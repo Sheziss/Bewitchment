@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"PPP",
+		"PPP"
+	],
+	"key":
+	{
+		"P": {"item": "bewitchment:planks_yew"}
+	},
+	"result":
+	{
+		"item": "bewitchment:trapdoor_yew",
+		"count": 2
+	}
+}

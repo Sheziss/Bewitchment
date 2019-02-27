@@ -1,0 +1,18 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"PP",
+		"PP",
+		"PP"
+	],
+	"key":
+	{
+		"P": {"item": "bewitchment:planks_yew"}
+	},
+	"result":
+	{
+		"item": "bewitchment:door_yew",
+		"count": 3
+	}
+}

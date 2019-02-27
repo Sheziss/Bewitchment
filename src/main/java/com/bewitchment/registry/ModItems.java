@@ -21,6 +21,7 @@ import com.bewitchment.registry.item.util.tool.ItemBoline;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
+import net.minecraft.block.BlockDoor;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
@@ -176,7 +177,7 @@ public class ModItems
 	{
 		for (Block block : ModBlocks.REGISTRY)
 		{
-			if (!(block instanceof BlockCrops) && !(block instanceof BlockSlab) && !(block instanceof BlockSaltBarrier) && !(block instanceof IFluidBlock))
+			if (!(block instanceof BlockCrops) && !(block instanceof BlockDoor) && !(block instanceof BlockSlab) && !(block instanceof BlockSaltBarrier) && !(block instanceof IFluidBlock))
 			{
 				Item itemBlock = new ItemBlock(block).setRegistryName(block.getRegistryName()).setTranslationKey(block.getTranslationKey());
 				event.getRegistry().register(itemBlock);

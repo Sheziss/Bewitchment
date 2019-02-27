@@ -37,6 +37,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class BlockDistillery extends ModBlock implements ITileEntityProvider
@@ -59,7 +60,7 @@ public class BlockDistillery extends ModBlock implements ITileEntityProvider
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing face, float hitX, float hitY, float hitZ)
 	{
 		player.openGui(Main.instance, ModGui.DISTILLERY.ordinal(), world, pos.getX(), pos.getY(), pos.getZ());
-		return super.onBlockActivated(world, pos, state, player, hand, face, hitX, hitY, hitZ);
+		return true;
 	}
 	
 	@Override
@@ -141,7 +142,7 @@ public class BlockDistillery extends ModBlock implements ITileEntityProvider
 		
 		private IMagicPower magic_power = IMagicPower.Provider.CAPABILITY.getDefaultInstance();
 		
-		private int progress, totalTime, burnTime;
+		private int progress, recipe_time, burn_time;
 		
 		public final ItemStackHandler fuel = new ItemStackHandler(1)
 		{
@@ -176,8 +177,8 @@ public class BlockDistillery extends ModBlock implements ITileEntityProvider
 			tag.setTag("input", input.serializeNBT());
 			tag.setTag("output", output.serializeNBT());
 			tag.setInteger("progress", progress);
-			tag.setInteger("totalTime", totalTime);
-			tag.setInteger("burnTime", burnTime);
+			tag.setInteger("recipe_time", recipe_time);
+			tag.setInteger("burn_time", burn_time);
 			tag.setInteger("power", magic_power.getAmount());
 			return super.writeToNBT(tag);
 		}
@@ -185,14 +186,14 @@ public class BlockDistillery extends ModBlock implements ITileEntityProvider
 		@Override
 		public void readFromNBT(NBTTagCompound tag)
 		{
+			super.readFromNBT(tag);
 			fuel.deserializeNBT(tag.getCompoundTag("fuel"));
 			input.deserializeNBT(tag.getCompoundTag("input"));
 			output.deserializeNBT(tag.getCompoundTag("output"));
 			progress = tag.getInteger("progress");
-			totalTime = tag.getInteger("totalTime");
-			burnTime = tag.getInteger("burnTime");
+			recipe_time = tag.getInteger("recipe_time");
+			burn_time = tag.getInteger("burn_time");
 			magic_power.setAmount(tag.getInteger("power"));
-			super.readFromNBT(tag);
 		}
 		
 		@Override
@@ -210,13 +211,13 @@ public class BlockDistillery extends ModBlock implements ITileEntityProvider
 		@Override
 		public boolean hasCapability(Capability<?> capability, EnumFacing face)
 		{
-			return capability == IMagicPower.Provider.CAPABILITY ? true : super.hasCapability(capability, face);
+			return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || capability == IMagicPower.Provider.CAPABILITY || super.hasCapability(capability, face);
 		}
 		
 		@Override
 		public <T> T getCapability(Capability<T> capability, EnumFacing face)
 		{
-			return capability == IMagicPower.Provider.CAPABILITY ? IMagicPower.Provider.CAPABILITY.cast(magic_power) : super.getCapability(capability, face);
+			return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? (face == world.getBlockState(pos).getValue(BlockHorizontal.FACING) ? CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(fuel) : CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(input)) : capability == IMagicPower.Provider.CAPABILITY ? IMagicPower.Provider.CAPABILITY.cast(magic_power) : super.getCapability(capability, face);
 		}
 		
 		@Override
@@ -232,6 +233,7 @@ public class BlockDistillery extends ModBlock implements ITileEntityProvider
 		public Container(InventoryPlayer inventory, Tile tile)
 		{
 			this.tile = tile;
+			addSlotToContainer(new ModSlot(tile.fuel, 12, 80, 58, Items.BLAZE_POWDER));
 			for (int i = 0; i < 3; i++)
 			{
 				addSlotToContainer(new ModSlot(tile.input, i * 4, 18, (18 * (i + 1)) - 1));
@@ -239,7 +241,6 @@ public class BlockDistillery extends ModBlock implements ITileEntityProvider
 				addSlotToContainer(new ModSlot(tile.output, 2 + (i * 4), 124, (18 * (i + 1)) - 1, Items.AIR));
 				addSlotToContainer(new ModSlot(tile.output, 3 + (i * 4), 142, (18 * (i + 1)) - 1, Items.AIR));
 			}
-			addSlotToContainer(new ModSlot(tile.fuel, 12, 80, 58, Items.BLAZE_POWDER));
 			for (int i = 0; i < 3; i++) for (int j = 0; j < 9; j++) addSlotToContainer(new Slot(inventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
 			for (int i = 0; i < 9; i++) addSlotToContainer(new Slot(inventory, i, 8 + i * 18, 142));
 		}
@@ -286,8 +287,8 @@ public class BlockDistillery extends ModBlock implements ITileEntityProvider
 			int x = (width - xSize) / 2;
 			int y = (height - ySize) / 2;
 			drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
-			if (container.tile.totalTime > 0) drawTexturedModalRect(x + 76, y + 16, 176, 0, (container.tile.progress * 24 / container.tile.totalTime) + 1, 17);
-			int burnProgress = 14 - (int) Math.ceil((14 * (container.tile.burnTime / (double) Tile.BURN_TIME)));
+			drawTexturedModalRect(x + 76, y + 16, 176, 0, (container.tile.progress * 24 / Math.max(1, container.tile.recipe_time)) + 1, 17);
+			int burnProgress = 14 - (int) Math.ceil((14 * (container.tile.burn_time / (double) Tile.BURN_TIME)));
 			drawTexturedModalRect(x + 81, y + 36 + burnProgress, 242, burnProgress, 14, 14 - burnProgress);
 		}
 	}

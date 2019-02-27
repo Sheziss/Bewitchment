@@ -1,0 +1,18 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"PP",
+		"PP",
+		"PP"
+	],
+	"key":
+	{
+		"P": {"item": "bewitchment:planks_juniper"}
+	},
+	"result":
+	{
+		"item": "bewitchment:door_juniper",
+		"count": 3
+	}
+}

@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"PPP",
+		"PPP"
+	],
+	"key":
+	{
+		"P": {"item": "bewitchment:planks_elder"}
+	},
+	"result":
+	{
+		"item": "bewitchment:trapdoor_elder",
+		"count": 2
+	}
+}

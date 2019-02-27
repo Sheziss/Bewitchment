@@ -7,21 +7,28 @@ import java.util.List;
 import com.bewitchment.core.Main;
 import com.bewitchment.registry.block.ModBlock;
 import com.bewitchment.registry.block.ModBlockCrop;
+import com.bewitchment.registry.block.ModBlockDoor;
 import com.bewitchment.registry.block.ModBlockExp;
 import com.bewitchment.registry.block.ModBlockFence;
+import com.bewitchment.registry.block.ModBlockFenceGate;
 import com.bewitchment.registry.block.ModBlockLeaves;
 import com.bewitchment.registry.block.ModBlockPillar;
 import com.bewitchment.registry.block.ModBlockSapling;
 import com.bewitchment.registry.block.ModBlockSlab;
 import com.bewitchment.registry.block.ModBlockStairs;
+import com.bewitchment.registry.block.ModBlockTrapDoor;
 import com.bewitchment.registry.block.tile.BlockDistillery;
 import com.bewitchment.registry.block.util.BlockMoonbell;
 import com.bewitchment.registry.block.util.BlockSaltBarrier;
+import com.bewitchment.registry.item.ModItemDoor;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockDoor;
+import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent.Register;
@@ -119,6 +126,16 @@ public class ModBlocks
 	public static final Block moonbell = new BlockMoonbell("moonbell");
 	
 	//Decoration
+	public static final ModBlockDoor door_block_cypress = new ModBlockDoor("door_block_cypress", planks_cypress);
+	public static final ModBlockDoor door_block_elder = new ModBlockDoor("door_block_elder", planks_elder);
+	public static final ModBlockDoor door_block_juniper = new ModBlockDoor("door_block_juniper", planks_juniper);
+	public static final ModBlockDoor door_block_yew = new ModBlockDoor("door_block_yew", planks_yew);
+	
+	public static final Item door_cypress = new ModItemDoor("door_cypress", door_block_cypress);
+	public static final Item door_elder = new ModItemDoor("door_elder", door_block_elder);
+	public static final Item door_juniper = new ModItemDoor("door_juniper", door_block_juniper);
+	public static final Item door_yew = new ModItemDoor("door_yew", door_block_yew);
+	
 	public static final Block stairs_cypress = new ModBlockStairs("stairs_cypress", planks_cypress, "axe", 0, "stairWood");
 	public static final Block stairs_elder = new ModBlockStairs("stairs_elder", planks_elder, "axe", 0, "stairWood");
 	public static final Block stairs_juniper = new ModBlockStairs("stairs_juniper", planks_juniper, "axe", 0, "stairWood");
@@ -136,6 +153,20 @@ public class ModBlocks
 	public static final ModBlockSlab slab_perpetual_ice = new ModBlockSlab("slab_perpetual_ice", perpetual_ice, false);
 	public static final ModBlockSlab slab_perpetual_ice_double = new ModBlockSlab("slab_perpetual_ice_double", perpetual_ice, true);
 	
+	public static final Block trapdoor_cypress = new ModBlockTrapDoor("trapdoor_cypress", planks_cypress);
+	public static final Block trapdoor_elder = new ModBlockTrapDoor("trapdoor_elder", planks_elder);
+	public static final Block trapdoor_juniper = new ModBlockTrapDoor("trapdoor_juniper", planks_juniper);
+	public static final Block trapdoor_yew = new ModBlockTrapDoor("trapdoor_yew", planks_yew);
+	
+	public static final Block fence_gate_cypress = new ModBlockFenceGate("fence_gate_cypress", planks_cypress);
+	public static final Block fence_gate_elder = new ModBlockFenceGate("fence_gate_elder", planks_elder);
+	public static final Block fence_gate_juniper = new ModBlockFenceGate("fence_gate_juniper", planks_juniper);
+	public static final Block fence_gate_yew = new ModBlockFenceGate("fence_gate_yew", planks_yew);
+	
+	public static final Block fence_cypress = new ModBlockFence("fence_cypress", planks_cypress);
+	public static final Block fence_elder = new ModBlockFence("fence_elder", planks_elder);
+	public static final Block fence_juniper = new ModBlockFence("fence_juniper", planks_juniper);
+	public static final Block fence_yew = new ModBlockFence("fence_yew", planks_yew);
 	public static final Block fence_perpetual_ice = new ModBlockFence("fence_perpetual_ice", perpetual_ice);
 	
 	@SubscribeEvent
@@ -143,6 +174,19 @@ public class ModBlocks
 	{
 		for (Block block : REGISTRY) event.getRegistry().register(block);
 		Main.proxy.ignoreProperty(crop_kelp, BlockLiquid.LEVEL);
+		Main.proxy.ignoreProperty(door_block_cypress, BlockDoor.POWERED);
+		Main.proxy.ignoreProperty(door_block_elder, BlockDoor.POWERED);
+		Main.proxy.ignoreProperty(door_block_juniper, BlockDoor.POWERED);
+		Main.proxy.ignoreProperty(door_block_yew, BlockDoor.POWERED);
+		Main.proxy.ignoreProperty(fence_gate_cypress, BlockFenceGate.POWERED);
+		Main.proxy.ignoreProperty(fence_gate_elder, BlockFenceGate.POWERED);
+		Main.proxy.ignoreProperty(fence_gate_juniper, BlockFenceGate.POWERED);
+		Main.proxy.ignoreProperty(fence_gate_yew, BlockFenceGate.POWERED);
+		
+		door_block_cypress.drop = door_cypress;
+		door_block_elder.drop = door_elder;
+		door_block_juniper.drop = door_juniper;
+		door_block_yew.drop = door_yew;
 	}
 	
 	public static List<Fluid> registerFluids()

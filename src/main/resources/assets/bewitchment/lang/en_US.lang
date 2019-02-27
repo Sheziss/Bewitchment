@@ -52,6 +52,11 @@ tile.bewitchment:sapling_yew.name=Yew Sapling
 
 tile.bewitchment:moonbell.name=Moonbell
 
+item.bewitchment:door_cypress.name=Cypress Door
+item.bewitchment:door_elder.name=Elder Door
+item.bewitchment:door_juniper.name=Juniper Door
+item.bewitchment:door_yew.name=Yew Door
+
 tile.bewitchment:stairs_cypress.name=Cypress Wood Stairs
 tile.bewitchment:stairs_elder.name=Elder Wood Stairs
 tile.bewitchment:stairs_juniper.name=Juniper Wood Stairs
@@ -64,6 +69,20 @@ tile.bewitchment:slab_juniper.name=Juniper Wood Slab
 tile.bewitchment:slab_yew.name=Yew Wood Slab
 tile.bewitchment:slab_perpetual_ice.name=Perpetual Ice Slab
 
+tile.bewitchment:trapdoor_cypress.name=Cypress Trapdoor
+tile.bewitchment:trapdoor_elder.name=Elder Trapdoor
+tile.bewitchment:trapdoor_juniper.name=Juniper Trapdoor
+tile.bewitchment:trapdoor_yew.name=Yew Trapdoor
+
+tile.bewitchment:fence_gate_cypress.name=Cypress Fence Gate
+tile.bewitchment:fence_gate_elder.name=Elder Fence Gate
+tile.bewitchment:fence_gate_juniper.name=Juniper Fence Gate
+tile.bewitchment:fence_gate_yew.name=Yew Fence Gate
+
+tile.bewitchment:fence_cypress.name=Cypress Fence
+tile.bewitchment:fence_elder.name=Elder Fence
+tile.bewitchment:fence_juniper.name=Juniper Fence
+tile.bewitchment:fence_yew.name=Yew Fence
 tile.bewitchment:fence_perpetual_ice.name=Perpetual Ice Fence
 
 #Items
@@ -179,8 +198,8 @@ item.bewitchment:seed_tulsi.name=Tulsi Seeds
 item.bewitchment:seed_white_sage.name=White Sage Seeds
 item.bewitchment:seed_wormwood.name=Wormwood Seeds
 
-bewitchment.book.rites.name=Book of Shadows
-bewitchment.book.codex_infernalis.name=Codex Infernalis
+item.bewitchment:book_of_shadows.name=Book of Shadows
+item.bewitchment:codex_infernalis.name=Codex Infernalis
 
 #Info
 itemGroup.bewitchment=Bewitchment
