@@ -1,7 +1,12 @@
 package com.bewitchment.registry.block.tile;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.bewitchment.core.CommonProxy.ModGui;
+import com.bewitchment.core.BewitchmentAPI;
 import com.bewitchment.core.Main;
+import com.bewitchment.core.BewitchmentAPI.IDistilleryRecipe;
 import com.bewitchment.registry.block.ModBlock;
 import com.bewitchment.registry.capability.IMagicPower;
 
@@ -141,8 +146,9 @@ public class BlockDistillery extends ModBlock implements ITileEntityProvider
 		public static final int BURN_TIME = 1200;
 		
 		private IMagicPower magic_power = IMagicPower.Provider.CAPABILITY.getDefaultInstance();
+		private IDistilleryRecipe recipe;
 		
-		private int progress, recipe_time, burn_time;
+		private int progress, burn_time, recipe_time;
 		
 		public final ItemStackHandler fuel = new ItemStackHandler(1)
 		{
@@ -177,7 +183,7 @@ public class BlockDistillery extends ModBlock implements ITileEntityProvider
 			tag.setTag("input", input.serializeNBT());
 			tag.setTag("output", output.serializeNBT());
 			tag.setInteger("progress", progress);
-			tag.setInteger("recipe_time", recipe_time);
+			tag.setInteger("recipe_time", recipe == null ? 0 : recipe.getTime());
 			tag.setInteger("burn_time", burn_time);
 			tag.setInteger("power", magic_power.getAmount());
 			return super.writeToNBT(tag);
@@ -223,6 +229,48 @@ public class BlockDistillery extends ModBlock implements ITileEntityProvider
 		@Override
 		public void update()
 		{
+			if (burn_time > 0)
+			{
+				burn_time--;
+				markDirty();
+			}
+			if (recipe != null)
+			{
+				if (burn_time == 0) fuel.getStackInSlot(0).shrink(1);
+				else if (burn_time > 0)
+				{
+					if (progress > 0)
+					{
+						if (true) // mp.drainAltarFirst(this.world.getClosestPlayer(this.pos.getX() + 0.5, this.pos.getY() + 0.5, this.pos.getZ() + 0.5, 5, false), this.getPos(), this.world.provider.getDimension(), 2)) {
+						{
+							progress--;
+							markDirty();
+						}
+					}
+					else
+					{
+						progress = 0;
+						checkRecipe();
+					}
+				}
+				markDirty();
+			}
+		}
+		
+		private void checkRecipe()
+		{
+			for (IDistilleryRecipe recipe : BewitchmentAPI.REGISTRY_DISTILLERY)
+			{
+				List<ItemStack> inputStacks = new ArrayList<ItemStack>();
+				for (int i = 0; i < input.getSlots(); i++) inputStacks.add(input.getStackInSlot(i));
+				if (recipe.getInput().containsAll(inputStacks) && recipe.getInput().size() == inputStacks.size())
+				{
+					this.recipe = recipe;
+					progress = recipe.getTime();
+					for (int i = 0; i < input.getSlots(); i++) input.getStackInSlot(i).shrink(1);
+					for (ItemStack stack : recipe.getOutput()) for (int i = 0; i < output.getSlots(); i++) output.insertItem(i, stack, false);
+				}
+			}
 		}
 	}
 	
