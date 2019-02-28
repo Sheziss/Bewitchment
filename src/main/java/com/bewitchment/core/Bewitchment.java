@@ -84,13 +84,13 @@ public class Bewitchment
 		/**
 		 * Registers a new Ritual, for use with rituals.
 		 * 
-		 * @param recipe the recipe to register
-		 * @return the recipe registered
+		 * @param ritual the ritual to register
+		 * @return the ritual registered
 		 */
-		public static final Ritual registerRitual(Ritual recipe)
+		public static final Ritual registerRitual(Ritual ritual)
 		{
-			REGISTRY_RITUAL.add(recipe);
-			return recipe;
+			REGISTRY_RITUAL.add(ritual);
+			return ritual;
 		}
 		
 		/**
