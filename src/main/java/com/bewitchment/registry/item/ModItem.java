@@ -3,7 +3,7 @@ package com.bewitchment.registry.item;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bewitchment.core.Main;
+import com.bewitchment.core.Bewitchment;
 import com.bewitchment.registry.IOreName;
 import com.bewitchment.registry.ModItems;
 
@@ -23,9 +23,9 @@ public class ModItem extends Item implements IOreName
 	
 	public ModItem(String name, String... oreNames)
 	{
-		this.setRegistryName(new ResourceLocation(Main.MOD_ID, name));
+		this.setRegistryName(new ResourceLocation(Bewitchment.MOD_ID, name));
 		this.setTranslationKey(this.getRegistryName().toString());
-		this.setCreativeTab(Main.proxy.tab);
+		this.setCreativeTab(Bewitchment.proxy.tab);
 		for (String ore : oreNames) this.oreNames.add(ore);
 		ModItems.REGISTRY.add(this);
 	}

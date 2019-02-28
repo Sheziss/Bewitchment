@@ -3,7 +3,7 @@ package com.bewitchment.registry.block;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bewitchment.core.Main;
+import com.bewitchment.core.Bewitchment;
 import com.bewitchment.registry.IOreName;
 import com.bewitchment.registry.ModBlocks;
 
@@ -18,9 +18,9 @@ public class ModBlockBush extends BlockBush implements IOreName
 	public ModBlockBush(String name, String... oreNames)
 	{
 		super();
-		this.setRegistryName(new ResourceLocation(Main.MOD_ID, name));
+		this.setRegistryName(new ResourceLocation(Bewitchment.MOD_ID, name));
 		this.setTranslationKey(this.getRegistryName().toString());
-		this.setCreativeTab(Main.proxy.tab);
+		this.setCreativeTab(Bewitchment.proxy.tab);
 		this.setSoundType(SoundType.PLANT);
 		this.setHardness(0);
 		for (String ore : oreNames) this.oreNames.add(ore);

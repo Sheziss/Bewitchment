@@ -2,7 +2,7 @@ package com.bewitchment.registry.block;
 
 import java.util.Random;
 
-import com.bewitchment.core.Main;
+import com.bewitchment.core.Bewitchment;
 import com.bewitchment.registry.ModBlocks;
 import com.bewitchment.registry.item.ModItemSeed;
 
@@ -36,7 +36,7 @@ public class ModBlockCrop extends BlockCrops
 	public ModBlockCrop(String name, int maxAge)
 	{
 		super();
-		this.setRegistryName(new ResourceLocation(Main.MOD_ID, name));
+		this.setRegistryName(new ResourceLocation(Bewitchment.MOD_ID, name));
 		this.setTranslationKey(this.getRegistryName().toString());
 		this.setCreativeTab(null);
 		this.maxAge = maxAge;

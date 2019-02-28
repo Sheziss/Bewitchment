@@ -3,7 +3,7 @@ package com.bewitchment.registry.block;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bewitchment.core.Main;
+import com.bewitchment.core.Bewitchment;
 import com.bewitchment.registry.IOreName;
 import com.bewitchment.registry.ModBlocks;
 
@@ -24,9 +24,9 @@ public class ModBlockStairs extends BlockStairs implements IOreName
 	public ModBlockStairs(String name, Block original, String tool, int level, String... oreNames)
 	{
 		super(original.getDefaultState());
-		this.setRegistryName(new ResourceLocation(Main.MOD_ID, name));
+		this.setRegistryName(new ResourceLocation(Bewitchment.MOD_ID, name));
 		this.setTranslationKey(this.getRegistryName().toString());
-		this.setCreativeTab(Main.proxy.tab);
+		this.setCreativeTab(Bewitchment.proxy.tab);
 		this.setHarvestLevel(tool, level);
 		if (original.getDefaultState().getMaterial() == Material.CARPET) Blocks.FIRE.setFireInfo(this, 60, 20);
 		if (original.getDefaultState().getMaterial() == Material.CLOTH || original.getDefaultState().getMaterial() == Material.LEAVES) Blocks.FIRE.setFireInfo(this, 30, 60);

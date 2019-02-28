@@ -6,7 +6,7 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import com.bewitchment.core.Main;
+import com.bewitchment.core.Bewitchment;
 import com.bewitchment.registry.IOreName;
 import com.bewitchment.registry.ModBlocks;
 
@@ -36,9 +36,9 @@ public class ModBlockLeaves extends BlockLeaves implements IOreName
 	
 	public ModBlockLeaves(String name, String... oreNames)
 	{
-		this.setRegistryName(new ResourceLocation(Main.MOD_ID, name));
+		this.setRegistryName(new ResourceLocation(Bewitchment.MOD_ID, name));
 		this.setTranslationKey(this.getRegistryName().toString());
-		this.setCreativeTab(Main.proxy.tab);
+		this.setCreativeTab(Bewitchment.proxy.tab);
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(CHECK_DECAY, true).withProperty(DECAYABLE, true));
 		Blocks.FIRE.setFireInfo(this, 30, 60);
 		for (String ore : oreNames) this.oreNames.add(ore);
@@ -78,7 +78,7 @@ public class ModBlockLeaves extends BlockLeaves implements IOreName
 	@Override
 	public boolean isOpaqueCube(IBlockState state)
 	{
-		this.leavesFancy = Main.proxy.isFancyGraphicsEnabled();
+		this.leavesFancy = Bewitchment.proxy.isFancyGraphicsEnabled();
 		return !this.leavesFancy;
 	}
 	

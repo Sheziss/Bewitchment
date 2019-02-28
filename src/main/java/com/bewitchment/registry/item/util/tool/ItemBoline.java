@@ -2,7 +2,7 @@ package com.bewitchment.registry.item.util.tool;
 
 import java.util.List;
 
-import com.bewitchment.core.Main;
+import com.bewitchment.core.Bewitchment;
 import com.bewitchment.registry.ModItems;
 
 import net.minecraft.client.util.ITooltipFlag;
@@ -26,9 +26,9 @@ public class ItemBoline extends ItemShears
 	public ItemBoline(String name)
 	{
 		super();
-		this.setRegistryName(new ResourceLocation(Main.MOD_ID, name));
+		this.setRegistryName(new ResourceLocation(Bewitchment.MOD_ID, name));
 		this.setTranslationKey(this.getRegistryName().toString());
-		this.setCreativeTab(Main.proxy.tab);
+		this.setCreativeTab(Bewitchment.proxy.tab);
 		this.setMaxDamage(600);
 		ModItems.REGISTRY.add(this);
 	}

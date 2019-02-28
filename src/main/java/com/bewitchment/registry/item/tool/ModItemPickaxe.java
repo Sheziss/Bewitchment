@@ -2,7 +2,7 @@ package com.bewitchment.registry.item.tool;
 
 import java.util.List;
 
-import com.bewitchment.core.Main;
+import com.bewitchment.core.Bewitchment;
 import com.bewitchment.registry.ModItems;
 
 import net.minecraft.client.resources.I18n;
@@ -27,9 +27,9 @@ public class ModItemPickaxe extends ItemPickaxe
 	public ModItemPickaxe(String name, ToolMaterial mat)
 	{
 		super(mat);
-		this.setRegistryName(new ResourceLocation(Main.MOD_ID, name));
+		this.setRegistryName(new ResourceLocation(Bewitchment.MOD_ID, name));
 		this.setTranslationKey(this.getRegistryName().toString());
-		this.setCreativeTab(Main.proxy.tab);
+		this.setCreativeTab(Bewitchment.proxy.tab);
 		ModItems.REGISTRY.add(this);
 	}
 	
@@ -52,7 +52,7 @@ public class ModItemPickaxe extends ItemPickaxe
 		{
 			if (!target.world.isRemote)
 			{
-				if (target.getCreatureAttribute() == Main.proxy.DEMON || target.getCreatureAttribute() == Main.proxy.SPIRIT || target instanceof EntityBlaze || target instanceof EntityEnderman || target instanceof EntityVex)
+				if (target.getCreatureAttribute() == Bewitchment.proxy.DEMON || target.getCreatureAttribute() == Bewitchment.proxy.SPIRIT || target instanceof EntityBlaze || target instanceof EntityEnderman || target instanceof EntityVex)
 				{
 					target.attackEntityFrom(attacker instanceof EntityPlayer ? DamageSource.causePlayerDamage((EntityPlayer)attacker) : DamageSource.causeMobDamage(attacker), 12);
 					stack.damageItem(5, attacker);

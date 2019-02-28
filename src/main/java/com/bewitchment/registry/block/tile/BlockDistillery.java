@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bewitchment.core.CommonProxy.ModGui;
-import com.bewitchment.core.BewitchmentAPI;
-import com.bewitchment.core.Main;
-import com.bewitchment.core.BewitchmentAPI.IDistilleryRecipe;
+import com.bewitchment.core.Bewitchment;
+import com.bewitchment.core.Bewitchment.API.DistilleryRecipe;
 import com.bewitchment.registry.block.ModBlock;
 import com.bewitchment.registry.capability.IMagicPower;
 
@@ -64,7 +63,7 @@ public class BlockDistillery extends ModBlock implements ITileEntityProvider
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing face, float hitX, float hitY, float hitZ)
 	{
-		player.openGui(Main.instance, ModGui.DISTILLERY.ordinal(), world, pos.getX(), pos.getY(), pos.getZ());
+		player.openGui(Bewitchment.instance, ModGui.DISTILLERY.ordinal(), world, pos.getX(), pos.getY(), pos.getZ());
 		return true;
 	}
 	
@@ -146,7 +145,7 @@ public class BlockDistillery extends ModBlock implements ITileEntityProvider
 		public static final int BURN_TIME = 1200;
 		
 		private IMagicPower magic_power = IMagicPower.Provider.CAPABILITY.getDefaultInstance();
-		private IDistilleryRecipe recipe;
+		private DistilleryRecipe recipe;
 		
 		private int progress, burn_time, recipe_time;
 		
@@ -259,7 +258,7 @@ public class BlockDistillery extends ModBlock implements ITileEntityProvider
 		
 		private void checkRecipe()
 		{
-			for (IDistilleryRecipe recipe : BewitchmentAPI.REGISTRY_DISTILLERY)
+			for (DistilleryRecipe recipe : Bewitchment.API.REGISTRY_DISTILLERY)
 			{
 				List<ItemStack> inputStacks = new ArrayList<ItemStack>();
 				for (int i = 0; i < input.getSlots(); i++) inputStacks.add(input.getStackInSlot(i));
@@ -309,7 +308,7 @@ public class BlockDistillery extends ModBlock implements ITileEntityProvider
 	@SideOnly(Side.CLIENT)
 	public static class Gui extends GuiContainer
 	{
-		private static final ResourceLocation TEX = new ResourceLocation(Main.MOD_ID, "textures/gui/distillery.png");
+		private static final ResourceLocation TEX = new ResourceLocation(Bewitchment.MOD_ID, "textures/gui/distillery.png");
 		
 		private final Container container;
 		

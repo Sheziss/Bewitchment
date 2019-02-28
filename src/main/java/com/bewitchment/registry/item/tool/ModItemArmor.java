@@ -2,7 +2,7 @@ package com.bewitchment.registry.item.tool;
 
 import java.util.List;
 
-import com.bewitchment.core.Main;
+import com.bewitchment.core.Bewitchment;
 import com.bewitchment.registry.ModItems;
 import com.bewitchment.registry.capability.ITransformation;
 import com.bewitchment.registry.capability.ITransformation.Transformations;
@@ -25,9 +25,9 @@ public class ModItemArmor extends ItemArmor
 	public ModItemArmor(String name, ArmorMaterial mat, EntityEquipmentSlot slot)
 	{
 		super(mat, 0, slot);
-		this.setRegistryName(new ResourceLocation(Main.MOD_ID, name));
+		this.setRegistryName(new ResourceLocation(Bewitchment.MOD_ID, name));
 		this.setTranslationKey(this.getRegistryName().toString());
-		this.setCreativeTab(Main.proxy.tab);
+		this.setCreativeTab(Bewitchment.proxy.tab);
 		ModItems.REGISTRY.add(this);
 	}
 	

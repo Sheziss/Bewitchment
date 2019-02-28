@@ -3,7 +3,7 @@ package com.bewitchment.registry.block;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bewitchment.core.Main;
+import com.bewitchment.core.Bewitchment;
 import com.bewitchment.registry.IOreName;
 import com.bewitchment.registry.ModBlocks;
 
@@ -27,9 +27,9 @@ public class ModBlock extends Block implements IOreName
 	public ModBlock(String name, Material mat, SoundType sound, float hardness, float resistance, String tool, int level, String... oreNames)
 	{
 		super(mat);
-		this.setRegistryName(new ResourceLocation(Main.MOD_ID, name));
+		this.setRegistryName(new ResourceLocation(Bewitchment.MOD_ID, name));
 		this.setTranslationKey(this.getRegistryName().toString());
-		this.setCreativeTab(Main.proxy.tab);
+		this.setCreativeTab(Bewitchment.proxy.tab);
 		this.setSoundType(sound);
 		this.setHardness(hardness);
 		this.setResistance(resistance);

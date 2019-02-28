@@ -3,7 +3,7 @@ package com.bewitchment.registry.block;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bewitchment.core.Main;
+import com.bewitchment.core.Bewitchment;
 import com.bewitchment.registry.IOreName;
 import com.bewitchment.registry.ModBlocks;
 
@@ -24,9 +24,9 @@ public class ModBlockTrapDoor extends BlockTrapDoor implements IOreName
 	public ModBlockTrapDoor(String name, Block base, String... oreNames)
 	{
 		super(base.getDefaultState().getMaterial());
-		this.setRegistryName(new ResourceLocation(Main.MOD_ID, name));
+		this.setRegistryName(new ResourceLocation(Bewitchment.MOD_ID, name));
 		this.setTranslationKey(this.getRegistryName().toString());
-		this.setCreativeTab(Main.proxy.tab);
+		this.setCreativeTab(Bewitchment.proxy.tab);
 		this.setHardness(base.getBlockHardness(null, null, null));
 		this.setResistance(base.getExplosionResistance(null)*5);
 		this.setHarvestLevel(base.getHarvestTool(base.getDefaultState()), base.getHarvestLevel(base.getDefaultState()));

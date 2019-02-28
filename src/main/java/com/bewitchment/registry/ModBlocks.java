@@ -4,7 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bewitchment.core.Main;
+import com.bewitchment.core.Bewitchment;
 import com.bewitchment.registry.block.ModBlock;
 import com.bewitchment.registry.block.ModBlockCrop;
 import com.bewitchment.registry.block.ModBlockDoor;
@@ -39,7 +39,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-@EventBusSubscriber(modid = Main.MOD_ID)
+@EventBusSubscriber(modid = Bewitchment.MOD_ID)
 public class ModBlocks
 {
 	public static final List<Block> REGISTRY = new ArrayList<Block>();
@@ -173,15 +173,15 @@ public class ModBlocks
 	public static void register(Register<Block> event)
 	{
 		for (Block block : REGISTRY) event.getRegistry().register(block);
-		Main.proxy.ignoreProperty(crop_kelp, BlockLiquid.LEVEL);
-		Main.proxy.ignoreProperty(door_block_cypress, BlockDoor.POWERED);
-		Main.proxy.ignoreProperty(door_block_elder, BlockDoor.POWERED);
-		Main.proxy.ignoreProperty(door_block_juniper, BlockDoor.POWERED);
-		Main.proxy.ignoreProperty(door_block_yew, BlockDoor.POWERED);
-		Main.proxy.ignoreProperty(fence_gate_cypress, BlockFenceGate.POWERED);
-		Main.proxy.ignoreProperty(fence_gate_elder, BlockFenceGate.POWERED);
-		Main.proxy.ignoreProperty(fence_gate_juniper, BlockFenceGate.POWERED);
-		Main.proxy.ignoreProperty(fence_gate_yew, BlockFenceGate.POWERED);
+		Bewitchment.proxy.ignoreProperty(crop_kelp, BlockLiquid.LEVEL);
+		Bewitchment.proxy.ignoreProperty(door_block_cypress, BlockDoor.POWERED);
+		Bewitchment.proxy.ignoreProperty(door_block_elder, BlockDoor.POWERED);
+		Bewitchment.proxy.ignoreProperty(door_block_juniper, BlockDoor.POWERED);
+		Bewitchment.proxy.ignoreProperty(door_block_yew, BlockDoor.POWERED);
+		Bewitchment.proxy.ignoreProperty(fence_gate_cypress, BlockFenceGate.POWERED);
+		Bewitchment.proxy.ignoreProperty(fence_gate_elder, BlockFenceGate.POWERED);
+		Bewitchment.proxy.ignoreProperty(fence_gate_juniper, BlockFenceGate.POWERED);
+		Bewitchment.proxy.ignoreProperty(fence_gate_yew, BlockFenceGate.POWERED);
 		
 		door_block_cypress.drop = door_cypress;
 		door_block_elder.drop = door_elder;
@@ -199,7 +199,7 @@ public class ModBlocks
 		Block block0 = null;
 		try {block0 = block.getDeclaredConstructor(String.class).newInstance(name);}
 		catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {e.printStackTrace();}
-		GameRegistry.registerTileEntity(tile, new ResourceLocation(Main.MOD_ID, name));
+		GameRegistry.registerTileEntity(tile, new ResourceLocation(Bewitchment.MOD_ID, name));
 		return block0;
 	}
 	
@@ -207,12 +207,12 @@ public class ModBlocks
 	{
 		if (!FluidRegistry.isFluidRegistered(name))
 		{
-			Fluid fluid = new Fluid(name, new ResourceLocation(Main.MOD_ID, "blocks/fluid/" + name + "_still"), new ResourceLocation(Main.MOD_ID, "blocks/fluid/" + name + (useFlowTexture ? "_flowing" : "_still"))).setTemperature(temperature).setLuminosity(luminosity).setDensity(density).setViscosity(viscosity);
+			Fluid fluid = new Fluid(name, new ResourceLocation(Bewitchment.MOD_ID, "blocks/fluid/" + name + "_still"), new ResourceLocation(Bewitchment.MOD_ID, "blocks/fluid/" + name + (useFlowTexture ? "_flowing" : "_still"))).setTemperature(temperature).setLuminosity(luminosity).setDensity(density).setViscosity(viscosity);
 			FluidRegistry.registerFluid(fluid);
-			Block block = new BlockFluidClassic(fluid, mat).setTemperature(temperature).setDensity(density).setRegistryName(new ResourceLocation(Main.MOD_ID, "fluid_" + name)).setTranslationKey(fluid.getUnlocalizedName());
+			Block block = new BlockFluidClassic(fluid, mat).setTemperature(temperature).setDensity(density).setRegistryName(new ResourceLocation(Bewitchment.MOD_ID, "fluid_" + name)).setTranslationKey(fluid.getUnlocalizedName());
 			fluid.setBlock(block);
 			if (useBucket) FluidRegistry.addBucketForFluid(fluid);
-			Main.proxy.registerTexture(fluid);
+			Bewitchment.proxy.registerTexture(fluid);
 			REGISTRY.add(block);
 			FLUID_REGISTRY.add(fluid);
 		}

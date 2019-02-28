@@ -3,7 +3,7 @@ package com.bewitchment.registry.crafting;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bewitchment.core.Main;
+import com.bewitchment.core.Bewitchment;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -60,7 +60,7 @@ public class DistilleryRecipe extends IForgeRegistryEntry.Impl<DistilleryRecipe>
 		
 		private Factory(String name)
 		{
-			recipe.setRegistryName(new ResourceLocation(Main.MOD_ID, name));
+			recipe.setRegistryName(new ResourceLocation(Bewitchment.MOD_ID, name));
 		}
 		
 		public static Factory start(String name)

@@ -1,6 +1,6 @@
 package com.bewitchment.registry.capability;
 
-import com.bewitchment.core.Main;
+import com.bewitchment.core.Bewitchment;
 import com.bewitchment.registry.block.tile.BlockDistillery;
 
 import net.minecraft.entity.Entity;
@@ -128,7 +128,7 @@ public interface IMagicPower
 	
 	public static class Handler
 	{
-		public static final ResourceLocation CAP = new ResourceLocation(Main.MOD_ID, "magic_power");
+		public static final ResourceLocation CAP = new ResourceLocation(Bewitchment.MOD_ID, "magic_power");
 		
 		@SubscribeEvent
 		public void attachCapabilityE(AttachCapabilitiesEvent<Entity> event)

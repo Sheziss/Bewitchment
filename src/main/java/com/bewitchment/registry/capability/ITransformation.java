@@ -1,6 +1,6 @@
 package com.bewitchment.registry.capability;
 
-import com.bewitchment.core.Main;
+import com.bewitchment.core.Bewitchment;
 import com.bewitchment.registry.ModBlocks;
 
 import net.minecraft.entity.Entity;
@@ -106,7 +106,7 @@ public interface ITransformation
 	
 	public static class Handler
 	{
-		public static final ResourceLocation CAP_TRANSFORMATION = new ResourceLocation(Main.MOD_ID, "transformation");
+		public static final ResourceLocation CAP_TRANSFORMATION = new ResourceLocation(Bewitchment.MOD_ID, "transformation");
 		
 		@SubscribeEvent
 		public void attachCapabilityE(AttachCapabilitiesEvent<Entity> event)

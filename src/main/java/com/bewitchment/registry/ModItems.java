@@ -3,7 +3,7 @@ package com.bewitchment.registry;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bewitchment.core.Main;
+import com.bewitchment.core.Bewitchment;
 import com.bewitchment.registry.block.ModBlockSlab;
 import com.bewitchment.registry.block.util.BlockSaltBarrier;
 import com.bewitchment.registry.item.ModItem;
@@ -39,19 +39,19 @@ import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-@EventBusSubscriber(modid = Main.MOD_ID)
+@EventBusSubscriber(modid = Bewitchment.MOD_ID)
 public class ModItems
 {
 	public static final List<Item> REGISTRY = new ArrayList<Item>();
 	
-	public static final ArmorMaterial ARMOR_COLD_IRON = EnumHelper.addArmorMaterial("cold_iron", Main.MOD_ID + ":" + "cold_iron", 18, new int[]{2, 6, 7, 2}, 8, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.45F);
-	public static final ArmorMaterial ARMOR_SILVER = EnumHelper.addArmorMaterial("silver", Main.MOD_ID + ":" + "silver", 12, new int[]{1, 4, 5, 2}, 22, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 1.5F);
+	public static final ArmorMaterial ARMOR_COLD_IRON = EnumHelper.addArmorMaterial("cold_iron", Bewitchment.MOD_ID + ":" + "cold_iron", 18, new int[]{2, 6, 7, 2}, 8, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.45F);
+	public static final ArmorMaterial ARMOR_SILVER = EnumHelper.addArmorMaterial("silver", Bewitchment.MOD_ID + ":" + "silver", 12, new int[]{1, 4, 5, 2}, 22, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 1.5F);
 	
 	public static final ToolMaterial TOOL_COLD_IRON = EnumHelper.addToolMaterial("cold_iron", 2, 850, 7, 3, 8);
 	public static final ToolMaterial TOOL_SILVER = EnumHelper.addToolMaterial("silver", 1, 215, 10, 2.5f, 24);
 
-	public static final ArmorMaterial ARMOR_BEWITCHED_LEATHER = EnumHelper.addArmorMaterial("bewitched_leather", Main.MOD_ID + ":" + "bewitched_leather", 24, new int[]{1, 4, 5, 1}, 22, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1.5F);
-	public static final ArmorMaterial ARMOR_VAMPIRE = EnumHelper.addArmorMaterial("vampire", Main.MOD_ID + ":" + "vampire", 9, new int[]{2, 6, 7, 1}, 22, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1.25F);
+	public static final ArmorMaterial ARMOR_BEWITCHED_LEATHER = EnumHelper.addArmorMaterial("bewitched_leather", Bewitchment.MOD_ID + ":" + "bewitched_leather", 24, new int[]{1, 4, 5, 1}, 22, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1.5F);
+	public static final ArmorMaterial ARMOR_VAMPIRE = EnumHelper.addArmorMaterial("vampire", Bewitchment.MOD_ID + ":" + "vampire", 9, new int[]{2, 6, 7, 1}, 22, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1.25F);
 
 	public static final ToolMaterial TOOL_RITUAL = EnumHelper.addToolMaterial("chalk", 2, 300, 2F, 1.5F, 30);
 	
@@ -181,7 +181,7 @@ public class ModItems
 			{
 				Item itemBlock = new ItemBlock(block).setRegistryName(block.getRegistryName()).setTranslationKey(block.getTranslationKey());
 				event.getRegistry().register(itemBlock);
-				Main.proxy.registerTexture(itemBlock);
+				Bewitchment.proxy.registerTexture(itemBlock);
 			}
 		}
 		registerSlab(event, ModBlocks.slab_cypress, ModBlocks.slab_cypress_double);
@@ -192,7 +192,7 @@ public class ModItems
 		for (Item item : REGISTRY)
 		{
 			event.getRegistry().register(item);
-			Main.proxy.registerTexture(item);
+			Bewitchment.proxy.registerTexture(item);
 		}
 	}
 	
@@ -203,8 +203,8 @@ public class ModItems
 		half.half = half;
 		full.half = half;
 		event.getRegistry().register(itemSlab);
-		Main.proxy.registerTexture(itemSlab);
+		Bewitchment.proxy.registerTexture(itemSlab);
 		event.getRegistry().register(itemSlabFull);
-		Main.proxy.registerTexture(itemSlabFull);
+		Bewitchment.proxy.registerTexture(itemSlabFull);
 	}
 }

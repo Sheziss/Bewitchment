@@ -60,7 +60,7 @@ public class ClientProxy extends CommonProxy
 		
 		public StateMapper(Fluid fluid)
 		{
-			this.location = new ModelResourceLocation(new ResourceLocation(Main.MOD_ID, "fluid"), fluid.getName());
+			this.location = new ModelResourceLocation(new ResourceLocation(Bewitchment.MOD_ID, "fluid"), fluid.getName());
 		}
 		
 		@Override

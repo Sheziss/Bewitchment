@@ -3,7 +3,7 @@ package com.bewitchment.registry.block.util;
 import java.util.List;
 import java.util.Random;
 
-import com.bewitchment.core.Main;
+import com.bewitchment.core.Bewitchment;
 import com.bewitchment.registry.ModItems;
 import com.bewitchment.registry.block.ModBlock;
 import com.bewitchment.registry.capability.ITransformation;
@@ -133,7 +133,7 @@ public class BlockSaltBarrier extends ModBlock
 		if (entity instanceof EntityLivingBase)
 		{
 			EnumCreatureAttribute attribute = ((EntityLivingBase)entity).getCreatureAttribute();
-			if (attribute == EnumCreatureAttribute.UNDEAD || attribute == Main.proxy.DEMON || attribute == Main.proxy.SPIRIT) addCollisionBoxToList(pos, box, boxes, WALL);
+			if (attribute == EnumCreatureAttribute.UNDEAD || attribute == Bewitchment.proxy.DEMON || attribute == Bewitchment.proxy.SPIRIT) addCollisionBoxToList(pos, box, boxes, WALL);
 		}
 		if (entity instanceof EntityBlaze || entity instanceof EntityGhast || entity instanceof EntityVex /*|| entity instanceof EntityBatSwarm*/) addCollisionBoxToList(pos, box, boxes, WALL);
 		if ((entity instanceof EntityPlayer) && !((EntityPlayer)entity).isCreative() && !entity.getCapability(ITransformation.Provider.TRANSFORMATION, null).getTransformation().canCrossSalt) addCollisionBoxToList(pos, box, boxes, WALL);

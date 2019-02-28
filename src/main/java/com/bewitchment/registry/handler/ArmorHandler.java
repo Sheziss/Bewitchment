@@ -1,6 +1,6 @@
 package com.bewitchment.registry.handler;
 
-import com.bewitchment.core.Main;
+import com.bewitchment.core.Bewitchment;
 import com.bewitchment.registry.capability.ITransformation;
 import com.bewitchment.registry.capability.ITransformation.Transformations;
 import com.bewitchment.registry.item.tool.ModItemArmor;
@@ -26,12 +26,12 @@ public class ArmorHandler
 			{
 				EntityLivingBase living = (EntityLivingBase) event.getSource().getTrueSource();
 				EntityLivingBase attacked = event.getEntityLiving();
-				if (living.getCreatureAttribute() == Main.proxy.DEMON)
+				if (living.getCreatureAttribute() == Bewitchment.proxy.DEMON)
 				{
 					if (!event.getSource().isProjectile()) living.attackEntityFrom(DamageSource.causeThornsDamage(attacked), EnchantmentThorns.getDamage(getColdIronArmor(attacked), attacked.getRNG()));
 					event.setAmount(event.getAmount() * (1 - 0.05f * getColdIronArmor(attacked)));
 				}
-				if (living.getCreatureAttribute() == Main.proxy.SPIRIT) event.setAmount(event.getAmount() * 0.8f);
+				if (living.getCreatureAttribute() == Bewitchment.proxy.SPIRIT) event.setAmount(event.getAmount() * 0.8f);
 				if (event.getSource().isFireDamage()) event.setAmount(event.getAmount() * 0.95f);
 			}
 		}

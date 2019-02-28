@@ -41,7 +41,7 @@ public class CommonProxy
 		APIARY, OVEN, THREAD_SPINNER, TAROT, DISTILLERY;
 	}
 	
-	public final CreativeTabs tab = new CreativeTabs(Main.MOD_ID)
+	public final CreativeTabs tab = new CreativeTabs(Bewitchment.MOD_ID)
 	{
 		@Override
 		public ItemStack createIcon()
@@ -83,7 +83,7 @@ public class CommonProxy
 		ModBlocks.leaves_juniper.drop = Item.getItemFromBlock(ModBlocks.sapling_juniper);
 		ModBlocks.leaves_yew.drop = Item.getItemFromBlock(ModBlocks.sapling_yew);
 		ModBlocks.registerFluids();
-		NetworkRegistry.INSTANCE.registerGuiHandler(Main.instance, new GuiHandler());
+		NetworkRegistry.INSTANCE.registerGuiHandler(Bewitchment.instance, new GuiHandler());
 		this.registerEventHandlers();
 		this.registerRecipes();
 		this.registerWorldGenerators();
