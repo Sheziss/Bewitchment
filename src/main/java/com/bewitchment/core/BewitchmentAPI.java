@@ -320,7 +320,7 @@ public class BewitchmentAPI
 		 */
 		public int getTime();
 		
-		public static class Ritual implements IRitual
+		public static abstract class Ritual implements IRitual
 		{
 			private List<ItemStack> input_items = new ArrayList<ItemStack>(), output = new ArrayList<ItemStack>();
 			private List<Class<? extends Entity>> input_entities = new ArrayList<Class<? extends Entity>>();
@@ -362,34 +362,19 @@ public class BewitchmentAPI
 			}
 			
 			@Override
-			public boolean onLowPower(World world, TileEntity tile, EntityPlayer player, BlockPos realPosition, BlockPos effectivePosition, NBTTagCompound data, int covenSize)
-			{
-				return false;
-			}
+			public abstract boolean onLowPower(World world, TileEntity tile, EntityPlayer player, BlockPos realPosition, BlockPos effectivePosition, NBTTagCompound data, int covenSize);
 			
 			@Override
-			public boolean onStarted(World world, TileEntity tile, EntityPlayer player, BlockPos realPosition, BlockPos effectivePosition, NBTTagCompound data, int covenSize)
-			{
-				return false;
-			}
+			public abstract boolean onStarted(World world, TileEntity tile, EntityPlayer player, BlockPos realPosition, BlockPos effectivePosition, NBTTagCompound data, int covenSize);
 			
 			@Override
-			public boolean onStopped(World world, TileEntity tile, EntityPlayer player, BlockPos realPosition, BlockPos effectivePosition, NBTTagCompound data, int covenSize)
-			{
-				return false;
-			}
+			public abstract boolean onStopped(World world, TileEntity tile, EntityPlayer player, BlockPos realPosition, BlockPos effectivePosition, NBTTagCompound data, int covenSize);
 			
 			@Override
-			public boolean onFinished(World world, TileEntity tile, EntityPlayer player, BlockPos realPosition, BlockPos effectivePosition, NBTTagCompound data, int covenSize)
-			{
-				return false;
-			}
+			public abstract boolean onFinished(World world, TileEntity tile, EntityPlayer player, BlockPos realPosition, BlockPos effectivePosition, NBTTagCompound data, int covenSize);
 			
 			@Override
-			public boolean onUpdate(World world, TileEntity tile, EntityPlayer player, BlockPos realPosition, BlockPos effectivePosition, NBTTagCompound data, int covenSize)
-			{
-				return false;
-			}
+			public abstract boolean onUpdate(World world, TileEntity tile, EntityPlayer player, BlockPos realPosition, BlockPos effectivePosition, NBTTagCompound data, int covenSize);
 			
 			@Override
 			public int getCircles()
