@@ -5,7 +5,6 @@ import com.bewitchment.registry.ModBlocks;
 import com.bewitchment.registry.ModItems;
 import com.bewitchment.registry.capability.IMagicPower;
 import com.bewitchment.registry.capability.ITransformation;
-import com.bewitchment.registry.crafting.ModDistilleryRecipes;
 import com.bewitchment.registry.gen.WorldGenCoquina;
 import com.bewitchment.registry.gen.WorldGenOres;
 import com.bewitchment.registry.handler.BlockDropHandler;
@@ -129,8 +128,6 @@ public class CommonProxy
 		ModItems.ARMOR_COLD_IRON.setRepairItem(new ItemStack(ModItems.ingot_cold_iron));
 		ModItems.ARMOR_SILVER.setRepairItem(new ItemStack(ModItems.ingot_silver));
 		ModItems.TOOL_RITUAL.setRepairItem(new ItemStack(ModItems.ingot_silver));
-		
-		ModDistilleryRecipes.init();
 	}
 	
 	private void registerWorldGenerators()

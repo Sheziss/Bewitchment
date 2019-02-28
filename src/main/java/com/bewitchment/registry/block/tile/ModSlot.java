@@ -1,27 +1,19 @@
 package com.bewitchment.registry.block.tile;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.SlotItemHandler;
 
-public class ModSlot extends SlotItemHandler
+public class ModSlot extends Slot
 {
-	private final List<Item> acceptable = new ArrayList<Item>();
-	
-	public ModSlot(IItemHandler itemHandler, int index, int xPosition, int yPosition, Item... acceptable)
+	public ModSlot(IInventory inventory, int index, int xPosition, int yPosition)
 	{
-		super(itemHandler, index, xPosition, yPosition);
-		for (Item item : acceptable) this.acceptable.add(item);
+		super(inventory, index, xPosition, yPosition);
 	}
 	
 	@Override
     public boolean isItemValid(ItemStack stack)
     {
-		return acceptable.contains(Items.AIR) ? false : acceptable.isEmpty() ? super.isItemValid(stack) : acceptable.contains(stack.getItem());
+		return inventory.isItemValidForSlot(this.getSlotIndex(), stack);
     }
 }

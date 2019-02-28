@@ -1,5 +1,6 @@
 #Fluids
 fluid.honey=Honey
+fluid.oil_mundane=Oil
 
 #Blocks
 tile.bewitchment:distillery.name=Distillery

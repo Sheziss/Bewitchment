@@ -3,9 +3,9 @@ package com.bewitchment.registry.block.tile;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bewitchment.core.CommonProxy.ModGui;
 import com.bewitchment.core.Bewitchment;
 import com.bewitchment.core.Bewitchment.API.DistilleryRecipe;
+import com.bewitchment.core.CommonProxy.ModGui;
 import com.bewitchment.registry.block.ModBlock;
 import com.bewitchment.registry.capability.IMagicPower;
 
@@ -22,7 +22,10 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -33,6 +36,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -42,7 +46,8 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.wrapper.InvWrapper;
+import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
 public class BlockDistillery extends ModBlock implements ITileEntityProvider
 {
@@ -72,10 +77,7 @@ public class BlockDistillery extends ModBlock implements ITileEntityProvider
 	{
 		if (!world.isRemote && world.getGameRules().getBoolean("doTileDrops") && hasTileEntity(state) && world.getTileEntity(pos) instanceof Tile)
 		{
-			Tile tile = (Tile) world.getTileEntity(pos);
-			for (int i = 0; i < tile.fuel.getSlots(); i++) InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), tile.fuel.getStackInSlot(i));
-			for (int i = 0; i < tile.input.getSlots(); i++) InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), tile.input.getStackInSlot(i));
-			for (int i = 0; i < tile.output.getSlots(); i++) InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), tile.output.getStackInSlot(i));
+			InventoryHelper.dropInventoryItems(world, pos, (IInventory) world.getTileEntity(pos));
 		}
 		super.breakBlock(world, pos, state);
 	}
@@ -140,7 +142,7 @@ public class BlockDistillery extends ModBlock implements ITileEntityProvider
 		return new BlockStateContainer(this, BlockHorizontal.FACING);
 	}
 	
-	public static class Tile extends TileEntity implements ITickable
+	public static class Tile extends TileEntity implements ISidedInventory, ITickable
 	{
 		public static final int BURN_TIME = 1200;
 		
@@ -149,38 +151,13 @@ public class BlockDistillery extends ModBlock implements ITileEntityProvider
 		
 		private int progress, burn_time, recipe_time;
 		
-		public final ItemStackHandler fuel = new ItemStackHandler(1)
-		{
-			@Override
-			protected void onContentsChanged(int slot)
-			{
-				markDirty();
-			}
-		};
-		public final ItemStackHandler input = new ItemStackHandler(6)
-		{
-			@Override
-			protected void onContentsChanged(int slot)
-			{
-				markDirty();
-			}
-		};
-		public final ItemStackHandler output = new ItemStackHandler(6)
-		{
-			@Override
-			protected void onContentsChanged(int slot)
-			{
-				markDirty();
-			}
-		};
+		public final NonNullList<ItemStack> inventory = NonNullList.withSize(13, ItemStack.EMPTY);
 		
 		@Override
 		public NBTTagCompound writeToNBT(NBTTagCompound tag)
 		{
 			markDirty();
-			tag.setTag("fuel", fuel.serializeNBT());
-			tag.setTag("input", input.serializeNBT());
-			tag.setTag("output", output.serializeNBT());
+			ItemStackHelper.loadAllItems(tag, inventory);
 			tag.setInteger("progress", progress);
 			tag.setInteger("recipe_time", recipe == null ? 0 : recipe.getTime());
 			tag.setInteger("burn_time", burn_time);
@@ -192,9 +169,7 @@ public class BlockDistillery extends ModBlock implements ITileEntityProvider
 		public void readFromNBT(NBTTagCompound tag)
 		{
 			super.readFromNBT(tag);
-			fuel.deserializeNBT(tag.getCompoundTag("fuel"));
-			input.deserializeNBT(tag.getCompoundTag("input"));
-			output.deserializeNBT(tag.getCompoundTag("output"));
+			ItemStackHelper.saveAllItems(tag, inventory);
 			progress = tag.getInteger("progress");
 			recipe_time = tag.getInteger("recipe_time");
 			burn_time = tag.getInteger("burn_time");
@@ -222,7 +197,7 @@ public class BlockDistillery extends ModBlock implements ITileEntityProvider
 		@Override
 		public <T> T getCapability(Capability<T> capability, EnumFacing face)
 		{
-			return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? (face == world.getBlockState(pos).getValue(BlockHorizontal.FACING) ? CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(fuel) : CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(input)) : capability == IMagicPower.Provider.CAPABILITY ? IMagicPower.Provider.CAPABILITY.cast(magic_power) : super.getCapability(capability, face);
+			return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? (face == world.getBlockState(pos).getValue(BlockHorizontal.FACING) ? CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(new SidedInvWrapper(this, face)) : CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(new InvWrapper(this))) : capability == IMagicPower.Provider.CAPABILITY ? IMagicPower.Provider.CAPABILITY.cast(magic_power) : super.getCapability(capability, face);
 		}
 		
 		@Override
@@ -235,7 +210,7 @@ public class BlockDistillery extends ModBlock implements ITileEntityProvider
 			}
 			if (recipe != null)
 			{
-				if (burn_time == 0) fuel.getStackInSlot(0).shrink(1);
+				if (burn_time == 0) inventory.get(0).shrink(1);
 				else if (burn_time > 0)
 				{
 					if (progress > 0)
@@ -261,15 +236,132 @@ public class BlockDistillery extends ModBlock implements ITileEntityProvider
 			for (DistilleryRecipe recipe : Bewitchment.API.REGISTRY_DISTILLERY)
 			{
 				List<ItemStack> inputStacks = new ArrayList<ItemStack>();
-				for (int i = 0; i < input.getSlots(); i++) inputStacks.add(input.getStackInSlot(i));
+				for (int i = 1; i < 8; i++) inputStacks.add(inventory.get(i));
 				if (recipe.getInput().containsAll(inputStacks) && recipe.getInput().size() == inputStacks.size())
 				{
 					this.recipe = recipe;
 					progress = recipe.getTime();
-					for (int i = 0; i < input.getSlots(); i++) input.getStackInSlot(i).shrink(1);
-					for (ItemStack stack : recipe.getOutput()) for (int i = 0; i < output.getSlots(); i++) output.insertItem(i, stack, false);
+					for (int i = 1; i < 8; i++) inventory.get(i).shrink(1);
+					for (ItemStack stack : recipe.getOutput()) for (int i = 8; i < inventory.size(); i++) inventory.add(i, stack);
 				}
 			}
+		}
+		
+		@Override
+		public int getSizeInventory()
+		{
+			return inventory.size();
+		}
+		
+		@Override
+		public boolean isEmpty()
+		{
+			return !inventory.isEmpty();
+		}
+		
+		@Override
+		public ItemStack getStackInSlot(int index)
+		{
+			return inventory.get(index);
+		}
+		
+		@Override
+		public ItemStack decrStackSize(int index, int count)
+		{
+			return ItemStackHelper.getAndSplit(inventory, index, count);
+		}
+		
+		@Override
+		public ItemStack removeStackFromSlot(int index)
+		{
+			return ItemStackHelper.getAndRemove(inventory, index);
+		}
+		
+		@Override
+		public void setInventorySlotContents(int index, ItemStack stack)
+		{
+			inventory.set(index, stack);
+		}
+		
+		@Override
+		public int getInventoryStackLimit()
+		{
+			return 64;
+		}
+		
+		@Override
+		public boolean isUsableByPlayer(EntityPlayer player)
+		{
+			return !player.isSpectator();
+		}
+		
+		@Override
+		public void openInventory(EntityPlayer player)
+		{
+		}
+		
+		@Override
+		public void closeInventory(EntityPlayer player)
+		{
+		}
+		
+		@Override
+		public boolean isItemValidForSlot(int index, ItemStack stack)
+		{
+			return index == 0 ? stack.getItem() == Items.BLAZE_POWDER : index < 7;
+		}
+		
+		@Override
+		public int getField(int id)
+		{
+			return 0;
+		}
+		
+		@Override
+		public void setField(int id, int value)
+		{
+		}
+		
+		@Override
+		public int getFieldCount()
+		{
+			return 0;
+		}
+		
+		@Override
+		public void clear()
+		{
+			inventory.clear();
+		}
+		
+		@Override
+		public String getName()
+		{
+			return world.getBlockState(pos).getBlock().getTranslationKey();
+		}
+		
+		@Override
+		public boolean hasCustomName()
+		{
+			return false;
+		}
+		
+		@Override
+		public int[] getSlotsForFace(EnumFacing face)
+		{
+			return face == world.getBlockState(pos).getValue(BlockHorizontal.FACING) ? new int[]{0} : new int[]{1, 2, 3, 4, 5, 6};
+		}
+		
+		@Override
+		public boolean canInsertItem(int index, ItemStack stack, EnumFacing face)
+		{
+			return isItemValidForSlot(index, stack);
+		}
+		
+		@Override
+		public boolean canExtractItem(int index, ItemStack stack, EnumFacing face)
+		{
+			return isItemValidForSlot(index, stack);
 		}
 	}
 	
@@ -280,13 +372,17 @@ public class BlockDistillery extends ModBlock implements ITileEntityProvider
 		public Container(InventoryPlayer inventory, Tile tile)
 		{
 			this.tile = tile;
-			addSlotToContainer(new ModSlot(tile.fuel, 12, 80, 58, Items.BLAZE_POWDER));
+			int index = 0;
+			addSlotToContainer(new ModSlot(tile, index++, 80, 58));
 			for (int i = 0; i < 3; i++)
 			{
-				addSlotToContainer(new ModSlot(tile.input, i * 4, 18, (18 * (i + 1)) - 1));
-				addSlotToContainer(new ModSlot(tile.input, 1 + (i * 4), 36, (18 * (i + 1)) - 1));
-				addSlotToContainer(new ModSlot(tile.output, 2 + (i * 4), 124, (18 * (i + 1)) - 1, Items.AIR));
-				addSlotToContainer(new ModSlot(tile.output, 3 + (i * 4), 142, (18 * (i + 1)) - 1, Items.AIR));
+				addSlotToContainer(new ModSlot(tile, index++, 18, (18 * (i + 1)) - 1));
+				addSlotToContainer(new ModSlot(tile, index++, 36, (18 * (i + 1)) - 1));
+			}
+			for (int i = 0; i < 3; i++)
+			{
+				addSlotToContainer(new ModSlot(tile, index++, 124, (18 * (i + 1)) - 1));
+				addSlotToContainer(new ModSlot(tile, index++, 142, (18 * (i + 1)) - 1));
 			}
 			for (int i = 0; i < 3; i++) for (int j = 0; j < 9; j++) addSlotToContainer(new Slot(inventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
 			for (int i = 0; i < 9; i++) addSlotToContainer(new Slot(inventory, i, 8 + i * 18, 142));
@@ -301,7 +397,7 @@ public class BlockDistillery extends ModBlock implements ITileEntityProvider
 		@Override
 		public boolean canInteractWith(EntityPlayer player)
 		{
-			return !player.isSpectator();
+			return tile.isUsableByPlayer(player);
 		}
 	}
 	

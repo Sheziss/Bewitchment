@@ -37,6 +37,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @EventBusSubscriber(modid = Bewitchment.MOD_ID)
@@ -47,6 +48,7 @@ public class ModBlocks
 	
 	//Fluids
 	public static final Fluid honey = registerFluid("honey", Material.WATER, 0, 10, 1500, 8000, true, false);
+	public static final Fluid oil_mundane = registerFluid("oil_mundane", Material.WATER, 0, 0, 800, 4000, true, true);
 	
 	//No Item
 	public static final Block salt_barrier = new BlockSaltBarrier("salt_barrier");
@@ -213,7 +215,7 @@ public class ModBlocks
 			fluid.setBlock(block);
 			if (useBucket) FluidRegistry.addBucketForFluid(fluid);
 			Bewitchment.proxy.registerTexture(fluid);
-			REGISTRY.add(block);
+			ForgeRegistries.BLOCKS.register(block);
 			FLUID_REGISTRY.add(fluid);
 		}
 		return FluidRegistry.getFluid(name);

@@ -6,6 +6,7 @@
 	},
 	"variants":
 	{
-		"honey": [{"custom": {"fluid": "honey"}}]
+		"honey": [{"custom": {"fluid": "honey"}}],
+		"oil_mundane": [{"custom": {"fluid": "oil_mundane"}}]
 	}
 }
