@@ -65,7 +65,7 @@ public class ModBlockDoor extends BlockDoor implements IOreName
 	
 	@Override
 	public ItemStack getItem(World world, BlockPos pos, IBlockState state)
-    {
+	{
 		return new ItemStack(drop);
 	}
 	
