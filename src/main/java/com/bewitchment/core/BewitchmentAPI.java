@@ -19,7 +19,7 @@ public class BewitchmentAPI
 	public static final List<ILoomRecipe> REGISTRY_LOOM = new ArrayList<ILoomRecipe>();
 	
 	/**
-	 * Registers a new IDistilleryRecipe, for use in the distillery.
+	 * Registers a new IDistilleryRecipe, for use in the Distillery.
 	 * 
 	 * @param recipe the recipe to register
 	 * @return the recipe registered
