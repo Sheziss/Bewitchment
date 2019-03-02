@@ -1,7 +1,7 @@
 package com.bewitchment.registry.capability;
 
 import com.bewitchment.core.Bewitchment;
-import com.bewitchment.registry.block.tile.BlockDistillery;
+import com.bewitchment.registry.block.tile.TileEntityDistillery;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -119,7 +119,7 @@ public class MagicPower
 		@SubscribeEvent
 		public void attachCapabilityTE(AttachCapabilitiesEvent<TileEntity> event)
 		{
-			if (event.getObject() instanceof BlockDistillery.Tile) event.addCapability(CAP, new Provider());
+			if (event.getObject() instanceof TileEntityDistillery) event.addCapability(CAP, new Provider());
 		}
 		
 		@SubscribeEvent

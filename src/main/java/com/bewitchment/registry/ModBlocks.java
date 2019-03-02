@@ -19,6 +19,8 @@ import com.bewitchment.registry.block.ModBlockStairs;
 import com.bewitchment.registry.block.ModBlockTrapDoor;
 import com.bewitchment.registry.block.tile.BlockDistillery;
 import com.bewitchment.registry.block.tile.BlockOven;
+import com.bewitchment.registry.block.tile.TileEntityDistillery;
+import com.bewitchment.registry.block.tile.TileEntityOven;
 import com.bewitchment.registry.block.util.BlockMoonbell;
 import com.bewitchment.registry.block.util.BlockSaltBarrier;
 
@@ -72,8 +74,8 @@ public class ModBlocks
 	public static final ModBlockCrop crop_wormwood = new ModBlockCrop("crop_wormwood", 6);
 	
 	//Devices
-	public static final Block distillery = registerTileEntity("distillery", BlockDistillery.class, BlockDistillery.Tile.class);
-	public static final Block oven = registerTileEntity("oven", BlockOven.class, BlockOven.Tile.class);
+	public static final Block distillery = registerTileEntity("distillery", BlockDistillery.class, TileEntityDistillery.class);
+	public static final Block oven = registerTileEntity("oven", BlockOven.class, TileEntityOven.class);
 	
 	//Material Blocks
 	public static final Block block_cold_iron = new ModBlock("block_cold_iron", Material.IRON, SoundType.METAL, 5, 30, "pickaxe", 1, "blockColdIron");
