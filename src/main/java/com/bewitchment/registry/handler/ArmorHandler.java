@@ -1,8 +1,8 @@
 package com.bewitchment.registry.handler;
 
 import com.bewitchment.core.Bewitchment;
-import com.bewitchment.registry.capability.ITransformation;
-import com.bewitchment.registry.capability.ITransformation.Transformations;
+import com.bewitchment.registry.capability.Transformation;
+import com.bewitchment.registry.capability.Transformation.Transformations;
 import com.bewitchment.registry.item.tool.ModItemArmor;
 
 import net.minecraft.enchantment.EnchantmentThorns;
@@ -40,7 +40,7 @@ public class ArmorHandler
 			if (event.getSource().getTrueSource() instanceof EntityLivingBase)
 			{
 				if (((EntityLivingBase) event.getSource().getTrueSource()).getCreatureAttribute() == EnumCreatureAttribute.UNDEAD) event.setAmount(event.getAmount() * 0.9f);
-				if (event.getSource().getTrueSource() instanceof EntityPlayer && event.getSource().getTrueSource().getCapability(ITransformation.Provider.TRANSFORMATION, null).getTransformation() == Transformations.WEREWOLF)
+				if (event.getSource().getTrueSource() instanceof EntityPlayer && event.getSource().getTrueSource().getCapability(Transformation.Provider.TRANSFORMATION, null).getTransformation() == Transformations.WEREWOLF)
 				{
 					event.setAmount(event.getAmount() * 0.9f);
 					event.getSource().getTrueSource().attackEntityFrom(DamageSource.causeThornsDamage(event.getEntityLiving()), MathHelper.clamp(event.getAmount() / 2, 1, 4));

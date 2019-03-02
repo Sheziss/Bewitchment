@@ -1,13 +1,12 @@
 package com.bewitchment.registry.block.tile;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Random;
 
 import com.bewitchment.core.Bewitchment;
-import com.bewitchment.core.Bewitchment.API.DistilleryRecipe;
+import com.bewitchment.core.Bewitchment.API.OvenRecipe;
 import com.bewitchment.core.CommonProxy.ModGui;
+import com.bewitchment.registry.ModItems;
 import com.bewitchment.registry.block.ModBlock;
-import com.bewitchment.registry.capability.MagicPower;
 
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.ITileEntityProvider;
@@ -26,29 +25,24 @@ import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.IWorldNameable;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 
-public class BlockDistillery extends ModBlock implements ITileEntityProvider
+public class BlockOven extends ModBlock implements ITileEntityProvider
 {
-	private static final AxisAlignedBB BBOX_X = new AxisAlignedBB(0.125, 0, 0, 0.875, 0.6875, 1), BBOX_Z = new AxisAlignedBB(0, 0, 0.125, 1, 0.6875, 0.875);
-	
-	public BlockDistillery(String name)
+	public BlockOven(String name)
 	{
 		super(name, Material.IRON, SoundType.METAL, 5, 5, "pickaxe", 0);
 		this.setDefaultState(blockState.getBaseState().withProperty(BlockHorizontal.FACING, EnumFacing.SOUTH));
@@ -63,7 +57,14 @@ public class BlockDistillery extends ModBlock implements ITileEntityProvider
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing face, float hitX, float hitY, float hitZ)
 	{
-		player.openGui(Bewitchment.instance, ModGui.DISTILLERY.ordinal(), world, pos.getX(), pos.getY(), pos.getZ());
+		if (player.isSneaking()) return false;
+		if (!player.getHeldItem(hand).isEmpty() && player.getHeldItem(hand).getItem() == Items.NAME_TAG && world.getTileEntity(pos) instanceof IWorldNameable)
+		{
+			if (!player.isCreative()) player.getHeldItem(hand).shrink(1);
+			((Tile)world.getTileEntity(pos)).custom_name = player.getHeldItem(hand).getDisplayName();
+			world.getTileEntity(pos).markDirty();
+		}
+		else player.openGui(Bewitchment.instance, ModGui.OVEN.ordinal(), world, pos.getX(), pos.getY(), pos.getZ());
 		return true;
 	}
 	
@@ -72,18 +73,6 @@ public class BlockDistillery extends ModBlock implements ITileEntityProvider
 	{
 		if (!world.isRemote && world.getGameRules().getBoolean("doTileDrops") && hasTileEntity(state) && world.getTileEntity(pos) instanceof IItemHandler) for (int i = 0; i < ((IItemHandler)world.getTileEntity(pos)).getSlots(); i++) InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), ((IItemHandler)world.getTileEntity(pos)).getStackInSlot(i));
 		super.breakBlock(world, pos, state);
-	}
-	
-	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos)
-	{
-		return state.getValue(BlockHorizontal.FACING).getAxis() == Axis.Z ? BBOX_X : BBOX_Z;
-	}
-	
-	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos)
-	{
-		return state.getValue(BlockHorizontal.FACING).getAxis() == Axis.Z ? BBOX_X : BBOX_Z;
 	}
 	
 	@Override
@@ -136,17 +125,15 @@ public class BlockDistillery extends ModBlock implements ITileEntityProvider
 	
 	public static class Tile extends ModTileEntity
 	{
-		public static final int BURN_TIME = 1200;
+		private final Random rand = new Random();
 		
-		private MagicPower magic_power = MagicPower.Provider.CAPABILITY.getDefaultInstance();
+		public String current_recipe = "";
 		
-		private String current_recipe = "";
-		
-		private int burn_time, progress, recipe_time;
+		private int burn_time, fuel_burn_time, progress;
 		
 		public Tile()
 		{
-			super(13);
+			super(5);
 		}
 		
 		@Override
@@ -154,9 +141,8 @@ public class BlockDistillery extends ModBlock implements ITileEntityProvider
 		{
 			tag.setString("current_recipe", current_recipe);
 			tag.setInteger("burn_time", burn_time);
+			tag.setInteger("fuel_burn_time", fuel_burn_time);
 			tag.setInteger("progress", progress);
-			tag.setInteger("recipe_time", recipe_time);
-			tag.setInteger("power", magic_power.getAmount());
 			return super.writeToNBT(tag);
 		}
 		
@@ -166,101 +152,68 @@ public class BlockDistillery extends ModBlock implements ITileEntityProvider
 			super.readFromNBT(tag);
 			current_recipe = tag.getString("current_recipe");
 			burn_time = tag.getInteger("burn_time");
+			fuel_burn_time = tag.getInteger("fuel_burn_time");
 			progress = tag.getInteger("progress");
-			recipe_time = tag.getInteger("recipe_time");
-			magic_power.setAmount(tag.getInteger("power"));
-		}
-		
-		@Override
-		public SPacketUpdateTileEntity getUpdatePacket()
-		{
-			return new SPacketUpdateTileEntity(getPos(), 1, writeToNBT(new NBTTagCompound()));
-		}
-		
-		@Override
-		public void onDataPacket(NetworkManager manager, SPacketUpdateTileEntity packet)
-		{
-			readFromNBT(packet.getNbtCompound());
 		}
 		
 		@Override
 		public boolean hasCapability(Capability<?> capability, EnumFacing face)
 		{
-			return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || capability == MagicPower.Provider.CAPABILITY || super.hasCapability(capability, face);
+			return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, face);
 		}
 		
 		@Override
 		public <T> T getCapability(Capability<T> capability, EnumFacing face)
 		{
-			return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this) : capability == MagicPower.Provider.CAPABILITY ? MagicPower.Provider.CAPABILITY.cast(magic_power) : super.getCapability(capability, face);
+			return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this) : super.getCapability(capability, face);
 		}
 		
 		@Override
-		public boolean isItemValid(int slot, ItemStack stack)
+		public boolean isItemValid(int index, ItemStack stack)
 		{
-			return slot == 0 ? stack.getItem() == Items.BLAZE_POWDER : slot < 7;
+			return index == 0 ? TileEntityFurnace.isItemFuel(stack) : index == 1 ? stack.getItem() == ModItems.empty_jar : index == 2;
 		}
 		
 		@Override
 		public void update()
 		{
+			OvenRecipe recipe = Bewitchment.API.REGISTRY_OVEN.getValuesCollection().parallelStream().filter(dr -> dr.matches(getStackInSlot(2))).findFirst().orElse(null);
+			if (recipe == null)
+			{
+				current_recipe = "";
+				progress = 0;
+			}
+			else if (!current_recipe.equals(recipe.getRegistryName().toString()) && (getStackInSlot(3).isEmpty() || (getStackInSlot(3).isItemEqual(recipe.getOutput()) && getStackInSlot(3).getCount() < getSlotLimit(3))) && (getStackInSlot(4).isEmpty() || (getStackInSlot(4).isItemEqual(recipe.getOutput()) && getStackInSlot(4).getCount() < getSlotLimit(4)))) current_recipe = recipe.getRegistryName().toString();
 			if (burn_time > 0) burn_time--;
 			if (!current_recipe.isEmpty())
 			{
 				if (burn_time == 0 && !getStackInSlot(0).isEmpty())
 				{
-					burn_time = BURN_TIME;
+					burn_time = TileEntityFurnace.getItemBurnTime(getStackInSlot(0));
+					fuel_burn_time = burn_time;
 					extractItem(0, 1, false);
 				}
 				else if (burn_time > 0)
 				{
-					if (progress < recipe_time)
+					progress++;
+					if (progress >= 100)
 					{
-						if (true) // mp.drainAltarFirst(this.world.getClosestPlayer(this.pos.getX() + 0.5, this.pos.getY() + 0.5, this.pos.getZ() + 0.5, 5, false), this.getPos(), this.world.provider.getDimension(), 2)) {
+						progress = 0;
+						extractItem(2, 1, false);
+						ItemStack output = getStackInSlot(3);
+						if (output.isItemEqual(recipe.getByproduct())) output.grow(1);
+						else output = recipe.getOutput();
+						insertItem(3, output, false);
+						if (rand.nextFloat() <= recipe.getByproductChance())
 						{
-							progress++;
+							extractItem(1, 1, false);
+							ItemStack byproduct = getStackInSlot(4);
+							if (byproduct.isItemEqual(recipe.getByproduct())) byproduct.grow(1);
+							else byproduct = recipe.getByproduct();
+							insertItem(4, byproduct, false);
 						}
 					}
-					else progress = 0;
 				}
-			}
-			checkRecipe();
-		}
-		
-		private boolean canOutputFit(DistilleryRecipe recipe)
-		{
-			ItemStackHandler sim = new ItemStackHandler(6);
-			for (int i = 0; i < sim.getSlots(); i++) sim.setStackInSlot(i, getStackInSlot(i + 7).copy());
-			for (ItemStack stack : recipe.getOutput())
-			{
-				ItemStack sim0 = stack.copy();
-				for (int i = 0; (i < sim.getSlots() && !sim0.isEmpty()); i++) sim0 = sim.insertItem(i, sim0, false);
-				if (!sim0.isEmpty()) return false;
-			}
-			return true;
-		}
-		
-		private void checkRecipe()
-		{
-			List<ItemStack> inputStacks = new ArrayList<ItemStack>();
-			for (int i = 1; i < 7; i++) inputStacks.add(getStackInSlot(i));
-			DistilleryRecipe recipe = Bewitchment.API.REGISTRY_DISTILLERY.getValuesCollection().parallelStream().filter(dr -> dr.matches(inputStacks)).findFirst().orElse(null);
-			if (recipe == null)
-			{
-				current_recipe = "";
-				progress = 0;
-				recipe_time = -1;
-			}
-			else if (!current_recipe.equals(recipe.getRegistryName().toString()) && canOutputFit(recipe))
-			{
-				current_recipe = recipe.getRegistryName().toString();
-				recipe_time = recipe.getTime();
-			}
-			if (recipe != null && progress >= recipe_time)
-			{
-				int i;
-				for (i = 1; i < 7; i++) extractItem(i, 1, false);
-				for (ItemStack stack : recipe.getOutput()) insertItem(getStackInSlot(i).getItem() != stack.getItem() || getStackInSlot(i).getMetadata() != stack.getMetadata() || getStackInSlot(i).getCount() >= getStackInSlot(i).getMaxStackSize() ? i++ : i, stack, false);
 			}
 			markDirty();
 		}
@@ -274,17 +227,11 @@ public class BlockDistillery extends ModBlock implements ITileEntityProvider
 		{
 			this.tile = tile;
 			int index = 0;
-			addSlotToContainer(new ModSlot(tile, index++, 80, 58));
-			for (int i = 0; i < 3; i++)
-			{
-				addSlotToContainer(new ModSlot(tile, index++, 18, (18 * (i + 1)) - 1));
-				addSlotToContainer(new ModSlot(tile, index++, 36, (18 * (i + 1)) - 1));
-			}
-			for (int i = 0; i < 3; i++)
-			{
-				addSlotToContainer(new ModSlot(tile, index++, 124, (18 * (i + 1)) - 1));
-				addSlotToContainer(new ModSlot(tile, index++, 142, (18 * (i + 1)) - 1));
-			}
+			addSlotToContainer(new ModSlot(tile, index++, 44, 55));
+			addSlotToContainer(new ModSlot(tile, index++, 80, 55));
+			addSlotToContainer(new ModSlot(tile, index++, 44, 19));
+			addSlotToContainer(new ModSlot(tile, index++, 116, 19));
+			addSlotToContainer(new ModSlot(tile, index++, 116, 55));
 			for (int i = 0; i < 3; i++) for (int j = 0; j < 9; j++) addSlotToContainer(new Slot(inventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
 			for (int i = 0; i < 9; i++) addSlotToContainer(new Slot(inventory, i, 8 + i * 18, 142));
 		}
@@ -318,14 +265,16 @@ public class BlockDistillery extends ModBlock implements ITileEntityProvider
 	@SideOnly(Side.CLIENT)
 	public static class Gui extends GuiContainer
 	{
-		private static final ResourceLocation TEX = new ResourceLocation(Bewitchment.MOD_ID, "textures/gui/distillery.png");
+		private static final ResourceLocation TEX = new ResourceLocation(Bewitchment.MOD_ID, "textures/gui/oven.png");
 		
+		private final InventoryPlayer inventory;
 		private final Container container;
 		
-		public Gui(Container container)
+		public Gui(Container container, InventoryPlayer inventory)
 		{
 			super(container);
 			this.container = container;
+			this.inventory = inventory;
 		}
 		
 		@Override
@@ -344,9 +293,21 @@ public class BlockDistillery extends ModBlock implements ITileEntityProvider
 			int x = (width - xSize) / 2;
 			int y = (height - ySize) / 2;
 			drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
-			drawTexturedModalRect(x + 76, y + 16, 176, 0, (container.tile.progress * 24 / Math.max(1, container.tile.recipe_time)) + 1, 17);
-			int burnProgress = 14 - (int) Math.ceil((14 * (container.tile.burn_time / (double) Tile.BURN_TIME)));
-			drawTexturedModalRect(x + 81, y + 36 + burnProgress, 242, burnProgress, 14, 14 - burnProgress);
+			this.drawTexturedModalRect(x, y, 0, 0, this.xSize, this.ySize);
+			if (container.tile.burn_time > 0)
+			{
+				int time = ((container.tile.burn_time) * 13) / container.tile.fuel_burn_time;
+				this.drawTexturedModalRect(x + 44, (y + 50) - time, 176, 12 - time, 14, time + 1);
+			}
+			this.drawTexturedModalRect(x + 76, y + 19, 176, 14, ((container.tile.progress * 24) / 100) + 1, 16);
+		}
+		
+		@Override
+		protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
+		{
+			String name = container.tile.getName();
+			fontRenderer.drawString(name, (xSize / 2) - (fontRenderer.getStringWidth(name) / 2), 6, 0x404040);
+			fontRenderer.drawString(inventory.getDisplayName().getUnformattedText(), 8, ySize - 94, 0x404040);
 		}
 	}
 }

@@ -7,6 +7,7 @@ import com.bewitchment.core.Bewitchment;
 import com.bewitchment.registry.block.ModBlockSlab;
 import com.bewitchment.registry.block.util.BlockSaltBarrier;
 import com.bewitchment.registry.item.ModItem;
+import com.bewitchment.registry.item.ModItemDoor;
 import com.bewitchment.registry.item.ModItemFood;
 import com.bewitchment.registry.item.ModItemSeed;
 import com.bewitchment.registry.item.tool.ModItemArmor;
@@ -54,6 +55,12 @@ public class ModItems
 	public static final ArmorMaterial ARMOR_VAMPIRE = EnumHelper.addArmorMaterial("vampire", Bewitchment.MOD_ID + ":" + "vampire", 9, new int[]{2, 6, 7, 1}, 22, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1.25F);
 
 	public static final ToolMaterial TOOL_RITUAL = EnumHelper.addToolMaterial("chalk", 2, 300, 2F, 1.5F, 30);
+	
+	//Door
+	public static final Item door_cypress = new ModItemDoor("door_cypress", ModBlocks.door_block_cypress);
+	public static final Item door_elder = new ModItemDoor("door_elder", ModBlocks.door_block_elder);
+	public static final Item door_juniper = new ModItemDoor("door_juniper", ModBlocks.door_block_juniper);
+	public static final Item door_yew = new ModItemDoor("door_yew", ModBlocks.door_block_yew);
 	
 	//Armor
 	public static final Item helmet_cold_iron = new ModItemArmor.ColdIron("helmet_cold_iron", ARMOR_COLD_IRON, EntityEquipmentSlot.HEAD);
@@ -144,10 +151,18 @@ public class ModItems
 	public static final Item witchweed = new ModItem("witchweed");
 	public static final Item wormwood = new ModItem("wormwood", "cropWormwood", "listAllspice");
 	
+	public static final Item demonic_heart = new ModItem("demonic_heart");
+	public static final Item diabolical_vein = new ModItem("diabolical_vein");
+	public static final Item dimensional_sand = new ModItem("dimensional_sand");
+	public static final Item ectoplasm = new ModItem("ectoplasm");
 	public static final Item glass_jar = new ModItem("glass_jar");
+	public static final Item graveyard_dust = new ModItem("graveyard_dust");
 	public static final Item grilled_watermelon = new ModItemFood("grilled_watermelon", 4, 2.5f, false);
 	public static final Item golden_thread = new ModItem("golden_thread");
 	public static final Item juniper_berries = new ModItemFood("juniper_berries", 1, 0.5f, false).setPotionEffect(new PotionEffect(MobEffects.POISON, 100, 0), 0.1f);
+	public static final Item lapis_powder = new ModItem("lapis_powder");
+	public static final Item oak_apple_gall = new ModItem("oak_apple_gall");
+	public static final Item quartz_powder = new ModItem("quartz_powder");
 	public static final Item silver_scales = new ModItem("silver_scales");
 	public static final Item wood_ash = new ModItem("wood_ash");
 	public static final Item yew_aril = new ModItemFood("yew_aril", 1, 0.5f, false).setPotionEffect(new PotionEffect(MobEffects.POISON, 100, 0), 0.1f);

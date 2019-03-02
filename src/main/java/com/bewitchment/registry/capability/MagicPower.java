@@ -19,64 +19,44 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public interface IMagicPower
+public class MagicPower
 {
-	public int getAmount();
+	int amount, max_amount, bonus_amount;
 	
-	public void setAmount(int amount);
-	
-	public int getMaxAmount();
-	
-	public void setMaxAmount(int max_amount);
-	
-	public int getBonusAmount();
-	
-	public void setBonusAmount(int bonus_amount);
-	
-	public static class Cap implements IMagicPower
+	public int getAmount()
 	{
-		int amount, max_amount, bonus_amount;
-		
-		@Override
-		public int getAmount()
-		{
-			return amount;
-		}
-		
-		@Override
-		public void setAmount(int amount)
-		{
-			this.amount = amount;
-		}
-		
-		@Override
-		public int getMaxAmount()
-		{
-			return max_amount;
-		}
-		
-		@Override
-		public void setMaxAmount(int max_amount)
-		{
-			this.max_amount = max_amount;
-		}
-		
-		@Override
-		public int getBonusAmount()
-		{
-			return max_amount;
-		}
-		
-		@Override
-		public void setBonusAmount(int bonus_amount)
-		{
-			this.bonus_amount = bonus_amount;
-		}
+		return amount;
 	}
-	public static class Storage implements IStorage<IMagicPower>
+	
+	public void setAmount(int amount)
+	{
+		this.amount = amount;
+	}
+	
+	public int getMaxAmount()
+	{
+		return max_amount;
+	}
+	
+	public void setMaxAmount(int max_amount)
+	{
+		this.max_amount = max_amount;
+	}
+	
+	public int getBonusAmount()
+	{
+		return max_amount;
+	}
+	
+	public void setBonusAmount(int bonus_amount)
+	{
+		this.bonus_amount = bonus_amount;
+	}
+	
+	public static class Storage implements IStorage<MagicPower>
 	{
 		@Override
-		public NBTBase writeNBT(Capability<IMagicPower> capability, IMagicPower instance, EnumFacing side)
+		public NBTBase writeNBT(Capability<MagicPower> capability, MagicPower instance, EnumFacing side)
 		{
 			NBTTagCompound tag = new NBTTagCompound();
 			tag.setInteger("amount", instance.getAmount());
@@ -86,20 +66,20 @@ public interface IMagicPower
 		}
 		
 		@Override
-		public void readNBT(Capability<IMagicPower> capability, IMagicPower instance, EnumFacing side, NBTBase nbt)
+		public void readNBT(Capability<MagicPower> capability, MagicPower instance, EnumFacing side, NBTBase nbt)
 		{
 			instance.setAmount(((NBTTagCompound)nbt).getInteger("amount"));
 			instance.setMaxAmount(((NBTTagCompound)nbt).getInteger("max_amount"));
 			instance.setBonusAmount(((NBTTagCompound)nbt).getInteger("bonux_amount"));
 		}
 	}
-	
+
 	public static class Provider implements ICapabilitySerializable<NBTTagCompound>
 	{
-		@CapabilityInject(IMagicPower.class)
-		public static final Capability<IMagicPower> CAPABILITY = null;
+		@CapabilityInject(MagicPower.class)
+		public static final Capability<MagicPower> CAPABILITY = null;
 		
-		private IMagicPower instance = CAPABILITY.getDefaultInstance();
+		private MagicPower instance = CAPABILITY.getDefaultInstance();
 		
 		@Override
 		public boolean hasCapability(Capability<?> capability, EnumFacing facing)
@@ -125,7 +105,7 @@ public interface IMagicPower
 			CAPABILITY.getStorage().readNBT(CAPABILITY, instance, null, nbt);
 		}
 	}
-	
+
 	public static class Handler
 	{
 		public static final ResourceLocation CAP = new ResourceLocation(Bewitchment.MOD_ID, "magic_power");
@@ -147,7 +127,7 @@ public interface IMagicPower
 		{
 			if (event.getEntityLiving() instanceof EntityPlayer)
 			{
-				IMagicPower cap = event.getEntityLiving().getCapability(Provider.CAPABILITY, null);
+				MagicPower cap = event.getEntityLiving().getCapability(Provider.CAPABILITY, null);
 				if (cap.getMaxAmount() <= 0)
 				{
 					cap.setAmount(800);
@@ -160,7 +140,7 @@ public interface IMagicPower
 		@SubscribeEvent
 		public void clonePlayer(PlayerEvent.Clone event)
 		{
-			IMagicPower oldC = event.getOriginal().getCapability(Provider.CAPABILITY, null), newC = event.getEntityPlayer().getCapability(Provider.CAPABILITY, null);
+			MagicPower oldC = event.getOriginal().getCapability(Provider.CAPABILITY, null), newC = event.getEntityPlayer().getCapability(Provider.CAPABILITY, null);
 			newC.setAmount(oldC.getAmount());
 			newC.setMaxAmount(oldC.getMaxAmount());
 			newC.setBonusAmount(oldC.getBonusAmount());

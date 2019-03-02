@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.bewitchment.core.Bewitchment;
 import com.bewitchment.registry.ModItems;
-import com.bewitchment.registry.capability.ITransformation;
-import com.bewitchment.registry.capability.ITransformation.Transformations;
+import com.bewitchment.registry.capability.Transformation;
+import com.bewitchment.registry.capability.Transformation.Transformations;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -48,7 +48,7 @@ public class ModItemArmor extends ItemArmor
 		@Override
 		public void onArmorTick(World world, EntityPlayer player, ItemStack stack)
 		{
-			if (player.getCapability(ITransformation.Provider.TRANSFORMATION, null).getTransformation() == Transformations.WEREWOLF) player.attackEntityFrom(DamageSource.MAGIC, 1);
+			if (player.getCapability(Transformation.Provider.TRANSFORMATION, null).getTransformation() == Transformations.WEREWOLF) player.attackEntityFrom(DamageSource.MAGIC, 1);
 		}
 	}
 	

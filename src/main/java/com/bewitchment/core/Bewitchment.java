@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Mod;
@@ -17,6 +18,9 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.IForgeRegistryEntry;
+import net.minecraftforge.registries.RegistryBuilder;
 
 @Mod(modid = Bewitchment.MOD_ID, name = Bewitchment.MOD_NAME, version = Bewitchment.MOD_VERSION)
 public class Bewitchment
@@ -52,10 +56,10 @@ public class Bewitchment
 	 */
 	public static class API
 	{
-		public static final List<DistilleryRecipe> REGISTRY_DISTILLERY = new ArrayList<DistilleryRecipe>();
-		public static final List<OvenRecipe> REGISTRY_OVEN = new ArrayList<OvenRecipe>();
-		public static final List<Ritual> REGISTRY_RITUAL = new ArrayList<Ritual>();
-		public static final List<LoomRecipe> REGISTRY_LOOM = new ArrayList<LoomRecipe>();
+		public static final IForgeRegistry<DistilleryRecipe> REGISTRY_DISTILLERY = new RegistryBuilder<DistilleryRecipe>().setName(new ResourceLocation(Bewitchment.MOD_ID, "distillery")).setType(DistilleryRecipe.class).create();
+		public static final IForgeRegistry<LoomRecipe> REGISTRY_LOOM = new RegistryBuilder<LoomRecipe>().setName(new ResourceLocation(Bewitchment.MOD_ID, "loom")).setType(LoomRecipe.class).create();
+		public static final IForgeRegistry<OvenRecipe> REGISTRY_OVEN = new RegistryBuilder<OvenRecipe>().setName(new ResourceLocation(Bewitchment.MOD_ID, "oven")).setType(OvenRecipe.class).create();
+		public static final IForgeRegistry<Ritual> REGISTRY_RITUAL = new RegistryBuilder<Ritual>().setName(new ResourceLocation(Bewitchment.MOD_ID, "ritual")).setType(Ritual.class).create();
 		
 		/**
 		 * Registers a new DistilleryRecipe, for use in the Distillery.
@@ -65,7 +69,7 @@ public class Bewitchment
 		 */
 		public static final DistilleryRecipe registerDistilleryRecipe(DistilleryRecipe recipe)
 		{
-			REGISTRY_DISTILLERY.add(recipe);
+			REGISTRY_DISTILLERY.register(recipe);
 			return recipe;
 		}
 		
@@ -77,7 +81,7 @@ public class Bewitchment
 		 */
 		public static final OvenRecipe registerOvenRecipe(OvenRecipe recipe)
 		{
-			REGISTRY_OVEN.add(recipe);
+			REGISTRY_OVEN.register(recipe);
 			return recipe;
 		}
 		
@@ -89,7 +93,7 @@ public class Bewitchment
 		 */
 		public static final Ritual registerRitual(Ritual ritual)
 		{
-			REGISTRY_RITUAL.add(ritual);
+			REGISTRY_RITUAL.register(ritual);
 			return ritual;
 		}
 		
@@ -101,19 +105,20 @@ public class Bewitchment
 		 */
 		public static final LoomRecipe registerLoomRecipe(LoomRecipe recipe)
 		{
-			REGISTRY_LOOM.add(recipe);
+			REGISTRY_LOOM.register(recipe);
 			return recipe;
 		}
 		
-		public static class DistilleryRecipe
+		public static class DistilleryRecipe extends IForgeRegistryEntry.Impl<DistilleryRecipe>
 		{
-			private List<ItemStack> input = new ArrayList<ItemStack>(), output = new ArrayList<ItemStack>();
+			private ItemStack[] input , output;
 			private int running_power, time;
 			
-			public DistilleryRecipe(ItemStack[] input, ItemStack[] output, int running_power, int time)
+			public DistilleryRecipe(String name, ItemStack[] input, ItemStack[] output, int running_power, int time)
 			{
-				for (ItemStack stack : input) this.input.add(stack);
-				for (ItemStack stack : output) this.output.add(stack);
+				this.setRegistryName(new ResourceLocation(Bewitchment.MOD_ID, name));
+				this.input = input;
+				this.output = output;
 				this.running_power = running_power;
 				this.time = time;
 			}
@@ -121,7 +126,7 @@ public class Bewitchment
 			/**
 			 * @return the list of ItemStacks to be used as an input.
 			 */
-			public List<ItemStack> getInput()
+			public ItemStack[] getInput()
 			{
 				return input;
 			}
@@ -129,7 +134,7 @@ public class Bewitchment
 			/**
 			 * @return the list of ItemStacks to be given as an output.
 			 */
-			public List<ItemStack> getOutput()
+			public ItemStack[] getOutput()
 			{
 				return output;
 			}
@@ -149,15 +154,40 @@ public class Bewitchment
 			{
 				return time;
 			}
+			
+			public boolean matches(List<ItemStack> inputStacks)
+			{
+				int nonEmpty = 0;
+				for (ItemStack stack : inputStacks) if (stack.getCount() > 0) nonEmpty++;
+				if (nonEmpty != getInput().length) return false;
+				boolean[] found = new boolean[getInput().length];
+				ArrayList<ItemStack> comp = new ArrayList<ItemStack>(inputStacks);
+				for (int i = 0; i < getInput().length; i++)
+				{
+					for (int j = 0; j < comp.size(); j++)
+					{
+						ItemStack stack = comp.get(j);
+						if (getInput()[i].getItem() == stack.getItem() && (getInput()[i].getMetadata() == stack.getMetadata() || getInput()[i].getMetadata() == 32767))
+						{
+							found[i] = true;
+							comp.set(j, ItemStack.EMPTY);
+							break;
+						}
+					}
+				}
+				for (boolean b : found) if (!b) return false;
+				return true;
+			}
 		}
 		
-		public static class OvenRecipe
+		public static class OvenRecipe extends IForgeRegistryEntry.Impl<OvenRecipe>
 		{
 			private ItemStack input, output, byproduct;
 			private float byproduct_chance;
 			
-			public OvenRecipe(ItemStack input, ItemStack output, ItemStack byproduct, float byproduct_chance)
+			public OvenRecipe(String name, ItemStack input, ItemStack output, ItemStack byproduct, float byproduct_chance)
 			{
+				this.setRegistryName(new ResourceLocation(Bewitchment.MOD_ID, name));
 				this.input = input;
 				this.output = output;
 				this.byproduct = byproduct;
@@ -195,21 +225,27 @@ public class Bewitchment
 			{
 				return byproduct_chance;
 			}
+			
+			public boolean matches(ItemStack inputStack)
+			{
+				return inputStack.getItem() == getInput().getItem() && (inputStack.getMetadata() == getInput().getMetadata() || getInput().getMetadata() == 32767);
+			}
 		}
 		
-		public static abstract class Ritual
+		public static abstract class Ritual extends IForgeRegistryEntry.Impl<Ritual>
 		{
-			private List<ItemStack> input_items = new ArrayList<ItemStack>(), output = new ArrayList<ItemStack>();
-			private List<Class<? extends Entity>> input_entities = new ArrayList<Class<? extends Entity>>();
+			private ItemStack[] input_items, output;
+			private Class<? extends Entity>[] input_entities;
 			
 			private GlyphType[] circles = new GlyphType[3];
 			private int time, running_power, starting_power;
 			
-			public Ritual(ItemStack[] input_items, Class<? extends Entity>[] input_entities, ItemStack[] output, int time, int running_power, int starting_power, GlyphType small, GlyphType medium, GlyphType big)
+			public Ritual(String name, ItemStack[] input_items, Class<? extends Entity>[] input_entities, ItemStack[] output, int time, int running_power, int starting_power, GlyphType small, GlyphType medium, GlyphType big)
 			{
-				for (ItemStack stack : input_items) this.input_items.add(stack);
-				for (Class<? extends Entity> clazz : input_entities) this.input_entities.add(clazz);
-				for (ItemStack stack : output) this.output.add(stack);
+				this.setRegistryName(new ResourceLocation(Bewitchment.MOD_ID, name));
+				this.input_items = input_items;
+				this.input_entities = input_entities;
+				this.output = output;
 				this.time = time;
 				this.running_power = running_power;
 				this.starting_power = starting_power;
@@ -224,7 +260,7 @@ public class Bewitchment
 			/**
 			 * @return the list of ItemStacks to be used as an input.
 			 */
-			public List<ItemStack> getInputItems()
+			public ItemStack[] getInputItems()
 			{
 				return input_items;
 			}
@@ -232,7 +268,7 @@ public class Bewitchment
 			/**
 			 * @return the list of Entities to be used as an input.
 			 */
-			public List<Class<? extends Entity>> getInputEntities()
+			public Class<? extends Entity>[] getInputEntities()
 			{
 				return input_entities;
 			}
@@ -240,7 +276,7 @@ public class Bewitchment
 			/**
 			 * @return the output of the ritual.
 			 */
-			public List<ItemStack> getOutput()
+			public ItemStack[] getOutput()
 			{
 				return output;
 			}
@@ -374,21 +410,22 @@ public class Bewitchment
 			}
 		}
 		
-		public static class LoomRecipe
+		public static class LoomRecipe extends IForgeRegistryEntry.Impl<LoomRecipe>
 		{
-			private List<ItemStack> input = new ArrayList<ItemStack>();
+			private ItemStack[] input;
 			private ItemStack output;
 			
-			public LoomRecipe(ItemStack[] input, ItemStack output)
+			public LoomRecipe(String name, ItemStack[] input, ItemStack output)
 			{
-				for (ItemStack stack : input) this.input.add(stack);
+				this.setRegistryName(new ResourceLocation(Bewitchment.MOD_ID, name));
+				this.input = input;
 				this.output = output;
 			}
 			
 			/**
 			 * @return the list of ItemStacks to be used as input.
 			 */
-			public List<ItemStack> getInput()
+			public ItemStack[] getInput()
 			{
 				return input;
 			}

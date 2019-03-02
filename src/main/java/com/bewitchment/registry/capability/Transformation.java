@@ -20,12 +20,8 @@ import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public interface ITransformation
+public class Transformation
 {
-	public Transformations getTransformation();
-	
-	public void setTransformation(Transformations val);
-	
 	public static enum Transformations
 	{
 		NONE(true), WEREWOLF(false), VAMPIRE(false), SPECTRE(false), HUNTER(false);
@@ -38,27 +34,22 @@ public interface ITransformation
 		}
 	}
 	
-	public static class Cap implements ITransformation
+	private Transformations transformation;
+	
+	public Transformations getTransformation()
 	{
-		private Transformations transformation;
-		
-		@Override
-		public Transformations getTransformation()
-		{
-			return transformation == null ? Transformations.NONE : transformation;
-		}
-		
-		@Override
-		public void setTransformation(Transformations transformation)
-		{
-			this.transformation = transformation;
-		}
+		return transformation == null ? Transformations.NONE : transformation;
 	}
 	
-	public static class Storage implements IStorage<ITransformation>
+	public void setTransformation(Transformations transformation)
+	{
+		this.transformation = transformation;
+	}
+	
+	public static class Storage implements IStorage<Transformation>
 	{
 		@Override
-		public NBTBase writeNBT(Capability<ITransformation> capability, ITransformation instance, EnumFacing side)
+		public NBTBase writeNBT(Capability<Transformation> capability, Transformation instance, EnumFacing side)
 		{
 			NBTTagCompound tag = new NBTTagCompound();
 			tag.setInteger("transformation", instance.getTransformation().ordinal());
@@ -66,7 +57,7 @@ public interface ITransformation
 		}
 		
 		@Override
-		public void readNBT(Capability<ITransformation> capability, ITransformation instance, EnumFacing side, NBTBase nbt)
+		public void readNBT(Capability<Transformation> capability, Transformation instance, EnumFacing side, NBTBase nbt)
 		{
 			instance.setTransformation(Transformations.values()[((NBTTagCompound)nbt).getInteger("transformation")]);
 		}
@@ -74,10 +65,10 @@ public interface ITransformation
 	
 	public static class Provider implements ICapabilitySerializable<NBTTagCompound>
 	{
-		@CapabilityInject(ITransformation.class)
-		public static final Capability<ITransformation> TRANSFORMATION = null;
+		@CapabilityInject(Transformation.class)
+		public static final Capability<Transformation> TRANSFORMATION = null;
 		
-		private ITransformation instance = TRANSFORMATION.getDefaultInstance();
+		private Transformation instance = TRANSFORMATION.getDefaultInstance();
 		
 		@Override
 		public boolean hasCapability(Capability<?> capability, EnumFacing facing)

@@ -1,10 +1,12 @@
 package com.bewitchment.core;
 
+import com.bewitchment.core.Bewitchment.API.DistilleryRecipe;
+import com.bewitchment.core.Bewitchment.API.OvenRecipe;
 import com.bewitchment.registry.IOreName;
 import com.bewitchment.registry.ModBlocks;
 import com.bewitchment.registry.ModItems;
-import com.bewitchment.registry.capability.IMagicPower;
-import com.bewitchment.registry.capability.ITransformation;
+import com.bewitchment.registry.capability.MagicPower;
+import com.bewitchment.registry.capability.Transformation;
 import com.bewitchment.registry.gen.WorldGenCoquina;
 import com.bewitchment.registry.gen.WorldGenOres;
 import com.bewitchment.registry.handler.BlockDropHandler;
@@ -37,7 +39,7 @@ public class CommonProxy
 	
 	public enum ModGui
 	{
-		APIARY, OVEN, THREAD_SPINNER, TAROT, DISTILLERY;
+		APIARY, DISTILLERY, OVEN, TAROT, THREAD_SPINNER;
 	}
 	
 	public final CreativeTabs tab = new CreativeTabs(Bewitchment.MOD_ID)
@@ -94,10 +96,10 @@ public class CommonProxy
 	
 	private void registerCapabilities()
 	{
-		CapabilityManager.INSTANCE.register(ITransformation.class, new ITransformation.Storage(), ITransformation.Cap::new);
-		MinecraftForge.EVENT_BUS.register(new ITransformation.Handler());
-		CapabilityManager.INSTANCE.register(IMagicPower.class, new IMagicPower.Storage(), IMagicPower.Cap::new);
-		MinecraftForge.EVENT_BUS.register(new IMagicPower.Handler());
+		CapabilityManager.INSTANCE.register(Transformation.class, new Transformation.Storage(), Transformation::new);
+		MinecraftForge.EVENT_BUS.register(new Transformation.Handler());
+		CapabilityManager.INSTANCE.register(MagicPower.class, new MagicPower.Storage(), MagicPower::new);
+		MinecraftForge.EVENT_BUS.register(new MagicPower.Handler());
 	}
 	
 	private void registerEventHandlers()
@@ -108,6 +110,7 @@ public class CommonProxy
 	
 	private void registerRecipes()
 	{
+		//Furnace
 		GameRegistry.addSmelting(ModBlocks.ore_silver, new ItemStack(ModItems.ingot_silver), 0.35f);
 		GameRegistry.addSmelting(Blocks.SAPLING, new ItemStack(ModItems.wood_ash, 4), 0.15f);
 		GameRegistry.addSmelting(Items.MELON, new ItemStack(ModItems.grilled_watermelon), 0.45f);
@@ -123,6 +126,81 @@ public class CommonProxy
 		GameRegistry.addSmelting(ModItems.golden_thread, new ItemStack(Items.GOLD_NUGGET), 1);
 		GameRegistry.addSmelting(ModItems.unfired_jar, new ItemStack(ModItems.empty_jar), 0.45f);
 		
+		//Distillery
+		Bewitchment.API.registerDistilleryRecipe(new DistilleryRecipe("cleansing_balm",
+				new ItemStack[]{new ItemStack(ModItems.acacia_resin), new ItemStack(ModItems.sagebrush), new ItemStack(ModItems.tulsi), new ItemStack(ModItems.white_sage)},
+				new ItemStack[]{new ItemStack(ModItems.cleansing_balm), new ItemStack(ModItems.wood_ash)},
+				0, 300));
+		Bewitchment.API.registerDistilleryRecipe(new DistilleryRecipe("demonic_elixir",
+				new ItemStack[]{new ItemStack(Items.BLAZE_POWDER), new ItemStack(ModItems.cloudy_oil), new ItemStack(ModItems.demonic_heart), new ItemStack(ModItems.graveyard_dust)},
+				new ItemStack[]{new ItemStack(ModItems.demonic_elixir)},
+				0, 300));
+		Bewitchment.API.registerDistilleryRecipe(new DistilleryRecipe("everchanging_dew",
+				new ItemStack[]{new ItemStack(Items.DYE, 1, 32767), new ItemStack(ModItems.essence_of_vitality), new ItemStack(Items.PAPER)},
+				new ItemStack[]{new ItemStack(ModItems.empty_jar), new ItemStack(ModItems.everchanging_dew)},
+				0, 300));
+		Bewitchment.API.registerDistilleryRecipe(new DistilleryRecipe("fiery_unguent",
+				new ItemStack[]{new ItemStack(Items.BLAZE_POWDER), new ItemStack(ModItems.cloudy_oil), new ItemStack(Blocks.OBSIDIAN), new ItemStack(ModItems.wood_ash)},
+				new ItemStack[]{new ItemStack(ModItems.diabolical_vein, 2), new ItemStack(ModItems.fiery_unguent)},
+				0, 900));
+		Bewitchment.API.registerDistilleryRecipe(new DistilleryRecipe("heaven_extract",
+				new ItemStack[]{new ItemStack(ModItems.birch_soul), new ItemStack(Items.GLOWSTONE_DUST), new ItemStack(ModItems.gem_jasper), new ItemStack(ModItems.quartz_powder)},
+				new ItemStack[]{new ItemStack(ModItems.heaven_extract)},
+				0, 900));
+		Bewitchment.API.registerDistilleryRecipe(new DistilleryRecipe("otherworldly_tears",
+				new ItemStack[]{new ItemStack(ModItems.birch_soul), new ItemStack(Items.ENDER_PEARL), new ItemStack(ModItems.lapis_powder)},
+				new ItemStack[]{new ItemStack(ModItems.dimensional_sand, 2), new ItemStack(ModItems.otherworldly_tears)},
+				0, 600));
+		Bewitchment.API.registerDistilleryRecipe(new DistilleryRecipe("philter_of_dishonesty",
+				new ItemStack[]{new ItemStack(Items.BLAZE_POWDER), new ItemStack(ModItems.graveyard_dust), new ItemStack(ModItems.liquid_witchcraft), new ItemStack(ModItems.oak_apple_gall)},
+				new ItemStack[]{new ItemStack(ModItems.philter_of_dishonesty)},
+				0, 300));
+		Bewitchment.API.registerDistilleryRecipe(new DistilleryRecipe("stone_ichor",
+				new ItemStack[]{new ItemStack(ModBlocks.coquina), new ItemStack(ModItems.liquid_witchcraft), new ItemStack(Blocks.OBSIDIAN), new ItemStack(Blocks.STONE)},
+				new ItemStack[]{new ItemStack(ModItems.stone_ichor)},
+				0, 900));
+		Bewitchment.API.registerDistilleryRecipe(new DistilleryRecipe("swirl_of_the_depths",
+				new ItemStack[]{new ItemStack(ModBlocks.coquina), new ItemStack(ModItems.kelp), new ItemStack(ModItems.lapis_powder), new ItemStack(ModItems.otherworldly_tears)},
+				new ItemStack[]{new ItemStack(Items.SLIME_BALL, 2), new ItemStack(ModItems.swirl_of_the_depths)},
+				0, 900));
+		Bewitchment.API.registerDistilleryRecipe(new DistilleryRecipe("undying_salve",
+				new ItemStack[]{new ItemStack(ModItems.ectoplasm), new ItemStack(ModItems.ebb_of_death), new ItemStack(ModItems.essence_of_vitality)},
+				new ItemStack[]{new ItemStack(ModItems.ectoplasm, 2), new ItemStack(ModItems.undying_salve)},
+				0, 300));
+		
+		//Oven
+		Bewitchment.API.registerOvenRecipe(new OvenRecipe("sapling_0", new ItemStack(Blocks.SAPLING), new ItemStack(ModItems.wood_ash), new ItemStack(ModItems.oak_spirit), 0.85f));
+		Bewitchment.API.registerOvenRecipe(new OvenRecipe("sapling_1", new ItemStack(Blocks.SAPLING, 1, 1), new ItemStack(ModItems.wood_ash), new ItemStack(ModItems.spruce_heart), 0.85f));
+		Bewitchment.API.registerOvenRecipe(new OvenRecipe("sapling_2", new ItemStack(Blocks.SAPLING, 1, 2), new ItemStack(ModItems.wood_ash), new ItemStack(ModItems.birch_soul), 0.85f));
+		Bewitchment.API.registerOvenRecipe(new OvenRecipe("sapling_3", new ItemStack(Blocks.SAPLING, 1, 3), new ItemStack(ModItems.wood_ash), new ItemStack(ModItems.cloudy_oil), 0.85f));
+		Bewitchment.API.registerOvenRecipe(new OvenRecipe("sapling_4", new ItemStack(Blocks.SAPLING, 1, 4), new ItemStack(ModItems.wood_ash), new ItemStack(ModItems.acacia_resin), 0.85f));
+		Bewitchment.API.registerOvenRecipe(new OvenRecipe("sapling_5", new ItemStack(Blocks.SAPLING, 1, 5), new ItemStack(ModItems.wood_ash), new ItemStack(ModItems.oak_spirit), 0.85f));
+		Bewitchment.API.registerOvenRecipe(new OvenRecipe("rotten_flesh", new ItemStack(Items.ROTTEN_FLESH), new ItemStack(Items.LEATHER), new ItemStack(ModItems.ectoplasm, 3), 0.85f));
+		Bewitchment.API.registerOvenRecipe(new OvenRecipe("log_0", new ItemStack(Blocks.LOG), new ItemStack(Items.COAL, 1, 1), new ItemStack(ModItems.wood_ash), 0.85f));
+		Bewitchment.API.registerOvenRecipe(new OvenRecipe("log_1", new ItemStack(Blocks.LOG, 1, 1), new ItemStack(Items.COAL, 1, 1), new ItemStack(ModItems.wood_ash), 0.85f));
+		Bewitchment.API.registerOvenRecipe(new OvenRecipe("log_2", new ItemStack(Blocks.LOG, 1, 2), new ItemStack(Items.COAL, 1, 1), new ItemStack(ModItems.wood_ash), 0.85f));
+		Bewitchment.API.registerOvenRecipe(new OvenRecipe("log_3", new ItemStack(Blocks.LOG, 1, 3), new ItemStack(Items.COAL, 1, 1), new ItemStack(ModItems.wood_ash), 0.85f));
+		Bewitchment.API.registerOvenRecipe(new OvenRecipe("log2_0", new ItemStack(Blocks.LOG2), new ItemStack(Items.COAL, 1, 1), new ItemStack(ModItems.wood_ash), 0.85f));
+		Bewitchment.API.registerOvenRecipe(new OvenRecipe("log2_1", new ItemStack(Blocks.LOG2, 1, 1), new ItemStack(Items.COAL, 1, 1), new ItemStack(ModItems.wood_ash, 3), 0.85f));
+		Bewitchment.API.registerOvenRecipe(new OvenRecipe("bone", new ItemStack(Items.BONE), new ItemStack(Items.DYE, 1, 15), new ItemStack(ModItems.ectoplasm), 0.85f));
+		Bewitchment.API.registerOvenRecipe(new OvenRecipe("wheat", new ItemStack(Items.WHEAT), new ItemStack(Items.BREAD), new ItemStack(ModItems.cloudy_oil), 0.85f));
+		Bewitchment.API.registerOvenRecipe(new OvenRecipe("rabbit", new ItemStack(Items.RABBIT), new ItemStack(Items.COOKED_RABBIT), new ItemStack(ModItems.cloudy_oil), 0.85f));
+		Bewitchment.API.registerOvenRecipe(new OvenRecipe("porkchop", new ItemStack(Items.PORKCHOP), new ItemStack(Items.COOKED_PORKCHOP), new ItemStack(ModItems.cloudy_oil), 0.85f));
+		Bewitchment.API.registerOvenRecipe(new OvenRecipe("beef", new ItemStack(Items.BEEF), new ItemStack(Items.COOKED_BEEF), new ItemStack(ModItems.cloudy_oil), 0.85f));
+		Bewitchment.API.registerOvenRecipe(new OvenRecipe("chicken", new ItemStack(Items.CHICKEN), new ItemStack(Items.CHICKEN), new ItemStack(ModItems.cloudy_oil), 0.85f));
+		Bewitchment.API.registerOvenRecipe(new OvenRecipe("fish_0", new ItemStack(Items.FISH), new ItemStack(Items.COOKED_FISH), new ItemStack(ModItems.cloudy_oil), 0.85f));
+		Bewitchment.API.registerOvenRecipe(new OvenRecipe("fish_1", new ItemStack(Items.COOKED_FISH, 1, 1), new ItemStack(Items.COOKED_FISH), new ItemStack(ModItems.cloudy_oil), 0.85f));
+		Bewitchment.API.registerOvenRecipe(new OvenRecipe("melon", new ItemStack(Items.MELON), new ItemStack(ModItems.grilled_watermelon), new ItemStack(ModItems.cloudy_oil), 0.85f));
+		Bewitchment.API.registerOvenRecipe(new OvenRecipe("cactus", new ItemStack(Blocks.CACTUS), new ItemStack(Items.DYE, 1, 2), new ItemStack(ModItems.cloudy_oil), 0.85f));
+		Bewitchment.API.registerOvenRecipe(new OvenRecipe("chorus_fruit", new ItemStack(Items.CHORUS_FRUIT), new ItemStack(Items.CHORUS_FRUIT_POPPED), new ItemStack(ModItems.dimensional_sand, 2), 0.85f));
+		Bewitchment.API.registerOvenRecipe(new OvenRecipe("mandrake_root", new ItemStack(ModItems.mandrake_root), new ItemStack(ModItems.wood_ash), new ItemStack(ModItems.cloudy_oil), 0.85f));
+		Bewitchment.API.registerOvenRecipe(new OvenRecipe("unfired_jar", new ItemStack(ModItems.unfired_jar), new ItemStack(ModItems.empty_jar), new ItemStack(ModItems.wood_ash), 0.85f));
+		Bewitchment.API.registerOvenRecipe(new OvenRecipe("sapling_6", new ItemStack(ModBlocks.sapling_cypress), new ItemStack(ModItems.wood_ash), new ItemStack(ModItems.ebb_of_death), 0.85f));
+		Bewitchment.API.registerOvenRecipe(new OvenRecipe("sapling_7", new ItemStack(ModBlocks.sapling_elder), new ItemStack(ModItems.wood_ash), new ItemStack(ModItems.droplet_of_wisdom), 0.85f));
+		Bewitchment.API.registerOvenRecipe(new OvenRecipe("sapling_8", new ItemStack(ModBlocks.sapling_juniper), new ItemStack(ModItems.wood_ash), new ItemStack(ModItems.liquid_witchcraft), 0.85f));
+		Bewitchment.API.registerOvenRecipe(new OvenRecipe("sapling_9", new ItemStack(ModBlocks.sapling_yew), new ItemStack(ModItems.wood_ash), new ItemStack(ModItems.essence_of_vitality), 0.85f));
+
+		//Tool Repair
 		ModItems.TOOL_COLD_IRON.setRepairItem(new ItemStack(ModItems.ingot_cold_iron));
 		ModItems.TOOL_SILVER.setRepairItem(new ItemStack(ModItems.ingot_silver));
 		ModItems.ARMOR_COLD_IRON.setRepairItem(new ItemStack(ModItems.ingot_cold_iron));

@@ -18,9 +18,9 @@ import com.bewitchment.registry.block.ModBlockSlab;
 import com.bewitchment.registry.block.ModBlockStairs;
 import com.bewitchment.registry.block.ModBlockTrapDoor;
 import com.bewitchment.registry.block.tile.BlockDistillery;
+import com.bewitchment.registry.block.tile.BlockOven;
 import com.bewitchment.registry.block.util.BlockMoonbell;
 import com.bewitchment.registry.block.util.BlockSaltBarrier;
-import com.bewitchment.registry.item.ModItemDoor;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
@@ -28,7 +28,6 @@ import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent.Register;
@@ -74,6 +73,7 @@ public class ModBlocks
 	
 	//Devices
 	public static final Block distillery = registerTileEntity("distillery", BlockDistillery.class, BlockDistillery.Tile.class);
+	public static final Block oven = registerTileEntity("oven", BlockOven.class, BlockOven.Tile.class);
 	
 	//Material Blocks
 	public static final Block block_cold_iron = new ModBlock("block_cold_iron", Material.IRON, SoundType.METAL, 5, 30, "pickaxe", 1, "blockColdIron");
@@ -133,11 +133,6 @@ public class ModBlocks
 	public static final ModBlockDoor door_block_juniper = new ModBlockDoor("door_block_juniper", planks_juniper);
 	public static final ModBlockDoor door_block_yew = new ModBlockDoor("door_block_yew", planks_yew);
 	
-	public static final Item door_cypress = new ModItemDoor("door_cypress", door_block_cypress);
-	public static final Item door_elder = new ModItemDoor("door_elder", door_block_elder);
-	public static final Item door_juniper = new ModItemDoor("door_juniper", door_block_juniper);
-	public static final Item door_yew = new ModItemDoor("door_yew", door_block_yew);
-	
 	public static final Block stairs_cypress = new ModBlockStairs("stairs_cypress", planks_cypress, "axe", 0, "stairWood");
 	public static final Block stairs_elder = new ModBlockStairs("stairs_elder", planks_elder, "axe", 0, "stairWood");
 	public static final Block stairs_juniper = new ModBlockStairs("stairs_juniper", planks_juniper, "axe", 0, "stairWood");
@@ -185,10 +180,10 @@ public class ModBlocks
 		Bewitchment.proxy.ignoreProperty(fence_gate_juniper, BlockFenceGate.POWERED);
 		Bewitchment.proxy.ignoreProperty(fence_gate_yew, BlockFenceGate.POWERED);
 		
-		door_block_cypress.drop = door_cypress;
-		door_block_elder.drop = door_elder;
-		door_block_juniper.drop = door_juniper;
-		door_block_yew.drop = door_yew;
+		door_block_cypress.drop = ModItems.door_cypress;
+		door_block_elder.drop = ModItems.door_elder;
+		door_block_juniper.drop = ModItems.door_juniper;
+		door_block_yew.drop = ModItems.door_yew;
 	}
 	
 	public static List<Fluid> registerFluids()

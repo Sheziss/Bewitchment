@@ -6,7 +6,7 @@ import java.util.Random;
 import com.bewitchment.core.Bewitchment;
 import com.bewitchment.registry.ModItems;
 import com.bewitchment.registry.block.ModBlock;
-import com.bewitchment.registry.capability.ITransformation;
+import com.bewitchment.registry.capability.Transformation;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -136,7 +136,7 @@ public class BlockSaltBarrier extends ModBlock
 			if (attribute == EnumCreatureAttribute.UNDEAD || attribute == Bewitchment.proxy.DEMON || attribute == Bewitchment.proxy.SPIRIT) addCollisionBoxToList(pos, box, boxes, WALL);
 		}
 		if (entity instanceof EntityBlaze || entity instanceof EntityGhast || entity instanceof EntityVex /*|| entity instanceof EntityBatSwarm*/) addCollisionBoxToList(pos, box, boxes, WALL);
-		if ((entity instanceof EntityPlayer) && !((EntityPlayer)entity).isCreative() && !entity.getCapability(ITransformation.Provider.TRANSFORMATION, null).getTransformation().canCrossSalt) addCollisionBoxToList(pos, box, boxes, WALL);
+		if ((entity instanceof EntityPlayer) && !((EntityPlayer)entity).isCreative() && !entity.getCapability(Transformation.Provider.TRANSFORMATION, null).getTransformation().canCrossSalt) addCollisionBoxToList(pos, box, boxes, WALL);
 	}
 	
 	@Override
