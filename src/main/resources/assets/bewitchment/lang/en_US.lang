@@ -117,7 +117,7 @@ item.bewitchment:ingot_cold_iron.name=Cold Iron Ingot
 item.bewitchment:ingot_silver.name=Silver Ingot
 item.bewitchment:nugget_cold_iron.name=Cold Iron Nugget
 item.bewitchment:nugget_silver.name=Silver Nugget
-item.bewitchment:gem_alexandrite.name=Alexanrite
+item.bewitchment:gem_alexandrite.name=Alexandrite
 item.bewitchment:gem_amethyst.name=Amethyst
 item.bewitchment:gem_bloodstone.name=Bloodstone
 item.bewitchment:gem_garnet.name=Garnet
@@ -173,17 +173,22 @@ item.bewitchment:white_sage.name=White Sage
 item.bewitchment:witchweed.name=Witchweed
 item.bewitchment:wormwood.name=Wormwood
 
+item.bewitchment:blindworms_sting.name=Blindworm's Sting
 item.bewitchment:demonic_heart.name=Demonic Heart
 item.bewitchment:diabolical_vein.name=Diabolical Vein
 item.bewitchment:dimensional_sand.name=Dimensional Sand
 item.bewitchment:ectoplasm.name=Ectoplasm
+item.bewitchment:envenomed_fang.name=Envenomed Fang
+item.bewitchment:eye_of_newt.name=Eye of Newt
 item.bewitchment:glass_jar.name=Glass Jar
 item.bewitchment:graveyard_dust.name=Gravyard Dust
 item.bewitchment:grilled_watermelon.name=Grilled Watermelon
 item.bewitchment:golden_thread.name=Golden Thread
 item.bewitchment:juniper_berries.name=Juniper Berries
 item.bewitchment:lapis_powder.name=Lapis Powder
+item.bewitchment:lizard_leg.name=Lizard Leg
 item.bewitchment:oak_apple_gall.name=Oak Apple Gall
+item.bewitchment:owlets_wing.name=Owlet's Wing
 item.bewitchment:quartz_powder.name=Quartz Powder
 item.bewitchment:silver_scales.name=Silver Scales
 item.bewitchment:wood_ash.name=Wood Ash
@@ -210,6 +215,12 @@ item.bewitchment:seed_wormwood.name=Wormwood Seeds
 
 item.bewitchment:book_of_shadows.name=Book of Shadows
 item.bewitchment:codex_infernalis.name=Codex Infernalis
+
+#Entity
+entity.blindworm.name=Blindworm
+entity.lizard.name=Lizard
+entity.newt.name=Newt
+entity.owl.name=Owl
 
 #Info
 itemGroup.bewitchment=Bewitchment
