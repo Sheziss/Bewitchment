@@ -29,6 +29,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -36,9 +37,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ClientProxy extends CommonProxy
 {
 	@Override
-	protected void registerEntities()
+	public void preInit(FMLPreInitializationEvent event)
 	{
-		super.registerEntities();
+		super.preInit(event);
 		RenderingRegistry.registerEntityRenderingHandler(EntityBlindworm.class, RenderBlindworm::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityLizard.class, RenderLizard::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityNewt.class, RenderNewt::new);

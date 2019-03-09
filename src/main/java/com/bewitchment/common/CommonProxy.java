@@ -11,10 +11,6 @@ import com.bewitchment.api.capability.transformation.TransformationHandler;
 import com.bewitchment.api.capability.transformation.TransformationStorage;
 import com.bewitchment.api.recipe.DistilleryRecipe;
 import com.bewitchment.api.recipe.OvenRecipe;
-import com.bewitchment.common.entity.EntityBlindworm;
-import com.bewitchment.common.entity.EntityLizard;
-import com.bewitchment.common.entity.EntityNewt;
-import com.bewitchment.common.entity.EntityOwl;
 import com.bewitchment.common.handler.BlockDropHandler;
 import com.bewitchment.common.handler.EventHandler;
 import com.bewitchment.common.handler.GuiHandler;
@@ -33,15 +29,10 @@ import net.minecraft.block.BlockPumpkin;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.biome.Biome;
-import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
@@ -50,7 +41,6 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
@@ -76,7 +66,6 @@ public class CommonProxy
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		config = new ModConfig(event.getSuggestedConfigurationFile());
-		registerEntities();
 		registerCapabilities();
 	}
 	
@@ -124,29 +113,6 @@ public class CommonProxy
 		MinecraftForge.EVENT_BUS.register(new TransformationHandler());
 		CapabilityManager.INSTANCE.register(MagicPowerCapability.class, new MagicPowerStorage(), MagicPowerCapability::new);
 		MinecraftForge.EVENT_BUS.register(new MagicPowerHandler());
-	}
-	
-	protected void registerEntities()
-	{
-		int id = 0;
-		EntityRegistry.registerModEntity(new ResourceLocation(Bewitchment.MOD_ID, "blindworm"), EntityBlindworm.class, "blindworm", id++, Bewitchment.instance, 64, 1, true, 0x826644, 0xD2B48C);
-		EntityRegistry.registerModEntity(new ResourceLocation(Bewitchment.MOD_ID, "lizard"), EntityLizard.class, "lizard", id++, Bewitchment.instance, 64, 1, true, 0x568203, 0x0070BB);
-		EntityRegistry.registerModEntity(new ResourceLocation(Bewitchment.MOD_ID, "newt"), EntityNewt.class, "newt", id++, Bewitchment.instance, 64, 1, true, 0x000000, 0xFFD300);
-		EntityRegistry.registerModEntity(new ResourceLocation(Bewitchment.MOD_ID, "owl"), EntityOwl.class, "owl", id++, Bewitchment.instance, 64, 1, true, 0xAF813F, 0x6E5127);
-
-		for (Biome biome : Biome.REGISTRY)
-		{
-			if (BiomeDictionary.hasType(biome, Type.FOREST))
-			{
-				EntityRegistry.addSpawn(EntityBlindworm.class, 20, 1, 4, EnumCreatureType.CREATURE, biome);
-				EntityRegistry.addSpawn(EntityLizard.class, 20, 1, 4, EnumCreatureType.CREATURE, biome);
-				if (BiomeDictionary.hasType(biome, Type.DENSE)) EntityRegistry.addSpawn(EntityOwl.class, 20, 1, 4, EnumCreatureType.CREATURE, biome);
-			}
-			if (BiomeDictionary.hasType(biome, Type.SWAMP))
-			{
-				EntityRegistry.addSpawn(EntityNewt.class, 20, 1, 4, EnumCreatureType.CREATURE, biome);
-			}
-		}
 	}
 	
 	private void registerAltarValues()
