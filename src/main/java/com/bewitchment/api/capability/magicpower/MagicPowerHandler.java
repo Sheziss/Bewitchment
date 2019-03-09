@@ -38,7 +38,6 @@ public class MagicPowerHandler
 			{
 				cap.setAmount(800);
 				cap.setMaxAmount(800);
-				cap.setBonusAmount(0);
 			}
 		}
 	}
@@ -49,6 +48,5 @@ public class MagicPowerHandler
 		MagicPowerCapability oldC = event.getOriginal().getCapability(MagicPowerProvider.CAPABILITY, null), newC = event.getEntityPlayer().getCapability(MagicPowerProvider.CAPABILITY, null);
 		newC.setAmount(oldC.getAmount());
 		newC.setMaxAmount(oldC.getMaxAmount());
-		newC.setBonusAmount(oldC.getBonusAmount());
 	}
 }

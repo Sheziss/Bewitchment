@@ -22,7 +22,7 @@ public class TransformationProvider implements ICapabilitySerializable<NBTTagCom
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing)
 	{
-		return capability == TRANSFORMATION ? TRANSFORMATION.<T>cast(instance) : null;
+		return capability == TRANSFORMATION ? TRANSFORMATION.cast(instance) : null;
 	}
 	
 	@Override

@@ -5,8 +5,11 @@ import com.bewitchment.api.recipe.DistilleryRecipe;
 import com.bewitchment.api.recipe.LoomRecipe;
 import com.bewitchment.api.recipe.OvenRecipe;
 import com.bewitchment.api.recipe.Ritual;
+import com.bewitchment.common.block.tile.entity.TileEntityWitchesAltar;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
@@ -77,5 +80,49 @@ public class BewitchmentAPI
 	{
 		REGISTRY_LOOM.register(recipe);
 		return recipe;
+	}
+	
+	/**
+	 * Registers a new scan value for the Witches' Altar.
+	 * 
+	 * @param block the block to be registered
+	 * @param power the value associated with the block
+	 */
+	public static final void registerAltarScanValue(Block block, int power)
+	{
+		TileEntityWitchesAltar.SCAN_VALUES.put(block, power);
+	}
+	
+	/**
+	 * Gets the scan value associated with a block
+	 * 
+	 * @param block the block to be checked
+	 * @return the scan value of the block
+	 */
+	public static final int getAltarScanValue(Block block)
+	{
+		return TileEntityWitchesAltar.SCAN_VALUES.getOrDefault(block, 0);
+	}
+	
+	/**
+	 * Registers a new sword upgrade value for the Witches' Altar.
+	 * 
+	 * @param item the item to be registered
+	 * @param variety_multiplier the multiplier associated with the item
+	 */
+	public static final void registerAltarSwordUpgrade(Item item, double variety_multiplier)
+	{
+		TileEntityWitchesAltar.SWORD_VALUES.put(item, variety_multiplier);
+	}
+	
+	/**
+	 * Gets the sword upgrade value associated with a block
+	 * 
+	 * @param item the item to be checked
+	 * @return the multiplier value of the item
+	 */
+	public static final double getAltarSwordUpgradeValue(Item item)
+	{
+		return TileEntityWitchesAltar.SWORD_VALUES.getOrDefault(item, 0d);
 	}
 }

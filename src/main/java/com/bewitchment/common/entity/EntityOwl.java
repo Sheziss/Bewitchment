@@ -7,14 +7,19 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIFleeSun;
-import net.minecraft.entity.ai.EntityAIFollowOwner;
 import net.minecraft.entity.ai.EntityAIFollowOwnerFlying;
+import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAIMate;
 import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
 import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAITargetNonTamed;
+import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWaterFlying;
+import net.minecraft.entity.ai.EntityAIWatchClosest2;
 import net.minecraft.entity.ai.EntityFlyHelper;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityBat;
@@ -92,6 +97,13 @@ public class EntityOwl extends ModEntityTameable
 	}
 	
 	@Override
+	public void onLivingUpdate()
+	{
+		super.onLivingUpdate();
+		if (!onGround && motionY <= 0) motionY *= 0.6;
+	}
+	
+	@Override
 	protected PathNavigate createNavigator(World world)
 	{
 		PathNavigateFlying path = new PathNavigateFlying(this, world);
@@ -129,11 +141,16 @@ public class EntityOwl extends ModEntityTameable
 	@Override
 	protected void initEntityAI()
 	{
-		super.initEntityAI();
-		tasks.removeTask(new EntityAIFollowOwner(this, getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue(), 2, 24));
+		tasks.addTask(0, new EntityAISwimming(this));
         tasks.addTask(1, new EntityAIFleeSun(this, 1));
-        tasks.addTask(2, new EntityAIFollowOwnerFlying(this, getEntityAttribute(SharedMonsterAttributes.FLYING_SPEED).getAttributeValue(), 10, 2));
-        tasks.addTask(2, new EntityAIWanderAvoidWaterFlying(this, getEntityAttribute(SharedMonsterAttributes.FLYING_SPEED).getAttributeValue()));
+		tasks.addTask(2, new EntityAIMate(this, getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue() / 2));
+		tasks.addTask(2, new EntityAIAttackMelee(this, getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue(), false));
+		tasks.addTask(3, new EntityAIWatchClosest2(this, EntityPlayer.class, 5, 1));
+		tasks.addTask(3, aiSit);
+		tasks.addTask(3, new EntityAIFollowParent(this, getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()));
+        tasks.addTask(3, new EntityAIWanderAvoidWaterFlying(this, getEntityAttribute(SharedMonsterAttributes.FLYING_SPEED).getAttributeValue()));
+        tasks.addTask(4, new EntityAIWander(this, getEntityAttribute(SharedMonsterAttributes.FLYING_SPEED).getAttributeValue()));
+        tasks.addTask(5, new EntityAIFollowOwnerFlying(this, 0.5, 2, 24));
         targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
 		targetTasks.addTask(0, new EntityAIOwnerHurtByTarget(this));
 		targetTasks.addTask(1, new EntityAIOwnerHurtTarget(this));

@@ -72,7 +72,7 @@ public abstract class Ritual extends IForgeRegistryEntry.Impl<Ritual>
 	}
 	
 	/**
-	 * This method gets called every tick if the altar doesn't have enough power to keep it running.
+	 * This method gets called every tick if the witches_altar doesn't have enough power to keep it running.
 	 * This method is called in place of {@link #onUpdate(World, TileEntity, EntityPlayer, BlockPos, BlockPos, NBTTagCompound, int)}
 	 * 
 	 * @param world the world the ritual is being performed in

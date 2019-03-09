@@ -84,12 +84,12 @@ public class EntityBlindworm extends ModEntityAnimal
 	@Override
 	protected void initEntityAI()
 	{
-		tasks.addTask(0, new EntityAIPanic(this, getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue() * 1.25));
-        tasks.addTask(0, new EntityAISwimming(this));
-        tasks.addTask(0, new EntityAIMate(this, getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue() / 2));
-        tasks.addTask(1, new EntityAIWatchClosest2(this, EntityPlayer.class, 5, 1));
-        tasks.addTask(2, new EntityAIFollowParent(this, getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()));
-        tasks.addTask(2, new EntityAIWander(this, getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue() * 2 / 3));
-        tasks.addTask(2, new EntityAILookIdle(this));
+		tasks.addTask(0, new EntityAIPanic(this, 0.7));
+		tasks.addTask(0, new EntityAISwimming(this));
+		tasks.addTask(0, new EntityAIMate(this, getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue() / 2));
+		tasks.addTask(1, new EntityAIWatchClosest2(this, EntityPlayer.class, 5, 1));
+		tasks.addTask(2, new EntityAIFollowParent(this, getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()));
+		tasks.addTask(2, new EntityAIWander(this, getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue() * 2 / 3));
+		tasks.addTask(2, new EntityAILookIdle(this));
 	}
 }

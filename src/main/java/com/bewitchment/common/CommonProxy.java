@@ -25,6 +25,12 @@ import com.bewitchment.common.world.gen.WorldGenCoquina;
 import com.bewitchment.common.world.gen.WorldGenOres;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockGrass;
+import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.BlockLog;
+import net.minecraft.block.BlockMelon;
+import net.minecraft.block.BlockPumpkin;
+import net.minecraft.block.IGrowable;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EnumCreatureType;
@@ -36,6 +42,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fluids.Fluid;
@@ -44,6 +51,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -107,6 +115,7 @@ public class CommonProxy
 	
 	public void postInit(FMLPostInitializationEvent event)
 	{
+		registerAltarValues();
 	}
 	
 	private void registerCapabilities()
@@ -138,6 +147,22 @@ public class CommonProxy
 				EntityRegistry.addSpawn(EntityNewt.class, 20, 1, 4, EnumCreatureType.CREATURE, biome);
 			}
 		}
+	}
+	
+	private void registerAltarValues()
+	{
+		for (Block block : ForgeRegistries.BLOCKS)
+		{
+			if (!(block instanceof BlockGrass) && (block instanceof IPlantable || block instanceof IGrowable || block instanceof BlockMelon || block instanceof BlockPumpkin)) BewitchmentAPI.registerAltarScanValue(block, 30);
+			if (block instanceof BlockLog) BewitchmentAPI.registerAltarScanValue(block, 15);
+			if (block instanceof BlockLeaves) BewitchmentAPI.registerAltarScanValue(block, 8);
+		}
+		BewitchmentAPI.registerAltarSwordUpgrade(ModItems.sword_silver, 1.275);
+		BewitchmentAPI.registerAltarSwordUpgrade(ModItems.sword_cold_iron, 1.425);
+		BewitchmentAPI.registerAltarSwordUpgrade(ModItems.athame, 1.625);
+		BewitchmentAPI.registerAltarSwordUpgrade(Items.IRON_SWORD, 1.275);
+		BewitchmentAPI.registerAltarSwordUpgrade(Items.GOLDEN_SWORD, 1.325);
+		BewitchmentAPI.registerAltarSwordUpgrade(Items.DIAMOND_SWORD, 1.575);
 	}
 	
 	private void registerEventHandlers()

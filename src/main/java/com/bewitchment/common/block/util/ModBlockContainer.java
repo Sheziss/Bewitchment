@@ -5,12 +5,10 @@ import com.bewitchment.common.block.tile.entity.TileEntityOven;
 import com.bewitchment.common.registry.ModBlocks;
 
 import net.minecraft.block.BlockContainer;
-import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -65,18 +63,6 @@ public abstract class ModBlockContainer extends BlockContainer
 	}
 	
 	@Override
-	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing face, float hitX, float hitY, float hitZ, int meta, EntityLivingBase entity, EnumHand hand)
-	{
-		return getDefaultState().withProperty(BlockHorizontal.FACING, EnumFacing.fromAngle(entity.rotationYaw));
-	}
-	
-	@Override
-	public boolean isFullBlock(IBlockState state)
-	{
-		return false;
-	}
-	
-	@Override
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getRenderLayer()
 	{
@@ -93,15 +79,8 @@ public abstract class ModBlockContainer extends BlockContainer
 			((TileEntityOven)world.getTileEntity(pos)).custom_name = player.getHeldItem(hand).getDisplayName();
 			world.getTileEntity(pos).markDirty();
 		}
-		else player.openGui(Bewitchment.instance, gui_id, world, pos.getX(), pos.getY(), pos.getZ());
+		else if (gui_id > -1) player.openGui(Bewitchment.instance, gui_id, world, pos.getX(), pos.getY(), pos.getZ());
 		return true;
-	}
-	
-	@Override
-	public void breakBlock(World world, BlockPos pos, IBlockState state)
-	{
-		if (!world.isRemote && world.getGameRules().getBoolean("doTileDrops") && hasTileEntity(state) && world.getTileEntity(pos) instanceof IItemHandler) for (int i = 0; i < ((IItemHandler)world.getTileEntity(pos)).getSlots(); i++) InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), ((IItemHandler)world.getTileEntity(pos)).getStackInSlot(i));
-		super.breakBlock(world, pos, state);
 	}
 	
 	@Override
@@ -111,10 +90,10 @@ public abstract class ModBlockContainer extends BlockContainer
     }
 	
 	@Override
-	public boolean isWood(IBlockAccess world, BlockPos pos)
-    {
-		return world.getBlockState(pos).getMaterial() == Material.WOOD;
-    }
+	public boolean isFullBlock(IBlockState state)
+	{
+		return false;
+	}
 	
 	@Override
 	public boolean isFullCube(IBlockState state)
@@ -128,10 +107,23 @@ public abstract class ModBlockContainer extends BlockContainer
 		return false;
 	}
 	
+	@Override
+	public boolean isWood(IBlockAccess world, BlockPos pos)
+    {
+		return world.getBlockState(pos).getMaterial() == Material.WOOD;
+    }
+	
 	@SuppressWarnings("deprecation")
 	@Override
 	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face)
 	{
 		return super.shouldSideBeRendered(state, world, pos, face) && (state.getMaterial() == Material.ICE || state.getMaterial() == Material.GLASS ? world.getBlockState(pos.offset(face)).getBlock() != this : true);
+	}
+	
+	@Override
+	public void breakBlock(World world, BlockPos pos, IBlockState state)
+	{
+		if (!world.isRemote && world.getGameRules().getBoolean("doTileDrops") && hasTileEntity(state) && world.getTileEntity(pos) instanceof IItemHandler) for (int i = 0; i < ((IItemHandler)world.getTileEntity(pos)).getSlots(); i++) InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), ((IItemHandler)world.getTileEntity(pos)).getStackInSlot(i));
+		super.breakBlock(world, pos, state);
 	}
 }

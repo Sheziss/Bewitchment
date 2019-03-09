@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import com.bewitchment.common.registry.ModBlocks;
+import com.bewitchment.common.world.gen.tree.util.WorldGenModTree;
 
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
-public class WorldGenJuniperTree extends WorldGenAbstractTree
+public class WorldGenJuniperTree extends WorldGenModTree
 {
 	public WorldGenJuniperTree(boolean notify)
 	{
@@ -64,10 +63,20 @@ public class WorldGenJuniperTree extends WorldGenAbstractTree
 		return true;
 	}
 	
-	private int generateTrunk(World world, IBlockState state, BlockPos pos, Random rand, int minHeight, int maxHeight)
+	@Override
+	public boolean canSaplingGrow(World world, BlockPos pos)
 	{
-		int height = minHeight + rand.nextInt(maxHeight - minHeight + 1);
-		for (int i = 0; i < height; i++) if (world.getBlockState(pos.up(i)).getBlock().canBeReplacedByLeaves(world.getBlockState(pos.up(i)), world, pos.up(i)) || i == 0) world.setBlockState(pos.up(i), state);
-		return height;
+		for (int x = -2; x < 3; x++)
+		{
+			for (int z = -2; z < 3; z++)
+			{
+				for (int y = 0; y < 2; y++)
+				{
+					BlockPos current = pos.up(2).add(x, y, z);
+					if (!world.getBlockState(current).getBlock().canBeReplacedByLeaves(world.getBlockState(current), world, current)) return false;
+				}
+			}
+		}
+		return true;
 	}
 }

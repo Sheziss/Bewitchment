@@ -3,6 +3,7 @@ fluid.honey=Honey
 fluid.oil_mundane=Oil
 
 #Blocks
+tile.bewitchment:witches_altar.name=Witches' Altar
 tile.bewitchment:distillery.name=Distillery
 tile.bewitchment:oven.name=Oven
 
@@ -141,10 +142,12 @@ item.bewitchment:ebb_of_death.name=Ebb of Death
 item.bewitchment:everchanging_dew.name=Everchanging Dew
 item.bewitchment:essence_of_vitality.name=Essence of Vitality
 item.bewitchment:fiery_unguent.name=Fiery Unguent
+item.bewitchment:heart.name=Heart
 item.bewitchment:heaven_extract.name=Heaven Extract
 item.bewitchment:liquid_witchcraft.name=Liquid Witchcraft
 item.bewitchment:oak_spirit.name=Oak Spirit
 item.bewitchment:otherworldly_tears.name=Otherworldly Tears
+item.bewitchment:pentacle.name=Pentacle
 item.bewitchment:philter_of_dishonesty.name=Philter of Dishonesty
 item.bewitchment:spruce_heart.name=Spruce Heart
 item.bewitchment:stone_ichor.name=Stone Ichor

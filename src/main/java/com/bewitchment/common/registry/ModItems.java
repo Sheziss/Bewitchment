@@ -119,10 +119,12 @@ public class ModItems
 	public static final Item everchanging_dew = new ModItem("everchanging_dew");
 	public static final Item essence_of_vitality = new ModItem("essence_of_vitality");
 	public static final Item fiery_unguent = new ModItem("fiery_unguent");
+	public static final Item heart = new ModItem("heart");
 	public static final Item heaven_extract = new ModItem("heaven_extract");
 	public static final Item liquid_witchcraft = new ModItem("liquid_witchcraft");
 	public static final Item oak_spirit = new ModItem("oak_spirit");
 	public static final Item otherworldly_tears = new ModItem("otherworldly_tears");
+	public static final Item pentacle = new ModItem("pentacle");
 	public static final Item philter_of_dishonesty = new ModItem("philter_of_dishonesty");
 	public static final Item spruce_heart = new ModItem("spruce_heart");
 	public static final Item stone_ichor = new ModItem("stone_ichor");

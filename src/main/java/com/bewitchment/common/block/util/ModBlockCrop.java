@@ -74,7 +74,7 @@ public class ModBlockCrop extends BlockCrops
 	}
 	
 	public static class Belladonna extends ModBlockCrop
-	{		
+	{
 		public Belladonna(String name, int maxAge)
 		{
 			super(name, maxAge);

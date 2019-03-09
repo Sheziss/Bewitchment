@@ -14,7 +14,6 @@ public class MagicPowerStorage implements IStorage<MagicPowerCapability>
 		NBTTagCompound tag = new NBTTagCompound();
 		tag.setInteger("amount", instance.getAmount());
 		tag.setInteger("max_amount", instance.getMaxAmount());
-		tag.setInteger("bonux_amount", instance.getBonusAmount());
 		return tag;
 	}
 	
@@ -23,6 +22,5 @@ public class MagicPowerStorage implements IStorage<MagicPowerCapability>
 	{
 		instance.setAmount(((NBTTagCompound)nbt).getInteger("amount"));
 		instance.setMaxAmount(((NBTTagCompound)nbt).getInteger("max_amount"));
-		instance.setBonusAmount(((NBTTagCompound)nbt).getInteger("bonux_amount"));
 	}
 }

@@ -1,11 +1,13 @@
 package com.bewitchment.client;
 
 import com.bewitchment.Bewitchment;
+import com.bewitchment.client.block.tile.render.RenderTileEntityPlacedItem;
 import com.bewitchment.client.entity.render.RenderBlindworm;
 import com.bewitchment.client.entity.render.RenderLizard;
 import com.bewitchment.client.entity.render.RenderNewt;
 import com.bewitchment.client.entity.render.RenderOwl;
 import com.bewitchment.common.CommonProxy;
+import com.bewitchment.common.block.tile.entity.TileEntityPlacedItem;
 import com.bewitchment.common.entity.EntityBlindworm;
 import com.bewitchment.common.entity.EntityLizard;
 import com.bewitchment.common.entity.EntityNewt;
@@ -25,6 +27,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -40,6 +43,8 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityLizard.class, RenderLizard::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityNewt.class, RenderNewt::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityOwl.class, RenderOwl::new);
+		
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPlacedItem.class, new RenderTileEntityPlacedItem());
 	}
 	
 	@Override

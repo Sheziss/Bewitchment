@@ -22,7 +22,7 @@ public class MagicPowerProvider implements ICapabilitySerializable<NBTTagCompoun
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing)
 	{
-		return capability == CAPABILITY ? CAPABILITY.<T>cast(instance) : null;
+		return capability == CAPABILITY ? CAPABILITY.cast(instance) : null;
 	}
 	
 	@Override
