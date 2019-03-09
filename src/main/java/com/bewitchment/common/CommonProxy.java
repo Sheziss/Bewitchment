@@ -59,7 +59,7 @@ public class CommonProxy
 		@Override
 		public ItemStack createIcon()
 		{
-			return new ItemStack(ModBlocks.log_elder);
+			return new ItemStack(ModBlocks.witches_altar);
 		}
 	};
 	
@@ -243,17 +243,17 @@ public class CommonProxy
 		GameRegistry.registerWorldGenerator(new WorldGenCoquina(), 0);
 	}
 	
+	public boolean isFancyGraphicsEnabled()
+	{
+		return false;
+	}
+	
 	public void registerTexture(Item item)
 	{
 	}
 	
 	public void registerTexture(Fluid fluid)
 	{
-	}
-	
-	public boolean isFancyGraphicsEnabled()
-	{
-		return false;
 	}
 	
 	public void ignoreProperty(Block block, IProperty<?>... property)

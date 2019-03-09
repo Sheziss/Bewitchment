@@ -12,14 +12,13 @@ import com.bewitchment.common.block.tile.util.ModTileEntity;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class TileEntityDistillery extends ModTileEntity
+public class TileEntityDistillery extends ModTileEntity implements ITickable
 {
 	public static final int BURN_TIME = 1200;
 	
@@ -54,18 +53,6 @@ public class TileEntityDistillery extends ModTileEntity
 		progress = tag.getInteger("progress");
 		recipe_time = tag.getInteger("recipe_time");
 		magic_power.setAmount(tag.getInteger("power"));
-	}
-	
-	@Override
-	public SPacketUpdateTileEntity getUpdatePacket()
-	{
-		return new SPacketUpdateTileEntity(getPos(), 1, writeToNBT(new NBTTagCompound()));
-	}
-	
-	@Override
-	public void onDataPacket(NetworkManager manager, SPacketUpdateTileEntity packet)
-	{
-		readFromNBT(packet.getNbtCompound());
 	}
 	
 	@Override

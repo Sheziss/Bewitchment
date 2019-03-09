@@ -1,51 +1,19 @@
 package com.bewitchment.common.block.tile.entity;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
+import com.bewitchment.common.block.tile.util.ModTileEntity;
 
-public class TileEntityPlacedItem extends TileEntity
+import net.minecraft.item.ItemStack;
+
+public class TileEntityPlacedItem extends ModTileEntity
 {
-	private ItemStack stack = ItemStack.EMPTY;
-	
-	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound tag)
+	public TileEntityPlacedItem() 
 	{
-		NBTTagCompound tag0 = new NBTTagCompound();
-		stack.writeToNBT(tag0);
-		tag.setTag("item", tag0);
-		return super.writeToNBT(tag);
+		super(1);
 	}
 	
 	@Override
-	public void readFromNBT(NBTTagCompound tag)
+	public boolean isItemValid(int slot, ItemStack stack)
 	{
-		super.readFromNBT(tag);
-		stack = new ItemStack(tag.getCompoundTag("item"));
-	}
-	
-	@Override
-	public SPacketUpdateTileEntity getUpdatePacket()
-	{
-		return new SPacketUpdateTileEntity(getPos(), 1, writeToNBT(new NBTTagCompound()));
-	}
-	
-	@Override
-	public void onDataPacket(NetworkManager manager, SPacketUpdateTileEntity packet)
-	{
-		readFromNBT(packet.getNbtCompound());
-	}
-	
-	public void setItem(ItemStack stack)
-	{
-		this.stack = stack;
-		markDirty();
-	}
-	
-	public ItemStack getItem()
-	{
-		return stack.copy();
+		return true;
 	}
 }

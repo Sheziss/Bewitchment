@@ -123,7 +123,7 @@ public class BlockWitchesAltar extends ModBlockContainer
 				if (world.getBlockState(pos.up()).getBlock().isReplaceable(world, pos.up()) && (item == ModItems.athame || item == ModItems.boline || item == ModItems.sword_silver || item == ModItems.sword_cold_iron || item == ModItems.pentacle || item == Items.BUCKET || item == Items.GOLDEN_SWORD || item == Items.IRON_SWORD || item == Items.DIAMOND_SWORD || item == Items.GOLDEN_APPLE || item == ModItems.demonic_heart || item == ModItems.heart || item == Items.GOLDEN_CARROT || item == ModItems.glass_jar || item == Items.NETHER_STAR))
 				{
 					world.setBlockState(pos.up(), ModBlocks.placed_item.getDefaultState().withProperty(BlockHorizontal.FACING, EnumFacing.fromAngle(player.rotationYaw)));
-					((TileEntityPlacedItem) world.getTileEntity(pos.up())).setItem(stack.splitStack(1));
+					((TileEntityPlacedItem) world.getTileEntity(pos.up())).setStackInSlot(0, stack.splitStack(1));
 					return true;
 				}
 			}

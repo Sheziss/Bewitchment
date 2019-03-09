@@ -54,7 +54,7 @@ public class TileEntityWitchesAltar extends TileEntity implements ITickable
 				TileEntityPlacedItem tile = (TileEntityPlacedItem) world.getTileEntity(pos0.up());
 				if (tile != null)
 				{
-					Item item = tile.getItem().getItem();
+					Item item = tile.getStackInSlot(0).getItem();
 					if (BewitchmentAPI.getAltarSwordUpgradeValue(item) != 0)
 					{
 						variety_multiplier = BewitchmentAPI.getAltarSwordUpgradeValue(item);
@@ -123,7 +123,7 @@ public class TileEntityWitchesAltar extends TileEntity implements ITickable
 	@Override
 	public SPacketUpdateTileEntity getUpdatePacket()
 	{
-		return new SPacketUpdateTileEntity(getPos(), 1, writeToNBT(new NBTTagCompound()));
+		return new SPacketUpdateTileEntity(getPos(), 0, writeToNBT(new NBTTagCompound()));
 	}
 	
 	@Override

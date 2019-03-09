@@ -49,6 +49,12 @@ public class ClientProxy extends CommonProxy
 	}
 	
 	@Override
+	public boolean isFancyGraphicsEnabled()
+	{
+		return Minecraft.getMinecraft().gameSettings.fancyGraphics;
+	}
+	
+	@Override
 	public void registerTexture(Item item)
 	{
 		ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
@@ -67,12 +73,6 @@ public class ClientProxy extends CommonProxy
 	public void ignoreProperty(Block block, IProperty<?>... property)
 	{
 		ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(property).build());
-	}
-	
-	@Override
-	public boolean isFancyGraphicsEnabled()
-	{
-		return Minecraft.getMinecraft().gameSettings.fancyGraphics;
 	}
 	
 	private static class StateMapper extends StateMapperBase implements ItemMeshDefinition

@@ -3,7 +3,6 @@ package com.bewitchment.common.block;
 import com.bewitchment.common.block.tile.entity.TileEntityPlacedItem;
 import com.bewitchment.common.block.util.ModBlockContainer;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -11,7 +10,6 @@ import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
@@ -54,27 +52,13 @@ public class BlockPlacedItem extends ModBlockContainer
 	@Override
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
 	{
-		return ((TileEntityPlacedItem) world.getTileEntity(pos)).getItem();
+		return ((TileEntityPlacedItem) world.getTileEntity(pos)).getStackInSlot(0);
 	}
 	
 	@Override
 	public boolean canPlaceBlockOnSide(World world, BlockPos pos, EnumFacing face)
 	{
 		return face == EnumFacing.UP && world.getBlockState(pos.down()).getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
-	}
-	
-	@Override
-	public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity tile, ItemStack stack)
-	{
-		super.harvestBlock(world, player, pos, state, tile, stack);
-		world.setBlockToAir(pos);
-		InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), ((TileEntityPlacedItem) tile).getItem());
-	}
-	
-	@Override
-	public void neighborChanged(IBlockState state, World world, BlockPos to, Block block, BlockPos from)
-	{
-		if (!canPlaceBlockOnSide(world, to, EnumFacing.UP)) world.destroyBlock(to, false);
 	}
 	
 	@Override
