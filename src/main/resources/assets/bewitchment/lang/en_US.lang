@@ -114,6 +114,12 @@ item.bewitchment:hoe_silver.name=Silver Hoe
 item.bewitchment:athame.name=Athame
 item.bewitchment:boline.name=Boline
 
+item.bewitchment:broom.name=Broom
+item.bewitchment:broom_cypress.name=Cypress Broom
+item.bewitchment:broom_elder.name=Elder Broom
+item.bewitchment:broom_juniper.name=Juniper Broom
+item.bewitchment:broom_yew.name=Yew Broom
+
 item.bewitchment:ingot_cold_iron.name=Cold Iron Ingot
 item.bewitchment:ingot_silver.name=Silver Ingot
 item.bewitchment:nugget_cold_iron.name=Cold Iron Nugget
@@ -224,6 +230,8 @@ entity.blindworm.name=Blindworm
 entity.lizard.name=Lizard
 entity.newt.name=Newt
 entity.owl.name=Owl
+
+entity.broom.name=Broom
 
 #Info
 itemGroup.bewitchment=Bewitchment

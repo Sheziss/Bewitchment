@@ -8,7 +8,11 @@ import com.bewitchment.common.block.BlockSaltBarrier;
 import com.bewitchment.common.block.util.ModBlockSlab;
 import com.bewitchment.common.item.ItemAthame;
 import com.bewitchment.common.item.ItemBoline;
+import com.bewitchment.common.item.ItemCypressBroom;
+import com.bewitchment.common.item.ItemElderBroom;
+import com.bewitchment.common.item.ItemJuniperBroom;
 import com.bewitchment.common.item.ItemSalt;
+import com.bewitchment.common.item.ItemYewBroom;
 import com.bewitchment.common.item.util.ModItem;
 import com.bewitchment.common.item.util.ModItemArmor;
 import com.bewitchment.common.item.util.ModItemAxe;
@@ -89,6 +93,13 @@ public class ModItems
 	public static final Item athame = new ItemAthame("athame", TOOL_RITUAL);
 	public static final Item boline = new ItemBoline("boline");
 	
+	//Brooms
+	public static final Item broom = new ModItem("broom").setMaxStackSize(1);
+	public static final Item broom_cypress = new ItemCypressBroom("broom_cypress");
+	public static final Item broom_elder = new ItemElderBroom("broom_elder");
+	public static final Item broom_juniper = new ItemJuniperBroom("broom_juniper");
+	public static final Item broom_yew = new ItemYewBroom("broom_yew");
+	
 	//Material Items
 	public static final Item ingot_cold_iron = new ModItem("ingot_cold_iron", "ingotColdIron");
 	public static final Item ingot_silver = new ModItem("ingot_silver", "ingotSilver");
@@ -119,12 +130,10 @@ public class ModItems
 	public static final Item everchanging_dew = new ModItem("everchanging_dew");
 	public static final Item essence_of_vitality = new ModItem("essence_of_vitality");
 	public static final Item fiery_unguent = new ModItem("fiery_unguent");
-	public static final Item heart = new ModItem("heart");
 	public static final Item heaven_extract = new ModItem("heaven_extract");
 	public static final Item liquid_witchcraft = new ModItem("liquid_witchcraft");
 	public static final Item oak_spirit = new ModItem("oak_spirit");
 	public static final Item otherworldly_tears = new ModItem("otherworldly_tears");
-	public static final Item pentacle = new ModItem("pentacle");
 	public static final Item philter_of_dishonesty = new ModItem("philter_of_dishonesty");
 	public static final Item spruce_heart = new ModItem("spruce_heart");
 	public static final Item stone_ichor = new ModItem("stone_ichor");
@@ -164,11 +173,13 @@ public class ModItems
 	public static final Item graveyard_dust = new ModItem("graveyard_dust");
 	public static final Item grilled_watermelon = new ModItemFood("grilled_watermelon", 4, 2.5f, false);
 	public static final Item golden_thread = new ModItem("golden_thread");
+	public static final Item heart = new ModItem("heart");
 	public static final Item juniper_berries = new ModItemFood("juniper_berries", 1, 0.5f, false).setPotionEffect(new PotionEffect(MobEffects.POISON, 100, 0), 0.1f);
 	public static final Item lapis_powder = new ModItem("lapis_powder");
 	public static final Item lizard_leg = new ModItem("lizard_leg");
 	public static final Item oak_apple_gall = new ModItem("oak_apple_gall");
 	public static final Item owlets_wing = new ModItem("owlets_wing");
+	public static final Item pentacle = new ModItem("pentacle");
 	public static final Item quartz_powder = new ModItem("quartz_powder");
 	public static final Item silver_scales = new ModItem("silver_scales");
 	public static final Item wood_ash = new ModItem("wood_ash");

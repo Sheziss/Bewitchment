@@ -1,6 +1,5 @@
 package com.bewitchment.common.registry;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,6 +59,7 @@ public class ModBlocks
 	public static final Fluid oil_mundane = registerFluid("oil_mundane", Material.WATER, 0, 0, 800, 4000, true, true);
 	
 	//No Item
+	public static final Block glyph = null;
 	public static final Block placed_item = registerTileEntity("placed_item", BlockPlacedItem.class, TileEntityPlacedItem.class);
 	public static final Block salt_barrier = new BlockSaltBarrier("salt_barrier");
 	public static final ModBlockCrop crop_aconitum = new ModBlockCrop("crop_aconitum", 3);
@@ -131,10 +131,10 @@ public class ModBlocks
 	public static final Block planks_elder = new ModBlock("planks_elder", Material.WOOD, SoundType.WOOD, 2, 15, "axe", 0, "plankWood");
 	public static final Block planks_juniper = new ModBlock("planks_juniper", Material.WOOD, SoundType.WOOD, 2, 15, "axe", 0, "plankWood");
 	public static final Block planks_yew = new ModBlock("planks_yew", Material.WOOD, SoundType.WOOD, 2, 15, "axe", 0, "plankWood");
-	public static final Block sapling_cypress = new ModBlockSapling("sapling_cypress", new WorldGenCypressTree(false), "treeSapling");
-	public static final Block sapling_elder = new ModBlockSapling("sapling_elder", new WorldGenElderTree(false), "treeSapling");
-	public static final Block sapling_juniper = new ModBlockSapling("sapling_juniper", new WorldGenJuniperTree(false), "treeSapling");
-	public static final Block sapling_yew = new ModBlockSapling("sapling_yew", new WorldGenYewTree(false), "treeSapling");
+	public static final Block sapling_cypress = new ModBlockSapling("sapling_cypress", WorldGenCypressTree.class, "treeSapling");
+	public static final Block sapling_elder = new ModBlockSapling("sapling_elder", WorldGenElderTree.class, "treeSapling");
+	public static final Block sapling_juniper = new ModBlockSapling("sapling_juniper", WorldGenJuniperTree.class, "treeSapling");
+	public static final Block sapling_yew = new ModBlockSapling("sapling_yew", WorldGenYewTree.class, "treeSapling");
 	
 	//Ingredients
 	public static final Block moonbell = new BlockMoonbell("moonbell");
@@ -207,7 +207,7 @@ public class ModBlocks
 	{
 		Block block0 = null;
 		try {block0 = block.getDeclaredConstructor(String.class).newInstance(name);}
-		catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {e.printStackTrace();}
+		catch (Exception e) {e.printStackTrace();}
 		GameRegistry.registerTileEntity(tile, new ResourceLocation(Bewitchment.MOD_ID, name));
 		return block0;
 	}

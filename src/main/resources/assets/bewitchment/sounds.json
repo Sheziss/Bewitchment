@@ -1,0 +1,17 @@
+{
+	"broom_sweep":
+	{
+		"sounds":
+		[
+			"bewitchment:broom_sweep"
+		]
+	},
+	"owl_hoot":
+	{
+		"sounds":
+		[
+			"bewitchment:owl_hoot_0",
+			"bewitchment:owl_hoot_1"
+		]
+	}
+}

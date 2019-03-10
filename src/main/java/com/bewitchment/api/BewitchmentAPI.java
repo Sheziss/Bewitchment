@@ -1,10 +1,11 @@
 package com.bewitchment.api;
 
 import com.bewitchment.Bewitchment;
-import com.bewitchment.api.recipe.DistilleryRecipe;
-import com.bewitchment.api.recipe.LoomRecipe;
-import com.bewitchment.api.recipe.OvenRecipe;
-import com.bewitchment.api.recipe.Ritual;
+import com.bewitchment.api.registry.DistilleryRecipe;
+import com.bewitchment.api.registry.LoomRecipe;
+import com.bewitchment.api.registry.OvenRecipe;
+import com.bewitchment.api.registry.Ritual;
+import com.bewitchment.api.registry.Spell;
 import com.bewitchment.common.block.tile.entity.TileEntityWitchesAltar;
 
 import net.minecraft.block.Block;
@@ -23,6 +24,7 @@ public class BewitchmentAPI
 	public static final IForgeRegistry<LoomRecipe> REGISTRY_LOOM = new RegistryBuilder<LoomRecipe>().setName(new ResourceLocation(Bewitchment.MOD_ID, "loom")).setType(LoomRecipe.class).create();
 	public static final IForgeRegistry<OvenRecipe> REGISTRY_OVEN = new RegistryBuilder<OvenRecipe>().setName(new ResourceLocation(Bewitchment.MOD_ID, "oven")).setType(OvenRecipe.class).create();
 	public static final IForgeRegistry<Ritual> REGISTRY_RITUAL = new RegistryBuilder<Ritual>().setName(new ResourceLocation(Bewitchment.MOD_ID, "ritual")).setType(Ritual.class).create();
+	public static final IForgeRegistry<Spell> REGISTRY_SPELL = new RegistryBuilder<Spell>().setName(new ResourceLocation(Bewitchment.MOD_ID, "spell")).setType(Spell.class).create();
 	
 	/**
 	 * The Demon creature attribute.
@@ -80,6 +82,18 @@ public class BewitchmentAPI
 	{
 		REGISTRY_LOOM.register(recipe);
 		return recipe;
+	}
+	
+	/**
+	 * Registers a new Spell.
+	 * 
+	 * @param recipe the spell to register
+	 * @return the spell registered
+	 */
+	public static final Spell registerLoomRecipe(Spell spell)
+	{
+		REGISTRY_SPELL.register(spell);
+		return spell;
 	}
 	
 	/**

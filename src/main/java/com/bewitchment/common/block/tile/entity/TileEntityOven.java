@@ -3,7 +3,7 @@ package com.bewitchment.common.block.tile.entity;
 import java.util.Random;
 
 import com.bewitchment.api.BewitchmentAPI;
-import com.bewitchment.api.recipe.OvenRecipe;
+import com.bewitchment.api.registry.OvenRecipe;
 import com.bewitchment.common.block.tile.util.ModTileEntity;
 import com.bewitchment.common.registry.ModItems;
 
@@ -11,11 +11,8 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityFurnace;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.world.IWorldNameable;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.items.CapabilityItemHandler;
 
 public class TileEntityOven extends ModTileEntity implements ITickable, IWorldNameable
 {
@@ -62,18 +59,6 @@ public class TileEntityOven extends ModTileEntity implements ITickable, IWorldNa
 	public boolean hasCustomName()
 	{
 		return custom_name != null && !custom_name.isEmpty();
-	}
-	
-	@Override
-	public boolean hasCapability(Capability<?> capability, EnumFacing face)
-	{
-		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, face);
-	}
-	
-	@Override
-	public <T> T getCapability(Capability<T> capability, EnumFacing face)
-	{
-		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this) : super.getCapability(capability, face);
 	}
 	
 	@Override

@@ -8,6 +8,7 @@ import com.bewitchment.api.capability.magicpower.MagicPowerCapability;
 import com.bewitchment.api.capability.magicpower.MagicPowerProvider;
 import com.bewitchment.common.block.BlockWitchesAltar;
 import com.bewitchment.common.block.BlockWitchesAltar.AltarType;
+import com.bewitchment.common.block.tile.util.ModTileEntity;
 import com.bewitchment.common.registry.ModBlocks;
 import com.bewitchment.common.registry.ModItems;
 
@@ -17,9 +18,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -27,7 +25,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 
-public class TileEntityWitchesAltar extends TileEntity implements ITickable
+public class TileEntityWitchesAltar extends ModTileEntity implements ITickable
 {
 	public static final Map<Block, Integer> SCAN_VALUES = new HashMap<Block, Integer>();
 	public static final Map<Item, Double> SWORD_MULTIPLIER_VALUES = new HashMap<Item, Double>();
@@ -38,6 +36,11 @@ public class TileEntityWitchesAltar extends TileEntity implements ITickable
 	public int color = EnumDyeColor.RED.ordinal(), gain = 1, multiplier = 1;
 	
 	private MagicPowerCapability magic_power = MagicPowerProvider.CAPABILITY.getDefaultInstance();
+	
+	public TileEntityWitchesAltar()
+	{
+		super(0);
+	}
 	
 	@Override
 	public void update()
@@ -57,7 +60,7 @@ public class TileEntityWitchesAltar extends TileEntity implements ITickable
 				gain = 1;
 				int variety = 0, radius_alter = 0;
 				double variety_multiplier = 1;
-				//Sword
+				//Upgrades
 				for (BlockPos pos0 : BlockWitchesAltar.getAltarPositions(world, pos))
 				{
 					TileEntityPlacedItem tile = (TileEntityPlacedItem) world.getTileEntity(pos0.up());
@@ -101,7 +104,6 @@ public class TileEntityWitchesAltar extends TileEntity implements ITickable
 				}
 				gain /= Math.max(1, variety);
 				gain *= multiplier;
-				//Upgrades
 				magic_power.setMaxAmount((int) (variety * variety_multiplier));
 				magic_power.setAmount(Math.min(magic_power.getAmount(), magic_power.getMaxAmount()));
 				magic_power.fill(gain);
@@ -113,8 +115,7 @@ public class TileEntityWitchesAltar extends TileEntity implements ITickable
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound tag)
 	{
-		tag.setInteger("amount", magic_power.getAmount());
-		tag.setInteger("max_amount", magic_power.getMaxAmount());
+		magic_power.writeToNBT(tag);
 		tag.setInteger("color", color);
 		tag.setInteger("gain", gain);
 		tag.setInteger("multiplier", multiplier);
@@ -125,23 +126,10 @@ public class TileEntityWitchesAltar extends TileEntity implements ITickable
 	public void readFromNBT(NBTTagCompound tag)
 	{
 		super.readFromNBT(tag);
-		magic_power.setAmount(tag.getInteger("amount"));
-		magic_power.setMaxAmount(tag.getInteger("max_amount"));
+		magic_power.readFromNBT(tag);
 		color = tag.getInteger("color");
 		gain = tag.getInteger("gain");
 		multiplier = tag.getInteger("multiplier");
-	}
-	
-	@Override
-	public SPacketUpdateTileEntity getUpdatePacket()
-	{
-		return new SPacketUpdateTileEntity(getPos(), 0, writeToNBT(new NBTTagCompound()));
-	}
-	
-	@Override
-	public void onDataPacket(NetworkManager manager, SPacketUpdateTileEntity packet)
-	{
-		readFromNBT(packet.getNbtCompound());
 	}
 	
 	@Override

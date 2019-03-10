@@ -6,7 +6,7 @@ import java.util.List;
 import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.api.capability.magicpower.MagicPowerCapability;
 import com.bewitchment.api.capability.magicpower.MagicPowerProvider;
-import com.bewitchment.api.recipe.DistilleryRecipe;
+import com.bewitchment.api.registry.DistilleryRecipe;
 import com.bewitchment.common.block.tile.util.ModTileEntity;
 
 import net.minecraft.init.Items;
@@ -15,7 +15,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityDistillery extends ModTileEntity implements ITickable
@@ -58,13 +57,13 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing face)
 	{
-		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || capability == MagicPowerProvider.CAPABILITY || super.hasCapability(capability, face);
+		return capability == MagicPowerProvider.CAPABILITY || super.hasCapability(capability, face);
 	}
 	
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing face)
 	{
-		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this) : capability == MagicPowerProvider.CAPABILITY ? MagicPowerProvider.CAPABILITY.cast(magic_power) : super.getCapability(capability, face);
+		return capability == MagicPowerProvider.CAPABILITY ? MagicPowerProvider.CAPABILITY.cast(magic_power) : super.getCapability(capability, face);
 	}
 	
 	@Override

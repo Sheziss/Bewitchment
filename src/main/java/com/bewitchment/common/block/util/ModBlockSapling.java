@@ -15,9 +15,9 @@ public class ModBlockSapling extends ModBlockBush implements IGrowable
 {
     private static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.8, 0.9);
     
-    public final WorldGenModTree gen;
+    public final Class<? extends WorldGenModTree> gen;
 	
-	public ModBlockSapling(String name, WorldGenModTree gen, String... oreNames)
+	public ModBlockSapling(String name, Class<? extends WorldGenModTree> gen, String... oreNames)
 	{
 		super(name, oreNames);
 		this.gen = gen;
@@ -54,6 +54,9 @@ public class ModBlockSapling extends ModBlockBush implements IGrowable
 	@Override
 	public void grow(World world, Random rand, BlockPos pos, IBlockState state)
 	{
-		if (!world.isRemote && !world.getBlockState(pos.up()).getBlock().canBeReplacedByLeaves(world.getBlockState(pos.up()), world, pos.up()) && gen.canSaplingGrow(world, pos) && rand.nextBoolean()) gen.generate(world, rand, pos);
+		WorldGenModTree generator = null;
+		try {generator = gen.getDeclaredConstructor(boolean.class).newInstance(false);}
+		catch (Exception e) {e.printStackTrace();}
+		if (!world.isRemote && world.getLightFromNeighbors(pos.up()) >= 9 && world.getBlockState(pos.up()).getBlock().canBeReplacedByLeaves(world.getBlockState(pos.up()), world, pos.up()) && generator.canSaplingGrow(world, pos) && rand.nextBoolean()) generator.generate(world, rand, pos);
 	}
 }

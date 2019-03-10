@@ -1,5 +1,7 @@
 package com.bewitchment.api.capability.magicpower;
 
+import net.minecraft.nbt.NBTTagCompound;
+
 public class MagicPowerCapability
 {
 	int amount = 0, max_amount = 0;
@@ -44,5 +46,17 @@ public class MagicPowerCapability
 			return true;
 		}
 		return false;
+	}
+	
+	public void writeToNBT(NBTTagCompound tag)
+	{
+		tag.setInteger("amount", getAmount());
+		tag.setInteger("max_amount", getMaxAmount());
+	}
+	
+	public void readFromNBT(NBTTagCompound tag)
+	{
+		setAmount(tag.getInteger("amount"));
+		setMaxAmount(tag.getInteger("max_amount"));
 	}
 }

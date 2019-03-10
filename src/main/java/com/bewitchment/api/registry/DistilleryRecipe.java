@@ -1,4 +1,4 @@
-package com.bewitchment.api.recipe;
+package com.bewitchment.api.registry;
 
 import java.util.ArrayList;
 import java.util.List;

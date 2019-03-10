@@ -6,6 +6,7 @@ import java.util.Set;
 
 import com.bewitchment.Bewitchment;
 import com.bewitchment.common.entity.EntityBlindworm;
+import com.bewitchment.common.entity.misc.EntityBroom;
 import com.google.common.collect.Sets;
 
 import net.minecraft.entity.Entity;
@@ -33,10 +34,19 @@ public class ModEntities
 	public static final EntityEntry newt = registerEntity(EntityBlindworm.class, "newt", 0x000000, 0xFFD300, EnumCreatureType.CREATURE, 20, 1, 4, Type.SWAMP);
 	public static final EntityEntry owl = registerEntity(EntityBlindworm.class, "owl", 0xAF813F, 0x6E5127, EnumCreatureType.CREATURE, 20, 1, 4, Type.FOREST, Type.DENSE);
 	
+	public static final EntityEntry broom = registerEntity(EntityBroom.class, "broom");
+	
 	@SubscribeEvent
 	public static void register(Register<EntityEntry> event)
 	{
 		for (EntityEntry entry : REGISTRY) event.getRegistry().register(entry);
+	}
+	
+	private static EntityEntry registerEntity(Class<? extends Entity> clazz, String name)
+	{
+		EntityEntry entry = EntityEntryBuilder.create().entity(clazz).id(new ResourceLocation(Bewitchment.MOD_ID, name), id++).name(name).tracker(64, 1, true).build();
+		REGISTRY.add(entry);
+		return entry;
 	}
 	
 	private static EntityEntry registerEntity(Class<? extends Entity> clazz, String name, int solidColor, int spotColor, EnumCreatureType type, int weight, int min, int max, Type... biomeTypes)

@@ -1,6 +1,7 @@
 package com.bewitchment.common.entity;
 
 import com.bewitchment.common.entity.util.ModEntityTameable;
+import com.bewitchment.common.registry.ModSounds;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -116,7 +117,7 @@ public class EntityOwl extends ModEntityTameable
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return null;
+		return ModSounds.OWL_HOOT;
 	}
 	
 	@Override

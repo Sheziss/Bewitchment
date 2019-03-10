@@ -2,8 +2,12 @@ package com.bewitchment.common.handler;
 
 import java.util.Random;
 
+import com.bewitchment.common.entity.misc.EntityBroom;
+import com.bewitchment.common.item.ItemBroom;
 import com.bewitchment.common.registry.ModBlocks;
 
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
@@ -11,7 +15,9 @@ import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraftforge.event.entity.EntityMountEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
@@ -48,6 +54,27 @@ public class EventHandler
 		if (event.getEntityLiving().world.getBlockState(event.getEntityLiving().getPosition()).getBlock() == ModBlocks.honey.getBlock())
 		{
 			event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 60));
+		}
+	}
+	
+	@SubscribeEvent(receiveCanceled = false, priority = EventPriority.LOWEST)
+	public void unmount(EntityMountEvent event)
+	{
+		if (event.getEntityBeingMounted() instanceof EntityBroom && event.isDismounting())
+		{
+			EntityBroom broom = (EntityBroom) event.getEntityBeingMounted();
+			EntityPlayer source = (EntityPlayer) event.getEntityMounting();
+			if (!source.isDead)
+			{
+				if (broom.item != null) ((ItemBroom) broom.item.getItem()).onDismount(broom, source);
+				if (!broom.world.isRemote)
+				{
+					EntityItem entity = new EntityItem(broom.world, source.posX, source.posY, source.posZ, broom.item);
+					broom.world.spawnEntity(entity);
+					broom.setDead();
+					entity.onCollideWithPlayer(source);
+				}
+			}
 		}
 	}
 }

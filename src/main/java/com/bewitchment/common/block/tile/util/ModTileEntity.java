@@ -1,12 +1,13 @@
 package com.bewitchment.common.block.tile.util;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -29,7 +30,7 @@ public abstract class ModTileEntity extends TileEntity implements IItemHandlerMo
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound tag)
 	{
-		tag.setTag("inventory", inventory.serializeNBT());
+		if (getSlots() > 0) tag.setTag("inventory", inventory.serializeNBT());
 		return super.writeToNBT(tag);
 	}
 	
@@ -37,7 +38,7 @@ public abstract class ModTileEntity extends TileEntity implements IItemHandlerMo
 	public void readFromNBT(NBTTagCompound tag)
 	{
 		super.readFromNBT(tag);
-		inventory.deserializeNBT(tag.getCompoundTag("inventory"));
+		if (getSlots() > 0) inventory.deserializeNBT(tag.getCompoundTag("inventory"));
 	}
 	
 	@Override
@@ -89,5 +90,14 @@ public abstract class ModTileEntity extends TileEntity implements IItemHandlerMo
 	}
 	
 	@Override
-	public abstract boolean isItemValid(int slot, @Nonnull ItemStack stack);
+	public boolean hasCapability(Capability<?> capability, EnumFacing face)
+	{
+		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && getSlots() > 0 || super.hasCapability(capability, face);
+	}
+	
+	@Override
+	public <T> T getCapability(Capability<T> capability, EnumFacing face)
+	{
+		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && getSlots() > 0 ? CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this) : super.getCapability(capability, face);
+	}
 }
