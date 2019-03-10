@@ -120,7 +120,7 @@ public class BlockWitchesAltar extends ModBlockContainer
 					}
 					return true;
 				}
-				if (world.getBlockState(pos.up()).getBlock().isReplaceable(world, pos.up()) && (item == ModItems.athame || item == ModItems.boline || item == ModItems.sword_silver || item == ModItems.sword_cold_iron || item == ModItems.pentacle || item == Items.BUCKET || item == Items.GOLDEN_SWORD || item == Items.IRON_SWORD || item == Items.DIAMOND_SWORD || item == Items.GOLDEN_APPLE || item == ModItems.demonic_heart || item == ModItems.heart || item == Items.GOLDEN_CARROT || item == ModItems.glass_jar || item == Items.NETHER_STAR))
+				if (world.getBlockState(pos.up()).getBlock().isReplaceable(world, pos.up()) && (TileEntityWitchesAltar.SWORD_MULTIPLIER_VALUES.containsKey(item) || TileEntityWitchesAltar.SWORD_RADIUS_VALUES.containsKey(item) || item == ModItems.pentacle || item == Items.BUCKET || item == Items.GOLDEN_APPLE || item == ModItems.demonic_heart || item == ModItems.heart || item == Items.GOLDEN_CARROT || item == ModItems.glass_jar || item == Items.NETHER_STAR))
 				{
 					world.setBlockState(pos.up(), ModBlocks.placed_item.getDefaultState().withProperty(BlockHorizontal.FACING, EnumFacing.fromAngle(player.rotationYaw)));
 					((TileEntityPlacedItem) world.getTileEntity(pos.up())).setStackInSlot(0, stack.splitStack(1));
@@ -133,7 +133,7 @@ public class BlockWitchesAltar extends ModBlockContainer
 				if (tile != null)
 				{
 					MagicPowerCapability cap = tile.getCapability(MagicPowerProvider.CAPABILITY, null);
-					player.sendStatusMessage(new TextComponentString(cap.getAmount() + "/" + cap.getMaxAmount() + "(x" + tile.multiplier + ")"), true);
+					player.sendStatusMessage(new TextComponentString(cap.getAmount() + "/" + cap.getMaxAmount() + " (x" + tile.multiplier + ")"), true);
 				}
 				return true;
 			}
@@ -146,18 +146,6 @@ public class BlockWitchesAltar extends ModBlockContainer
 	{
 		for (BlockPos pos0 : getAltarPositions(world, pos)) world.setBlockState(pos0, getDefaultState());
 		super.breakBlock(world, pos, state);
-	}
-	
-	@Override
-	public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos)
-	{
-		BlockPos pos0 = getAltarPosition(world, pos);
-		if (pos0 != null)
-		{
-			TileEntityWitchesAltar tile = (TileEntityWitchesAltar) world.getTileEntity(pos0);
-			if (tile != null && state.getValue(TYPE) != AltarType.UNFORMED) return state.withProperty(COLOR, tile.color);
-		}
-		return state;
 	}
 	
 	@Override
@@ -232,7 +220,7 @@ public class BlockWitchesAltar extends ModBlockContainer
 			for (int j = sz - 1; j <= ez + 1; j++)
 			{
 				BlockPos checked = new BlockPos(i, y, j);
-				if (world.getBlockState(checked).getBlock() == ModBlocks.witches_altar && world.getBlockState(checked).getValue(TYPE) != AltarType.UNFORMED && i >= sx && i <= ex && j >= sz && j <= ez) return false;
+				if (!(world.getBlockState(checked).getBlock() == ModBlocks.witches_altar && world.getBlockState(checked).getValue(TYPE) == AltarType.UNFORMED) && i >= sx && i <= ex && j >= sz && j <= ez) return false;
 				blocks.add(checked);
 				if (world.getBlockState(checked).getBlock() == ModBlocks.witches_altar && (i < sx || i > ex || j < sz || j > ez)) return false;
 			}

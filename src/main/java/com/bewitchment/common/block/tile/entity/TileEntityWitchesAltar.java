@@ -30,7 +30,8 @@ import net.minecraftforge.common.capabilities.Capability;
 public class TileEntityWitchesAltar extends TileEntity implements ITickable
 {
 	public static final Map<Block, Integer> SCAN_VALUES = new HashMap<Block, Integer>();
-	public static final Map<Item, Double> SWORD_VALUES = new HashMap<Item, Double>();
+	public static final Map<Item, Double> SWORD_MULTIPLIER_VALUES = new HashMap<Item, Double>();
+	public static final Map<Item, Integer> SWORD_RADIUS_VALUES = new HashMap<Item, Integer>();
 	
 	private static final int RADIUS = 18;
 	
@@ -41,60 +42,71 @@ public class TileEntityWitchesAltar extends TileEntity implements ITickable
 	@Override
 	public void update()
 	{
-		if (!world.isRemote && world.getTotalWorldTime() % 20 == 0)
+		if (!world.isRemote)
 		{
 			BlockPos altar_pos = BlockWitchesAltar.getAltarPosition(world, getPos());
-			multiplier = 1;
-			gain = 1;
-			int variety = 0;
-			double variety_multiplier = 1;
-			//Sword
 			for (BlockPos pos0 : BlockWitchesAltar.getAltarPositions(world, pos))
 			{
-				TileEntityPlacedItem tile = (TileEntityPlacedItem) world.getTileEntity(pos0.up());
-				if (tile != null)
-				{
-					Item item = tile.getStackInSlot(0).getItem();
-					if (BewitchmentAPI.getAltarSwordUpgradeValue(item) != 0)
-					{
-						variety_multiplier = BewitchmentAPI.getAltarSwordUpgradeValue(item);
-						break;
-					}
-					if (item == ModItems.athame)
-					{
-						for (EntityPlayer player : world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).grow(5)))
-						{
-							MagicPowerCapability cap = player.getCapability(MagicPowerProvider.CAPABILITY, null);
-							int amount = Math.min(20, cap.getMaxAmount() - cap.getAmount());
-							if (magic_power.drain(amount)) cap.fill(amount / 10);
-						}
-					}
-				}
+				IBlockState state = world.getBlockState(pos0);
+				world.setBlockState(pos0, state.withProperty(BlockWitchesAltar.COLOR, color), 2);
+				world.notifyBlockUpdate(pos0, state, state.withProperty(BlockWitchesAltar.COLOR, color), 2);
 			}
-			//Plants
-			for (int x = -RADIUS / 2; x < RADIUS / 2; x++)
+			if (world.getTotalWorldTime() % 20 == 0)
 			{
-				for (int y = -RADIUS / 2; y < RADIUS / 2; y++)
+				multiplier = 1;
+				gain = 1;
+				int variety = 0, radius_alter = 0;
+				double variety_multiplier = 1;
+				//Sword
+				for (BlockPos pos0 : BlockWitchesAltar.getAltarPositions(world, pos))
 				{
-					for (int z = -RADIUS / 2; z < RADIUS / 2; z++)
+					TileEntityPlacedItem tile = (TileEntityPlacedItem) world.getTileEntity(pos0.up());
+					if (tile != null)
 					{
-						Block block = world.getBlockState(altar_pos.add(x, y, z)).getBlock();
-						int value = BewitchmentAPI.getAltarScanValue(block);
-						if (value != 0)
+						Item item = tile.getStackInSlot(0).getItem();
+						if (SWORD_MULTIPLIER_VALUES.containsKey(item) || SWORD_RADIUS_VALUES.containsKey(item))
 						{
-							gain += value;
-							variety++;
+							variety_multiplier = BewitchmentAPI.getAltarSwordMultiplierValue(item);
+							radius_alter = BewitchmentAPI.getAltarSwordRadiusValue(item);
+							break;
+						}
+						if (item == ModItems.athame)
+						{
+							for (EntityPlayer player : world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).grow(5)))
+							{
+								MagicPowerCapability cap = player.getCapability(MagicPowerProvider.CAPABILITY, null);
+								int amount = Math.min(20, cap.getMaxAmount() - cap.getAmount());
+								if (magic_power.drain(amount)) cap.fill(amount / 10);
+							}
 						}
 					}
 				}
+				//Plants
+				int radius = RADIUS / 2 + radius_alter;
+				for (int x = -radius; x < radius; x++)
+				{
+					for (int y = -radius; y < radius; y++)
+					{
+						for (int z = -radius; z < radius; z++)
+						{
+							Block block = world.getBlockState(altar_pos.add(x, y, z)).getBlock();
+							int value = BewitchmentAPI.getAltarScanValue(block);
+							if (value != 0)
+							{
+								gain += value;
+								variety++;
+							}
+						}
+					}
+				}
+				gain /= Math.max(1, variety);
+				gain *= multiplier;
+				//Upgrades
+				magic_power.setMaxAmount((int) (variety * variety_multiplier));
+				magic_power.setAmount(Math.min(magic_power.getAmount(), magic_power.getMaxAmount()));
+				magic_power.fill(gain);
+				markDirty();
 			}
-			gain /= Math.max(1, variety);
-			gain *= multiplier;
-			//Upgrades
-			magic_power.setMaxAmount((int) (variety * variety_multiplier));
-			magic_power.setAmount(Math.min(magic_power.getAmount(), magic_power.getMaxAmount()));
-			magic_power.fill(gain);
-			markDirty();
 		}
 	}
 	

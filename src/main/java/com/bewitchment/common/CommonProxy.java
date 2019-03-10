@@ -123,12 +123,19 @@ public class CommonProxy
 			if (block instanceof BlockLog) BewitchmentAPI.registerAltarScanValue(block, 15);
 			if (block instanceof BlockLeaves) BewitchmentAPI.registerAltarScanValue(block, 8);
 		}
-		BewitchmentAPI.registerAltarSwordUpgrade(ModItems.sword_silver, 1.275);
-		BewitchmentAPI.registerAltarSwordUpgrade(ModItems.sword_cold_iron, 1.425);
-		BewitchmentAPI.registerAltarSwordUpgrade(ModItems.athame, 1.625);
-		BewitchmentAPI.registerAltarSwordUpgrade(Items.IRON_SWORD, 1.275);
-		BewitchmentAPI.registerAltarSwordUpgrade(Items.GOLDEN_SWORD, 1.325);
-		BewitchmentAPI.registerAltarSwordUpgrade(Items.DIAMOND_SWORD, 1.575);
+		BewitchmentAPI.registerAltarSwordRadius(ModItems.boline, 2);
+		BewitchmentAPI.registerAltarSwordMultiplier(ModItems.sword_silver, 1.275);
+		BewitchmentAPI.registerAltarSwordRadius(ModItems.sword_cold_iron, -1);
+		BewitchmentAPI.registerAltarSwordMultiplier(ModItems.sword_cold_iron, 1.425);
+		BewitchmentAPI.registerAltarSwordRadius(ModItems.sword_cold_iron, -1);
+		BewitchmentAPI.registerAltarSwordMultiplier(ModItems.athame, 1.625);
+		BewitchmentAPI.registerAltarSwordRadius(ModItems.athame, 1);
+		BewitchmentAPI.registerAltarSwordMultiplier(Items.IRON_SWORD, 1.275);
+		BewitchmentAPI.registerAltarSwordRadius(Items.IRON_SWORD, -1);
+		BewitchmentAPI.registerAltarSwordMultiplier(Items.GOLDEN_SWORD, 1.325);
+		BewitchmentAPI.registerAltarSwordRadius(Items.GOLDEN_SWORD, 2);
+		BewitchmentAPI.registerAltarSwordMultiplier(Items.DIAMOND_SWORD, 1.575);
+		BewitchmentAPI.registerAltarSwordRadius(Items.DIAMOND_SWORD, -2);
 	}
 	
 	private void registerEventHandlers()

@@ -105,24 +105,46 @@ public class BewitchmentAPI
 	}
 	
 	/**
-	 * Registers a new sword upgrade value for the Witches' Altar.
+	 * Registers a new sword multiplier value for the Witches' Altar.
 	 * 
 	 * @param item the item to be registered
 	 * @param variety_multiplier the multiplier associated with the item
 	 */
-	public static final void registerAltarSwordUpgrade(Item item, double variety_multiplier)
+	public static final void registerAltarSwordMultiplier(Item item, double variety_multiplier)
 	{
-		TileEntityWitchesAltar.SWORD_VALUES.put(item, variety_multiplier);
+		TileEntityWitchesAltar.SWORD_MULTIPLIER_VALUES.put(item, variety_multiplier);
 	}
 	
 	/**
-	 * Gets the sword upgrade value associated with a block
+	 * Gets the sword multiplier value associated with a block
 	 * 
 	 * @param item the item to be checked
 	 * @return the multiplier value of the item
 	 */
-	public static final double getAltarSwordUpgradeValue(Item item)
+	public static final double getAltarSwordMultiplierValue(Item item)
 	{
-		return TileEntityWitchesAltar.SWORD_VALUES.getOrDefault(item, 0d);
+		return TileEntityWitchesAltar.SWORD_MULTIPLIER_VALUES.getOrDefault(item, 0d);
+	}
+	
+	/**
+	 * Registers a new sword radius value for the Witches' Altar.
+	 * 
+	 * @param item the item to be registered
+	 * @param radius the radius associated with the item
+	 */
+	public static final void registerAltarSwordRadius(Item item, int radius)
+	{
+		TileEntityWitchesAltar.SWORD_RADIUS_VALUES.put(item, radius);
+	}
+	
+	/**
+	 * Gets the sword radius value associated with a block
+	 * 
+	 * @param item the item to be checked
+	 * @return the radius value of the item
+	 */
+	public static final int getAltarSwordRadiusValue(Item item)
+	{
+		return TileEntityWitchesAltar.SWORD_RADIUS_VALUES.getOrDefault(item, 0);
 	}
 }
