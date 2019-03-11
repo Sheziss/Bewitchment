@@ -90,7 +90,7 @@ public class BewitchmentAPI
 	 * @param recipe the spell to register
 	 * @return the spell registered
 	 */
-	public static final Spell registerLoomRecipe(Spell spell)
+	public static final Spell registerSpell(Spell spell)
 	{
 		REGISTRY_SPELL.register(spell);
 		return spell;
