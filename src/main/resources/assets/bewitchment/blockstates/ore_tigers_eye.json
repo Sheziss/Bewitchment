@@ -2,7 +2,7 @@
 	"forge_marker": 1,
 	"defaults":
 	{
-		"model": "bewitchment:cube_overlay",
+		"model": "froglib:cube_overlay",
 		"textures":
 		{
 			"base": "blocks/stone",
