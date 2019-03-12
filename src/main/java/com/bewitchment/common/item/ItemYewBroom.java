@@ -10,9 +10,9 @@ import net.minecraft.util.math.Vec3d;
 
 public class ItemYewBroom extends ItemBroom
 {
-	public ItemYewBroom(String name, String... oreNames)
+	public ItemYewBroom()
 	{
-		super(name, new ResourceLocation(Bewitchment.MOD_ID, "textures/entity/broom_yew.png"), oreNames);
+		super(Bewitchment.MOD_ID, "broom_yew", Bewitchment.proxy.tab, new ResourceLocation(Bewitchment.MOD_ID, "textures/entity/broom_yew.png"));
 	}
 	
 	@Override

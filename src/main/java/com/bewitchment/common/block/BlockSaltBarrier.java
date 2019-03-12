@@ -3,11 +3,12 @@ package com.bewitchment.common.block;
 import java.util.List;
 import java.util.Random;
 
+import com.bewitchment.Bewitchment;
 import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.api.capability.transformation.TransformationProvider;
-import com.bewitchment.common.block.util.ModBlock;
 import com.bewitchment.common.registry.ModItems;
 
+import moriyashiine.froglib.common.block.ModBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -44,10 +45,9 @@ public class BlockSaltBarrier extends ModBlock
 	private static final AxisAlignedBB[] WIRE_AABB = {new AxisAlignedBB(0.1875, 0, 0.1875, 0.8125, 0.0625, 0.8125), new AxisAlignedBB(0.1875, 0, 0.1875, 0.8125, 0.0625, 1), new AxisAlignedBB(0, 0, 0.1875, 0.8125, 0.0625, 0.8125), new AxisAlignedBB(0, 0, 0.1875, 0.8125, 0.0625, 1), new AxisAlignedBB(0.1875, 0, 0, 0.8125, 0.0625, 0.8125), new AxisAlignedBB(0.1875, 0, 0, 0.8125, 0.0625, 1), new AxisAlignedBB(0, 0, 0, 0.8125, 0.0625, 0.8125), new AxisAlignedBB(0, 0, 0, 0.8125, 0.0625, 1), new AxisAlignedBB(0.1875, 0, 0.1875, 1, 0.0625, 0.8125), new AxisAlignedBB(0.1875, 0, 0.1875, 1, 0.0625, 1), new AxisAlignedBB(0, 0, 0.1875, 1, 0.0625, 0.8125), new AxisAlignedBB(0, 0, 0.1875, 1, 0.0625, 1), new AxisAlignedBB(0.1875, 0, 0, 1, 0.0625, 0.8125), new AxisAlignedBB(0.1875, 0, 0, 1, 0.0625, 1), new AxisAlignedBB(0, 0, 0, 1, 0.0625, 0.8125), new AxisAlignedBB(0, 0, 0, 1, 0.0625, 1)};
 	private static final AxisAlignedBB WALL = new AxisAlignedBB(0, -5, 0, 1, 5, 1);
 	
-	public BlockSaltBarrier(String name, String... oreNames)
+	public BlockSaltBarrier()
 	{
-		super(name, Material.CIRCUITS, SoundType.CLOTH, 0, 0, "", 0, oreNames);
-		this.setCreativeTab(null);
+		super(Bewitchment.MOD_ID, "salt_barrier", Material.CIRCUITS, SoundType.CLOTH, null, 0, 0, "", 0);
 		setDefaultState(blockState.getBaseState().withProperty(NORTH, EnumAttachPosition.NONE).withProperty(EAST, EnumAttachPosition.NONE).withProperty(SOUTH, EnumAttachPosition.NONE).withProperty(WEST, EnumAttachPosition.NONE));
 	}
 	

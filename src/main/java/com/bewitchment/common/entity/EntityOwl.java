@@ -1,8 +1,9 @@
 package com.bewitchment.common.entity;
 
-import com.bewitchment.common.entity.util.ModEntityTameable;
+import com.bewitchment.Bewitchment;
 import com.bewitchment.common.registry.ModSounds;
 
+import moriyashiine.froglib.common.entity.ModEntityTameable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -35,6 +36,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.pathfinding.PathNavigateFlying;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -43,7 +45,7 @@ public class EntityOwl extends ModEntityTameable
 {
 	public EntityOwl(World world)
 	{
-		super(world, "owl", Items.RABBIT, Items.CHICKEN);
+		super(world, new ResourceLocation(Bewitchment.MOD_ID, "owl"), Items.RABBIT, Items.CHICKEN);
 		setSize(0.4f, 0.9f);
 		moveHelper = new EntityFlyHelper(this);
 	}
@@ -52,6 +54,12 @@ public class EntityOwl extends ModEntityTameable
 	public EntityAgeable createChild(EntityAgeable ageable)
 	{
 		return new EntityOwl(world);
+	}
+	
+	@Override
+	public boolean isBreedingItem(ItemStack stack)
+	{
+		return stack.getItem() == Items.RABBIT;
 	}
 	
 	@Override
@@ -78,12 +86,6 @@ public class EntityOwl extends ModEntityTameable
 	{
 		if (other == this || !(other instanceof EntityOwl)) return false;
 		return isTamed() && isInLove() && ((EntityTameable) other).isTamed() && other.isInLove() && !((EntityTameable) other).isSitting();
-	}
-	
-	@Override
-	public boolean isBreedingItem(ItemStack stack)
-	{
-		return stack.getItem() == Items.RABBIT;
 	}
 	
 	@Override

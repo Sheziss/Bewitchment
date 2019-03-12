@@ -7,8 +7,8 @@ import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.api.capability.magicpower.MagicPowerCapability;
 import com.bewitchment.api.capability.magicpower.MagicPowerProvider;
 import com.bewitchment.api.registry.DistilleryRecipe;
-import com.bewitchment.common.block.tile.util.ModTileEntity;
 
+import moriyashiine.froglib.common.block.tile.ModTileEntity;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

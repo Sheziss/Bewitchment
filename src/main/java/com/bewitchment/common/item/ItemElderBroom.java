@@ -9,9 +9,9 @@ import net.minecraft.util.math.Vec3d;
 
 public class ItemElderBroom extends ItemBroom
 {
-	public ItemElderBroom(String name, String... oreNames)
+	public ItemElderBroom()
 	{
-		super(name, new ResourceLocation(Bewitchment.MOD_ID, "textures/entity/broom_elder.png"), oreNames);
+		super(Bewitchment.MOD_ID, "broom_elder", Bewitchment.proxy.tab, new ResourceLocation(Bewitchment.MOD_ID, "textures/entity/broom_elder.png"));
 	}
 	
 	@Override

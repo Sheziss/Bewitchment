@@ -5,14 +5,15 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import com.bewitchment.Bewitchment;
 import com.bewitchment.api.capability.magicpower.MagicPowerCapability;
 import com.bewitchment.api.capability.magicpower.MagicPowerProvider;
 import com.bewitchment.common.block.tile.entity.TileEntityPlacedItem;
 import com.bewitchment.common.block.tile.entity.TileEntityWitchesAltar;
-import com.bewitchment.common.block.util.ModBlockContainer;
 import com.bewitchment.common.registry.ModBlocks;
 import com.bewitchment.common.registry.ModItems;
 
+import moriyashiine.froglib.common.block.ModBlockContainer;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.EnumPushReaction;
@@ -40,9 +41,9 @@ public class BlockWitchesAltar extends ModBlockContainer
 	public static final PropertyAltar TYPE = new PropertyAltar("type", AltarType.class, Arrays.asList(AltarType.values()));
 	public static final PropertyInteger COLOR = PropertyInteger.create("color", 0, 16);
 	
-	public BlockWitchesAltar(String name)
+	public BlockWitchesAltar()
 	{
-		super(name, Material.ROCK, SoundType.STONE, 2, 30, "pickaxe", 0, -1);
+		super(null, Bewitchment.MOD_ID, "witches_altar", Material.ROCK, SoundType.STONE, Bewitchment.proxy.tab, 2, 30, "pickaxe", 0, -1);
 		setDefaultState(blockState.getBaseState().withProperty(TYPE, AltarType.UNFORMED).withProperty(COLOR, 16));
 	}
 	

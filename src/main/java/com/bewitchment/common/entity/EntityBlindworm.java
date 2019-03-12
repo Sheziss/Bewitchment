@@ -1,7 +1,8 @@
 package com.bewitchment.common.entity;
 
-import com.bewitchment.common.entity.util.ModEntityAnimal;
+import com.bewitchment.Bewitchment;
 
+import moriyashiine.froglib.common.entity.ModEntityAnimal;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIFollowParent;
@@ -17,13 +18,14 @@ import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 public class EntityBlindworm extends ModEntityAnimal
 {	
 	public EntityBlindworm(World world)
 	{
-		super(world, "blindworm");
+		super(world, new ResourceLocation(Bewitchment.MOD_ID, "blindworm"));
 		setSize(1, 0.3f);
 	}
 	
@@ -34,16 +36,16 @@ public class EntityBlindworm extends ModEntityAnimal
 	}
 	
 	@Override
+	public boolean isBreedingItem(ItemStack stack)
+	{
+		return stack.getItem() == Items.SPIDER_EYE;
+	}
+	
+	@Override
 	public boolean canMateWith(EntityAnimal other)
 	{
 		if (other == this || !(other instanceof EntityBlindworm)) return false;
 		return isInLove() && other.isInLove();
-	}
-	
-	@Override
-	public boolean isBreedingItem(ItemStack stack)
-	{
-		return stack.getItem() == Items.SPIDER_EYE;
 	}
 	
 	@Override

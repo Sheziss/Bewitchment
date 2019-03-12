@@ -10,7 +10,7 @@
 	{
 		"E": {"item": "bewitchment:empty_jar"},
 		"S": {"item": "bewitchment:salt"},
-		"B": {"item": "minecraft:stonebrick"},
+		"B": {"item": "minecraft:stonebrick", "data": 0},
 		"L": {"item": "bewitchment:log_elder"}
 	},
 	"result":

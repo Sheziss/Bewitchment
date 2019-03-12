@@ -2,8 +2,9 @@ package com.bewitchment.common.handler;
 
 import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.api.capability.transformation.TransformationCapability.Transformation;
+import com.bewitchment.common.item.tool.ItemColdIronArmor;
+import com.bewitchment.common.item.tool.ItemSilverArmor;
 import com.bewitchment.api.capability.transformation.TransformationProvider;
-import com.bewitchment.common.item.util.ModItemArmor;
 
 import net.minecraft.enchantment.EnchantmentThorns;
 import net.minecraft.entity.EntityLivingBase;
@@ -52,14 +53,14 @@ public class ArmorHandler
 	private byte getColdIronArmor(EntityLivingBase entity)
 	{
 		byte fin = 0;
-		for (ItemStack stack : entity.getArmorInventoryList()) if (stack.getItem() instanceof ModItemArmor.ColdIron) fin++;
+		for (ItemStack stack : entity.getArmorInventoryList()) if (stack.getItem() instanceof ItemColdIronArmor) fin++;
 		return fin;
 	}
 	
 	private byte getSilverArmor(EntityLivingBase entity)
 	{
 		byte fin = 0;
-		for (ItemStack stack : entity.getArmorInventoryList()) if (stack.getItem() instanceof ModItemArmor.Silver) fin++;
+		for (ItemStack stack : entity.getArmorInventoryList()) if (stack.getItem() instanceof ItemSilverArmor) fin++;
 		return fin;
 	}
 }

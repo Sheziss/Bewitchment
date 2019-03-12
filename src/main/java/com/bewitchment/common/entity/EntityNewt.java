@@ -1,7 +1,8 @@
 package com.bewitchment.common.entity;
 
-import com.bewitchment.common.entity.util.ModEntityAnimal;
+import com.bewitchment.Bewitchment;
 
+import moriyashiine.froglib.common.entity.ModEntityAnimal;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
@@ -16,13 +17,14 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 public class EntityNewt extends ModEntityAnimal
 {
 	public EntityNewt(World world)
 	{
-		super(world, "newt");
+		super(world, new ResourceLocation(Bewitchment.MOD_ID, "newt"));
 		setSize(1, 0.3f);
 	}
 	
@@ -30,6 +32,12 @@ public class EntityNewt extends ModEntityAnimal
 	public EntityAgeable createChild(EntityAgeable ageable)
 	{
 		return new EntityNewt(world);
+	}
+	
+	@Override
+	public boolean isBreedingItem(ItemStack stack)
+	{
+		return stack.getItem() == Items.SPIDER_EYE;
 	}
 	
 	@Override
@@ -43,12 +51,6 @@ public class EntityNewt extends ModEntityAnimal
 	{
 		if (other == this || !(other instanceof EntityNewt)) return false;
 		return isInLove() && other.isInLove();
-	}
-	
-	@Override
-	public boolean isBreedingItem(ItemStack stack)
-	{
-		return stack.getItem() == Items.SPIDER_EYE;
 	}
 	
 	@Override

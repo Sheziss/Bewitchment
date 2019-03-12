@@ -1,8 +1,9 @@
 package com.bewitchment.common.item;
 
-import com.bewitchment.common.item.util.ModItem;
+import com.bewitchment.Bewitchment;
 import com.bewitchment.common.registry.ModBlocks;
 
+import moriyashiine.froglib.common.item.ModItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
@@ -13,9 +14,9 @@ import net.minecraft.world.World;
 
 public class ItemSalt extends ModItem
 {
-	public ItemSalt(String name, String... oreNames)
+	public ItemSalt()
 	{
-		super(name, oreNames);
+		super(Bewitchment.MOD_ID, "salt", Bewitchment.proxy.tab, "salt", "dustSalt", "materialSalt", "ingredientSalt", "listAllsalt", "foodSalt", "lumpSalt", "pinchSalt", "portionSalt");
 	}
 	
 	@Override

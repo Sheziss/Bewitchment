@@ -4,9 +4,9 @@ import java.util.Random;
 
 import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.api.registry.OvenRecipe;
-import com.bewitchment.common.block.tile.util.ModTileEntity;
 import com.bewitchment.common.registry.ModItems;
 
+import moriyashiine.froglib.common.block.tile.ModTileEntity;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

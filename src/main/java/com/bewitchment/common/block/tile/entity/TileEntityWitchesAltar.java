@@ -8,10 +8,10 @@ import com.bewitchment.api.capability.magicpower.MagicPowerCapability;
 import com.bewitchment.api.capability.magicpower.MagicPowerProvider;
 import com.bewitchment.common.block.BlockWitchesAltar;
 import com.bewitchment.common.block.BlockWitchesAltar.AltarType;
-import com.bewitchment.common.block.tile.util.ModTileEntity;
 import com.bewitchment.common.registry.ModBlocks;
 import com.bewitchment.common.registry.ModItems;
 
+import moriyashiine.froglib.common.block.tile.ModTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

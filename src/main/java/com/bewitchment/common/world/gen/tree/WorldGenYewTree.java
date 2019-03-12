@@ -3,8 +3,8 @@ package com.bewitchment.common.world.gen.tree;
 import java.util.Random;
 
 import com.bewitchment.common.registry.ModBlocks;
-import com.bewitchment.common.world.gen.tree.util.WorldGenModTree;
 
+import moriyashiine.froglib.world.gen.tree.WorldGenModTree;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 

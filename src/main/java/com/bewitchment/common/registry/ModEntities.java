@@ -6,6 +6,7 @@ import java.util.Set;
 
 import com.bewitchment.Bewitchment;
 import com.bewitchment.common.entity.EntityBlindworm;
+import com.bewitchment.common.entity.EntitySnake;
 import com.bewitchment.common.entity.misc.EntityBroom;
 import com.google.common.collect.Sets;
 
@@ -33,6 +34,7 @@ public class ModEntities
 	public static final EntityEntry lizard = registerEntity(EntityBlindworm.class, "lizard", 0x568203, 0x0070BB, EnumCreatureType.CREATURE, 20, 1, 4, Type.FOREST);
 	public static final EntityEntry newt = registerEntity(EntityBlindworm.class, "newt", 0x000000, 0xFFD300, EnumCreatureType.CREATURE, 20, 1, 4, Type.SWAMP);
 	public static final EntityEntry owl = registerEntity(EntityBlindworm.class, "owl", 0xAF813F, 0x6E5127, EnumCreatureType.CREATURE, 20, 1, 4, Type.FOREST, Type.DENSE);
+	public static final EntityEntry snake = registerEntity(EntitySnake.class, "snake", 0x8F9779, 0x696969, EnumCreatureType.CREATURE, 20, 1, 4, Type.PLAINS, Type.HILLS);
 	
 	public static final EntityEntry broom = registerEntity(EntityBroom.class, "broom");
 	

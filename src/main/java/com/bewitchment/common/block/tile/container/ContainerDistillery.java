@@ -1,9 +1,9 @@
 package com.bewitchment.common.block.tile.container;
 
-import com.bewitchment.common.block.tile.container.util.ModContainer;
-import com.bewitchment.common.block.tile.container.util.ModSlot;
 import com.bewitchment.common.block.tile.entity.TileEntityDistillery;
 
+import moriyashiine.froglib.common.block.tile.container.ModContainer;
+import moriyashiine.froglib.common.block.tile.container.ModSlot;
 import net.minecraft.entity.player.InventoryPlayer;
 
 public class ContainerDistillery extends ModContainer

@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bewitchment.common.entity.misc.EntityBroom;
-import com.bewitchment.common.item.util.ModItem;
 import com.bewitchment.common.registry.ModBlocks;
 import com.bewitchment.common.registry.ModSounds;
 
+import moriyashiine.froglib.common.item.ModItem;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumActionResult;
@@ -26,9 +27,9 @@ public abstract class ItemBroom extends ModItem
 	
 	public final int type;
 	
-	public ItemBroom(String name, ResourceLocation entity_texture, String... oreNames)
+	public ItemBroom(String mod_id, String name, CreativeTabs tab, ResourceLocation entity_texture, String... oreNames)
 	{
-		super(name, oreNames);
+		super(mod_id, name, tab, oreNames);
 		setMaxStackSize(1);
 		TEX.add(entity_texture);
 		type = TEX.size();

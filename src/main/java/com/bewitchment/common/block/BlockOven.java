@@ -1,9 +1,10 @@
 package com.bewitchment.common.block;
 
+import com.bewitchment.Bewitchment;
 import com.bewitchment.common.CommonProxy.ModGui;
 import com.bewitchment.common.block.tile.entity.TileEntityOven;
-import com.bewitchment.common.block.util.ModBlockContainer;
 
+import moriyashiine.froglib.common.block.ModBlockContainer;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -18,9 +19,9 @@ import net.minecraft.world.World;
 
 public class BlockOven extends ModBlockContainer
 {
-	public BlockOven(String name)
+	public BlockOven()
 	{
-		super(name, Material.IRON, SoundType.METAL, 5, 5, "pickaxe", 0, ModGui.OVEN.ordinal());
+		super(Bewitchment.instance, Bewitchment.MOD_ID, "oven", Material.IRON, SoundType.METAL, Bewitchment.proxy.tab, 5, 5, "pickaxe", 0, ModGui.OVEN.ordinal());
 		this.setDefaultState(blockState.getBaseState().withProperty(BlockHorizontal.FACING, EnumFacing.SOUTH));
 	}
 	

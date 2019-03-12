@@ -1,8 +1,9 @@
 package com.bewitchment.common.block;
 
+import com.bewitchment.Bewitchment;
 import com.bewitchment.common.block.tile.entity.TileEntityPlacedItem;
-import com.bewitchment.common.block.util.ModBlockContainer;
 
+import moriyashiine.froglib.common.block.ModBlockContainer;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -24,10 +25,9 @@ public class BlockPlacedItem extends ModBlockContainer
 {
 	private static final AxisAlignedBB BOX = new AxisAlignedBB(0.25, 0, 0.25, 0.75, 0.0625, 0.75);
 	
-	public BlockPlacedItem(String name)
+	public BlockPlacedItem()
 	{
-		super(name, Material.ROCK, SoundType.CLOTH, 0, 0, "", 0, -1);
-		this.setCreativeTab(null);
+		super(null, Bewitchment.MOD_ID, "placed_item", Material.ROCK, SoundType.CLOTH, null, 0, 0, "", 0, -1);
 		this.setLightOpacity(0);
 	}
 	

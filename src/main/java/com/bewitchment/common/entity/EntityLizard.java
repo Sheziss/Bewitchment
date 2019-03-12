@@ -1,8 +1,9 @@
 package com.bewitchment.common.entity;
 
-import com.bewitchment.common.entity.util.ModEntityTameable;
+import com.bewitchment.Bewitchment;
 import com.bewitchment.common.registry.ModItems;
 
+import moriyashiine.froglib.common.entity.ModEntityTameable;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIFollowOwner;
@@ -18,13 +19,14 @@ import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 public class EntityLizard extends ModEntityTameable
 {
 	public EntityLizard(World world)
 	{
-		super(world, "lizard", Items.SPIDER_EYE, Items.FERMENTED_SPIDER_EYE, ModItems.silver_scales, ModItems.envenomed_fang);
+		super(world, new ResourceLocation(Bewitchment.MOD_ID, "lizard"), Items.SPIDER_EYE, Items.FERMENTED_SPIDER_EYE, ModItems.silver_scales, ModItems.envenomed_fang);
 		setSize(1, 0.3f);
 	}
 	
@@ -32,6 +34,12 @@ public class EntityLizard extends ModEntityTameable
 	public EntityAgeable createChild(EntityAgeable ageable)
 	{
 		return new EntityLizard(world);
+	}
+	
+	@Override
+	public boolean isBreedingItem(ItemStack stack)
+	{
+		return stack.getItem() == Items.SPIDER_EYE;
 	}
 	
 	@Override
@@ -45,12 +53,6 @@ public class EntityLizard extends ModEntityTameable
 	{
 		if (other == this || !(other instanceof EntityLizard)) return false;
 		return isTamed() && isInLove() && ((EntityTameable) other).isTamed() && other.isInLove() && !((EntityTameable) other).isSitting();
-	}
-	
-	@Override
-	public boolean isBreedingItem(ItemStack stack)
-	{
-		return stack.getItem() == Items.SPIDER_EYE;
 	}
 	
 	@Override

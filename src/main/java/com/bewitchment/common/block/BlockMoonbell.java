@@ -2,8 +2,9 @@ package com.bewitchment.common.block;
 
 import java.util.Random;
 
-import com.bewitchment.common.block.util.ModBlockBush;
+import com.bewitchment.Bewitchment;
 
+import moriyashiine.froglib.common.block.ModBlockBush;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -27,7 +28,7 @@ public class BlockMoonbell extends ModBlockBush implements IInfusionStabiliserEx
 	
 	public BlockMoonbell(String name, String... oreNames)
 	{
-		super(name, oreNames);
+		super(Bewitchment.MOD_ID, name, Bewitchment.proxy.tab, oreNames);
 		this.setLightOpacity(0).setLightLevel(0.5f);
 		this.setDefaultState(blockState.getBaseState().withProperty(PLACED, false));
 	}
