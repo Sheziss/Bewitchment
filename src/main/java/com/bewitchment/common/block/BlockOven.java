@@ -4,7 +4,7 @@ import com.bewitchment.Bewitchment;
 import com.bewitchment.common.CommonProxy.ModGui;
 import com.bewitchment.common.block.tile.entity.TileEntityOven;
 
-import moriyashiine.froglib.common.block.ModBlockContainer;
+import moriyashiine.froglib.common.block.FLBlockContainer;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -17,7 +17,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockOven extends ModBlockContainer
+public class BlockOven extends FLBlockContainer
 {
 	public BlockOven()
 	{

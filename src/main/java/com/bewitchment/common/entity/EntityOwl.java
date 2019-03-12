@@ -3,7 +3,7 @@ package com.bewitchment.common.entity;
 import com.bewitchment.Bewitchment;
 import com.bewitchment.common.registry.ModSounds;
 
-import moriyashiine.froglib.common.entity.ModEntityTameable;
+import moriyashiine.froglib.common.entity.FLEntityTameable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -41,7 +41,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class EntityOwl extends ModEntityTameable
+public class EntityOwl extends FLEntityTameable
 {
 	public EntityOwl(World world)
 	{

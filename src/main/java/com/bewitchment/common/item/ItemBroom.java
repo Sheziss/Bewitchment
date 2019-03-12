@@ -7,7 +7,7 @@ import com.bewitchment.common.entity.misc.EntityBroom;
 import com.bewitchment.common.registry.ModBlocks;
 import com.bewitchment.common.registry.ModSounds;
 
-import moriyashiine.froglib.common.item.ModItem;
+import moriyashiine.froglib.common.item.FLItem;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,7 +21,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-public abstract class ItemBroom extends ModItem
+public abstract class ItemBroom extends FLItem
 {
 	public static final List<ResourceLocation> TEX = new ArrayList<ResourceLocation>();
 	

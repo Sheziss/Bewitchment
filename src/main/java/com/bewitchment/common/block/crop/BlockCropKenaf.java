@@ -5,7 +5,7 @@ import java.util.Random;
 import com.bewitchment.Bewitchment;
 import com.bewitchment.common.registry.ModItems;
 
-import moriyashiine.froglib.common.block.ModBlockCrop;
+import moriyashiine.froglib.common.block.FLBlockCrop;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -16,7 +16,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockCropKenaf extends ModBlockCrop
+public class BlockCropKenaf extends FLBlockCrop
 {
 	private static final AxisAlignedBB[] KENAF_AABB = {new AxisAlignedBB(0, 0, 0, 1, 0.125, 1), new AxisAlignedBB(0, 0, 0, 1, 0.375, 1), new AxisAlignedBB(0, 0, 0, 1, 0.625, 1), new AxisAlignedBB(0, 0, 0, 1, 0.75, 1), new AxisAlignedBB(0, 0, 0, 1, 1, 1)};
 	

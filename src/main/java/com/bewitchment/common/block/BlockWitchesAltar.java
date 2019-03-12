@@ -13,7 +13,7 @@ import com.bewitchment.common.block.tile.entity.TileEntityWitchesAltar;
 import com.bewitchment.common.registry.ModBlocks;
 import com.bewitchment.common.registry.ModItems;
 
-import moriyashiine.froglib.common.block.ModBlockContainer;
+import moriyashiine.froglib.common.block.FLBlockContainer;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.EnumPushReaction;
@@ -36,7 +36,7 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockWitchesAltar extends ModBlockContainer
+public class BlockWitchesAltar extends FLBlockContainer
 {
 	public static final PropertyAltar TYPE = new PropertyAltar("type", AltarType.class, Arrays.asList(AltarType.values()));
 	public static final PropertyInteger COLOR = PropertyInteger.create("color", 0, 16);

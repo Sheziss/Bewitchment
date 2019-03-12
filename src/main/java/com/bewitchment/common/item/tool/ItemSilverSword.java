@@ -2,14 +2,14 @@ package com.bewitchment.common.item.tool;
 
 import com.bewitchment.Bewitchment;
 
-import moriyashiine.froglib.common.item.ModItemSword;
+import moriyashiine.froglib.common.item.FLItemSword;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 
-public class ItemSilverSword extends ModItemSword
+public class ItemSilverSword extends FLItemSword
 {
 	public ItemSilverSword(ToolMaterial mat)
 	{

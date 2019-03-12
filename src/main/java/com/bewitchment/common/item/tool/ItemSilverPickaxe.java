@@ -2,14 +2,14 @@ package com.bewitchment.common.item.tool;
 
 import com.bewitchment.Bewitchment;
 
-import moriyashiine.froglib.common.item.ModItemPickaxe;
+import moriyashiine.froglib.common.item.FLItemPickaxe;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 
-public class ItemSilverPickaxe extends ModItemPickaxe
+public class ItemSilverPickaxe extends FLItemPickaxe
 {
 	public ItemSilverPickaxe(ToolMaterial mat)
 	{

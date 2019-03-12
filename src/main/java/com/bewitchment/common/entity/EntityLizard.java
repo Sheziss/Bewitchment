@@ -3,7 +3,7 @@ package com.bewitchment.common.entity;
 import com.bewitchment.Bewitchment;
 import com.bewitchment.common.registry.ModItems;
 
-import moriyashiine.froglib.common.entity.ModEntityTameable;
+import moriyashiine.froglib.common.entity.FLEntityTameable;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIFollowOwner;
@@ -22,7 +22,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class EntityLizard extends ModEntityTameable
+public class EntityLizard extends FLEntityTameable
 {
 	public EntityLizard(World world)
 	{

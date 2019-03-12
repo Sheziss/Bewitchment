@@ -2,14 +2,14 @@ package com.bewitchment.common.item.tool;
 
 import com.bewitchment.Bewitchment;
 
-import moriyashiine.froglib.common.item.ModItemAxe;
+import moriyashiine.froglib.common.item.FLItemAxe;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 
-public class ItemSilverAxe extends ModItemAxe
+public class ItemSilverAxe extends FLItemAxe
 {
 	public ItemSilverAxe(ToolMaterial mat)
 	{

@@ -5,7 +5,7 @@ import java.util.Random;
 import com.bewitchment.Bewitchment;
 import com.bewitchment.common.registry.ModItems;
 
-import moriyashiine.froglib.common.block.ModBlockCrop;
+import moriyashiine.froglib.common.block.FLBlockCrop;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
@@ -18,7 +18,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockCropKelp extends ModBlockCrop
+public class BlockCropKelp extends FLBlockCrop
 {
 	private static final AxisAlignedBB[] KELP_AABB = {new AxisAlignedBB(0, 0, 0, 1, 0.125, 1), new AxisAlignedBB(0, 0, 0, 1, 0.25, 1), new AxisAlignedBB(0, 0, 0, 1, 0.375, 1), new AxisAlignedBB(0, 0, 0, 1, 0.5, 1), new AxisAlignedBB(0, 0, 0, 1, 0.75, 1), new AxisAlignedBB(0, 0, 0, 1, 0.95, 1), new AxisAlignedBB(0, 0, 0, 1, 1, 1), new AxisAlignedBB(0, 0, 0, 1, 1, 1)};
 	

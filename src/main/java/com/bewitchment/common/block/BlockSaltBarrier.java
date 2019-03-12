@@ -8,7 +8,7 @@ import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.api.capability.transformation.TransformationProvider;
 import com.bewitchment.common.registry.ModItems;
 
-import moriyashiine.froglib.common.block.ModBlock;
+import moriyashiine.froglib.common.block.FLBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -38,7 +38,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockSaltBarrier extends ModBlock
+public class BlockSaltBarrier extends FLBlock
 {
 	public static final PropertyEnum<EnumAttachPosition> NORTH = PropertyEnum.<EnumAttachPosition>create("north", EnumAttachPosition.class), EAST = PropertyEnum.<EnumAttachPosition>create("east", EnumAttachPosition.class), SOUTH = PropertyEnum.<EnumAttachPosition>create("south", EnumAttachPosition.class), WEST = PropertyEnum.<EnumAttachPosition>create("west", EnumAttachPosition.class);
 	

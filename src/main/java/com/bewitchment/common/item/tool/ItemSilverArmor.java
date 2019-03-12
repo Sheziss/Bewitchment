@@ -4,14 +4,14 @@ import com.bewitchment.Bewitchment;
 import com.bewitchment.api.capability.transformation.TransformationCapability.Transformation;
 import com.bewitchment.api.capability.transformation.TransformationProvider;
 
-import moriyashiine.froglib.common.item.ModItemArmor;
+import moriyashiine.froglib.common.item.FLItemArmor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
-public class ItemSilverArmor extends ModItemArmor
+public class ItemSilverArmor extends FLItemArmor
 {
 	public ItemSilverArmor(String name, ArmorMaterial mat, EntityEquipmentSlot slot)
 	{

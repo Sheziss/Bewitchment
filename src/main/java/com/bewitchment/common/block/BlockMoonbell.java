@@ -4,7 +4,7 @@ import java.util.Random;
 
 import com.bewitchment.Bewitchment;
 
-import moriyashiine.froglib.common.block.ModBlockBush;
+import moriyashiine.froglib.common.block.FLBlockBush;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -22,7 +22,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import thaumcraft.api.crafting.IInfusionStabiliserExt;
 
 @Optional.Interface(iface = "thaumcraft.api.crafting.IInfusionStabiliserExt", modid = "thaumcraft")
-public class BlockMoonbell extends ModBlockBush implements IInfusionStabiliserExt
+public class BlockMoonbell extends FLBlockBush implements IInfusionStabiliserExt
 {
 	private static final PropertyBool PLACED = PropertyBool.create("placed");
 	

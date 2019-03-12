@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.bewitchment.Bewitchment;
 
-import moriyashiine.froglib.common.item.ModItemSword;
+import moriyashiine.froglib.common.item.FLItemSword;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemAthame extends ModItemSword
+public class ItemAthame extends FLItemSword
 {
 	public ItemAthame(ToolMaterial mat)
 	{

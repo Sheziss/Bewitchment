@@ -3,7 +3,7 @@ package com.bewitchment.common.item;
 import com.bewitchment.Bewitchment;
 import com.bewitchment.common.registry.ModBlocks;
 
-import moriyashiine.froglib.common.item.ModItem;
+import moriyashiine.froglib.common.item.FLItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
@@ -12,7 +12,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class ItemSalt extends ModItem
+public class ItemSalt extends FLItem
 {
 	public ItemSalt()
 	{

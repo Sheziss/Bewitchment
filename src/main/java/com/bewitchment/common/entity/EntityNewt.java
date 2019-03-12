@@ -2,7 +2,7 @@ package com.bewitchment.common.entity;
 
 import com.bewitchment.Bewitchment;
 
-import moriyashiine.froglib.common.entity.ModEntityAnimal;
+import moriyashiine.froglib.common.entity.FLEntityAnimal;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
@@ -20,7 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class EntityNewt extends ModEntityAnimal
+public class EntityNewt extends FLEntityAnimal
 {
 	public EntityNewt(World world)
 	{

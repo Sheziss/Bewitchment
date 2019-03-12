@@ -3,7 +3,7 @@ package com.bewitchment.common.block;
 import com.bewitchment.Bewitchment;
 import com.bewitchment.common.block.tile.entity.TileEntityPlacedItem;
 
-import moriyashiine.froglib.common.block.ModBlockContainer;
+import moriyashiine.froglib.common.block.FLBlockContainer;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -21,7 +21,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockPlacedItem extends ModBlockContainer
+public class BlockPlacedItem extends FLBlockContainer
 {
 	private static final AxisAlignedBB BOX = new AxisAlignedBB(0.25, 0, 0.25, 0.75, 0.0625, 0.75);
 	

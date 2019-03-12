@@ -2,14 +2,14 @@ package com.bewitchment.common.item.tool;
 
 import com.bewitchment.Bewitchment;
 
-import moriyashiine.froglib.common.item.ModItemHoe;
+import moriyashiine.froglib.common.item.FLItemHoe;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 
-public class ItemSilverHoe extends ModItemHoe
+public class ItemSilverHoe extends FLItemHoe
 {
 	public ItemSilverHoe(ToolMaterial mat)
 	{

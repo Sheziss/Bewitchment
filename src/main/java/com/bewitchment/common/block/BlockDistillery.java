@@ -4,7 +4,7 @@ import com.bewitchment.Bewitchment;
 import com.bewitchment.common.CommonProxy.ModGui;
 import com.bewitchment.common.block.tile.entity.TileEntityDistillery;
 
-import moriyashiine.froglib.common.block.ModBlockContainer;
+import moriyashiine.froglib.common.block.FLBlockContainer;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -20,7 +20,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockDistillery extends ModBlockContainer
+public class BlockDistillery extends FLBlockContainer
 {
 	private static final AxisAlignedBB BBOX_X = new AxisAlignedBB(0.125, 0, 0, 0.875, 0.6875, 1), BBOX_Z = new AxisAlignedBB(0, 0, 0.125, 1, 0.6875, 0.875);
 	

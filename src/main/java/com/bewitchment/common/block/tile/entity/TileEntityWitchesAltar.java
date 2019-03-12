@@ -11,7 +11,7 @@ import com.bewitchment.common.block.BlockWitchesAltar.AltarType;
 import com.bewitchment.common.registry.ModBlocks;
 import com.bewitchment.common.registry.ModItems;
 
-import moriyashiine.froglib.common.block.tile.ModTileEntity;
+import moriyashiine.froglib.common.block.tile.FLTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,7 +25,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 
-public class TileEntityWitchesAltar extends ModTileEntity implements ITickable
+public class TileEntityWitchesAltar extends FLTileEntity implements ITickable
 {
 	public static final Map<Block, Integer> SCAN_VALUES = new HashMap<Block, Integer>();
 	public static final Map<Item, Double> SWORD_MULTIPLIER_VALUES = new HashMap<Item, Double>();

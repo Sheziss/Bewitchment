@@ -2,7 +2,7 @@ package com.bewitchment.common.entity;
 
 import com.bewitchment.Bewitchment;
 
-import moriyashiine.froglib.common.entity.ModEntityAnimal;
+import moriyashiine.froglib.common.entity.FLEntityAnimal;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIFollowParent;
@@ -21,7 +21,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class EntityBlindworm extends ModEntityAnimal
+public class EntityBlindworm extends FLEntityAnimal
 {	
 	public EntityBlindworm(World world)
 	{

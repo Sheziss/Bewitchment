@@ -3,7 +3,7 @@ package com.bewitchment.common.entity;
 import com.bewitchment.Bewitchment;
 import com.bewitchment.common.registry.ModItems;
 
-import moriyashiine.froglib.common.entity.ModEntityTameable;
+import moriyashiine.froglib.common.entity.FLEntityTameable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
@@ -38,7 +38,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class EntitySnake extends ModEntityTameable
+public class EntitySnake extends FLEntityTameable
 {
 	public int animation_timer = 0;
 	private int milk_timer = 0;

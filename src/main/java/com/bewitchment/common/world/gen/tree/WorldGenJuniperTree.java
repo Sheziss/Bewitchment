@@ -5,12 +5,12 @@ import java.util.Random;
 
 import com.bewitchment.common.registry.ModBlocks;
 
-import moriyashiine.froglib.world.gen.tree.WorldGenModTree;
+import moriyashiine.froglib.world.gen.tree.WorldGenFLTree;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class WorldGenJuniperTree extends WorldGenModTree
+public class WorldGenJuniperTree extends WorldGenFLTree
 {
 	public WorldGenJuniperTree(boolean notify)
 	{

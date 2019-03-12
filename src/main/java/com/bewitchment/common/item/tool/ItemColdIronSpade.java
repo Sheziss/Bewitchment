@@ -3,7 +3,7 @@ package com.bewitchment.common.item.tool;
 import com.bewitchment.Bewitchment;
 import com.bewitchment.api.BewitchmentAPI;
 
-import moriyashiine.froglib.common.item.ModItemSpade;
+import moriyashiine.froglib.common.item.FLItemSpade;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityEnderman;
@@ -12,7 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 
-public class ItemColdIronSpade extends ModItemSpade
+public class ItemColdIronSpade extends FLItemSpade
 {
 	public ItemColdIronSpade(ToolMaterial mat)
 	{

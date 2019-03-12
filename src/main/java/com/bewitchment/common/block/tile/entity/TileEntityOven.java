@@ -6,7 +6,7 @@ import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.api.registry.OvenRecipe;
 import com.bewitchment.common.registry.ModItems;
 
-import moriyashiine.froglib.common.block.tile.ModTileEntity;
+import moriyashiine.froglib.common.block.tile.FLTileEntity;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -14,7 +14,7 @@ import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.ITickable;
 import net.minecraft.world.IWorldNameable;
 
-public class TileEntityOven extends ModTileEntity implements ITickable, IWorldNameable
+public class TileEntityOven extends FLTileEntity implements ITickable, IWorldNameable
 {
 	private final Random rand = new Random();
 	
