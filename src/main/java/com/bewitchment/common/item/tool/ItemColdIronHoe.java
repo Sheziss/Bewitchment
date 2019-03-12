@@ -1,9 +1,13 @@
 package com.bewitchment.common.item.tool;
 
+import java.util.List;
+
 import com.bewitchment.Bewitchment;
 import com.bewitchment.api.BewitchmentAPI;
 
 import moriyashiine.froglib.common.item.FLItemHoe;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityEnderman;
@@ -11,12 +15,23 @@ import net.minecraft.entity.monster.EntityVex;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemColdIronHoe extends FLItemHoe
 {
 	public ItemColdIronHoe(ToolMaterial mat)
 	{
 		super(Bewitchment.MOD_ID, "hoe_cold_iron", Bewitchment.proxy.tab, mat);
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag flag)
+	{
+		tooltip.add(TextFormatting.GRAY + I18n.format("tooltip." + "tool_description_" + toolMaterial.name()));
 	}
 	
 	@Override
