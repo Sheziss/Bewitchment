@@ -1,8 +1,8 @@
 package com.bewitchment.common.handler;
 
 import com.bewitchment.api.BewitchmentAPI;
-import com.bewitchment.api.capability.transformation.TransformationCapability.Transformation;
-import com.bewitchment.api.capability.transformation.TransformationProvider;
+import com.bewitchment.api.capability.transformation.Transformation;
+import com.bewitchment.api.capability.transformation.Transformation.TransformationType;
 import com.bewitchment.common.item.tool.ItemColdIronArmor;
 import com.bewitchment.common.item.tool.ItemSilverArmor;
 
@@ -40,7 +40,7 @@ public class ArmorHandler {
 			if (event.getSource().getTrueSource() instanceof EntityLivingBase)
 			{
 				if (((EntityLivingBase) event.getSource().getTrueSource()).getCreatureAttribute() == EnumCreatureAttribute.UNDEAD) event.setAmount(event.getAmount() * 0.9f);
-				if (event.getSource().getTrueSource() instanceof EntityPlayer && event.getSource().getTrueSource().getCapability(TransformationProvider.TRANSFORMATION, null).getTransformation() == Transformation.WEREWOLF)
+				if (event.getSource().getTrueSource() instanceof EntityPlayer && event.getSource().getTrueSource().getCapability(Transformation.CAPABILITY, null).getTransformation() == TransformationType.WEREWOLF)
 				{
 					event.setAmount(event.getAmount() * 0.9f);
 					event.getSource().getTrueSource().attackEntityFrom(DamageSource.causeThornsDamage(event.getEntityLiving()), MathHelper.clamp(event.getAmount() / 2, 1, 4));

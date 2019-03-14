@@ -4,8 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.bewitchment.api.BewitchmentAPI;
-import com.bewitchment.api.capability.magicpower.MagicPowerCapability;
-import com.bewitchment.api.capability.magicpower.MagicPowerProvider;
+import com.bewitchment.api.capability.magicpower.MagicPower;
 import com.bewitchment.common.block.BlockWitchesAltar;
 import com.bewitchment.common.block.BlockWitchesAltar.AltarType;
 import com.bewitchment.common.block.tile.entity.util.ModTileEntity;
@@ -34,7 +33,7 @@ public class TileEntityWitchesAltar extends ModTileEntity implements ITickable
 	
 	public int color = EnumDyeColor.RED.ordinal(), gain = 1, multiplier = 1;
 	
-	private final MagicPowerCapability magic_power = MagicPowerProvider.CAPABILITY.getDefaultInstance();
+	private final MagicPower magic_power = MagicPower.CAPABILITY.getDefaultInstance();
 	
 	public TileEntityWitchesAltar()
 	{
@@ -44,13 +43,13 @@ public class TileEntityWitchesAltar extends ModTileEntity implements ITickable
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing face)
 	{
-		return capability == MagicPowerProvider.CAPABILITY ? MagicPowerProvider.CAPABILITY.cast(magic_power) : super.getCapability(capability, face);
+		return capability == MagicPower.CAPABILITY ? MagicPower.CAPABILITY.cast(magic_power) : super.getCapability(capability, face);
 	}
 	
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing face)
 	{
-		return capability == MagicPowerProvider.CAPABILITY || super.hasCapability(capability, face);
+		return capability == MagicPower.CAPABILITY || super.hasCapability(capability, face);
 	}
 	
 	@Override
@@ -94,7 +93,7 @@ public class TileEntityWitchesAltar extends ModTileEntity implements ITickable
 						{
 							for (EntityPlayer player : world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).grow(5)))
 							{
-								MagicPowerCapability cap = player.getCapability(MagicPowerProvider.CAPABILITY, null);
+								MagicPower cap = player.getCapability(MagicPower.CAPABILITY, null);
 								int amount = Math.min(20, cap.getMaxAmount() - cap.getAmount());
 								if (magic_power.drain(amount)) cap.fill(amount / 10);
 							}
@@ -132,7 +131,7 @@ public class TileEntityWitchesAltar extends ModTileEntity implements ITickable
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound tag)
 	{
-		magic_power.writeToNBT(tag);
+		magic_power.serialize(tag);
 		tag.setInteger("color", color);
 		tag.setInteger("gain", gain);
 		tag.setInteger("multiplier", multiplier);
@@ -143,7 +142,7 @@ public class TileEntityWitchesAltar extends ModTileEntity implements ITickable
 	public void readFromNBT(NBTTagCompound tag)
 	{
 		super.readFromNBT(tag);
-		magic_power.readFromNBT(tag);
+		magic_power.deserialize(tag);
 		color = tag.getInteger("color");
 		gain = tag.getInteger("gain");
 		multiplier = tag.getInteger("multiplier");

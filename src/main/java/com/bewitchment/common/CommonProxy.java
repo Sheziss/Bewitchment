@@ -3,12 +3,10 @@ package com.bewitchment.common;
 import com.bewitchment.Bewitchment;
 import com.bewitchment.ModConfig;
 import com.bewitchment.api.BewitchmentAPI;
-import com.bewitchment.api.capability.magicpower.MagicPowerCapability;
+import com.bewitchment.api.capability.magicpower.MagicPower;
 import com.bewitchment.api.capability.magicpower.MagicPowerHandler;
-import com.bewitchment.api.capability.magicpower.MagicPowerStorage;
-import com.bewitchment.api.capability.transformation.TransformationCapability;
+import com.bewitchment.api.capability.transformation.Transformation;
 import com.bewitchment.api.capability.transformation.TransformationHandler;
-import com.bewitchment.api.capability.transformation.TransformationStorage;
 import com.bewitchment.api.registry.DistilleryRecipe;
 import com.bewitchment.api.registry.OvenRecipe;
 import com.bewitchment.common.handler.BlockDropHandler;
@@ -112,9 +110,9 @@ public class CommonProxy
 	
 	private void registerCapabilities()
 	{
-		CapabilityManager.INSTANCE.register(TransformationCapability.class, new TransformationStorage(), TransformationCapability::new);
+		CapabilityManager.INSTANCE.register(Transformation.class, new Transformation(), Transformation::new);
 		MinecraftForge.EVENT_BUS.register(new TransformationHandler());
-		CapabilityManager.INSTANCE.register(MagicPowerCapability.class, new MagicPowerStorage(), MagicPowerCapability::new);
+		CapabilityManager.INSTANCE.register(MagicPower.class, new MagicPower(), MagicPower::new);
 		MinecraftForge.EVENT_BUS.register(new MagicPowerHandler());
 	}
 	

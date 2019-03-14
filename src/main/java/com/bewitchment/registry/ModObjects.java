@@ -36,6 +36,7 @@ import com.bewitchment.common.item.ItemElderBroom;
 import com.bewitchment.common.item.ItemHeart;
 import com.bewitchment.common.item.ItemJuniperBroom;
 import com.bewitchment.common.item.ItemSalt;
+import com.bewitchment.common.item.ItemUndyingSalve;
 import com.bewitchment.common.item.ItemYewBroom;
 import com.bewitchment.common.item.tool.ItemAthame;
 import com.bewitchment.common.item.tool.ItemBoline;
@@ -298,7 +299,7 @@ public class ModObjects
 	public static final Item spruce_heart = new ModItem("spruce_heart");
 	public static final Item stone_ichor = new ModItem("stone_ichor");
 	public static final Item swirl_of_the_depths = new ModItem("swirl_of_the_depths");
-	public static final Item undying_salve = new ModItem("undying_salve");
+	public static final Item undying_salve = new ItemUndyingSalve();
 	
 	// Ingredients
 	public static final Item aconitum = new ModItem("aconitum", "cropAconitum");

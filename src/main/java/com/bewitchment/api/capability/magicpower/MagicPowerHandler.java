@@ -14,26 +14,24 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class MagicPowerHandler
 {
-	public static final ResourceLocation CAP = new ResourceLocation(Bewitchment.MOD_ID, "magic_power");
+	private static final ResourceLocation CAP = new ResourceLocation(Bewitchment.MOD_ID, "magic_power");
 	
 	@SubscribeEvent
 	public void attachCapabilityE(AttachCapabilitiesEvent<Entity> event)
 	{
-		if (event.getObject() instanceof EntityPlayer) event.addCapability(CAP, new MagicPowerProvider());
+		if (event.getObject() instanceof EntityPlayer) event.addCapability(CAP, new MagicPower());
 	}
 	
 	@SubscribeEvent
 	public void attachCapabilityTE(AttachCapabilitiesEvent<TileEntity> event)
 	{
-		if (event.getObject() instanceof TileEntityDistillery) event.addCapability(CAP, new MagicPowerProvider());
+		if (event.getObject() instanceof TileEntityDistillery) event.addCapability(CAP, new MagicPower());
 	}
 	
 	@SubscribeEvent
 	public void clonePlayer(PlayerEvent.Clone event)
 	{
-		MagicPowerCapability oldC = event.getOriginal().getCapability(MagicPowerProvider.CAPABILITY, null), newC = event.getEntityPlayer().getCapability(MagicPowerProvider.CAPABILITY, null);
-		newC.setAmount(oldC.getAmount());
-		newC.setMaxAmount(oldC.getMaxAmount());
+		event.getEntityPlayer().getCapability(MagicPower.CAPABILITY, null).deserializeNBT(event.getOriginal().getCapability(MagicPower.CAPABILITY, null).serializeNBT());
 	}
 	
 	@SubscribeEvent
@@ -41,11 +39,12 @@ public class MagicPowerHandler
 	{
 		if (event.getEntityLiving() instanceof EntityPlayer)
 		{
-			MagicPowerCapability cap = event.getEntityLiving().getCapability(MagicPowerProvider.CAPABILITY, null);
+			MagicPower cap = event.getEntityLiving().getCapability(MagicPower.CAPABILITY, null);
 			if (cap.getMaxAmount() <= 0)
 			{
 				cap.setAmount(800);
 				cap.setMaxAmount(800);
+				cap.setBonusAmount(0);
 			}
 		}
 	}

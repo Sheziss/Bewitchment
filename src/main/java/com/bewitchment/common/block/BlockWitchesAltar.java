@@ -5,8 +5,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import com.bewitchment.api.capability.magicpower.MagicPowerCapability;
-import com.bewitchment.api.capability.magicpower.MagicPowerProvider;
+import com.bewitchment.api.capability.magicpower.MagicPower;
 import com.bewitchment.common.block.tile.entity.TileEntityPlacedItem;
 import com.bewitchment.common.block.tile.entity.TileEntityWitchesAltar;
 import com.bewitchment.common.block.util.ModBlockContainer;
@@ -74,7 +73,7 @@ public class BlockWitchesAltar extends ModBlockContainer
 				for (int z = -16; z <= 16; z++)
 				{
 					TileEntity tile = world.getTileEntity(getAltarPosition(world, pos.add(x, y, z)));
-					if (tile.hasCapability(MagicPowerProvider.CAPABILITY, null)) return getAltarPosition(world, pos.add(x, y, z));
+					if (tile.hasCapability(MagicPower.CAPABILITY, null)) return getAltarPosition(world, pos.add(x, y, z));
 				}
 			}
 		}
@@ -214,7 +213,7 @@ public class BlockWitchesAltar extends ModBlockContainer
 				TileEntityWitchesAltar tile = (TileEntityWitchesAltar) world.getTileEntity(getAltarPosition(world, pos));
 				if (tile != null)
 				{
-					MagicPowerCapability cap = tile.getCapability(MagicPowerProvider.CAPABILITY, null);
+					MagicPower cap = tile.getCapability(MagicPower.CAPABILITY, null);
 					player.sendStatusMessage(new TextComponentString(cap.getAmount() + "/" + cap.getMaxAmount() + " (x" + tile.multiplier + ")"), true);
 				}
 				return true;

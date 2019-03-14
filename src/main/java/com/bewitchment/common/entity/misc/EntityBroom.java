@@ -2,7 +2,7 @@ package com.bewitchment.common.entity.misc;
 
 import java.lang.reflect.Field;
 
-import com.bewitchment.api.capability.magicpower.MagicPowerProvider;
+import com.bewitchment.api.capability.magicpower.MagicPower;
 import com.bewitchment.api.item.ItemBroom;
 
 import net.minecraft.block.state.IBlockState;
@@ -152,7 +152,7 @@ public class EntityBroom extends Entity
 			setFuel(100);
 			if (rider != null && item != null)
 			{
-				if (dataManager.get(FUEL) < 5 && rider.getCapability(MagicPowerProvider.CAPABILITY, null).drain(30)) dataManager.set(FUEL, 100);
+				if (dataManager.get(FUEL) < 5 && rider.getCapability(MagicPower.CAPABILITY, null).drain(30)) dataManager.set(FUEL, 100);
 				float front = rider.moveForward, strafe = rider.moveStrafing, up = 0;
 				try {up = jumpField("field_70703_bu", "isJumping", EntityLivingBase.class).getBoolean(rider) ? 1 : 0;}
 				catch (Exception e) {e.printStackTrace();}

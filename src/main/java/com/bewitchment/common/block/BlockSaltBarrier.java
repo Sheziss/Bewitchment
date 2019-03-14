@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import com.bewitchment.api.BewitchmentAPI;
-import com.bewitchment.api.capability.transformation.TransformationProvider;
+import com.bewitchment.api.capability.transformation.Transformation;
 import com.bewitchment.common.block.util.ModBlock;
 import com.bewitchment.registry.ModObjects;
 
@@ -100,7 +100,7 @@ public class BlockSaltBarrier extends ModBlock
 				addCollisionBoxToList(pos, box, boxes, WALL);
 		}
 		if (entity instanceof EntityBlaze || entity instanceof EntityGhast || entity instanceof EntityVex /* || entity instanceof EntityBatSwarm */) addCollisionBoxToList(pos, box, boxes, WALL);
-		if (entity instanceof EntityPlayer && !((EntityPlayer) entity).isCreative() && !entity.getCapability(TransformationProvider.TRANSFORMATION, null).getTransformation().canCrossSalt) addCollisionBoxToList(pos, box, boxes, WALL);
+		if (entity instanceof EntityPlayer && !((EntityPlayer) entity).isCreative() && !entity.getCapability(Transformation.CAPABILITY, null).getTransformation().canCrossSalt) addCollisionBoxToList(pos, box, boxes, WALL);
 	}
 	
 	@SuppressWarnings("deprecation")

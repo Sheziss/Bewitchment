@@ -5,8 +5,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import com.bewitchment.api.BewitchmentAPI;
-import com.bewitchment.api.capability.magicpower.MagicPowerCapability;
-import com.bewitchment.api.capability.magicpower.MagicPowerProvider;
+import com.bewitchment.api.capability.magicpower.MagicPower;
 import com.bewitchment.api.registry.DistilleryRecipe;
 import com.bewitchment.common.block.tile.entity.util.ModTileEntity;
 
@@ -22,7 +21,7 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable
 {
 	public static final int BURN_TIME = 1200;
 	
-	private final MagicPowerCapability magic_power = MagicPowerProvider.CAPABILITY.getDefaultInstance();
+	private final MagicPower magic_power = MagicPower.CAPABILITY.getDefaultInstance();
 	
 	private String current_recipe = "";
 	
@@ -36,13 +35,13 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing face)
 	{
-		return capability == MagicPowerProvider.CAPABILITY ? MagicPowerProvider.CAPABILITY.cast(magic_power) : super.getCapability(capability, face);
+		return capability == MagicPower.CAPABILITY ? MagicPower.CAPABILITY.cast(magic_power) : super.getCapability(capability, face);
 	}
 	
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing face)
 	{
-		return capability == MagicPowerProvider.CAPABILITY || super.hasCapability(capability, face);
+		return capability == MagicPower.CAPABILITY || super.hasCapability(capability, face);
 	}
 	
 	@Override
@@ -74,7 +73,7 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound tag)
 	{
-		magic_power.writeToNBT(tag);
+		magic_power.serialize(tag);
 		tag.setString("current_recipe", current_recipe);
 		tag.setInteger("burn_time", burn_time);
 		tag.setInteger("progress", progress);
@@ -86,7 +85,7 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable
 	public void readFromNBT(NBTTagCompound tag)
 	{
 		super.readFromNBT(tag);
-		magic_power.readFromNBT(tag);
+		magic_power.deserialize(tag);
 		current_recipe = tag.getString("current_recipe");
 		burn_time = tag.getInteger("burn_time");
 		progress = tag.getInteger("progress");

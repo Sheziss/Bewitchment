@@ -2,8 +2,8 @@ package com.bewitchment.common.item.tool;
 
 import java.util.List;
 
-import com.bewitchment.api.capability.transformation.TransformationCapability.Transformation;
-import com.bewitchment.api.capability.transformation.TransformationProvider;
+import com.bewitchment.api.capability.transformation.Transformation;
+import com.bewitchment.api.capability.transformation.Transformation.TransformationType;
 import com.bewitchment.common.item.util.ModItemArmor;
 
 import net.minecraft.client.resources.I18n;
@@ -34,6 +34,6 @@ public class ItemSilverArmor extends ModItemArmor
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack stack)
 	{
-		if (player.getCapability(TransformationProvider.TRANSFORMATION, null).getTransformation() == Transformation.WEREWOLF) player.attackEntityFrom(DamageSource.MAGIC, 1);
+		if (player.getCapability(Transformation.CAPABILITY, null).getTransformation() == TransformationType.WEREWOLF) player.attackEntityFrom(DamageSource.MAGIC, 1);
 	}
 }
