@@ -13,18 +13,6 @@ public class Transformation implements ICapabilitySerializable<NBTTagCompound>, 
 	@CapabilityInject(Transformation.class)
 	public static final Capability<Transformation> CAPABILITY = null;
 	
-	public enum TransformationType
-	{
-		NONE(true), WEREWOLF(false), VAMPIRE(false), SPECTRE(false), HUNTER(false);
-		
-		public final boolean canCrossSalt;
-		
-		private TransformationType(boolean canCrossSalt)
-		{
-			this.canCrossSalt = canCrossSalt;
-		}
-	}
-	
 	private TransformationType transformation;
 	
 	public TransformationType getTransformation()
@@ -73,5 +61,17 @@ public class Transformation implements ICapabilitySerializable<NBTTagCompound>, 
 	public void deserializeNBT(NBTTagCompound nbt)
 	{
 		CAPABILITY.getStorage().readNBT(CAPABILITY, this, null, nbt);
+	}
+	
+	public enum TransformationType
+	{
+		NONE(true), WEREWOLF(false), VAMPIRE(false), SPECTRE(false), HUNTER(false);
+		
+		public final boolean canCrossSalt;
+		
+		private TransformationType(boolean canCrossSalt)
+		{
+			this.canCrossSalt = canCrossSalt;
+		}
 	}
 }

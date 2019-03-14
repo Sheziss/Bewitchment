@@ -39,30 +39,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockSaltBarrier extends ModBlock
 {
-	protected enum EnumAttachPosition implements IStringSerializable
-	{
-		UP("up"), SIDE("side"), NONE("none");
-		
-		private final String name;
-		
-		EnumAttachPosition(String name)
-		{
-			this.name = name;
-		}
-		
-		@Override
-		public String getName()
-		{
-			return name;
-		}
-		
-		@Override
-		public String toString()
-		{
-			return name;
-		}
-	}
-	
 	public static final PropertyEnum<EnumAttachPosition> NORTH = PropertyEnum.<EnumAttachPosition>create("north", EnumAttachPosition.class), EAST = PropertyEnum.<EnumAttachPosition>create("east", EnumAttachPosition.class), SOUTH = PropertyEnum.<EnumAttachPosition>create("south", EnumAttachPosition.class), WEST = PropertyEnum.<EnumAttachPosition>create("west", EnumAttachPosition.class);
 	private static final AxisAlignedBB[] WIRE_AABB = { new AxisAlignedBB(0.1875, 0, 0.1875, 0.8125, 0.0625, 0.8125), new AxisAlignedBB(0.1875, 0, 0.1875, 0.8125, 0.0625, 1), new AxisAlignedBB(0, 0, 0.1875, 0.8125, 0.0625, 0.8125), new AxisAlignedBB(0, 0, 0.1875, 0.8125, 0.0625, 1), new AxisAlignedBB(0.1875, 0, 0, 0.8125, 0.0625, 0.8125), new AxisAlignedBB(0.1875, 0, 0, 0.8125, 0.0625, 1), new AxisAlignedBB(0, 0, 0, 0.8125, 0.0625, 0.8125), new AxisAlignedBB(0, 0, 0, 0.8125, 0.0625, 1), new AxisAlignedBB(0.1875, 0, 0.1875, 1, 0.0625, 0.8125), new AxisAlignedBB(0.1875, 0, 0.1875, 1, 0.0625, 1), new AxisAlignedBB(0, 0, 0.1875, 1, 0.0625, 0.8125), new AxisAlignedBB(0, 0, 0.1875, 1, 0.0625, 1), new AxisAlignedBB(0.1875, 0, 0, 1, 0.0625, 0.8125), new AxisAlignedBB(0.1875, 0, 0, 1, 0.0625, 1), new AxisAlignedBB(0, 0, 0, 1, 0.0625, 0.8125), new AxisAlignedBB(0, 0, 0, 1, 0.0625, 1) };
 	
@@ -222,5 +198,29 @@ public class BlockSaltBarrier extends ModBlock
 	protected BlockStateContainer createBlockState()
 	{
 		return new BlockStateContainer(this, NORTH, EAST, SOUTH, WEST);
+	}
+	
+	protected enum EnumAttachPosition implements IStringSerializable
+	{
+		UP("up"), SIDE("side"), NONE("none");
+		
+		private final String name;
+		
+		EnumAttachPosition(String name)
+		{
+			this.name = name;
+		}
+		
+		@Override
+		public String getName()
+		{
+			return name;
+		}
+		
+		@Override
+		public String toString()
+		{
+			return name;
+		}
 	}
 }
