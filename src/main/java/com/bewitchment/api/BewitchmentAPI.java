@@ -12,6 +12,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
 
@@ -29,12 +30,12 @@ public class BewitchmentAPI
 	/**
 	 * The Demon creature attribute.
 	 */
-	public static EnumCreatureAttribute DEMON;
+	public static EnumCreatureAttribute DEMON = EnumHelper.addCreatureAttribute("DEMON");
 	
 	/**
 	 * The Spirit creature attribute.
 	 */
-	public static EnumCreatureAttribute SPIRIT;
+	public static EnumCreatureAttribute SPIRIT = EnumHelper.addCreatureAttribute("SPIRIT");
 	
 	/**
 	 * Gets the scan value associated with a block

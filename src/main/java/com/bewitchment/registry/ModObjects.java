@@ -33,6 +33,7 @@ import com.bewitchment.common.block.util.ModBlockStairs;
 import com.bewitchment.common.block.util.ModBlockTrapdoor;
 import com.bewitchment.common.item.ItemCypressBroom;
 import com.bewitchment.common.item.ItemElderBroom;
+import com.bewitchment.common.item.ItemHeart;
 import com.bewitchment.common.item.ItemJuniperBroom;
 import com.bewitchment.common.item.ItemSalt;
 import com.bewitchment.common.item.ItemYewBroom;
@@ -334,7 +335,7 @@ public class ModObjects
 	public static final Item graveyard_dust = new ModItem("graveyard_dust");
 	public static final Item grilled_watermelon = new ModItemFood("grilled_watermelon", 4, 2.5f, false);
 	public static final Item golden_thread = new ModItem("golden_thread");
-	public static final Item heart = new ModItem("heart");
+	public static final Item heart = new ItemHeart();
 	public static final Item juniper_berries = new ModItemFood("juniper_berries", 1, 0.5f, false).setPotionEffect(new PotionEffect(MobEffects.POISON, 100, 0), 0.1f);
 	public static final Item lapis_powder = new ModItem("lapis_powder");
 	public static final Item lizard_leg = new ModItem("lizard_leg");
