@@ -1,6 +1,7 @@
 package com.bewitchment.common.item;
 
 import com.bewitchment.Bewitchment;
+import com.bewitchment.api.item.ItemBroom;
 import com.bewitchment.common.entity.misc.EntityBroom;
 
 import net.minecraft.entity.EntityLivingBase;

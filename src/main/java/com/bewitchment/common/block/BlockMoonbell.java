@@ -39,20 +39,6 @@ public class BlockMoonbell extends ModBlockBush implements IInfusionStabiliserEx
 	}
 	
 	@Override
-	@Optional.Method(modid = "thaumcraft")
-	public boolean canStabaliseInfusion(World world, BlockPos pos)
-	{
-		return true;
-	}
-	
-	@Override
-	@Optional.Method(modid = "thaumcraft")
-	public float getStabilizationAmount(World world, BlockPos pos)
-	{
-		return 2;
-	}
-	
-	@Override
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand)
 	{
@@ -67,6 +53,20 @@ public class BlockMoonbell extends ModBlockBush implements IInfusionStabiliserEx
 			world.setBlockToAir(pos);
 			for (int i = 0; i < 7; i++) world.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, pos.getX() + rand.nextDouble(), pos.getY() + rand.nextDouble(), pos.getZ() + rand.nextDouble(), rand.nextGaussian() * 0.1, rand.nextGaussian() * 0.1, rand.nextGaussian() * 0.1);
 		}
+	}
+	
+	@Override
+	@Optional.Method(modid = "thaumcraft")
+	public boolean canStabaliseInfusion(World world, BlockPos pos)
+	{
+		return true;
+	}
+	
+	@Override
+	@Optional.Method(modid = "thaumcraft")
+	public float getStabilizationAmount(World world, BlockPos pos)
+	{
+		return 2;
 	}
 	
 	@Override

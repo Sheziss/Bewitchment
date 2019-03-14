@@ -1,7 +1,7 @@
 package com.bewitchment.common.entity;
 
 import com.bewitchment.Bewitchment;
-import com.bewitchment.common.entity.util.FLEntityAnimal;
+import com.bewitchment.common.entity.util.ModEntityAnimal;
 
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -20,7 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class EntityNewt extends FLEntityAnimal
+public class EntityNewt extends ModEntityAnimal
 {
 	public EntityNewt(World world)
 	{

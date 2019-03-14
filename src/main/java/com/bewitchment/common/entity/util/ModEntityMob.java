@@ -3,7 +3,7 @@ package com.bewitchment.common.entity.util;
 import javax.annotation.Nullable;
 
 import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -12,13 +12,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
-public abstract class FLEntityAnimal extends EntityAnimal
+public abstract class ModEntityMob extends EntityMob
 {
-	public static final DataParameter<Integer> SKIN = EntityDataManager.createKey(FLEntityAnimal.class, DataSerializers.VARINT);
+	public static final DataParameter<Integer> SKIN = EntityDataManager.createKey(ModEntityMob.class, DataSerializers.VARINT);
 	
 	private final ResourceLocation loot_table;
 	
-	public FLEntityAnimal(World world, ResourceLocation loot_table_location)
+	public ModEntityMob(World world, ResourceLocation loot_table_location)
 	{
 		super(world);
 		this.loot_table = loot_table_location;
@@ -43,9 +43,12 @@ public abstract class FLEntityAnimal extends EntityAnimal
 	}
 	
 	@Override
+	protected abstract boolean isValidLightLevel();
+	
+	@Override
 	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData data)
     {
-		if (getSkinTypes() > 1) dataManager.set(SKIN, rand.nextInt(getSkinTypes()));
+		dataManager.set(SKIN, rand.nextInt(getSkinTypes()));
 		return super.onInitialSpawn(difficulty, data);
     }
 	

@@ -1,7 +1,7 @@
 package com.bewitchment.common.entity;
 
 import com.bewitchment.Bewitchment;
-import com.bewitchment.common.entity.util.FLEntityTameable;
+import com.bewitchment.common.entity.util.ModEntityTameable;
 import com.bewitchment.registry.ModObjects;
 
 import net.minecraft.entity.EntityAgeable;
@@ -22,7 +22,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class EntityLizard extends FLEntityTameable
+public class EntityLizard extends ModEntityTameable
 {
 	public EntityLizard(World world)
 	{

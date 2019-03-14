@@ -1,7 +1,7 @@
 package com.bewitchment.common.entity;
 
 import com.bewitchment.Bewitchment;
-import com.bewitchment.common.entity.util.FLEntityTameable;
+import com.bewitchment.common.entity.util.ModEntityTameable;
 import com.bewitchment.registry.ModSounds;
 import com.google.common.base.Predicate;
 
@@ -42,7 +42,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class EntityOwl extends FLEntityTameable
+public class EntityOwl extends ModEntityTameable
 {
 	public EntityOwl(World world)
 	{

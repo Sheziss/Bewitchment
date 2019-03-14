@@ -25,15 +25,15 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 
-public abstract class FLEntityTameable extends EntityTameable
+public abstract class ModEntityTameable extends EntityTameable
 {
-	public static final DataParameter<Integer> SKIN = EntityDataManager.createKey(FLEntityTameable.class, DataSerializers.VARINT);
+	public static final DataParameter<Integer> SKIN = EntityDataManager.createKey(ModEntityTameable.class, DataSerializers.VARINT);
 	
 	private final ResourceLocation loot_table;
 	
 	private final Set<Item> tame_items;
 	
-	public FLEntityTameable(World world, ResourceLocation loot_table_location, Item... tame_items)
+	public ModEntityTameable(World world, ResourceLocation loot_table_location, Item... tame_items)
 	{
 		super(world);
 		this.tame_items = Sets.newHashSet(tame_items);

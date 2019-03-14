@@ -3,7 +3,7 @@ package com.bewitchment.client.entity.render;
 import com.bewitchment.Bewitchment;
 import com.bewitchment.client.entity.model.ModelSnake;
 import com.bewitchment.common.entity.EntitySnake;
-import com.bewitchment.common.entity.util.FLEntityTameable;
+import com.bewitchment.common.entity.util.ModEntityTameable;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -31,7 +31,7 @@ public class RenderSnake extends RenderLiving<EntitySnake>
 	@Override
 	protected ResourceLocation getEntityTexture(EntitySnake entity)
 	{
-		return TEX[entity.getDataManager().get(FLEntityTameable.SKIN)];
+		return TEX[entity.getDataManager().get(ModEntityTameable.SKIN)];
 	}
 	
 	@Override

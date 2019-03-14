@@ -1,7 +1,7 @@
 package com.bewitchment.common.entity;
 
 import com.bewitchment.Bewitchment;
-import com.bewitchment.common.entity.util.FLEntityTameable;
+import com.bewitchment.common.entity.util.ModEntityTameable;
 import com.bewitchment.registry.ModObjects;
 import com.google.common.base.Predicate;
 
@@ -39,7 +39,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class EntitySnake extends FLEntityTameable
+public class EntitySnake extends ModEntityTameable
 {
 	public int animation_timer = 0;
 	private int milk_timer = 0;

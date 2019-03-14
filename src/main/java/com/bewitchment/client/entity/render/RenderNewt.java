@@ -3,7 +3,7 @@ package com.bewitchment.client.entity.render;
 import com.bewitchment.Bewitchment;
 import com.bewitchment.client.entity.model.ModelNewt;
 import com.bewitchment.common.entity.EntityNewt;
-import com.bewitchment.common.entity.util.FLEntityAnimal;
+import com.bewitchment.common.entity.util.ModEntityAnimal;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -29,7 +29,7 @@ public class RenderNewt extends RenderLiving<EntityNewt>
 	@Override
 	protected ResourceLocation getEntityTexture(EntityNewt entity)
 	{
-		return TEX[entity.getDataManager().get(FLEntityAnimal.SKIN)];
+		return TEX[entity.getDataManager().get(ModEntityAnimal.SKIN)];
 	}
 	
 	@Override

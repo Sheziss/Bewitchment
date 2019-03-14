@@ -2,8 +2,8 @@ package com.bewitchment.common.handler;
 
 import java.util.Random;
 
+import com.bewitchment.api.item.ItemBroom;
 import com.bewitchment.common.entity.misc.EntityBroom;
-import com.bewitchment.common.item.ItemBroom;
 import com.bewitchment.registry.ModObjects;
 
 import net.minecraft.entity.item.EntityItem;

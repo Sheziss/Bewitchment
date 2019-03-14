@@ -1,8 +1,8 @@
 package com.bewitchment.client.entity.render;
 
+import com.bewitchment.api.item.ItemBroom;
 import com.bewitchment.client.entity.model.ModelBroom;
 import com.bewitchment.common.entity.misc.EntityBroom;
-import com.bewitchment.common.item.ItemBroom;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;

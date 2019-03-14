@@ -1,4 +1,4 @@
-package com.bewitchment.common.item;
+package com.bewitchment.api.item;
 
 import java.util.ArrayList;
 import java.util.List;

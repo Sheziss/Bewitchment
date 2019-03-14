@@ -3,7 +3,7 @@ package com.bewitchment.common.entity.misc;
 import java.lang.reflect.Field;
 
 import com.bewitchment.api.capability.magicpower.MagicPowerProvider;
-import com.bewitchment.common.item.ItemBroom;
+import com.bewitchment.api.item.ItemBroom;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
