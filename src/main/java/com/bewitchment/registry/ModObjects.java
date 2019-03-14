@@ -27,6 +27,7 @@ import com.bewitchment.common.block.util.ModBlockFence;
 import com.bewitchment.common.block.util.ModBlockFenceGate;
 import com.bewitchment.common.block.util.ModBlockLeaves;
 import com.bewitchment.common.block.util.ModBlockPillar;
+import com.bewitchment.common.block.util.ModBlockPressurePlate;
 import com.bewitchment.common.block.util.ModBlockSapling;
 import com.bewitchment.common.block.util.ModBlockSlab;
 import com.bewitchment.common.block.util.ModBlockStairs;
@@ -52,6 +53,7 @@ import com.bewitchment.common.item.tool.ItemSilverHoe;
 import com.bewitchment.common.item.tool.ItemSilverPickaxe;
 import com.bewitchment.common.item.tool.ItemSilverSpade;
 import com.bewitchment.common.item.tool.ItemSilverSword;
+import com.bewitchment.common.item.util.ModBlockButton;
 import com.bewitchment.common.item.util.ModItem;
 import com.bewitchment.common.item.util.ModItemDoor;
 import com.bewitchment.common.item.util.ModItemFood;
@@ -204,17 +206,26 @@ public class ModObjects
 	public static final Block trapdoor_juniper = new ModBlockTrapdoor("trapdoor_juniper", planks_juniper);
 	public static final Block trapdoor_yew = new ModBlockTrapdoor("trapdoor_yew", planks_yew);
 	
-	public static final Block fence_gate_cypress = new ModBlockFenceGate("fence_gate_cypress", planks_cypress);
-	public static final Block fence_gate_elder = new ModBlockFenceGate("fence_gate_elder", planks_elder);
-	public static final Block fence_gate_juniper = new ModBlockFenceGate("fence_gate_juniper", planks_juniper);
-	public static final Block fence_gate_yew = new ModBlockFenceGate("fence_gate_yew", planks_yew);
+	public static final Block fence_gate_cypress = new ModBlockFenceGate("fence_gate_cypress", planks_cypress, "fenceGateWood");
+	public static final Block fence_gate_elder = new ModBlockFenceGate("fence_gate_elder", planks_elder, "fenceGateWood");
+	public static final Block fence_gate_juniper = new ModBlockFenceGate("fence_gate_juniper", planks_juniper, "fenceGateWood");
+	public static final Block fence_gate_yew = new ModBlockFenceGate("fence_gate_yew", planks_yew, "fenceGateWood");
 	
-	public static final Block fence_cypress = new ModBlockFence("fence_cypress", planks_cypress);
-	public static final Block fence_elder = new ModBlockFence("fence_elder", planks_elder);
-	public static final Block fence_juniper = new ModBlockFence("fence_juniper", planks_juniper);
-	public static final Block fence_yew = new ModBlockFence("fence_yew", planks_yew);
+	public static final Block fence_cypress = new ModBlockFence("fence_cypress", planks_cypress, "fenceWood");
+	public static final Block fence_elder = new ModBlockFence("fence_elder", planks_elder, "fenceWood");
+	public static final Block fence_juniper = new ModBlockFence("fence_juniper", planks_juniper, "fenceWood");
+	public static final Block fence_yew = new ModBlockFence("fence_yew", planks_yew, "fenceWood");
 	public static final Block fence_perpetual_ice = new ModBlockFence("fence_perpetual_ice", perpetual_ice);
 	
+	public static final Block pressure_plate_cypress = new ModBlockPressurePlate("pressure_plate_cypress", planks_cypress);
+	public static final Block pressure_plate_elder = new ModBlockPressurePlate("pressure_plate_elder", planks_elder);
+	public static final Block pressure_plate_juniper = new ModBlockPressurePlate("pressure_plate_juniper", planks_juniper);
+	public static final Block pressure_plate_yew = new ModBlockPressurePlate("pressure_plate_yew", planks_yew);
+	
+	public static final Block button_cypress = new ModBlockButton("button_cypress", planks_cypress);
+	public static final Block button_elder = new ModBlockButton("button_elder", planks_elder);
+	public static final Block button_juniper = new ModBlockButton("button_juniper", planks_juniper);
+	public static final Block button_yew = new ModBlockButton("button_yew", planks_yew);
 	
 	public static final ArmorMaterial ARMOR_COLD_IRON = EnumHelper.addArmorMaterial("cold_iron", Bewitchment.MOD_ID + ":" + "cold_iron", 18, new int[] {2, 6, 7, 2}, 8, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.45f);
 	public static final ArmorMaterial ARMOR_SILVER = EnumHelper.addArmorMaterial("silver", Bewitchment.MOD_ID + ":" + "silver", 12, new int[] {1, 4, 5, 2}, 22, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 1.5f);

@@ -88,6 +88,16 @@ tile.bewitchment:fence_juniper.name=Juniper Fence
 tile.bewitchment:fence_yew.name=Yew Fence
 tile.bewitchment:fence_perpetual_ice.name=Perpetual Ice Fence
 
+tile.bewitchment:pressure_plate_cypress.name=Cypress Pressure Plate
+tile.bewitchment:pressure_plate_elder.name=Elder Pressure Plate
+tile.bewitchment:pressure_plate_juniper.name=Juniper Pressure Plate
+tile.bewitchment:pressure_plate_yew.name=Yew Pressure Plate
+
+tile.bewitchment:button_cypress.name=Cypress Button
+tile.bewitchment:button_elder.name=Elder Button
+tile.bewitchment:button_juniper.name=Juniper Button
+tile.bewitchment:button_yew.name=Yew Button
+
 #Items
 item.bewitchment:helmet_cold_iron.name=Cold Iron Helmet
 item.bewitchment:chestplate_cold_iron.name=Cold Iron Chestplate

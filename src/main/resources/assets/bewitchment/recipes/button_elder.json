@@ -1,0 +1,13 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients":
+	[
+		{
+			"item": "bewitchment:planks_elder"
+		}
+	],
+	"result":
+	{
+		"item": "bewitchment:button_elder"
+	}
+}
