@@ -11,8 +11,8 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 
 public class DistilleryRecipe extends IForgeRegistryEntry.Impl<DistilleryRecipe>
 {
-	private ItemStack[] input , output;
-	private int running_power, time;
+	private final ItemStack[] input, output;
+	private final int running_power, time;
 	
 	public DistilleryRecipe(String name, ItemStack[] input, ItemStack[] output, int running_power, int time)
 	{
@@ -61,7 +61,7 @@ public class DistilleryRecipe extends IForgeRegistryEntry.Impl<DistilleryRecipe>
 		for (ItemStack stack : inputStacks) if (stack.getCount() > 0) nonEmpty++;
 		if (nonEmpty != getInput().length) return false;
 		boolean[] found = new boolean[getInput().length];
-		ArrayList<ItemStack> comp = new ArrayList<ItemStack>(inputStacks);
+		ArrayList<ItemStack> comp = new ArrayList<>(inputStacks);
 		for (int i = 0; i < getInput().length; i++)
 		{
 			for (int j = 0; j < comp.size(); j++)

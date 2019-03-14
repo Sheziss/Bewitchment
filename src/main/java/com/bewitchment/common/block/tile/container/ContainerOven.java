@@ -1,9 +1,9 @@
 package com.bewitchment.common.block.tile.container;
 
+import com.bewitchment.common.block.tile.container.util.FLContainer;
+import com.bewitchment.common.block.tile.container.util.FLSlot;
 import com.bewitchment.common.block.tile.entity.TileEntityOven;
 
-import moriyashiine.froglib.common.block.tile.container.FLContainer;
-import moriyashiine.froglib.common.block.tile.container.FLSlot;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.items.CapabilityItemHandler;

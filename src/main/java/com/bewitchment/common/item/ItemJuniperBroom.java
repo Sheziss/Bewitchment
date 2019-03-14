@@ -11,7 +11,7 @@ public class ItemJuniperBroom extends ItemBroom
 {
 	public ItemJuniperBroom()
 	{
-		super(Bewitchment.MOD_ID, "broom_juniper", Bewitchment.proxy.tab, new ResourceLocation(Bewitchment.MOD_ID, "textures/entity/broom_juniper.png"));
+		super("broom_juniper", Bewitchment.proxy.tab, new ResourceLocation(Bewitchment.MOD_ID, "textures/entity/broom_juniper.png"));
 	}
 	
 	@Override
@@ -24,7 +24,7 @@ public class ItemJuniperBroom extends ItemBroom
 			{
 				Vec3d horizontal_axis = look.crossProduct(new Vec3d(0, 1, 0)).normalize().scale(-strafe / 10);
 				broom.motionX += front * (horizontal_axis.x + look.x) / 20;
-				broom.motionY += (up / 80 + front * (horizontal_axis.y + look.y) / 80);
+				broom.motionY += up / 80 + front * (horizontal_axis.y + look.y) / 80;
 				broom.motionZ += front * (horizontal_axis.z + look.z) / 20;
 				if (broom.motionX * broom.motionX + broom.motionY * broom.motionY + broom.motionZ * broom.motionZ > 1)
 				{

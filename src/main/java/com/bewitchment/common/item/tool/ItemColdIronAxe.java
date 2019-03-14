@@ -2,10 +2,9 @@ package com.bewitchment.common.item.tool;
 
 import java.util.List;
 
-import com.bewitchment.Bewitchment;
 import com.bewitchment.api.BewitchmentAPI;
+import com.bewitchment.common.item.util.ModItemAxe;
 
-import moriyashiine.froglib.common.item.FLItemAxe;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
@@ -20,11 +19,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemColdIronAxe extends FLItemAxe
+public class ItemColdIronAxe extends ModItemAxe
 {
 	public ItemColdIronAxe(ToolMaterial mat)
 	{
-		super(Bewitchment.MOD_ID, "axe_cold_iron", Bewitchment.proxy.tab, mat);
+		super("axe_cold_iron", mat);
 	}
 	
 	@Override
@@ -41,7 +40,7 @@ public class ItemColdIronAxe extends FLItemAxe
 		{
 			if (target.getCreatureAttribute() == BewitchmentAPI.DEMON || target.getCreatureAttribute() == BewitchmentAPI.SPIRIT || target instanceof EntityBlaze || target instanceof EntityEnderman || target instanceof EntityVex)
 			{
-				target.attackEntityFrom(attacker instanceof EntityPlayer ? DamageSource.causePlayerDamage((EntityPlayer)attacker) : DamageSource.causeMobDamage(attacker), 12);
+				target.attackEntityFrom(attacker instanceof EntityPlayer ? DamageSource.causePlayerDamage((EntityPlayer) attacker) : DamageSource.causeMobDamage(attacker), 12);
 				stack.damageItem(5, attacker);
 			}
 			else return super.hitEntity(stack, target, attacker);

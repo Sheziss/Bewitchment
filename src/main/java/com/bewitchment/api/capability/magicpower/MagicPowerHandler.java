@@ -29,6 +29,14 @@ public class MagicPowerHandler
 	}
 	
 	@SubscribeEvent
+	public void clonePlayer(PlayerEvent.Clone event)
+	{
+		MagicPowerCapability oldC = event.getOriginal().getCapability(MagicPowerProvider.CAPABILITY, null), newC = event.getEntityPlayer().getCapability(MagicPowerProvider.CAPABILITY, null);
+		newC.setAmount(oldC.getAmount());
+		newC.setMaxAmount(oldC.getMaxAmount());
+	}
+	
+	@SubscribeEvent
 	public void livingTick(LivingEvent.LivingUpdateEvent event)
 	{
 		if (event.getEntityLiving() instanceof EntityPlayer)
@@ -40,13 +48,5 @@ public class MagicPowerHandler
 				cap.setMaxAmount(800);
 			}
 		}
-	}
-	
-	@SubscribeEvent
-	public void clonePlayer(PlayerEvent.Clone event)
-	{
-		MagicPowerCapability oldC = event.getOriginal().getCapability(MagicPowerProvider.CAPABILITY, null), newC = event.getEntityPlayer().getCapability(MagicPowerProvider.CAPABILITY, null);
-		newC.setAmount(oldC.getAmount());
-		newC.setMaxAmount(oldC.getMaxAmount());
 	}
 }

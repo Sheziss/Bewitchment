@@ -2,9 +2,8 @@ package com.bewitchment.common.item.tool;
 
 import java.util.List;
 
-import com.bewitchment.Bewitchment;
+import com.bewitchment.common.item.util.ModItemAxe;
 
-import moriyashiine.froglib.common.item.FLItemAxe;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,11 +16,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemSilverAxe extends FLItemAxe
+public class ItemSilverAxe extends ModItemAxe
 {
 	public ItemSilverAxe(ToolMaterial mat)
 	{
-		super(Bewitchment.MOD_ID, "axe_silver", Bewitchment.proxy.tab, mat);
+		super("axe_silver", mat);
 	}
 	
 	@Override
@@ -38,7 +37,7 @@ public class ItemSilverAxe extends FLItemAxe
 		{
 			if (target.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
 			{
-				target.attackEntityFrom(attacker instanceof EntityPlayer ? DamageSource.causePlayerDamage((EntityPlayer)attacker) : DamageSource.causeMobDamage(attacker), 12);
+				target.attackEntityFrom(attacker instanceof EntityPlayer ? DamageSource.causePlayerDamage((EntityPlayer) attacker) : DamageSource.causeMobDamage(attacker), 12);
 				stack.damageItem(25, attacker);
 			}
 			else return super.hitEntity(stack, target, attacker);

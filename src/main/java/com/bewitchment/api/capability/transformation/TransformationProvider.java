@@ -11,18 +11,18 @@ public class TransformationProvider implements ICapabilitySerializable<NBTTagCom
 	@CapabilityInject(TransformationCapability.class)
 	public static final Capability<TransformationCapability> TRANSFORMATION = null;
 	
-	private TransformationCapability instance = TRANSFORMATION.getDefaultInstance();
-	
-	@Override
-	public boolean hasCapability(Capability<?> capability, EnumFacing facing)
-	{
-		return capability == TRANSFORMATION;
-	}
+	private final TransformationCapability instance = TRANSFORMATION.getDefaultInstance();
 	
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing)
 	{
 		return capability == TRANSFORMATION ? TRANSFORMATION.cast(instance) : null;
+	}
+	
+	@Override
+	public boolean hasCapability(Capability<?> capability, EnumFacing facing)
+	{
+		return capability == TRANSFORMATION;
 	}
 	
 	@Override

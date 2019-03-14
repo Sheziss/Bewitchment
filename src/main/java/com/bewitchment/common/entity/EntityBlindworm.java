@@ -1,8 +1,8 @@
 package com.bewitchment.common.entity;
 
 import com.bewitchment.Bewitchment;
+import com.bewitchment.common.entity.util.FLEntityAnimal;
 
-import moriyashiine.froglib.common.entity.FLEntityAnimal;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIFollowParent;
@@ -22,23 +22,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 public class EntityBlindworm extends FLEntityAnimal
-{	
+{
 	public EntityBlindworm(World world)
 	{
 		super(world, new ResourceLocation(Bewitchment.MOD_ID, "blindworm"));
 		setSize(1, 0.3f);
-	}
-	
-	@Override
-	public EntityAgeable createChild(EntityAgeable ageable)
-	{
-		return new EntityBlindworm(world);
-	}
-	
-	@Override
-	public boolean isBreedingItem(ItemStack stack)
-	{
-		return stack.getItem() == Items.SPIDER_EYE;
 	}
 	
 	@Override
@@ -49,9 +37,21 @@ public class EntityBlindworm extends FLEntityAnimal
 	}
 	
 	@Override
+	public EntityAgeable createChild(EntityAgeable ageable)
+	{
+		return new EntityBlindworm(world);
+	}
+	
+	@Override
 	public int getMaxSpawnedInChunk()
 	{
 		return 2;
+	}
+	
+	@Override
+	public boolean isBreedingItem(ItemStack stack)
+	{
+		return stack.getItem() == Items.SPIDER_EYE;
 	}
 	
 	@Override

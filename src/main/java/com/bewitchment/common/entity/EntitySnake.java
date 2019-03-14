@@ -1,9 +1,10 @@
 package com.bewitchment.common.entity;
 
 import com.bewitchment.Bewitchment;
-import com.bewitchment.common.registry.ModItems;
+import com.bewitchment.common.entity.util.FLEntityTameable;
+import com.bewitchment.registry.ModObjects;
+import com.google.common.base.Predicate;
 
-import moriyashiine.froglib.common.entity.FLEntityTameable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
@@ -50,33 +51,15 @@ public class EntitySnake extends FLEntityTameable
 	}
 	
 	@Override
-	public EntityAgeable createChild(EntityAgeable ageable)
-	{
-		return new EntitySnake(world);
-	}
-	
-	@Override
-	public boolean isBreedingItem(ItemStack stack)
-	{
-		return stack.getItem() == Items.RABBIT;
-	}
-	
-	@Override
-	protected int getSkinTypes()
-	{
-		return 6;
-	}
-	
-	@Override
 	public boolean attackEntityAsMob(Entity entity)
-    {
+	{
 		if (entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue()))
 		{
-			this.applyEnchantments(this, entity);
+			applyEnchantments(this, entity);
 			if (entity instanceof EntityLivingBase) ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.POISON, 2000, 1, false, false));
 		}
 		return super.attackEntityAsMob(entity);
-    }
+	}
 	
 	@Override
 	public boolean attackEntityFrom(DamageSource source, float amount)
@@ -93,38 +76,28 @@ public class EntitySnake extends FLEntityTameable
 	}
 	
 	@Override
-	public boolean processInteract(EntityPlayer player, EnumHand hand)
+	public EntityAgeable createChild(EntityAgeable ageable)
 	{
-		if (getAttackTarget() == null || getAttackTarget().isDead || getRevengeTarget() == null || getRevengeTarget().isDead)
-		{
-			ItemStack stack = player.getHeldItem(hand);
-			if (stack.getItem() == ModItems.glass_jar)
-			{
-				if (milk_timer == 0 && getRNG().nextBoolean())
-				{
-					if (getGrowingAge() >= 0 && !player.isCreative())
-					{
-						stack.shrink(1);
-						if (stack.isEmpty()) player.setHeldItem(hand, new ItemStack(ModItems.snake_venom));
-						else if (!player.inventory.addItemStackToInventory(new ItemStack(ModItems.snake_venom))) player.dropItem(new ItemStack(ModItems.snake_venom), false);
-						milk_timer = 3600;
-						return true;
-					}
-					else
-					{
-						setAttackTarget(player);
-						setRevengeTarget(player);
-					}
-				}
-			}
-		}
-		return super.processInteract(player, hand);
+		return new EntitySnake(world);
 	}
 	
 	@Override
 	public int getMaxSpawnedInChunk()
 	{
 		return 2;
+	}
+	
+	@Override
+	public boolean isBreedingItem(ItemStack stack)
+	{
+		return stack.getItem() == Items.RABBIT;
+	}
+	
+	@Override
+	public void onLivingUpdate()
+	{
+		super.onLivingUpdate();
+		if (milk_timer > 0) milk_timer--;
 	}
 	
 	@Override
@@ -146,10 +119,54 @@ public class EntitySnake extends FLEntityTameable
 	}
 	
 	@Override
-	public void onLivingUpdate()
+	public boolean processInteract(EntityPlayer player, EnumHand hand)
 	{
-		super.onLivingUpdate();
-		if (milk_timer > 0) milk_timer--;
+		if (getAttackTarget() == null || getAttackTarget().isDead || getRevengeTarget() == null || getRevengeTarget().isDead)
+		{
+			ItemStack stack = player.getHeldItem(hand);
+			if (stack.getItem() == ModObjects.glass_jar)
+			{
+				if (milk_timer == 0 && getRNG().nextBoolean())
+				{
+					if (getGrowingAge() >= 0 && !player.isCreative())
+					{
+						stack.shrink(1);
+						if (stack.isEmpty()) player.setHeldItem(hand, new ItemStack(ModObjects.snake_venom));
+						else if (!player.inventory.addItemStackToInventory(new ItemStack(ModObjects.snake_venom))) player.dropItem(new ItemStack(ModObjects.snake_venom), false);
+						milk_timer = 3600;
+						return true;
+					}
+					else
+					{
+						setAttackTarget(player);
+						setRevengeTarget(player);
+					}
+				}
+			}
+		}
+		return super.processInteract(player, hand);
+	}
+	
+	@Override
+	protected int getSkinTypes()
+	{
+		return 6;
+	}
+	
+	@Override
+	public void writeEntityToNBT(NBTTagCompound tag)
+	{
+		super.writeEntityToNBT(tag);
+		tag.setInteger("animation_timer", animation_timer);
+		tag.setInteger("milk_timer", milk_timer);
+	}
+	
+	@Override
+	public void readEntityFromNBT(NBTTagCompound tag)
+	{
+		super.readEntityFromNBT(tag);
+		animation_timer = tag.getInteger("animation_timer");
+		milk_timer = tag.getInteger("milk_timer");
 	}
 	
 	@Override
@@ -174,27 +191,11 @@ public class EntitySnake extends FLEntityTameable
 		tasks.addTask(3, new EntityAIFollowParent(this, getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()));
 		tasks.addTask(3, new EntityAIWander(this, getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue() * 2 / 3));
 		tasks.addTask(3, new EntityAILookIdle(this));
-        tasks.addTask(4, new EntityAIFollowOwner(this, 0.5, 2, 24));
-        targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
+		tasks.addTask(4, new EntityAIFollowOwner(this, 0.5, 2, 24));
+		targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
 		targetTasks.addTask(0, new EntityAIOwnerHurtByTarget(this));
 		targetTasks.addTask(1, new EntityAIOwnerHurtTarget(this));
-		targetTasks.addTask(2, new EntityAITargetNonTamed<>(this, EntityPlayer.class, true, e -> e.getDistanceSq(this) < 1));
-		targetTasks.addTask(3, new EntityAITargetNonTamed<EntityLivingBase>(this, EntityLivingBase.class, false, e -> e instanceof EntityBlindworm || e instanceof EntityChicken || e instanceof EntityLizard || e instanceof EntityRabbit));
-	}
-	
-	@Override
-	public void writeEntityToNBT(NBTTagCompound tag)
-	{
-		super.writeEntityToNBT(tag);
-		tag.setInteger("animation_timer", animation_timer);
-		tag.setInteger("milk_timer", milk_timer);
-	}
-	
-	@Override
-	public void readEntityFromNBT(NBTTagCompound tag)
-	{
-		super.readEntityFromNBT(tag);
-		animation_timer = tag.getInteger("animation_timer");
-		milk_timer = tag.getInteger("milk_timer");
+		targetTasks.addTask(2, new EntityAITargetNonTamed<>(this, EntityPlayer.class, true, new Predicate<EntityPlayer>() {@Override public boolean apply(EntityPlayer e) {return e.getDistanceSq(EntitySnake.this) < 1;}}));
+		targetTasks.addTask(3, new EntityAITargetNonTamed<>(this, EntityLivingBase.class, false, new Predicate<EntityLivingBase>() {@Override public boolean apply(EntityLivingBase e) {return e instanceof EntityBlindworm || e instanceof EntityChicken || e instanceof EntityLizard || e instanceof EntityRabbit;}}));
 	}
 }

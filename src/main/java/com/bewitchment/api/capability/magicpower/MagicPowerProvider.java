@@ -11,18 +11,18 @@ public class MagicPowerProvider implements ICapabilitySerializable<NBTTagCompoun
 	@CapabilityInject(MagicPowerCapability.class)
 	public static final Capability<MagicPowerCapability> CAPABILITY = null;
 	
-	private MagicPowerCapability instance = CAPABILITY.getDefaultInstance();
-	
-	@Override
-	public boolean hasCapability(Capability<?> capability, EnumFacing facing)
-	{
-		return capability == CAPABILITY;
-	}
+	private final MagicPowerCapability instance = CAPABILITY.getDefaultInstance();
 	
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing)
 	{
 		return capability == CAPABILITY ? CAPABILITY.cast(instance) : null;
+	}
+	
+	@Override
+	public boolean hasCapability(Capability<?> capability, EnumFacing facing)
+	{
+		return capability == CAPABILITY;
 	}
 	
 	@Override

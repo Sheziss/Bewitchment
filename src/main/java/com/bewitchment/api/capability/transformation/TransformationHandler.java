@@ -2,7 +2,7 @@ package com.bewitchment.api.capability.transformation;
 
 import com.bewitchment.Bewitchment;
 import com.bewitchment.api.capability.transformation.TransformationCapability.Transformation;
-import com.bewitchment.common.registry.ModBlocks;
+import com.bewitchment.registry.ModObjects;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,12 +25,6 @@ public class TransformationHandler
 	}
 	
 	@SubscribeEvent
-	public void livingTick(LivingEvent.LivingUpdateEvent event)
-	{
-		if (event.getEntityLiving() instanceof EntityPlayer && ((EntityPlayer)event.getEntityLiving()).getCapability(TransformationProvider.TRANSFORMATION, null).getTransformation() == null) event.getEntityLiving().getCapability(TransformationProvider.TRANSFORMATION, null).setTransformation(Transformation.NONE);
-	}
-	
-	@SubscribeEvent
 	public void clonePlayer(PlayerEvent.Clone event)
 	{
 		event.getEntityPlayer().getCapability(TransformationProvider.TRANSFORMATION, null).setTransformation(event.getOriginal().getCapability(TransformationProvider.TRANSFORMATION, null).getTransformation());
@@ -39,6 +33,12 @@ public class TransformationHandler
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void breakBlock(BlockEvent.BreakEvent event)
 	{
-		if (!event.getPlayer().getCapability(TransformationProvider.TRANSFORMATION, null).getTransformation().canCrossSalt && event.getState().getBlock() == ModBlocks.salt_barrier || event.getPlayer().world.getBlockState(event.getPos().up()).getBlock() == ModBlocks.salt_barrier) event.setCanceled(true);
+		if (!event.getPlayer().getCapability(TransformationProvider.TRANSFORMATION, null).getTransformation().canCrossSalt && event.getState().getBlock() == ModObjects.salt_barrier || event.getPlayer().world.getBlockState(event.getPos().up()).getBlock() == ModObjects.salt_barrier) event.setCanceled(true);
+	}
+	
+	@SubscribeEvent
+	public void livingTick(LivingEvent.LivingUpdateEvent event)
+	{
+		if (event.getEntityLiving() instanceof EntityPlayer && ((EntityPlayer) event.getEntityLiving()).getCapability(TransformationProvider.TRANSFORMATION, null).getTransformation() == null) event.getEntityLiving().getCapability(TransformationProvider.TRANSFORMATION, null).setTransformation(Transformation.NONE);
 	}
 }

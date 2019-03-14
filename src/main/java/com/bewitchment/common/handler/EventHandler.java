@@ -4,7 +4,7 @@ import java.util.Random;
 
 import com.bewitchment.common.entity.misc.EntityBroom;
 import com.bewitchment.common.item.ItemBroom;
-import com.bewitchment.common.registry.ModBlocks;
+import com.bewitchment.registry.ModObjects;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,8 +23,14 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
-public class EventHandler
+public class EventHandler 
 {
+	@SubscribeEvent
+	public void livingUpdate(LivingEvent.LivingUpdateEvent event)
+	{
+		if (event.getEntityLiving().world.getBlockState(event.getEntityLiving().getPosition()).getBlock() == ModObjects.honey.getBlock()) event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 60));
+	}
+	
 	@SubscribeEvent
 	public void playerTick(PlayerTickEvent event)
 	{
@@ -34,26 +40,17 @@ public class EventHandler
 			if (world.getTotalWorldTime() % 20 == 0 && BiomeDictionary.hasType(world.getBiome(event.player.getPosition()), Type.FOREST))
 			{
 				Random rand = event.player.getRNG();
-				if (world.provider.getDimension() == 0 && world.provider.getMoonPhase(world.getWorldTime()) == 4 && !world.isDaytime() && event.player.getRNG().nextDouble() < 0.2)
+				if (world.provider.getDimension() == 0 && world.provider.getMoonPhase(world.getWorldTime()) == 4 && !world.isDaytime() && rand.nextDouble() < 0.2)
 				{
 					MutableBlockPos pos = new MutableBlockPos(event.player.getPosition().add((rand.nextInt(7) - 3) * 10, 0, (rand.nextInt(7) - 3) * 10));
 					int y = pos.getY();
 					for (int i = -5; i <= 5; i++)
 					{
 						pos.setY(y + i);
-						if ((world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos)) && world.getBlockState(pos.down()).getBlock() == Blocks.DIRT) world.setBlockState(pos, ModBlocks.moonbell.getDefaultState());
+						if ((world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos)) && world.getBlockState(pos.down()).getBlock() == Blocks.DIRT) world.setBlockState(pos, ModObjects.moonbell.getDefaultState());
 					}
 				}
 			}
-		}
-	}
-	
-	@SubscribeEvent
-	public void livingUpdate(LivingEvent.LivingUpdateEvent event)
-	{
-		if (event.getEntityLiving().world.getBlockState(event.getEntityLiving().getPosition()).getBlock() == ModBlocks.honey.getBlock())
-		{
-			event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 60));
 		}
 	}
 	

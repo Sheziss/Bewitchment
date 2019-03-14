@@ -1,11 +1,12 @@
 package com.bewitchment.common.block.tile.entity;
 
-import moriyashiine.froglib.common.block.tile.FLTileEntity;
+import com.bewitchment.common.block.tile.entity.util.FLTileEntity;
+
 import net.minecraft.item.ItemStack;
 
 public class TileEntityPlacedItem extends FLTileEntity
 {
-	public TileEntityPlacedItem() 
+	public TileEntityPlacedItem()
 	{
 		super(1);
 	}

@@ -22,8 +22,8 @@ public class ModelSnake extends ModelBase
 	public ModelRenderer upperJawR;
 	public ModelRenderer lowerJaw;
 	public ModelRenderer eyes;
-	public ModelRenderer lFang;
-	public ModelRenderer rFang;
+	public ModelRenderer lfang;
+	public ModelRenderer rfang;
 	public ModelRenderer tail01;
 	public ModelRenderer tail01b;
 	public ModelRenderer tail02;
@@ -34,99 +34,99 @@ public class ModelSnake extends ModelBase
 	
 	public ModelSnake()
 	{
-		this.textureWidth = 64;
-		this.textureHeight = 64;
-		this.tongue = new ModelRenderer(this, 25, 0);
-		this.tongue.setRotationPoint(0.0F, 0.4F, -2.0F);
-		this.tongue.addBox(-1.5F, 0.0F, -5.0F, 3, 0, 7, 0.0F);
-		this.tail03b = new ModelRenderer(this, 22, 55);
-		this.tail03b.setRotationPoint(0.0F, 0.5F, 0.0F);
-		this.tail03b.addBox(-1.5F, 0.0F, -1.0F, 3, 1, 7, 0.0F);
-		this.upperJawR = new ModelRenderer(this, 17, 0);
-		this.upperJawR.mirror = true;
-		this.upperJawR.setRotationPoint(-1.9F, -0.9F, -3.0F);
-		this.upperJawR.addBox(-0.5F, -1.0F, -4.07F, 2, 2, 5, 0.0F);
-		this.setRotateAngle(upperJawR, 0.0F, -0.19198621771937624F, 0.0F);
-		this.upperJawL = new ModelRenderer(this, 17, 0);
-		this.upperJawL.setRotationPoint(0.9F, -0.9F, -3.0F);
-		this.upperJawL.addBox(-0.5F, -1.0F, -3.7F, 2, 2, 5, 0.0F);
-		this.setRotateAngle(upperJawL, 0.0F, 0.19198621771937624F, 0.0F);
-		this.tail03 = new ModelRenderer(this, 23, 45);
-		this.tail03.setRotationPoint(0.0F, 0.0F, 5.9F);
-		this.tail03.addBox(-1.5F, -1.1F, -1.0F, 3, 2, 7, 0.0F);
-		this.lFang = new ModelRenderer(this, 0, 0);
-		this.lFang.setRotationPoint(1.4F, -0.5F, -3.6F);
-		this.lFang.addBox(0.0F, 0.0F, -0.5F, 0, 2, 1, 0.0F);
-		this.eyes = new ModelRenderer(this, 40, 0);
-		this.eyes.setRotationPoint(0.0F, -2.0F, -3.9F);
-		this.eyes.addBox(-2.0F, -0.5F, -0.5F, 4, 1, 1, 0.0F);
-		this.tail01b = new ModelRenderer(this, 46, 18);
-		this.tail01b.setRotationPoint(0.0F, 0.0F, 0.0F);
-		this.tail01b.addBox(-2.3F, -1.5F, 0.5F, 2, 3, 7, 0.0F);
-		this.tail05 = new ModelRenderer(this, 43, 54);
-		this.tail05.setRotationPoint(0.0F, 0.5F, 7.8F);
-		this.tail05.addBox(-0.5F, -0.5F, -0.6F, 1, 1, 8, 0.0F);
-		this.rFang = new ModelRenderer(this, 0, 0);
-		this.rFang.setRotationPoint(-1.4F, -0.5F, -3.6F);
-		this.rFang.addBox(0.0F, 0.0F, -0.5F, 0, 2, 1, 0.0F);
-		this.body01 = new ModelRenderer(this, 0, 31);
-		this.body01.setRotationPoint(0.0F, 0.0F, 1.2F);
-		this.body01.addBox(-2.5F, -1.8F, -0.4F, 5, 4, 8, 0.0F);
-		this.tail04 = new ModelRenderer(this, 41, 40);
-		this.tail04.setRotationPoint(0.0F, 0.5F, 5.8F);
-		this.tail04.addBox(-1.0F, -1.0F, -1.0F, 2, 2, 9, 0.0F);
-		this.neck01b = new ModelRenderer(this, 43, 28);
-		this.neck01b.setRotationPoint(0.0F, 0.0F, 0.0F);
-		this.neck01b.addBox(-2.3F, -1.49F, -6.0F, 2, 3, 8, 0.0F);
-		this.head = new ModelRenderer(this, 0, 22);
-		this.head.setRotationPoint(0.0F, 0.8F, -5.9F);
-		this.head.addBox(-2.5F, -2.4F, -3.0F, 5, 3, 3, 0.0F);
-		this.lowerJaw = new ModelRenderer(this, 0, 8);
-		this.lowerJaw.setRotationPoint(0.0F, 0.1F, -2.0F);
-		this.lowerJaw.addBox(-1.5F, -0.5F, -5.0F, 3, 1, 5, 0.0F);
-		this.neck01a = new ModelRenderer(this, 27, 33);
-		this.neck01a.setRotationPoint(0.0F, 22.5F, -3.9F);
-		this.neck01a.addBox(-0.7F, -1.49F, -6.0F, 3, 3, 8, 0.0F);
-		this.tail02 = new ModelRenderer(this, 0, 45);
-		this.tail02.setRotationPoint(0.0F, 0.0F, 7.4F);
-		this.tail02.addBox(-2.0F, -1.49F, -0.5F, 4, 3, 7, 0.0F);
-		this.neck02 = new ModelRenderer(this, 0, 45);
-		this.neck02.setRotationPoint(0.0F, 0.0F, -5.9F);
-		this.neck02.addBox(-2.0F, -1.5F, -6.0F, 4, 3, 7, 0.0F);
-		this.upperJawM = new ModelRenderer(this, 0, 0);
-		this.upperJawM.setRotationPoint(0.0F, -1.3F, -2.8F);
-		this.upperJawM.addBox(-1.5F, -1.1F, -4.4F, 3, 2, 5, 0.0F);
-		this.setRotateAngle(upperJawM, 0.08726646259971647F, 0.0F, 0.0F);
-		this.tail01 = new ModelRenderer(this, 27, 22);
-		this.tail01.setRotationPoint(0.0F, 0.0F, 6.7F);
-		this.tail01.addBox(-0.7F, -1.5F, 0.6F, 3, 3, 7, 0.0F);
-		this.head.addChild(this.tongue);
-		this.tail03.addChild(this.tail03b);
-		this.head.addChild(this.upperJawR);
-		this.head.addChild(this.upperJawL);
-		this.tail02.addChild(this.tail03);
-		this.upperJawM.addChild(this.lFang);
-		this.head.addChild(this.eyes);
-		this.tail01.addChild(this.tail01b);
-		this.tail04.addChild(this.tail05);
-		this.upperJawM.addChild(this.rFang);
-		this.neck01a.addChild(this.body01);
-		this.tail03.addChild(this.tail04);
-		this.neck01a.addChild(this.neck01b);
-		this.neck02.addChild(this.head);
-		this.head.addChild(this.lowerJaw);
-		this.tail01.addChild(this.tail02);
-		this.neck01a.addChild(this.neck02);
-		this.head.addChild(this.upperJawM);
-		this.body01.addChild(this.tail01);
+		textureWidth = 64;
+		textureHeight = 64;
+		tongue = new ModelRenderer(this, 25, 0);
+		tongue.setRotationPoint(0, 0.4f, -2);
+		tongue.addBox(-1.5f, 0, -5, 3, 0, 7, 0);
+		tail03b = new ModelRenderer(this, 22, 55);
+		tail03b.setRotationPoint(0, 0.5f, 0);
+		tail03b.addBox(-1.5f, 0, -1, 3, 1, 7, 0);
+		upperJawR = new ModelRenderer(this, 17, 0);
+		upperJawR.mirror = true;
+		upperJawR.setRotationPoint(-1.9f, -0.9f, -3);
+		upperJawR.addBox(-0.5f, -1, -4.07f, 2, 2, 5, 0);
+		setRotateAngle(upperJawR, 0, -0.19198621771937624f, 0);
+		upperJawL = new ModelRenderer(this, 17, 0);
+		upperJawL.setRotationPoint(0.9f, -0.9f, -3);
+		upperJawL.addBox(-0.5f, -1, -3.7f, 2, 2, 5, 0);
+		setRotateAngle(upperJawL, 0, 0.19198621771937624f, 0);
+		tail03 = new ModelRenderer(this, 23, 45);
+		tail03.setRotationPoint(0, 0, 5.9f);
+		tail03.addBox(-1.5f, -1.1f, -1, 3, 2, 7, 0);
+		lfang = new ModelRenderer(this, 0, 0);
+		lfang.setRotationPoint(1.4f, -0.5f, -3.6f);
+		lfang.addBox(0, 0, -0.5f, 0, 2, 1, 0);
+		eyes = new ModelRenderer(this, 40, 0);
+		eyes.setRotationPoint(0, -2, -3.9f);
+		eyes.addBox(-2, -0.5f, -0.5f, 4, 1, 1, 0);
+		tail01b = new ModelRenderer(this, 46, 18);
+		tail01b.setRotationPoint(0, 0, 0);
+		tail01b.addBox(-2.3f, -1.5f, 0.5f, 2, 3, 7, 0);
+		tail05 = new ModelRenderer(this, 43, 54);
+		tail05.setRotationPoint(0, 0.5f, 7.8f);
+		tail05.addBox(-0.5f, -0.5f, -0.6f, 1, 1, 8, 0);
+		rfang = new ModelRenderer(this, 0, 0);
+		rfang.setRotationPoint(-1.4f, -0.5f, -3.6f);
+		rfang.addBox(0, 0, -0.5f, 0, 2, 1, 0);
+		body01 = new ModelRenderer(this, 0, 31);
+		body01.setRotationPoint(0, 0, 1.2f);
+		body01.addBox(-2.5f, -1.8f, -0.4f, 5, 4, 8, 0);
+		tail04 = new ModelRenderer(this, 41, 40);
+		tail04.setRotationPoint(0, 0.5f, 5.8f);
+		tail04.addBox(-1, -1, -1, 2, 2, 9, 0);
+		neck01b = new ModelRenderer(this, 43, 28);
+		neck01b.setRotationPoint(0, 0, 0);
+		neck01b.addBox(-2.3f, -1.49f, -6, 2, 3, 8, 0);
+		head = new ModelRenderer(this, 0, 22);
+		head.setRotationPoint(0, 0.8f, -5.9f);
+		head.addBox(-2.5f, -2.4f, -3, 5, 3, 3, 0);
+		lowerJaw = new ModelRenderer(this, 0, 8);
+		lowerJaw.setRotationPoint(0, 0.1f, -2);
+		lowerJaw.addBox(-1.5f, -0.5f, -5, 3, 1, 5, 0);
+		neck01a = new ModelRenderer(this, 27, 33);
+		neck01a.setRotationPoint(0, 22.5f, -3.9f);
+		neck01a.addBox(-0.7f, -1.49f, -6, 3, 3, 8, 0);
+		tail02 = new ModelRenderer(this, 0, 45);
+		tail02.setRotationPoint(0, 0, 7.4f);
+		tail02.addBox(-2, -1.49f, -0.5f, 4, 3, 7, 0);
+		neck02 = new ModelRenderer(this, 0, 45);
+		neck02.setRotationPoint(0, 0, -5.9f);
+		neck02.addBox(-2, -1.5f, -6, 4, 3, 7, 0);
+		upperJawM = new ModelRenderer(this, 0, 0);
+		upperJawM.setRotationPoint(0, -1.3f, -2.8f);
+		upperJawM.addBox(-1.5f, -1.1f, -4.4f, 3, 2, 5, 0);
+		setRotateAngle(upperJawM, 0.08726646259971647f, 0, 0);
+		tail01 = new ModelRenderer(this, 27, 22);
+		tail01.setRotationPoint(0, 0, 6.7f);
+		tail01.addBox(-0.7f, -1.5f, 0.6f, 3, 3, 7, 0);
+		head.addChild(tongue);
+		tail03.addChild(tail03b);
+		head.addChild(upperJawR);
+		head.addChild(upperJawL);
+		tail02.addChild(tail03);
+		upperJawM.addChild(lfang);
+		head.addChild(eyes);
+		tail01.addChild(tail01b);
+		tail04.addChild(tail05);
+		upperJawM.addChild(rfang);
+		neck01a.addChild(body01);
+		tail03.addChild(tail04);
+		neck01a.addChild(neck01b);
+		neck02.addChild(head);
+		head.addChild(lowerJaw);
+		tail01.addChild(tail02);
+		neck01a.addChild(neck02);
+		head.addChild(upperJawM);
+		body01.addChild(tail01);
 	}
 	
 	@Override
 	public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float rotationYaw, float rotationPitch, float scale)
 	{
 		float pticks = Minecraft.getMinecraft().getRenderPartialTicks();
-		float time = ((entity.ticksExisted + pticks) * 0.2F);
-		float angle = 0.34906585039F;
+		float time = (entity.ticksExisted + pticks) * 0.2f;
+		float angle = 0.34906585039f;
 		EntitySnake snek = (EntitySnake) entity;
 		if (snek.isSitting())
 		{
@@ -134,66 +134,62 @@ public class ModelSnake extends ModelBase
 			{
 				snek.animation_timer++;
 				int timer = snek.animation_timer;
-				this.neck01a.rotateAngleY = neck01a.rotateAngleY + (-0.09110618695F - neck01a.rotateAngleY) * timer / COIL_ANIMATION_LENGTH;
-				this.neck02.rotateAngleY = neck02.rotateAngleY + (-1.27478848566F - neck02.rotateAngleY) * timer / COIL_ANIMATION_LENGTH;
-				this.neck02.rotateAngleX = neck02.rotateAngleX + (-0.27314402793F - neck02.rotateAngleX) * timer / COIL_ANIMATION_LENGTH;
-				this.body01.rotateAngleY = body01.rotateAngleY + (1.09397237515F - body01.rotateAngleY) * timer / COIL_ANIMATION_LENGTH;
-				this.tail01.rotateAngleY = tail01.rotateAngleY + (0.95609136424F - tail01.rotateAngleY) * timer / COIL_ANIMATION_LENGTH;
-				this.tail02.rotateAngleY = tail02.rotateAngleY + (1.27478848566F - tail02.rotateAngleY) * timer / COIL_ANIMATION_LENGTH;
-				this.tail03.rotateAngleY = tail03.rotateAngleY + (0.81960661673F - tail03.rotateAngleY) * timer / COIL_ANIMATION_LENGTH;
-				this.tail04.rotateAngleY = tail04.rotateAngleY + (1.54810704652F - tail04.rotateAngleY) * timer / COIL_ANIMATION_LENGTH;
-				this.tail05.rotateAngleY = tail05.rotateAngleY + (1.59348560707F - tail05.rotateAngleY) * timer / COIL_ANIMATION_LENGTH;
-
-				this.head.rotateAngleX = head.rotateAngleX + (0.13665928043F - head.rotateAngleX) * timer / COIL_ANIMATION_LENGTH;
-				this.head.rotateAngleY = head.rotateAngleY + (-0.77405352325F - head.rotateAngleY) * timer / COIL_ANIMATION_LENGTH;
-				this.head.rotateAngleZ = head.rotateAngleZ + (-0.18203784098F - head.rotateAngleZ) * timer / COIL_ANIMATION_LENGTH;
+				neck01a.rotateAngleY = neck01a.rotateAngleY + (-0.09110618695f - neck01a.rotateAngleY) * timer / COIL_ANIMATION_LENGTH;
+				neck02.rotateAngleY = neck02.rotateAngleY + (-1.27478848566f - neck02.rotateAngleY) * timer / COIL_ANIMATION_LENGTH;
+				neck02.rotateAngleX = neck02.rotateAngleX + (-0.27314402793f - neck02.rotateAngleX) * timer / COIL_ANIMATION_LENGTH;
+				body01.rotateAngleY = body01.rotateAngleY + (1.09397237515f - body01.rotateAngleY) * timer / COIL_ANIMATION_LENGTH;
+				tail01.rotateAngleY = tail01.rotateAngleY + (0.95609136424f - tail01.rotateAngleY) * timer / COIL_ANIMATION_LENGTH;
+				tail02.rotateAngleY = tail02.rotateAngleY + (1.27478848566f - tail02.rotateAngleY) * timer / COIL_ANIMATION_LENGTH;
+				tail03.rotateAngleY = tail03.rotateAngleY + (0.81960661673f - tail03.rotateAngleY) * timer / COIL_ANIMATION_LENGTH;
+				tail04.rotateAngleY = tail04.rotateAngleY + (1.54810704652f - tail04.rotateAngleY) * timer / COIL_ANIMATION_LENGTH;
+				tail05.rotateAngleY = tail05.rotateAngleY + (1.59348560707f - tail05.rotateAngleY) * timer / COIL_ANIMATION_LENGTH;
+				head.rotateAngleX = head.rotateAngleX + (0.13665928043f - head.rotateAngleX) * timer / COIL_ANIMATION_LENGTH;
+				head.rotateAngleY = head.rotateAngleY + (-0.77405352325f - head.rotateAngleY) * timer / COIL_ANIMATION_LENGTH;
+				head.rotateAngleZ = head.rotateAngleZ + (-0.18203784098f - head.rotateAngleZ) * timer / COIL_ANIMATION_LENGTH;
 			}
 			else
 			{
-				this.neck01a.offsetX = -0.3F;
-				this.neck01a.rotateAngleY = -0.09110618695F;
-				this.neck02.rotateAngleY = -1.27478848566F;
-				this.neck02.rotateAngleX = -0.27314402793F;
-				this.body01.rotateAngleY = 1.09397237515F;
-				this.tail01.rotateAngleY = 0.95609136424F;
-				this.tail02.rotateAngleY = 1.27478848566F;
-				this.tail03.rotateAngleY = 0.81960661673F;
-				this.tail04.rotateAngleY = 1.54810704652F;
-				this.tail05.rotateAngleY = 1.59348560707F;
-
-				this.head.rotateAngleX = 0.13665928043F;
-				this.head.rotateAngleY = -0.77405352325F;
-				this.head.rotateAngleZ = -0.18203784098F;
+				neck01a.offsetX = -0.3f;
+				neck01a.rotateAngleY = -0.09110618695f;
+				neck02.rotateAngleY = -1.27478848566f;
+				neck02.rotateAngleX = -0.27314402793f;
+				body01.rotateAngleY = 1.09397237515f;
+				tail01.rotateAngleY = 0.95609136424f;
+				tail02.rotateAngleY = 1.27478848566f;
+				tail03.rotateAngleY = 0.81960661673f;
+				tail04.rotateAngleY = 1.54810704652f;
+				tail05.rotateAngleY = 1.59348560707f;
+				head.rotateAngleX = 0.13665928043f;
+				head.rotateAngleY = -0.77405352325f;
+				head.rotateAngleZ = -0.18203784098f;
 			}
+		}
+		else if (snek.motionX != 0 || snek.motionZ != 0)
+		{
+			neck01a.offsetX = 0.3f * MathHelper.cos(time);
+			neck01a.rotateAngleY = angle * MathHelper.sin(time);
+			neck02.rotateAngleY = angle * MathHelper.sin(time - 5);
+			neck02.rotateAngleX = 0;
+			body01.rotateAngleY = angle * MathHelper.sin(time + 5);
+			tail01.rotateAngleY = angle * MathHelper.sin(time + 11);
+			tail02.rotateAngleY = angle * MathHelper.sin(time + 4);
+			tail03.rotateAngleY = angle * MathHelper.sin(time + 2);
+			tail04.rotateAngleY = angle * MathHelper.sin(time + 3);
+			tail05.rotateAngleY = angle / 4f * MathHelper.sin(time + 2);
+			head.rotateAngleY = neck02.rotateAngleY;
+			head.rotateAngleZ = 0.174532925f * MathHelper.cos(time - 5);
+			head.rotateAngleX = 0;
+			head.rotateAngleZ = 0;
+			snek.animation_timer = 0;
 		}
 		else
 		{
-			if (snek.motionX != 0 || snek.motionZ != 0)
-			{
-				this.neck01a.offsetX = 0.3F * MathHelper.cos(time);
-				this.neck01a.rotateAngleY = angle * MathHelper.sin(time);
-				this.neck02.rotateAngleY = angle * MathHelper.sin(time - 5);
-				this.neck02.rotateAngleX = 0;
-				this.body01.rotateAngleY = angle * MathHelper.sin(time + 5);
-				this.tail01.rotateAngleY = angle * MathHelper.sin(time + 11);
-				this.tail02.rotateAngleY = angle * MathHelper.sin(time + 4);
-				this.tail03.rotateAngleY = angle * MathHelper.sin(time + 2);
-				this.tail04.rotateAngleY = angle * MathHelper.sin(time + 3);
-				this.tail05.rotateAngleY = angle / 4F * MathHelper.sin(time + 2);
-				this.head.rotateAngleY = this.neck02.rotateAngleY;
-				this.head.rotateAngleZ = 0.174532925F * MathHelper.cos(time - 5);
-				this.head.rotateAngleX = 0;
-				this.head.rotateAngleZ = 0;
-				snek.animation_timer = 0;
-			}
-			else
-			{
-				// TODO: This is the cause of the clipping. Additionally, boxes probably shouldn't be added during render() ... may be a memory leak.
-				//this.neck01b.addBox(-2.3F, -1.49F, -6.0F, 2, 3, 8, MathHelper.sin(time));
-			}
+			// TODO: This is the cause of the clipping. Additionally, boxes probably
+			// shouldn't be added during render() ... may be a memory leak.
+			// this.neck01b.addBox(-2.3f, -1.49f, -6, 2, 3, 8, MathHelper.sin(time));
 		}
-		this.neck01a.render(scale);
-		this.head.rotateAngleY = 0.001F * MathHelper.sin(time);
+		neck01a.render(scale);
+		head.rotateAngleY = 0.001f * MathHelper.sin(time);
 	}
 	
 	public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)

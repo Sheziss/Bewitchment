@@ -41,20 +41,20 @@ public class GuiOven extends GuiContainer
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
 		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
-		this.drawTexturedModalRect(x, y, 0, 0, this.xSize, this.ySize);
+		this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 		if (container.tile.burn_time > 0)
 		{
-			int time = ((container.tile.burn_time) * 13) / container.tile.fuel_burn_time;
-			this.drawTexturedModalRect(x + 44, (y + 50) - time, 176, 12 - time, 14, time + 1);
+			int time = container.tile.burn_time * 13 / container.tile.fuel_burn_time;
+			this.drawTexturedModalRect(x + 44, y + 50 - time, 176, 12 - time, 14, time + 1);
 		}
-		this.drawTexturedModalRect(x + 76, y + 19, 176, 14, ((container.tile.progress * 24) / 100) + 1, 16);
+		this.drawTexturedModalRect(x + 76, y + 19, 176, 14, container.tile.progress * 24 / 100 + 1, 16);
 	}
 	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
 		String name = container.tile.getName();
-		fontRenderer.drawString(name, (xSize / 2) - (fontRenderer.getStringWidth(name) / 2), 6, 0x404040);
+		fontRenderer.drawString(name, xSize / 2 - fontRenderer.getStringWidth(name) / 2, 6, 0x404040);
 		fontRenderer.drawString(inventory.getDisplayName().getUnformattedText(), 8, ySize - 94, 0x404040);
 	}
 }

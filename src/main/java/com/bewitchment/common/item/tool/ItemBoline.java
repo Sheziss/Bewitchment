@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.bewitchment.Bewitchment;
 
-import moriyashiine.froglib.FrogLib;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,7 +24,7 @@ public class ItemBoline extends ItemShears
 	public ItemBoline()
 	{
 		super();
-		FrogLib.proxy.registerItem(this, Bewitchment.MOD_ID, "boline", Bewitchment.proxy.tab);
+		Bewitchment.proxy.registerValues(this, "boline");
 		setMaxDamage(600);
 	}
 	
@@ -34,15 +33,6 @@ public class ItemBoline extends ItemShears
 	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag flag)
 	{
 		if (stack.hasTagCompound() && stack.getTagCompound().hasKey("biome_id")) tooltip.add(Biome.getBiome(stack.getTagCompound().getInteger("biome_id")).getBiomeName());
-	}
-	
-	@Override
-	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)
-	{
-		ItemStack stack = player.getHeldItem(hand);
-		if (!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
-		stack.getTagCompound().setInteger("biome_id", Biome.getIdForBiome(world.getBiome(player.getPosition())));
-		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
 	}
 	
 	@Override
@@ -58,5 +48,14 @@ public class ItemBoline extends ItemShears
 			else return super.hitEntity(stack, target, attacker);
 		}
 		return true;
+	}
+	
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)
+	{
+		ItemStack stack = player.getHeldItem(hand);
+		if (!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
+		stack.getTagCompound().setInteger("biome_id", Biome.getIdForBiome(world.getBiome(player.getPosition())));
+		return new ActionResult<>(EnumActionResult.SUCCESS, stack);
 	}
 }

@@ -1,9 +1,8 @@
 package com.bewitchment.common.item;
 
-import com.bewitchment.Bewitchment;
-import com.bewitchment.common.registry.ModBlocks;
+import com.bewitchment.common.item.util.ModItem;
+import com.bewitchment.registry.ModObjects;
 
-import moriyashiine.froglib.common.item.FLItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
@@ -12,11 +11,11 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class ItemSalt extends FLItem
+public class ItemSalt extends ModItem
 {
 	public ItemSalt()
 	{
-		super(Bewitchment.MOD_ID, "salt", Bewitchment.proxy.tab, "salt", "dustSalt", "materialSalt", "ingredientSalt", "listAllsalt", "foodSalt", "lumpSalt", "pinchSalt", "portionSalt");
+		super("salt", "salt", "dustSalt", "materialSalt", "ingredientSalt", "listAllsalt", "foodSalt", "lumpSalt", "pinchSalt", "portionSalt");
 	}
 	
 	@Override
@@ -24,10 +23,10 @@ public class ItemSalt extends FLItem
 	{
 		BlockPos pos0 = world.getBlockState(pos).getBlock().isReplaceable(world, pos) ? pos : pos.offset(face);
 		ItemStack stack = player.getHeldItem(hand);
-		if (player.canPlayerEdit(pos0, face, stack) && world.mayPlace(world.getBlockState(pos0).getBlock(), pos0, false, face, player) && ModBlocks.salt_barrier.canPlaceBlockAt(world, pos0))
+		if (player.canPlayerEdit(pos0, face, stack) && world.mayPlace(world.getBlockState(pos0).getBlock(), pos0, false, face, player) && ModObjects.salt_barrier.canPlaceBlockAt(world, pos0))
 		{
 			stack.shrink(1);
-			world.setBlockState(pos0, ModBlocks.salt_barrier.getDefaultState());
+			world.setBlockState(pos0, ModObjects.salt_barrier.getDefaultState());
 			return EnumActionResult.SUCCESS;
 		}
 		return EnumActionResult.FAIL;

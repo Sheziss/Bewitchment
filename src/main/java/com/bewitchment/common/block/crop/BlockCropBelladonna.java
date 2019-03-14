@@ -2,21 +2,20 @@ package com.bewitchment.common.block.crop;
 
 import java.util.Random;
 
-import com.bewitchment.Bewitchment;
-import com.bewitchment.common.registry.ModItems;
+import com.bewitchment.common.block.util.ModBlockCrop;
+import com.bewitchment.registry.ModObjects;
 
-import moriyashiine.froglib.common.block.FLBlockCrop;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockCropBelladonna extends FLBlockCrop
+public class BlockCropBelladonna extends ModBlockCrop
 {
 	public BlockCropBelladonna()
 	{
-		super(Bewitchment.MOD_ID, "crop_belladonna", Bewitchment.proxy.tab, ModItems.seed_belladonna, new ItemStack(ModItems.belladonna), 4);
+		super("crop_belladonna", ModObjects.seed_belladonna, new ItemStack(ModObjects.belladonna), 4);
 	}
 	
 	@Override

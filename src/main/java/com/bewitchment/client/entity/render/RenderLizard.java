@@ -3,6 +3,7 @@ package com.bewitchment.client.entity.render;
 import com.bewitchment.Bewitchment;
 import com.bewitchment.client.entity.model.ModelLizard;
 import com.bewitchment.common.entity.EntityLizard;
+import com.bewitchment.common.entity.util.FLEntityTameable;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -14,10 +15,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderLizard extends RenderLiving<EntityLizard>
 {
-	private static final ResourceLocation[] TEX = {new ResourceLocation(Bewitchment.MOD_ID, "textures/entity/lizard_0.png"),
-			new ResourceLocation(Bewitchment.MOD_ID, "textures/entity/lizard_1.png"),
-			new ResourceLocation(Bewitchment.MOD_ID, "textures/entity/lizard_2.png"),
-			new ResourceLocation(Bewitchment.MOD_ID, "textures/entity/lizard_3.png")};
+	private static final ResourceLocation[] TEX = {
+		new ResourceLocation(Bewitchment.MOD_ID, "textures/entity/lizard_0.png"),
+		new ResourceLocation(Bewitchment.MOD_ID, "textures/entity/lizard_1.png"),
+		new ResourceLocation(Bewitchment.MOD_ID, "textures/entity/lizard_2.png"),
+		new ResourceLocation(Bewitchment.MOD_ID, "textures/entity/lizard_3.png")};
 	
 	public RenderLizard(RenderManager manager)
 	{
@@ -27,7 +29,7 @@ public class RenderLizard extends RenderLiving<EntityLizard>
 	@Override
 	protected ResourceLocation getEntityTexture(EntityLizard entity)
 	{
-		return TEX[entity.getDataManager().get(EntityLizard.SKIN)];
+		return TEX[entity.getDataManager().get(FLEntityTameable.SKIN)];
 	}
 	
 	@Override

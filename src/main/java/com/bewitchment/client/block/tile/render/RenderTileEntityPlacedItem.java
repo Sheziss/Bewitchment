@@ -3,7 +3,7 @@ package com.bewitchment.client.block.tile.render;
 import org.lwjgl.opengl.GL11;
 
 import com.bewitchment.common.block.tile.entity.TileEntityPlacedItem;
-import com.bewitchment.common.registry.ModBlocks;
+import com.bewitchment.registry.ModObjects;
 
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.client.Minecraft;
@@ -24,7 +24,7 @@ public class RenderTileEntityPlacedItem extends TileEntitySpecialRenderer<TileEn
 	@Override
 	public void render(TileEntityPlacedItem tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha)
 	{
-		if (tile.getWorld().getBlockState(tile.getPos()).getBlock() == ModBlocks.placed_item && !tile.getStackInSlot(0).isEmpty())
+		if (tile.getWorld().getBlockState(tile.getPos()).getBlock() == ModObjects.placed_item && !tile.getStackInSlot(0).isEmpty())
 		{
 			ItemStack stack = tile.getStackInSlot(0);
 			GlStateManager.enableRescaleNormal();

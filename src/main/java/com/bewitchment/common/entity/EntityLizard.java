@@ -1,9 +1,9 @@
 package com.bewitchment.common.entity;
 
 import com.bewitchment.Bewitchment;
-import com.bewitchment.common.registry.ModItems;
+import com.bewitchment.common.entity.util.FLEntityTameable;
+import com.bewitchment.registry.ModObjects;
 
-import moriyashiine.froglib.common.entity.FLEntityTameable;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIFollowOwner;
@@ -26,14 +26,27 @@ public class EntityLizard extends FLEntityTameable
 {
 	public EntityLizard(World world)
 	{
-		super(world, new ResourceLocation(Bewitchment.MOD_ID, "lizard"), Items.SPIDER_EYE, Items.FERMENTED_SPIDER_EYE, ModItems.silver_scales, ModItems.envenomed_fang);
+		super(world, new ResourceLocation(Bewitchment.MOD_ID, "lizard"), Items.SPIDER_EYE, Items.FERMENTED_SPIDER_EYE, ModObjects.silver_scales, ModObjects.envenomed_fang);
 		setSize(1, 0.3f);
+	}
+	
+	@Override
+	public boolean canMateWith(EntityAnimal other)
+	{
+		if (other == this || !(other instanceof EntityLizard)) return false;
+		return isTamed() && isInLove() && ((EntityTameable) other).isTamed() && other.isInLove() && !((EntityTameable) other).isSitting();
 	}
 	
 	@Override
 	public EntityAgeable createChild(EntityAgeable ageable)
 	{
 		return new EntityLizard(world);
+	}
+	
+	@Override
+	public int getMaxSpawnedInChunk()
+	{
+		return 2;
 	}
 	
 	@Override
@@ -46,19 +59,6 @@ public class EntityLizard extends FLEntityTameable
 	protected int getSkinTypes()
 	{
 		return 4;
-	}
-	
-	@Override
-	public boolean canMateWith(EntityAnimal other)
-	{
-		if (other == this || !(other instanceof EntityLizard)) return false;
-		return isTamed() && isInLove() && ((EntityTameable) other).isTamed() && other.isInLove() && !((EntityTameable) other).isSitting();
-	}
-	
-	@Override
-	public int getMaxSpawnedInChunk()
-	{
-		return 2;
 	}
 	
 	@Override

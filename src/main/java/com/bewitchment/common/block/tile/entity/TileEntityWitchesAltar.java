@@ -8,10 +8,9 @@ import com.bewitchment.api.capability.magicpower.MagicPowerCapability;
 import com.bewitchment.api.capability.magicpower.MagicPowerProvider;
 import com.bewitchment.common.block.BlockWitchesAltar;
 import com.bewitchment.common.block.BlockWitchesAltar.AltarType;
-import com.bewitchment.common.registry.ModBlocks;
-import com.bewitchment.common.registry.ModItems;
+import com.bewitchment.common.block.tile.entity.util.FLTileEntity;
+import com.bewitchment.registry.ModObjects;
 
-import moriyashiine.froglib.common.block.tile.FLTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,19 +26,37 @@ import net.minecraftforge.common.capabilities.Capability;
 
 public class TileEntityWitchesAltar extends FLTileEntity implements ITickable
 {
-	public static final Map<Block, Integer> SCAN_VALUES = new HashMap<Block, Integer>();
-	public static final Map<Item, Double> SWORD_MULTIPLIER_VALUES = new HashMap<Item, Double>();
-	public static final Map<Item, Integer> SWORD_RADIUS_VALUES = new HashMap<Item, Integer>();
+	public static final Map<Block, Integer> SCAN_VALUES = new HashMap<>();
+	public static final Map<Item, Double> SWORD_MULTIPLIER_VALUES = new HashMap<>();
+	public static final Map<Item, Integer> SWORD_RADIUS_VALUES = new HashMap<>();
 	
 	private static final int RADIUS = 18;
 	
 	public int color = EnumDyeColor.RED.ordinal(), gain = 1, multiplier = 1;
 	
-	private MagicPowerCapability magic_power = MagicPowerProvider.CAPABILITY.getDefaultInstance();
+	private final MagicPowerCapability magic_power = MagicPowerProvider.CAPABILITY.getDefaultInstance();
 	
 	public TileEntityWitchesAltar()
 	{
 		super(0);
+	}
+	
+	@Override
+	public <T> T getCapability(Capability<T> capability, EnumFacing face)
+	{
+		return capability == MagicPowerProvider.CAPABILITY ? MagicPowerProvider.CAPABILITY.cast(magic_power) : super.getCapability(capability, face);
+	}
+	
+	@Override
+	public boolean hasCapability(Capability<?> capability, EnumFacing face)
+	{
+		return capability == MagicPowerProvider.CAPABILITY || super.hasCapability(capability, face);
+	}
+	
+	@Override
+	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState)
+	{
+		return newState.getBlock() != ModObjects.witches_altar || newState.getValue(BlockWitchesAltar.TYPE) != AltarType.TILE;
 	}
 	
 	@Override
@@ -60,7 +77,7 @@ public class TileEntityWitchesAltar extends FLTileEntity implements ITickable
 				gain = 1;
 				int variety = 0, radius_alter = 0;
 				double variety_multiplier = 1;
-				//Upgrades
+				// Upgrades
 				for (BlockPos pos0 : BlockWitchesAltar.getAltarPositions(world, pos))
 				{
 					TileEntityPlacedItem tile = (TileEntityPlacedItem) world.getTileEntity(pos0.up());
@@ -73,7 +90,7 @@ public class TileEntityWitchesAltar extends FLTileEntity implements ITickable
 							radius_alter = BewitchmentAPI.getAltarSwordRadiusValue(item);
 							break;
 						}
-						if (item == ModItems.athame)
+						if (item == ModObjects.athame)
 						{
 							for (EntityPlayer player : world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).grow(5)))
 							{
@@ -84,7 +101,7 @@ public class TileEntityWitchesAltar extends FLTileEntity implements ITickable
 						}
 					}
 				}
-				//Plants
+				// Plants
 				int radius = RADIUS / 2 + radius_alter;
 				for (int x = -radius; x < radius; x++)
 				{
@@ -131,22 +148,4 @@ public class TileEntityWitchesAltar extends FLTileEntity implements ITickable
 		gain = tag.getInteger("gain");
 		multiplier = tag.getInteger("multiplier");
 	}
-	
-	@Override
-	public boolean hasCapability(Capability<?> capability, EnumFacing face)
-	{
-		return capability == MagicPowerProvider.CAPABILITY || super.hasCapability(capability, face);
-	}
-	
-	@Override
-	public <T> T getCapability(Capability<T> capability, EnumFacing face)
-	{
-		return capability == MagicPowerProvider.CAPABILITY ? MagicPowerProvider.CAPABILITY.cast(magic_power) : super.getCapability(capability, face);
-	}
-	
-	@Override
-	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState)
-    {
-		return newState.getBlock() != ModBlocks.witches_altar || newState.getValue(BlockWitchesAltar.TYPE) != AltarType.TILE;
-    }
 }

@@ -1,8 +1,8 @@
 package com.bewitchment.common.entity;
 
 import com.bewitchment.Bewitchment;
+import com.bewitchment.common.entity.util.FLEntityAnimal;
 
-import moriyashiine.froglib.common.entity.FLEntityAnimal;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
@@ -29,9 +29,22 @@ public class EntityNewt extends FLEntityAnimal
 	}
 	
 	@Override
+	public boolean canMateWith(EntityAnimal other)
+	{
+		if (other == this || !(other instanceof EntityNewt)) return false;
+		return isInLove() && other.isInLove();
+	}
+	
+	@Override
 	public EntityAgeable createChild(EntityAgeable ageable)
 	{
 		return new EntityNewt(world);
+	}
+	
+	@Override
+	public int getMaxSpawnedInChunk()
+	{
+		return 2;
 	}
 	
 	@Override
@@ -44,19 +57,6 @@ public class EntityNewt extends FLEntityAnimal
 	protected int getSkinTypes()
 	{
 		return 4;
-	}
-	
-	@Override
-	public boolean canMateWith(EntityAnimal other)
-	{
-		if (other == this || !(other instanceof EntityNewt)) return false;
-		return isInLove() && other.isInLove();
-	}
-	
-	@Override
-	public int getMaxSpawnedInChunk()
-	{
-		return 2;
 	}
 	
 	@Override

@@ -20,7 +20,7 @@ public class MagicPowerStorage implements IStorage<MagicPowerCapability>
 	@Override
 	public void readNBT(Capability<MagicPowerCapability> capability, MagicPowerCapability instance, EnumFacing side, NBTBase nbt)
 	{
-		instance.setAmount(((NBTTagCompound)nbt).getInteger("amount"));
-		instance.setMaxAmount(((NBTTagCompound)nbt).getInteger("max_amount"));
+		instance.setAmount(((NBTTagCompound) nbt).getInteger("amount"));
+		instance.setMaxAmount(((NBTTagCompound) nbt).getInteger("max_amount"));
 	}
 }

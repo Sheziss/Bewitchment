@@ -21,6 +21,6 @@ public class TransformationStorage implements IStorage<TransformationCapability>
 	@Override
 	public void readNBT(Capability<TransformationCapability> capability, TransformationCapability instance, EnumFacing side, NBTBase nbt)
 	{
-		instance.setTransformation(Transformation.values()[((NBTTagCompound)nbt).getInteger("transformation")]);
+		instance.setTransformation(Transformation.values()[((NBTTagCompound) nbt).getInteger("transformation")]);
 	}
 }

@@ -2,7 +2,7 @@ package com.bewitchment.common.world.gen;
 
 import java.util.Random;
 
-import com.bewitchment.common.registry.ModBlocks;
+import com.bewitchment.registry.ModObjects;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -27,10 +27,7 @@ public class WorldGenCoquina implements IWorldGenerator
 					int x = rand.nextInt(2);
 					int y = rand.nextInt(2);
 					int z = rand.nextInt(2);
-					for (BlockPos blockpos : BlockPos.getAllInBox(position.add(-x, -y, -z), position.add(x, y, z)))
-					{
-						if (blockpos.distanceSq(position) <= Math.pow((x + y + z) * .333f + 0.5f, 2)) world.setBlockState(blockpos, ModBlocks.coquina.getDefaultState(), 2);
-					}
+					for (BlockPos blockpos : BlockPos.getAllInBox(position.add(-x, -y, -z), position.add(x, y, z))) if (blockpos.distanceSq(position) <= Math.pow((x + y + z) * .333f + 0.5f, 2)) world.setBlockState(blockpos, ModObjects.coquina.getDefaultState(), 2);
 					position = position.add(rand.nextInt(2) - 1, -rand.nextInt(2), rand.nextInt(2) - 1);
 				}
 				position = position.down();

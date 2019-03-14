@@ -8,8 +8,8 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 
 public class LoomRecipe extends IForgeRegistryEntry.Impl<LoomRecipe>
 {
-	private ItemStack[] input;
-	private ItemStack output;
+	private final ItemStack[] input;
+	private final ItemStack output;
 	
 	public LoomRecipe(String name, ItemStack[] input, ItemStack output)
 	{

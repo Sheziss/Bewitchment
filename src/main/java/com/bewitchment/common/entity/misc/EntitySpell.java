@@ -32,6 +32,23 @@ public class EntitySpell extends EntityThrowable
 		super(world, x, y, z);
 	}
 	
+	public EntityLivingBase getCaster()
+	{
+		String uuid = dataManager.get(CASTER);
+		if (uuid == null || uuid.isEmpty()) return null;
+		EntityLivingBase player = world.getPlayerEntityByUUID(UUID.fromString(uuid));
+		if (player != null) return player;
+		for (Entity entity : world.getLoadedEntityList()) if (entity instanceof EntityLivingBase && uuid.equals(entity.getUniqueID().toString())) return (EntityLivingBase) entity;
+		return null;
+	}
+	
+	@Override
+	public void onEntityUpdate()
+	{
+		super.onEntityUpdate();
+		if (ticksExisted > 40) setDead();
+	}
+	
 	@Override
 	protected void onImpact(RayTraceResult result)
 	{
@@ -49,11 +66,13 @@ public class EntitySpell extends EntityThrowable
 	}
 	
 	@Override
-	public void readEntityFromNBT(NBTTagCompound tag)
+	protected void entityInit()
 	{
-		super.readEntityFromNBT(tag);
-		tag.setString("spell", dataManager.get(SPELL));
-		tag.setString("caster", dataManager.get(CASTER));
+		setEntityInvulnerable(true);
+		setNoGravity(true);
+		setSize(0.1f, 0.1f);
+		dataManager.register(SPELL, "");
+		dataManager.register(CASTER, "");
 	}
 	
 	@Override
@@ -65,29 +84,10 @@ public class EntitySpell extends EntityThrowable
 	}
 	
 	@Override
-	public void onEntityUpdate()
+	public void readEntityFromNBT(NBTTagCompound tag)
 	{
-		super.onEntityUpdate();
-		if (ticksExisted > 40) setDead();
-	}
-	
-	@Override
-	protected void entityInit()
-	{
-		setEntityInvulnerable(true);
-		setNoGravity(true);
-		setSize(0.1f, 0.1f);
-		dataManager.register(SPELL, "");
-		dataManager.register(CASTER, "");
-	}
-	
-	public EntityLivingBase getCaster()
-	{
-		String uuid = dataManager.get(CASTER);
-		if (uuid == null || uuid.isEmpty()) return null;
-		EntityLivingBase player = world.getPlayerEntityByUUID(UUID.fromString(uuid));
-		if (player != null) return player;
-		for (Entity entity : world.getLoadedEntityList()) if (entity instanceof EntityLivingBase && uuid.equals(entity.getUniqueID().toString())) return (EntityLivingBase) entity;
-		return null;
+		super.readEntityFromNBT(tag);
+		tag.setString("spell", dataManager.get(SPELL));
+		tag.setString("caster", dataManager.get(CASTER));
 	}
 }

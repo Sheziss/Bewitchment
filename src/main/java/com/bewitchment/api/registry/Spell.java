@@ -11,8 +11,14 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 
 public abstract class Spell extends IForgeRegistryEntry.Impl<Spell>
 {
+	public enum SpellType
+	{
+		INSTANT, BLOCK, ENTITY, ALL;
+	}
+	
 	private final SpellType type;
 	private final String name;
+	
 	private final int color, cost;
 	
 	public Spell(String name, int cost, int color, SpellType type)
@@ -24,21 +30,7 @@ public abstract class Spell extends IForgeRegistryEntry.Impl<Spell>
 		this.type = type;
 	}
 	
-	/**
-	 * @return the type of the spell
-	 */
-	public SpellType getType()
-	{
-		return type;
-	}
-	
-	/**
-	 * @return the name of the spell
-	 */
-	public String getName()
-	{
-		return name;
-	}
+	public abstract boolean canBeUsed(World world, BlockPos pos, EntityLivingBase caster);
 	
 	/**
 	 * @return the color of the spell
@@ -56,12 +48,21 @@ public abstract class Spell extends IForgeRegistryEntry.Impl<Spell>
 		return cost;
 	}
 	
-	public abstract boolean canBeUsed(World world, BlockPos pos, EntityLivingBase caster);
+	/**
+	 * @return the name of the spell
+	 */
+	public String getName()
+	{
+		return name;
+	}
+	
+	/**
+	 * @return the type of the spell
+	 */
+	public SpellType getType()
+	{
+		return type;
+	}
 	
 	public abstract void performEffect(World world, RayTraceResult result, EntityLivingBase caster);
-	
-	public static enum SpellType
-	{
-		INSTANT, BLOCK, ENTITY, ALL;
-	}
 }

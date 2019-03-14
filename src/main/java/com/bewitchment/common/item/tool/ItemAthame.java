@@ -1,20 +1,19 @@
 package com.bewitchment.common.item.tool;
 
-import com.bewitchment.Bewitchment;
+import com.bewitchment.common.item.util.ModItemSword;
 
-import moriyashiine.froglib.common.item.FLItemSword;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 
-public class ItemAthame extends FLItemSword
+public class ItemAthame extends ModItemSword
 {
 	public ItemAthame(ToolMaterial mat)
 	{
-		super(Bewitchment.MOD_ID, "athame", Bewitchment.proxy.tab, mat);
-		this.setMaxDamage(600);
+		super("athame", mat);
+		setMaxDamage(600);
 	}
 	
 	@Override

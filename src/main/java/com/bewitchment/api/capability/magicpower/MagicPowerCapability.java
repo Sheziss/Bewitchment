@@ -4,28 +4,16 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class MagicPowerCapability
 {
-	int amount = 0, max_amount = 0;
+	private int amount = 0, max_amount = 0;
 	
-	public int getAmount()
+	public boolean drain(int amount)
 	{
-		return amount;
-	}
-	
-	public MagicPowerCapability setAmount(int amount)
-	{
-		this.amount = amount;
-		return this;
-	}
-	
-	public int getMaxAmount()
-	{
-		return max_amount;
-	}
-	
-	public MagicPowerCapability setMaxAmount(int max_amount)
-	{
-		this.max_amount = max_amount;
-		return this;
+		if (getAmount() > 0)
+		{
+			setAmount(Math.max(0, getAmount()) - amount);
+			return true;
+		}
+		return false;
 	}
 	
 	public boolean fill(int amount)
@@ -38,14 +26,26 @@ public class MagicPowerCapability
 		return false;
 	}
 	
-	public boolean drain(int amount)
+	public int getAmount()
 	{
-		if (getAmount() > 0)
-		{
-			setAmount(Math.max(0, getAmount()) - amount);
-			return true;
-		}
-		return false;
+		return amount;
+	}
+	
+	public int getMaxAmount()
+	{
+		return max_amount;
+	}
+	
+	public MagicPowerCapability setAmount(int amount)
+	{
+		this.amount = amount;
+		return this;
+	}
+	
+	public MagicPowerCapability setMaxAmount(int max_amount)
+	{
+		this.max_amount = max_amount;
+		return this;
 	}
 	
 	public void writeToNBT(NBTTagCompound tag)

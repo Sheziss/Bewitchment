@@ -2,11 +2,10 @@ package com.bewitchment.common.item.tool;
 
 import java.util.List;
 
-import com.bewitchment.Bewitchment;
 import com.bewitchment.api.capability.transformation.TransformationCapability.Transformation;
 import com.bewitchment.api.capability.transformation.TransformationProvider;
+import com.bewitchment.common.item.util.ModItemArmor;
 
-import moriyashiine.froglib.common.item.FLItemArmor;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,11 +17,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemSilverArmor extends FLItemArmor
+public class ItemSilverArmor extends ModItemArmor
 {
 	public ItemSilverArmor(String name, ArmorMaterial mat, EntityEquipmentSlot slot)
 	{
-		super(Bewitchment.MOD_ID, name, Bewitchment.proxy.tab, mat, slot);
+		super(name, mat, slot);
 	}
 	
 	@Override

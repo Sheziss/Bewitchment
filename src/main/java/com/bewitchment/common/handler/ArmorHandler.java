@@ -2,9 +2,9 @@ package com.bewitchment.common.handler;
 
 import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.api.capability.transformation.TransformationCapability.Transformation;
+import com.bewitchment.api.capability.transformation.TransformationProvider;
 import com.bewitchment.common.item.tool.ItemColdIronArmor;
 import com.bewitchment.common.item.tool.ItemSilverArmor;
-import com.bewitchment.api.capability.transformation.TransformationProvider;
 
 import net.minecraft.enchantment.EnchantmentThorns;
 import net.minecraft.entity.EntityLivingBase;
@@ -16,8 +16,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class ArmorHandler
-{
+public class ArmorHandler {
 	@SubscribeEvent
 	public void onHurt(LivingHurtEvent event)
 	{

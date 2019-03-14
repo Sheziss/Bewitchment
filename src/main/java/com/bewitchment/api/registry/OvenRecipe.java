@@ -8,8 +8,8 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 
 public class OvenRecipe extends IForgeRegistryEntry.Impl<OvenRecipe>
 {
-	private ItemStack input, output, byproduct;
-	private float byproduct_chance;
+	private final ItemStack input, output, byproduct;
+	private final float byproduct_chance;
 	
 	public OvenRecipe(String name, ItemStack input, ItemStack output, ItemStack byproduct, float byproduct_chance)
 	{
@@ -18,22 +18,6 @@ public class OvenRecipe extends IForgeRegistryEntry.Impl<OvenRecipe>
 		this.output = output;
 		this.byproduct = byproduct;
 		this.byproduct_chance = byproduct_chance;
-	}
-	
-	/**
-	 * @return the ItemStack to be used as input.
-	 */
-	public ItemStack getInput()
-	{
-		return input;
-	}
-	
-	/**
-	 * @return the ItemStack to be given as output.
-	 */
-	public ItemStack getOutput()
-	{
-		return output;
 	}
 	
 	/**
@@ -50,6 +34,22 @@ public class OvenRecipe extends IForgeRegistryEntry.Impl<OvenRecipe>
 	public float getByproductChance()
 	{
 		return byproduct_chance;
+	}
+	
+	/**
+	 * @return the ItemStack to be used as input.
+	 */
+	public ItemStack getInput()
+	{
+		return input;
+	}
+	
+	/**
+	 * @return the ItemStack to be given as output.
+	 */
+	public ItemStack getOutput()
+	{
+		return output;
 	}
 	
 	public boolean matches(ItemStack inputStack)

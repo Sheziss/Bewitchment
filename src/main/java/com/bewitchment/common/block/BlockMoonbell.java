@@ -2,9 +2,8 @@ package com.bewitchment.common.block;
 
 import java.util.Random;
 
-import com.bewitchment.Bewitchment;
+import com.bewitchment.common.block.util.ModBlockBush;
 
-import moriyashiine.froglib.common.block.FLBlockBush;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -22,27 +21,35 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import thaumcraft.api.crafting.IInfusionStabiliserExt;
 
 @Optional.Interface(iface = "thaumcraft.api.crafting.IInfusionStabiliserExt", modid = "thaumcraft")
-public class BlockMoonbell extends FLBlockBush implements IInfusionStabiliserExt
+public class BlockMoonbell extends ModBlockBush implements IInfusionStabiliserExt
 {
 	private static final PropertyBool PLACED = PropertyBool.create("placed");
 	
-	public BlockMoonbell(String name, String... oreNames)
+	public BlockMoonbell()
 	{
-		super(Bewitchment.MOD_ID, name, Bewitchment.proxy.tab, oreNames);
-		this.setLightOpacity(0).setLightLevel(0.5f);
-		this.setDefaultState(blockState.getBaseState().withProperty(PLACED, false));
-	}
-	
-	@Override
-	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing face, float hitX, float hitY, float hitZ, int meta, EntityLivingBase entity, EnumHand hand)
-	{
-		return getDefaultState().withProperty(PLACED, true);
+		super("moonbell");
+		setLightOpacity(0).setLightLevel(0.5f);
+		setDefaultState(blockState.getBaseState().withProperty(PLACED, false));
 	}
 	
 	@Override
 	public boolean canHarvestBlock(IBlockAccess world, BlockPos pos, EntityPlayer player)
 	{
-		return player == null ? world.getBlockState(pos).getValue(PLACED) : super.canHarvestBlock(world, pos, player) && (!player.world.isDaytime() && player.world.getMoonPhase() == 4) || world.getBlockState(pos).getValue(PLACED);
+		return player == null ? world.getBlockState(pos).getValue(PLACED) : super.canHarvestBlock(world, pos, player) && !player.world.isDaytime() && player.world.getMoonPhase() == 4 || world.getBlockState(pos).getValue(PLACED);
+	}
+	
+	@Override
+	@Optional.Method(modid = "thaumcraft")
+	public boolean canStabaliseInfusion(World world, BlockPos pos)
+	{
+		return true;
+	}
+	
+	@Override
+	@Optional.Method(modid = "thaumcraft")
+	public float getStabilizationAmount(World world, BlockPos pos)
+	{
+		return 2;
 	}
 	
 	@Override
@@ -63,6 +70,13 @@ public class BlockMoonbell extends FLBlockBush implements IInfusionStabiliserExt
 	}
 	
 	@Override
+	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing face, float hitX, float hitY,
+			float hitZ, int meta, EntityLivingBase entity, EnumHand hand)
+	{
+		return getDefaultState().withProperty(PLACED, true);
+	}
+	
+	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
 		return getDefaultState().withProperty(PLACED, meta == 0);
@@ -78,19 +92,5 @@ public class BlockMoonbell extends FLBlockBush implements IInfusionStabiliserExt
 	protected BlockStateContainer createBlockState()
 	{
 		return new BlockStateContainer(this, PLACED);
-	}
-	
-	@Override
-	@Optional.Method(modid = "thaumcraft")
-	public boolean canStabaliseInfusion(World world, BlockPos pos)
-	{
-		return true;
-	}
-	
-	@Override
-	@Optional.Method(modid = "thaumcraft")
-	public float getStabilizationAmount(World world, BlockPos pos)
-	{
-		return 2;
 	}
 }

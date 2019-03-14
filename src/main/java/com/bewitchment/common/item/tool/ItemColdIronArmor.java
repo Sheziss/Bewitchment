@@ -2,9 +2,8 @@ package com.bewitchment.common.item.tool;
 
 import java.util.List;
 
-import com.bewitchment.Bewitchment;
+import com.bewitchment.common.item.util.ModItemArmor;
 
-import moriyashiine.froglib.common.item.FLItemArmor;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -14,11 +13,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemColdIronArmor extends FLItemArmor
+public class ItemColdIronArmor extends ModItemArmor
 {
 	public ItemColdIronArmor(String name, ArmorMaterial mat, EntityEquipmentSlot slot)
 	{
-		super(Bewitchment.MOD_ID, name, Bewitchment.proxy.tab, mat, slot);
+		super(name, mat, slot);
 	}
 	
 	@Override

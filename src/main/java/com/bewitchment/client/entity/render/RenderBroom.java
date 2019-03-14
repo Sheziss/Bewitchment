@@ -32,9 +32,7 @@ public class RenderBroom extends Render<EntityBroom>
 	{
 		GlStateManager.pushMatrix();
 		bindEntityTexture(entity);
-
 		float smoothYaw = entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * partialTicks;
-
 		GlStateManager.translate(x, y - 0.5d, z);
 		GlStateManager.scale(0.0625d, 0.0625d, 0.0625d);
 		GlStateManager.rotate(90 - smoothYaw, 0, 1, 0);

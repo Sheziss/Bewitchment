@@ -1,12 +1,13 @@
 package com.bewitchment.common.block.tile.entity;
 
 import java.util.Random;
+import java.util.function.Predicate;
 
 import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.api.registry.OvenRecipe;
-import com.bewitchment.common.registry.ModItems;
+import com.bewitchment.common.block.tile.entity.util.FLTileEntity;
+import com.bewitchment.registry.ModObjects;
 
-import moriyashiine.froglib.common.block.tile.FLTileEntity;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -28,28 +29,6 @@ public class TileEntityOven extends FLTileEntity implements ITickable, IWorldNam
 	}
 	
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound tag)
-	{
-		tag.setString("custom_name", custom_name);
-		tag.setString("current_recipe", current_recipe);
-		tag.setInteger("burn_time", burn_time);
-		tag.setInteger("fuel_burn_time", fuel_burn_time);
-		tag.setInteger("progress", progress);
-		return super.writeToNBT(tag);
-	}
-	
-	@Override
-	public void readFromNBT(NBTTagCompound tag)
-	{
-		super.readFromNBT(tag);
-		custom_name = tag.getString("custom_name");
-		current_recipe = tag.getString("current_recipe");
-		burn_time = tag.getInteger("burn_time");
-		fuel_burn_time = tag.getInteger("fuel_burn_time");
-		progress = tag.getInteger("progress");
-	}
-	
-	@Override
 	public String getName()
 	{
 		return hasCustomName() ? custom_name : I18n.format(world.getBlockState(pos).getBlock().getTranslationKey() + ".name");
@@ -64,19 +43,19 @@ public class TileEntityOven extends FLTileEntity implements ITickable, IWorldNam
 	@Override
 	public boolean isItemValid(int index, ItemStack stack)
 	{
-		return index == 0 ? TileEntityFurnace.isItemFuel(stack) : index == 1 ? stack.getItem() == ModItems.empty_jar : index == 2;
+		return index == 0 ? TileEntityFurnace.isItemFuel(stack) : index == 1 ? stack.getItem() == ModObjects.empty_jar : index == 2;
 	}
 	
 	@Override
 	public void update()
 	{
-		OvenRecipe recipe = BewitchmentAPI.REGISTRY_OVEN.getValuesCollection().parallelStream().filter(dr -> dr.matches(getStackInSlot(2))).findFirst().orElse(null);
+		OvenRecipe recipe = BewitchmentAPI.REGISTRY_OVEN.getValuesCollection().parallelStream().filter(new Predicate<OvenRecipe>() {@Override public boolean test(OvenRecipe dr) {return dr.matches(getStackInSlot(2));}}).findFirst().orElse(null);
 		if (recipe == null)
 		{
 			current_recipe = "";
 			progress = 0;
 		}
-		else if (!current_recipe.equals(recipe.getRegistryName().toString()) && (getStackInSlot(3).isEmpty() || (getStackInSlot(3).isItemEqual(recipe.getOutput()) && getStackInSlot(3).getCount() < getSlotLimit(3))) && (getStackInSlot(4).isEmpty() || (getStackInSlot(4).isItemEqual(recipe.getOutput()) && getStackInSlot(4).getCount() < getSlotLimit(4)))) current_recipe = recipe.getRegistryName().toString();
+		else if (!current_recipe.equals(recipe.getRegistryName().toString()) && (getStackInSlot(3).isEmpty() || getStackInSlot(3).isItemEqual(recipe.getOutput()) && getStackInSlot(3).getCount() < getSlotLimit(3)) && (getStackInSlot(4).isEmpty() || getStackInSlot(4).isItemEqual(recipe.getOutput()) && getStackInSlot(4).getCount() < getSlotLimit(4))) current_recipe = recipe.getRegistryName().toString();
 		if (burn_time > 0) burn_time--;
 		if (!current_recipe.isEmpty())
 		{
@@ -85,8 +64,7 @@ public class TileEntityOven extends FLTileEntity implements ITickable, IWorldNam
 				burn_time = TileEntityFurnace.getItemBurnTime(getStackInSlot(0));
 				fuel_burn_time = burn_time;
 				extractItem(0, 1, false);
-			}
-			else if (burn_time > 0)
+			} else if (burn_time > 0)
 			{
 				progress++;
 				if (progress >= 100)
@@ -109,5 +87,27 @@ public class TileEntityOven extends FLTileEntity implements ITickable, IWorldNam
 			}
 		}
 		markDirty();
+	}
+
+	@Override
+	public NBTTagCompound writeToNBT(NBTTagCompound tag)
+	{
+		tag.setString("custom_name", custom_name);
+		tag.setString("current_recipe", current_recipe);
+		tag.setInteger("burn_time", burn_time);
+		tag.setInteger("fuel_burn_time", fuel_burn_time);
+		tag.setInteger("progress", progress);
+		return super.writeToNBT(tag);
+	}
+	
+	@Override
+	public void readFromNBT(NBTTagCompound tag)
+	{
+		super.readFromNBT(tag);
+		custom_name = tag.getString("custom_name");
+		current_recipe = tag.getString("current_recipe");
+		burn_time = tag.getInteger("burn_time");
+		fuel_burn_time = tag.getInteger("fuel_burn_time");
+		progress = tag.getInteger("progress");
 	}
 }

@@ -37,8 +37,74 @@ public class BewitchmentAPI
 	public static EnumCreatureAttribute SPIRIT;
 	
 	/**
+	 * Gets the scan value associated with a block
+	 *
+	 * @param block the block to be checked
+	 * @return the scan value of the block
+	 */
+	public static final int getAltarScanValue(Block block)
+	{
+		return TileEntityWitchesAltar.SCAN_VALUES.getOrDefault(block, 0);
+	}
+	
+	/**
+	 * Gets the sword multiplier value associated with a block
+	 *
+	 * @param item the item to be checked
+	 * @return the multiplier value of the item
+	 */
+	public static final double getAltarSwordMultiplierValue(Item item)
+	{
+		return TileEntityWitchesAltar.SWORD_MULTIPLIER_VALUES.getOrDefault(item, 0d);
+	}
+	
+	/**
+	 * Gets the sword radius value associated with a block
+	 *
+	 * @param item the item to be checked
+	 * @return the radius value of the item
+	 */
+	public static final int getAltarSwordRadiusValue(Item item)
+	{
+		return TileEntityWitchesAltar.SWORD_RADIUS_VALUES.getOrDefault(item, 0);
+	}
+	
+	/**
+	 * Registers a new scan value for the Witches' Altar.
+	 *
+	 * @param block the block to be registered
+	 * @param power the value associated with the block
+	 */
+	public static final void registerAltarScanValue(Block block, int power)
+	{
+		TileEntityWitchesAltar.SCAN_VALUES.put(block, power);
+	}
+	
+	/**
+	 * Registers a new sword multiplier value for the Witches' Altar.
+	 *
+	 * @param item               the item to be registered
+	 * @param variety_multiplier the multiplier associated with the item
+	 */
+	public static final void registerAltarSwordMultiplier(Item item, double variety_multiplier)
+	{
+		TileEntityWitchesAltar.SWORD_MULTIPLIER_VALUES.put(item, variety_multiplier);
+	}
+	
+	/**
+	 * Registers a new sword radius value for the Witches' Altar.
+	 *
+	 * @param item   the item to be registered
+	 * @param radius the radius associated with the item
+	 */
+	public static final void registerAltarSwordRadius(Item item, int radius)
+	{
+		TileEntityWitchesAltar.SWORD_RADIUS_VALUES.put(item, radius);
+	}
+	
+	/**
 	 * Registers a new DistilleryRecipe, for use in the Distillery.
-	 * 
+	 *
 	 * @param recipe the recipe to register
 	 * @return the recipe registered
 	 */
@@ -49,8 +115,20 @@ public class BewitchmentAPI
 	}
 	
 	/**
+	 * Registers a new LoomRecipe, for use with the Loom.
+	 *
+	 * @param recipe the recipe to register
+	 * @return the recipe registered
+	 */
+	public static final LoomRecipe registerLoomRecipe(LoomRecipe recipe)
+	{
+		REGISTRY_LOOM.register(recipe);
+		return recipe;
+	}
+	
+	/**
 	 * Registers a new OvenRecipe, for use in the Oven.
-	 * 
+	 *
 	 * @param recipe the recipe to register
 	 * @return the recipe registered
 	 */
@@ -62,7 +140,7 @@ public class BewitchmentAPI
 	
 	/**
 	 * Registers a new Ritual, for use with rituals.
-	 * 
+	 *
 	 * @param ritual the ritual to register
 	 * @return the ritual registered
 	 */
@@ -73,20 +151,8 @@ public class BewitchmentAPI
 	}
 	
 	/**
-	 * Registers a new LoomRecipe, for use with the Loom.
-	 * 
-	 * @param recipe the recipe to register
-	 * @return the recipe registered
-	 */
-	public static final LoomRecipe registerLoomRecipe(LoomRecipe recipe)
-	{
-		REGISTRY_LOOM.register(recipe);
-		return recipe;
-	}
-	
-	/**
 	 * Registers a new Spell.
-	 * 
+	 *
 	 * @param recipe the spell to register
 	 * @return the spell registered
 	 */
@@ -94,71 +160,5 @@ public class BewitchmentAPI
 	{
 		REGISTRY_SPELL.register(spell);
 		return spell;
-	}
-	
-	/**
-	 * Registers a new scan value for the Witches' Altar.
-	 * 
-	 * @param block the block to be registered
-	 * @param power the value associated with the block
-	 */
-	public static final void registerAltarScanValue(Block block, int power)
-	{
-		TileEntityWitchesAltar.SCAN_VALUES.put(block, power);
-	}
-	
-	/**
-	 * Gets the scan value associated with a block
-	 * 
-	 * @param block the block to be checked
-	 * @return the scan value of the block
-	 */
-	public static final int getAltarScanValue(Block block)
-	{
-		return TileEntityWitchesAltar.SCAN_VALUES.getOrDefault(block, 0);
-	}
-	
-	/**
-	 * Registers a new sword multiplier value for the Witches' Altar.
-	 * 
-	 * @param item the item to be registered
-	 * @param variety_multiplier the multiplier associated with the item
-	 */
-	public static final void registerAltarSwordMultiplier(Item item, double variety_multiplier)
-	{
-		TileEntityWitchesAltar.SWORD_MULTIPLIER_VALUES.put(item, variety_multiplier);
-	}
-	
-	/**
-	 * Gets the sword multiplier value associated with a block
-	 * 
-	 * @param item the item to be checked
-	 * @return the multiplier value of the item
-	 */
-	public static final double getAltarSwordMultiplierValue(Item item)
-	{
-		return TileEntityWitchesAltar.SWORD_MULTIPLIER_VALUES.getOrDefault(item, 0d);
-	}
-	
-	/**
-	 * Registers a new sword radius value for the Witches' Altar.
-	 * 
-	 * @param item the item to be registered
-	 * @param radius the radius associated with the item
-	 */
-	public static final void registerAltarSwordRadius(Item item, int radius)
-	{
-		TileEntityWitchesAltar.SWORD_RADIUS_VALUES.put(item, radius);
-	}
-	
-	/**
-	 * Gets the sword radius value associated with a block
-	 * 
-	 * @param item the item to be checked
-	 * @return the radius value of the item
-	 */
-	public static final int getAltarSwordRadiusValue(Item item)
-	{
-		return TileEntityWitchesAltar.SWORD_RADIUS_VALUES.getOrDefault(item, 0);
 	}
 }
