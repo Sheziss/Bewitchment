@@ -94,7 +94,7 @@ public class TileEntityWitchesAltar extends ModTileEntity implements ITickable
 							for (EntityPlayer player : world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).grow(5)))
 							{
 								MagicPower cap = player.getCapability(MagicPower.CAPABILITY, null);
-								int amount = Math.min(20, cap.getMaxAmount() - cap.getAmount());
+								int amount = Math.min(20, (cap.getMaxAmount() + cap.getBonusAmount()) - cap.getAmount());
 								if (magic_power.drain(amount)) cap.fill(amount / 10);
 							}
 						}
