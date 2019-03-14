@@ -64,10 +64,7 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable
 			}
 			else if (burn_time > 0)
 			{
-				if (progress < recipe_time)
-				{
-					if (true) progress++; // mp.drainaltarfirst
-				}
+				if (progress < recipe_time && magic_power.drainAltarFirst(world.getClosestPlayer(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 5, false), pos, 2)) progress++;
 				else progress = 0;
 			}
 		}
@@ -77,11 +74,11 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound tag)
 	{
+		magic_power.writeToNBT(tag);
 		tag.setString("current_recipe", current_recipe);
 		tag.setInteger("burn_time", burn_time);
 		tag.setInteger("progress", progress);
 		tag.setInteger("recipe_time", recipe_time);
-		tag.setInteger("power", magic_power.getAmount());
 		return super.writeToNBT(tag);
 	}
 	
@@ -89,11 +86,11 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable
 	public void readFromNBT(NBTTagCompound tag)
 	{
 		super.readFromNBT(tag);
+		magic_power.readFromNBT(tag);
 		current_recipe = tag.getString("current_recipe");
 		burn_time = tag.getInteger("burn_time");
 		progress = tag.getInteger("progress");
 		recipe_time = tag.getInteger("recipe_time");
-		magic_power.setAmount(tag.getInteger("power"));
 	}
 	
 	private boolean canOutputFit(DistilleryRecipe recipe)

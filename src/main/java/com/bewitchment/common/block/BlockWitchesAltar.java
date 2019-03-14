@@ -65,6 +65,22 @@ public class BlockWitchesAltar extends ModBlockContainer
 		setDefaultState(blockState.getBaseState().withProperty(TYPE, AltarType.UNFORMED).withProperty(COLOR, 16));
 	}
 	
+	public static BlockPos getNearestAltar(World world, BlockPos pos)
+	{
+		for (int x = -16; x <= 16; x++)
+		{
+			for (int y = -16; y <= 16; y++)
+			{
+				for (int z = -16; z <= 16; z++)
+				{
+					TileEntity tile = world.getTileEntity(getAltarPosition(world, pos.add(x, y, z)));
+					if (tile.hasCapability(MagicPowerProvider.CAPABILITY, null)) return getAltarPosition(world, pos.add(x, y, z));
+				}
+			}
+		}
+		return null;
+	}
+	
 	public static BlockPos getAltarPosition(IBlockAccess world, BlockPos pos)
 	{
 		for (int x = -1; x <= 1; x++)

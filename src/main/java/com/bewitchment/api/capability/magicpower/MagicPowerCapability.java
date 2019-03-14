@@ -1,10 +1,21 @@
 package com.bewitchment.api.capability.magicpower;
 
+import com.bewitchment.common.block.BlockWitchesAltar;
+
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.math.BlockPos;
 
 public class MagicPowerCapability
 {
 	private int amount = 0, max_amount = 0;
+	
+	public boolean drainAltarFirst(EntityPlayer player, BlockPos pos, int amount)
+	{
+		if (amount == 0) return true;
+		if (BlockWitchesAltar.getNearestAltar(player.world, pos) != null) return player.world.getTileEntity(BlockWitchesAltar.getNearestAltar(player.world, pos)).getCapability(MagicPowerProvider.CAPABILITY, null).drain(amount);
+		return player.getCapability(MagicPowerProvider.CAPABILITY, null).drain(amount);
+	}
 	
 	public boolean drain(int amount)
 	{
