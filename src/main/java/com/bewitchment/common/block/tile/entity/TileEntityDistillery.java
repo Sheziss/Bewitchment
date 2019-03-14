@@ -8,7 +8,7 @@ import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.api.capability.magicpower.MagicPowerCapability;
 import com.bewitchment.api.capability.magicpower.MagicPowerProvider;
 import com.bewitchment.api.registry.DistilleryRecipe;
-import com.bewitchment.common.block.tile.entity.util.FLTileEntity;
+import com.bewitchment.common.block.tile.entity.util.ModTileEntity;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -18,7 +18,7 @@ import net.minecraft.util.ITickable;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class TileEntityDistillery extends FLTileEntity implements ITickable
+public class TileEntityDistillery extends ModTileEntity implements ITickable
 {
 	public static final int BURN_TIME = 1200;
 	

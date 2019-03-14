@@ -6,7 +6,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public abstract class FLContainer extends Container
+public abstract class ModContainer extends Container
 {
 	protected void addPlayerSlots(InventoryPlayer inventory)
 	{

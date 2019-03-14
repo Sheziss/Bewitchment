@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 
 import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.api.registry.OvenRecipe;
-import com.bewitchment.common.block.tile.entity.util.FLTileEntity;
+import com.bewitchment.common.block.tile.entity.util.ModTileEntity;
 import com.bewitchment.registry.ModObjects;
 
 import net.minecraft.client.resources.I18n;
@@ -15,7 +15,7 @@ import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.ITickable;
 import net.minecraft.world.IWorldNameable;
 
-public class TileEntityOven extends FLTileEntity implements ITickable, IWorldNameable
+public class TileEntityOven extends ModTileEntity implements ITickable, IWorldNameable
 {
 	private final Random rand = new Random();
 	

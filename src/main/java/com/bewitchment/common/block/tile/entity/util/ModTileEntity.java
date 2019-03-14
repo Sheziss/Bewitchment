@@ -11,11 +11,11 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 
-public abstract class FLTileEntity extends TileEntity implements IItemHandlerModifiable
+public abstract class ModTileEntity extends TileEntity implements IItemHandlerModifiable
 {
 	private ItemStackHandler inventory;
 	
-	protected FLTileEntity(int inventory_size)
+	protected ModTileEntity(int inventory_size)
 	{
 		inventory = new ItemStackHandler(inventory_size)
 		{

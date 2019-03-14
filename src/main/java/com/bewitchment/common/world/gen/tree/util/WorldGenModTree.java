@@ -7,9 +7,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
-public abstract class WorldGenFLTree extends WorldGenAbstractTree
+public abstract class WorldGenModTree extends WorldGenAbstractTree
 {
-	public WorldGenFLTree(boolean notify)
+	public WorldGenModTree(boolean notify)
 	{
 		super(notify);
 	}

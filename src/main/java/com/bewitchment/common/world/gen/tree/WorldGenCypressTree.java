@@ -2,13 +2,13 @@ package com.bewitchment.common.world.gen.tree;
 
 import java.util.Random;
 
-import com.bewitchment.common.world.gen.tree.util.WorldGenFLTree;
+import com.bewitchment.common.world.gen.tree.util.WorldGenModTree;
 import com.bewitchment.registry.ModObjects;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class WorldGenCypressTree extends WorldGenFLTree
+public class WorldGenCypressTree extends WorldGenModTree
 {
 	public WorldGenCypressTree(boolean notify)
 	{

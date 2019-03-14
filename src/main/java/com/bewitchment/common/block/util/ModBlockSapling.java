@@ -2,7 +2,7 @@ package com.bewitchment.common.block.util;
 
 import java.util.Random;
 
-import com.bewitchment.common.world.gen.tree.util.WorldGenFLTree;
+import com.bewitchment.common.world.gen.tree.util.WorldGenModTree;
 
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.state.IBlockState;
@@ -15,9 +15,9 @@ public class ModBlockSapling extends ModBlockBush implements IGrowable
 {
     private static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.8, 0.9);
     
-    private final Class<? extends WorldGenFLTree> gen;
+    private final Class<? extends WorldGenModTree> gen;
     
-    public ModBlockSapling(String name, Class<? extends WorldGenFLTree> gen, String... ore_dictionary_names)
+    public ModBlockSapling(String name, Class<? extends WorldGenModTree> gen, String... ore_dictionary_names)
 	{
 		super(name, ore_dictionary_names);
 		this.gen = gen;
@@ -44,7 +44,7 @@ public class ModBlockSapling extends ModBlockBush implements IGrowable
 	@Override
 	public void grow(World world, Random rand, BlockPos pos, IBlockState state)
 	{
-		WorldGenFLTree generator = null;
+		WorldGenModTree generator = null;
 		try {generator = gen.getDeclaredConstructor(boolean.class).newInstance(false);}
 		catch (Exception e) {e.printStackTrace();}
 		if (!world.isRemote && world.getLightFromNeighbors(pos.up()) >= 9 && world.getBlockState(pos.up()).getBlock().canBeReplacedByLeaves(world.getBlockState(pos.up()), world, pos.up()) && generator.canSaplingGrow(world, pos) && rand.nextBoolean()) generator.generate(world, rand, pos);

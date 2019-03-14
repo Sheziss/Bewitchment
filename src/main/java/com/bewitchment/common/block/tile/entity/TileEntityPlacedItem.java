@@ -1,10 +1,10 @@
 package com.bewitchment.common.block.tile.entity;
 
-import com.bewitchment.common.block.tile.entity.util.FLTileEntity;
+import com.bewitchment.common.block.tile.entity.util.ModTileEntity;
 
 import net.minecraft.item.ItemStack;
 
-public class TileEntityPlacedItem extends FLTileEntity
+public class TileEntityPlacedItem extends ModTileEntity
 {
 	public TileEntityPlacedItem()
 	{

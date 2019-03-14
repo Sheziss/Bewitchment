@@ -8,7 +8,7 @@ import com.bewitchment.api.capability.magicpower.MagicPowerCapability;
 import com.bewitchment.api.capability.magicpower.MagicPowerProvider;
 import com.bewitchment.common.block.BlockWitchesAltar;
 import com.bewitchment.common.block.BlockWitchesAltar.AltarType;
-import com.bewitchment.common.block.tile.entity.util.FLTileEntity;
+import com.bewitchment.common.block.tile.entity.util.ModTileEntity;
 import com.bewitchment.registry.ModObjects;
 
 import net.minecraft.block.Block;
@@ -24,7 +24,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 
-public class TileEntityWitchesAltar extends FLTileEntity implements ITickable
+public class TileEntityWitchesAltar extends ModTileEntity implements ITickable
 {
 	public static final Map<Block, Integer> SCAN_VALUES = new HashMap<>();
 	public static final Map<Item, Double> SWORD_MULTIPLIER_VALUES = new HashMap<>();
