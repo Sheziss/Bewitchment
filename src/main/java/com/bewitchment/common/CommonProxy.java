@@ -13,6 +13,9 @@ import com.bewitchment.api.registry.Ritual;
 import com.bewitchment.common.block.BlockGlyph.GlyphType;
 import com.bewitchment.common.block.tile.entity.TileEntityGlyph;
 import com.bewitchment.common.entity.hostile.EntityAlphaHellhound;
+import com.bewitchment.common.entity.hostile.EntityBlackDog;
+import com.bewitchment.common.entity.hostile.EntityDemon;
+import com.bewitchment.common.entity.hostile.EntityDemoness;
 import com.bewitchment.common.entity.hostile.EntityHellhound;
 import com.bewitchment.common.entity.living.EntityBlindworm;
 import com.bewitchment.common.entity.living.EntityLizard;
@@ -299,8 +302,13 @@ public class CommonProxy
 		BewitchmentAPI.registerAthameLoot(EntityRegistry.getEntry(EntityToad.class), Sets.newHashSet(new ItemStack(ModObjects.toe_of_frog, 4)));
 		BewitchmentAPI.registerAthameLoot(EntityRegistry.getEntry(EntitySnake.class), Sets.newHashSet(new ItemStack(ModObjects.fillet_of_fenny_snake, 3), new ItemStack(ModObjects.adders_fork, 3)));
 		
-		BewitchmentAPI.registerAthameLoot(EntityRegistry.getEntry(EntityHellhound.class), Sets.newHashSet(new ItemStack(ModObjects.tongue_of_dog, 1), new ItemStack(ModObjects.hellhound_horn, 2), new ItemStack(Items.BLAZE_POWDER, 4)));
-		BewitchmentAPI.registerAthameLoot(EntityRegistry.getEntry(EntityAlphaHellhound.class), Sets.newHashSet(new ItemStack(ModObjects.tongue_of_dog, 1), new ItemStack(ModObjects.hellhound_horn, 4), new ItemStack(Items.BLAZE_POWDER, 8)));
+		BewitchmentAPI.registerAthameLoot(EntityRegistry.getEntry(EntityBlackDog.class), Sets.newHashSet(new ItemStack(ModObjects.tongue_of_dog), new ItemStack(ModObjects.ectoplasm, 4), new ItemStack(ModObjects.spectral_dust)));
+		
+		BewitchmentAPI.registerAthameLoot(EntityRegistry.getEntry(EntityHellhound.class), Sets.newHashSet(new ItemStack(ModObjects.tongue_of_dog), new ItemStack(ModObjects.hellhound_horn, 2), new ItemStack(Items.BLAZE_POWDER, 4)));
+		BewitchmentAPI.registerAthameLoot(EntityRegistry.getEntry(EntityAlphaHellhound.class), Sets.newHashSet(new ItemStack(ModObjects.tongue_of_dog), new ItemStack(ModObjects.hellhound_horn, 4), new ItemStack(Items.BLAZE_POWDER, 8)));
+		
+		BewitchmentAPI.registerAthameLoot(EntityRegistry.getEntry(EntityDemon.class), Sets.newHashSet(new ItemStack(ModObjects.demonic_heart)));
+		BewitchmentAPI.registerAthameLoot(EntityRegistry.getEntry(EntityDemoness.class), Sets.newHashSet(new ItemStack(ModObjects.demonic_heart)));
 	}
 	
 	private void registerCapabilities()
@@ -586,7 +594,11 @@ public class CommonProxy
 		LootTableList.register(new ResourceLocation(Bewitchment.MOD_ID, "entities/raven"));
 		LootTableList.register(new ResourceLocation(Bewitchment.MOD_ID, "entities/toad"));
 		
+		LootTableList.register(new ResourceLocation(Bewitchment.MOD_ID, "entities/black_dog"));
+		
 		LootTableList.register(new ResourceLocation(Bewitchment.MOD_ID, "entities/hellhound"));
 		LootTableList.register(new ResourceLocation(Bewitchment.MOD_ID, "entities/alpha_hellhound"));
+		
+		LootTableList.register(new ResourceLocation(Bewitchment.MOD_ID, "entities/demon"));
 	}
 }

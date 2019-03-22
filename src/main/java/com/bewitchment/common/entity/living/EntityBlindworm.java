@@ -1,8 +1,10 @@
 package com.bewitchment.common.entity.living;
 
 import com.bewitchment.Bewitchment;
+import com.bewitchment.common.entity.hostile.EntitySerpent;
 import com.bewitchment.common.entity.util.ModEntityAnimal;
 
+import net.ilexiconn.llibrary.server.animation.Animation;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIFollowParent;
@@ -14,7 +16,6 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest2;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -27,6 +28,12 @@ public class EntityBlindworm extends ModEntityAnimal
 	{
 		super(world, new ResourceLocation(Bewitchment.MOD_ID, "entities/blindworm"));
 		setSize(1, 0.3f);
+	}
+	
+	@Override
+	public Animation[] getAnimations()
+	{
+		return new Animation[] {};
 	}
 	
 	@Override
@@ -59,7 +66,7 @@ public class EntityBlindworm extends ModEntityAnimal
 	{
 		if (!world.isRemote && !isDead)
 		{
-			EntityPig entity = new EntityPig(world);
+			EntitySerpent entity = new EntitySerpent(world);
 			entity.setLocationAndAngles(posX, posY, posZ, rotationYaw, rotationPitch);
 			entity.setNoAI(isAIDisabled());
 			if (hasCustomName())

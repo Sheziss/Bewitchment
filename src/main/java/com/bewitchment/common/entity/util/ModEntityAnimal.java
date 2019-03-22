@@ -1,5 +1,7 @@
 package com.bewitchment.common.entity.util;
 
+import net.ilexiconn.llibrary.server.animation.Animation;
+import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.nbt.NBTTagCompound;
@@ -10,16 +12,46 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
-public abstract class ModEntityAnimal extends EntityAnimal
+public abstract class ModEntityAnimal extends EntityAnimal implements IAnimatedEntity
 {
 	public static final DataParameter<Integer> SKIN = EntityDataManager.createKey(ModEntityAnimal.class, DataSerializers.VARINT);
 	
 	private final ResourceLocation lootTableLocation;
 	
+	protected Animation currentAnimation;
+	protected int animationTick;
+	
 	public ModEntityAnimal(World world, ResourceLocation lootTableLocation)
 	{
 		super(world);
 		this.lootTableLocation = lootTableLocation;
+	}
+	
+	@Override
+	public abstract Animation[] getAnimations();
+	
+	@Override
+	public Animation getAnimation()
+	{
+		return currentAnimation;
+	}
+	
+	@Override
+	public int getAnimationTick()
+	{
+		return animationTick;
+	}
+	
+	@Override
+	public void setAnimation(Animation animation)
+	{
+		currentAnimation = animation;
+	}
+	
+	@Override
+	public void setAnimationTick(int tick)
+	{
+		animationTick = tick;
 	}
 	
 	@Override

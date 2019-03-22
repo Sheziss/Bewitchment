@@ -2,7 +2,6 @@ package com.bewitchment.common.entity.hostile;
 
 import com.bewitchment.Bewitchment;
 
-import net.ilexiconn.llibrary.server.animation.Animation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -17,8 +16,6 @@ import net.minecraft.world.World;
 public class EntityAlphaHellhound extends EntityHellhound
 {
 	private final BossInfoServer bossInfo = (BossInfoServer) (new BossInfoServer(getDisplayName(), BossInfo.Color.RED, BossInfo.Overlay.PROGRESS)).setDarkenSky(false);
-	
-	public static final Animation BITE = Animation.create(10);
 	
 	public EntityAlphaHellhound(World world)
 	{
@@ -38,7 +35,7 @@ public class EntityAlphaHellhound extends EntityHellhound
 			{
 				setAnimation(BITE);
 				((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 2000, 3, false, false));
-				entity.setFire(125);
+				entity.setFire(20);
 			}
 		}
 		return flag;
@@ -88,10 +85,10 @@ public class EntityAlphaHellhound extends EntityHellhound
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(8);
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(10);
 		getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(4.5);
 		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100);
-		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.95);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.675);
 		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(48);
 	}
 }

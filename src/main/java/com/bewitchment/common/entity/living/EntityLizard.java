@@ -3,6 +3,7 @@ package com.bewitchment.common.entity.living;
 import com.bewitchment.Bewitchment;
 import com.bewitchment.common.entity.util.ModEntityAnimal;
 
+import net.ilexiconn.llibrary.server.animation.Animation;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIFollowParent;
@@ -25,6 +26,12 @@ public class EntityLizard extends ModEntityAnimal
 	{
 		super(world, new ResourceLocation(Bewitchment.MOD_ID, "entities/lizard"));
 		setSize(1, 0.3f);
+	}
+	
+	@Override
+	public Animation[] getAnimations()
+	{
+		return new Animation[] {};
 	}
 	
 	@Override
@@ -66,13 +73,13 @@ public class EntityLizard extends ModEntityAnimal
 		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(0.5);
 //		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(6);
 		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10);
-		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.85);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.6);
 	}
 	
 	@Override
 	protected void initEntityAI()
 	{
-		tasks.addTask(0, new EntityAIPanic(this, 0.5));
+		tasks.addTask(0, new EntityAIPanic(this, getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()));
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, new EntityAIMate(this, getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue() / 2));
 		tasks.addTask(2, new EntityAIWatchClosest2(this, EntityPlayer.class, 5, 1));

@@ -1,9 +1,11 @@
 package com.bewitchment.common.entity.living;
 
 import com.bewitchment.Bewitchment;
+import com.bewitchment.common.entity.hostile.EntitySerpent;
 import com.bewitchment.common.entity.util.ModEntityTameable;
 import com.bewitchment.registry.ModObjects;
 
+import net.ilexiconn.llibrary.server.animation.Animation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
@@ -23,7 +25,6 @@ import net.minecraft.entity.ai.EntityAIWatchClosest2;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityChicken;
-import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntityRabbit;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
@@ -47,6 +48,12 @@ public class EntitySnake extends ModEntityTameable
 	{
 		super(world, new ResourceLocation(Bewitchment.MOD_ID, "entities/snake"), Items.CHICKEN, Items.RABBIT);
 		setSize(1, 0.3f);
+	}
+	
+	@Override
+	public Animation[] getAnimations()
+	{
+		return new Animation[] {};
 	}
 	
 	@Override
@@ -139,7 +146,7 @@ public class EntitySnake extends ModEntityTameable
 	{
 		if (!world.isRemote && !isDead)
 		{
-			EntityPig entity = new EntityPig(world);
+			EntitySerpent entity = new EntitySerpent(world);
 			entity.setLocationAndAngles(posX, posY, posZ, rotationYaw, rotationPitch);
 			entity.setNoAI(isAIDisabled());
 			if (hasCustomName())
@@ -176,7 +183,7 @@ public class EntitySnake extends ModEntityTameable
 		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.5);
 		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(15);
 		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10);
-		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.55);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.6);
 	}
 	
 	@Override
@@ -190,11 +197,11 @@ public class EntitySnake extends ModEntityTameable
 		tasks.addTask(3, new EntityAIFollowParent(this, getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()));
 		tasks.addTask(3, new EntityAIWander(this, getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue() * 2 / 3));
 		tasks.addTask(3, new EntityAILookIdle(this));
-		tasks.addTask(4, new EntityAIFollowOwner(this, 0.5, 2, 24));
+		tasks.addTask(4, new EntityAIFollowOwner(this, getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue(), 2, 5));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
 		targetTasks.addTask(0, new EntityAIOwnerHurtByTarget(this));
 		targetTasks.addTask(1, new EntityAIOwnerHurtTarget(this));
-		targetTasks.addTask(2, new EntityAITargetNonTamed<>(this, EntityPlayer.class, true, p -> p.getDistanceSq(this) < 1));
+		targetTasks.addTask(2, new EntityAITargetNonTamed<>(this, EntityPlayer.class, false, p -> p.getDistanceSq(this) < 1));
 		targetTasks.addTask(3, new EntityAITargetNonTamed<>(this, EntityLivingBase.class, false, e -> e instanceof EntityBlindworm || e instanceof EntityChicken || e instanceof EntityLizard || e instanceof EntityRabbit));
 	}
 }

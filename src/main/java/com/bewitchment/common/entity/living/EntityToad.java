@@ -5,6 +5,7 @@ import com.bewitchment.common.entity.util.ModEntityTameable;
 import com.bewitchment.registry.ModObjects;
 import com.bewitchment.registry.ModSounds;
 
+import net.ilexiconn.llibrary.server.animation.Animation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
@@ -47,6 +48,12 @@ public class EntityToad extends ModEntityTameable
 	{
 		super(world, new ResourceLocation(Bewitchment.MOD_ID, "entities/toad"), Items.SPIDER_EYE, Items.FERMENTED_SPIDER_EYE, ModObjects.silver_scales, ModObjects.envenomed_fang);
 		setSize(1, 0.3f);
+	}
+	
+	@Override
+	public Animation[] getAnimations()
+	{
+		return new Animation[] {};
 	}
 	
 	@Override
@@ -117,7 +124,7 @@ public class EntityToad extends ModEntityTameable
 		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(0.5);
 		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(10);
 		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10);
-		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.7);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5);
 	}
 	
 	@Override
@@ -139,7 +146,7 @@ public class EntityToad extends ModEntityTameable
 		tasks.addTask(3, new EntityAIFollowParent(this, getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()));
 		tasks.addTask(3, new EntityAIWander(this, getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue() * 2 / 3));
 		tasks.addTask(3, new EntityAILookIdle(this));
-		tasks.addTask(4, new EntityAIFollowOwner(this, 0.5, 2, 24));
+		tasks.addTask(4, new EntityAIFollowOwner(this, getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue(), 2, 5));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
 		targetTasks.addTask(0, new EntityAIOwnerHurtByTarget(this));
 		targetTasks.addTask(1, new EntityAIOwnerHurtTarget(this));

@@ -6,12 +6,12 @@ import com.bewitchment.common.item.util.ModItemSeed;
 import com.bewitchment.registry.ModObjects;
 import com.bewitchment.registry.ModSounds;
 
+import net.ilexiconn.llibrary.server.animation.Animation;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIFleeSun;
 import net.minecraft.entity.ai.EntityAIFollowOwnerFlying;
 import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -28,6 +28,7 @@ import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemSeeds;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigate;
@@ -42,9 +43,20 @@ public class EntityRaven extends ModEntityTameable
 {
 	public EntityRaven(World world)
 	{
-		super(world, new ResourceLocation(Bewitchment.MOD_ID, "entities/raven"), Items.GOLD_NUGGET, ModObjects.nugget_silver);
+		this(world, new ResourceLocation(Bewitchment.MOD_ID, "entities/raven"), Items.GOLD_NUGGET, ModObjects.nugget_silver);
+	}
+	
+	protected EntityRaven(World world, ResourceLocation lootTableLocation, Item... tameItems)
+	{
+		super(world, lootTableLocation, tameItems);
 		setSize(0.4f, 0.4f);
 		moveHelper = new EntityFlyHelper(this);
+	}
+	
+	@Override
+	public Animation[] getAnimations()
+	{
+		return new Animation[] {};
 	}
 	
 	@Override
@@ -62,7 +74,7 @@ public class EntityRaven extends ModEntityTameable
 	@Override
 	protected PathNavigate createNavigator(World world)
 	{
-		final PathNavigateFlying path = new PathNavigateFlying(this, world);
+		PathNavigateFlying path = new PathNavigateFlying(this, world);
 		path.setCanEnterDoors(true);
 		path.setCanFloat(true);
 		path.setCanOpenDoors(false);
@@ -125,25 +137,24 @@ public class EntityRaven extends ModEntityTameable
 		getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
 		getAttributeMap().registerAttribute(SharedMonsterAttributes.FLYING_SPEED);
 		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.5);
-		getEntityAttribute(SharedMonsterAttributes.FLYING_SPEED).setBaseValue(1);
-//		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(6);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(10);
 		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8);
-		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.85);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4);
+		getEntityAttribute(SharedMonsterAttributes.FLYING_SPEED).setBaseValue(1);
 	}
 	
 	@Override
 	protected void initEntityAI()
 	{
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, new EntityAIFleeSun(this, 1));
 		tasks.addTask(2, new EntityAIMate(this, getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue() / 2));
-		tasks.addTask(2, new EntityAIAttackMelee(this, getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue(), false));
+		tasks.addTask(2, new EntityAIAttackMelee(this, 0.5, false));
 		tasks.addTask(3, new EntityAIWatchClosest2(this, EntityPlayer.class, 5, 1));
 		tasks.addTask(3, aiSit);
 		tasks.addTask(3, new EntityAIFollowParent(this, getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()));
 		tasks.addTask(3, new EntityAIWanderAvoidWaterFlying(this, getEntityAttribute(SharedMonsterAttributes.FLYING_SPEED).getAttributeValue()));
 		tasks.addTask(4, new EntityAIWander(this, getEntityAttribute(SharedMonsterAttributes.FLYING_SPEED).getAttributeValue()));
-		tasks.addTask(5, new EntityAIFollowOwnerFlying(this, 0.5, 2, 24));
+		tasks.addTask(5, new EntityAIFollowOwnerFlying(this, getEntityAttribute(SharedMonsterAttributes.FLYING_SPEED).getAttributeValue(), 2, 5));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
 		targetTasks.addTask(0, new EntityAIOwnerHurtByTarget(this));
 		targetTasks.addTask(1, new EntityAIOwnerHurtTarget(this));

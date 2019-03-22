@@ -4,6 +4,9 @@ import com.bewitchment.Bewitchment;
 import com.bewitchment.client.block.tile.render.RenderTileEntityGemBowl;
 import com.bewitchment.client.block.tile.render.RenderTileEntityPlacedItem;
 import com.bewitchment.client.entity.render.hostile.RenderAlphaHellhound;
+import com.bewitchment.client.entity.render.hostile.RenderBlackDog;
+import com.bewitchment.client.entity.render.hostile.RenderDemon;
+import com.bewitchment.client.entity.render.hostile.RenderDemoness;
 import com.bewitchment.client.entity.render.hostile.RenderHellhound;
 import com.bewitchment.client.entity.render.hostile.RenderSerpent;
 import com.bewitchment.client.entity.render.living.RenderBlindworm;
@@ -24,6 +27,9 @@ import com.bewitchment.common.block.BlockGlyph.GlyphType;
 import com.bewitchment.common.block.tile.entity.TileEntityGemBowl;
 import com.bewitchment.common.block.tile.entity.TileEntityPlacedItem;
 import com.bewitchment.common.entity.hostile.EntityAlphaHellhound;
+import com.bewitchment.common.entity.hostile.EntityBlackDog;
+import com.bewitchment.common.entity.hostile.EntityDemon;
+import com.bewitchment.common.entity.hostile.EntityDemoness;
 import com.bewitchment.common.entity.hostile.EntityHellhound;
 import com.bewitchment.common.entity.hostile.EntitySerpent;
 import com.bewitchment.common.entity.living.EntityBlindworm;
@@ -88,9 +94,13 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntitySnake.class, RenderSnake::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityToad.class, RenderToad::new);
 		
+		RenderingRegistry.registerEntityRenderingHandler(EntityBlackDog.class, RenderBlackDog::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityHellhound.class, RenderHellhound::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityAlphaHellhound.class, RenderAlphaHellhound::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntitySerpent.class, RenderSerpent::new);
+		
+		RenderingRegistry.registerEntityRenderingHandler(EntityDemon.class, RenderDemon::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityDemoness.class, RenderDemoness::new);
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPlacedItem.class, new RenderTileEntityPlacedItem());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGemBowl.class, new RenderTileEntityGemBowl());
