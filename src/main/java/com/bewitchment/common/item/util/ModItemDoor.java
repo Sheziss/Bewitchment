@@ -26,19 +26,19 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ModItemDoor extends ItemDoor implements IOreDictionaryContainer
 {
-	private final List<String> ore_dictionary_names = new ArrayList<String>();
+	private final List<String> oreDictionaryNames = new ArrayList<String>();
 	
 	public final FLBlockDoor door;
 	
-	public ModItemDoor(String name, Block base, String... ore_dictionary_names)
+	public ModItemDoor(String name, Block base, String... oreDictionaryNames)
 	{
-		this(name, base, new FLBlockDoor("block_" + name, base), ore_dictionary_names);
+		this(name, base, new FLBlockDoor("block_" + name, base), oreDictionaryNames);
 	}
 	
-	private ModItemDoor(String name, Block base, FLBlockDoor door, String... ore_dictionary_names)
+	private ModItemDoor(String name, Block base, FLBlockDoor door, String... oreDictionaryNames)
 	{
 		super(door);
-		Bewitchment.proxy.registerValues(this, name, ore_dictionary_names);
+		Bewitchment.proxy.registerValues(this, name, oreDictionaryNames);
 		this.door = door;
 		this.door.drop = new ItemStack(this);
 	}
@@ -46,12 +46,12 @@ public class ModItemDoor extends ItemDoor implements IOreDictionaryContainer
 	@Override
 	public List<String> getOreDictionaryNames()
 	{
-		return ore_dictionary_names;
+		return oreDictionaryNames;
 	}
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag flag)
+	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced)
 	{
 		String tip = "tooltip." + getTranslationKey().substring(5);
 		if (!I18n.format(tip).equals(tip)) tooltip.add(TextFormatting.GRAY + I18n.format(tip));
@@ -69,6 +69,13 @@ public class ModItemDoor extends ItemDoor implements IOreDictionaryContainer
 		}
 		
 		@Override
+		@SideOnly(Side.CLIENT)
+		public BlockRenderLayer getRenderLayer()
+		{
+			return getDefaultState().getMaterial() == Material.ICE || getDefaultState().getMaterial() == Material.GLASS ? BlockRenderLayer.TRANSLUCENT : BlockRenderLayer.CUTOUT;
+		}
+		
+		@Override
 		public ItemStack getItem(World world, BlockPos pos, IBlockState state)
 		{
 			return drop;
@@ -78,13 +85,6 @@ public class ModItemDoor extends ItemDoor implements IOreDictionaryContainer
 		public Item getItemDropped(IBlockState state, Random rand, int fortune)
 		{
 			return state.getValue(HALF) == EnumDoorHalf.UPPER ? Items.AIR : drop.getItem();
-		}
-		
-		@Override
-		@SideOnly(Side.CLIENT)
-		public BlockRenderLayer getRenderLayer()
-		{
-			return getDefaultState().getMaterial() == Material.ICE || getDefaultState().getMaterial() == Material.GLASS ? BlockRenderLayer.TRANSLUCENT : BlockRenderLayer.CUTOUT;
 		}
 	}
 }

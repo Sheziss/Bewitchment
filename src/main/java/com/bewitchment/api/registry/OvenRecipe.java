@@ -1,7 +1,5 @@
 package com.bewitchment.api.registry;
 
-import com.bewitchment.Bewitchment;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryEntry;
@@ -9,15 +7,15 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 public class OvenRecipe extends IForgeRegistryEntry.Impl<OvenRecipe>
 {
 	private final ItemStack input, output, byproduct;
-	private final float byproduct_chance;
+	private final float byproductChance;
 	
-	public OvenRecipe(String name, ItemStack input, ItemStack output, ItemStack byproduct, float byproduct_chance)
+	public OvenRecipe(String modid, String name, ItemStack input, ItemStack output, ItemStack byproduct, float byproductChance)
 	{
-		this.setRegistryName(new ResourceLocation(Bewitchment.MOD_ID, name));
+		this.setRegistryName(new ResourceLocation(modid, name));
 		this.input = input;
 		this.output = output;
 		this.byproduct = byproduct;
-		this.byproduct_chance = byproduct_chance;
+		this.byproductChance = byproductChance;
 	}
 	
 	/**
@@ -33,7 +31,7 @@ public class OvenRecipe extends IForgeRegistryEntry.Impl<OvenRecipe>
 	 */
 	public float getByproductChance()
 	{
-		return byproduct_chance;
+		return byproductChance;
 	}
 	
 	/**

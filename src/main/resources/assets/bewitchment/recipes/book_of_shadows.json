@@ -8,6 +8,12 @@
 		{
 			"type": "forge:ore_dict",
 			"ore": "dyeBlack"
+		},
+		{
+			"item": "bewitchment:mandrake_root"
+		},
+		{
+			"item": "bewitchment:hellebore"
 		}
 	],
 	"result":
@@ -15,7 +21,7 @@
 		"item": "patchouli:guide_book",
 		"nbt":
 		{
-			"patchouli:book": "bewitchment:rituals"
+			"patchouli:book": "bewitchment:book_of_shadows"
 		}
 	}
 }

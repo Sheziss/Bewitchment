@@ -12,16 +12,12 @@ import com.bewitchment.common.block.tile.entity.util.ModTileEntity;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
-import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityDistillery extends ModTileEntity implements ITickable
 {
 	public static final int BURN_TIME = 1200;
-	
-	private final MagicPower magic_power = MagicPower.CAPABILITY.getDefaultInstance();
 	
 	private String current_recipe = "";
 	
@@ -30,18 +26,6 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable
 	public TileEntityDistillery()
 	{
 		super(13);
-	}
-	
-	@Override
-	public <T> T getCapability(Capability<T> capability, EnumFacing face)
-	{
-		return capability == MagicPower.CAPABILITY ? MagicPower.CAPABILITY.cast(magic_power) : super.getCapability(capability, face);
-	}
-	
-	@Override
-	public boolean hasCapability(Capability<?> capability, EnumFacing face)
-	{
-		return capability == MagicPower.CAPABILITY || super.hasCapability(capability, face);
 	}
 	
 	@Override
@@ -63,7 +47,7 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable
 			}
 			else if (burn_time > 0)
 			{
-				if (progress < recipe_time && magic_power.drainAltarFirst(world.getClosestPlayer(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 5, false), pos, 2)) progress++;
+				if (progress < recipe_time && MagicPower.drainAltarFirst(world, world.getClosestPlayer(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 5, false), pos, 2)) progress++;
 				else progress = 0;
 			}
 		}
@@ -73,7 +57,6 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound tag)
 	{
-		magic_power.serialize(tag);
 		tag.setString("current_recipe", current_recipe);
 		tag.setInteger("burn_time", burn_time);
 		tag.setInteger("progress", progress);
@@ -85,7 +68,6 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable
 	public void readFromNBT(NBTTagCompound tag)
 	{
 		super.readFromNBT(tag);
-		magic_power.deserialize(tag);
 		current_recipe = tag.getString("current_recipe");
 		burn_time = tag.getInteger("burn_time");
 		progress = tag.getInteger("progress");

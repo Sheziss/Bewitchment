@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import com.bewitchment.api.BewitchmentAPI;
-import com.bewitchment.api.capability.transformation.Transformation;
+import com.bewitchment.api.capability.extendedplayer.ExtendedPlayer;
 import com.bewitchment.common.block.util.ModBlock;
 import com.bewitchment.registry.ModObjects;
 
@@ -51,47 +51,6 @@ public class BlockSaltBarrier extends ModBlock
 		setDefaultState(blockState.getBaseState().withProperty(NORTH, EnumAttachPosition.NONE).withProperty(EAST, EnumAttachPosition.NONE).withProperty(SOUTH, EnumAttachPosition.NONE).withProperty(WEST, EnumAttachPosition.NONE));
 	}
 	
-	private static int getAABBIndex(IBlockState state)
-	{
-		int i = 0;
-		boolean north = state.getValue(NORTH) != EnumAttachPosition.NONE;
-		boolean east = state.getValue(EAST) != EnumAttachPosition.NONE;
-		boolean south = state.getValue(SOUTH) != EnumAttachPosition.NONE;
-		boolean west = state.getValue(WEST) != EnumAttachPosition.NONE;
-		if (north || south && !east && !west) i |= 1 << EnumFacing.NORTH.getHorizontalIndex();
-		if (east || west && !north && !south) i |= 1 << EnumFacing.EAST.getHorizontalIndex();
-		if (south || north && !east && !west) i |= 1 << EnumFacing.SOUTH.getHorizontalIndex();
-		if (west || east && !north && !south) i |= 1 << EnumFacing.WEST.getHorizontalIndex();
-		return i;
-	}
-	
-	@SuppressWarnings("deprecation")
-	@Override
-	public void addCollisionBoxToList(IBlockState state, World world, BlockPos pos, AxisAlignedBB box, List<AxisAlignedBB> boxes, Entity entity, boolean wut)
-	{
-		if (entity instanceof EntityLivingBase)
-		{
-			EnumCreatureAttribute attribute = ((EntityLivingBase) entity).getCreatureAttribute();
-			if (attribute == EnumCreatureAttribute.UNDEAD || attribute == BewitchmentAPI.DEMON || attribute == BewitchmentAPI.SPIRIT)
-				addCollisionBoxToList(pos, box, boxes, WALL);
-		}
-		if (entity instanceof EntityBlaze || entity instanceof EntityGhast || entity instanceof EntityVex /* || entity instanceof EntityBatSwarm */) addCollisionBoxToList(pos, box, boxes, WALL);
-		if (entity instanceof EntityPlayer && !((EntityPlayer) entity).isCreative() && !entity.getCapability(Transformation.CAPABILITY, null).getTransformation().canCrossSalt) addCollisionBoxToList(pos, box, boxes, WALL);
-	}
-	
-	@SuppressWarnings("deprecation")
-	@Override
-	public boolean canPlaceBlockAt(World world, BlockPos pos)
-	{
-		return world.getBlockState(pos.down()).isTopSolid() || world.getBlockState(pos.down()).getBlock() == Blocks.GLOWSTONE;
-	}
-	
-	@Override
-	public BlockFaceShape getBlockFaceShape(IBlockAccess world, IBlockState state, BlockPos pos, EnumFacing face)
-	{
-		return BlockFaceShape.UNDEFINED;
-	}
-	
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos)
 	{
@@ -102,6 +61,19 @@ public class BlockSaltBarrier extends ModBlock
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos)
 	{
 		return NULL_AABB;
+	}
+	
+	@Override
+	public BlockFaceShape getBlockFaceShape(IBlockAccess world, IBlockState state, BlockPos pos, EnumFacing face)
+	{
+		return BlockFaceShape.UNDEFINED;
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public BlockRenderLayer getRenderLayer()
+	{
+		return BlockRenderLayer.CUTOUT;
 	}
 	
 	@Override
@@ -116,11 +88,11 @@ public class BlockSaltBarrier extends ModBlock
 		return ModObjects.salt;
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
-	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getRenderLayer()
+	public boolean canPlaceBlockAt(World world, BlockPos pos)
 	{
-		return BlockRenderLayer.CUTOUT;
+		return world.getBlockState(pos.down()).isTopSolid() || world.getBlockState(pos.down()).getBlock() == Blocks.GLOWSTONE;
 	}
 	
 	@Override
@@ -135,16 +107,6 @@ public class BlockSaltBarrier extends ModBlock
 		return false;
 	}
 	
-	@Override
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos from)
-	{
-		if (!world.isRemote && !canPlaceBlockAt(world, pos))
-		{
-			dropBlockAsItem(world, pos, state, 0);
-			world.setBlockToAir(pos);
-		}
-	}
-	
 	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState withMirror(IBlockState state, Mirror mirror)
@@ -155,25 +117,31 @@ public class BlockSaltBarrier extends ModBlock
 	@Override
 	public IBlockState withRotation(IBlockState state, Rotation rot)
 	{
-		return rot == Rotation.CLOCKWISE_180 ? state.withProperty(NORTH, state.getValue(SOUTH)).withProperty(EAST, state.getValue(WEST)) .withProperty(SOUTH, state.getValue(NORTH)).withProperty(WEST, state.getValue(EAST)) : rot == Rotation.COUNTERCLOCKWISE_90 ? state.withProperty(NORTH, state.getValue(EAST)).withProperty(EAST, state.getValue(SOUTH)).withProperty(SOUTH, state.getValue(WEST)).withProperty(WEST, state.getValue(NORTH)) : rot == Rotation.CLOCKWISE_90 ? state.withProperty(NORTH, state.getValue(WEST)).withProperty(EAST, state.getValue(NORTH)).withProperty(SOUTH, state.getValue(EAST)).withProperty(WEST, state.getValue(SOUTH)) : state;
+		return rot == Rotation.CLOCKWISE_180 ? state.withProperty(NORTH, state.getValue(SOUTH)).withProperty(EAST, state.getValue(WEST)).withProperty(SOUTH, state.getValue(NORTH)).withProperty(WEST, state.getValue(EAST)) : rot == Rotation.COUNTERCLOCKWISE_90 ? state.withProperty(NORTH, state.getValue(EAST)).withProperty(EAST, state.getValue(SOUTH)).withProperty(SOUTH, state.getValue(WEST)).withProperty(WEST, state.getValue(NORTH)) : rot == Rotation.CLOCKWISE_90 ? state.withProperty(NORTH, state.getValue(WEST)).withProperty(EAST, state.getValue(NORTH)).withProperty(SOUTH, state.getValue(EAST)).withProperty(WEST, state.getValue(SOUTH)) : state;
 	}
 	
-	protected boolean canConnectTo(IBlockState state, EnumFacing face, IBlockAccess world, BlockPos pos)
+	@SuppressWarnings("deprecation")
+	@Override
+	public void addCollisionBoxToList(IBlockState state, World world, BlockPos pos, AxisAlignedBB box, List<AxisAlignedBB> boxes, Entity entity, boolean wut)
 	{
-		return state.getBlock() == this;
+		if (entity instanceof EntityLivingBase)
+		{
+			EnumCreatureAttribute attribute = ((EntityLivingBase) entity).getCreatureAttribute();
+			if (attribute == EnumCreatureAttribute.UNDEAD || attribute == BewitchmentAPI.DEMON || attribute == BewitchmentAPI.SPIRIT)
+				addCollisionBoxToList(pos, box, boxes, WALL);
+		}
+		if (entity instanceof EntityBlaze || entity instanceof EntityGhast || entity instanceof EntityVex /* || entity instanceof EntityBatSwarm */) addCollisionBoxToList(pos, box, boxes, WALL);
+		if (entity instanceof EntityPlayer && !((EntityPlayer) entity).isCreative() && !entity.getCapability(ExtendedPlayer.CAPABILITY, null).getTransformation().canCrossSalt) addCollisionBoxToList(pos, box, boxes, WALL);
 	}
 	
-	protected boolean canConnectUpwardsTo(IBlockAccess world, BlockPos pos)
+	@Override
+	public void neighborChanged(IBlockState state, World world, BlockPos to, Block block, BlockPos from)
 	{
-		return canConnectTo(world.getBlockState(pos), null, world, pos);
-	}
-	
-	protected EnumAttachPosition getAttachPosition(IBlockAccess world, BlockPos pos, EnumFacing face)
-	{
-		BlockPos pos0 = pos.offset(face);
-		IBlockState state = world.getBlockState(pos.offset(face));
-		if (!canConnectTo(world.getBlockState(pos0), face, world, pos0) && (state.isNormalCube() || !canConnectUpwardsTo(world, pos0.down()))) return !world.getBlockState(pos.up()).isNormalCube() && (world.getBlockState(pos0).isSideSolid(world, pos0, EnumFacing.UP) || world.getBlockState(pos0).getBlock() == Blocks.GLOWSTONE) && canConnectUpwardsTo(world, pos0.up()) ? state.isBlockNormalCube() ? EnumAttachPosition.UP : EnumAttachPosition.SIDE : EnumAttachPosition.NONE;
-		return EnumAttachPosition.SIDE;
+		if (!world.isRemote && !canPlaceBlockAt(world, to))
+		{
+			dropBlockAsItem(world, to, state, 0);
+			world.setBlockToAir(to);
+		}
 	}
 	
 	@Override
@@ -197,7 +165,39 @@ public class BlockSaltBarrier extends ModBlock
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, NORTH, EAST, SOUTH, WEST);
+		return new BlockStateContainer(this, NORTH, SOUTH, EAST, WEST);
+	}
+	
+	private static int getAABBIndex(IBlockState state)
+	{
+		int i = 0;
+		boolean north = state.getValue(NORTH) != EnumAttachPosition.NONE;
+		boolean east = state.getValue(EAST) != EnumAttachPosition.NONE;
+		boolean south = state.getValue(SOUTH) != EnumAttachPosition.NONE;
+		boolean west = state.getValue(WEST) != EnumAttachPosition.NONE;
+		if (north || south && !east && !west) i |= 1 << EnumFacing.NORTH.getHorizontalIndex();
+		if (east || west && !north && !south) i |= 1 << EnumFacing.EAST.getHorizontalIndex();
+		if (south || north && !east && !west) i |= 1 << EnumFacing.SOUTH.getHorizontalIndex();
+		if (west || east && !north && !south) i |= 1 << EnumFacing.WEST.getHorizontalIndex();
+		return i;
+	}
+	
+	protected EnumAttachPosition getAttachPosition(IBlockAccess world, BlockPos pos, EnumFacing face)
+	{
+		BlockPos pos0 = pos.offset(face);
+		IBlockState state = world.getBlockState(pos.offset(face));
+		if (!canConnectTo(world.getBlockState(pos0), face, world, pos0) && (state.isNormalCube() || !canConnectUpwardsTo(world, pos0.down()))) return !world.getBlockState(pos.up()).isNormalCube() && (world.getBlockState(pos0).isSideSolid(world, pos0, EnumFacing.UP) || world.getBlockState(pos0).getBlock() == Blocks.GLOWSTONE) && canConnectUpwardsTo(world, pos0.up()) ? state.isBlockNormalCube() ? EnumAttachPosition.UP : EnumAttachPosition.SIDE : EnumAttachPosition.NONE;
+		return EnumAttachPosition.SIDE;
+	}
+	
+	protected boolean canConnectTo(IBlockState state, EnumFacing face, IBlockAccess world, BlockPos pos)
+	{
+		return state.getBlock() == this;
+	}
+	
+	protected boolean canConnectUpwardsTo(IBlockAccess world, BlockPos pos)
+	{
+		return canConnectTo(world.getBlockState(pos), null, world, pos);
 	}
 	
 	protected enum EnumAttachPosition implements IStringSerializable

@@ -32,12 +32,6 @@ public class BlockPlacedItem extends ModBlockContainer
 	}
 	
 	@Override
-	public boolean canPlaceBlockOnSide(World world, BlockPos pos, EnumFacing face)
-	{
-		return face == EnumFacing.UP && world.getBlockState(pos.down()).getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
-	}
-	
-	@Override
 	public TileEntity createNewTileEntity(World world, int meta)
 	{
 		return new TileEntityPlacedItem();
@@ -50,15 +44,21 @@ public class BlockPlacedItem extends ModBlockContainer
 	}
 	
 	@Override
+	public EnumBlockRenderType getRenderType(IBlockState state)
+	{
+		return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
+	}
+	
+	@Override
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
 	{
 		return ((TileEntityPlacedItem) world.getTileEntity(pos)).getStackInSlot(0);
 	}
 	
 	@Override
-	public EnumBlockRenderType getRenderType(IBlockState state)
+	public boolean canPlaceBlockOnSide(World world, BlockPos pos, EnumFacing face)
 	{
-		return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
+		return face == EnumFacing.UP && world.getBlockState(pos.down()).getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
 	}
 	
 	@Override

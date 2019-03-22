@@ -1,0 +1,6 @@
+{
+	"recipes":
+	{
+		"ritual": "com.bewitchment.api.registry.recipe.RitualRecipe"
+	}
+}

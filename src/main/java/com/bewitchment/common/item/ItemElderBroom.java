@@ -12,7 +12,7 @@ public class ItemElderBroom extends ItemBroom
 {
 	public ItemElderBroom()
 	{
-		super("broom_elder", Bewitchment.proxy.tab, new ResourceLocation(Bewitchment.MOD_ID, "textures/entity/broom_elder.png"));
+		super(Bewitchment.MOD_ID, "broom_elder", Bewitchment.proxy.tab, new ResourceLocation(Bewitchment.MOD_ID, "textures/entity/broom_elder.png"));
 	}
 	
 	@Override
@@ -21,19 +21,15 @@ public class ItemElderBroom extends ItemBroom
 		if (broom.getFuel() > 0)
 		{
 			broom.setFuel(broom.getFuel() - 1);
-			Vec3d horizontal_axis = look.crossProduct(new Vec3d(0, 1, 0)).normalize().scale(-strafe / 10);
-			broom.motionX += front * (horizontal_axis.x + look.x) / 20;
-			broom.motionY += up / 60 - 0.005;
-			broom.motionZ += front * (horizontal_axis.z + look.z) / 20;
-			if (broom.motionX * broom.motionX + broom.motionY * broom.motionY + broom.motionZ * broom.motionZ > 8)
-			{
-				Vec3d limit = new Vec3d(broom.motionX, broom.motionY, broom.motionZ).normalize().scale(2);
-				broom.motionX = limit.x;
-				broom.motionY = limit.y;
-				broom.motionZ = limit.z;
-			}
+			if (Math.abs(broom.motionX) < 1) broom.motionX += strafe * (1/6f);
+			broom.motionY += up / 10;
+			if (Math.abs(broom.motionZ) < 1) broom.motionZ += front * (1/6f);
+			
+			broom.motionX /= 1.1;
+			broom.motionY /= up > 0 ? 1.025 : 1;
+			broom.motionZ /= 1.1;
 		}
-		broom.motionY -= 0.005;
+		broom.motionY -= 0.02;
 	}
 	
 	@Override

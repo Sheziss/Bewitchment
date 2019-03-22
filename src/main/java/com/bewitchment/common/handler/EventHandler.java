@@ -28,7 +28,7 @@ public class EventHandler
 	@SubscribeEvent
 	public void livingUpdate(LivingEvent.LivingUpdateEvent event)
 	{
-		if (event.getEntityLiving().world.getBlockState(event.getEntityLiving().getPosition()).getBlock() == ModObjects.honey.getBlock()) event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 60));
+		if (event.getEntityLiving().world.getBlockState(event.getEntityLiving().getPosition()).getBlock() == ModObjects.fluid_honey.getBlock()) event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 60));
 	}
 	
 	@SubscribeEvent

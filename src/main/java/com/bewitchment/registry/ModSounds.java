@@ -16,8 +16,14 @@ public class ModSounds
 {
 	public static final List<SoundEvent> REGISTRY = new ArrayList<>();
 	
-	public static final SoundEvent BROOM_SWEEP = createSoundEvent(Bewitchment.MOD_ID, "broom_sweep");
-	public static final SoundEvent OWL_HOOT = createSoundEvent(Bewitchment.MOD_ID, "owl_hoot");
+	public static final SoundEvent BUZZ = createSoundEvent("buzz");
+	public static final SoundEvent BROOM_SWEEP = createSoundEvent("broom_sweep");
+	public static final SoundEvent CHALK_SCRIBBLE = createSoundEvent("chalk_scribble");
+	public static final SoundEvent OWL_HOOT = createSoundEvent("owl_hoot");
+	public static final SoundEvent RAVEN_CRY = createSoundEvent("raven_cry");
+	public static final SoundEvent TOAD_DEATH = createSoundEvent("toad_death");
+	public static final SoundEvent TOAD_HURT = createSoundEvent("toad_hurt");
+	public static final SoundEvent TOAD_IDLE = createSoundEvent("toad_idle");
 	
 	@SubscribeEvent
 	public static void registerSounds(Register<SoundEvent> event)
@@ -25,9 +31,9 @@ public class ModSounds
 		for (SoundEvent sound : REGISTRY) event.getRegistry().register(sound);
 	}
 	
-	private static final SoundEvent createSoundEvent(String mod_id, String name)
+	private static final SoundEvent createSoundEvent(String name)
 	{
-		ResourceLocation id = new ResourceLocation(mod_id, name);
+		ResourceLocation id = new ResourceLocation(Bewitchment.MOD_ID, name);
 		SoundEvent event = new SoundEvent(id).setRegistryName(id);
 		REGISTRY.add(event);
 		return event;

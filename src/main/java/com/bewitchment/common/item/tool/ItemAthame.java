@@ -1,19 +1,35 @@
 package com.bewitchment.common.item.tool;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
 import com.bewitchment.common.item.util.ModItemSword;
+import com.bewitchment.registry.ModObjects;
 
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemSkull;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.EntityEntry;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 public class ItemAthame extends ModItemSword
 {
+	public static final Map<EntityEntry, Collection<ItemStack>> LOOT_TABLE = new HashMap<>();
+	
 	public ItemAthame(ToolMaterial mat)
 	{
 		super("athame", mat);
 		setMaxDamage(600);
+		MinecraftForge.EVENT_BUS.register(this);
 	}
 	
 	@Override
@@ -29,5 +45,23 @@ public class ItemAthame extends ModItemSword
 			else return super.hitEntity(stack, target, attacker);
 		}
 		return true;
+	}
+	
+	@SubscribeEvent
+	public void livingDrop(LivingDropsEvent event)
+	{
+		if (event.isRecentlyHit() && event.getSource().getTrueSource() instanceof EntityLivingBase && ((EntityLivingBase) event.getSource().getTrueSource()).getHeldItemMainhand().getItem() == ModObjects.athame && LOOT_TABLE.containsKey(EntityRegistry.getEntry(event.getEntityLiving().getClass())))
+		{
+			for (ItemStack stack : LOOT_TABLE.get(EntityRegistry.getEntry(event.getEntityLiving().getClass()))) if (event.getEntityLiving().getRNG().nextInt(5) <= 2 + (2 * event.getLootingLevel()))
+			{
+				if (event.getEntityLiving() instanceof EntityPlayer && stack.getItem() instanceof ItemSkull)
+				{
+					NBTTagCompound tag = new NBTTagCompound();
+					tag.setString("SkullOwner", event.getEntity().getName());
+					stack.setTagCompound(tag);
+				}
+				event.getDrops().add(new EntityItem(event.getEntityLiving().world, event.getEntityLiving().posX + 0.5, event.getEntityLiving().posY + 0.5, event.getEntityLiving().posZ + 0.5, stack));
+			}
+		}
 	}
 }

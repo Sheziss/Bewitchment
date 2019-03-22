@@ -1,7 +1,5 @@
 package com.bewitchment.api.registry;
 
-import com.bewitchment.Bewitchment;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -21,9 +19,9 @@ public abstract class Spell extends IForgeRegistryEntry.Impl<Spell>
 	
 	private final int color, cost;
 	
-	public Spell(String name, int cost, int color, SpellType type)
+	public Spell(String modid, String name, int cost, int color, SpellType type)
 	{
-		this.setRegistryName(new ResourceLocation(Bewitchment.MOD_ID, name));
+		this.setRegistryName(new ResourceLocation(modid, name));
 		this.name = getRegistryName().toString();
 		this.cost = cost;
 		this.color = color;

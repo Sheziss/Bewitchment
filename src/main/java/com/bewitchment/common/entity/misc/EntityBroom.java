@@ -31,8 +31,8 @@ public class EntityBroom extends Entity
 	private static final DataParameter<Integer> TYPE = EntityDataManager.createKey(EntityBroom.class, DataSerializers.VARINT), FUEL = EntityDataManager.createKey(EntityBroom.class, DataSerializers.VARINT);
 	
 	public ItemStack item;
-	public BlockPos original_position;
-	public int original_dimension;
+	public BlockPos originalPosition;
+	public int originalDimension;
 	
 	public EntityBroom(World world)
 	{
@@ -44,17 +44,17 @@ public class EntityBroom extends Entity
 	{
 		this(world);
 		setPosition(x, y, z);
-		original_position = new BlockPos(x, y, z);
-		original_dimension = world.provider.getDimension();
+		originalPosition = new BlockPos(x, y, z);
+		originalDimension = world.provider.getDimension();
 		this.item = new ItemStack(item);
 		dataManager.set(TYPE, item.type);
 		dataManager.setDirty(TYPE);
 	}
 	
-	private static Field jumpField(String isJumping, String field, Class<EntityLivingBase> base)
+	@Override
+	public Entity getControllingPassenger()
 	{
-		try {return ObfuscationReflectionHelper.findField(base, field);}
-		catch (Exception e) {return ObfuscationReflectionHelper.findField(base, isJumping);}
+		return getPassengers().size() == 0 ? null : getPassengers().get(0);
 	}
 	
 	@Override
@@ -68,6 +68,12 @@ public class EntityBroom extends Entity
 			return EnumActionResult.SUCCESS;
 		}
 		return EnumActionResult.PASS;
+	}
+	
+	@Override
+	public ItemStack getPickedResult(RayTraceResult target)
+	{
+		return item != null ? item : super.getPickedResult(target);
 	}
 	
 	@Override
@@ -98,32 +104,21 @@ public class EntityBroom extends Entity
 	}
 	
 	@Override
+	protected boolean canBeRidden(Entity entity)
+	{
+		return entity instanceof EntityPlayer;
+	}
+	
+	@Override
 	public boolean canPassengerSteer()
 	{
 		return true;
 	}
 	
 	@Override
-	public Entity getControllingPassenger()
-	{
-		return getPassengers().size() == 0 ? null : getPassengers().get(0);
-	}
-	
-	public int getFuel()
-	{
-		return dataManager.get(FUEL);
-	}
-	
-	@Override
 	public double getMountedYOffset()
 	{
 		return 0.4;
-	}
-	
-	@Override
-	public ItemStack getPickedResult(RayTraceResult target)
-	{
-		return item != null ? item : super.getPickedResult(target);
 	}
 	
 	public int getType()
@@ -152,18 +147,12 @@ public class EntityBroom extends Entity
 			setFuel(100);
 			if (rider != null && item != null)
 			{
-				if (dataManager.get(FUEL) < 5 && rider.getCapability(MagicPower.CAPABILITY, null).drain(30)) dataManager.set(FUEL, 100);
+				if (dataManager.get(FUEL) < 5 && rider.getCapability(MagicPower.CAPABILITY, null).drain(30)) setFuel(100);
 				float front = rider.moveForward, strafe = rider.moveStrafing, up = 0;
 				try {up = jumpField("field_70703_bu", "isJumping", EntityLivingBase.class).getBoolean(rider) ? 1 : 0;}
 				catch (Exception e) {e.printStackTrace();}
 				((ItemBroom) item.getItem()).handleMovement(this, rider.getLookVec(), front, strafe, up);
-				setRotationYawHead(rider.rotationYaw);
 			}
-		}
-		else if (!collidedVertically)
-		{
-			motionY -= 0.009;
-			if (motionY < -0.5) motionY = -0.5;
 		}
 		if (collidedHorizontally)
 		{
@@ -174,24 +163,6 @@ public class EntityBroom extends Entity
 		if (isBeingRidden()) setSize(0.7f, rider.height);
 		move(MoverType.SELF, motionX, motionY, motionZ);
 		if (isBeingRidden()) setSize(0.7f, 0.7f);
-	}
-	
-	public void setFuel(int fuel)
-	{
-		dataManager.set(FUEL, fuel);
-	}
-	
-	@Override
-	public void setRotationYawHead(float rotation)
-	{
-		prevRotationYaw = rotationYaw;
-		rotationYaw = rotation;
-	}
-	
-	@Override
-	protected boolean canBeRidden(Entity entity)
-	{
-		return entity instanceof EntityPlayer;
 	}
 	
 	@Override
@@ -213,10 +184,10 @@ public class EntityBroom extends Entity
 		tag.setInteger("type", dataManager.get(TYPE));
 		tag.setInteger("fuel", dataManager.get(FUEL));
 		tag.setTag("item", item.serializeNBT());
-		tag.setDouble("original_x", original_position.getX());
-		tag.setDouble("original_y", original_position.getY());
-		tag.setDouble("original_z", original_position.getZ());
-		tag.setInteger("original_dimension", original_dimension);
+		tag.setDouble("original_x", originalPosition.getX());
+		tag.setDouble("original_y", originalPosition.getY());
+		tag.setDouble("original_z", originalPosition.getZ());
+		tag.setInteger("originalDimension", originalDimension);
 	}
 	
 	@Override
@@ -225,7 +196,23 @@ public class EntityBroom extends Entity
 		dataManager.set(TYPE, tag.getInteger("type"));
 		dataManager.set(FUEL, tag.getInteger("fuel"));
 		item = new ItemStack(tag.getCompoundTag("item"));
-		original_position = new BlockPos(tag.getDouble("original_x"), tag.getDouble("original_y"), tag.getDouble("original_z"));
-		original_dimension = tag.getInteger("original_dimension");
+		originalPosition = new BlockPos(tag.getDouble("original_x"), tag.getDouble("original_y"), tag.getDouble("original_z"));
+		originalDimension = tag.getInteger("originalDimension");
+	}
+	
+	private static Field jumpField(String isJumping, String field, Class<EntityLivingBase> base)
+	{
+		try {return ObfuscationReflectionHelper.findField(base, field);}
+		catch (Exception e) {return ObfuscationReflectionHelper.findField(base, isJumping);}
+	}
+	
+	public int getFuel()
+	{
+		return dataManager.get(FUEL);
+	}
+	
+	public void setFuel(int fuel)
+	{
+		dataManager.set(FUEL, fuel);
 	}
 }

@@ -12,9 +12,9 @@ import net.minecraft.world.World;
 
 public class ModBlockExp extends ModBlock
 {
-	public ModBlockExp(String name, Material mat, SoundType sound, float hardness, float resistance, String tool, int level, String... ore_dictionary_names)
+	public ModBlockExp(String name, Material mat, SoundType sound, float hardness, float resistance, String tool, int level, String... oreDictionaryNames)
 	{
-		super(name, mat, sound, hardness, resistance, tool, level, ore_dictionary_names);
+		super(name, mat, sound, hardness, resistance, tool, level, oreDictionaryNames);
 	}
 	
 	@Override

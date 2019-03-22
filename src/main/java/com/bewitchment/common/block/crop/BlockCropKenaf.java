@@ -26,6 +26,12 @@ public class BlockCropKenaf extends ModBlockCrop
 	}
 	
 	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	{
+		return KENAF_AABB[state.getValue(AGE)];
+	}
+	
+	@Override
 	public boolean canBlockStay(World world, BlockPos pos, IBlockState state)
 	{
 		Block block = world.getBlockState(pos.down()).getBlock();
@@ -43,12 +49,6 @@ public class BlockCropKenaf extends ModBlockCrop
 	{
 		IBlockState state = world.getBlockState(pos.down());
 		return state.getBlock().canSustainPlant(state, world, pos, EnumFacing.UP, this) || state.getBlock() == this;
-	}
-	
-	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
-	{
-		return KENAF_AABB[state.getValue(AGE)];
 	}
 	
 	@Override

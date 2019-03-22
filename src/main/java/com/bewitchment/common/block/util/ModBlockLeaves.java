@@ -29,49 +29,28 @@ import net.minecraft.world.World;
 
 public class ModBlockLeaves extends BlockLeaves implements IOreDictionaryContainer
 {
-	private final List<String> ore_dictionary_names = new ArrayList<String>();
+	private final List<String> oreDictionaryNames = new ArrayList<String>();
 	
 	private final ItemStack drop;
 	
-	public ModBlockLeaves(String name, ItemStack drop, String... ore_dictionary_names)
+	public ModBlockLeaves(String name, ItemStack drop, String... oreDictionaryNames)
 	{
 		super();
-		Bewitchment.proxy.registerValues(this, name, Material.LEAVES, SoundType.PLANT, 0.2f, 0, "shears", 0, ore_dictionary_names);
+		Bewitchment.proxy.registerValues(this, name, Material.LEAVES, SoundType.PLANT, 0.2f, 0, "shears", 0, oreDictionaryNames);
 		setDefaultState(this.getBlockState().getBaseState().withProperty(CHECK_DECAY, true).withProperty(DECAYABLE, true));
 		this.drop = drop;
 	}
 	
 	@Override
-	protected BlockStateContainer createBlockState()
-	{
-		return new BlockStateContainer(this, DECAYABLE, CHECK_DECAY);
-	}
-	
-	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
-	{
-		return drop.getItem();
-	}
-
-	@Override
-	public int getMetaFromState(IBlockState state)
-	{
-		int meta = 0;
-		meta += (state.getValue(DECAYABLE) ? 1 : 0);
-		meta += (state.getValue(CHECK_DECAY) ? 2 : 1);
-		return meta;
-	}
-	
-	@Override
 	public List<String> getOreDictionaryNames()
 	{
-		return ore_dictionary_names;
+		return oreDictionaryNames;
 	}
 	
 	@Override
-	public IBlockState getStateFromMeta(int meta)
+	public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune)
 	{
-		return getDefaultState().withProperty(DECAYABLE, ((meta) & 1) == 1).withProperty(CHECK_DECAY, ((meta) & 2) > 0);
+		return NonNullList.withSize(1, new ItemStack(this));
 	}
 	
 	@Override
@@ -81,14 +60,9 @@ public class ModBlockLeaves extends BlockLeaves implements IOreDictionaryContain
 	}
 	
 	@Override
-	public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity tile, ItemStack stack)
+	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
-		if (!world.isRemote && stack.getItem() instanceof ItemShears)
-		{
-			player.addStat(StatList.getBlockStats(this));
-			spawnAsEntity(world, pos, new ItemStack(Item.getItemFromBlock(this)));
-		}
-		else super.harvestBlock(world, player, pos, state, tile, stack);
+		return drop.getItem();
 	}
 	
 	@Override
@@ -105,8 +79,34 @@ public class ModBlockLeaves extends BlockLeaves implements IOreDictionaryContain
 	}
 	
 	@Override
-	public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune)
+	public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity tile, ItemStack stack)
 	{
-		return NonNullList.withSize(1, new ItemStack(this));
+		if (!world.isRemote && stack.getItem() instanceof ItemShears)
+		{
+			player.addStat(StatList.getBlockStats(this));
+			spawnAsEntity(world, pos, new ItemStack(Item.getItemFromBlock(this)));
+		}
+		else super.harvestBlock(world, player, pos, state, tile, stack);
+	}
+	
+	@Override
+	public IBlockState getStateFromMeta(int meta)
+	{
+		return getDefaultState().withProperty(DECAYABLE, ((meta) & 1) == 1).withProperty(CHECK_DECAY, ((meta) & 2) > 0);
+	}
+	
+	@Override
+	public int getMetaFromState(IBlockState state)
+	{
+		int meta = 0;
+		meta += (state.getValue(DECAYABLE) ? 1 : 0);
+		meta += (state.getValue(CHECK_DECAY) ? 2 : 1);
+		return meta;
+	}
+	
+	@Override
+	protected BlockStateContainer createBlockState()
+	{
+		return new BlockStateContainer(this, DECAYABLE, CHECK_DECAY);
 	}
 }

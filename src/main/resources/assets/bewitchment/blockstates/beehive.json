@@ -1,0 +1,16 @@
+{
+	"forge_marker": 1,
+	"defaults":
+	{
+		"model": "bewitchment:beehive"
+	},
+	"variants":
+	{
+		"inventory": [{}],
+		"normal": [{}],
+		"facing=north": [{"y": 180}],
+		"facing=south": [{}],
+		"facing=east": [{"y": 270}],
+		"facing=west": [{"y": 90}]
+	}
+}

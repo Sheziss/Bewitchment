@@ -15,18 +15,18 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ModBlockPressurePlate extends BlockPressurePlate implements IOreDictionaryContainer
 {
-	private final List<String> ore_dictionary_names = new ArrayList<String>();
+	private final List<String> oreDictionaryNames = new ArrayList<String>();
 	
-	public ModBlockPressurePlate(String name, Block base, String... ore_dictionary_names)
+	public ModBlockPressurePlate(String name, Block base, String... oreDictionaryNames)
 	{
 		super(base.getDefaultState().getMaterial(), Sensitivity.EVERYTHING);
-		Bewitchment.proxy.registerValues(this, name, base, ore_dictionary_names);
+		Bewitchment.proxy.registerValues(this, name, base, oreDictionaryNames);
 	}
 	
 	@Override
 	public List<String> getOreDictionaryNames()
 	{
-		return ore_dictionary_names;
+		return oreDictionaryNames;
 	}
 	
 	@Override

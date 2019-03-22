@@ -12,17 +12,17 @@ import net.minecraft.block.material.Material;
 
 public class ModBlockBush extends BlockBush implements IOreDictionaryContainer
 {
-	private final List<String> ore_dictionary_names = new ArrayList<String>();
+	private final List<String> oreDictionaryNames = new ArrayList<String>();
 	
-	public ModBlockBush(String name, String... ore_dictionary_names)
+	public ModBlockBush(String name, String... oreDictionaryNames)
 	{
 		super();
-		Bewitchment.proxy.registerValues(this, name, Material.PLANTS, SoundType.PLANT, 0, 0, "", 0, ore_dictionary_names);
+		Bewitchment.proxy.registerValues(this, name, Material.PLANTS, SoundType.PLANT, 0, 0, "", 0, oreDictionaryNames);
 	}
 	
 	@Override
 	public List<String> getOreDictionaryNames()
 	{
-		return ore_dictionary_names;
+		return oreDictionaryNames;
 	}
 }

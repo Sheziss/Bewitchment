@@ -27,9 +27,14 @@ public abstract class ItemBroom extends ModItem
 	
 	public final int type;
 	
-	public ItemBroom(String name, CreativeTabs tab, ResourceLocation entity_texture, String... oreNames)
+	public ItemBroom(String modid, String name, CreativeTabs tab, ResourceLocation entity_texture, String... oreDictionaryNames)
 	{
-		super(name, oreNames);
+		super();
+		setRegistryName(new ResourceLocation(modid, name));
+		setTranslationKey(getRegistryName().toString().replace(":", "."));
+		setCreativeTab(tab);
+		for (String ore : oreDictionaryNames) getOreDictionaryNames().add(ore);
+		ModObjects.REGISTRY.add(this);
 		setCreativeTab(tab);
 		setMaxStackSize(1);
 		TEX.add(entity_texture);

@@ -22,29 +22,16 @@ import net.minecraftforge.items.IItemHandler;
 
 public abstract class ModBlockContainer extends BlockContainer
 {
-	private final Object mod_instance;
-	private final int gui_id;
+	private final Object modInstance;
+	private final int guiID;
 	
-	public ModBlockContainer(Object mod_instance, String name, Material mat, SoundType sound, float hardness, float resistance, String tool, int level, int gui_id)
+	public ModBlockContainer(Object modInstance, String name, Material mat, SoundType sound, float hardness, float resistance, String tool, int level, int guiID)
 	{
 		super(mat);
 		Bewitchment.proxy.registerValues(this, name, mat, sound, hardness, resistance, tool, level);
-		this.mod_instance = mod_instance;
-		this.gui_id = gui_id;
+		this.modInstance = modInstance;
+		this.guiID = guiID;
 	}
-	
-	@Override
-	public void breakBlock(World world, BlockPos pos, IBlockState state)
-	{
-		if (!world.isRemote && world.getGameRules().getBoolean("doTileDrops") && hasTileEntity(state) && world.getTileEntity(pos) instanceof IItemHandler) for (int i = 0; i < ((IItemHandler)world.getTileEntity(pos)).getSlots(); i++) InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), ((IItemHandler)world.getTileEntity(pos)).getStackInSlot(i));
-		super.breakBlock(world, pos, state);
-	}
-	
-	@Override
-	public boolean canSustainLeaves(IBlockState state, IBlockAccess world, BlockPos pos)
-    {
-        return state.getMaterial() == Material.WOOD;
-    }
 	
 	@Override
 	public BlockFaceShape getBlockFaceShape(IBlockAccess world, IBlockState state, BlockPos pos, EnumFacing face)
@@ -63,6 +50,12 @@ public abstract class ModBlockContainer extends BlockContainer
 	public EnumBlockRenderType getRenderType(IBlockState state)
     {
         return EnumBlockRenderType.MODEL;
+    }
+	
+	@Override
+	public boolean canSustainLeaves(IBlockState state, IBlockAccess world, BlockPos pos)
+    {
+        return state.getMaterial() == Material.WOOD;
     }
 	
 	@Override
@@ -92,9 +85,12 @@ public abstract class ModBlockContainer extends BlockContainer
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing face, float hitX, float hitY, float hitZ)
 	{
-		if (player.isSneaking()) return false;
-		if (gui_id > -1) player.openGui(mod_instance, gui_id, world, pos.getX(), pos.getY(), pos.getZ());
-		return true;
+		if (!player.isSneaking() && guiID > -1)
+		{
+			player.openGui(modInstance, guiID, world, pos.getX(), pos.getY(), pos.getZ());
+			return true;
+		}
+		return super.onBlockActivated(world, pos, state, player, hand, face, hitX, hitY, hitZ);
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -102,5 +98,12 @@ public abstract class ModBlockContainer extends BlockContainer
 	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face)
 	{
 		return super.shouldSideBeRendered(state, world, pos, face) && (state.getMaterial() == Material.ICE || state.getMaterial() == Material.GLASS ? world.getBlockState(pos.offset(face)).getBlock() != this : true);
+	}
+	
+	@Override
+	public void breakBlock(World world, BlockPos pos, IBlockState state)
+	{
+		if (!world.isRemote && world.getGameRules().getBoolean("doTileDrops") && hasTileEntity(state) && world.getTileEntity(pos) instanceof IItemHandler) for (int i = 0; i < ((IItemHandler)world.getTileEntity(pos)).getSlots(); i++) InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), ((IItemHandler)world.getTileEntity(pos)).getStackInSlot(i));
+		super.breakBlock(world, pos, state);
 	}
 }

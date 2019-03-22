@@ -29,15 +29,31 @@ public abstract class ModEntityTameable extends EntityTameable
 {
 	public static final DataParameter<Integer> SKIN = EntityDataManager.createKey(ModEntityTameable.class, DataSerializers.VARINT);
 	
-	private final ResourceLocation loot_table;
+	private final ResourceLocation lootTableLocation;
 	
-	private final Set<Item> tame_items;
+	private final Set<Item> tameItems;
 	
-	public ModEntityTameable(World world, ResourceLocation loot_table_location, Item... tame_items)
+	public ModEntityTameable(World world, ResourceLocation lootTableLocation, Item... tameItems)
 	{
 		super(world);
-		this.tame_items = Sets.newHashSet(tame_items);
-		this.loot_table = loot_table_location;
+		this.tameItems = Sets.newHashSet(tameItems);
+		this.lootTableLocation = lootTableLocation;
+	}
+	
+	@Override
+	public abstract boolean isBreedingItem(ItemStack stack);
+	
+	@Override
+	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData data)
+    {
+		if (getSkinTypes() > 1) dataManager.set(SKIN, rand.nextInt(getSkinTypes()));
+		return super.onInitialSpawn(difficulty, data);
+    }
+	
+	@Override
+	protected ResourceLocation getLootTable()
+	{
+		return lootTableLocation;
 	}
 	
 	@Override
@@ -49,45 +65,10 @@ public abstract class ModEntityTameable extends EntityTameable
 	}
 	
 	@Override
-	protected void collideWithEntity(Entity entity)
-	{
-		if (!entity.equals(getOwner())) super.collideWithEntity(entity);
-	}
-	
-	@Override
-	protected void entityInit()
-	{
-		super.entityInit();
-		aiSit = new EntityAISit(this);
-		if (getSkinTypes() > 1) dataManager.register(SKIN, rand.nextInt(getSkinTypes()));
-	}
-	
-	@Override
-	protected ResourceLocation getLootTable()
-	{
-		return loot_table;
-	}
-	
-	protected int getSkinTypes()
-	{
-		return 1;
-	}
-	
-	@Override
-	public abstract boolean isBreedingItem(ItemStack stack);
-	
-	@Override
-	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData data)
-    {
-		dataManager.set(SKIN, rand.nextInt(getSkinTypes()));
-		return super.onInitialSpawn(difficulty, data);
-    }
-	
-	@Override
 	public boolean processInteract(EntityPlayer player, EnumHand hand)
 	{
 		ItemStack stack = player.getHeldItem(hand);
-		if (!isTamed() && tame_items.contains(stack.getItem()))
+		if (!isTamed() && tameItems.contains(stack.getItem()))
 		{
 			if (!player.isCreative()) stack.shrink(1);
 			if (!isSilent()) world.playSound(null, posX, posY, posZ, SoundEvents.ENTITY_PARROT_EAT, getSoundCategory(), 1, 1 + (rand.nextFloat() - rand.nextFloat()) * 0.2f);
@@ -112,10 +93,17 @@ public abstract class ModEntityTameable extends EntityTameable
 	}
 	
 	@Override
-	public void readEntityFromNBT(NBTTagCompound tag)
+	protected void collideWithEntity(Entity entity)
 	{
-		super.readEntityFromNBT(tag);
-		if (getSkinTypes() > 1) dataManager.set(SKIN, tag.getInteger("skin"));
+		if (!entity.equals(getOwner())) super.collideWithEntity(entity);
+	}
+	
+	@Override
+	protected void entityInit()
+	{
+		super.entityInit();
+		aiSit = new EntityAISit(this);
+		if (getSkinTypes() > 1) dataManager.register(SKIN, rand.nextInt(getSkinTypes()));
 	}
 	
 	@Override
@@ -127,5 +115,17 @@ public abstract class ModEntityTameable extends EntityTameable
 			tag.setInteger("skin", dataManager.get(SKIN));
 			dataManager.setDirty(SKIN);
 		}
+	}
+	
+	@Override
+	public void readEntityFromNBT(NBTTagCompound tag)
+	{
+		super.readEntityFromNBT(tag);
+		if (getSkinTypes() > 1) dataManager.set(SKIN, tag.getInteger("skin"));
+	}
+	
+	protected int getSkinTypes()
+	{
+		return 1;
 	}
 }

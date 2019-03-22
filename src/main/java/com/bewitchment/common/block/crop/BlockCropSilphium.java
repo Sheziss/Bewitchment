@@ -28,10 +28,15 @@ public class BlockCropSilphium extends ModBlockCrop
 	}
 	
 	@Override
-	public void breakBlock(World world, BlockPos pos, IBlockState state)
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
-		super.breakBlock(world, pos, state);
-		if (state.getValue(TOP)) world.setBlockToAir(pos.down());
+		return state.getValue(TOP) ? SILPHIUM_AABB_TOP[state.getValue(AGE)] : SILPHIUM_AABB_BOTTOM[state.getValue(AGE)];
+	}
+	
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune)
+	{
+		return state.getValue(TOP) && isMaxAge(state) ? getCrop() : getSeed();
 	}
 	
 	@Override
@@ -55,15 +60,10 @@ public class BlockCropSilphium extends ModBlockCrop
 	}
 	
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	public void breakBlock(World world, BlockPos pos, IBlockState state)
 	{
-		return state.getValue(TOP) ? SILPHIUM_AABB_TOP[state.getValue(AGE)] : SILPHIUM_AABB_BOTTOM[state.getValue(AGE)];
-	}
-	
-	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
-	{
-		return state.getValue(TOP) && isMaxAge(state) ? getCrop() : getSeed();
+		super.breakBlock(world, pos, state);
+		if (state.getValue(TOP)) world.setBlockToAir(pos.down());
 	}
 	
 	@Override

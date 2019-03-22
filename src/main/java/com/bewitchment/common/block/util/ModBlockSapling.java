@@ -13,14 +13,20 @@ import net.minecraft.world.World;
 
 public class ModBlockSapling extends ModBlockBush implements IGrowable
 {
-    private static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.8, 0.9);
+    private static final AxisAlignedBB BOX = new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.8, 0.9);
     
     private final Class<? extends WorldGenModTree> gen;
     
-    public ModBlockSapling(String name, Class<? extends WorldGenModTree> gen, String... ore_dictionary_names)
+    public ModBlockSapling(String name, Class<? extends WorldGenModTree> gen, String... oreDictionaryNames)
 	{
-		super(name, ore_dictionary_names);
+		super(name, oreDictionaryNames);
 		this.gen = gen;
+	}
+    
+    @Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos)
+	{
+		return BOX;
 	}
 	
 	@Override
@@ -33,12 +39,6 @@ public class ModBlockSapling extends ModBlockBush implements IGrowable
 	public boolean canUseBonemeal(World world, Random rand, BlockPos pos, IBlockState state)
 	{
 		return rand.nextFloat() < 0.45f;
-	}
-    
-	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos)
-	{
-		return SAPLING_AABB;
 	}
 	
 	@Override

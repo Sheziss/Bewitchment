@@ -1,9 +1,9 @@
 {
-	"name": "item.bewitchment:codex_infernalis.name",
+	"name": "item.bewitchment.codex_infernalis.name",
 	"landing_text": "This book just feels wrong holding it... do you want to read further?",
-	"version": 1,
+	"version": 666,
 	"model": "bewitchment:codex_infernalis",
-	"subtitle": "bewitchment:codex_infernalis_subtitle",
+	"subtitle": "bewitchment.codex_infernalis_subtitle",
 	"book_texture": "bewitchment:textures/gui/book.png",
 	"show_toasts": false,
 	"creative_tab": "bewitchment",

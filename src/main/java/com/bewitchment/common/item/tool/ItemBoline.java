@@ -29,10 +29,12 @@ public class ItemBoline extends ItemShears
 	}
 	
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag flag)
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)
 	{
-		if (stack.hasTagCompound() && stack.getTagCompound().hasKey("biome_id")) tooltip.add(Biome.getBiome(stack.getTagCompound().getInteger("biome_id")).getBiomeName());
+		ItemStack stack = player.getHeldItem(hand);
+		if (!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
+		stack.getTagCompound().setInteger("biome_id", Biome.getIdForBiome(world.getBiome(player.getPosition())));
+		return new ActionResult<>(EnumActionResult.SUCCESS, stack);
 	}
 	
 	@Override
@@ -51,11 +53,9 @@ public class ItemBoline extends ItemShears
 	}
 	
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced)
 	{
-		ItemStack stack = player.getHeldItem(hand);
-		if (!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
-		stack.getTagCompound().setInteger("biome_id", Biome.getIdForBiome(world.getBiome(player.getPosition())));
-		return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+		if (stack.hasTagCompound() && stack.getTagCompound().hasKey("biome_id")) tooltip.add(Biome.getBiome(stack.getTagCompound().getInteger("biome_id")).getBiomeName());
 	}
 }

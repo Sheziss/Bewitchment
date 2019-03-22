@@ -28,15 +28,39 @@ public abstract class ModTileEntity extends TileEntity implements IItemHandlerMo
 	}
 	
 	@Override
+	public SPacketUpdateTileEntity getUpdatePacket()
+	{
+		return new SPacketUpdateTileEntity(getPos(), 0, writeToNBT(new NBTTagCompound()));
+	}
+	
+	@Override
+	public void onDataPacket(NetworkManager manager, SPacketUpdateTileEntity packet)
+	{
+		readFromNBT(packet.getNbtCompound());
+	}
+	
+	@Override
 	public ItemStack extractItem(int slot, int amount, boolean simulate)
 	{
 		return inventory.extractItem(slot, amount, simulate);
 	}
 	
 	@Override
-	public <T> T getCapability(Capability<T> capability, EnumFacing face)
+	public ItemStack insertItem(int slot, ItemStack stack, boolean simulate)
 	{
-		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && getSlots() > 0 ? CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this) : super.getCapability(capability, face);
+		return inventory.insertItem(slot, stack, simulate);
+	}
+	
+	@Override
+	public ItemStack getStackInSlot(int slot)
+	{
+		return inventory.getStackInSlot(slot);
+	}
+	
+	@Override
+	public void setStackInSlot(int slot, ItemStack stack)
+	{
+		inventory.setStackInSlot(slot, stack);
 	}
 	
 	@Override
@@ -52,15 +76,9 @@ public abstract class ModTileEntity extends TileEntity implements IItemHandlerMo
 	}
 	
 	@Override
-	public ItemStack getStackInSlot(int slot)
+	public <T> T getCapability(Capability<T> capability, EnumFacing face)
 	{
-		return inventory.getStackInSlot(slot);
-	}
-	
-	@Override
-	public SPacketUpdateTileEntity getUpdatePacket()
-	{
-		return new SPacketUpdateTileEntity(getPos(), 0, writeToNBT(new NBTTagCompound()));
+		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && getSlots() > 0 ? CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this) : super.getCapability(capability, face);
 	}
 	
 	@Override
@@ -70,15 +88,12 @@ public abstract class ModTileEntity extends TileEntity implements IItemHandlerMo
 	}
 	
 	@Override
-	public ItemStack insertItem(int slot, ItemStack stack, boolean simulate)
+	public NBTTagCompound writeToNBT(NBTTagCompound tag)
 	{
-		return inventory.insertItem(slot, stack, simulate);
-	}
-	
-	@Override
-	public void onDataPacket(NetworkManager manager, SPacketUpdateTileEntity packet)
-	{
-		readFromNBT(packet.getNbtCompound());
+		if (getSlots() > 0) tag.setTag("inventory", inventory.serializeNBT());
+		markDirty();
+		world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 2);
+		return super.writeToNBT(tag);
 	}
 	
 	@Override
@@ -88,16 +103,20 @@ public abstract class ModTileEntity extends TileEntity implements IItemHandlerMo
 		if (getSlots() > 0) inventory.deserializeNBT(tag.getCompoundTag("inventory"));
 	}
 	
-	@Override
-	public void setStackInSlot(int slot, ItemStack stack)
+	public boolean isEmpty()
 	{
-		inventory.setStackInSlot(slot, stack);
+		for (int i = 0; i < inventory.getSlots(); i++) if (!getStackInSlot(i).isEmpty()) return false;
+		return true;
 	}
 	
-	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound tag)
+	public int getFirstEmptySlot()
 	{
-		if (getSlots() > 0) tag.setTag("inventory", inventory.serializeNBT());
-		return super.writeToNBT(tag);
+		for (int i = 0; i < inventory.getSlots(); i++) if (getStackInSlot(i).isEmpty()) return i;
+		return -1;
+	}
+	
+	public void clear()
+	{
+		for (int i = 0; i < getSlots(); i++) setStackInSlot(i, ItemStack.EMPTY);
 	}
 }

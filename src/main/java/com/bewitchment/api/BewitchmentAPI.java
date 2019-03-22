@@ -1,18 +1,24 @@
 package com.bewitchment.api;
 
+import java.util.Collection;
+
 import com.bewitchment.Bewitchment;
 import com.bewitchment.api.registry.DistilleryRecipe;
+import com.bewitchment.api.registry.Fortune;
 import com.bewitchment.api.registry.LoomRecipe;
 import com.bewitchment.api.registry.OvenRecipe;
 import com.bewitchment.api.registry.Ritual;
 import com.bewitchment.api.registry.Spell;
 import com.bewitchment.common.block.tile.entity.TileEntityWitchesAltar;
+import com.bewitchment.common.item.tool.ItemAthame;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
 
@@ -20,13 +26,15 @@ import net.minecraftforge.registries.RegistryBuilder;
  * The Bewitchment API, use this for creating addons.
  */
 public class BewitchmentAPI
-{
+{	
 	public static final IForgeRegistry<DistilleryRecipe> REGISTRY_DISTILLERY = new RegistryBuilder<DistilleryRecipe>().setName(new ResourceLocation(Bewitchment.MOD_ID, "distillery")).setType(DistilleryRecipe.class).create();
 	public static final IForgeRegistry<LoomRecipe> REGISTRY_LOOM = new RegistryBuilder<LoomRecipe>().setName(new ResourceLocation(Bewitchment.MOD_ID, "loom")).setType(LoomRecipe.class).create();
 	public static final IForgeRegistry<OvenRecipe> REGISTRY_OVEN = new RegistryBuilder<OvenRecipe>().setName(new ResourceLocation(Bewitchment.MOD_ID, "oven")).setType(OvenRecipe.class).create();
 	public static final IForgeRegistry<Ritual> REGISTRY_RITUAL = new RegistryBuilder<Ritual>().setName(new ResourceLocation(Bewitchment.MOD_ID, "ritual")).setType(Ritual.class).create();
 	public static final IForgeRegistry<Spell> REGISTRY_SPELL = new RegistryBuilder<Spell>().setName(new ResourceLocation(Bewitchment.MOD_ID, "spell")).setType(Spell.class).create();
 	
+	public static final IForgeRegistry<Fortune> REGISTRY_FORTUNE = new RegistryBuilder<Fortune>().setName(new ResourceLocation(Bewitchment.MOD_ID, "fortune")).setType(Fortune.class).create();
+
 	/**
 	 * The Demon creature attribute.
 	 */
@@ -84,23 +92,34 @@ public class BewitchmentAPI
 	/**
 	 * Registers a new sword multiplier value for the Witches' Altar.
 	 *
-	 * @param item               the item to be registered
-	 * @param variety_multiplier the multiplier associated with the item
+	 * @param item the item to be registered
+	 * @param varietyMultiplier the multiplier associated with the item
 	 */
-	public static final void registerAltarSwordMultiplier(Item item, double variety_multiplier)
+	public static final void registerAltarSwordMultiplier(Item item, double varietyMultiplier)
 	{
-		TileEntityWitchesAltar.SWORD_MULTIPLIER_VALUES.put(item, variety_multiplier);
+		TileEntityWitchesAltar.SWORD_MULTIPLIER_VALUES.put(item, varietyMultiplier);
 	}
 	
 	/**
 	 * Registers a new sword radius value for the Witches' Altar.
 	 *
-	 * @param item   the item to be registered
+	 * @param item the item to be registered
 	 * @param radius the radius associated with the item
 	 */
 	public static final void registerAltarSwordRadius(Item item, int radius)
 	{
 		TileEntityWitchesAltar.SWORD_RADIUS_VALUES.put(item, radius);
+	}
+	
+	/**
+	 * Registers a new special drop for the Athame
+	 * 
+	 * @param entry the EntityEntry associated with the drop
+	 * @param drops the list of ItemStacks dropped when the Entity is killed with the Athame
+	 */
+	public static final void registerAthameLoot(EntityEntry entry, Collection<ItemStack> drops)
+	{
+		ItemAthame.LOOT_TABLE.put(entry, drops);
 	}
 	
 	/**
@@ -161,5 +180,17 @@ public class BewitchmentAPI
 	{
 		REGISTRY_SPELL.register(spell);
 		return spell;
+	}
+	
+	/**
+	 * Registers a new Fortune.
+	 *
+	 * @param recipe the fortune to register
+	 * @return the fortune registered
+	 */
+	public static final Fortune registerFortune(Fortune fortune)
+	{
+		REGISTRY_FORTUNE.register(fortune);
+		return fortune;
 	}
 }

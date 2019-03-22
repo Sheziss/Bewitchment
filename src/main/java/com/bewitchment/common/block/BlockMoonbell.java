@@ -70,8 +70,7 @@ public class BlockMoonbell extends ModBlockBush implements IInfusionStabiliserEx
 	}
 	
 	@Override
-	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing face, float hitX, float hitY,
-			float hitZ, int meta, EntityLivingBase entity, EnumHand hand)
+	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing face, float hitX, float hitY, float hitZ, int meta, EntityLivingBase living, EnumHand hand)
 	{
 		return getDefaultState().withProperty(PLACED, true);
 	}

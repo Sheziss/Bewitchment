@@ -30,13 +30,13 @@ public class ModBlockSlab extends BlockSlab implements IOreDictionaryContainer
 {
 	public Block half;
 	
-	private final List<String> ore_dictionary_names = new ArrayList<String>();
+	private final List<String> oreDictionaryNames = new ArrayList<String>();
 	
 	private final boolean isDouble;
 	
-	public ModBlockSlab(String name, Block base, String... ore_dictionary_names)
+	public ModBlockSlab(String name, Block base, String... oreDictionaryNames)
 	{
-		this(name, base, false, ore_dictionary_names);
+		this(name, base, false, oreDictionaryNames);
 		ModBlockSlab double_slab = new ModBlockSlab(getRegistryName().getPath() + "_double", base, true);
 		double_slab.setCreativeTab(null);
 		this.half = this;
@@ -46,44 +46,19 @@ public class ModBlockSlab extends BlockSlab implements IOreDictionaryContainer
 		Bewitchment.proxy.registerTexture(item);
 	}
 	
-	public ModBlockSlab(String name, Block base, boolean isDouble, String... ore_dictionary_names)
+	public ModBlockSlab(String name, Block base, boolean isDouble, String... oreDictionaryNames)
 	{
 		super(base.getDefaultState().getMaterial());
-		Bewitchment.proxy.registerValues(this, name, base, ore_dictionary_names);
+		Bewitchment.proxy.registerValues(this, name, base, oreDictionaryNames);
 		this.setDefaultState(isDouble ? blockState.getBaseState().withProperty(BlockPurpurSlab.VARIANT, BlockPurpurSlab.Variant.DEFAULT) : blockState.getBaseState().withProperty(BlockPurpurSlab.VARIANT, BlockPurpurSlab.Variant.DEFAULT).withProperty(HALF, EnumBlockHalf.BOTTOM));
 		this.isDouble = isDouble;
 		this.fullBlock = isDouble;
 	}
 	
 	@Override
-    public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face)
-    {
-		return state.getMaterial() == Material.ICE || state.getMaterial() == Material.GLASS ? false : super.doesSideBlockRendering(state, world, pos, face);
-    }
-
-	@Override
-	public ItemStack getItem(World world, BlockPos pos, IBlockState state)
-    {
-        return new ItemStack(half);
-    }
-
-	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
-    {
-        return Item.getItemFromBlock(half);
-    }
-	
-	@Override
 	public List<String> getOreDictionaryNames()
 	{
-		return ore_dictionary_names;
-	}
-	
-	@Override
-	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getRenderLayer()
-	{
-		return getDefaultState().getMaterial() == Material.ICE || getDefaultState().getMaterial() == Material.GLASS ? BlockRenderLayer.TRANSLUCENT : BlockRenderLayer.CUTOUT;
+		return oreDictionaryNames;
 	}
 	
 	@Override
@@ -103,6 +78,31 @@ public class ModBlockSlab extends BlockSlab implements IOreDictionaryContainer
 	{
 		return BlockPurpurSlab.VARIANT;
 	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public BlockRenderLayer getRenderLayer()
+	{
+		return getDefaultState().getMaterial() == Material.ICE || getDefaultState().getMaterial() == Material.GLASS ? BlockRenderLayer.TRANSLUCENT : BlockRenderLayer.CUTOUT;
+	}
+	
+	@Override
+	public ItemStack getItem(World world, BlockPos pos, IBlockState state)
+    {
+        return new ItemStack(half);
+    }
+
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune)
+    {
+        return Item.getItemFromBlock(half);
+    }
+	
+	@Override
+    public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face)
+    {
+		return state.getMaterial() == Material.ICE || state.getMaterial() == Material.GLASS ? false : super.doesSideBlockRendering(state, world, pos, face);
+    }
 	
 	@Override
 	public boolean isDouble()

@@ -13,7 +13,7 @@ public class ItemYewBroom extends ItemBroom
 {
 	public ItemYewBroom()
 	{
-		super("broom_yew", Bewitchment.proxy.tab, new ResourceLocation(Bewitchment.MOD_ID, "textures/entity/broom_yew.png"));
+		super(Bewitchment.MOD_ID, "broom_yew", Bewitchment.proxy.tab, new ResourceLocation(Bewitchment.MOD_ID, "textures/entity/broom_yew.png"));
 	}
 	
 	@Override
@@ -40,11 +40,11 @@ public class ItemYewBroom extends ItemBroom
 	@Override
 	public void onDismount(EntityBroom broom, EntityLivingBase mounter)
 	{
-		BlockPos start = broom.original_position;
-		if (broom.world.provider.getDimension() == broom.original_dimension)
+		BlockPos start = broom.originalPosition;
+		if (broom.world.provider.getDimension() == broom.originalDimension)
 		{
-			broom.setPositionAndUpdate(start.getX(), start.getY(), start.getZ());
 			mounter.setPositionAndUpdate(start.getX(), start.getY(), start.getZ());
+			broom.setPositionAndUpdate(start.getX(), start.getY(), start.getZ());
 		}
 	}
 }

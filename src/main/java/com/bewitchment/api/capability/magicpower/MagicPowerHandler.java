@@ -1,11 +1,9 @@
 package com.bewitchment.api.capability.magicpower;
 
 import com.bewitchment.Bewitchment;
-import com.bewitchment.common.block.tile.entity.TileEntityDistillery;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -14,18 +12,12 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class MagicPowerHandler
 {
-	private static final ResourceLocation CAP = new ResourceLocation(Bewitchment.MOD_ID, "magic_power");
+	private static final ResourceLocation CAP = new ResourceLocation(Bewitchment.MOD_ID, "magicPower");
 	
 	@SubscribeEvent
 	public void attachCapabilityE(AttachCapabilitiesEvent<Entity> event)
 	{
 		if (event.getObject() instanceof EntityPlayer) event.addCapability(CAP, new MagicPower());
-	}
-	
-	@SubscribeEvent
-	public void attachCapabilityTE(AttachCapabilitiesEvent<TileEntity> event)
-	{
-		if (event.getObject() instanceof TileEntityDistillery) event.addCapability(CAP, new MagicPower());
 	}
 	
 	@SubscribeEvent

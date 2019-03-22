@@ -3,8 +3,6 @@ package com.bewitchment.api.registry;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bewitchment.Bewitchment;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryEntry;
@@ -12,14 +10,14 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 public class DistilleryRecipe extends IForgeRegistryEntry.Impl<DistilleryRecipe>
 {
 	private final ItemStack[] input, output;
-	private final int running_power, time;
+	private final int runningPower, time;
 	
-	public DistilleryRecipe(String name, ItemStack[] input, ItemStack[] output, int running_power, int time)
+	public DistilleryRecipe(String modid, String name, ItemStack[] input, ItemStack[] output, int runningPower, int time)
 	{
-		this.setRegistryName(new ResourceLocation(Bewitchment.MOD_ID, name));
+		this.setRegistryName(new ResourceLocation(modid, name));
 		this.input = input;
 		this.output = output;
-		this.running_power = running_power;
+		this.runningPower = runningPower;
 		this.time = time;
 	}
 	
@@ -44,7 +42,7 @@ public class DistilleryRecipe extends IForgeRegistryEntry.Impl<DistilleryRecipe>
 	 */
 	public int getRunningPower()
 	{
-		return running_power;
+		return runningPower;
 	}
 	
 	/**

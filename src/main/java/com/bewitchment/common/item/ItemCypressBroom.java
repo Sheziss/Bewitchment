@@ -12,7 +12,7 @@ public class ItemCypressBroom extends ItemBroom
 {
 	public ItemCypressBroom()
 	{
-		super("broom_cypress", Bewitchment.proxy.tab, new ResourceLocation(Bewitchment.MOD_ID, "textures/entity/broom_cypress.png"));
+		super(Bewitchment.MOD_ID, "broom_cypress", Bewitchment.proxy.tab, new ResourceLocation(Bewitchment.MOD_ID, "textures/entity/broom_cypress.png"));
 	}
 	
 	@Override

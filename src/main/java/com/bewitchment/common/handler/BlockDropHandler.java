@@ -29,6 +29,11 @@ public class BlockDropHandler
 		replaceDrop(event, ModObjects.leaves_yew, new ItemStack(ModObjects.yew_aril), 15, false, false);
 	}
 	
+	private static int getFortuneDropAmount(Random rand, int fortuneLevel)
+	{
+		return fortuneLevel > 0 ? Math.max(0, rand.nextInt(fortuneLevel + 2)) : 1;
+	}
+	
 	private static void replaceDrop(HarvestDropsEvent event, Block block, ItemStack out, int chance, boolean replace, boolean ignoreSilkTouch)
 	{
 		if (event.getState().getBlock() == block && (ignoreSilkTouch ? true : !event.isSilkTouching()))
@@ -36,10 +41,5 @@ public class BlockDropHandler
 			if (replace) event.getDrops().clear();
 			if (event.getWorld().rand.nextInt(100) <= chance) event.getDrops().add(out);
 		}
-	}
-	
-	public static int getFortuneDropAmount(Random rand, int fortune_level)
-	{
-		return fortune_level > 0 ? Math.max(0, rand.nextInt(fortune_level + 2)) : 1;
 	}
 }

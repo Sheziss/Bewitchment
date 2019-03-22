@@ -1,0 +1,19 @@
+{
+	"type": "forge:ore_shaped",
+	"pattern":
+	[
+		"S  ",
+		"W  ",
+		"WD "
+	],
+	"key":
+	{
+		"S": {"item": "bewitchment:candle_small_blue"},
+		"W": {"item": "#GENERIC_WAX"},
+		"D": {"type": "forge:ore_dict", "ore": "dyeBlue"}
+	},
+	"result":
+	{
+		"item": "bewitchment:candle_blue"
+	}
+}

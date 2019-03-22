@@ -7,6 +7,7 @@ import com.bewitchment.registry.ModObjects;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldProviderSurface;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.feature.WorldGenMinable;
@@ -19,35 +20,35 @@ public class WorldGenOres implements IWorldGenerator
 	
 	public WorldGenOres()
 	{
-		silver = new WorldGenMinable(ModObjects.ore_silver.getDefaultState(), Bewitchment.proxy.config.silver_size);
-		salt = new WorldGenMinable(ModObjects.ore_salt.getDefaultState(), Bewitchment.proxy.config.salt_size);
-		alexandrite = new WorldGenMinable(ModObjects.ore_alexandrite.getDefaultState(), Bewitchment.proxy.config.alexandrite_size);
-		amethyst = new WorldGenMinable(ModObjects.ore_amethyst.getDefaultState(), Bewitchment.proxy.config.amethyst_size);
-		bloodstone = new WorldGenMinable(ModObjects.ore_bloodstone.getDefaultState(), Bewitchment.proxy.config.bloodstone_size);
-		garnet = new WorldGenMinable(ModObjects.ore_garnet.getDefaultState(), Bewitchment.proxy.config.garnet_size);
-		jasper = new WorldGenMinable(ModObjects.ore_jasper.getDefaultState(), Bewitchment.proxy.config.jasper_size);
-		malachite = new WorldGenMinable(ModObjects.ore_malachite.getDefaultState(), Bewitchment.proxy.config.malachite_size);
-		nuummite = new WorldGenMinable(ModObjects.ore_nuummite.getDefaultState(), Bewitchment.proxy.config.nuummite_size);
-		tigers_eye = new WorldGenMinable(ModObjects.ore_tigers_eye.getDefaultState(), Bewitchment.proxy.config.tigers_eye_size);
-		tourmaline = new WorldGenMinable(ModObjects.ore_tourmaline.getDefaultState(), Bewitchment.proxy.config.tourmaline_size);
+		silver = new WorldGenMinable(ModObjects.ore_silver.getDefaultState(), Bewitchment.proxy.config.silverSize);
+		salt = new WorldGenMinable(ModObjects.ore_salt.getDefaultState(), Bewitchment.proxy.config.saltSize);
+		alexandrite = new WorldGenMinable(ModObjects.ore_alexandrite.getDefaultState(), Bewitchment.proxy.config.alexandriteSize);
+		amethyst = new WorldGenMinable(ModObjects.ore_amethyst.getDefaultState(), Bewitchment.proxy.config.amethystSize);
+		bloodstone = new WorldGenMinable(ModObjects.ore_bloodstone.getDefaultState(), Bewitchment.proxy.config.bloodstoneSize);
+		garnet = new WorldGenMinable(ModObjects.ore_garnet.getDefaultState(), Bewitchment.proxy.config.garnetSize);
+		jasper = new WorldGenMinable(ModObjects.ore_jasper.getDefaultState(), Bewitchment.proxy.config.jasperSize);
+		malachite = new WorldGenMinable(ModObjects.ore_malachite.getDefaultState(), Bewitchment.proxy.config.malachiteSize);
+		nuummite = new WorldGenMinable(ModObjects.ore_nuummite.getDefaultState(), Bewitchment.proxy.config.nuummiteSize);
+		tigers_eye = new WorldGenMinable(ModObjects.ore_tigers_eye.getDefaultState(), Bewitchment.proxy.config.tigersEyeSize);
+		tourmaline = new WorldGenMinable(ModObjects.ore_tourmaline.getDefaultState(), Bewitchment.proxy.config.tourmalineSize);
 	}
 	
 	@Override
 	public void generate(Random rand, int chunkX, int chunkZ, World world, IChunkGenerator generator, IChunkProvider provider)
 	{
-		if (world.provider.getDimension() == 0) // for (int j = 0; j < 32; j++) // uncomment this for mega ores
+		if (world.provider instanceof WorldProviderSurface) // for (int j = 0; j < 32; j++) // uncomment this for mega ores
 		{
-			for (int i = 0; i < Bewitchment.proxy.config.silver_chance; i++) silver.generate(world, rand, new BlockPos(chunkX * 16 + rand.nextInt(16), rand.nextInt(Bewitchment.proxy.config.silver_max - Bewitchment.proxy.config.silver_min) + Bewitchment.proxy.config.silver_min, chunkZ * 16 + rand.nextInt(16)));
-			for (int i = 0; i < Bewitchment.proxy.config.salt_chance; i++) salt.generate(world, rand, new BlockPos(chunkX * 16 + rand.nextInt(16), rand.nextInt(Bewitchment.proxy.config.salt_max - Bewitchment.proxy.config.salt_min) + Bewitchment.proxy.config.salt_min, chunkZ * 16 + rand.nextInt(16)));
-			for (int i = 0; i < Bewitchment.proxy.config.alexandrite_chance; i++) alexandrite.generate(world, rand, new BlockPos(chunkX * 16 + rand.nextInt(16), rand.nextInt( Bewitchment.proxy.config.alexandrite_max - Bewitchment.proxy.config.alexandrite_min) + Bewitchment.proxy.config.alexandrite_min, chunkZ * 16 + rand.nextInt(16)));
-			for (int i = 0; i < Bewitchment.proxy.config.amethyst_chance; i++) amethyst.generate(world, rand, new BlockPos(chunkX * 16 + rand.nextInt(16), rand.nextInt(Bewitchment.proxy.config.amethyst_max - Bewitchment.proxy.config.amethyst_min) + Bewitchment.proxy.config.amethyst_min, chunkZ * 16 + rand.nextInt(16)));
-			for (int i = 0; i < Bewitchment.proxy.config.bloodstone_chance; i++) bloodstone.generate(world, rand, new BlockPos(chunkX * 16 + rand.nextInt(16), rand.nextInt(Bewitchment.proxy.config.bloodstone_max - Bewitchment.proxy.config.bloodstone_min) + Bewitchment.proxy.config.bloodstone_min, chunkZ * 16 + rand.nextInt(16)));
-			for (int i = 0; i < Bewitchment.proxy.config.garnet_chance; i++) garnet.generate(world, rand, new BlockPos(chunkX * 16 + rand.nextInt(16), rand.nextInt(Bewitchment.proxy.config.garnet_max - Bewitchment.proxy.config.garnet_min) + Bewitchment.proxy.config.garnet_min, chunkZ * 16 + rand.nextInt(16)));
-			for (int i = 0; i < Bewitchment.proxy.config.jasper_chance; i++) jasper.generate(world, rand, new BlockPos(chunkX * 16 + rand.nextInt(16), rand.nextInt(Bewitchment.proxy.config.jasper_max - Bewitchment.proxy.config.jasper_min) + Bewitchment.proxy.config.jasper_min, chunkZ * 16 + rand.nextInt(16)));
-			for (int i = 0; i < Bewitchment.proxy.config.malachite_chance; i++) malachite.generate(world, rand, new BlockPos(chunkX * 16 + rand.nextInt(16), rand.nextInt(Bewitchment.proxy.config.malachite_max - Bewitchment.proxy.config.malachite_min) + Bewitchment.proxy.config.malachite_min, chunkZ * 16 + rand.nextInt(16)));
-			for (int i = 0; i < Bewitchment.proxy.config.nuummite_chance; i++) nuummite.generate(world, rand, new BlockPos(chunkX * 16 + rand.nextInt(16), rand.nextInt(Bewitchment.proxy.config.nuummite_max - Bewitchment.proxy.config.nuummite_min) + Bewitchment.proxy.config.nuummite_min, chunkZ * 16 + rand.nextInt(16)));
-			for (int i = 0; i < Bewitchment.proxy.config.tigers_eye_chance; i++) tigers_eye.generate(world, rand, new BlockPos(chunkX * 16 + rand.nextInt(16), rand.nextInt(Bewitchment.proxy.config.tigers_eye_max - Bewitchment.proxy.config.tigers_eye_min) + Bewitchment.proxy.config.tigers_eye_min, chunkZ * 16 + rand.nextInt(16)));
-			for (int i = 0; i < Bewitchment.proxy.config.tourmaline_chance; i++) tourmaline.generate(world, rand, new BlockPos(chunkX * 16 + rand.nextInt(16), rand.nextInt(Bewitchment.proxy.config.tourmaline_max - Bewitchment.proxy.config.tourmaline_min) + Bewitchment.proxy.config.tourmaline_min, chunkZ * 16 + rand.nextInt(16)));
+			for (int i = 0; i < Bewitchment.proxy.config.silverChance; i++) silver.generate(world, rand, new BlockPos(chunkX * 16 + rand.nextInt(16), rand.nextInt(Bewitchment.proxy.config.silverMax - Bewitchment.proxy.config.silverMin) + Bewitchment.proxy.config.silverMin, chunkZ * 16 + rand.nextInt(16)));
+			for (int i = 0; i < Bewitchment.proxy.config.saltChance; i++) salt.generate(world, rand, new BlockPos(chunkX * 16 + rand.nextInt(16), rand.nextInt(Bewitchment.proxy.config.saltMax - Bewitchment.proxy.config.saltMin) + Bewitchment.proxy.config.saltMin, chunkZ * 16 + rand.nextInt(16)));
+			for (int i = 0; i < Bewitchment.proxy.config.alexandriteChance; i++) alexandrite.generate(world, rand, new BlockPos(chunkX * 16 + rand.nextInt(16), rand.nextInt( Bewitchment.proxy.config.alexandriteMax - Bewitchment.proxy.config.alexandriteMin) + Bewitchment.proxy.config.alexandriteMin, chunkZ * 16 + rand.nextInt(16)));
+			for (int i = 0; i < Bewitchment.proxy.config.amethystChance; i++) amethyst.generate(world, rand, new BlockPos(chunkX * 16 + rand.nextInt(16), rand.nextInt(Bewitchment.proxy.config.amethystMax - Bewitchment.proxy.config.amethystMin) + Bewitchment.proxy.config.amethystMin, chunkZ * 16 + rand.nextInt(16)));
+			for (int i = 0; i < Bewitchment.proxy.config.bloodstoneChance; i++) bloodstone.generate(world, rand, new BlockPos(chunkX * 16 + rand.nextInt(16), rand.nextInt(Bewitchment.proxy.config.bloodstoneMax - Bewitchment.proxy.config.bloodstoneMin) + Bewitchment.proxy.config.bloodstoneMin, chunkZ * 16 + rand.nextInt(16)));
+			for (int i = 0; i < Bewitchment.proxy.config.garnetChance; i++) garnet.generate(world, rand, new BlockPos(chunkX * 16 + rand.nextInt(16), rand.nextInt(Bewitchment.proxy.config.garnetMax - Bewitchment.proxy.config.garnetMin) + Bewitchment.proxy.config.garnetMin, chunkZ * 16 + rand.nextInt(16)));
+			for (int i = 0; i < Bewitchment.proxy.config.jasperChance; i++) jasper.generate(world, rand, new BlockPos(chunkX * 16 + rand.nextInt(16), rand.nextInt(Bewitchment.proxy.config.jasperMax - Bewitchment.proxy.config.jasperMin) + Bewitchment.proxy.config.jasperMin, chunkZ * 16 + rand.nextInt(16)));
+			for (int i = 0; i < Bewitchment.proxy.config.malachiteChance; i++) malachite.generate(world, rand, new BlockPos(chunkX * 16 + rand.nextInt(16), rand.nextInt(Bewitchment.proxy.config.malachiteMax - Bewitchment.proxy.config.malachiteMin) + Bewitchment.proxy.config.malachiteMin, chunkZ * 16 + rand.nextInt(16)));
+			for (int i = 0; i < Bewitchment.proxy.config.nuummiteChance; i++) nuummite.generate(world, rand, new BlockPos(chunkX * 16 + rand.nextInt(16), rand.nextInt(Bewitchment.proxy.config.nuummiteMax - Bewitchment.proxy.config.nuummiteMin) + Bewitchment.proxy.config.nuummiteMin, chunkZ * 16 + rand.nextInt(16)));
+			for (int i = 0; i < Bewitchment.proxy.config.tigersEyeChance; i++) tigers_eye.generate(world, rand, new BlockPos(chunkX * 16 + rand.nextInt(16), rand.nextInt(Bewitchment.proxy.config.tigersEyeMax - Bewitchment.proxy.config.tigersEyeMin) + Bewitchment.proxy.config.tigersEyeMin, chunkZ * 16 + rand.nextInt(16)));
+			for (int i = 0; i < Bewitchment.proxy.config.tourmalineChance; i++) tourmaline.generate(world, rand, new BlockPos(chunkX * 16 + rand.nextInt(16), rand.nextInt(Bewitchment.proxy.config.tourmalineMax - Bewitchment.proxy.config.tourmalineMin) + Bewitchment.proxy.config.tourmalineMin, chunkZ * 16 + rand.nextInt(16)));
 		}
 	}
 }

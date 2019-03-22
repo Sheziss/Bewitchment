@@ -10,6 +10,7 @@ import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.common.capabilities.CapabilityInject;
@@ -23,20 +24,20 @@ public class MagicPower implements ICapabilitySerializable<NBTTagCompound>, ISto
 	
 	private final Map<String, Integer> upgrades = new HashMap<>();
 	
-	private int amount = 0, max_amount = 0, bonus_amount;
+	private int amount = 0, maxAmount = 0, bonusAmount;
 	
-	public boolean drainAltarFirst(EntityPlayer player, BlockPos pos, int amount)
+	public static boolean drainAltarFirst(World world, EntityPlayer player, BlockPos pos, int amount)
 	{
 		if (amount == 0) return true;
-		if (BlockWitchesAltar.getNearestAltar(player.world, pos) != null) return player.world.getTileEntity(BlockWitchesAltar.getNearestAltar(player.world, pos)).getCapability(CAPABILITY, null).drain(amount);
-		return player.getCapability(CAPABILITY, null).drain(amount);
+		if (BlockWitchesAltar.getNearestAltar(world, pos) != null) return world.getTileEntity(BlockWitchesAltar.getNearestAltar(world, pos)).getCapability(CAPABILITY, null).drain(amount);
+		return player == null ? false : player.getCapability(CAPABILITY, null).drain(amount);
 	}
 	
 	public boolean drain(int amount)
 	{
-		if (getAmount() > 0)
+		if (getAmount() >= amount)
 		{
-			setAmount(Math.max(0, getAmount() + getBonusAmount()) - amount);
+			setAmount(Math.max(0, (getAmount() + getBonusAmount()) - amount));
 			return true;
 		}
 		return false;
@@ -44,7 +45,7 @@ public class MagicPower implements ICapabilitySerializable<NBTTagCompound>, ISto
 	
 	public boolean fill(int amount)
 	{
-		if (getAmount() < getMaxAmount())
+		if (getAmount() <= getMaxAmount())
 		{
 			setAmount(Math.min(getAmount() + amount, getMaxAmount() + getBonusAmount()));
 			return true;
@@ -69,12 +70,12 @@ public class MagicPower implements ICapabilitySerializable<NBTTagCompound>, ISto
 	
 	public int getMaxAmount()
 	{
-		return max_amount;
+		return maxAmount;
 	}
 	
 	public int getBonusAmount()
 	{
-		return bonus_amount;
+		return bonusAmount;
 	}
 	
 	public MagicPower setAmount(int amount)
@@ -83,78 +84,38 @@ public class MagicPower implements ICapabilitySerializable<NBTTagCompound>, ISto
 		return this;
 	}
 	
-	public MagicPower setMaxAmount(int max_amount)
+	public MagicPower setMaxAmount(int maxAmount)
 	{
-		this.max_amount = max_amount;
+		this.maxAmount = maxAmount;
 		return this;
 	}
 	
-	public MagicPower setBonusAmount(int bonus_amount)
+	public MagicPower setBonusAmount(int bonusAmount)
 	{
-		this.bonus_amount = bonus_amount;
+		this.bonusAmount = bonusAmount;
 		return this;
-	}
-	
-	public NBTTagCompound serialize(NBTTagCompound tag)
-	{
-		return serialize(tag, this);
-	}
-	
-	public void deserialize(NBTTagCompound tag)
-	{
-		deserialize(tag, this);
-	}
-	
-	private NBTTagCompound serialize(NBTTagCompound tag, MagicPower instance)
-	{
-		NBTTagCompound tag0 = new NBTTagCompound();
-		for (String value : upgrades.keySet())
-		{
-			int i = 0;
-			tag0.setString("upgrade" + i, value);
-			tag0.setInteger("value" + i, upgrades.get(value));
-			i++;
-		}
-		tag.setTag("upgrades", tag0);
-		tag.setInteger("amount", instance.getAmount());
-		tag.setInteger("max_amount", instance.getMaxAmount());
-		tag.setInteger("bonus_amount", instance.getBonusAmount());
-		return tag;
-	}
-	
-	private void deserialize(NBTTagCompound tag, MagicPower instance)
-	{
-		for (NBTBase nbt : tag.getTagList("upgrades", NBT.TAG_COMPOUND))
-		{
-			int i = 0;
-			upgrades.put(((NBTTagCompound) nbt).getString("upgrade" + i), ((NBTTagCompound) nbt).getInteger("value" + i));
-			i++;
-		}
-		instance.setAmount(tag.getInteger("amount"));
-		instance.setMaxAmount(tag.getInteger("max_amount"));
-		instance.setBonusAmount(tag.getInteger("bonus_amount"));
 	}
 	
 	@Override
 	public NBTBase writeNBT(Capability<MagicPower> capability, MagicPower instance, EnumFacing side)
 	{
-		return serialize(new NBTTagCompound(), instance);
+		return serialize(instance, new NBTTagCompound());
 	}
 	
 	@Override
-	public void readNBT(Capability<MagicPower> capability, MagicPower instance, EnumFacing side, NBTBase nbt)
+	public void readNBT(Capability<MagicPower> capability, MagicPower instance, EnumFacing side, NBTBase tag)
 	{
-		deserialize((NBTTagCompound) nbt, instance);
+		deserialize(instance, (NBTTagCompound) tag);
 	}
 
 	@Override
-	public <T> T getCapability(Capability<T> capability, EnumFacing facing)
+	public <T> T getCapability(Capability<T> capability, EnumFacing face)
 	{
 		return capability == CAPABILITY ? CAPABILITY.cast(this) : null;
 	}
 	
 	@Override
-	public boolean hasCapability(Capability<?> capability, EnumFacing facing)
+	public boolean hasCapability(Capability<?> capability, EnumFacing face)
 	{
 		return capability == CAPABILITY;
 	}
@@ -166,8 +127,48 @@ public class MagicPower implements ICapabilitySerializable<NBTTagCompound>, ISto
 	}
 	
 	@Override
-	public void deserializeNBT(NBTTagCompound nbt)
+	public void deserializeNBT(NBTTagCompound tag)
 	{
-		CAPABILITY.getStorage().readNBT(CAPABILITY, this, null, nbt);
+		CAPABILITY.getStorage().readNBT(CAPABILITY, this, null, tag);
+	}
+	
+	public NBTTagCompound serialize(NBTTagCompound tag)
+	{
+		return serialize(this, tag);
+	}
+	
+	public void deserialize(NBTTagCompound tag)
+	{
+		deserialize(this, tag);
+	}
+	
+	public NBTTagCompound serialize(MagicPower instance, NBTTagCompound tag)
+	{
+		NBTTagCompound tag_upgrades = new NBTTagCompound();
+		for (String value : upgrades.keySet())
+		{
+			int i = 0;
+			tag_upgrades.setString("upgrade" + i, value);
+			tag_upgrades.setInteger("value" + i, upgrades.get(value));
+			i++;
+		}
+		tag.setTag("upgrades", tag_upgrades);
+		tag.setInteger("amount", instance.getAmount());
+		tag.setInteger("maxAmount", instance.getMaxAmount());
+		tag.setInteger("bonusAmount", instance.getBonusAmount());
+		return tag;
+	}
+	
+	public void deserialize(MagicPower instance, NBTTagCompound tag)
+	{
+		for (NBTBase nbt0 : tag.getTagList("upgrades", NBT.TAG_COMPOUND))
+		{
+			int i = 0;
+			upgrades.put(((NBTTagCompound) nbt0).getString("upgrade" + i), ((NBTTagCompound) nbt0).getInteger("value" + i));
+			i++;
+		}
+		instance.setAmount(tag.getInteger("amount"));
+		instance.setMaxAmount(tag.getInteger("maxAmount"));
+		instance.setBonusAmount(tag.getInteger("bonusAmount"));
 	}
 }

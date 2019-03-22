@@ -16,18 +16,18 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ModBlockFenceGate extends BlockFenceGate implements IOreDictionaryContainer
 {
-	private final List<String> ore_dictionary_names = new ArrayList<String>();
+	private final List<String> oreDictionaryNames = new ArrayList<String>();
 	
-	public ModBlockFenceGate(String name, Block base, String... ore_dictionary_names)
+	public ModBlockFenceGate(String name, Block base, String... oreDictionaryNames)
 	{
 		super(EnumType.OAK);
-		Bewitchment.proxy.registerValues(this, name, base, ore_dictionary_names);
+		Bewitchment.proxy.registerValues(this, name, base, oreDictionaryNames);
 	}
 	
 	@Override
 	public List<String> getOreDictionaryNames()
 	{
-		return ore_dictionary_names;
+		return oreDictionaryNames;
 	}
 	
 	@Override

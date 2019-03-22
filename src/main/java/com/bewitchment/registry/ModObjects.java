@@ -4,23 +4,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bewitchment.Bewitchment;
+import com.bewitchment.common.block.BlockApiary;
+import com.bewitchment.common.block.BlockBeehive;
+import com.bewitchment.common.block.BlockCandle;
+import com.bewitchment.common.block.BlockCandleBase;
+import com.bewitchment.common.block.BlockCandleSmall;
+import com.bewitchment.common.block.BlockCrystalBall;
 import com.bewitchment.common.block.BlockDistillery;
+import com.bewitchment.common.block.BlockGemBowl;
+import com.bewitchment.common.block.BlockGlyph;
+import com.bewitchment.common.block.BlockGoblet;
+import com.bewitchment.common.block.BlockLantern;
 import com.bewitchment.common.block.BlockMoonbell;
 import com.bewitchment.common.block.BlockOven;
 import com.bewitchment.common.block.BlockPlacedItem;
+import com.bewitchment.common.block.BlockPurifyingEarth;
 import com.bewitchment.common.block.BlockSaltBarrier;
 import com.bewitchment.common.block.BlockWitchesAltar;
+import com.bewitchment.common.block.BlockWitchesLight;
 import com.bewitchment.common.block.crop.BlockCropBelladonna;
 import com.bewitchment.common.block.crop.BlockCropKelp;
 import com.bewitchment.common.block.crop.BlockCropKenaf;
 import com.bewitchment.common.block.crop.BlockCropMint;
 import com.bewitchment.common.block.crop.BlockCropSilphium;
 import com.bewitchment.common.block.crop.BlockCropThistle;
+import com.bewitchment.common.block.tile.entity.TileEntityApiary;
 import com.bewitchment.common.block.tile.entity.TileEntityDistillery;
+import com.bewitchment.common.block.tile.entity.TileEntityGemBowl;
+import com.bewitchment.common.block.tile.entity.TileEntityGlyph;
 import com.bewitchment.common.block.tile.entity.TileEntityOven;
 import com.bewitchment.common.block.tile.entity.TileEntityPlacedItem;
 import com.bewitchment.common.block.tile.entity.TileEntityWitchesAltar;
 import com.bewitchment.common.block.util.ModBlock;
+import com.bewitchment.common.block.util.ModBlockButton;
 import com.bewitchment.common.block.util.ModBlockCrop;
 import com.bewitchment.common.block.util.ModBlockExp;
 import com.bewitchment.common.block.util.ModBlockFence;
@@ -32,13 +48,34 @@ import com.bewitchment.common.block.util.ModBlockSapling;
 import com.bewitchment.common.block.util.ModBlockSlab;
 import com.bewitchment.common.block.util.ModBlockStairs;
 import com.bewitchment.common.block.util.ModBlockTrapdoor;
+import com.bewitchment.common.item.ItemChalk;
 import com.bewitchment.common.item.ItemCypressBroom;
 import com.bewitchment.common.item.ItemElderBroom;
-import com.bewitchment.common.item.ItemHeart;
 import com.bewitchment.common.item.ItemJuniperBroom;
+import com.bewitchment.common.item.ItemLantern;
 import com.bewitchment.common.item.ItemSalt;
 import com.bewitchment.common.item.ItemUndyingSalve;
 import com.bewitchment.common.item.ItemYewBroom;
+import com.bewitchment.common.item.food.ItemAconitum;
+import com.bewitchment.common.item.food.ItemAsphodel;
+import com.bewitchment.common.item.food.ItemBelladonna;
+import com.bewitchment.common.item.food.ItemChrysanthemum;
+import com.bewitchment.common.item.food.ItemGarlic;
+import com.bewitchment.common.item.food.ItemGinger;
+import com.bewitchment.common.item.food.ItemHeart;
+import com.bewitchment.common.item.food.ItemHellebore;
+import com.bewitchment.common.item.food.ItemHoney;
+import com.bewitchment.common.item.food.ItemKelp;
+import com.bewitchment.common.item.food.ItemKenaf;
+import com.bewitchment.common.item.food.ItemLavender;
+import com.bewitchment.common.item.food.ItemMandrakeRoot;
+import com.bewitchment.common.item.food.ItemMint;
+import com.bewitchment.common.item.food.ItemSagebrush;
+import com.bewitchment.common.item.food.ItemSilphium;
+import com.bewitchment.common.item.food.ItemThistle;
+import com.bewitchment.common.item.food.ItemTulsi;
+import com.bewitchment.common.item.food.ItemWhiteSage;
+import com.bewitchment.common.item.food.ItemWormwood;
 import com.bewitchment.common.item.tool.ItemAthame;
 import com.bewitchment.common.item.tool.ItemBoline;
 import com.bewitchment.common.item.tool.ItemColdIronArmor;
@@ -53,7 +90,6 @@ import com.bewitchment.common.item.tool.ItemSilverHoe;
 import com.bewitchment.common.item.tool.ItemSilverPickaxe;
 import com.bewitchment.common.item.tool.ItemSilverSpade;
 import com.bewitchment.common.item.tool.ItemSilverSword;
-import com.bewitchment.common.item.util.ModBlockButton;
 import com.bewitchment.common.item.util.ModItem;
 import com.bewitchment.common.item.util.ModItemDoor;
 import com.bewitchment.common.item.util.ModItemFood;
@@ -100,12 +136,14 @@ public class ModObjects
 	public static final List<Object> REGISTRY = new ArrayList<>();
 	
 	// Fluids
-	public static final Fluid honey = createFluid("honey", Material.WATER, 0, 10, 1500, 8000, true, false);
-	public static final Fluid oil_mundane = createFluid("oil_mundane", Material.WATER, 0, 0, 800, 4000, true, true);
+	public static final Fluid fluid_honey = createFluid("honey", Material.WATER, 0, 10, 1500, 8000, true, false);
+	public static final Fluid fluid_oil_mundane = createFluid("oil_mundane", Material.WATER, 0, 0, 800, 4000, true, true);
 	
 	// No Item
-	public static final Block glyph = null;
+	public static final Block glyph = createTileEntity(new BlockGlyph(), TileEntityGlyph.class);
 	public static final Block placed_item = createTileEntity(new BlockPlacedItem(), TileEntityPlacedItem.class);
+	public static final Block witchfire = null;
+	public static final Block witches_light = new BlockWitchesLight();
 	public static final Block salt_barrier = new BlockSaltBarrier();
 	public static final Block crop_aconitum = new ModBlockCrop("crop_aconitum", ModObjects.seed_aconitum, new ItemStack(ModObjects.aconitum), 3);
 	public static final Block crop_asphodel = new ModBlockCrop("crop_asphodel", ModObjects.seed_asphodel, new ItemStack(ModObjects.asphodel), 4);
@@ -127,9 +165,28 @@ public class ModObjects
 	public static final Block crop_wormwood = new ModBlockCrop("crop_wormwood", ModObjects.seed_wormwood, new ItemStack(ModObjects.wormwood), 6);
 	
 	// Devices
-	public static final Block witches_altar = createTileEntity(new BlockWitchesAltar(), TileEntityWitchesAltar.class);
+	public static final Block apiary = createTileEntity(new BlockApiary(), TileEntityApiary.class);
+	public static final Block witches_altar_unformed = createTileEntity(new BlockWitchesAltar(""), TileEntityWitchesAltar.class);
+	public static final Block witches_altar_white = new BlockWitchesAltar("white").setCreativeTab(null);
+	public static final Block witches_altar_orange = new BlockWitchesAltar("orange").setCreativeTab(null);
+	public static final Block witches_altar_magenta = new BlockWitchesAltar("magenta").setCreativeTab(null);
+	public static final Block witches_altar_light_blue = new BlockWitchesAltar("light_blue").setCreativeTab(null);
+	public static final Block witches_altar_yellow = new BlockWitchesAltar("yellow").setCreativeTab(null);
+	public static final Block witches_altar_lime = new BlockWitchesAltar("lime").setCreativeTab(null);
+	public static final Block witches_altar_pink = new BlockWitchesAltar("pink").setCreativeTab(null);
+	public static final Block witches_altar_gray = new BlockWitchesAltar("gray").setCreativeTab(null);
+	public static final Block witches_altar_light_gray = new BlockWitchesAltar("light_gray").setCreativeTab(null);
+	public static final Block witches_altar_cyan = new BlockWitchesAltar("cyan").setCreativeTab(null);
+	public static final Block witches_altar_purple = new BlockWitchesAltar("purple").setCreativeTab(null);
+	public static final Block witches_altar_blue = new BlockWitchesAltar("blue").setCreativeTab(null);
+	public static final Block witches_altar_brown = new BlockWitchesAltar("brown").setCreativeTab(null);
+	public static final Block witches_altar_green = new BlockWitchesAltar("green").setCreativeTab(null);
+	public static final Block witches_altar_red = new BlockWitchesAltar("red").setCreativeTab(null);
+	public static final Block witches_altar_black = new BlockWitchesAltar("black").setCreativeTab(null);
 	public static final Block distillery = createTileEntity(new BlockDistillery(), TileEntityDistillery.class);
 	public static final Block oven = createTileEntity(new BlockOven(), TileEntityOven.class);
+	public static final Block gem_bowl = createTileEntity(new BlockGemBowl(), TileEntityGemBowl.class);
+	public static final Block crystal_ball = new BlockCrystalBall();
 	
 	// Material Blocks
 	public static final Block block_cold_iron = new ModBlock("block_cold_iron", Material.IRON, SoundType.METAL, 5, 30, "pickaxe", 1, "blockColdIron");
@@ -144,8 +201,66 @@ public class ModObjects
 	public static final Block block_tigers_eye = new ModBlock("block_tigers_eye", Material.GLASS, SoundType.GLASS, 5, 30, "pickaxe", 1, "blockTigersEye");
 	public static final Block block_tourmaline = new ModBlock("block_tourmaline", Material.GLASS, SoundType.GLASS, 5, 30, "pickaxe", 1, "blockTourmaline");
 	
+	// Misc
+	public static final Block beehive = new BlockBeehive();
+	
 	public static final Block perpetual_ice = new ModBlock("perpetual_ice", Material.ICE, SoundType.GLASS, 0.5f, 2.5f, "", 0);
 	public static final Block nethersteel = new ModBlock("nethersteel", Material.IRON, SoundType.METAL, 5, 30, "pickaxe", 1, "blockNethersteel");
+	public static final Block coquina = new ModBlock("coquina", Material.ROCK, SoundType.STONE, 5, 30, "pickaxe", 0, "coquina");
+	public static final Block purifying_earth = new BlockPurifyingEarth();
+	public static final Block graveyard_dirt = new ModBlock("graveyard_dirt", Material.GROUND, SoundType.GROUND, 0.5f, 2.5f, "shovel", 0);
+	
+	public static final Block goblet = new BlockGoblet();
+	
+	public static final Block lantern_white = new BlockLantern("white");
+	public static final Block lantern_orange = new BlockLantern("orange");
+	public static final Block lantern_magenta = new BlockLantern("magenta");
+	public static final Block lantern_light_blue = new BlockLantern("light_blue");
+	public static final Block lantern_yellow = new BlockLantern("yellow");
+	public static final Block lantern_lime = new BlockLantern("lime");
+	public static final Block lantern_pink = new BlockLantern("pink");
+	public static final Block lantern_gray = new BlockLantern("gray");
+	public static final Block lantern_light_gray = new BlockLantern("light_gray");
+	public static final Block lantern_cyan = new BlockLantern("cyan");
+	public static final Block lantern_purple = new BlockLantern("purple");
+	public static final Block lantern_blue = new BlockLantern("blue");
+	public static final Block lantern_brown = new BlockLantern("brown");
+	public static final Block lantern_green = new BlockLantern("green");
+	public static final Block lantern_red = new BlockLantern("red");
+	public static final Block lantern_black = new BlockLantern("black");
+	
+	public static final Block candle_white = new BlockCandle("candle_white");
+	public static final Block candle_small_white = new BlockCandleSmall("candle_small_white");
+	public static final Block candle_orange = new BlockCandle("candle_orange");
+	public static final Block candle_small_orange = new BlockCandleSmall("candle_small_orange");
+	public static final Block candle_magenta = new BlockCandle("candle_magenta");
+	public static final Block candle_small_magenta = new BlockCandleSmall("candle_small_magenta");
+	public static final Block candle_light_blue = new BlockCandle("candle_light_blue");
+	public static final Block candle_small_light_blue = new BlockCandleSmall("candle_small_light_blue");
+	public static final Block candle_yellow = new BlockCandle("candle_yellow");
+	public static final Block candle_small_yellow = new BlockCandleSmall("candle_small_yellow");
+	public static final Block candle_lime = new BlockCandle("candle_lime");
+	public static final Block candle_small_lime = new BlockCandleSmall("candle_small_lime");
+	public static final Block candle_pink = new BlockCandle("candle_pink");
+	public static final Block candle_small_pink = new BlockCandleSmall("candle_small_pink");
+	public static final Block candle_gray = new BlockCandle("candle_gray");
+	public static final Block candle_small_gray = new BlockCandleSmall("candle_small_gray");
+	public static final Block candle_light_gray = new BlockCandle("candle_light_gray");
+	public static final Block candle_small_light_gray = new BlockCandleSmall("candle_small_light_gray");
+	public static final Block candle_cyan = new BlockCandle("candle_cyan");
+	public static final Block candle_small_cyan = new BlockCandleSmall("candle_small_cyan");
+	public static final Block candle_purple = new BlockCandle("candle_purple");
+	public static final Block candle_small_purple = new BlockCandleSmall("candle_small_purple");
+	public static final Block candle_blue = new BlockCandle("candle_blue");
+	public static final Block candle_small_blue = new BlockCandleSmall("candle_small_blue");
+	public static final Block candle_brown = new BlockCandle("candle_brown");
+	public static final Block candle_small_brown = new BlockCandleSmall("candle_small_brown");
+	public static final Block candle_green = new BlockCandle("candle_green");
+	public static final Block candle_small_green = new BlockCandleSmall("candle_small_green");
+	public static final Block candle_red = new BlockCandle("candle_red");
+	public static final Block candle_small_red = new BlockCandleSmall("candle_small_red");
+	public static final Block candle_black = new BlockCandle("candle_black");
+	public static final Block candle_small_black = new BlockCandleSmall("candle_small_black");
 	
 	// Ores
 	public static final Block ore_silver = new ModBlock("ore_silver", Material.ROCK, SoundType.STONE, 3, 15, "pickaxe", 1, "oreSilver");
@@ -159,8 +274,6 @@ public class ModObjects
 	public static final Block ore_nuummite = new ModBlockExp("ore_nuummite", Material.ROCK, SoundType.STONE, 3, 15, "pickaxe", 1, "oreNuummite");
 	public static final Block ore_tigers_eye = new ModBlockExp("ore_tigers_eye", Material.ROCK, SoundType.STONE, 3, 15, "pickaxe", 1, "oreTigersEye");
 	public static final Block ore_tourmaline = new ModBlockExp("ore_tourmaline", Material.ROCK, SoundType.STONE, 3, 15, "pickaxe", 1, "oreTourmaline");
-	
-	public static final Block coquina = new ModBlock("coquina", Material.ROCK, SoundType.STONE, 5, 30, "pickaxe", 0, "coquina");
 	
 	// Trees
 	public static final Block sapling_cypress = new ModBlockSapling("sapling_cypress", WorldGenCypressTree.class, "treeSapling");
@@ -265,6 +378,11 @@ public class ModObjects
 	public static final Item athame = new ItemAthame(TOOL_RITUAL);
 	public static final Item boline = new ItemBoline();
 	
+	public static final Item chalk_normal = new ItemChalk("chalk_normal");
+	public static final Item chalk_golden = new ItemChalk("chalk_golden");
+	public static final Item chalk_nether = new ItemChalk("chalk_nether");
+	public static final Item chalk_ender = new ItemChalk("chalk_ender");
+	
 	// Brooms
 	public static final Item broom = new ModItem("broom").setMaxStackSize(1);
 	public static final Item broom_cypress = new ItemCypressBroom();
@@ -288,6 +406,10 @@ public class ModObjects
 	public static final Item gem_tourmaline = new ModItem("gem_tourmaline", "gemTourmaline", "gemAll");
 	
 	public static final Item salt = new ItemSalt();
+	public static final Item wax = new ModItem("wax", "materialWax", "materialBeeswax", "materialPressedWax", "itemBeeswax", "wax", "tallow", "clumpWax", "beeswax", "itemWax");
+	public static final Item honey = new ItemHoney();
+	public static final Item empty_honeycomb = new ModItem("empty_honeycomb", "materialWaxcomb");
+	public static final Item honeycomb = new ModItem("honeycomb", "materialHoneycomb");
 	
 	// Jars
 	public static final Item unfired_jar = new ModItem("unfired_jar");
@@ -313,41 +435,47 @@ public class ModObjects
 	public static final Item undying_salve = new ItemUndyingSalve();
 	
 	// Ingredients
-	public static final Item aconitum = new ModItem("aconitum", "cropAconitum");
-	public static final Item asphodel = new ModItem("asphodel", "cropAsphodel");
-	public static final Item belladonna = new ModItem("belladonna", "cropBelladonna");
-	public static final Item chrysanthemum = new ModItem("chrysanthemum");
-	public static final Item garlic = new ModItem("garlic", "cropGarlic", "listAllherb");
-	public static final Item ginger = new ModItem("ginger", "cropGinger", "listAllspice");
-	public static final Item hellebore = new ModItem("hellebore");
-	public static final Item infested_wheat = new ModItem("infested_wheat");
-	public static final Item kelp = new ModItem("kelp", "cropKelp", "cropSeaweed", "listAllveggie", "listAllgreenveggie");
-	public static final Item kenaf = new ModItem("kenaf", "cropKenaf");
-	public static final Item lavender = new ModItem("lavender", "cropLavender", "listAllherb");
-	public static final Item mandrake_root = new ModItem("mandrake_root", "cropMandrake");
-	public static final Item mint = new ModItem("mint", "cropMint", "cropSpiceleaf", "listAllspice", "listAllgreenveggie");
-	public static final Item sagebrush = new ModItem("sagebrush");
-	public static final Item silphium = new ModItem("silphium", "cropSilphium", "listAllherb", "listAllspice", "listAllgreenveggie");
-	public static final Item thistle = new ModItem("thistle", "cropThistle");
-	public static final Item tulsi = new ModItem("tulsi", "cropTulsi", "listAllherb");
-	public static final Item white_sage = new ModItem("white_sage", "cropWhiteSage");
+	public static final Item aconitum = new ItemAconitum();
+	public static final Item asphodel = new ItemAsphodel();
+	public static final Item belladonna = new ItemBelladonna();
+	public static final Item chrysanthemum = new ItemChrysanthemum();
+	public static final Item garlic = new ItemGarlic();
+	public static final Item ginger = new ItemGinger();
+	public static final Item hellebore = new ItemHellebore();
+	public static final Item kelp = new ItemKelp();
+	public static final Item kenaf = new ItemKenaf();
+	public static final Item lavender = new ItemLavender();
+	public static final Item mandrake_root = new ItemMandrakeRoot();
+	public static final Item mint = new ItemMint();
+	public static final Item sagebrush = new ItemSagebrush();
+	public static final Item silphium = new ItemSilphium();
+	public static final Item thistle = new ItemThistle();
+	public static final Item tulsi = new ItemTulsi();
+	public static final Item white_sage = new ItemWhiteSage();
 	public static final Item witchweed = new ModItem("witchweed");
-	public static final Item wormwood = new ModItem("wormwood", "cropWormwood", "listAllspice");
+	public static final Item wormwood = new ItemWormwood();
 	
 	public static final Item adders_fork = new ModItem("adders_fork");
 	public static final Item blindworms_sting = new ModItem("blindworms_sting");
+	public static final Item carnivorous_tooth = new ModItem("carnivorous_tooth");
+	public static final Item chromatic_quill = new ModItem("chromatic_quill");
 	public static final Item demonic_heart = new ModItem("demonic_heart");
 	public static final Item diabolical_vein = new ModItem("diabolical_vein");
 	public static final Item dimensional_sand = new ModItem("dimensional_sand");
 	public static final Item ectoplasm = new ModItem("ectoplasm");
 	public static final Item envenomed_fang = new ModItem("envenomed_fang");
+	public static final Item equine_tail = new ModItem("equine_tail");
+	public static final Item eye_of_ancient = new ModItem("eye_of_ancient");
 	public static final Item eye_of_newt = new ModItem("eye_of_newt");
+	public static final Item eye_of_old = new ModItem("eye_of_old");
 	public static final Item fillet_of_fenny_snake = new ModItem("fillet_of_fenny_snake");
 	public static final Item glass_jar = new ModItem("glass_jar");
 	public static final Item graveyard_dust = new ModItem("graveyard_dust");
 	public static final Item grilled_watermelon = new ModItemFood("grilled_watermelon", 4, 2.5f, false);
 	public static final Item golden_thread = new ModItem("golden_thread");
 	public static final Item heart = new ItemHeart();
+	public static final Item hellhound_horn = new ModItem("hellhound_horn");
+	public static final Item hoof = new ModItem("hoof");
 	public static final Item juniper_berries = new ModItemFood("juniper_berries", 1, 0.5f, false).setPotionEffect(new PotionEffect(MobEffects.POISON, 100, 0), 0.1f);
 	public static final Item lapis_powder = new ModItem("lapis_powder");
 	public static final Item lizard_leg = new ModItem("lizard_leg");
@@ -355,9 +483,14 @@ public class ModObjects
 	public static final Item owlets_wing = new ModItem("owlets_wing");
 	public static final Item pentacle = new ModItem("pentacle");
 	public static final Item quartz_powder = new ModItem("quartz_powder");
+	public static final Item ravens_feather = new ModItem("ravens_feather");
 	public static final Item silver_scales = new ModItem("silver_scales");
 	public static final Item snake_venom = new ModItem("snake_venom");
+	public static final Item spectral_dust = new ModItem("spectral_dust");
+	public static final Item toe_of_frog = new ModItem("toe_of_frog");
+	public static final Item tongue_of_dog = new ModItem("tongue_of_dog");
 	public static final Item wood_ash = new ModItem("wood_ash");
+	public static final Item wool_of_bat = new ModItem("wool_of_bat");
 	public static final Item yew_aril = new ModItemFood("yew_aril", 1, 0.5f, false).setPotionEffect(new PotionEffect(MobEffects.POISON, 100, 0), 0.1f);
 	
 	// Seeds
@@ -383,7 +516,11 @@ public class ModObjects
 	@SubscribeEvent
 	public static void registerBlocks(Register<Block> event)
 	{
-		for (Object obj : REGISTRY) if (obj instanceof Block) event.getRegistry().register((Block) obj);
+		for (Object obj : REGISTRY)
+		{
+			if (obj instanceof Block) event.getRegistry().register((Block) obj);
+			if (obj instanceof BlockCandleBase) Bewitchment.proxy.ignoreProperty((Block) obj, BlockCandleBase.LIT);
+		}
 		Bewitchment.proxy.ignoreProperty(crop_kelp, BlockLiquid.LEVEL);
 		Bewitchment.proxy.ignoreProperty(door_cypress.door, BlockDoor.POWERED);
 		Bewitchment.proxy.ignoreProperty(door_elder.door, BlockDoor.POWERED);
@@ -403,7 +540,13 @@ public class ModObjects
 			if (obj instanceof Block)
 			{
 				Block block = (Block) obj;
-				if (!(block instanceof BlockSaltBarrier) && !(block instanceof BlockCrops) && !(block instanceof BlockDoor) && !(block instanceof BlockSlab) && !(block instanceof IFluidBlock))
+				if (block instanceof BlockLantern)
+				{
+					Item itemBlock = new ItemLantern(block).setRegistryName(block.getRegistryName()).setTranslationKey(block.getTranslationKey());
+					event.getRegistry().register(itemBlock);
+					Bewitchment.proxy.registerTexture(itemBlock);
+				}
+				else if (!(block instanceof BlockWitchesLight) && !(block instanceof BlockGlyph) && !(block instanceof BlockSaltBarrier) && !(block instanceof BlockCrops) && !(block instanceof BlockDoor) && !(block instanceof BlockSlab) && !(block instanceof IFluidBlock))
 				{
 					Item itemBlock = new ItemBlock(block).setRegistryName(block.getRegistryName()).setTranslationKey(block.getTranslationKey());
 					event.getRegistry().register(itemBlock);
@@ -414,7 +557,8 @@ public class ModObjects
 			{
 				Item item = (Item) obj;
 				event.getRegistry().register(item);
-				Bewitchment.proxy.registerTexture(item);
+				if (obj == ModObjects.eye_of_old) Bewitchment.proxy.registerTextureEyeOfOld();
+				else Bewitchment.proxy.registerTexture(item);
 			}
 		}
 	}

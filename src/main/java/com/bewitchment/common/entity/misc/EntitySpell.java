@@ -32,16 +32,6 @@ public class EntitySpell extends EntityThrowable
 		super(world, x, y, z);
 	}
 	
-	public EntityLivingBase getCaster()
-	{
-		String uuid = dataManager.get(CASTER);
-		if (uuid == null || uuid.isEmpty()) return null;
-		EntityLivingBase player = world.getPlayerEntityByUUID(UUID.fromString(uuid));
-		if (player != null) return player;
-		for (Entity entity : world.getLoadedEntityList()) if (entity instanceof EntityLivingBase && uuid.equals(entity.getUniqueID().toString())) return (EntityLivingBase) entity;
-		return null;
-	}
-	
 	@Override
 	public void onEntityUpdate()
 	{
@@ -89,5 +79,15 @@ public class EntitySpell extends EntityThrowable
 		super.readEntityFromNBT(tag);
 		tag.setString("spell", dataManager.get(SPELL));
 		tag.setString("caster", dataManager.get(CASTER));
+	}
+	
+	public EntityLivingBase getCaster()
+	{
+		String uuid = dataManager.get(CASTER);
+		if (uuid == null || uuid.isEmpty()) return null;
+		EntityLivingBase player = world.getPlayerEntityByUUID(UUID.fromString(uuid));
+		if (player != null) return player;
+		for (Entity entity : world.getLoadedEntityList()) if (entity instanceof EntityLivingBase && uuid.equals(entity.getUniqueID().toString())) return (EntityLivingBase) entity;
+		return null;
 	}
 }

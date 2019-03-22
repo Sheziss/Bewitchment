@@ -1,0 +1,18 @@
+{
+	"type": "forge:ore_shaped",
+	"pattern":
+	[
+		"S",
+		"W",
+		"W"
+	],
+	"key":
+	{
+		"S": {"item": "candle_small_white"},
+		"W": {"item": "#GENERIC_WAX"}
+	},
+	"result":
+	{
+		"item": "bewitchment:candle_white"
+	}
+}

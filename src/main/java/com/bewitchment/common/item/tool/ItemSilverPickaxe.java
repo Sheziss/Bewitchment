@@ -24,13 +24,6 @@ public class ItemSilverPickaxe extends ModItemPickaxe
 	}
 	
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag flag)
-	{
-		tooltip.add(TextFormatting.GRAY + I18n.format("tooltip." + "tool_description_" + toolMaterial.name()));
-	}
-	
-	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
 	{
 		if (!target.world.isRemote)
@@ -43,5 +36,12 @@ public class ItemSilverPickaxe extends ModItemPickaxe
 			else return super.hitEntity(stack, target, attacker);
 		}
 		return true;
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced)
+	{
+		tooltip.add(TextFormatting.GRAY + I18n.format("tooltip." + "tool_description_" + toolMaterial.name()));
 	}
 }

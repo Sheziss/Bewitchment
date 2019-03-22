@@ -1,0 +1,25 @@
+{
+	"forge_marker": 1,
+	"defaults":
+	{
+		"model": "cube_bottom_top",
+		"textures":
+		{
+			"top": "bewitchment:blocks/altar_light_blue_top",
+			"bottom": "bewitchment:blocks/altar_bottom",
+			"side": "bewitchment:blocks/altar_light_blue_side"
+		}
+	},
+	"variants":
+	{
+		"inventory": [{}],
+		"normal": [{}],
+		"type":
+		{
+			"unformed": {},
+			"corner": {},
+			"side": {},
+			"tile": {}
+		}
+	}
+}

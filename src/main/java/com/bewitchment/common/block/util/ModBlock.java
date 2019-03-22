@@ -19,24 +19,18 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ModBlock extends Block implements IOreDictionaryContainer
 {
-	private final List<String> ore_dictionary_names = new ArrayList<String>();
+	private final List<String> oreDictionaryNames = new ArrayList<String>();
 	
-	public ModBlock(String name, Material mat, SoundType sound, float hardness, float resistance, String tool, int level, String... ore_dictionary_names)
+	public ModBlock(String name, Material mat, SoundType sound, float hardness, float resistance, String tool, int level, String... oreDictionaryNames)
 	{
 		super(mat);
-		Bewitchment.proxy.registerValues(this, name, mat, sound, hardness, resistance, tool, level, ore_dictionary_names);
+		Bewitchment.proxy.registerValues(this, name, mat, sound, hardness, resistance, tool, level, oreDictionaryNames);
 	}
-	
-	@Override
-	public boolean canSustainLeaves(IBlockState state, IBlockAccess world, BlockPos pos)
-    {
-        return state.getMaterial() == Material.WOOD;
-    }
 	
 	@Override
 	public List<String> getOreDictionaryNames()
 	{
-		return ore_dictionary_names;
+		return oreDictionaryNames;
 	}
 	
 	@Override
@@ -45,6 +39,12 @@ public class ModBlock extends Block implements IOreDictionaryContainer
 	{
 		return getDefaultState().getMaterial() == Material.ICE || getDefaultState().getMaterial() == Material.GLASS ? BlockRenderLayer.TRANSLUCENT : BlockRenderLayer.CUTOUT;
 	}
+	
+	@Override
+	public boolean canSustainLeaves(IBlockState state, IBlockAccess world, BlockPos pos)
+    {
+        return state.getMaterial() == Material.WOOD;
+    }
 	
 	@SuppressWarnings("deprecation")
 	@Override

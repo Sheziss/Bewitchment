@@ -16,12 +16,18 @@ import net.minecraft.world.IBlockAccess;
 
 public class ModBlockStairs extends BlockStairs implements IOreDictionaryContainer
 {
-	private final List<String> ore_dictionary_names = new ArrayList<String>();
+	private final List<String> oreDictionaryNames = new ArrayList<String>();
 	
-	public ModBlockStairs(String name, Block base, String... ore_dictionary_names)
+	public ModBlockStairs(String name, Block base, String... oreDictionaryNams)
 	{
 		super(base.getDefaultState());
-		Bewitchment.proxy.registerValues(this, name, base, ore_dictionary_names);
+		Bewitchment.proxy.registerValues(this, name, base, oreDictionaryNams);
+	}
+	
+	@Override
+	public List<String> getOreDictionaryNames()
+	{
+		return oreDictionaryNames;
 	}
 	
 	@Override
@@ -29,12 +35,6 @@ public class ModBlockStairs extends BlockStairs implements IOreDictionaryContain
     {
 		return state.getMaterial() == Material.ICE || state.getMaterial() == Material.GLASS ? false : super.doesSideBlockRendering(state, world, pos, face);
     }
-	
-	@Override
-	public List<String> getOreDictionaryNames()
-	{
-		return ore_dictionary_names;
-	}
 	
 	@SuppressWarnings("deprecation")
 	@Override

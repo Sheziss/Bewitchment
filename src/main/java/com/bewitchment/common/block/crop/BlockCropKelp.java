@@ -27,6 +27,18 @@ public class BlockCropKelp extends ModBlockCrop
 	}
 	
 	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	{
+		return KELP_AABB[state.getValue(AGE)];
+	}
+	
+	@Override
+	public Material getMaterial(IBlockState state)
+	{
+		return Material.WATER;
+	}
+	
+	@Override
 	public boolean canBlockStay(World world, BlockPos pos, IBlockState state)
 	{
 		Block block = world.getBlockState(pos.down()).getBlock();
@@ -46,15 +58,19 @@ public class BlockCropKelp extends ModBlockCrop
 	}
 	
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	public boolean isReplaceable(IBlockAccess world, BlockPos pos)
 	{
-		return KELP_AABB[state.getValue(AGE)];
+		return false;
 	}
 	
 	@Override
-	public Material getMaterial(IBlockState state)
+	protected void checkAndDropBlock(World world, BlockPos pos, IBlockState state)
 	{
-		return Material.WATER;
+		if (!canBlockStay(world, pos, state))
+		{
+			dropBlockAsItem(world, pos, state, 0);
+			world.setBlockState(pos, Blocks.WATER.getDefaultState());
+		}
 	}
 	
 	@Override
@@ -62,12 +78,6 @@ public class BlockCropKelp extends ModBlockCrop
 	{
 		if (isMaxAge(state) && world.getBlockState(pos.up()).getBlock() == Blocks.WATER && world.getBlockState(pos.up(2)).getBlock() == Blocks.WATER) world.setBlockState(pos.up(), getDefaultState());
 		else super.grow(world, pos, state);
-	}
-	
-	@Override
-	public boolean isReplaceable(IBlockAccess world, BlockPos pos)
-	{
-		return false;
 	}
 	
 	@Override
@@ -81,16 +91,6 @@ public class BlockCropKelp extends ModBlockCrop
 	{
 		super.updateTick(world, pos, state, rand);
 		if (rand.nextInt(2) == 0) grow(world, pos, state);
-	}
-	
-	@Override
-	protected void checkAndDropBlock(World world, BlockPos pos, IBlockState state)
-	{
-		if (!canBlockStay(world, pos, state))
-		{
-			dropBlockAsItem(world, pos, state, 0);
-			world.setBlockState(pos, Blocks.WATER.getDefaultState());
-		}
 	}
 	
 	@Override

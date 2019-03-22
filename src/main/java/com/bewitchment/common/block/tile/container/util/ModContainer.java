@@ -15,12 +15,6 @@ public abstract class ModContainer extends Container
 	}
 	
 	@Override
-	public boolean canInteractWith(EntityPlayer player)
-	{
-		return !player.isSpectator();
-	}
-	
-	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int index)
     {
 		ItemStack stack = ItemStack.EMPTY;
@@ -29,7 +23,7 @@ public abstract class ModContainer extends Container
 		{
 			ItemStack stack0 = slot.getStack();
 			stack = stack0.copy();
-			int containerSlots = inventorySlots.size() - player.inventory.mainInventory.size() - 2;
+			int containerSlots = inventorySlots.size() - player.inventory.mainInventory.size();
 			if (index < containerSlots && !mergeItemStack(stack0, containerSlots, inventorySlots.size(), true) || !mergeItemStack(stack0, 0, containerSlots, false)) return ItemStack.EMPTY;
 			if (stack0.getCount() == 0) slot.putStack(ItemStack.EMPTY);
 			else slot.onSlotChanged();
@@ -38,4 +32,10 @@ public abstract class ModContainer extends Container
 		}
 		return stack;
     }
+	
+	@Override
+	public boolean canInteractWith(EntityPlayer player)
+	{
+		return !player.isSpectator();
+	}
 }
