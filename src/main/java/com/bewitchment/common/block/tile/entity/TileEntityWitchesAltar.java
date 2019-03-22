@@ -39,7 +39,7 @@ public class TileEntityWitchesAltar extends ModTileEntity implements ITickable
 	
 	public int gain = 1, multiplier = 1;
 	
-	private final MagicPower magic_power = MagicPower.CAPABILITY.getDefaultInstance();
+	public final MagicPower magic_power = MagicPower.CAPABILITY.getDefaultInstance();
 	
 	public TileEntityWitchesAltar()
 	{

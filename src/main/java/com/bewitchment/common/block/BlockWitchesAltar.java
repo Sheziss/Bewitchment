@@ -122,9 +122,19 @@ public class BlockWitchesAltar extends ModBlockContainer
 					if (state.getValue(TYPE) == AltarType.UNFORMED && !tryFormAltar(world, pos, color)) return false;
 					if (world.getBlockState(pos).getBlock() != getAltarWithColor(color))
 					{
-						for (BlockPos pos0 : getAltarPositions(world, pos))
+						TileEntityWitchesAltar tile = (TileEntityWitchesAltar) world.getTileEntity(getAltarPosition(world, pos));
+						int amount = 0, maxAmount = 0;
+						if (tile != null)
 						{
-							world.setBlockState(pos0, getAltarWithColor(color).getDefaultState().withProperty(TYPE, world.getBlockState(pos0).getValue(TYPE)));
+							amount = tile.magic_power.getAmount();
+							maxAmount = tile.magic_power.getMaxAmount();
+						}
+						for (BlockPos pos0 : getAltarPositions(world, pos)) world.setBlockState(pos0, getAltarWithColor(color).getDefaultState().withProperty(TYPE, world.getBlockState(pos0).getValue(TYPE)));
+						tile = (TileEntityWitchesAltar) world.getTileEntity(getAltarPosition(world, pos));
+						if (tile != null)
+						{
+							tile.magic_power.setAmount(amount);
+							tile.magic_power.setMaxAmount(maxAmount);
 						}
 						if (!player.isCreative()) stack.shrink(1);
 					}
