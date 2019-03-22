@@ -32,6 +32,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -63,6 +64,12 @@ public class BlockWitchesAltar extends ModBlockContainer
 	public EnumPushReaction getPushReaction(IBlockState state)
 	{
 		return EnumPushReaction.BLOCK;
+	}
+	
+	@Override
+	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
+	{
+		return new ItemStack(ModObjects.witches_altar_unformed);
 	}
 	
 	@Override

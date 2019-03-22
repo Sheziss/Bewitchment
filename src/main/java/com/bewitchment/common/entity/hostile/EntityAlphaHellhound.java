@@ -23,7 +23,7 @@ public class EntityAlphaHellhound extends EntityHellhound
 	public EntityAlphaHellhound(World world)
 	{
 		super(world, new ResourceLocation(Bewitchment.MOD_ID, "entities/alpha_hellhound"));
-		setSize(1.6f, 1.6f);
+		setSize(0.96f, 1.36f);
 		experienceValue = 65;
 		bossInfo.setName(getDisplayName());
 	}
