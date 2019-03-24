@@ -39,6 +39,11 @@ public class ModItem extends Item implements IOreDictionaryContainer
 	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced)
 	{
 		String tip = "tooltip." + getTranslationKey().substring(5);
-		if (!I18n.format(tip).equals(tip)) tooltip.add(TextFormatting.GRAY + I18n.format(tip));
+		if (!I18n.format(tip).equals(tip)) tooltip.add(getTooltipColor() + I18n.format(tip));
+	}
+	
+	protected TextFormatting getTooltipColor()
+	{
+		return TextFormatting.GRAY;
 	}
 }

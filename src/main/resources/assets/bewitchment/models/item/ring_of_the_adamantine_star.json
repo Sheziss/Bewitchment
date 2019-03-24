@@ -1,0 +1,7 @@
+{
+	"parent": "item/generated",
+	"textures":
+	{
+		"layer0": "bewitchment:items/ring_of_the_adamantine_star"
+	}
+}

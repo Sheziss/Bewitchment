@@ -25,7 +25,11 @@ public class ModItemHoe extends ItemHoe
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced)
 	{
-		String tip = "tooltip." + getTranslationKey().substring(5);
-		if (!I18n.format(tip).equals(tip)) tooltip.add(TextFormatting.GRAY + I18n.format(tip));
+		tooltip.add(getTooltipColor() + I18n.format("tooltip." + "tool_description_" + toolMaterial.name()));
+	}
+	
+	protected TextFormatting getTooltipColor()
+	{
+		return TextFormatting.GRAY;
 	}
 }

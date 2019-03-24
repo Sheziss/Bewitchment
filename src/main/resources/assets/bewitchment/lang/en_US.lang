@@ -159,6 +159,19 @@ tile.bewitchment.button_juniper.name=Juniper Button
 tile.bewitchment.button_yew.name=Yew Button
 
 #Items
+item.bewitchment.girdle_of_the_dryad.name=Girdle of the Dryad
+item.bewitchment.hellish_bauble.name=Hellish Bauble
+item.bewitchment.horseshoe.name=Horseshoe
+item.bewitchment.nazar.name=Nazar
+item.bewitchment.token_of_remedies.name=Token of Remedies
+item.bewitchment.triskelion_amulet.name=Triskelion Amulet
+item.bewitchment.wrathful_eye.name=Wrathful Eye
+item.bewitchment.aquamarine_crown.name=Aquamarine Crown
+item.bewitchment.emerald_pendant.name=Emerald Pendant
+item.bewitchment.everwatching_eye.name=Everwatching Eye
+item.bewitchment.ring_of_the_adamantine_star.name=Ring of the Adamantine Star
+item.bewitchment.scarlet_orb.name=Scarlet Orb
+
 item.bewitchment.helmet_cold_iron.name=Cold Iron Helmet
 item.bewitchment.chestplate_cold_iron.name=Cold Iron Chestplate
 item.bewitchment.leggings_cold_iron.name=Cold Iron Leggings
@@ -231,7 +244,6 @@ item.bewitchment.heaven_extract.name=Heaven Extract
 item.bewitchment.liquid_witchcraft.name=Liquid Witchcraft
 item.bewitchment.oak_spirit.name=Oak Spirit
 item.bewitchment.otherworldly_tears.name=Otherworldly Tears
-item.bewitchment.pentacle.name=Pentacle
 item.bewitchment.philter_of_dishonesty.name=Philter of Dishonesty
 item.bewitchment.spruce_heart.name=Spruce Heart
 item.bewitchment.stone_ichor.name=Stone Ichor
@@ -285,6 +297,8 @@ item.bewitchment.lapis_powder.name=Lapis Powder
 item.bewitchment.lizard_leg.name=Lizard Leg
 item.bewitchment.oak_apple_gall.name=Oak Apple Gall
 item.bewitchment.owlets_wing.name=Owlet's Wing
+item.bewitchment.pentacle.name=Pentacle
+item.bewitchment.pure_filament.name=Pure Filament
 item.bewitchment.quartz_powder.name=Quartz Powder
 item.bewitchment.ravens_feather.name=Raven's Feather
 item.bewitchment.silver_scales.name=Silver Scales
@@ -338,6 +352,19 @@ entity.serpent.name=Serpent
 entity.demon.name=Demon
 entity.demoness.name=Demoness
 
+#Enchantment
+enchantment.bewitchment.desperate_ward=Desperate Ward
+enchantment.bewitchment.potent_ward=Potent Ward
+enchantment.bewitchment.natural_attuning=Natural Attuning
+enchantment.bewitchment.demon_protection=Demon Protection
+enchantment.bewitchment.spirit_protection=Spirit Protection
+
+enchantment.bewitchment.desperate_ward.desc=Consumes infusion power to reduce or nullify damage.
+enchantment.bewitchment.potent_ward.desc=Consumes infusion power to reduce or nullify damage.
+enchantment.bewitchment.natural_attuning.desc=Extends the wearer's infusion bar.
+enchantment.bewitchment.demon_protection.desc=Reduces damage from demons.
+enchantment.bewitchment.spirit_protection.desc=Reduces damage from spirits.
+
 #Ritual
 bewitchment.high_moon=Ritual of the High Moon
 bewitchment.solar_glory=Rite of Solar Glory
@@ -375,13 +402,24 @@ fortune.no_fortune=This world has no secrets awaiting
 tooltip.goblet_full=Full
 tooltip.lantern_lit=Lit
 
+tooltip.bewitchment.girdle_of_the_dryad=This belt protects the wearer from harm by growing pieces of bark as armor.
+tooltip.bewitchment.hellish_bauble=This oddly shaped trinket will allow you to tap into a small portion of demonic power.
+tooltip.bewitchment.horseshoe=Horseshoes seem to be rather lucky trinkets in general. Spirits seem averse to you.
+tooltip.bewitchment.mantle=A plain mantle. It's stylish, though...
+tooltip.bewitchment.nazar=An amulet that keeps bad luck at bay and provides some immunity from magic attacks.
+tooltip.bewitchment.pouch=What secrets does it hold?
+tooltip.bewitchment.remedy_talisman=The gem in its core seems to absorb illnesses, but it depletes rather quickly.
+tooltip.bewitchment.triskelion_amulet=This amulet seems to provide some strength against foes, but drains you slightly.
+tooltip.bewitchment.wrathful_eye=This trinket commands respect from demons.
+tooltip.bewitchment.talisman=An enchantable trinket, its effects will mainfest once enchanted.
+
 tooltip.armor_description_cold_iron=Protects against demons and spirits
 tooltip.tool_description_cold_iron=Deals extra damage to spirits
 
 tooltip.armor_description_silver=Protects against undead
 tooltip.tool_description_silver=Deals extra damage to undead
 
-tooltip.bewitchment.athame=This ceremonial dagger also allows you to obtain special loot from mobs.
+tooltip.bewitchment.athame=This ceremonial dagger also allows you to obtain special loot from mobs
 
 tooltip.bewitchment.seed_aconitum=Seed from a poisonous plant
 tooltip.bewitchment.seed_asphodel=Seed from a plant of the dead

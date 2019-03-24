@@ -56,6 +56,16 @@ import com.bewitchment.common.item.ItemLantern;
 import com.bewitchment.common.item.ItemSalt;
 import com.bewitchment.common.item.ItemUndyingSalve;
 import com.bewitchment.common.item.ItemYewBroom;
+import com.bewitchment.common.item.equipment.ItemColdIronArmor;
+import com.bewitchment.common.item.equipment.ItemSilverArmor;
+import com.bewitchment.common.item.equipment.bauble.ItemGirdleOfTheDryad;
+import com.bewitchment.common.item.equipment.bauble.ItemHellishBauble;
+import com.bewitchment.common.item.equipment.bauble.ItemHorseshoe;
+import com.bewitchment.common.item.equipment.bauble.ItemNazar;
+import com.bewitchment.common.item.equipment.bauble.ItemTalisman;
+import com.bewitchment.common.item.equipment.bauble.ItemTokenOfRemedies;
+import com.bewitchment.common.item.equipment.bauble.ItemTriskelionAmulet;
+import com.bewitchment.common.item.equipment.bauble.ItemWrathfulEye;
 import com.bewitchment.common.item.food.ItemAconitum;
 import com.bewitchment.common.item.food.ItemAsphodel;
 import com.bewitchment.common.item.food.ItemBelladonna;
@@ -78,13 +88,11 @@ import com.bewitchment.common.item.food.ItemWhiteSage;
 import com.bewitchment.common.item.food.ItemWormwood;
 import com.bewitchment.common.item.tool.ItemAthame;
 import com.bewitchment.common.item.tool.ItemBoline;
-import com.bewitchment.common.item.tool.ItemColdIronArmor;
 import com.bewitchment.common.item.tool.ItemColdIronAxe;
 import com.bewitchment.common.item.tool.ItemColdIronHoe;
 import com.bewitchment.common.item.tool.ItemColdIronPickaxe;
 import com.bewitchment.common.item.tool.ItemColdIronSpade;
 import com.bewitchment.common.item.tool.ItemColdIronSword;
-import com.bewitchment.common.item.tool.ItemSilverArmor;
 import com.bewitchment.common.item.tool.ItemSilverAxe;
 import com.bewitchment.common.item.tool.ItemSilverHoe;
 import com.bewitchment.common.item.tool.ItemSilverPickaxe;
@@ -99,6 +107,7 @@ import com.bewitchment.common.world.gen.tree.WorldGenElderTree;
 import com.bewitchment.common.world.gen.tree.WorldGenJuniperTree;
 import com.bewitchment.common.world.gen.tree.WorldGenYewTree;
 
+import baubles.api.BaubleType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.BlockDoor;
@@ -351,6 +360,19 @@ public class ModObjects
 	
 	public static final ToolMaterial TOOL_RITUAL = EnumHelper.addToolMaterial("ritual", 2, 300, 2, 1.5f, 30);
 	
+	public static final ItemGirdleOfTheDryad girdle_of_the_dryad = new ItemGirdleOfTheDryad();
+	public static final Item hellish_bauble = new ItemHellishBauble();
+	public static final Item horseshoe = new ItemHorseshoe();
+	public static final Item nazar = new ItemNazar();
+	public static final Item token_of_remedies = new ItemTokenOfRemedies();
+	public static final Item triskelion_amulet = new ItemTriskelionAmulet();
+	public static final Item wrathful_eye = new ItemWrathfulEye();
+	public static final Item aquamarine_crown = new ItemTalisman("aquamarine_crown", BaubleType.HEAD);
+	public static final Item emerald_pendant = new ItemTalisman("emerald_pendant", BaubleType.AMULET);
+	public static final Item everwatching_eye = new ItemTalisman("everwatching_eye", BaubleType.CHARM);
+	public static final Item ring_of_the_adamantine_star = new ItemTalisman("ring_of_the_adamantine_star", BaubleType.RING);
+	public static final Item scarlet_orb = new ItemTalisman("scarlet_orb", BaubleType.BELT);
+	
 	// Armor
 	public static final Item helmet_cold_iron = new ItemColdIronArmor("helmet_cold_iron", ARMOR_COLD_IRON, EntityEquipmentSlot.HEAD);
 	public static final Item chestplate_cold_iron = new ItemColdIronArmor("chestplate_cold_iron", ARMOR_COLD_IRON, EntityEquipmentSlot.CHEST);
@@ -482,6 +504,7 @@ public class ModObjects
 	public static final Item oak_apple_gall = new ModItem("oak_apple_gall");
 	public static final Item owlets_wing = new ModItem("owlets_wing");
 	public static final Item pentacle = new ModItem("pentacle");
+	public static final Item pure_filament = new ModItem("pure_filament");
 	public static final Item quartz_powder = new ModItem("quartz_powder");
 	public static final Item ravens_feather = new ModItem("ravens_feather");
 	public static final Item silver_scales = new ModItem("silver_scales");

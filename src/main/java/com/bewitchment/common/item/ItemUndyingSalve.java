@@ -33,7 +33,7 @@ public class ItemUndyingSalve extends ModItem
 	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing face, float hitX, float hitY, float hitZ)
 	{
 		player.setActiveHand(hand);
-		player.getCapability(MagicPower.CAPABILITY, null).addBonus(getRegistryName().toString(), 75);
+		player.getCapability(MagicPower.CAPABILITY, null).addBonus(getTranslationKey(), 75);
 		return EnumActionResult.SUCCESS;
 	}
 	
