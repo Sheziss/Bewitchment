@@ -30,9 +30,9 @@ public class RitualConjureVex extends Ritual
 	{
 		List<ItemStack> out = new ArrayList<>();
 		for (ItemStack stack : super.getOutput(tile)) out.add(stack);
-		for (int i = 0; i < tile.getSlots(); i++)
+		for (int i = 0; i < tile.inventory.getSlots(); i++)
 		{
-			ItemStack stack = tile.getStackInSlot(i);
+			ItemStack stack = tile.inventory.getStackInSlot(i);
 			if (stack.getItem() == ModObjects.athame)
 			{
 				stack.setItemDamage(stack.getItemDamage() + 50);

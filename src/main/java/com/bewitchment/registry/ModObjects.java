@@ -360,7 +360,7 @@ public class ModObjects
 	
 	public static final ToolMaterial TOOL_RITUAL = EnumHelper.addToolMaterial("ritual", 2, 300, 2, 1.5f, 30);
 	
-	public static final ItemGirdleOfTheDryad girdle_of_the_dryad = new ItemGirdleOfTheDryad();
+	public static final Item girdle_of_the_dryad = new ItemGirdleOfTheDryad();
 	public static final Item hellish_bauble = new ItemHellishBauble();
 	public static final Item horseshoe = new ItemHorseshoe();
 	public static final Item nazar = new ItemNazar();

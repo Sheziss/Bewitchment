@@ -23,9 +23,9 @@ public class RenderTileEntityPlacedItem extends TileEntitySpecialRenderer<TileEn
 	@Override
 	public void render(TileEntityPlacedItem tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha)
 	{
-		if (!tile.getStackInSlot(0).isEmpty())
+		if (!tile.inventory.getStackInSlot(0).isEmpty())
 		{
-			ItemStack stack = tile.getStackInSlot(0);
+			ItemStack stack = tile.inventory.getStackInSlot(0);
 			GlStateManager.enableRescaleNormal();
 			GlStateManager.alphaFunc(GL11.GL_GREATER, 0.1f);
 			GlStateManager.enableBlend();

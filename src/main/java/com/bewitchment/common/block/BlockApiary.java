@@ -5,6 +5,7 @@ import java.util.Random;
 import com.bewitchment.Bewitchment;
 import com.bewitchment.common.CommonProxy.ModGui;
 import com.bewitchment.common.block.tile.entity.TileEntityApiary;
+import com.bewitchment.common.block.tile.entity.util.ModTileEntity;
 import com.bewitchment.common.block.util.ModBlockContainer;
 import com.bewitchment.registry.ModParticles;
 
@@ -14,6 +15,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -47,6 +49,17 @@ public class BlockApiary extends ModBlockContainer
 	}
 	
 	@Override
+	public void breakBlock(World world, BlockPos pos, IBlockState state)
+	{
+		if (!world.isRemote && world.getGameRules().getBoolean("doTileDrops") && hasTileEntity(state) && world.getTileEntity(pos) instanceof TileEntityApiary)
+		{
+			TileEntityApiary tile = (TileEntityApiary) world.getTileEntity(pos);
+			for (int i = 0; i < tile.inventory.getSlots(); i++) InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), tile.inventory.getStackInSlot(i));
+		}
+		super.breakBlock(world, pos, state);
+	}
+	
+	@Override
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing face, float hitX, float hitY, float hitZ, int meta, EntityLivingBase living, EnumHand hand)
 	{
 		return getDefaultState().withProperty(BlockHorizontal.FACING, EnumFacing.fromAngle(living.rotationYaw));
@@ -56,7 +69,7 @@ public class BlockApiary extends ModBlockContainer
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand)
 	{
-		if (!((TileEntityApiary) world.getTileEntity(pos)).isEmpty()) Bewitchment.proxy.spawnParticle(ModParticles.BEE, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
+		if (!ModTileEntity.isEmpty(((TileEntityApiary) world.getTileEntity(pos)).inventory)) Bewitchment.proxy.spawnParticle(ModParticles.BEE, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
 	}
 	
 	@Override

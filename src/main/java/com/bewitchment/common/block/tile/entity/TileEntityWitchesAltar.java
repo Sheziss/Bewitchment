@@ -41,11 +41,6 @@ public class TileEntityWitchesAltar extends ModTileEntity implements ITickable
 	
 	public final MagicPower magic_power = MagicPower.CAPABILITY.getDefaultInstance();
 	
-	public TileEntityWitchesAltar()
-	{
-		super(0);
-	}
-	
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing face)
 	{
@@ -131,7 +126,7 @@ public class TileEntityWitchesAltar extends ModTileEntity implements ITickable
 				}
 				if (state.getBlock() == ModObjects.placed_item)
 				{
-					Item item = ((TileEntityPlacedItem) world.getTileEntity(pos0.up())).getStackInSlot(0).getItem();
+					Item item = ((TileEntityPlacedItem) world.getTileEntity(pos0.up())).inventory.getStackInSlot(0).getItem();
 					if (item == ModObjects.pentacle && !found_pentacle)
 					{
 						multiplier += 3;

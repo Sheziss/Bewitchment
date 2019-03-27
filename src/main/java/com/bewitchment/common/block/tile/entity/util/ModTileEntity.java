@@ -5,28 +5,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 
-public abstract class ModTileEntity extends TileEntity implements IItemHandlerModifiable
+public abstract class ModTileEntity extends TileEntity
 {
-	private ItemStackHandler inventory;
-	
-	protected ModTileEntity(int inventory_size)
-	{
-		inventory = new ItemStackHandler(inventory_size)
-		{
-			@Override
-			protected void onContentsChanged(int slot)
-		    {
-				markDirty();
-		    }
-		};
-	}
-	
 	@Override
 	public SPacketUpdateTileEntity getUpdatePacket()
 	{
@@ -40,83 +22,33 @@ public abstract class ModTileEntity extends TileEntity implements IItemHandlerMo
 	}
 	
 	@Override
-	public ItemStack extractItem(int slot, int amount, boolean simulate)
+	public void markDirty()
 	{
-		return inventory.extractItem(slot, amount, simulate);
-	}
-	
-	@Override
-	public ItemStack insertItem(int slot, ItemStack stack, boolean simulate)
-	{
-		return inventory.insertItem(slot, stack, simulate);
-	}
-	
-	@Override
-	public ItemStack getStackInSlot(int slot)
-	{
-		return inventory.getStackInSlot(slot);
-	}
-	
-	@Override
-	public void setStackInSlot(int slot, ItemStack stack)
-	{
-		inventory.setStackInSlot(slot, stack);
-	}
-	
-	@Override
-	public int getSlotLimit(int slot)
-	{
-		return inventory.getSlotLimit(slot);
-	}
-	
-	@Override
-	public int getSlots()
-	{
-		return inventory.getSlots();
-	}
-	
-	@Override
-	public <T> T getCapability(Capability<T> capability, EnumFacing face)
-	{
-		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && getSlots() > 0 ? CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this) : super.getCapability(capability, face);
-	}
-	
-	@Override
-	public boolean hasCapability(Capability<?> capability, EnumFacing face)
-	{
-		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && getSlots() > 0 || super.hasCapability(capability, face);
+		super.markDirty();
+		world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 2);
 	}
 	
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound tag)
 	{
-		if (getSlots() > 0) tag.setTag("inventory", inventory.serializeNBT());
 		markDirty();
-		world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 2);
 		return super.writeToNBT(tag);
 	}
 	
-	@Override
-	public void readFromNBT(NBTTagCompound tag)
+	public static boolean isEmpty(ItemStackHandler handler)
 	{
-		super.readFromNBT(tag);
-		if (getSlots() > 0) inventory.deserializeNBT(tag.getCompoundTag("inventory"));
-	}
-	
-	public boolean isEmpty()
-	{
-		for (int i = 0; i < inventory.getSlots(); i++) if (!getStackInSlot(i).isEmpty()) return false;
+		for (int i = 0; i < handler.getSlots(); i++) if (!handler.getStackInSlot(i).isEmpty()) return false;
 		return true;
 	}
 	
-	public int getFirstEmptySlot()
+	public static int getFirstEmptySlot(ItemStackHandler handler)
 	{
-		for (int i = 0; i < inventory.getSlots(); i++) if (getStackInSlot(i).isEmpty()) return i;
+		for (int i = 0; i < handler.getSlots(); i++) if (handler.getStackInSlot(i).isEmpty()) return i;
 		return -1;
 	}
 	
-	public void clear()
+	public static void clear(ItemStackHandler handler)
 	{
-		for (int i = 0; i < getSlots(); i++) setStackInSlot(i, ItemStack.EMPTY);
+		for (int i = 0; i < handler.getSlots(); i++) handler.setStackInSlot(i, ItemStack.EMPTY);
 	}
 }

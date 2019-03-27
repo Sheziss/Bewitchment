@@ -2,11 +2,13 @@ package com.bewitchment.client.block.tile.gui;
 
 import com.bewitchment.Bewitchment;
 import com.bewitchment.common.block.tile.container.ContainerOven;
+import com.bewitchment.registry.ModObjects;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -53,7 +55,7 @@ public class GuiOven extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
-		String name = container.tile.getName();
+		String name = new TextComponentTranslation(ModObjects.oven.getTranslationKey() + ".name").getFormattedText();
 		fontRenderer.drawString(name, xSize / 2 - fontRenderer.getStringWidth(name) / 2, 6, 0x404040);
 		fontRenderer.drawString(inventory.getDisplayName().getUnformattedText(), 8, ySize - 94, 0x404040);
 	}

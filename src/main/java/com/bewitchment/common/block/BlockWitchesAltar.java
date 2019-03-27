@@ -143,7 +143,7 @@ public class BlockWitchesAltar extends ModBlockContainer
 				if (world.getBlockState(pos.up()).getBlock().isReplaceable(world, pos.up()) && (TileEntityWitchesAltar.SWORD_MULTIPLIER_VALUES.containsKey(item) || TileEntityWitchesAltar.SWORD_RADIUS_VALUES.containsKey(item) || item == ModObjects.pentacle || item == Items.BUCKET || item == Items.GOLDEN_APPLE || item == ModObjects.demonic_heart || item == ModObjects.heart || item == Items.GOLDEN_CARROT || item == ModObjects.glass_jar || item == Items.NETHER_STAR))
 				{
 					world.setBlockState(pos.up(), ModObjects.placed_item.getDefaultState().withProperty(BlockHorizontal.FACING, EnumFacing.fromAngle(player.rotationYaw)));
-					((TileEntityPlacedItem) world.getTileEntity(pos.up())).setStackInSlot(0, stack.splitStack(1));
+					((TileEntityPlacedItem) world.getTileEntity(pos.up())).inventory.setStackInSlot(0, stack.splitStack(1));
 					return true;
 				}
 			}

@@ -31,6 +31,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
+import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityGlyph extends ModTileEntity implements ITickable
 {
@@ -76,10 +77,14 @@ public class TileEntityGlyph extends ModTileEntity implements ITickable
 	private UUID caster;
 	private int cooldown = -1;
 	
-	public TileEntityGlyph()
+	public final ItemStackHandler inventory = new ItemStackHandler(Byte.MAX_VALUE)
 	{
-		super(Byte.MAX_VALUE);
-	}
+		@Override
+		protected void onContentsChanged(int slot)
+	    {
+			markDirty();
+	    }
+	};
 	
 	@Override
 	public void update()
@@ -102,6 +107,7 @@ public class TileEntityGlyph extends ModTileEntity implements ITickable
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound tag)
 	{
+		tag.setTag("inventory", inventory.serializeNBT());
 		tag.setString("ritual", ritual == null ? "" : ritual.getRegistryName().toString());
 		tag.setIntArray("effective_pos", new int[] {getEffectivePosition().getX(), getEffectivePosition().getY(), getEffectivePosition().getZ()});
 		tag.setString("caster", caster == null ? "" : caster.toString());
@@ -113,6 +119,7 @@ public class TileEntityGlyph extends ModTileEntity implements ITickable
 	public void readFromNBT(NBTTagCompound tag)
 	{
 		super.readFromNBT(tag);
+		inventory.deserializeNBT(tag.getCompoundTag("inventory"));
 		ritual = tag.getString("ritual") == "" ? null : BewitchmentAPI.REGISTRY_RITUAL.getValue(new ResourceLocation(tag.getString("ritual")));
 		int[] poses = tag.getIntArray("effective_pos");
 		setEffectivePosition(new BlockPos(poses[0], poses[1], poses[2]));
@@ -221,7 +228,7 @@ public class TileEntityGlyph extends ModTileEntity implements ITickable
 						ritual.onStarted(this, player);
 						world.playSound(null, getPos(), SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.7f, 0.7f);
 						player.sendStatusMessage(new TextComponentTranslation(ritual.getRegistryName().toString()), true);
-						for (ItemStack stack : items_on_ground) insertItem(getFirstEmptySlot(), stack.splitStack(1), false);
+						for (ItemStack stack : items_on_ground) inventory.insertItem(getFirstEmptySlot(inventory), stack.splitStack(1), false);
 						if (ritual.getInputEntities().length != 0)
 						{
 							for (EntityLivingBase entity : living_on_ground)
@@ -254,11 +261,11 @@ public class TileEntityGlyph extends ModTileEntity implements ITickable
 			else
 			{
 				ritual.onStopped(this, player);
-				for (int i = 0; i < getSlots(); i++) InventoryHelper.spawnItemStack(world, getPos().getX(), getPos().getY(), getPos().getZ(), extractItem(i, getStackInSlot(i).getCount(), false));
+				for (int i = 0; i < inventory.getSlots(); i++) InventoryHelper.spawnItemStack(world, getPos().getX(), getPos().getY(), getPos().getZ(), inventory.extractItem(i, inventory.getStackInSlot(i).getCount(), false));
 			}
 		}
 		world.notifyBlockUpdate(getPos(), world.getBlockState(getPos()), world.getBlockState(getPos()), 2);
-		clear();
+		clear(inventory);
 		setEffectivePosition(getPos());
 		ritual = null;
 		caster = null;

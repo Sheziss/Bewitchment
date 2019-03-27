@@ -15,7 +15,7 @@ public class ContainerApiary extends ModContainer
 		{
 			for (int y = 0; y < 6; y++)
 			{
-				addSlotToContainer(new ModSlot(tile, index++, 35 + y * 18, 16 + x * 18, 1));
+				addSlotToContainer(new ModSlot(tile.inventory, index++, 35 + y * 18, 16 + x * 18, 1));
 			}
 		}
 		addPlayerSlots(inventory);

@@ -5,15 +5,31 @@ import java.util.Map;
 
 import com.bewitchment.common.block.tile.entity.util.ModTileEntity;
 
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class TileEntityGemBowl extends ModTileEntity
 {
 	public static final Map<String, Integer> gainMap = new HashMap<>();
 	
-	public TileEntityGemBowl()
+	public final ItemStackHandler inventory = new ItemStackHandler(18)
 	{
-		super(1);
+		@Override
+		public int getSlotLimit(int slot)
+		{
+			return 1;
+		}
+		
+		@Override
+		protected void onContentsChanged(int slot)
+	    {
+			markDirty();
+	    }
+	};
+	
+	static
+	{
 		gainMap.put("fossil", 1);
 		gainMap.put("gemDiamond", 4);
 		gainMap.put("gemEmerald", 4);
@@ -117,9 +133,23 @@ public class TileEntityGemBowl extends ModTileEntity
 		gainMap.put("gemShadow", 1);
 	}
 	
+	@Override
+	public NBTTagCompound writeToNBT(NBTTagCompound tag)
+	{
+		tag.setTag("inventory", inventory.serializeNBT());
+		return super.writeToNBT(tag);
+	}
+	
+	@Override
+	public void readFromNBT(NBTTagCompound tag)
+	{
+		super.readFromNBT(tag);
+		inventory.deserializeNBT(tag.getCompoundTag("inventory"));
+	}
+	
 	public int getGemValue()
 	{
-		for (int id : OreDictionary.getOreIDs(getStackInSlot(0))) if (gainMap.containsKey(OreDictionary.getOreName(id))) return gainMap.get(OreDictionary.getOreName(id));
+		for (int id : OreDictionary.getOreIDs(inventory.getStackInSlot(0))) if (gainMap.containsKey(OreDictionary.getOreName(id))) return gainMap.get(OreDictionary.getOreName(id));
 		return 0;
 	}
 }

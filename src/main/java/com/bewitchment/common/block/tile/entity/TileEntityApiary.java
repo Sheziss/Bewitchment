@@ -12,21 +12,39 @@ import net.minecraft.block.BlockFlower;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityApiary extends ModTileEntity implements ITickable
 {
-	public TileEntityApiary()
+	public final ItemStackHandler inventory = new ItemStackHandler(18)
 	{
-		super(18);
-	}
+		@Override
+		public boolean isItemValid(int slot, ItemStack stack)
+		{
+			return stack.getItem() == ModObjects.empty_honeycomb || stack.getItem() == ModObjects.honeycomb || stack.getItem() == Items.ITEM_FRAME;
+		}
+		
+		@Override
+		public int getSlotLimit(int slot)
+		{
+			return 1;
+		}
+		
+		@Override
+		protected void onContentsChanged(int slot)
+	    {
+			markDirty();
+	    }
+	};
 	
 	@Override
 	public void update()
 	{
-		if (!world.isRemote && world.getTotalWorldTime() % 20 == 0 && !isEmpty())
+		if (!world.isRemote && world.getTotalWorldTime() % 20 == 0 && !isEmpty(inventory))
 		{
 			List<BlockPos> crops = new ArrayList<>(), flowers = new ArrayList<>();
 			for (BlockPos pos : BlockPos.getAllInBox(getPos().add(-2, -2, -2), getPos().add(2, 2, 2)))
@@ -56,45 +74,43 @@ public class TileEntityApiary extends ModTileEntity implements ITickable
 					}
 				}
 				boolean update = false;
-				for (int i = 0; i < getSlots(); i++)
+				for (int i = 0; i < inventory.getSlots(); i++)
 				{
 					if (world.rand.nextInt(100) == 0)
 					{
-						ItemStack oldStack = getStackInSlot(i), newStack = growItem(i);
+						ItemStack oldStack = inventory.getStackInSlot(i), newStack = growItem(i);
 						if (oldStack != newStack && MagicPower.drainAltarFirst(world, null, getPos(), 30))
 						{
-							setStackInSlot(i, newStack);
+							inventory.setStackInSlot(i, newStack);
 							update = true;
 						}
 					}
 				}
-				if (update)
-				{
-					markDirty();
-					world.notifyBlockUpdate(pos, world.getBlockState(getPos()), world.getBlockState(getPos()), 2);
-				}
+				if (update) markDirty();
 			}
 		}
 	}
 	
 	@Override
-	public boolean isItemValid(int slot, ItemStack stack)
+	public NBTTagCompound writeToNBT(NBTTagCompound tag)
 	{
-		return stack.getItem() == ModObjects.empty_honeycomb || stack.getItem() == ModObjects.honeycomb || stack.getItem() == Items.ITEM_FRAME;
+		tag.setTag("inventory", inventory.serializeNBT());
+		return super.writeToNBT(tag);
 	}
 	
 	@Override
-	public int getSlotLimit(int slot)
+	public void readFromNBT(NBTTagCompound tag)
 	{
-		return 1;
+		super.readFromNBT(tag);
+		inventory.deserializeNBT(tag.getCompoundTag("inventory"));
 	}
 	
 	private ItemStack growItem(int i)
 	{
-		ItemStack stack = getStackInSlot(i);
+		ItemStack stack = inventory.getStackInSlot(i);
 		if (stack.isEmpty() && world.rand.nextInt(3) == 0)
 		{
-			for (int j : getNeighbors(i)) if (getStackInSlot(j).isEmpty()) return new ItemStack(ModObjects.empty_honeycomb);
+			for (int j : getNeighbors(i)) if (inventory.getStackInSlot(j).isEmpty()) return new ItemStack(ModObjects.empty_honeycomb);
 		}
 		if (stack.getItem() == ModObjects.empty_honeycomb) return new ItemStack(ModObjects.honeycomb);
 		if (stack.getItem() == Items.ITEM_FRAME) return new ItemStack(ModObjects.empty_honeycomb);

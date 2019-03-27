@@ -14,16 +14,16 @@ public class ContainerDistillery extends ModContainer
 	{
 		this.tile = tile;
 		int index = 0;
-		addSlotToContainer(new ModSlot(tile, index++, 80, 58));
+		addSlotToContainer(new ModSlot(tile.inventory, index++, 80, 58));
 		for (int i = 0; i < 3; i++)
 		{
-			addSlotToContainer(new ModSlot(tile, index++, 18, 18 * (i + 1) - 1));
-			addSlotToContainer(new ModSlot(tile, index++, 36, 18 * (i + 1) - 1));
+			addSlotToContainer(new ModSlot(tile.inventory, index++, 18, 18 * (i + 1) - 1));
+			addSlotToContainer(new ModSlot(tile.inventory, index++, 36, 18 * (i + 1) - 1));
 		}
 		for (int i = 0; i < 3; i++)
 		{
-			addSlotToContainer(new ModSlot(tile, index++, 124, 18 * (i + 1) - 1));
-			addSlotToContainer(new ModSlot(tile, index++, 142, 18 * (i + 1) - 1));
+			addSlotToContainer(new ModSlot(tile.inventory, index++, 124, 18 * (i + 1) - 1));
+			addSlotToContainer(new ModSlot(tile.inventory, index++, 142, 18 * (i + 1) - 1));
 		}
 		addPlayerSlots(inventory);
 	}

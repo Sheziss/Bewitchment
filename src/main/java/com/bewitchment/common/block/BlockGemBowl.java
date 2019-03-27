@@ -10,6 +10,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -48,24 +49,23 @@ public class BlockGemBowl extends ModBlockContainer implements IInfusionStabilis
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing face, float hitX, float hitY, float hitZ)
 	{
-		if (!player.isSneaking() && !world.isRemote)
+		if (!world.isRemote && !player.isSneaking())
 		{
 			TileEntityGemBowl tile = ((TileEntityGemBowl) world.getTileEntity(pos));
 			ItemStack stack = player.getHeldItem(hand);
-			if (stack.isEmpty() && !tile.getStackInSlot(0).isEmpty()) player.setHeldItem(hand, tile.getStackInSlot(0).splitStack(1));
-			else if (!stack.isEmpty() && tile.getStackInSlot(0).isEmpty())
+			if (stack.isEmpty() && !tile.inventory.getStackInSlot(0).isEmpty()) player.setHeldItem(hand, tile.inventory.getStackInSlot(0).splitStack(1));
+			else if (!stack.isEmpty() && tile.inventory.getStackInSlot(0).isEmpty())
 			{
 				for (int id : OreDictionary.getOreIDs(stack))
 				{
 					if (TileEntityGemBowl.gainMap.keySet().contains(OreDictionary.getOreName(id)))
 					{
-						tile.setStackInSlot(0, stack.splitStack(1));
+						tile.inventory.setStackInSlot(0, stack.splitStack(1));
 						break;
 					}
 				}
 			}
 			tile.markDirty();
-			world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 2);
 		}
 		return super.onBlockActivated(world, pos, state, player, hand, face, hitX, hitY, hitZ);
 	}
@@ -82,6 +82,17 @@ public class BlockGemBowl extends ModBlockContainer implements IInfusionStabilis
 	public float getStabilizationAmount(World world, BlockPos pos)
 	{
 		return 4;
+	}
+	
+	@Override
+	public void breakBlock(World world, BlockPos pos, IBlockState state)
+	{
+		if (!world.isRemote && world.getGameRules().getBoolean("doTileDrops") && hasTileEntity(state) && world.getTileEntity(pos) instanceof TileEntityGemBowl)
+		{
+			TileEntityGemBowl tile = (TileEntityGemBowl) world.getTileEntity(pos);
+			for (int i = 0; i < tile.inventory.getSlots(); i++) InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), tile.inventory.getStackInSlot(i));
+		}
+		super.breakBlock(world, pos, state);
 	}
 	
 	@Override
