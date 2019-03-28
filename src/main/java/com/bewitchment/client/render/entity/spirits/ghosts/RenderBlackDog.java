@@ -1,7 +1,7 @@
-package com.bewitchment.client.render.entity.living.hostile;
+package com.bewitchment.client.render.entity.spirits.ghosts;
 
 import com.bewitchment.Bewitchment;
-import com.bewitchment.client.model.entity.living.hostile.ModelBlackDog;
+import com.bewitchment.client.model.entity.spirits.ghosts.ModelBlackDog;
 import com.bewitchment.common.entity.spirits.ghosts.EntityBlackDog;
 
 import net.minecraft.client.renderer.GlStateManager;

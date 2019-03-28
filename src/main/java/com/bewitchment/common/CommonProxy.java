@@ -12,11 +12,7 @@ import com.bewitchment.api.registry.OvenRecipe;
 import com.bewitchment.api.registry.Ritual;
 import com.bewitchment.common.block.BlockGlyph.GlyphType;
 import com.bewitchment.common.block.tile.entity.TileEntityGlyph;
-import com.bewitchment.common.entity.spirits.demons.EntityAlphaHellhound;
-import com.bewitchment.common.entity.spirits.ghosts.EntityBlackDog;
-import com.bewitchment.common.entity.spirits.demons.EntityDemon;
-import com.bewitchment.common.entity.spirits.demons.EntityDemoness;
-import com.bewitchment.common.entity.spirits.demons.EntityHellhound;
+import com.bewitchment.common.compat.thaumcraft.ThaumcraftCompat;
 import com.bewitchment.common.entity.living.EntityBlindworm;
 import com.bewitchment.common.entity.living.EntityLizard;
 import com.bewitchment.common.entity.living.EntityNewt;
@@ -24,6 +20,11 @@ import com.bewitchment.common.entity.living.EntityOwl;
 import com.bewitchment.common.entity.living.EntityRaven;
 import com.bewitchment.common.entity.living.EntitySnake;
 import com.bewitchment.common.entity.living.EntityToad;
+import com.bewitchment.common.entity.spirits.demons.EntityAlphaHellhound;
+import com.bewitchment.common.entity.spirits.demons.EntityDemon;
+import com.bewitchment.common.entity.spirits.demons.EntityDemoness;
+import com.bewitchment.common.entity.spirits.demons.EntityHellhound;
+import com.bewitchment.common.entity.spirits.ghosts.EntityBlackDog;
 import com.bewitchment.common.fortune.FortuneBadLuck;
 import com.bewitchment.common.fortune.FortuneDeath;
 import com.bewitchment.common.fortune.FortuneDropItem;
@@ -155,6 +156,7 @@ public class CommonProxy
 	{
 		registerAltarValues();
 		registerAthameValues();
+		ThaumcraftCompat.loadThaumcraftCompat();
 	}
 	
 	@SuppressWarnings("deprecation")

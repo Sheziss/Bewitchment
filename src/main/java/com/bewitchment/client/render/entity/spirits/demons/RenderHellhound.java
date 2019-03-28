@@ -1,7 +1,7 @@
-package com.bewitchment.client.render.entity.living.hostile;
+package com.bewitchment.client.render.entity.spirits.demons;
 
 import com.bewitchment.Bewitchment;
-import com.bewitchment.client.model.entity.living.hostile.ModelHellhound;
+import com.bewitchment.client.model.entity.spirits.demons.ModelHellhound;
 import com.bewitchment.common.entity.spirits.demons.EntityHellhound;
 
 import net.minecraft.client.renderer.entity.RenderLiving;

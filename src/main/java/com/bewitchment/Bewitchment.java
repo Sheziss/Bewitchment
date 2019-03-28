@@ -1,8 +1,10 @@
 package com.bewitchment;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.bewitchment.common.CommonProxy;
 
-import com.bewitchment.common.compat.thaumcraft.ThaumcraftCompat;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -10,8 +12,6 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 //R DZH SVIV
 //HFMXLMFIV11
@@ -52,7 +52,6 @@ public class Bewitchment
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		proxy.preInit(event);
-		ThaumcraftCompat.loadThaumcraftCompat();
 		logger.info("Remember when I told you how my");
 		logger.info("Kin is different in some ways?");
 	}

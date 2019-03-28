@@ -1,4 +1,4 @@
-package com.bewitchment.client.model.entity.living.hostile;
+package com.bewitchment.client.model.entity.spirits.demons;
 
 import com.bewitchment.common.entity.spirits.demons.EntityDemon;
 

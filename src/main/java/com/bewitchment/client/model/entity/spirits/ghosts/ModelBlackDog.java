@@ -1,4 +1,4 @@
-package com.bewitchment.client.model.entity.living.hostile;
+package com.bewitchment.client.model.entity.spirits.ghosts;
 
 import com.bewitchment.common.entity.spirits.ghosts.EntityBlackDog;
 
