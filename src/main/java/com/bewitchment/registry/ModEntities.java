@@ -6,12 +6,12 @@ import java.util.List;
 import java.util.Set;
 
 import com.bewitchment.Bewitchment;
-import com.bewitchment.common.entity.hostile.EntityAlphaHellhound;
-import com.bewitchment.common.entity.hostile.EntityBlackDog;
-import com.bewitchment.common.entity.hostile.EntityDemon;
-import com.bewitchment.common.entity.hostile.EntityDemoness;
-import com.bewitchment.common.entity.hostile.EntityHellhound;
-import com.bewitchment.common.entity.hostile.EntitySerpent;
+import com.bewitchment.common.entity.spirits.demons.EntityAlphaHellhound;
+import com.bewitchment.common.entity.spirits.ghosts.EntityBlackDog;
+import com.bewitchment.common.entity.spirits.demons.EntityDemon;
+import com.bewitchment.common.entity.spirits.demons.EntityDemoness;
+import com.bewitchment.common.entity.spirits.demons.EntityHellhound;
+import com.bewitchment.common.entity.spirits.demons.EntitySerpent;
 import com.bewitchment.common.entity.living.EntityBlindworm;
 import com.bewitchment.common.entity.living.EntityLizard;
 import com.bewitchment.common.entity.living.EntityNewt;

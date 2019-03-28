@@ -2,7 +2,7 @@ package com.bewitchment.client.render.entity.living.hostile;
 
 import com.bewitchment.Bewitchment;
 import com.bewitchment.client.model.entity.living.hostile.ModelSerpent;
-import com.bewitchment.common.entity.hostile.EntitySerpent;
+import com.bewitchment.common.entity.spirits.demons.EntitySerpent;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;

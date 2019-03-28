@@ -1,6 +1,6 @@
 package com.bewitchment.client.model.entity.living.hostile;
 
-import com.bewitchment.common.entity.hostile.EntityBlackDog;
+import com.bewitchment.common.entity.spirits.ghosts.EntityBlackDog;
 
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelBase;

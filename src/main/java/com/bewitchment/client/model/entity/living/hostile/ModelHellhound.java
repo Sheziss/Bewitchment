@@ -1,6 +1,6 @@
 package com.bewitchment.client.model.entity.living.hostile;
 
-import com.bewitchment.common.entity.hostile.EntityHellhound;
+import com.bewitchment.common.entity.spirits.demons.EntityHellhound;
 
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelBase;

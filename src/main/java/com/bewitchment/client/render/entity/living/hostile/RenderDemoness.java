@@ -2,7 +2,7 @@ package com.bewitchment.client.render.entity.living.hostile;
 
 import com.bewitchment.Bewitchment;
 import com.bewitchment.client.model.entity.living.hostile.ModelDemoness;
-import com.bewitchment.common.entity.hostile.EntityDemoness;
+import com.bewitchment.common.entity.spirits.demons.EntityDemoness;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;

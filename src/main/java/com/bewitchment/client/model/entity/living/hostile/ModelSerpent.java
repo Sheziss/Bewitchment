@@ -1,6 +1,6 @@
 package com.bewitchment.client.model.entity.living.hostile;
 
-import com.bewitchment.common.entity.hostile.EntitySerpent;
+import com.bewitchment.common.entity.spirits.demons.EntitySerpent;
 
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelBase;

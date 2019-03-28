@@ -1,7 +1,7 @@
 package com.bewitchment.common.entity.living;
 
 import com.bewitchment.Bewitchment;
-import com.bewitchment.common.entity.hostile.EntitySerpent;
+import com.bewitchment.common.entity.spirits.demons.EntitySerpent;
 import com.bewitchment.common.entity.util.ModEntityTameable;
 import com.bewitchment.registry.ModObjects;
 
