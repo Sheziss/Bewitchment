@@ -2,6 +2,7 @@ package com.bewitchment;
 
 import com.bewitchment.common.CommonProxy;
 
+import com.bewitchment.common.compat.thaumcraft.ThaumcraftCompat;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -9,11 +10,37 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+//R DZH SVIV
+//HFMXLMFIV11
+//HKRMLHZFIFH111
+//MLGOVTZOGVMWVI
+//OVHLERPP
+//WZGFIZ
+//GSILFTS GSVHV ORMVH R WL WVXIVV
+//GSZG YB NVIVOB KFGGRMT NB MZNV RM
+//NB RMUOFVMXV TILDH, ZMW GSFH, R YVXLNV RNNLIGZO
+//XBYVIMVGRX DVY
+
+
+//GL HLNV, R ZN YFG Z HSZWV
+//YFG SVIV, R VCVIG KLDVI LEVI GSVN
+//R NZWV Z XZHGOV SVIV LM GSRH SROO
+//ZMW SZEV KFG NB UOZT RM GSV TILFMW
+//GSRH RH NB MVD DLIOW
+
+
+//HSLFOW GSV GIVHKZHHVIH LU GSV LOW DLIOW
+//ZIIREV SVIV, YVZIRMT SLHGRORGRVH
+//GSVB DROO YV NVG DRGS DIZGS
 
 @Mod(modid = Bewitchment.MOD_ID, name = Bewitchment.MOD_NAME, version = Bewitchment.MOD_VERSION)
 public class Bewitchment
 {
-	public static final String MOD_ID = "bewitchment", MOD_NAME = "Bewitchment", MOD_VERSION = "0.1";
+	public static final String MOD_ID = "bewitchment", MOD_NAME = "Bewitchment", MOD_VERSION = "0.20";
+	public static final Logger logger = LogManager.getLogger(MOD_NAME);
 	
 	@Instance(Bewitchment.MOD_ID)
 	public static Bewitchment instance;
@@ -25,12 +52,22 @@ public class Bewitchment
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		proxy.preInit(event);
+		ThaumcraftCompat.loadThaumcraftCompat();
+		logger.info("Remember when I told you how my");
+		logger.info("Kin is different in some ways?");
 	}
 	
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
 		proxy.init(event);
+		logger.info("It's a fact, she is exactly that!");
+		logger.info("A harbinger of death from the world of witchcraft,");
+		logger.info("And she's feeding them cakes and her ale to this innocent boy,");
+		logger.info("And her magic brings dismay!");
+
+		logger.info("I hear her in the wind, the bane of our town");
+		logger.info("Come with me, father, I'm to expose a heathen");
 	}
 	
 	@EventHandler
