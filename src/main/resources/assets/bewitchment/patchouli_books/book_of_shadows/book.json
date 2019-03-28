@@ -1,11 +1,11 @@
 {
-	"name": "item.bewitchment.book_of_shadows.name",
-	"landing_text": "Welcome to your own personal grimoire, detailing various rituals and other forms of magic you have come across.",
-	"version": 42,
-	"model": "bewitchment:book_of_shadows",
-	"subtitle": "bewitchment.book_of_shadows_subtitle",
-	"book_texture": "bewitchment:textures/gui/book.png",
-	"show_toasts": false,
-	"creative_tab": "bewitchment",
-	"show_progress": false
+  "name": "bewitchment.book.rites.name",
+  "landing_text": "Welcome to your own personal grimoire, detailing various rituals and other forms of magic you have come across.",
+  "version": 4,
+  "model": "bewitchment:book_of_shadows",
+  "subtitle": "bewitchment.book.rites.subtitle",
+  "book_texture": "bewitchment:textures/gui/book.png",
+  "show_toasts": false,
+  "creative_tab": "bewitchment_items",
+  "show_progress": false
 }
