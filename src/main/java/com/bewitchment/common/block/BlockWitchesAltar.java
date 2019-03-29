@@ -243,8 +243,7 @@ public class BlockWitchesAltar extends ModBlockContainer
 			if (obj instanceof BlockWitchesAltar)
 			{
 				Block altar = (BlockWitchesAltar) obj;
-				String name = altar.getRegistryName().toString().replace("light_gray", "silver");
-				if (name.contains(EnumDyeColor.values()[color].getName())) return altar;
+				if (altar.getRegistryName().toString().replace("light_gray", "silver").substring(25).replaceFirst("_", "").equals(EnumDyeColor.values()[color].getName())) return altar;
 			}
 		}
 		return ModObjects.witches_altar_unformed;
