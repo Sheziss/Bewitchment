@@ -85,6 +85,6 @@ public class DistilleryRecipe extends IForgeRegistryEntry.Impl<DistilleryRecipe>
 	public void giveOutput(ItemStackHandler input, ItemStackHandler output)
 	{
 		for (int i = 0; i < input.getSlots(); i++) input.extractItem(i, 1, false);
-		for (ItemStack stack : getOutput()) output.insertItem(ModTileEntity.getFirstValidSlot(output, stack), stack, false);
+		for (ItemStack stack : getOutput()) output.insertItem(ModTileEntity.getFirstValidSlot(output, stack), stack.copy(), false);
 	}
 }

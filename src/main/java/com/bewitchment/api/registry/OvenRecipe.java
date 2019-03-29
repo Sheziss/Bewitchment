@@ -70,11 +70,11 @@ public class OvenRecipe extends IForgeRegistryEntry.Impl<OvenRecipe>
 	public void giveOutput(Random rand, ItemStackHandler input, ItemStackHandler output)
 	{
 		input.extractItem(2, 1, false);
-		output.insertItem(0, getOutput(), false);
+		output.insertItem(0, getOutput().copy(), false);
 		if (rand.nextFloat() < getByproductChance() && !input.getStackInSlot(1).isEmpty())
 		{
 			input.extractItem(1, 1, false);
-			output.insertItem(1, getByproduct(), false);
+			output.insertItem(1, getByproduct().copy(), false);
 		}
 	}
 }
