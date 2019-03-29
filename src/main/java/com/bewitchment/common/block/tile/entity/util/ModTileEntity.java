@@ -1,5 +1,7 @@
 package com.bewitchment.common.block.tile.entity.util;
 
+import com.bewitchment.Bewitchment;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -31,8 +33,21 @@ public abstract class ModTileEntity extends TileEntity
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound tag)
 	{
+		for (int i = 0; i < getInventories().length; i++) tag.setTag("inventory_" + i, getInventories()[i].serializeNBT());
 		markDirty();
 		return super.writeToNBT(tag);
+	}
+	
+	@Override
+	public void readFromNBT(NBTTagCompound tag)
+	{
+		super.readFromNBT(tag);
+		for (int i = 0; i < getInventories().length; i++) getInventories()[i].deserializeNBT(tag.getCompoundTag("inventory_" + i));
+	}
+	
+	public ItemStackHandler[] getInventories()
+	{
+		return new ItemStackHandler[] {};
 	}
 	
 	public static boolean isEmpty(ItemStackHandler handler)
@@ -43,8 +58,18 @@ public abstract class ModTileEntity extends TileEntity
 	
 	public static int getFirstEmptySlot(ItemStackHandler handler)
 	{
-		for (int i = 0; i < handler.getSlots(); i++) if (handler.getStackInSlot(i).isEmpty()) return i;
-		return -1;
+		return getFirstValidSlot(handler, ItemStack.EMPTY);
+	}
+	
+	public static int getFirstValidSlot(ItemStackHandler handler, ItemStack stack)
+	{
+		boolean hasEmpty = false;
+		for (int i = 0; i < handler.getSlots(); i++)
+		{
+			if (Bewitchment.proxy.areStacksEqual(handler.getStackInSlot(i), stack)) return i;
+			if (handler.getStackInSlot(i).isEmpty()) hasEmpty = true;
+		}
+		return hasEmpty ? getFirstEmptySlot(handler) : -1;
 	}
 	
 	public static void clear(ItemStackHandler handler)

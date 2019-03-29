@@ -11,7 +11,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -30,17 +29,6 @@ public class BlockOven extends ModBlockContainer
 	public TileEntity createNewTileEntity(World world, int meta)
 	{
 		return new TileEntityOven();
-	}
-	
-	@Override
-	public void breakBlock(World world, BlockPos pos, IBlockState state)
-	{
-		if (!world.isRemote && world.getGameRules().getBoolean("doTileDrops") && hasTileEntity(state) && world.getTileEntity(pos) instanceof TileEntityOven)
-		{
-			TileEntityOven tile = (TileEntityOven) world.getTileEntity(pos);
-			for (int i = 0; i < tile.inventory.getSlots(); i++) InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), tile.inventory.getStackInSlot(i));
-		}
-		super.breakBlock(world, pos, state);
 	}
 	
 	@Override

@@ -10,7 +10,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -82,17 +81,6 @@ public class BlockGemBowl extends ModBlockContainer implements IInfusionStabilis
 	public float getStabilizationAmount(World world, BlockPos pos)
 	{
 		return 4;
-	}
-	
-	@Override
-	public void breakBlock(World world, BlockPos pos, IBlockState state)
-	{
-		if (!world.isRemote && world.getGameRules().getBoolean("doTileDrops") && hasTileEntity(state) && world.getTileEntity(pos) instanceof TileEntityGemBowl)
-		{
-			TileEntityGemBowl tile = (TileEntityGemBowl) world.getTileEntity(pos);
-			for (int i = 0; i < tile.inventory.getSlots(); i++) InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), tile.inventory.getStackInSlot(i));
-		}
-		super.breakBlock(world, pos, state);
 	}
 	
 	@Override

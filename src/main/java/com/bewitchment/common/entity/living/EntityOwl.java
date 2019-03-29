@@ -74,7 +74,7 @@ public class EntityOwl extends EntityRaven
 		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2.5);
 		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(10);
 		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(15);
-		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.1);
 		getEntityAttribute(SharedMonsterAttributes.FLYING_SPEED).setBaseValue(0.8);
 	}
 	

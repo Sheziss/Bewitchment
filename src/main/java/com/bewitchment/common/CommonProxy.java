@@ -1,5 +1,9 @@
 package com.bewitchment.common;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import com.bewitchment.Bewitchment;
 import com.bewitchment.ModConfig;
 import com.bewitchment.api.BewitchmentAPI;
@@ -102,6 +106,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.common.IPlantable;
@@ -194,6 +199,11 @@ public class CommonProxy
 		ModObjects.REGISTRY.add(item);
 	}
 	
+	public boolean areStacksEqual(ItemStack stack0, ItemStack stack1)
+	{
+		return stack0.getItem() == stack1.getItem() && (stack0.getMetadata() == stack1.getMetadata() || stack1.getMetadata() == Short.MAX_VALUE);
+	}
+	
 	public boolean isFancyGraphicsEnabled()
 	{
 		return false;
@@ -213,6 +223,60 @@ public class CommonProxy
 	
 	public void registerTextureEyeOfOld()
 	{
+	}
+	
+	public boolean areISListsEqual(List<Ingredient> ings, List<ItemStack> stacks)
+	{
+		List<Ingredient> removalList = new ArrayList<>(ings);
+		for (ItemStack stack : stacks)
+		{
+			Ingredient found = null;
+			for (Ingredient ingredient : ings)
+			{
+				if (ingredient.apply(stack))
+				{
+					found = ingredient;
+					break;
+				}
+			}
+			if (found == null) return false;
+			removalList.remove(found);
+		}
+		return removalList.isEmpty();
+	}
+	
+	public List<ItemStack> sortISList(List<ItemStack> list)
+	{
+		List<ItemStack> ret = new ArrayList<>();
+		List<ResourceLocation> items = new ArrayList<>();
+		List<Integer> metas = new ArrayList<>();
+		for (ItemStack stack : list)
+		{
+			items.add(stack.getItem().getRegistryName());
+			metas.add(stack.getMetadata());
+		}
+		boolean sorted = false;
+		while (!sorted)
+		{
+			sorted = true;
+			for (int i = 1; i < items.size(); i++)
+			{
+				if (items.get(i).toString().compareTo(items.get(i-1).toString()) > 0)
+				{
+					items.add(0, items.remove(i));
+					metas.add(0, metas.remove(i));
+					sorted = false;
+				}
+			}
+		}
+		for (int i = 0; i < items.size(); i++)
+		{
+			ItemStack stack = new ItemStack(ForgeRegistries.ITEMS.getValue(items.get(i)), metas.get(i));
+//			System.out.println(stack);
+			ret.add(stack);
+		}
+		System.out.println(ret);
+		return ret;
 	}
 	
 	public void spawnParticle(ModParticles particle, double x, double y, double z)
@@ -364,44 +428,44 @@ public class CommonProxy
 		
 		// Distillery
 		BewitchmentAPI.registerDistilleryRecipe(new DistilleryRecipe(Bewitchment.MOD_ID, "cleansing_balm",
-				new ItemStack[] {new ItemStack(ModObjects.acacia_resin), new ItemStack(ModObjects.sagebrush), new ItemStack(ModObjects.tulsi), new ItemStack(ModObjects.white_sage)},
-				new ItemStack[] {new ItemStack(ModObjects.cleansing_balm), new ItemStack(ModObjects.wood_ash)},
+				Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.acacia_resin)), Ingredient.fromStacks(new ItemStack(ModObjects.sagebrush)), Ingredient.fromStacks(new ItemStack(ModObjects.tulsi)), Ingredient.fromStacks(new ItemStack(ModObjects.white_sage))),
+				Arrays.asList(new ItemStack(ModObjects.cleansing_balm), new ItemStack(ModObjects.wood_ash)),
 				0, 300));
 		BewitchmentAPI.registerDistilleryRecipe(new DistilleryRecipe(Bewitchment.MOD_ID, "demonic_elixir",
-				new ItemStack[] {new ItemStack(Items.BLAZE_POWDER), new ItemStack(ModObjects.cloudy_oil), new ItemStack(ModObjects.demonic_heart), new ItemStack(ModObjects.graveyard_dust)},
-				new ItemStack[] {new ItemStack(ModObjects.demonic_elixir) },
+				Arrays.asList(Ingredient.fromStacks(new ItemStack(Items.BLAZE_POWDER)), Ingredient.fromStacks(new ItemStack(ModObjects.cloudy_oil)), Ingredient.fromStacks(new ItemStack(ModObjects.demonic_heart)), Ingredient.fromStacks(new ItemStack(ModObjects.graveyard_dust))),
+				Arrays.asList(new ItemStack(ModObjects.demonic_elixir)),
 				0, 300));
 		BewitchmentAPI.registerDistilleryRecipe(new DistilleryRecipe(Bewitchment.MOD_ID, "everchanging_dew",
-				new ItemStack[] {new ItemStack(Items.DYE, 1, 32767), new ItemStack(ModObjects.essence_of_vitality), new ItemStack(Items.PAPER)},
-				new ItemStack[] {new ItemStack(ModObjects.empty_jar), new ItemStack(ModObjects.everchanging_dew)},
+				Arrays.asList(Ingredient.fromStacks(new ItemStack(Items.DYE, 1, Short.MAX_VALUE)), Ingredient.fromStacks(new ItemStack(ModObjects.essence_of_vitality)), Ingredient.fromStacks(new ItemStack(Items.PAPER))),
+				Arrays.asList(new ItemStack(ModObjects.empty_jar), new ItemStack(ModObjects.everchanging_dew)),
 				0, 300));
 		BewitchmentAPI.registerDistilleryRecipe(new DistilleryRecipe(Bewitchment.MOD_ID, "fiery_unguent",
-				new ItemStack[] {new ItemStack(Items.BLAZE_POWDER), new ItemStack(ModObjects.cloudy_oil), new ItemStack(Blocks.OBSIDIAN), new ItemStack(ModObjects.wood_ash)},
-				new ItemStack[] {new ItemStack(ModObjects.diabolical_vein, 2), new ItemStack(ModObjects.fiery_unguent)},
+				Arrays.asList(Ingredient.fromStacks(new ItemStack(Items.BLAZE_POWDER)), Ingredient.fromStacks(new ItemStack(ModObjects.cloudy_oil)), Ingredient.fromStacks(new ItemStack(Blocks.OBSIDIAN)), Ingredient.fromStacks(new ItemStack(ModObjects.wood_ash))),
+				Arrays.asList(new ItemStack(ModObjects.diabolical_vein, 2), new ItemStack(ModObjects.fiery_unguent)),
 				0, 900));
 		BewitchmentAPI.registerDistilleryRecipe(new DistilleryRecipe(Bewitchment.MOD_ID, "heaven_extract",
-				new ItemStack[] {new ItemStack(ModObjects.birch_soul), new ItemStack(Items.GLOWSTONE_DUST), new ItemStack(ModObjects.gem_jasper), new ItemStack(ModObjects.quartz_powder)},
-				new ItemStack[] {new ItemStack(ModObjects.heaven_extract)},
+				Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.birch_soul)), Ingredient.fromStacks(new ItemStack(Items.GLOWSTONE_DUST)), Ingredient.fromStacks(new ItemStack(ModObjects.gem_jasper)), Ingredient.fromStacks(new ItemStack(ModObjects.quartz_powder))),
+				Arrays.asList(new ItemStack(ModObjects.heaven_extract)),
 				0, 900));
 		BewitchmentAPI.registerDistilleryRecipe(new DistilleryRecipe(Bewitchment.MOD_ID, "otherworldly_tears",
-				new ItemStack[] {new ItemStack(ModObjects.birch_soul), new ItemStack(Items.ENDER_PEARL), new ItemStack(ModObjects.lapis_powder)},
-				new ItemStack[] {new ItemStack(ModObjects.dimensional_sand, 2), new ItemStack(ModObjects.otherworldly_tears)},
+				Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.birch_soul)), Ingredient.fromStacks(new ItemStack(Items.ENDER_PEARL)), Ingredient.fromStacks(new ItemStack(ModObjects.lapis_powder))),
+				Arrays.asList(new ItemStack(ModObjects.dimensional_sand, 2), new ItemStack(ModObjects.otherworldly_tears)),
 				0, 600));
 		BewitchmentAPI.registerDistilleryRecipe(new DistilleryRecipe(Bewitchment.MOD_ID, "philter_of_dishonesty",
-				new ItemStack[] {new ItemStack(Items.BLAZE_POWDER), new ItemStack(ModObjects.graveyard_dust), new ItemStack(ModObjects.liquid_witchcraft), new ItemStack(ModObjects.oak_apple_gall)},
-				new ItemStack[] {new ItemStack(ModObjects.philter_of_dishonesty)},
+				Arrays.asList(Ingredient.fromStacks(new ItemStack(Items.BLAZE_POWDER)), Ingredient.fromStacks(new ItemStack(ModObjects.graveyard_dust)), Ingredient.fromStacks(new ItemStack(ModObjects.liquid_witchcraft)), Ingredient.fromStacks(new ItemStack(ModObjects.oak_apple_gall))),
+				Arrays.asList(new ItemStack(ModObjects.philter_of_dishonesty)),
 				0, 300));
 		BewitchmentAPI.registerDistilleryRecipe(new DistilleryRecipe(Bewitchment.MOD_ID, "stone_ichor",
-				new ItemStack[] {new ItemStack(ModObjects.coquina), new ItemStack(ModObjects.liquid_witchcraft), new ItemStack(Blocks.OBSIDIAN), new ItemStack(Blocks.STONE)},
-				new ItemStack[] {new ItemStack(ModObjects.stone_ichor)},
+				Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.coquina)), Ingredient.fromStacks(new ItemStack(ModObjects.liquid_witchcraft)), Ingredient.fromStacks(new ItemStack(Blocks.OBSIDIAN)), Ingredient.fromStacks(new ItemStack(Blocks.STONE))),
+				Arrays.asList(new ItemStack(ModObjects.stone_ichor)),
 				0, 900));
 		BewitchmentAPI.registerDistilleryRecipe(new DistilleryRecipe(Bewitchment.MOD_ID, "swirl_of_the_depths",
-				new ItemStack[] {new ItemStack(ModObjects.coquina), new ItemStack(ModObjects.kelp), new ItemStack(ModObjects.lapis_powder), new ItemStack(ModObjects.otherworldly_tears)},
-				new ItemStack[] {new ItemStack(Items.SLIME_BALL, 2), new ItemStack(ModObjects.swirl_of_the_depths)},
+				Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.coquina)), Ingredient.fromStacks(new ItemStack(ModObjects.kelp)), Ingredient.fromStacks(new ItemStack(ModObjects.lapis_powder)), Ingredient.fromStacks(new ItemStack(ModObjects.otherworldly_tears))),
+				Arrays.asList(new ItemStack(Items.SLIME_BALL, 2), new ItemStack(ModObjects.swirl_of_the_depths)),
 				0, 900));
 		BewitchmentAPI.registerDistilleryRecipe(new DistilleryRecipe(Bewitchment.MOD_ID, "undying_salve",
-				new ItemStack[] {new ItemStack(ModObjects.ectoplasm), new ItemStack(ModObjects.ebb_of_death), new ItemStack(ModObjects.essence_of_vitality)},
-				new ItemStack[] {new ItemStack(ModObjects.ectoplasm, 2), new ItemStack(ModObjects.undying_salve)},
+				Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.ectoplasm)), Ingredient.fromStacks(new ItemStack(ModObjects.ebb_of_death)), Ingredient.fromStacks(new ItemStack(ModObjects.essence_of_vitality))),
+				Arrays.asList(new ItemStack(ModObjects.ectoplasm, 2), new ItemStack(ModObjects.undying_salve)),
 				0, 300));
 		
 		// Oven

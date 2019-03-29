@@ -2,7 +2,6 @@ package com.bewitchment.common.block.tile.entity;
 
 import com.bewitchment.common.block.tile.entity.util.ModTileEntity;
 
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityPlacedItem extends ModTileEntity
@@ -14,25 +13,11 @@ public class TileEntityPlacedItem extends ModTileEntity
 		{
 			return 1;
 		}
-		
-		@Override
-		protected void onContentsChanged(int slot)
-	    {
-			markDirty();
-	    }
 	};
 	
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound tag)
+	public ItemStackHandler[] getInventories()
 	{
-		tag.setTag("inventory", inventory.serializeNBT());
-		return super.writeToNBT(tag);
-	}
-	
-	@Override
-	public void readFromNBT(NBTTagCompound tag)
-	{
-		super.readFromNBT(tag);
-		inventory.deserializeNBT(tag.getCompoundTag("inventory"));
+		return new ItemStackHandler[] {inventory};
 	}
 }

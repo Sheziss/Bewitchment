@@ -26,8 +26,8 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 
 public class EntitySerpent extends ModEntityMob
 {
@@ -87,18 +87,6 @@ public class EntitySerpent extends ModEntityMob
 	}
 	
 	@Override
-	public boolean attackEntityFrom(DamageSource source, float amount)
-	{
-		boolean flag = super.attackEntityFrom(source, amount);
-		if (!world.isRemote && flag && source == DamageSource.DROWN && hurtTime == 1)
-		{
-			for (int i = 0; i < 20; i++) ((WorldServer) world).spawnParticle(EnumParticleTypes.SMOKE_NORMAL, posX + (rand.nextDouble() - 0.5) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5) * width, 1, 0, 0, 0);
-			playSound(SoundEvents.BLOCK_FIRE_EXTINGUISH, 1, 1);
-		}
-		return flag;
-	}
-	
-	@Override
 	public boolean getCanSpawnHere()
 	{
 		return (world.provider.doesWaterVaporize() || world.provider.isNether()) && !world.containsAnyLiquid(getEntityBoundingBox()) && super.getCanSpawnHere();
@@ -108,7 +96,15 @@ public class EntitySerpent extends ModEntityMob
 	public void onLivingUpdate()
 	{
 		super.onLivingUpdate();
-		if (isWet()) attackEntityFrom(DamageSource.DROWN, 2.5f);
+		if (isWet())
+		{
+			attackEntityFrom(DamageSource.DROWN, 2.5f);
+			if (hurtTime == 1)
+			{
+				for (int i = 0; i < 20; i++) world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, posX + (rand.nextDouble() - 0.5) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5) * width, 0, 0, 0);
+				world.playSound(null, getPosition(), SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.HOSTILE, 1, 1);
+			}
+		}
 	}
 	
 	@Override

@@ -10,7 +10,6 @@ import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
@@ -60,17 +59,6 @@ public class BlockPlacedItem extends ModBlockContainer
 	public boolean canPlaceBlockOnSide(World world, BlockPos pos, EnumFacing face)
 	{
 		return face == EnumFacing.UP && world.getBlockState(pos.down()).getBlockFaceShape(world, pos.down(), EnumFacing.UP) == BlockFaceShape.SOLID;
-	}
-	
-	@Override
-	public void breakBlock(World world, BlockPos pos, IBlockState state)
-	{
-		if (!world.isRemote && world.getGameRules().getBoolean("doTileDrops") && hasTileEntity(state) && world.getTileEntity(pos) instanceof TileEntityPlacedItem)
-		{
-			TileEntityPlacedItem tile = (TileEntityPlacedItem) world.getTileEntity(pos);
-			for (int i = 0; i < tile.inventory.getSlots(); i++) InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), tile.inventory.getStackInSlot(i));
-		}
-		super.breakBlock(world, pos, state);
 	}
 	
 	@Override

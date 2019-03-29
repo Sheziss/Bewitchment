@@ -3,16 +3,22 @@ package com.bewitchment.api.registry;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bewitchment.Bewitchment;
+import com.bewitchment.common.block.tile.entity.util.ModTileEntity;
+
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 public class DistilleryRecipe extends IForgeRegistryEntry.Impl<DistilleryRecipe>
 {
-	private final ItemStack[] input, output;
+	private final List<Ingredient> input;
+	private final List<ItemStack> output;
 	private final int runningPower, time;
 	
-	public DistilleryRecipe(String modid, String name, ItemStack[] input, ItemStack[] output, int runningPower, int time)
+	public DistilleryRecipe(String modid, String name, List<Ingredient> input, List<ItemStack> output, int runningPower, int time)
 	{
 		this.setRegistryName(new ResourceLocation(modid, name));
 		this.input = input;
@@ -24,7 +30,7 @@ public class DistilleryRecipe extends IForgeRegistryEntry.Impl<DistilleryRecipe>
 	/**
 	 * @return the list of ItemStacks to be used as an input.
 	 */
-	public ItemStack[] getInput()
+	public List<Ingredient> getInput()
 	{
 		return input;
 	}
@@ -32,7 +38,7 @@ public class DistilleryRecipe extends IForgeRegistryEntry.Impl<DistilleryRecipe>
 	/**
 	 * @return the list of ItemStacks to be given as an output.
 	 */
-	public ItemStack[] getOutput()
+	public List<ItemStack> getOutput()
 	{
 		return output;
 	}
@@ -53,27 +59,32 @@ public class DistilleryRecipe extends IForgeRegistryEntry.Impl<DistilleryRecipe>
 		return time;
 	}
 	
-	public boolean matches(List<ItemStack> inputStacks)
+	public boolean matches(ItemStackHandler handler)
 	{
-		int nonEmpty = 0;
-		for (ItemStack stack : inputStacks) if (stack.getCount() > 0) nonEmpty++;
-		if (nonEmpty != getInput().length) return false;
-		boolean[] found = new boolean[getInput().length];
-		ArrayList<ItemStack> comp = new ArrayList<>(inputStacks);
-		for (int i = 0; i < getInput().length; i++)
-		{
-			for (int j = 0; j < comp.size(); j++)
-			{
-				ItemStack stack = comp.get(j);
-				if (getInput()[i].getItem() == stack.getItem() && (getInput()[i].getMetadata() == stack.getMetadata() || getInput()[i].getMetadata() == 32767))
-				{
-					found[i] = true;
-					comp.set(j, ItemStack.EMPTY);
-					break;
-				}
-			}
-		}
-		for (boolean b : found) if (!b) return false;
-		return true;
+		List<ItemStack> checklist = new ArrayList<>();
+		for (int i = 0; i < handler.getSlots(); i++) if (!handler.getStackInSlot(i).isEmpty()) checklist.add(handler.extractItem(i, 1, true));
+		if (checklist.size() == getInput().size()) return Bewitchment.proxy.areISListsEqual(getInput(), checklist);
+		return false;
+	}
+	
+	public boolean canOutputFit(ItemStackHandler handler)
+	{
+//		ItemStackHandler sim = new ItemStackHandler(6);
+//		for (int i = 1; i < sim.getSlots(); i++) sim.setStackInSlot(i, handler.getStackInSlot(i).copy());
+//		for (ItemStack stack : getOutput())
+//		{
+//			ItemStack stack0 = stack.copy();
+//			for (int i = 0; i < sim.getSlots() && !stack0.isEmpty(); i++) stack0 = sim.insertItem(i, stack0, false);
+//			if (!stack0.isEmpty()) return false;
+//		}
+//		return true;
+		for (int i = 0; i < handler.getSlots(); i++) if (handler.getStackInSlot(i).isEmpty()) return true;
+		return false;
+	}
+	
+	public void giveOutput(ItemStackHandler input, ItemStackHandler output)
+	{
+		for (int i = 0; i < input.getSlots(); i++) input.extractItem(i, 1, false);
+		for (ItemStack stack : getOutput()) output.insertItem(ModTileEntity.getFirstValidSlot(output, stack), stack, false);
 	}
 }

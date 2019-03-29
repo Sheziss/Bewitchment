@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.bewitchment.common.block.tile.entity.util.ModTileEntity;
 
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -20,12 +19,6 @@ public class TileEntityGemBowl extends ModTileEntity
 		{
 			return 1;
 		}
-		
-		@Override
-		protected void onContentsChanged(int slot)
-	    {
-			markDirty();
-	    }
 	};
 	
 	static
@@ -134,17 +127,9 @@ public class TileEntityGemBowl extends ModTileEntity
 	}
 	
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound tag)
+	public ItemStackHandler[] getInventories()
 	{
-		tag.setTag("inventory", inventory.serializeNBT());
-		return super.writeToNBT(tag);
-	}
-	
-	@Override
-	public void readFromNBT(NBTTagCompound tag)
-	{
-		super.readFromNBT(tag);
-		inventory.deserializeNBT(tag.getCompoundTag("inventory"));
+		return new ItemStackHandler[] {inventory};
 	}
 	
 	public int getGemValue()

@@ -8,41 +8,46 @@ import com.bewitchment.registry.ModObjects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityOven extends ModTileEntity implements ITickable
 {
 	public int burn_time, fuel_burn_time, progress;
 	
-	public final ItemStackHandler inventory = new ItemStackHandler(5)
+	public final ItemStackHandler inventory_up = new ItemStackHandler(3)
 	{
 		@Override
 		public boolean isItemValid(int index, ItemStack stack)
 		{
-			return index == 0 ? TileEntityFurnace.isItemFuel(stack) : index == 1 ? stack.getItem() == ModObjects.empty_jar : index == 2;
+			return index == 0 ? TileEntityFurnace.isItemFuel(stack) : index == 1 ? stack.getItem() == ModObjects.empty_jar : true;
 		}
-		
+	};
+	public final ItemStackHandler inventory_down = new ItemStackHandler(2)
+	{
 		@Override
-		protected void onContentsChanged(int slot)
-	    {
-			markDirty();
-	    }
+		public boolean isItemValid(int index, ItemStack stack)
+		{
+			return false;
+		}
 	};
 	
 	@Override
 	public void update()
 	{
-		OvenRecipe recipe = BewitchmentAPI.REGISTRY_OVEN.getValuesCollection().parallelStream().filter(p -> p.matches(inventory.getStackInSlot(2))).findFirst().orElse(null);
+		if (burn_time > 0) burn_time--;
+		OvenRecipe recipe = BewitchmentAPI.REGISTRY_OVEN.getValuesCollection().parallelStream().filter(p -> p.matches(inventory_up.getStackInSlot(2))).findFirst().orElse(null);
 		if (recipe == null) progress = 0;
-		else if (recipe.canOutputFit(inventory.getStackInSlot(3), inventory.getStackInSlot(4)))
+		else if (recipe.canOutputFit(inventory_down))
 		{
-			if (burn_time > 0) burn_time--;
-			if (burn_time == 0 && !inventory.getStackInSlot(0).isEmpty())
+			if (burn_time == 0 && !inventory_up.getStackInSlot(0).isEmpty())
 			{
-				burn_time = TileEntityFurnace.getItemBurnTime(inventory.getStackInSlot(0));
+				burn_time = TileEntityFurnace.getItemBurnTime(inventory_up.getStackInSlot(0));
 				fuel_burn_time = burn_time;
-				if (!world.isRemote) inventory.extractItem(0, 1, false);
+				if (!world.isRemote) inventory_up.extractItem(0, 1, false);
 			}
 			else if (burn_time > 0)
 			{
@@ -50,26 +55,27 @@ public class TileEntityOven extends ModTileEntity implements ITickable
 				if (progress >= 100)
 				{
 					progress = 0;
-					if (!world.isRemote)
-					{
-						inventory.extractItem(2, 1, false);
-						inventory.insertItem(3, recipe.getOutput(), false);
-						if (world.rand.nextFloat() < recipe.getByproductChance() && !inventory.getStackInSlot(1).isEmpty())
-						{
-							inventory.extractItem(1, 1, false);
-							inventory.insertItem(4, recipe.getByproduct(), false);
-						}
-					}
+					if (!world.isRemote) recipe.giveOutput(world.rand, inventory_up, inventory_down);
 				}
 			}
 		}
-		markDirty();
+	}
+	
+	@Override
+	public <T> T getCapability(Capability<T> capability, EnumFacing face)
+	{
+		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(face == EnumFacing.DOWN ? inventory_down : inventory_up) : super.getCapability(capability, face);
+	}
+	
+	@Override
+	public boolean hasCapability(Capability<?> capability, EnumFacing face)
+	{
+		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, face);
 	}
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound tag)
 	{
-		tag.setTag("inventory", inventory.serializeNBT());
 		tag.setInteger("burn_time", burn_time);
 		tag.setInteger("fuel_burn_time", fuel_burn_time);
 		tag.setInteger("progress", progress);
@@ -80,9 +86,14 @@ public class TileEntityOven extends ModTileEntity implements ITickable
 	public void readFromNBT(NBTTagCompound tag)
 	{
 		super.readFromNBT(tag);
-		inventory.deserializeNBT(tag.getCompoundTag("inventory"));
 		burn_time = tag.getInteger("burn_time");
 		fuel_burn_time = tag.getInteger("fuel_burn_time");
 		progress = tag.getInteger("progress");
+	}
+	
+	@Override
+	public ItemStackHandler[] getInventories()
+	{
+		return new ItemStackHandler[] {inventory_up, inventory_down};
 	}
 }

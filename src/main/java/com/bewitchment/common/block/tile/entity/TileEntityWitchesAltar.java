@@ -173,7 +173,6 @@ public class TileEntityWitchesAltar extends ModTileEntity implements ITickable
 			magic_power.setMaxAmount((int) (variety * variety_multiplier));
 			magic_power.setAmount(Math.min(magic_power.getAmount(), magic_power.getMaxAmount()));
 			magic_power.fill(gain);
-			markDirty();
 		}
 	}
 	

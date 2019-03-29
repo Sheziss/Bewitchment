@@ -12,10 +12,11 @@ import net.minecraft.block.BlockFlower;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityApiary extends ModTileEntity implements ITickable
@@ -33,12 +34,6 @@ public class TileEntityApiary extends ModTileEntity implements ITickable
 		{
 			return 1;
 		}
-		
-		@Override
-		protected void onContentsChanged(int slot)
-	    {
-			markDirty();
-	    }
 	};
 	
 	@Override
@@ -73,7 +68,6 @@ public class TileEntityApiary extends ModTileEntity implements ITickable
 						if (flower.canPlaceBlockAt(world, offset) && MagicPower.drainAltarFirst(world, null, getPos(), 30)) world.setBlockState(offset, state);
 					}
 				}
-				boolean update = false;
 				for (int i = 0; i < inventory.getSlots(); i++)
 				{
 					if (world.rand.nextInt(100) == 0)
@@ -82,27 +76,29 @@ public class TileEntityApiary extends ModTileEntity implements ITickable
 						if (oldStack != newStack && MagicPower.drainAltarFirst(world, null, getPos(), 30))
 						{
 							inventory.setStackInSlot(i, newStack);
-							update = true;
 						}
 					}
 				}
-				if (update) markDirty();
 			}
 		}
 	}
 	
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound tag)
+	public <T> T getCapability(Capability<T> capability, EnumFacing face)
 	{
-		tag.setTag("inventory", inventory.serializeNBT());
-		return super.writeToNBT(tag);
+		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(inventory) : super.getCapability(capability, face);
 	}
 	
 	@Override
-	public void readFromNBT(NBTTagCompound tag)
+	public boolean hasCapability(Capability<?> capability, EnumFacing face)
 	{
-		super.readFromNBT(tag);
-		inventory.deserializeNBT(tag.getCompoundTag("inventory"));
+		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, face);
+	}
+	
+	@Override
+	public ItemStackHandler[] getInventories()
+	{
+		return new ItemStackHandler[] {inventory};
 	}
 	
 	private ItemStack growItem(int i)

@@ -2,8 +2,11 @@ package com.bewitchment.api.registry;
 
 import java.util.Random;
 
+import com.bewitchment.Bewitchment;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 public class OvenRecipe extends IForgeRegistryEntry.Impl<OvenRecipe>
@@ -52,34 +55,26 @@ public class OvenRecipe extends IForgeRegistryEntry.Impl<OvenRecipe>
 		return output;
 	}
 	
-	public static boolean areStacksEqual(ItemStack stack0, ItemStack stack1)
-	{
-		return stack0.getItem() == stack1.getItem() && (stack0.getMetadata() == stack1.getMetadata() || stack1.getMetadata() == Short.MAX_VALUE);
-	}
-	
 	public boolean matches(ItemStack input)
 	{
-		return areStacksEqual(input, getInput());
+		return Bewitchment.proxy.areStacksEqual(input, getInput());
 	}
 	
-	public boolean canOutputFit(ItemStack output, ItemStack byproduct)
+	public boolean canOutputFit(ItemStackHandler handler)
 	{
-		boolean outputValid = output.isEmpty() || (areStacksEqual(output, getOutput()) && output.getCount() < output.getMaxStackSize());
-		boolean byproductValid = byproduct.isEmpty() || (areStacksEqual(byproduct, getByproduct()) && byproduct.getCount() < byproduct.getMaxStackSize() - (getByproduct().getCount() - 1));
+		boolean outputValid = handler.getStackInSlot(0).isEmpty() || (Bewitchment.proxy.areStacksEqual(handler.getStackInSlot(0), getOutput()) && handler.getStackInSlot(0).getCount() < handler.getStackInSlot(0).getMaxStackSize());
+		boolean byproductValid = handler.getStackInSlot(1).isEmpty() || (Bewitchment.proxy.areStacksEqual(handler.getStackInSlot(1), getByproduct()) && handler.getStackInSlot(1).getCount() < handler.getStackInSlot(1).getMaxStackSize() - (getByproduct().getCount() - 1));
 		return outputValid && byproductValid;
 	}
 	
-	public void giveOutput(Random rand, ItemStack input, ItemStack jar, ItemStack output, ItemStack byproduct)
+	public void giveOutput(Random rand, ItemStackHandler input, ItemStackHandler output)
 	{
-		input.shrink(1);
-		if (areStacksEqual(output, getOutput())) output.grow(getOutput().getCount());
-		else output = getOutput();
-		System.out.println(output);
-		if (rand.nextFloat() < getByproductChance() && !jar.isEmpty())
+		input.extractItem(2, 1, false);
+		output.insertItem(0, getOutput(), false);
+		if (rand.nextFloat() < getByproductChance() && !input.getStackInSlot(1).isEmpty())
 		{
-			jar.shrink(1);
-			if (areStacksEqual(byproduct, getByproduct())) byproduct.grow(getByproduct().getCount());
-			else byproduct = getByproduct();
+			input.extractItem(1, 1, false);
+			output.insertItem(1, getByproduct(), false);
 		}
 	}
 }
