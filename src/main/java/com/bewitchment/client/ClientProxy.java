@@ -170,8 +170,8 @@ public class ClientProxy extends CommonProxy
 			@Override
 			public ModelResourceLocation getModelLocation(ItemStack stack)
 			{
-				if (stack.getDisplayName().equalsIgnoreCase("Izuxe") || stack.getDisplayName().equalsIgnoreCase("Haruspex") || stack.getDisplayName().equalsIgnoreCase("H4rv5p3x")) return new ModelResourceLocation(new ResourceLocation(Bewitchment.MOD_ID, "eye_of_old_haru"), "inventory");
-				if (stack.getDisplayName().equalsIgnoreCase("Haru") || stack.getDisplayName().equalsIgnoreCase("Izu") || stack.getDisplayName().equalsIgnoreCase("Izuxe43ui520815")) return new ModelResourceLocation(new ResourceLocation(Bewitchment.MOD_ID, "eye_of_old_izu"), "inventory");
+				if (stack.getDisplayName().equalsIgnoreCase("Haru") || stack.getDisplayName().equalsIgnoreCase("Haruspex") || stack.getDisplayName().equalsIgnoreCase("H4rv5p3x")) return new ModelResourceLocation(new ResourceLocation(Bewitchment.MOD_ID, "eye_of_old_haru"), "inventory");
+				if (stack.getDisplayName().equalsIgnoreCase("Izuxe") || stack.getDisplayName().equalsIgnoreCase("Izu") || stack.getDisplayName().equalsIgnoreCase("Izuxe43ui520815")) return new ModelResourceLocation(new ResourceLocation(Bewitchment.MOD_ID, "eye_of_old_izu"), "inventory");
 				return new ModelResourceLocation(new ResourceLocation(Bewitchment.MOD_ID, "eye_of_old_normal"), "inventory");
 			}
 		});
