@@ -15,7 +15,7 @@ public class ItemSalt extends ModItem
 {
 	public ItemSalt()
 	{
-		super("salt", "salt", "dustSalt", "materialSalt", "ingredientSalt", "listAllsalt", "foodSalt", "lumpSalt", "pinchSalt", "portionSalt");
+		super("salt", "salt", "itemSalt", "dustSalt", "foodSalt", "listAllSalt", "ingredientSalt", "pinchSalt", "portionSalt", "lumpSalt", "materialSalt");
 	}
 	
 	@Override
