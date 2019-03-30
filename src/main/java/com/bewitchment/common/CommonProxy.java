@@ -11,7 +11,9 @@ import com.bewitchment.api.capability.extendedplayer.ExtendedPlayer;
 import com.bewitchment.api.capability.extendedplayer.ExtendedPlayerHandler;
 import com.bewitchment.api.capability.magicpower.MagicPower;
 import com.bewitchment.api.capability.magicpower.MagicPowerHandler;
+import com.bewitchment.api.capability.magicpower.MagicPowerPacket;
 import com.bewitchment.api.registry.DistilleryRecipe;
+import com.bewitchment.api.registry.LoomRecipe;
 import com.bewitchment.api.registry.OvenRecipe;
 import com.bewitchment.api.registry.Ritual;
 import com.bewitchment.common.block.BlockGlyph.GlyphType;
@@ -118,17 +120,21 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class CommonProxy
 {
 	public enum ModGui
 	{
-		APIARY, DISTILLERY, OVEN, TAROT, THREAD_SPINNER;
+		APIARY, DISTILLERY, LOOM, OVEN, TAROT;
 	}
+	
+	public static final SimpleNetworkWrapper WRAPPER = NetworkRegistry.INSTANCE.newSimpleChannel(Bewitchment.MOD_ID);
 	
 	public ModConfig config;
 	
@@ -227,60 +233,40 @@ public class CommonProxy
 	
 	public boolean areISListsEqual(List<Ingredient> ings, List<ItemStack> stacks)
 	{
-		List<Ingredient> removalList = new ArrayList<>(ings);
-		for (ItemStack stack : stacks)
+		if (ings.size() == stacks.size())
 		{
-			Ingredient found = null;
-			for (Ingredient ingredient : ings)
+			List<Ingredient> foundList = new ArrayList<>(ings);
+			for (int i = 0; i < stacks.size(); i++)
 			{
-				if (ingredient.apply(stack))
+				for (Ingredient ingredient : ings)
 				{
-					found = ingredient;
-					break;
+					if (ingredient.apply(stacks.get(i)))
+					{
+						foundList.set(i, Ingredient.EMPTY);
+						break;
+					}
 				}
 			}
-			if (found == null) return false;
-			removalList.remove(found);
+			for (Ingredient ing : foundList) if (ing != Ingredient.EMPTY) return false;
+			return true;
 		}
-		return removalList.isEmpty();
-	}
-	
-	public List<ItemStack> sortISList(List<ItemStack> list)
-	{
-		List<ItemStack> ret = new ArrayList<>();
-		List<ResourceLocation> items = new ArrayList<>();
-		List<Integer> metas = new ArrayList<>();
-		for (ItemStack stack : list)
-		{
-			items.add(stack.getItem().getRegistryName());
-			metas.add(stack.getMetadata());
-		}
-		boolean sorted = false;
-		while (!sorted)
-		{
-			sorted = true;
-			for (int i = 1; i < items.size(); i++)
-			{
-				if (items.get(i).toString().compareTo(items.get(i-1).toString()) > 0)
-				{
-					items.add(0, items.remove(i));
-					metas.add(0, metas.remove(i));
-					sorted = false;
-				}
-			}
-		}
-		for (int i = 0; i < items.size(); i++)
-		{
-			ItemStack stack = new ItemStack(ForgeRegistries.ITEMS.getValue(items.get(i)), metas.get(i));
-//			System.out.println(stack);
-			ret.add(stack);
-		}
-		System.out.println(ret);
-		return ret;
+		return false;
 	}
 	
 	public void spawnParticle(ModParticles particle, double x, double y, double z)
 	{
+	}
+	
+	protected void registerCapabilities()
+	{
+		byte id = 0;
+		CapabilityManager.INSTANCE.register(ExtendedPlayer.class, new ExtendedPlayer(), ExtendedPlayer::new);
+		MinecraftForge.EVENT_BUS.register(new ExtendedPlayerHandler());
+		WRAPPER.registerMessage(MagicPowerPacket.Handler.class, MagicPowerPacket.class, id++, Side.CLIENT);
+		
+		CapabilityManager.INSTANCE.register(MagicPower.class, new MagicPower(), MagicPower::new);
+		MinecraftForge.EVENT_BUS.register(new MagicPowerHandler());
+		
 	}
 	
 	protected void registerEventHandlers()
@@ -377,14 +363,6 @@ public class CommonProxy
 		BewitchmentAPI.registerAthameLoot(EntityRegistry.getEntry(EntityDemoness.class), Sets.newHashSet(new ItemStack(ModObjects.demonic_heart)));
 	}
 	
-	private void registerCapabilities()
-	{
-		CapabilityManager.INSTANCE.register(ExtendedPlayer.class, new ExtendedPlayer(), ExtendedPlayer::new);
-		MinecraftForge.EVENT_BUS.register(new ExtendedPlayerHandler());
-		CapabilityManager.INSTANCE.register(MagicPower.class, new MagicPower(), MagicPower::new);
-		MinecraftForge.EVENT_BUS.register(new MagicPowerHandler());
-	}
-	
 	private void registerRecipes()
 	{
 		// Furnace
@@ -467,6 +445,20 @@ public class CommonProxy
 				Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.ectoplasm)), Ingredient.fromStacks(new ItemStack(ModObjects.ebb_of_death)), Ingredient.fromStacks(new ItemStack(ModObjects.essence_of_vitality))),
 				Arrays.asList(new ItemStack(ModObjects.ectoplasm, 2), new ItemStack(ModObjects.undying_salve)),
 				0, 300));
+		
+		// Loom
+		BewitchmentAPI.registerLoomRecipe(new LoomRecipe(Bewitchment.MOD_ID, "spider_web",
+				Arrays.asList(Ingredient.fromStacks(new ItemStack(Items.STRING)), Ingredient.fromStacks(new ItemStack(Items.STRING)), Ingredient.fromStacks(new ItemStack(Items.STRING))),
+				new ItemStack(Blocks.WEB)));
+		BewitchmentAPI.registerLoomRecipe(new LoomRecipe(Bewitchment.MOD_ID, "regal_silk",
+				Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.chromatic_quill)), Ingredient.fromStacks(new ItemStack(Blocks.WEB)), Ingredient.fromStacks(new ItemStack(Blocks.WEB)), Ingredient.fromStacks(new ItemStack(ModObjects.everchanging_dew))),
+				new ItemStack(ModObjects.regal_silk, 12)));
+		BewitchmentAPI.registerLoomRecipe(new LoomRecipe(Bewitchment.MOD_ID, "golden_thread",
+				Arrays.asList(Ingredient.fromStacks(new ItemStack(Items.WHEAT)), Ingredient.fromStacks(new ItemStack(Items.WHEAT)), Ingredient.fromStacks(new ItemStack(Blocks.HAY_BLOCK)), Ingredient.fromStacks(new ItemStack(ModObjects.everchanging_dew))),
+				new ItemStack(ModObjects.golden_thread, 3)));
+		BewitchmentAPI.registerLoomRecipe(new LoomRecipe(Bewitchment.MOD_ID, "witches_stitching",
+				Arrays.asList(Ingredient.fromStacks(new ItemStack(Items.STRING)), Ingredient.fromStacks(new ItemStack(Items.STRING)), Ingredient.fromStacks(new ItemStack(ModObjects.oak_spirit)), Ingredient.fromStacks(new ItemStack(ModObjects.oak_spirit))),
+				new ItemStack(ModObjects.witches_stitching, 4)));
 		
 		// Oven
 		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MOD_ID, "sapling_0",

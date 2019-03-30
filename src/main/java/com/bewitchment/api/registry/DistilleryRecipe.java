@@ -63,23 +63,13 @@ public class DistilleryRecipe extends IForgeRegistryEntry.Impl<DistilleryRecipe>
 	{
 		List<ItemStack> checklist = new ArrayList<>();
 		for (int i = 0; i < handler.getSlots(); i++) if (!handler.getStackInSlot(i).isEmpty()) checklist.add(handler.extractItem(i, 1, true));
-		if (checklist.size() == getInput().size()) return Bewitchment.proxy.areISListsEqual(getInput(), checklist);
-		return false;
+		return Bewitchment.proxy.areISListsEqual(getInput(), checklist);
 	}
 	
 	public boolean canOutputFit(ItemStackHandler handler)
 	{
-//		ItemStackHandler sim = new ItemStackHandler(6);
-//		for (int i = 1; i < sim.getSlots(); i++) sim.setStackInSlot(i, handler.getStackInSlot(i).copy());
-//		for (ItemStack stack : getOutput())
-//		{
-//			ItemStack stack0 = stack.copy();
-//			for (int i = 0; i < sim.getSlots() && !stack0.isEmpty(); i++) stack0 = sim.insertItem(i, stack0, false);
-//			if (!stack0.isEmpty()) return false;
-//		}
-//		return true;
-		for (int i = 0; i < handler.getSlots(); i++) if (handler.getStackInSlot(i).isEmpty()) return true;
-		return false;
+		for (ItemStack stack : getOutput()) if (ModTileEntity.getFirstValidSlot(handler, stack) < 0) return false;
+		return true;
 	}
 	
 	public void giveOutput(ItemStackHandler input, ItemStackHandler output)

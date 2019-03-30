@@ -1,15 +1,22 @@
 package com.bewitchment.api.registry;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.bewitchment.Bewitchment;
+
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 public class LoomRecipe extends IForgeRegistryEntry.Impl<LoomRecipe>
 {
-	private final ItemStack[] input;
+	private final List<Ingredient> input;
 	private final ItemStack output;
 	
-	public LoomRecipe(String modid, String name, ItemStack[] input, ItemStack output)
+	public LoomRecipe(String modid, String name, List<Ingredient> input, ItemStack output)
 	{
 		this.setRegistryName(new ResourceLocation(modid, name));
 		this.input = input;
@@ -17,9 +24,9 @@ public class LoomRecipe extends IForgeRegistryEntry.Impl<LoomRecipe>
 	}
 	
 	/**
-	 * @return the list of ItemStacks to be used as input.
+	 * @return the list of Ingredients to be used as input.
 	 */
-	public ItemStack[] getInput()
+	public List<Ingredient> getInput()
 	{
 		return input;
 	}
@@ -30,5 +37,23 @@ public class LoomRecipe extends IForgeRegistryEntry.Impl<LoomRecipe>
 	public ItemStack getOutput()
 	{
 		return output;
+	}
+	
+	public boolean matches(ItemStackHandler handler)
+	{
+		List<ItemStack> checklist = new ArrayList<>();
+		for (int i = 0; i < handler.getSlots(); i++) if (!handler.getStackInSlot(i).isEmpty()) checklist.add(handler.extractItem(i, 1, true));
+		return Bewitchment.proxy.areISListsEqual(getInput(), checklist);
+	}
+	
+	public boolean canOutputFit(ItemStackHandler handler)
+	{
+		return handler.getStackInSlot(0).isEmpty() || (Bewitchment.proxy.areStacksEqual(handler.getStackInSlot(0), getOutput()) && handler.getStackInSlot(0).getCount() < handler.getStackInSlot(0).getMaxStackSize());
+	}
+	
+	public void giveOutput(ItemStackHandler input, ItemStackHandler output)
+	{
+		for (int i = 0; i < input.getSlots(); i++) input.extractItem(i, 1, false);
+		output.insertItem(0, getOutput().copy(), false);
 	}
 }

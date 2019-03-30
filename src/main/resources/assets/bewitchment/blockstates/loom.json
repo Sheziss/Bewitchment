@@ -2,12 +2,12 @@
 	"forge_marker": 1,
 	"defaults":
 	{
-		"model": "bewitchment:distillery",
+		"model": "bewitchment:loom",
 		"transform": "forge:default-block"
 	},
 	"variants":
 	{
-		"inventory": [{}],
+		"inventory": [{"y": 180}],
 		"normal": [{}],
 		"facing=north": [{}],
 		"facing=south": [{"y": 180}],
