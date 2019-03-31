@@ -463,32 +463,32 @@ public class CommonProxy
 		// Oven
 		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MOD_ID, "sapling_0",
 				new ItemStack(Blocks.SAPLING),
-				new ItemStack(ModObjects.wood_ash),
+				new ItemStack(ModObjects.wood_ash, 4),
 				new ItemStack(ModObjects.oak_spirit),
 				0.85f));
 		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MOD_ID, "sapling_1",
 				new ItemStack(Blocks.SAPLING, 1, 1),
-				new ItemStack(ModObjects.wood_ash),
+				new ItemStack(ModObjects.wood_ash, 4),
 				new ItemStack(ModObjects.spruce_heart),
 				0.85f));
 		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MOD_ID, "sapling_2",
 				new ItemStack(Blocks.SAPLING, 1, 2),
-				new ItemStack(ModObjects.wood_ash),
+				new ItemStack(ModObjects.wood_ash, 4),
 				new ItemStack(ModObjects.birch_soul),
 				0.85f));
 		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MOD_ID, "sapling_3",
 				new ItemStack(Blocks.SAPLING, 1, 3),
-				new ItemStack(ModObjects.wood_ash),
+				new ItemStack(ModObjects.wood_ash, 4),
 				new ItemStack(ModObjects.cloudy_oil),
 				0.85f));
 		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MOD_ID, "sapling_4",
 				new ItemStack(Blocks.SAPLING, 1, 4),
-				new ItemStack(ModObjects.wood_ash),
+				new ItemStack(ModObjects.wood_ash, 4),
 				new ItemStack(ModObjects.acacia_resin),
 				0.85f));
 		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MOD_ID, "sapling_5",
 				new ItemStack(Blocks.SAPLING, 1, 5),
-				new ItemStack(ModObjects.wood_ash),
+				new ItemStack(ModObjects.wood_ash, 4),
 				new ItemStack(ModObjects.oak_spirit),
 				0.85f));
 		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MOD_ID, "rotten_flesh",
