@@ -24,18 +24,18 @@ public class MagicPower implements ICapabilitySerializable<NBTTagCompound>, ISto
 	
 	private final Map<String, Integer> upgrades = new HashMap<>();
 	
-	private int amount = 0, maxAmount = 0, bonusAmount;
+	private int amount = 0, maxAmount = 0, bonusAmount = 0;
 	
-	public static boolean drainAltarFirst(World world, EntityPlayer player, BlockPos pos, int amount)
+	public static boolean attemptDrain(World world, EntityPlayer player, BlockPos pos, int amount)
 	{
 		if (amount == 0) return true;
 		if (BlockWitchesAltar.getNearestAltar(world, pos) != null) return world.getTileEntity(BlockWitchesAltar.getNearestAltar(world, pos)).getCapability(CAPABILITY, null).drain(amount);
-		return player == null ? false : player.getCapability(CAPABILITY, null).drain(amount);
+		return player != null && player.getCapability(CAPABILITY, null).drain(amount);
 	}
 	
 	public boolean drain(int amount)
 	{
-		if (getAmount() >= amount)
+		if (getAmount() - amount > 0)
 		{
 			setAmount(Math.max(0, (getAmount() + getBonusAmount()) - amount));
 			return true;

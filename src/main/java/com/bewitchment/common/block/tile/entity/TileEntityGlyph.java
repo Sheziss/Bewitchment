@@ -85,7 +85,7 @@ public class TileEntityGlyph extends ModTileEntity implements ITickable
 		if (!world.isRemote && ritual != null && caster != null)
 		{
 			EntityPlayer player = world.getPlayerEntityByUUID(caster);
-			if (MagicPower.drainAltarFirst(world, player, getPos(), ritual.getRunningPower() * (getEffectivePosition() == getPos() ? 1 : MathHelper.ceil(getEffectivePosition().distanceSq(getPos()) / 400))))
+			if (MagicPower.attemptDrain(world, player, getPos(), ritual.getRunningPower() * (getEffectivePosition() == getPos() ? 1 : MathHelper.ceil(getEffectivePosition().distanceSq(getPos()) / 400))))
 			{
 				ritual.onUpdate(this, player);
 				cooldown--;
@@ -197,7 +197,7 @@ public class TileEntityGlyph extends ModTileEntity implements ITickable
 			{
 				if (ritual.isValid(this, player))
 				{
-					if (MagicPower.drainAltarFirst(world, player, getPos(), ritual.getStartingPower() * (getEffectivePosition() == getPos() ? 1 : MathHelper.ceil(getEffectivePosition().distanceSq(getPos()) / 400))))
+					if (MagicPower.attemptDrain(world, player, getPos(), ritual.getStartingPower() * (getEffectivePosition() == getPos() ? 1 : MathHelper.ceil(getEffectivePosition().distanceSq(getPos()) / 400))))
 					{
 						caster = player.getPersistentID();
 						cooldown = ritual.getTime();

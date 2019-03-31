@@ -72,7 +72,7 @@ public class BlockCrystalBall extends ModBlock
 			{
 				Fortune fortune = player.getCapability(ExtendedPlayer.CAPABILITY, null).getFortune();
 				if (fortune != null) player.sendStatusMessage(new TextComponentTranslation("fortune.fortune_exists" + new TextComponentTranslation(fortune.getRegistryName().toString())), true);
-				else if (MagicPower.drainAltarFirst(world, player, pos, 3000))
+				else if (MagicPower.attemptDrain(world, player, pos, 3000))
 				{
 					List<Fortune> valid = BewitchmentAPI.REGISTRY_FORTUNE.getValuesCollection().stream().filter(f -> f.canBeUsed(player)).collect(Collectors.toList());
 					if (!valid.isEmpty())

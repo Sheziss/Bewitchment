@@ -65,7 +65,7 @@ public class TileEntityApiary extends ModTileEntity implements ITickable
 						IBlockState state = world.getBlockState(pos);
 						BlockFlower flower = (BlockFlower) state.getBlock();
 						BlockPos offset = pos.offset(EnumFacing.random(world.rand));
-						if (flower.canPlaceBlockAt(world, offset) && MagicPower.drainAltarFirst(world, null, getPos(), 30)) world.setBlockState(offset, state);
+						if (flower.canPlaceBlockAt(world, offset) && MagicPower.attemptDrain(world, null, getPos(), 30)) world.setBlockState(offset, state);
 					}
 				}
 				for (int i = 0; i < inventory.getSlots(); i++)
@@ -73,7 +73,7 @@ public class TileEntityApiary extends ModTileEntity implements ITickable
 					if (world.rand.nextInt(100) == 0)
 					{
 						ItemStack oldStack = inventory.getStackInSlot(i), newStack = growItem(i);
-						if (oldStack != newStack && MagicPower.drainAltarFirst(world, null, getPos(), 30))
+						if (oldStack != newStack && MagicPower.attemptDrain(world, null, getPos(), 30))
 						{
 							inventory.setStackInSlot(i, newStack);
 						}

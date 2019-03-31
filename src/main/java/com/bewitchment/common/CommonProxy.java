@@ -11,7 +11,7 @@ import com.bewitchment.api.capability.extendedplayer.ExtendedPlayer;
 import com.bewitchment.api.capability.extendedplayer.ExtendedPlayerHandler;
 import com.bewitchment.api.capability.magicpower.MagicPower;
 import com.bewitchment.api.capability.magicpower.MagicPowerHandler;
-import com.bewitchment.api.capability.magicpower.MagicPowerPacket;
+import com.bewitchment.api.capability.magicpower.MagicPowerMessage;
 import com.bewitchment.api.registry.DistilleryRecipe;
 import com.bewitchment.api.registry.LoomRecipe;
 import com.bewitchment.api.registry.OvenRecipe;
@@ -262,7 +262,7 @@ public class CommonProxy
 		byte id = 0;
 		CapabilityManager.INSTANCE.register(ExtendedPlayer.class, new ExtendedPlayer(), ExtendedPlayer::new);
 		MinecraftForge.EVENT_BUS.register(new ExtendedPlayerHandler());
-		WRAPPER.registerMessage(MagicPowerPacket.Handler.class, MagicPowerPacket.class, id++, Side.CLIENT);
+		WRAPPER.registerMessage(MagicPowerMessage.Handler.class, MagicPowerMessage.class, id++, Side.CLIENT);
 		
 		CapabilityManager.INSTANCE.register(MagicPower.class, new MagicPower(), MagicPower::new);
 		MinecraftForge.EVENT_BUS.register(new MagicPowerHandler());

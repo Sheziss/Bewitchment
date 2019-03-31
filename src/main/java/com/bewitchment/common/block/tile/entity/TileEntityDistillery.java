@@ -52,7 +52,7 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable
 			}
 			else if (burn_time > 0)
 			{
-				if (MagicPower.drainAltarFirst(world, world.getClosestPlayer(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 5, false), pos, 2)) progress++;
+				if (MagicPower.attemptDrain(world, world.getClosestPlayer(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 5, false), pos, 2)) progress++;
 				if (progress >= recipe.getTime())
 				{
 					progress = 0;
