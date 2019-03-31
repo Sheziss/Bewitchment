@@ -47,7 +47,7 @@ public class GuiOven extends GuiContainer
 			int time = container.tile.burn_time * 13 / container.tile.fuel_burn_time;
 			this.drawTexturedModalRect(x + 44, y + 50 - time, 176, 12 - time, 14, time + 1);
 		}
-		this.drawTexturedModalRect(x + 76, y + 19, 176, 14, container.tile.progress * 24 / 100 + 1, 16);
+		this.drawTexturedModalRect(x + 76, y + 19, 176, 14, container.tile.progress * 24 / 200 + 1, 16);
 	}
 	
 	@Override

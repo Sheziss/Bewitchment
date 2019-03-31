@@ -47,20 +47,20 @@ public class TileEntityOven extends ModTileEntity implements ITickable
 	@Override
 	public void update()
 	{
-		if (burn_time > 0) burn_time--;
+		if (burn_time >= 0) burn_time--;
 		if (recipe == null) progress = 0;
 		else if (recipe.canOutputFit(inventory_down))
 		{
-			if (burn_time == 0 && !inventory_up.getStackInSlot(0).isEmpty())
+			if (burn_time == -1 && !inventory_up.getStackInSlot(0).isEmpty())
 			{
 				burn_time = TileEntityFurnace.getItemBurnTime(inventory_up.getStackInSlot(0));
 				fuel_burn_time = burn_time;
 				if (!world.isRemote) inventory_up.extractItem(0, 1, false);
 			}
-			else if (burn_time > 0)
+			else if (burn_time >= 0)
 			{
 				progress++;
-				if (progress >= 100)
+				if (progress >= 200)
 				{
 					progress = 0;
 					if (!world.isRemote) recipe.giveOutput(world.rand, inventory_up, inventory_down);
