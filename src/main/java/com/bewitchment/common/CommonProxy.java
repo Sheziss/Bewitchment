@@ -553,7 +553,7 @@ public class CommonProxy
 				0.85f));
 		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MOD_ID, "chicken",
 				new ItemStack(Items.CHICKEN),
-				new ItemStack(Items.CHICKEN),
+				new ItemStack(Items.COOKED_CHICKEN),
 				new ItemStack(ModObjects.cloudy_oil),
 				0.85f));
 		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MOD_ID, "fish_0",
