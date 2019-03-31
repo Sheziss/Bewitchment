@@ -222,16 +222,10 @@ public class BlockWitchesAltar extends ModBlockContainer
 	
 	public static BlockPos getNearestAltar(World world, BlockPos pos)
 	{
-		for (int x = -16; x <= 16; x++)
+		for (BlockPos pos0 : BlockPos.MutableBlockPos.getAllInBox(pos.add(-8, -8, -8), pos.add(8, 8, 8)))
 		{
-			for (int y = -16; y <= 16; y++)
-			{
-				for (int z = -16; z <= 16; z++)
-				{
-					IBlockState state = world.getBlockState(getAltarPosition(world, pos.add(x, y, z)));
-					if (state.getBlock() instanceof BlockWitchesAltar && state.getValue(TYPE) == AltarType.TILE) return getAltarPosition(world, pos.add(x, y, z));
-				}
-			}
+			IBlockState state = world.getBlockState(getAltarPosition(world, pos0));
+			if (state.getBlock() instanceof BlockWitchesAltar && state.getValue(TYPE) == AltarType.TILE) return getAltarPosition(world, pos0);
 		}
 		return null;
 	}

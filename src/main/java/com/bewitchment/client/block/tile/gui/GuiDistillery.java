@@ -36,8 +36,8 @@ public class GuiDistillery extends GuiContainer
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
 		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
-		drawTexturedModalRect(x + 76, y + 16, 176, 0, container.tile.progress * 24 / Math.max(1, container.tile.recipe_time) + 1, 17);
-		int burnProgress = 14 - (int) Math.ceil(14 * (container.tile.burn_time / (double) 1200));
+		drawTexturedModalRect(x + 76, y + 16, 176, 0, container.progress * 24 / Math.max(1, container.recipe_time) + 1, 17);
+		int burnProgress = 14 - (int) Math.ceil(14 * (container.burn_time / (double) 1200));
 		drawTexturedModalRect(x + 81, y + 36 + burnProgress, 242, burnProgress, 14, 14 - burnProgress);
 	}
 }

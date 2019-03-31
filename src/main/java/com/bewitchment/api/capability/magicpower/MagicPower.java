@@ -3,7 +3,7 @@ package com.bewitchment.api.capability.magicpower;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.bewitchment.common.block.BlockWitchesAltar;
+import com.bewitchment.common.block.tile.entity.TileEntityWitchesAltar;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTBase;
@@ -29,7 +29,7 @@ public class MagicPower implements ICapabilitySerializable<NBTTagCompound>, ISto
 	public static boolean attemptDrain(World world, EntityPlayer player, BlockPos pos, int amount)
 	{
 		if (amount == 0) return true;
-		if (BlockWitchesAltar.getNearestAltar(world, pos) != null) return world.getTileEntity(BlockWitchesAltar.getNearestAltar(world, pos)).getCapability(CAPABILITY, null).drain(amount);
+		if (pos != null && world.getTileEntity(pos) instanceof TileEntityWitchesAltar) return world.getTileEntity(pos).getCapability(CAPABILITY, null).drain(amount);
 		return player != null && player.getCapability(CAPABILITY, null).drain(amount);
 	}
 	

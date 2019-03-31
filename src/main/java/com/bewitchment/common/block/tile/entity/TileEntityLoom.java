@@ -3,12 +3,15 @@ package com.bewitchment.common.block.tile.entity;
 import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.api.capability.magicpower.MagicPower;
 import com.bewitchment.api.registry.LoomRecipe;
+import com.bewitchment.common.block.BlockWitchesAltar;
 import com.bewitchment.common.block.tile.entity.util.ModTileEntity;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -17,7 +20,18 @@ public class TileEntityLoom extends ModTileEntity implements ITickable
 {
 	public int progress;
 	
-	public final ItemStackHandler inventory_up = new ItemStackHandler(4);
+	private BlockPos altarPos;
+	
+	private LoomRecipe recipe;
+	
+	public final ItemStackHandler inventory_up = new ItemStackHandler(4)
+	{
+		@Override
+		protected void onContentsChanged(int index)
+		{
+			recipe = BewitchmentAPI.REGISTRY_LOOM.getValuesCollection().parallelStream().filter(p -> p.matches(this)).findFirst().orElse(null);
+		}
+	};
 	public final ItemStackHandler inventory_down = new ItemStackHandler(1)
 	{
 		@Override
@@ -30,15 +44,19 @@ public class TileEntityLoom extends ModTileEntity implements ITickable
 	@Override
 	public void update()
 	{
-		LoomRecipe recipe = BewitchmentAPI.REGISTRY_LOOM.getValuesCollection().parallelStream().filter(p -> p.matches(inventory_up)).findFirst().orElse(null);
-		if (recipe == null) progress = 0;
-		else if (recipe.canOutputFit(inventory_down))
+		if (!world.isRemote)
 		{
-			if (MagicPower.attemptDrain(world, world.getClosestPlayer(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 5, false), pos, 6)) progress++;
-			if (progress >= 200)
+			if (world.getTotalWorldTime() % 40 == 0 && altarPos != null && !(world.getTileEntity(altarPos) instanceof TileEntityWitchesAltar)) altarPos = null;
+			if (world.getTotalWorldTime() % 200 == 0 && altarPos == null) altarPos = BlockWitchesAltar.getNearestAltar(world, getPos());
+			if (recipe == null) progress = 0;
+			else if (recipe.canOutputFit(inventory_down))
 			{
-				progress = 0;
-				if (!world.isRemote) recipe.giveOutput(inventory_up, inventory_down);
+				if (MagicPower.attemptDrain(world, world.getClosestPlayer(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 5, false), altarPos, 6)) progress++;
+				if (progress >= 200)
+				{
+					progress = 0;
+					recipe.giveOutput(inventory_up, inventory_down);
+				}
 			}
 		}
 	}
@@ -58,6 +76,13 @@ public class TileEntityLoom extends ModTileEntity implements ITickable
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound tag)
 	{
+		if (altarPos != null)
+		{
+			tag.setInteger("x", altarPos.getX());
+			tag.setInteger("y", altarPos.getY());
+			tag.setInteger("z", altarPos.getZ());
+		}
+		tag.setString("recipe", recipe == null ? "" : recipe.getRegistryName().toString());
 		tag.setInteger("progress", progress);
 		return super.writeToNBT(tag);
 	}
@@ -66,6 +91,8 @@ public class TileEntityLoom extends ModTileEntity implements ITickable
 	public void readFromNBT(NBTTagCompound tag)
 	{
 		super.readFromNBT(tag);
+		altarPos = !tag.hasKey("x") ? null : new BlockPos(tag.getInteger("x"), tag.getInteger("y"), tag.getInteger("z"));
+		recipe = tag.getString("recipe").isEmpty() ? null : BewitchmentAPI.REGISTRY_LOOM.getValue(new ResourceLocation(tag.getString("recipe")));
 		progress = tag.getInteger("progress");
 	}
 	

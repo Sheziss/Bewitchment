@@ -5,13 +5,18 @@ import com.bewitchment.common.block.tile.container.util.ModSlot;
 import com.bewitchment.common.block.tile.entity.TileEntityOven;
 
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.util.EnumFacing;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 public class ContainerOven extends ModContainer
 {
-	public final TileEntityOven tile;
+	public int burn_time, fuel_burn_time, progress;
+	
+	private final TileEntityOven tile;
 	
 	public ContainerOven(InventoryPlayer inventory, TileEntityOven tile)
 	{
@@ -26,4 +31,25 @@ public class ContainerOven extends ModContainer
 		addSlotToContainer(new ModSlot(down, di++, 116, 55));
 		addPlayerSlots(inventory);
 	}
+	
+	@Override
+	public void detectAndSendChanges()
+	{
+		super.detectAndSendChanges();
+		for (IContainerListener listener : listeners)
+		{
+			listener.sendWindowProperty(this, 0, tile.burn_time);
+			listener.sendWindowProperty(this, 1, tile.fuel_burn_time);
+			listener.sendWindowProperty(this, 2, tile.progress);
+		}
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+    public void updateProgressBar(int id, int data)
+    {
+		if (id == 0) burn_time = data;
+		if (id == 1) fuel_burn_time = data;
+		else progress = data;
+    }
 }

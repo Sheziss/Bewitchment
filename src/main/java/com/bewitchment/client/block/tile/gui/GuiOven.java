@@ -41,13 +41,12 @@ public class GuiOven extends GuiContainer
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
 		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
-		this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
-		if (container.tile.burn_time > 0)
+		if (container.burn_time > 0)
 		{
-			int time = container.tile.burn_time * 13 / container.tile.fuel_burn_time;
+			int time = container.burn_time * 13 / container.fuel_burn_time;
 			this.drawTexturedModalRect(x + 44, y + 50 - time, 176, 12 - time, 14, time + 1);
 		}
-		this.drawTexturedModalRect(x + 76, y + 19, 176, 14, container.tile.progress * 24 / 200 + 1, 16);
+		this.drawTexturedModalRect(x + 76, y + 19, 176, 14, container.progress * 24 / 200 + 1, 16);
 	}
 	
 	@Override

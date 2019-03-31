@@ -5,13 +5,18 @@ import com.bewitchment.common.block.tile.container.util.ModSlot;
 import com.bewitchment.common.block.tile.entity.TileEntityLoom;
 
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.util.EnumFacing;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 public class ContainerLoom extends ModContainer
 {
-	public final TileEntityLoom tile;
+	public int progress;
+	
+	private final TileEntityLoom tile;
 	
 	public ContainerLoom(InventoryPlayer inventory, TileEntityLoom tile)
 	{
@@ -26,4 +31,21 @@ public class ContainerLoom extends ModContainer
 		addSlotToContainer(new ModSlot(down, di++, 116, 34));
 		addPlayerSlots(inventory);
 	}
+	
+	@Override
+	public void detectAndSendChanges()
+	{
+		super.detectAndSendChanges();
+		for (IContainerListener listener : listeners)
+		{
+			listener.sendWindowProperty(this, 0, tile.progress);
+		}
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+    public void updateProgressBar(int id, int data)
+    {
+		progress = data;
+    }
 }

@@ -36,6 +36,6 @@ public class GuiLoom extends GuiContainer
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
 		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
-		drawTexturedModalRect(x + 85, y + 33, 176, 0, container.tile.progress * 24 / 200, 17);
+		drawTexturedModalRect(x + 85, y + 33, 176, 0, container.progress * 24 / 200, 17);
 	}
 }

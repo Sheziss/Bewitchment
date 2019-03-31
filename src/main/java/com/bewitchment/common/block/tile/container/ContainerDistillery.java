@@ -5,13 +5,18 @@ import com.bewitchment.common.block.tile.container.util.ModSlot;
 import com.bewitchment.common.block.tile.entity.TileEntityDistillery;
 
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.util.EnumFacing;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 public class ContainerDistillery extends ModContainer
 {
-	public final TileEntityDistillery tile;
+	public int burn_time, progress, recipe_time;
+	
+	private final TileEntityDistillery tile;
 	
 	public ContainerDistillery(InventoryPlayer inventory, TileEntityDistillery tile)
 	{
@@ -29,4 +34,25 @@ public class ContainerDistillery extends ModContainer
 		}
 		addPlayerSlots(inventory);
 	}
+	
+	@Override
+	public void detectAndSendChanges()
+	{
+		super.detectAndSendChanges();
+		for (IContainerListener listener : listeners)
+		{
+			listener.sendWindowProperty(this, 0, tile.burn_time);
+			listener.sendWindowProperty(this, 1, tile.progress);
+			listener.sendWindowProperty(this, 2, tile.recipe_time);
+		}
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+    public void updateProgressBar(int id, int data)
+    {
+		if (id == 0) burn_time = data;
+		if (id == 1) progress = data;
+		else recipe_time = data;
+    }
 }
