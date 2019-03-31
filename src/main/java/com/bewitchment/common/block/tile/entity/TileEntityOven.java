@@ -32,7 +32,11 @@ public class TileEntityOven extends ModTileEntity implements ITickable
 		@Override
 		protected void onContentsChanged(int index)
 		{
-			recipe = BewitchmentAPI.REGISTRY_OVEN.getValuesCollection().parallelStream().filter(p -> p.matches(getStackInSlot(2))).findFirst().orElse(null);
+			if (index == 2)
+			{
+				recipe = BewitchmentAPI.REGISTRY_OVEN.getValuesCollection().parallelStream().filter(p -> p.matches(getStackInSlot(2))).findFirst().orElse(null);
+				onContentsChanged(0);
+			}
 		}
 	};
 	public final ItemStackHandler inventory_down = new ItemStackHandler(2)
