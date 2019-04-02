@@ -1,4 +1,4 @@
-package com.bewitchment.registry;
+package com.bewitchment.registry.util;
 
 import java.util.List;
 

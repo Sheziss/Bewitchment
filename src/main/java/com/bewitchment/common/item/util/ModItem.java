@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bewitchment.Bewitchment;
-import com.bewitchment.registry.IOreDictionaryContainer;
+import com.bewitchment.registry.util.IOreDictionaryContainer;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;

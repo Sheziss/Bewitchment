@@ -511,8 +511,10 @@ public class ModObjects
 	public static final Item quartz_powder = new ModItem("quartz_powder");
 	public static final Item ravens_feather = new ModItem("ravens_feather");
 	public static final Item regal_silk = new ModItem("regal_silk");
+	public static final Item sanguine_fabric = new ModItem("sanguine_fabric");
 	public static final Item silver_scales = new ModItem("silver_scales");
 	public static final Item snake_venom = new ModItem("snake_venom");
+	public static final Item soul_string = new ModItem("soul_string");
 	public static final Item spectral_dust = new ModItem("spectral_dust");
 	public static final Item toe_of_frog = new ModItem("toe_of_frog");
 	public static final Item tongue_of_dog = new ModItem("tongue_of_dog");

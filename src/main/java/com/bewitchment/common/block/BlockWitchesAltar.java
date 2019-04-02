@@ -221,6 +221,7 @@ public class BlockWitchesAltar extends ModBlockContainer
 		}
 		return null;
 	}
+	
 	private void refreshAltarContainers(World world, BlockPos pos)
 	{
 		for (BlockPos pos0 : BlockPos.getAllInBoxMutable(pos.add(-8, -8, -8), pos.add(8, 8, 8)))

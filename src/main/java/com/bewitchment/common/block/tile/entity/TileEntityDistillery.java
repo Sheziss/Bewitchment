@@ -99,12 +99,7 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable, IA
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound tag)
 	{
-		if (altarPos != null)
-		{
-			tag.setInteger("x", altarPos.getX());
-			tag.setInteger("y", altarPos.getY());
-			tag.setInteger("z", altarPos.getZ());
-		}
+		if (altarPos != null) tag.setLong("altarPos", altarPos.toLong());
 		tag.setString("recipe", recipe == null ? "" : recipe.getRegistryName().toString());
 		tag.setInteger("burn_time", burn_time);
 		tag.setInteger("progress", progress);
@@ -115,7 +110,7 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable, IA
 	public void readFromNBT(NBTTagCompound tag)
 	{
 		super.readFromNBT(tag);
-		altarPos = !tag.hasKey("x") ? null : new BlockPos(tag.getInteger("x"), tag.getInteger("y"), tag.getInteger("z"));
+		if (tag.hasKey("altarPos")) setAltarPosition(BlockPos.fromLong(tag.getLong("altarPos")));
 		recipe = tag.getString("recipe").isEmpty() ? null : BewitchmentAPI.REGISTRY_DISTILLERY.getValue(new ResourceLocation(tag.getString("recipe")));
 		burn_time = tag.getInteger("burn_time");
 		progress = tag.getInteger("progress");

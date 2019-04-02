@@ -53,9 +53,9 @@ import com.bewitchment.common.ritual.RitualSolarGlory;
 import com.bewitchment.common.world.gen.WorldGenBeehive;
 import com.bewitchment.common.world.gen.WorldGenCoquina;
 import com.bewitchment.common.world.gen.WorldGenOres;
-import com.bewitchment.registry.IOreDictionaryContainer;
 import com.bewitchment.registry.ModObjects;
 import com.bewitchment.registry.ModParticles;
+import com.bewitchment.registry.util.IOreDictionaryContainer;
 import com.google.common.collect.Sets;
 
 import net.minecraft.block.Block;
@@ -459,6 +459,21 @@ public class CommonProxy
 		BewitchmentAPI.registerLoomRecipe(new LoomRecipe(Bewitchment.MOD_ID, "witches_stitching",
 				Arrays.asList(Ingredient.fromStacks(new ItemStack(Items.STRING)), Ingredient.fromStacks(new ItemStack(Items.STRING)), Ingredient.fromStacks(new ItemStack(ModObjects.oak_spirit)), Ingredient.fromStacks(new ItemStack(ModObjects.oak_spirit))),
 				new ItemStack(ModObjects.witches_stitching, 4)));
+		BewitchmentAPI.registerLoomRecipe(new LoomRecipe(Bewitchment.MOD_ID, "diabolical_vein",
+				Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.soul_string)), Ingredient.fromStacks(new ItemStack(ModObjects.demonic_heart)), Ingredient.fromStacks(new ItemStack(ModObjects.philter_of_dishonesty)), Ingredient.fromStacks(new ItemStack(ModObjects.stone_ichor))),
+				new ItemStack(ModObjects.diabolical_vein, 4)));
+		BewitchmentAPI.registerLoomRecipe(new LoomRecipe(Bewitchment.MOD_ID, "pure_filament",
+				Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.witches_stitching)), Ingredient.fromStacks(new ItemStack(ModObjects.witches_stitching)), Ingredient.fromStacks(new ItemStack(ModObjects.cleansing_balm)), Ingredient.fromStacks(new ItemStack(ModObjects.cleansing_balm))),
+				new ItemStack(ModObjects.pure_filament, 4)));
+		BewitchmentAPI.registerLoomRecipe(new LoomRecipe(Bewitchment.MOD_ID, "soul_string",
+				Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.witches_stitching)), Ingredient.fromStacks(new ItemStack(ModObjects.witches_stitching)), Ingredient.fromStacks(new ItemStack(ModObjects.undying_salve)), Ingredient.fromStacks(new ItemStack(ModObjects.ectoplasm))),
+				new ItemStack(ModObjects.soul_string, 2)));
+		BewitchmentAPI.registerLoomRecipe(new LoomRecipe(Bewitchment.MOD_ID, "string",
+				Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.kenaf)), Ingredient.fromStacks(new ItemStack(ModObjects.kenaf)), Ingredient.fromStacks(new ItemStack(ModObjects.kenaf)), Ingredient.fromStacks(new ItemStack(ModObjects.kenaf))),
+				new ItemStack(Items.STRING, 12)));
+		BewitchmentAPI.registerLoomRecipe(new LoomRecipe(Bewitchment.MOD_ID, "sanguine_fabric",
+				Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.diabolical_vein)), Ingredient.fromStacks(new ItemStack(ModObjects.diabolical_vein)), Ingredient.fromStacks(new ItemStack(ModObjects.diabolical_vein)), Ingredient.fromStacks(new ItemStack(ModObjects.diabolical_vein))),
+				new ItemStack(ModObjects.sanguine_fabric, 4)));
 		
 		// Oven
 		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MOD_ID, "sapling_0",
@@ -618,6 +633,8 @@ public class CommonProxy
 		ModObjects.ARMOR_COLD_IRON.setRepairItem(new ItemStack(ModObjects.ingot_cold_iron));
 		ModObjects.ARMOR_SILVER.setRepairItem(new ItemStack(ModObjects.ingot_silver));
 		ModObjects.TOOL_RITUAL.setRepairItem(new ItemStack(ModObjects.ingot_silver));
+		ModObjects.ARMOR_BEWITCHED_LEATHER.setRepairItem(new ItemStack(ModObjects.witches_stitching));
+		ModObjects.ARMOR_VAMPIRE.setRepairItem(new ItemStack(ModObjects.sanguine_fabric));
 	}
 	
 	private void registerWorldGenerators()

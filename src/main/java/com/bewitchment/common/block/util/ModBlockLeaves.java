@@ -7,7 +7,7 @@ import java.util.Random;
 import javax.annotation.Nullable;
 
 import com.bewitchment.Bewitchment;
-import com.bewitchment.registry.IOreDictionaryContainer;
+import com.bewitchment.registry.util.IOreDictionaryContainer;
 
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks.EnumType;

@@ -119,7 +119,7 @@ public abstract class ModBlockContainer extends BlockContainer
 	@Override
 	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
     {
-		if (world.getTileEntity(pos) instanceof IAltarStorage) refreshAltarPos(world, pos);
+		refreshAltarPos(world, pos);
     }
 	
 	public void refreshAltarPos(World world, BlockPos pos)

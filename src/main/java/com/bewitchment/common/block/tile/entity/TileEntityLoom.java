@@ -46,7 +46,6 @@ public class TileEntityLoom extends ModTileEntity implements ITickable, IAltarSt
 	{
 		if (!world.isRemote)
 		{
-//			System.out.println(altarPos);
 			if (recipe == null) progress = 0;
 			else if (recipe.canOutputFit(inventory_down))
 			{
@@ -75,12 +74,7 @@ public class TileEntityLoom extends ModTileEntity implements ITickable, IAltarSt
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound tag)
 	{
-		if (altarPos != null)
-		{
-			tag.setInteger("x", altarPos.getX());
-			tag.setInteger("y", altarPos.getY());
-			tag.setInteger("z", altarPos.getZ());
-		}
+		if (altarPos != null) tag.setLong("altarPos", altarPos.toLong());
 		tag.setString("recipe", recipe == null ? "" : recipe.getRegistryName().toString());
 		tag.setInteger("progress", progress);
 		return super.writeToNBT(tag);
@@ -90,7 +84,7 @@ public class TileEntityLoom extends ModTileEntity implements ITickable, IAltarSt
 	public void readFromNBT(NBTTagCompound tag)
 	{
 		super.readFromNBT(tag);
-		altarPos = !tag.hasKey("x") ? null : new BlockPos(tag.getInteger("x"), tag.getInteger("y"), tag.getInteger("z"));
+		if (tag.hasKey("altarPos")) setAltarPosition(BlockPos.fromLong(tag.getLong("altarPos")));
 		recipe = tag.getString("recipe").isEmpty() ? null : BewitchmentAPI.REGISTRY_LOOM.getValue(new ResourceLocation(tag.getString("recipe")));
 		progress = tag.getInteger("progress");
 	}
