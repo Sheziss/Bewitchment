@@ -1,6 +1,8 @@
 package com.bewitchment.common.block.util;
 
 import com.bewitchment.Bewitchment;
+import com.bewitchment.common.block.BlockWitchesAltar;
+import com.bewitchment.common.block.tile.entity.util.IAltarStorage;
 import com.bewitchment.common.block.tile.entity.util.ModTileEntity;
 
 import net.minecraft.block.BlockContainer;
@@ -8,8 +10,10 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
@@ -110,5 +114,16 @@ public abstract class ModBlockContainer extends BlockContainer
 			for (IItemHandler inventory : tile.getInventories()) for (int i = 0; i < inventory.getSlots(); i++) InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), inventory.getStackInSlot(i));
 		}
 		super.breakBlock(world, pos, state);
+	}
+	
+	@Override
+	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+    {
+		if (world.getTileEntity(pos) instanceof IAltarStorage) refreshAltarPos(world, pos);
+    }
+	
+	public void refreshAltarPos(World world, BlockPos pos)
+	{
+		if (world.getTileEntity(pos) instanceof IAltarStorage) ((IAltarStorage) world.getTileEntity(pos)).setAltarPosition(BlockWitchesAltar.getNearestAltar(world, pos));
 	}
 }

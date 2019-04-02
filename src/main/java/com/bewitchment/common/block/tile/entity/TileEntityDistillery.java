@@ -3,7 +3,7 @@ package com.bewitchment.common.block.tile.entity;
 import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.api.capability.magicpower.MagicPower;
 import com.bewitchment.api.registry.DistilleryRecipe;
-import com.bewitchment.common.block.BlockWitchesAltar;
+import com.bewitchment.common.block.tile.entity.util.IAltarStorage;
 import com.bewitchment.common.block.tile.entity.util.ModTileEntity;
 
 import net.minecraft.init.Items;
@@ -17,7 +17,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class TileEntityDistillery extends ModTileEntity implements ITickable
+public class TileEntityDistillery extends ModTileEntity implements ITickable, IAltarStorage
 {
 	public int burn_time, progress, recipe_time;
 	
@@ -55,8 +55,6 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable
 	{
 		if (!world.isRemote)
 		{
-			if (world.getTotalWorldTime() % 40 == 0 && altarPos != null && !(world.getTileEntity(altarPos) instanceof TileEntityWitchesAltar)) altarPos = null;
-			if (world.getTotalWorldTime() % 200 == 0 && altarPos == null) altarPos = BlockWitchesAltar.getNearestAltar(world, getPos());
 			if (burn_time > 0) burn_time--;
 			else if (progress > 0)
 			{
@@ -127,5 +125,17 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable
 	public ItemStackHandler[] getInventories()
 	{
 		return new ItemStackHandler[] {inventory_up, inventory_down, inventory_side};
+	}
+	
+	@Override
+	public BlockPos getAltarPosition()
+	{
+		return altarPos;
+	}
+	
+	@Override
+	public void setAltarPosition(BlockPos pos)
+	{
+		altarPos = pos;
 	}
 }

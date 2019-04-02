@@ -3,7 +3,7 @@ package com.bewitchment.common.block.tile.entity;
 import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.api.capability.magicpower.MagicPower;
 import com.bewitchment.api.registry.LoomRecipe;
-import com.bewitchment.common.block.BlockWitchesAltar;
+import com.bewitchment.common.block.tile.entity.util.IAltarStorage;
 import com.bewitchment.common.block.tile.entity.util.ModTileEntity;
 
 import net.minecraft.item.ItemStack;
@@ -16,7 +16,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class TileEntityLoom extends ModTileEntity implements ITickable
+public class TileEntityLoom extends ModTileEntity implements ITickable, IAltarStorage
 {
 	public int progress;
 	
@@ -46,8 +46,7 @@ public class TileEntityLoom extends ModTileEntity implements ITickable
 	{
 		if (!world.isRemote)
 		{
-			if (world.getTotalWorldTime() % 40 == 0 && altarPos != null && !(world.getTileEntity(altarPos) instanceof TileEntityWitchesAltar)) altarPos = null;
-			if (world.getTotalWorldTime() % 200 == 0 && altarPos == null) altarPos = BlockWitchesAltar.getNearestAltar(world, getPos());
+//			System.out.println(altarPos);
 			if (recipe == null) progress = 0;
 			else if (recipe.canOutputFit(inventory_down))
 			{
@@ -100,5 +99,17 @@ public class TileEntityLoom extends ModTileEntity implements ITickable
 	public ItemStackHandler[] getInventories()
 	{
 		return new ItemStackHandler[] {inventory_up, inventory_down};
+	}
+	
+	@Override
+	public BlockPos getAltarPosition()
+	{
+		return altarPos;
+	}
+	
+	@Override
+	public void setAltarPosition(BlockPos pos)
+	{
+		altarPos = pos;
 	}
 }

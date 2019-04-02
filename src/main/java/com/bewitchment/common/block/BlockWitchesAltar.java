@@ -75,7 +75,7 @@ public class BlockWitchesAltar extends ModBlockContainer
 	@Override
 	public boolean canPlaceBlockAt(World world, BlockPos pos)
 	{
-		for (BlockPos pos0 : new BlockPos[] { pos.north(), pos.south(), pos.east(), pos.west(), pos.west().north(), pos.west().south(), pos.east().north(), pos.east().south()})
+		for (BlockPos pos0 : new BlockPos[] {pos.north(), pos.south(), pos.east(), pos.west(), pos.west().north(), pos.west().south(), pos.east().north(), pos.east().south()})
 		{
 			IBlockState state = world.getBlockState(pos0);
 			if (state.getBlock() instanceof BlockWitchesAltar && state.getValue(TYPE) != AltarType.UNFORMED) return false;
@@ -116,60 +116,49 @@ public class BlockWitchesAltar extends ModBlockContainer
 			Item item = stack.getItem();
 			if (face == EnumFacing.UP)
 			{
-				if (stack.getItem() == Item.getItemFromBlock(Blocks.CARPET) && !player.isSneaking())
+				if (item == Item.getItemFromBlock(Blocks.CARPET) && !player.isSneaking())
 				{
 					int color = stack.getMetadata();
 					if (state.getValue(TYPE) == AltarType.UNFORMED && !tryFormAltar(world, pos, color)) return false;
-					if (world.getBlockState(pos).getBlock() != getAltarWithColor(color))
+					Block altar = getAltarWithColor(color);
+					refreshAltarContainers(world, pos);
+					if (world.getBlockState(pos).getBlock() != altar)
 					{
 						TileEntityWitchesAltar tile = (TileEntityWitchesAltar) world.getTileEntity(getAltarPosition(world, pos));
-						int amount = 0, maxAmount = 0;
+						for (BlockPos pos0 : getAltarPositions(world, pos)) world.setBlockState(pos0, altar.getDefaultState().withProperty(TYPE, world.getBlockState(pos0).getValue(TYPE)));
 						if (tile != null)
 						{
+							int amount = 0, maxAmount = 0;
 							amount = tile.magic_power.getAmount();
 							maxAmount = tile.magic_power.getMaxAmount();
-						}
-						for (BlockPos pos0 : getAltarPositions(world, pos)) world.setBlockState(pos0, getAltarWithColor(color).getDefaultState().withProperty(TYPE, world.getBlockState(pos0).getValue(TYPE)));
-						tile = (TileEntityWitchesAltar) world.getTileEntity(getAltarPosition(world, pos));
-						if (tile != null)
-						{
+							tile = (TileEntityWitchesAltar) world.getTileEntity(getAltarPosition(world, pos));
 							tile.magic_power.setAmount(amount);
 							tile.magic_power.setMaxAmount(maxAmount);
 						}
 						if (!player.isCreative()) stack.shrink(1);
 					}
-					return true;
 				}
-				if (world.getBlockState(pos.up()).getBlock().isReplaceable(world, pos.up()) && (TileEntityWitchesAltar.SWORD_MULTIPLIER_VALUES.containsKey(item) || TileEntityWitchesAltar.SWORD_RADIUS_VALUES.containsKey(item) || item == ModObjects.pentacle || item == Items.BUCKET || item == Items.GOLDEN_APPLE || item == ModObjects.demonic_heart || item == ModObjects.heart || item == Items.GOLDEN_CARROT || item == ModObjects.glass_jar || item == Items.NETHER_STAR))
+				else if (world.getBlockState(pos.up()).getBlock().isReplaceable(world, pos.up()) && (TileEntityWitchesAltar.SWORD_MULTIPLIER_VALUES.containsKey(item) || TileEntityWitchesAltar.SWORD_RADIUS_VALUES.containsKey(item) || item == ModObjects.pentacle || item == Items.BUCKET || item == Items.GOLDEN_APPLE || item == ModObjects.demonic_heart || item == ModObjects.heart || item == Items.GOLDEN_CARROT || item == ModObjects.glass_jar || item == Items.NETHER_STAR))
 				{
 					world.setBlockState(pos.up(), ModObjects.placed_item.getDefaultState().withProperty(BlockHorizontal.FACING, EnumFacing.fromAngle(player.rotationYaw)));
 					((TileEntityPlacedItem) world.getTileEntity(pos.up())).inventory.setStackInSlot(0, stack.splitStack(1));
-					return true;
 				}
 			}
 			if (hand == EnumHand.MAIN_HAND && stack.isEmpty() && world.getBlockState(pos).getValue(TYPE) != AltarType.UNFORMED)
 			{
 				TileEntityWitchesAltar tile = (TileEntityWitchesAltar) world.getTileEntity(getAltarPosition(world, pos));
-				if (tile != null)
-				{
-					MagicPower cap = tile.getCapability(MagicPower.CAPABILITY, null);
-					player.sendStatusMessage(new TextComponentString(cap.getAmount() + "/" + cap.getMaxAmount() + " (x" + tile.multiplier + ")"), true);
-				}
-				return true;
+				MagicPower cap = tile.getCapability(MagicPower.CAPABILITY, null);
+				player.sendStatusMessage(new TextComponentString(cap.getAmount() + "/" + cap.getMaxAmount() + " (x" + tile.multiplier + ")"), true);
 			}
+			return true;
 		}
 		return false;
 	}
 	
 	@Override
-	public void onBlockHarvested(World world, BlockPos pos, IBlockState state, EntityPlayer player)
-    {
-		super.onBlockHarvested(world, pos, state, player);
-    }
-	
-	@Override
 	public void breakBlock(World world, BlockPos pos, IBlockState state)
 	{
+		if (state.getValue(TYPE) == AltarType.TILE) refreshAltarContainers(world, pos);
 		if (getAltarPositions(world, pos).size() < 6) for (BlockPos pos0 : getAltarPositions(world, pos)) world.setBlockState(pos0, ModObjects.witches_altar_unformed.getDefaultState());
 		super.breakBlock(world, pos, state);
 	}
@@ -222,12 +211,22 @@ public class BlockWitchesAltar extends ModBlockContainer
 	
 	public static BlockPos getNearestAltar(World world, BlockPos pos)
 	{
-		for (BlockPos pos0 : BlockPos.MutableBlockPos.getAllInBox(pos.add(-8, -8, -8), pos.add(8, 8, 8)))
+		if (pos != null)
 		{
-			IBlockState state = world.getBlockState(getAltarPosition(world, pos0));
-			if (state.getBlock() instanceof BlockWitchesAltar && state.getValue(TYPE) == AltarType.TILE) return getAltarPosition(world, pos0);
+			for (BlockPos pos0 : BlockPos.getAllInBoxMutable(pos.add(-8, -8, -8), pos.add(8, 8, 8)))
+			{
+				IBlockState state = world.getBlockState(getAltarPosition(world, pos0));
+				if (state.getBlock() instanceof BlockWitchesAltar && state.getValue(TYPE) == AltarType.TILE) return getAltarPosition(world, pos0);
+			}
 		}
 		return null;
+	}
+	private void refreshAltarContainers(World world, BlockPos pos)
+	{
+		for (BlockPos pos0 : BlockPos.getAllInBoxMutable(pos.add(-8, -8, -8), pos.add(8, 8, 8)))
+		{
+			if (world.getBlockState(pos0).getBlock() instanceof ModBlockContainer) ((ModBlockContainer) world.getBlockState(pos0).getBlock()).refreshAltarPos(world, pos0);;
+		}
 	}
 	
 	private Block getAltarWithColor(int color)
