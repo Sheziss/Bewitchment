@@ -21,6 +21,7 @@ import com.bewitchment.common.block.BlockOven;
 import com.bewitchment.common.block.BlockPlacedItem;
 import com.bewitchment.common.block.BlockPurifyingEarth;
 import com.bewitchment.common.block.BlockSaltBarrier;
+import com.bewitchment.common.block.BlockTarotTable;
 import com.bewitchment.common.block.BlockWitchesAltar;
 import com.bewitchment.common.block.BlockWitchesLight;
 import com.bewitchment.common.block.crop.BlockCropBelladonna;
@@ -30,12 +31,14 @@ import com.bewitchment.common.block.crop.BlockCropMint;
 import com.bewitchment.common.block.crop.BlockCropSilphium;
 import com.bewitchment.common.block.crop.BlockCropThistle;
 import com.bewitchment.common.block.tile.entity.TileEntityApiary;
+import com.bewitchment.common.block.tile.entity.TileEntityCrystalBall;
 import com.bewitchment.common.block.tile.entity.TileEntityDistillery;
 import com.bewitchment.common.block.tile.entity.TileEntityGemBowl;
 import com.bewitchment.common.block.tile.entity.TileEntityGlyph;
 import com.bewitchment.common.block.tile.entity.TileEntityLoom;
 import com.bewitchment.common.block.tile.entity.TileEntityOven;
 import com.bewitchment.common.block.tile.entity.TileEntityPlacedItem;
+import com.bewitchment.common.block.tile.entity.TileEntityTarotTable;
 import com.bewitchment.common.block.tile.entity.TileEntityWitchesAltar;
 import com.bewitchment.common.block.util.ModBlock;
 import com.bewitchment.common.block.util.ModBlockButton;
@@ -56,6 +59,7 @@ import com.bewitchment.common.item.ItemElderBroom;
 import com.bewitchment.common.item.ItemJuniperBroom;
 import com.bewitchment.common.item.ItemLantern;
 import com.bewitchment.common.item.ItemSalt;
+import com.bewitchment.common.item.ItemTarotsDeck;
 import com.bewitchment.common.item.ItemUndyingSalve;
 import com.bewitchment.common.item.ItemYewBroom;
 import com.bewitchment.common.item.equipment.ItemColdIronArmor;
@@ -198,7 +202,8 @@ public class ModObjects
 	public static final Block loom = createTileEntity(new BlockLoom(), TileEntityLoom.class);
 	public static final Block oven = createTileEntity(new BlockOven(), TileEntityOven.class);
 	public static final Block gem_bowl = createTileEntity(new BlockGemBowl(), TileEntityGemBowl.class);
-	public static final Block crystal_ball = new BlockCrystalBall();
+	public static final Block crystal_ball = createTileEntity(new BlockCrystalBall(), TileEntityCrystalBall.class);
+	public static final Block tarot_table = createTileEntity(new BlockTarotTable(), TileEntityTarotTable.class);
 	
 	// Material Blocks
 	public static final Block block_cold_iron = new ModBlock("block_cold_iron", Material.IRON, SoundType.METAL, 5, 30, "pickaxe", 1, "blockColdIron");
@@ -363,6 +368,7 @@ public class ModObjects
 	
 	public static final ToolMaterial TOOL_RITUAL = EnumHelper.addToolMaterial("ritual", 2, 300, 2, 1.5f, 30);
 	
+	// Baubles
 	public static final Item girdle_of_the_dryad = new ItemGirdleOfTheDryad();
 	public static final Item hellish_bauble = new ItemHellishBauble();
 	public static final Item horseshoe = new ItemHorseshoe();
@@ -387,6 +393,8 @@ public class ModObjects
 	public static final Item leggings_silver = new ItemSilverArmor("leggings_silver", ARMOR_SILVER, EntityEquipmentSlot.LEGS);
 	public static final Item boots_silver = new ItemSilverArmor("boots_silver", ARMOR_SILVER, EntityEquipmentSlot.FEET);
 	
+//	public static final Item witcharmor
+	
 	// Tools
 	public static final Item sword_cold_iron = new ItemColdIronSword(TOOL_COLD_IRON);
 	public static final Item pickaxe_cold_iron = new ItemColdIronPickaxe(TOOL_COLD_IRON);
@@ -407,6 +415,8 @@ public class ModObjects
 	public static final Item chalk_golden = new ItemChalk("chalk_golden");
 	public static final Item chalk_nether = new ItemChalk("chalk_nether");
 	public static final Item chalk_ender = new ItemChalk("chalk_ender");
+	
+	public static final Item tarots_deck = new ItemTarotsDeck();
 	
 	// Brooms
 	public static final Item broom = new ModItem("broom").setMaxStackSize(1);

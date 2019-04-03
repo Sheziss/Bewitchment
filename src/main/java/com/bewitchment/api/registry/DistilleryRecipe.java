@@ -66,10 +66,10 @@ public class DistilleryRecipe extends IForgeRegistryEntry.Impl<DistilleryRecipe>
 		return Bewitchment.proxy.areISListsEqual(getInput(), checklist);
 	}
 	
-	public boolean canOutputFit(ItemStackHandler handler)
+	public boolean isValid(ItemStackHandler input, ItemStackHandler output)
 	{
-		for (ItemStack stack : getOutput()) if (ModTileEntity.getFirstValidSlot(handler, stack) < 0) return false;
-		return true;
+		for (ItemStack stack : getOutput()) if (ModTileEntity.getFirstValidSlot(output, stack) < 0) return false;
+		return ModTileEntity.isEmpty(input);
 	}
 	
 	public void giveOutput(ItemStackHandler input, ItemStackHandler output)

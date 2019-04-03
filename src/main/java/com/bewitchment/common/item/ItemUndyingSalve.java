@@ -43,7 +43,9 @@ public class ItemUndyingSalve extends ModItem
 		entity.addPotionEffect(new PotionEffect(MobEffects.POISON, 1000, 1));
 		entity.addPotionEffect(new PotionEffect(MobEffects.WITHER, 1000, 1));
 		entity.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 1000, 1));
-		return new ItemStack(ModObjects.empty_jar);
+		if (entity instanceof EntityPlayer) ((EntityPlayer) entity).addItemStackToInventory(new ItemStack(ModObjects.empty_jar));
+		stack.shrink(1);
+		return stack;
 	}
 	
 	@Override

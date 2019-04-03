@@ -40,7 +40,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 public class Bewitchment
 {
 	public static final String MOD_ID = "bewitchment", MOD_NAME = "Bewitchment", MOD_VERSION = "0.20";
-	public static final Logger logger = LogManager.getLogger(MOD_NAME);
+	public static final Logger LOGGER = LogManager.getLogger(MOD_NAME);
 	
 	@Instance(Bewitchment.MOD_ID)
 	public static Bewitchment instance;
@@ -52,21 +52,21 @@ public class Bewitchment
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		proxy.preInit(event);
-		logger.info("Remember when I told you how my");
-		logger.info("Kin is different in some ways?");
+		LOGGER.info("Remember when I told you how my");
+		LOGGER.info("Kin is different in some ways?");
 	}
 	
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
 		proxy.init(event);
-		logger.info("It's a fact, she is exactly that!");
-		logger.info("A harbinger of death from the world of witchcraft,");
-		logger.info("And she's feeding them cakes and her ale to this innocent boy,");
-		logger.info("And her magic brings dismay!");
+		LOGGER.info("It's a fact, she is exactly that!");
+		LOGGER.info("A harbinger of death from the world of witchcraft,");
+		LOGGER.info("And she's feeding them cakes and her ale to this innocent boy,");
+		LOGGER.info("And her magic brings dismay!");
 
-		logger.info("I hear her in the wind, the bane of our town");
-		logger.info("Come with me, father, I'm to expose a heathen");
+		LOGGER.info("I hear her in the wind, the bane of our town");
+		LOGGER.info("Come with me, father, I'm to expose a heathen");
 	}
 	
 	@EventHandler

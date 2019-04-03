@@ -61,10 +61,10 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable, IA
 				progress -= 2;
 				if (progress < 0) progress = 0;
 			}
-			if (recipe == null) progress = 0;
-			else if (recipe.canOutputFit(inventory_down))
+			if (recipe == null || !recipe.isValid(inventory_up, inventory_down)) progress = 0;
+			else
 			{
-				if (burn_time == 0 && !inventory_side.getStackInSlot(0).isEmpty())
+				if (burn_time == 0 && !inventory_side.getStackInSlot(0).isEmpty() && !isEmpty(inventory_up))
 				{
 					burn_time = 1200;
 					recipe_time = recipe.getTime();

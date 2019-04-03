@@ -12,6 +12,7 @@ tile.bewitchment.loom.name=Loom
 tile.bewitchment.oven.name=Oven
 tile.bewitchment.gem_bowl.name=Gem Bowl
 tile.bewitchment.crystal_ball.name=Crystal Ball
+tile.bewitchment.tarot_table.name=Tarot Table
 
 tile.bewitchment.block_cold_iron.name=Block of Cold Iron
 tile.bewitchment.block_silver.name=Block of Silver
@@ -202,6 +203,8 @@ item.bewitchment.chalk_normal.name=Ritual Chalk
 item.bewitchment.chalk_golden.name=Focal Chalk
 item.bewitchment.chalk_nether.name=Fiery Chalk
 item.bewitchment.chalk_ender.name=Phasing Chalk
+
+item.bewitchment.tarots_deck.name=Tarots Deck
 
 item.bewitchment.broom.name=Broom
 item.bewitchment.broom_cypress.name=Cypress Broom
@@ -425,6 +428,9 @@ tooltip.armor_description_silver=Protects against undead
 tooltip.tool_description_silver=Deals extra damage to undead
 
 tooltip.bewitchment.athame=This ceremonial dagger also allows you to obtain special loot from mobs
+
+tooltip.bewitchment.tarots_deck=They are receptive to %s's future
+tooltip.bewitchment.tarots_deck.error=The cards predictions make no sense
 
 tooltip.bewitchment.seed_aconitum=Seed from a poisonous plant
 tooltip.bewitchment.seed_asphodel=Seed from a plant of the dead

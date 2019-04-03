@@ -55,10 +55,10 @@ public class TileEntityOven extends ModTileEntity implements ITickable
 				progress -= 2;
 				if (progress < 0) progress = 0;
 			}
-			if (recipe == null) progress = 0;
-			else if (recipe.canOutputFit(inventory_down))
+			if (recipe == null || !recipe.isValid(inventory_up, inventory_down)) progress = 0;
+			else
 			{
-				if (burn_time == -1 && !inventory_up.getStackInSlot(0).isEmpty())
+				if (burn_time == -1 && !inventory_up.getStackInSlot(0).isEmpty() && !inventory_up.getStackInSlot(2).isEmpty())
 				{
 					burn_time = TileEntityFurnace.getItemBurnTime(inventory_up.getStackInSlot(0));
 					fuel_burn_time = burn_time;

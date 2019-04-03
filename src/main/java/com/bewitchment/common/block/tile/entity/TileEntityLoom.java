@@ -46,8 +46,8 @@ public class TileEntityLoom extends ModTileEntity implements ITickable, IAltarSt
 	{
 		if (!world.isRemote)
 		{
-			if (recipe == null) progress = 0;
-			else if (recipe.canOutputFit(inventory_down))
+			if (recipe == null || !recipe.isValid(inventory_up, inventory_down)) progress = 0;
+			else
 			{
 				if (MagicPower.attemptDrain(world, world.getClosestPlayer(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 5, false), altarPos, 6)) progress++;
 				if (progress >= 200)

@@ -60,18 +60,18 @@ public class OvenRecipe extends IForgeRegistryEntry.Impl<OvenRecipe>
 		return Bewitchment.proxy.areStacksEqual(input, getInput());
 	}
 	
-	public boolean canOutputFit(ItemStackHandler handler)
+	public boolean isValid(ItemStackHandler input, ItemStackHandler output)
 	{
-		boolean outputValid = handler.getStackInSlot(0).isEmpty() || (Bewitchment.proxy.areStacksEqual(handler.getStackInSlot(0), getOutput()) && handler.getStackInSlot(0).getCount() < handler.getStackInSlot(0).getMaxStackSize());
-		boolean byproductValid = handler.getStackInSlot(1).isEmpty() || (Bewitchment.proxy.areStacksEqual(handler.getStackInSlot(1), getByproduct()) && handler.getStackInSlot(1).getCount() < handler.getStackInSlot(1).getMaxStackSize() - (getByproduct().getCount() - 1));
-		return outputValid && byproductValid;
+		boolean outputValid = output.getStackInSlot(0).isEmpty() || (Bewitchment.proxy.areStacksEqual(output.getStackInSlot(0), getOutput()) && output.getStackInSlot(0).getCount() < output.getStackInSlot(0).getMaxStackSize());
+		boolean byproductValid = output.getStackInSlot(1).isEmpty() || (Bewitchment.proxy.areStacksEqual(output.getStackInSlot(1), getByproduct()) && output.getStackInSlot(1).getCount() < output.getStackInSlot(1).getMaxStackSize() - (getByproduct().getCount() - 1));
+		return !input.getStackInSlot(2).isEmpty() && outputValid && byproductValid;
 	}
 	
 	public void giveOutput(Random rand, ItemStackHandler input, ItemStackHandler output)
 	{
 		input.extractItem(2, 1, false);
 		output.insertItem(0, getOutput().copy(), false);
-		if (rand.nextFloat() < getByproductChance() && !input.getStackInSlot(1).isEmpty())
+		if (!getByproduct().isEmpty() && rand.nextFloat() < getByproductChance() && !input.getStackInSlot(1).isEmpty())
 		{
 			input.extractItem(1, 1, false);
 			output.insertItem(1, getByproduct().copy(), false);

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bewitchment.Bewitchment;
+import com.bewitchment.common.block.tile.entity.util.ModTileEntity;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -46,9 +47,9 @@ public class LoomRecipe extends IForgeRegistryEntry.Impl<LoomRecipe>
 		return Bewitchment.proxy.areISListsEqual(getInput(), checklist);
 	}
 	
-	public boolean canOutputFit(ItemStackHandler handler)
+	public boolean isValid(ItemStackHandler input, ItemStackHandler output)
 	{
-		return handler.getStackInSlot(0).isEmpty() || (Bewitchment.proxy.areStacksEqual(handler.getStackInSlot(0), getOutput()) && handler.getStackInSlot(0).getCount() < handler.getStackInSlot(0).getMaxStackSize());
+		return !ModTileEntity.isEmpty(input) && (output.getStackInSlot(0).isEmpty() || (Bewitchment.proxy.areStacksEqual(output.getStackInSlot(0), getOutput()) && output.getStackInSlot(0).getCount() < output.getStackInSlot(0).getMaxStackSize()));
 	}
 	
 	public void giveOutput(ItemStackHandler input, ItemStackHandler output)
