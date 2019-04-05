@@ -136,6 +136,7 @@ public class BlockWitchesAltar extends ModBlockContainer
 							tile.magic_power.setMaxAmount(maxAmount);
 						}
 						if (!player.isCreative()) stack.shrink(1);
+						return true;
 					}
 				}
 				else if (world.getBlockState(pos.up()).getBlock().isReplaceable(world, pos.up()) && (TileEntityWitchesAltar.SWORD_MULTIPLIER_VALUES.containsKey(item) || TileEntityWitchesAltar.SWORD_RADIUS_VALUES.containsKey(item) || item == ModObjects.pentacle || item == Items.BUCKET || item == Items.GOLDEN_APPLE || item == ModObjects.demonic_heart || item == ModObjects.heart || item == Items.GOLDEN_CARROT || item == ModObjects.glass_jar || item == Items.NETHER_STAR))
@@ -150,9 +151,8 @@ public class BlockWitchesAltar extends ModBlockContainer
 				MagicPower cap = tile.getCapability(MagicPower.CAPABILITY, null);
 				player.sendStatusMessage(new TextComponentString(cap.getAmount() + "/" + cap.getMaxAmount() + " (x" + tile.multiplier + ")"), true);
 			}
-			return true;
 		}
-		return false;
+		return super.onBlockActivated(world, pos, state, player, hand, face, hitX, hitY, hitZ);
 	}
 	
 	@Override

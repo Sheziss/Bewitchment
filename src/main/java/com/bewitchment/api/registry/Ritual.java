@@ -1,13 +1,22 @@
 package com.bewitchment.api.registry;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.bewitchment.Bewitchment;
+import com.bewitchment.common.block.BlockGlyph;
 import com.bewitchment.common.block.BlockGlyph.GlyphType;
 import com.bewitchment.common.block.tile.entity.TileEntityGlyph;
+import com.bewitchment.registry.ModObjects;
 
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -15,15 +24,52 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 
 public class Ritual extends IForgeRegistryEntry.Impl<Ritual>
 {
-	private final NonNullList<Ingredient> inputItems;
-	private final ItemStack[] output;
+	public static final int[][] small = {
+			{0,0,1,1,1,0,0},
+			{0,1,0,0,0,1,0},
+			{1,0,0,0,0,0,1},
+			{1,0,0,0,0,0,1},
+			{1,0,0,0,0,0,1},
+			{0,1,0,0,0,1,0},
+			{0,0,1,1,1,0,0}};
+	public static final int[][] medium = {
+			{0,0,0,1,1,1,1,1,0,0,0},
+			{0,0,1,0,0,0,0,0,1,0,0},
+			{0,1,0,0,0,0,0,0,0,1,0},
+			{1,0,0,0,0,0,0,0,0,0,1},
+			{1,0,0,0,0,0,0,0,0,0,1},
+			{1,0,0,0,0,0,0,0,0,0,1},
+			{1,0,0,0,0,0,0,0,0,0,1},
+			{1,0,0,0,0,0,0,0,0,0,1},
+			{0,1,0,0,0,0,0,0,0,1,0},
+			{0,0,1,0,0,0,0,0,1,0,0},
+			{0,0,0,1,1,1,1,1,0,0,0}};
+	public static final int[][] large = {
+			{0,0,0,0,1,1,1,1,1,1,1,0,0,0,0},
+			{0,0,0,1,0,0,0,0,0,0,0,1,0,0,0},
+			{0,0,1,0,0,0,0,0,0,0,0,0,1,0,0},
+			{0,1,0,0,0,0,0,0,0,0,0,0,0,1,0},
+			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+			{0,1,0,0,0,0,0,0,0,0,0,0,0,1,0},
+			{0,0,1,0,0,0,0,0,0,0,0,0,1,0,0},
+			{0,0,0,1,0,0,0,0,0,0,0,1,0,0,0},
+			{0,0,0,0,1,1,1,1,1,1,1,0,0,0,0}};
 	
-	private final EntityEntry[] inputEntities;
+	private final List<Ingredient> inputItems;
+	private final List<ItemStack> output;
+	
+	private final List<EntityEntry> inputEntities;
 	private final GlyphType[] circles = new GlyphType[3];
 	
 	private final int time, startingPower, runningPower;
 	
-	public Ritual(String modid, String name, NonNullList<Ingredient> inputItems, EntityEntry[] inputEntities, ItemStack[] output, int time, int startingPower, int runningPower, GlyphType small, GlyphType medium, GlyphType big)
+	public Ritual(String modid, String name, List<Ingredient> inputItems, List<EntityEntry> inputEntities, List<ItemStack> output, int time, int startingPower, int runningPower, GlyphType small, GlyphType medium, GlyphType big)
 	{
 		this.setRegistryName(new ResourceLocation(modid, name));
 		this.inputItems = inputItems;
@@ -56,7 +102,7 @@ public class Ritual extends IForgeRegistryEntry.Impl<Ritual>
 	/**
 	 * @return the list of Entities to be used as an input.
 	 */
-	public EntityEntry[] getInputEntities()
+	public List<EntityEntry> getInputEntities()
 	{
 		return inputEntities;
 	}
@@ -64,7 +110,7 @@ public class Ritual extends IForgeRegistryEntry.Impl<Ritual>
 	/**
 	 * @return the list of ItemStacks to be used as an input.
 	 */
-	public NonNullList<Ingredient> getInputItems()
+	public List<Ingredient> getInputItems()
 	{
 		return inputItems;
 	}
@@ -74,9 +120,27 @@ public class Ritual extends IForgeRegistryEntry.Impl<Ritual>
 	 * 
 	 * @return the output of the ritual.
 	 */
-	public ItemStack[] getOutput(TileEntityGlyph tile)
+	public List<ItemStack> getOutput(TileEntityGlyph tile)
 	{
-		return output;
+		List<ItemStack> out = new ArrayList<>();
+		for (ItemStack stack : output) out.add(stack);
+		for (int i = 0; i < tile.inventory.getSlots(); i++)
+		{
+			ItemStack stack = tile.inventory.extractItem(i, tile.inventory.getStackInSlot(i).getCount(), false);
+			if (stack.getItem() == ModObjects.athame) stack.damageItem(50, tile.getWorld().getPlayerEntityByUUID(tile.getCaster()));
+			else
+			{
+				for (Ingredient ing : getInputItems())
+				{
+					for (ItemStack stack0 : ing.getMatchingStacks())
+					{
+						if (Bewitchment.proxy.areStacksEqual(stack, stack0)) stack.shrink(stack0.getCount());
+					}
+				}
+			}
+			out.add(stack);
+		}
+		return out;
 	}
 	
 	/**
@@ -181,19 +245,48 @@ public class Ritual extends IForgeRegistryEntry.Impl<Ritual>
 	{
 	}
 	
-	public static NonNullList<Ingredient> ofi(Ingredient... ingredients)
+	public final boolean matches(World world, BlockPos pos, List<ItemStack> ground, List<EntityLivingBase> living)
 	{
-		return NonNullList.from(Ingredient.EMPTY, ingredients);
-	}
-	
-	public static ItemStack[] ofs()
-	{
-//		return ofi(Ingredient.fromStacks(OreDictionary.getOres(oreDictionaryName).toArray(new ItemStack[1]))).toar;
-		return new ItemStack[1];
-	}
-	
-	public static EntityEntry[] ofe(EntityEntry... entries)
-	{
-		return entries;
+		for (int x = 0; x < small.length; x++)
+		{
+			for (int z = 0; z < small.length; z++)
+			{
+				IBlockState state = world.getBlockState(pos.add(x - small.length / 2, 0, z - small.length / 2));
+				if (small[x][z] == 1 && (state.getBlock() != ModObjects.glyph || (state.getValue(BlockGlyph.TYPE) != GlyphType.GOLDEN && (state.getValue(BlockGlyph.TYPE) != getCircles()[0] && getCircles()[0] != GlyphType.ANY)))) return false;
+			}
+		}
+		if (getCircles()[1] != null)
+		{
+			for (int x = 0; x < medium.length; x++)
+			{
+				for (int z = 0; z < medium.length; z++)
+				{
+					IBlockState state = world.getBlockState(pos.add(x - medium.length / 2, 0, z - medium.length / 2));
+					if (medium[x][z] == 1 && (state.getBlock() != ModObjects.glyph || (state.getValue(BlockGlyph.TYPE) != GlyphType.GOLDEN && (state.getValue(BlockGlyph.TYPE) != getCircles()[1] && getCircles()[1] != GlyphType.ANY)))) return false;
+				}
+			}
+		}
+		if (getCircles()[2] != null)
+		{
+			for (int x = 0; x < large.length; x++)
+			{
+				for (int z = 0; z < large.length; z++)
+				{
+					IBlockState state = world.getBlockState(pos.add(x - large.length / 2, 0, z - large.length / 2));
+					if (large[x][z] == 1 && (state.getBlock() != ModObjects.glyph || (state.getValue(BlockGlyph.TYPE) != GlyphType.GOLDEN && (state.getValue(BlockGlyph.TYPE) != getCircles()[2] && getCircles()[2] != GlyphType.ANY)))) return false;
+				}
+			}
+		}
+		if (Bewitchment.proxy.areISListsEqual(getInputItems(), ground))
+		{
+			if (!getInputEntities().isEmpty())
+			{
+				boolean found = false;
+				for (EntityLivingBase entity : living) if (getInputEntities().parallelStream().anyMatch(p -> p.getEntityClass().equals(entity.getClass()))) found = true;
+				return found;
+			}
+			return true;
+		}
+		return false;
 	}
 }

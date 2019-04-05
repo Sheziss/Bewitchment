@@ -19,7 +19,7 @@ public class ModItem extends Item implements IOreDictionaryContainer
 {
 	private final List<String> oreDictionaryNames = new ArrayList<String>();
 	
-	public ModItem()
+	protected ModItem()
 	{
 	}
 	

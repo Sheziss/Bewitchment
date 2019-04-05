@@ -27,7 +27,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockLantern extends BlockCandleBase
 {
-	private static final AxisAlignedBB LANTERN_AABB = new AxisAlignedBB(0.2, 0, 0.2, 0.8, 0.9375, 0.8);
+	private static final AxisAlignedBB BOX = new AxisAlignedBB(0.2, 0, 0.2, 0.8, 0.9375, 0.8);
 	
 	public BlockLantern(String color)
 	{
@@ -37,7 +37,7 @@ public class BlockLantern extends BlockCandleBase
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos)
 	{
-		return LANTERN_AABB;
+		return BOX;
 	}
 	
 	@Override

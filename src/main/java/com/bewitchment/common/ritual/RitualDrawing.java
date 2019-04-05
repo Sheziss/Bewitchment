@@ -1,5 +1,8 @@
 package com.bewitchment.common.ritual;
 
+import java.util.Arrays;
+import java.util.List;
+
 import com.bewitchment.Bewitchment;
 import com.bewitchment.api.registry.Ritual;
 import com.bewitchment.common.block.BlockGlyph;
@@ -9,6 +12,7 @@ import com.bewitchment.registry.ModObjects;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.math.BlockPos;
 
 public class RitualDrawing extends Ritual
@@ -16,9 +20,9 @@ public class RitualDrawing extends Ritual
 	private final int[][] circle;
 	private GlyphType type;
 	
-	public RitualDrawing(String name, int time, int starting_power, int running_power, GlyphType small, GlyphType medium, GlyphType big, int[][] circle)
+	public RitualDrawing(String name, List<Ingredient> inputItems, int time, int starting_power, int running_power, GlyphType small, GlyphType medium, GlyphType big, int[][] circle)
 	{
-		super(Bewitchment.MOD_ID, name, ofi(), ofe(), ofs(), time, starting_power, running_power, small, medium, big);
+		super(Bewitchment.MOD_ID, name, inputItems, Arrays.asList(), Arrays.asList(), time, starting_power, running_power, small, medium, big);
 		this.circle = circle;
 	}
 	
@@ -30,7 +34,7 @@ public class RitualDrawing extends Ritual
 			for (int z = 0; z < circle.length; z++)
 			{
 				BlockPos pos = tile.getPos().add(x - circle.length / 2, 0, z - circle.length / 2);
-				if (!tile.getWorld().isAirBlock(pos) && !tile.getWorld().getBlockState(pos).getBlock().isReplaceable(tile.getWorld(), pos) && tile.getWorld().getBlockState(pos).getBlock() != ModObjects.glyph) return false;
+				if (circle[x][z] == 1 && !tile.getWorld().isAirBlock(pos) && !tile.getWorld().getBlockState(pos).getBlock().isReplaceable(tile.getWorld(), pos) && tile.getWorld().getBlockState(pos).getBlock() != ModObjects.glyph) return false;
 			}
 		}
 		Item item = caster.getHeldItemOffhand().getItem();

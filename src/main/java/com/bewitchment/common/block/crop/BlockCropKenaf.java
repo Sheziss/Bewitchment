@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 
 public class BlockCropKenaf extends ModBlockCrop
 {
-	private static final AxisAlignedBB[] KENAF_AABB = {new AxisAlignedBB(0, 0, 0, 1, 0.125, 1), new AxisAlignedBB(0, 0, 0, 1, 0.375, 1), new AxisAlignedBB(0, 0, 0, 1, 0.625, 1), new AxisAlignedBB(0, 0, 0, 1, 0.75, 1), new AxisAlignedBB(0, 0, 0, 1, 1, 1)};
+	private static final AxisAlignedBB[] BOX = {new AxisAlignedBB(0, 0, 0, 1, 0.125, 1), new AxisAlignedBB(0, 0, 0, 1, 0.375, 1), new AxisAlignedBB(0, 0, 0, 1, 0.625, 1), new AxisAlignedBB(0, 0, 0, 1, 0.75, 1), new AxisAlignedBB(0, 0, 0, 1, 1, 1)};
 	
 	public BlockCropKenaf()
 	{
@@ -28,7 +28,7 @@ public class BlockCropKenaf extends ModBlockCrop
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
-		return KENAF_AABB[state.getValue(AGE)];
+		return BOX[state.getValue(AGE)];
 	}
 	
 	@Override

@@ -59,20 +59,20 @@ public class DistilleryRecipe extends IForgeRegistryEntry.Impl<DistilleryRecipe>
 		return time;
 	}
 	
-	public boolean matches(ItemStackHandler handler)
+	public final boolean matches(ItemStackHandler handler)
 	{
 		List<ItemStack> checklist = new ArrayList<>();
 		for (int i = 0; i < handler.getSlots(); i++) if (!handler.getStackInSlot(i).isEmpty()) checklist.add(handler.extractItem(i, 1, true));
 		return Bewitchment.proxy.areISListsEqual(getInput(), checklist);
 	}
 	
-	public boolean isValid(ItemStackHandler input, ItemStackHandler output)
+	public final boolean isValid(ItemStackHandler input, ItemStackHandler output)
 	{
 		for (ItemStack stack : getOutput()) if (ModTileEntity.getFirstValidSlot(output, stack) < 0) return false;
 		return ModTileEntity.isEmpty(input);
 	}
 	
-	public void giveOutput(ItemStackHandler input, ItemStackHandler output)
+	public final void giveOutput(ItemStackHandler input, ItemStackHandler output)
 	{
 		for (int i = 0; i < input.getSlots(); i++) input.extractItem(i, 1, false);
 		for (ItemStack stack : getOutput()) output.insertItem(ModTileEntity.getFirstValidSlot(output, stack), stack.copy(), false);

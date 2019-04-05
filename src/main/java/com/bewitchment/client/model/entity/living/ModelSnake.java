@@ -130,10 +130,10 @@ public class ModelSnake extends ModelBase
 		EntitySnake snek = (EntitySnake) entity;
 		if (snek.isSitting())
 		{
-			if (snek.animation_timer < COIL_ANIMATION_LENGTH)
+			if (snek.animationTimer < COIL_ANIMATION_LENGTH)
 			{
-				snek.animation_timer++;
-				int timer = snek.animation_timer;
+				snek.animationTimer++;
+				int timer = snek.animationTimer;
 				neck01a.rotateAngleY = neck01a.rotateAngleY + (-0.09110618695f - neck01a.rotateAngleY) * timer / COIL_ANIMATION_LENGTH;
 				neck02.rotateAngleY = neck02.rotateAngleY + (-1.27478848566f - neck02.rotateAngleY) * timer / COIL_ANIMATION_LENGTH;
 				neck02.rotateAngleX = neck02.rotateAngleX + (-0.27314402793f - neck02.rotateAngleX) * timer / COIL_ANIMATION_LENGTH;
@@ -180,7 +180,7 @@ public class ModelSnake extends ModelBase
 			head.rotateAngleZ = 0.174532925f * MathHelper.cos(time - 5);
 			head.rotateAngleX = 0;
 			head.rotateAngleZ = 0;
-			snek.animation_timer = 0;
+			snek.animationTimer = 0;
 		}
 		else
 		{

@@ -83,9 +83,7 @@ public class EntityBlindworm extends ModEntityAnimal
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1);
-		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(10);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(6);
 		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8);
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.55);
 	}

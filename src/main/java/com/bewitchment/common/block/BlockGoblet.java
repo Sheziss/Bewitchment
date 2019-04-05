@@ -32,7 +32,7 @@ public class BlockGoblet extends ModBlock
 {
 	public static final PropertyBool FULL = PropertyBool.create("full");
 	
-	private static final AxisAlignedBB GOBLET_AABB = new AxisAlignedBB(0.375, 0, 0.375, 0.625, 0.375, 0.625);
+	private static final AxisAlignedBB BOX = new AxisAlignedBB(0.375, 0, 0.375, 0.625, 0.375, 0.625);
 	
 	public BlockGoblet()
 	{
@@ -44,7 +44,7 @@ public class BlockGoblet extends ModBlock
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos)
 	{
-		return GOBLET_AABB;
+		return BOX;
 	}
 	
 	@Override

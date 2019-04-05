@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bewitchment.api.capability.magicpower.MagicPower;
-import com.bewitchment.common.block.tile.entity.util.IAltarStorage;
-import com.bewitchment.common.block.tile.entity.util.ModTileEntity;
+import com.bewitchment.common.block.tile.entity.util.TileEntityAltarStorage;
 import com.bewitchment.registry.ModObjects;
 
 import net.minecraft.block.BlockCrops;
@@ -13,7 +12,6 @@ import net.minecraft.block.BlockFlower;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
@@ -21,10 +19,8 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class TileEntityApiary extends ModTileEntity implements ITickable, IAltarStorage
+public class TileEntityApiary extends TileEntityAltarStorage implements ITickable
 {
-	private BlockPos altarPos;
-	
 	public final ItemStackHandler inventory = new ItemStackHandler(18)
 	{
 		@Override
@@ -69,7 +65,7 @@ public class TileEntityApiary extends ModTileEntity implements ITickable, IAltar
 						IBlockState state = world.getBlockState(pos);
 						BlockFlower flower = (BlockFlower) state.getBlock();
 						BlockPos offset = pos.offset(EnumFacing.random(world.rand));
-						if (flower.canPlaceBlockAt(world, offset) && MagicPower.attemptDrain(world, null, altarPos, 30)) world.setBlockState(offset, state);
+						if (flower.canPlaceBlockAt(world, offset) && MagicPower.attemptDrain(world, null, getAltarPosition(), 30)) world.setBlockState(offset, state);
 					}
 				}
 				for (int i = 0; i < inventory.getSlots(); i++)
@@ -77,7 +73,7 @@ public class TileEntityApiary extends ModTileEntity implements ITickable, IAltar
 					if (world.rand.nextInt(100) == 0)
 					{
 						ItemStack oldStack = inventory.getStackInSlot(i), newStack = growItem(i);
-						if (oldStack != newStack && MagicPower.attemptDrain(world, null, altarPos, 30))
+						if (oldStack != newStack && MagicPower.attemptDrain(world, null, getAltarPosition(), 30))
 						{
 							inventory.setStackInSlot(i, newStack);
 						}
@@ -100,35 +96,9 @@ public class TileEntityApiary extends ModTileEntity implements ITickable, IAltar
 	}
 	
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound tag)
-	{
-		if (altarPos != null) tag.setLong("altarPos", altarPos.toLong());
-		return super.writeToNBT(tag);
-	}
-	
-	@Override
-	public void readFromNBT(NBTTagCompound tag)
-	{
-		super.readFromNBT(tag);
-		if (tag.hasKey("altarPos")) setAltarPosition(BlockPos.fromLong(tag.getLong("altarPos")));
-	}
-	
-	@Override
 	public ItemStackHandler[] getInventories()
 	{
 		return new ItemStackHandler[] {inventory};
-	}
-	
-	@Override
-	public BlockPos getAltarPosition()
-	{
-		return altarPos;
-	}
-	
-	@Override
-	public void setAltarPosition(BlockPos pos)
-	{
-		altarPos = pos;
 	}
 	
 	private ItemStack growItem(int i)

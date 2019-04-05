@@ -3,24 +3,20 @@ package com.bewitchment.common.block.tile.entity;
 import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.api.capability.magicpower.MagicPower;
 import com.bewitchment.api.registry.LoomRecipe;
-import com.bewitchment.common.block.tile.entity.util.IAltarStorage;
-import com.bewitchment.common.block.tile.entity.util.ModTileEntity;
+import com.bewitchment.common.block.tile.entity.util.TileEntityAltarStorage;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class TileEntityLoom extends ModTileEntity implements ITickable, IAltarStorage
+public class TileEntityLoom extends TileEntityAltarStorage implements ITickable
 {
 	public int progress;
-	
-	private BlockPos altarPos;
 	
 	private LoomRecipe recipe;
 	
@@ -49,7 +45,7 @@ public class TileEntityLoom extends ModTileEntity implements ITickable, IAltarSt
 			if (recipe == null || !recipe.isValid(inventory_up, inventory_down)) progress = 0;
 			else
 			{
-				if (MagicPower.attemptDrain(world, world.getClosestPlayer(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 5, false), altarPos, 6)) progress++;
+				if (MagicPower.attemptDrain(world, world.getClosestPlayer(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 5, false), getAltarPosition(), 6)) progress++;
 				if (progress >= 200)
 				{
 					progress = 0;
@@ -74,7 +70,6 @@ public class TileEntityLoom extends ModTileEntity implements ITickable, IAltarSt
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound tag)
 	{
-		if (altarPos != null) tag.setLong("altarPos", altarPos.toLong());
 		tag.setString("recipe", recipe == null ? "" : recipe.getRegistryName().toString());
 		tag.setInteger("progress", progress);
 		return super.writeToNBT(tag);
@@ -84,7 +79,6 @@ public class TileEntityLoom extends ModTileEntity implements ITickable, IAltarSt
 	public void readFromNBT(NBTTagCompound tag)
 	{
 		super.readFromNBT(tag);
-		if (tag.hasKey("altarPos")) setAltarPosition(BlockPos.fromLong(tag.getLong("altarPos")));
 		recipe = tag.getString("recipe").isEmpty() ? null : BewitchmentAPI.REGISTRY_LOOM.getValue(new ResourceLocation(tag.getString("recipe")));
 		progress = tag.getInteger("progress");
 	}
@@ -93,17 +87,5 @@ public class TileEntityLoom extends ModTileEntity implements ITickable, IAltarSt
 	public ItemStackHandler[] getInventories()
 	{
 		return new ItemStackHandler[] {inventory_up, inventory_down};
-	}
-	
-	@Override
-	public BlockPos getAltarPosition()
-	{
-		return altarPos;
-	}
-	
-	@Override
-	public void setAltarPosition(BlockPos pos)
-	{
-		altarPos = pos;
 	}
 }

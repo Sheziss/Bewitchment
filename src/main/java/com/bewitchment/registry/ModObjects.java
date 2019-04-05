@@ -38,8 +38,8 @@ import com.bewitchment.common.block.tile.entity.TileEntityGlyph;
 import com.bewitchment.common.block.tile.entity.TileEntityLoom;
 import com.bewitchment.common.block.tile.entity.TileEntityOven;
 import com.bewitchment.common.block.tile.entity.TileEntityPlacedItem;
-import com.bewitchment.common.block.tile.entity.TileEntityTarotTable;
 import com.bewitchment.common.block.tile.entity.TileEntityWitchesAltar;
+import com.bewitchment.common.block.tile.entity.util.TileEntityAltarStorage;
 import com.bewitchment.common.block.util.ModBlock;
 import com.bewitchment.common.block.util.ModBlockButton;
 import com.bewitchment.common.block.util.ModBlockCrop;
@@ -203,7 +203,7 @@ public class ModObjects
 	public static final Block oven = createTileEntity(new BlockOven(), TileEntityOven.class);
 	public static final Block gem_bowl = createTileEntity(new BlockGemBowl(), TileEntityGemBowl.class);
 	public static final Block crystal_ball = createTileEntity(new BlockCrystalBall(), TileEntityCrystalBall.class);
-	public static final Block tarot_table = createTileEntity(new BlockTarotTable(), TileEntityTarotTable.class);
+	public static final Block tarot_table = createTileEntity(new BlockTarotTable(), TileEntityAltarStorage.class);
 	
 	// Material Blocks
 	public static final Block block_cold_iron = new ModBlock("block_cold_iron", Material.IRON, SoundType.METAL, 5, 30, "pickaxe", 1, "blockColdIron");
@@ -513,6 +513,7 @@ public class ModObjects
 	public static final Item hoof = new ModItem("hoof");
 	public static final Item juniper_berries = new ModItemFood("juniper_berries", 1, 0.5f, false).setPotionEffect(new PotionEffect(MobEffects.POISON, 100, 0), 0.1f);
 	public static final Item lapis_powder = new ModItem("lapis_powder");
+	public static final Item liquid_wroth = new ModItem("liquid_wroth");
 	public static final Item lizard_leg = new ModItem("lizard_leg");
 	public static final Item oak_apple_gall = new ModItem("oak_apple_gall");
 	public static final Item owlets_wing = new ModItem("owlets_wing");

@@ -40,7 +40,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockSaltBarrier extends ModBlock
 {
 	public static final PropertyEnum<EnumAttachPosition> NORTH = PropertyEnum.<EnumAttachPosition>create("north", EnumAttachPosition.class), EAST = PropertyEnum.<EnumAttachPosition>create("east", EnumAttachPosition.class), SOUTH = PropertyEnum.<EnumAttachPosition>create("south", EnumAttachPosition.class), WEST = PropertyEnum.<EnumAttachPosition>create("west", EnumAttachPosition.class);
-	private static final AxisAlignedBB[] WIRE_AABB = { new AxisAlignedBB(0.1875, 0, 0.1875, 0.8125, 0.0625, 0.8125), new AxisAlignedBB(0.1875, 0, 0.1875, 0.8125, 0.0625, 1), new AxisAlignedBB(0, 0, 0.1875, 0.8125, 0.0625, 0.8125), new AxisAlignedBB(0, 0, 0.1875, 0.8125, 0.0625, 1), new AxisAlignedBB(0.1875, 0, 0, 0.8125, 0.0625, 0.8125), new AxisAlignedBB(0.1875, 0, 0, 0.8125, 0.0625, 1), new AxisAlignedBB(0, 0, 0, 0.8125, 0.0625, 0.8125), new AxisAlignedBB(0, 0, 0, 0.8125, 0.0625, 1), new AxisAlignedBB(0.1875, 0, 0.1875, 1, 0.0625, 0.8125), new AxisAlignedBB(0.1875, 0, 0.1875, 1, 0.0625, 1), new AxisAlignedBB(0, 0, 0.1875, 1, 0.0625, 0.8125), new AxisAlignedBB(0, 0, 0.1875, 1, 0.0625, 1), new AxisAlignedBB(0.1875, 0, 0, 1, 0.0625, 0.8125), new AxisAlignedBB(0.1875, 0, 0, 1, 0.0625, 1), new AxisAlignedBB(0, 0, 0, 1, 0.0625, 0.8125), new AxisAlignedBB(0, 0, 0, 1, 0.0625, 1) };
+	private static final AxisAlignedBB[] BOX = { new AxisAlignedBB(0.1875, 0, 0.1875, 0.8125, 0.0625, 0.8125), new AxisAlignedBB(0.1875, 0, 0.1875, 0.8125, 0.0625, 1), new AxisAlignedBB(0, 0, 0.1875, 0.8125, 0.0625, 0.8125), new AxisAlignedBB(0, 0, 0.1875, 0.8125, 0.0625, 1), new AxisAlignedBB(0.1875, 0, 0, 0.8125, 0.0625, 0.8125), new AxisAlignedBB(0.1875, 0, 0, 0.8125, 0.0625, 1), new AxisAlignedBB(0, 0, 0, 0.8125, 0.0625, 0.8125), new AxisAlignedBB(0, 0, 0, 0.8125, 0.0625, 1), new AxisAlignedBB(0.1875, 0, 0.1875, 1, 0.0625, 0.8125), new AxisAlignedBB(0.1875, 0, 0.1875, 1, 0.0625, 1), new AxisAlignedBB(0, 0, 0.1875, 1, 0.0625, 0.8125), new AxisAlignedBB(0, 0, 0.1875, 1, 0.0625, 1), new AxisAlignedBB(0.1875, 0, 0, 1, 0.0625, 0.8125), new AxisAlignedBB(0.1875, 0, 0, 1, 0.0625, 1), new AxisAlignedBB(0, 0, 0, 1, 0.0625, 0.8125), new AxisAlignedBB(0, 0, 0, 1, 0.0625, 1) };
 	
 	private static final AxisAlignedBB WALL = new AxisAlignedBB(0, -5, 0, 1, 5, 1);
 	
@@ -54,7 +54,7 @@ public class BlockSaltBarrier extends ModBlock
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos)
 	{
-		return WIRE_AABB[getAABBIndex(state.getActualState(world, pos))];
+		return BOX[getAABBIndex(state.getActualState(world, pos))];
 	}
 	
 	@Override
@@ -127,8 +127,7 @@ public class BlockSaltBarrier extends ModBlock
 		if (entity instanceof EntityLivingBase)
 		{
 			EnumCreatureAttribute attribute = ((EntityLivingBase) entity).getCreatureAttribute();
-			if (attribute == EnumCreatureAttribute.UNDEAD || attribute == BewitchmentAPI.DEMON || attribute == BewitchmentAPI.SPIRIT)
-				addCollisionBoxToList(pos, box, boxes, WALL);
+			if (attribute == EnumCreatureAttribute.UNDEAD || attribute == BewitchmentAPI.DEMON || attribute == BewitchmentAPI.SPIRIT) addCollisionBoxToList(pos, box, boxes, WALL);
 		}
 		if (entity instanceof EntityBlaze || entity instanceof EntityGhast || entity instanceof EntityVex /* || entity instanceof EntityBatSwarm */) addCollisionBoxToList(pos, box, boxes, WALL);
 		if (entity instanceof EntityPlayer && !((EntityPlayer) entity).isCreative() && !entity.getCapability(ExtendedPlayer.CAPABILITY, null).getTransformation().canCrossSalt) addCollisionBoxToList(pos, box, boxes, WALL);

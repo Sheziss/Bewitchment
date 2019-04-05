@@ -18,8 +18,8 @@ import net.minecraft.world.World;
 
 public class BlockCropSilphium extends ModBlockCrop
 {
-	private static final AxisAlignedBB[] SILPHIUM_AABB_BOTTOM = {new AxisAlignedBB(0, 0, 0, 1, 0.125, 1), new AxisAlignedBB(0, 0, 0, 1, 0.375, 1), new AxisAlignedBB(0, 0, 0, 1, 0.5, 1), new AxisAlignedBB(0, 0, 0, 1, 0.625, 1), new AxisAlignedBB(0, 0, 0, 1, 0.75, 1), new AxisAlignedBB(0, 0, 0, 1, 1, 1)};
-	private static final AxisAlignedBB[] SILPHIUM_AABB_TOP = {new AxisAlignedBB(0, 0, 0, 1, 0.125, 1), new AxisAlignedBB(0, 0, 0, 1, 0.375, 1), new AxisAlignedBB(0, 0, 0, 1, 0.5, 1), new AxisAlignedBB(0, 0, 0, 1, 0.5, 1), new AxisAlignedBB(0, 0, 0, 1, 0.55, 1), new AxisAlignedBB(0, 0, 0, 1, 0.625, 1)};
+	private static final AxisAlignedBB[] BOX_BOTTOM = {new AxisAlignedBB(0, 0, 0, 1, 0.125, 1), new AxisAlignedBB(0, 0, 0, 1, 0.375, 1), new AxisAlignedBB(0, 0, 0, 1, 0.5, 1), new AxisAlignedBB(0, 0, 0, 1, 0.625, 1), new AxisAlignedBB(0, 0, 0, 1, 0.75, 1), new AxisAlignedBB(0, 0, 0, 1, 1, 1)};
+	private static final AxisAlignedBB[] BOX_TOP = {new AxisAlignedBB(0, 0, 0, 1, 0.125, 1), new AxisAlignedBB(0, 0, 0, 1, 0.375, 1), new AxisAlignedBB(0, 0, 0, 1, 0.5, 1), new AxisAlignedBB(0, 0, 0, 1, 0.5, 1), new AxisAlignedBB(0, 0, 0, 1, 0.55, 1), new AxisAlignedBB(0, 0, 0, 1, 0.625, 1)};
 	
 	public BlockCropSilphium()
 	{
@@ -30,7 +30,7 @@ public class BlockCropSilphium extends ModBlockCrop
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
-		return state.getValue(TOP) ? SILPHIUM_AABB_TOP[state.getValue(AGE)] : SILPHIUM_AABB_BOTTOM[state.getValue(AGE)];
+		return state.getValue(TOP) ? BOX_TOP[state.getValue(AGE)] : BOX_BOTTOM[state.getValue(AGE)];
 	}
 	
 	@Override

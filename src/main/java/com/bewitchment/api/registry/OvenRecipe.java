@@ -55,19 +55,19 @@ public class OvenRecipe extends IForgeRegistryEntry.Impl<OvenRecipe>
 		return output;
 	}
 	
-	public boolean matches(ItemStack input)
+	public final boolean matches(ItemStack input)
 	{
 		return Bewitchment.proxy.areStacksEqual(input, getInput());
 	}
 	
-	public boolean isValid(ItemStackHandler input, ItemStackHandler output)
+	public final boolean isValid(ItemStackHandler input, ItemStackHandler output)
 	{
 		boolean outputValid = output.getStackInSlot(0).isEmpty() || (Bewitchment.proxy.areStacksEqual(output.getStackInSlot(0), getOutput()) && output.getStackInSlot(0).getCount() < output.getStackInSlot(0).getMaxStackSize());
 		boolean byproductValid = output.getStackInSlot(1).isEmpty() || (Bewitchment.proxy.areStacksEqual(output.getStackInSlot(1), getByproduct()) && output.getStackInSlot(1).getCount() < output.getStackInSlot(1).getMaxStackSize() - (getByproduct().getCount() - 1));
 		return !input.getStackInSlot(2).isEmpty() && outputValid && byproductValid;
 	}
 	
-	public void giveOutput(Random rand, ItemStackHandler input, ItemStackHandler output)
+	public final void giveOutput(Random rand, ItemStackHandler input, ItemStackHandler output)
 	{
 		input.extractItem(2, 1, false);
 		output.insertItem(0, getOutput().copy(), false);

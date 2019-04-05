@@ -8,10 +8,8 @@ import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.MinecraftForge;
@@ -43,12 +41,6 @@ public class ItemHellishBauble extends ModItemBauble
 	public void onUnequipped(ItemStack stack, EntityLivingBase living)
 	{
 		if (living instanceof EntityPlayer) living.getCapability(MagicPower.CAPABILITY, null).removeBonus(getTranslationKey());
-	}
-	
-	@Override
-	public void onWornTick(ItemStack stack, EntityLivingBase living)
-	{
-		if (living.ticksExisted % 40 == 0) living.addPotionEffect(new PotionEffect(MobEffects.LUCK, 120));
 	}
 	
 	@Override

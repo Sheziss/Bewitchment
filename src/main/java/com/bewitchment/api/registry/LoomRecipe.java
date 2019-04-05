@@ -40,19 +40,19 @@ public class LoomRecipe extends IForgeRegistryEntry.Impl<LoomRecipe>
 		return output;
 	}
 	
-	public boolean matches(ItemStackHandler handler)
+	public final boolean matches(ItemStackHandler handler)
 	{
 		List<ItemStack> checklist = new ArrayList<>();
 		for (int i = 0; i < handler.getSlots(); i++) if (!handler.getStackInSlot(i).isEmpty()) checklist.add(handler.extractItem(i, 1, true));
 		return Bewitchment.proxy.areISListsEqual(getInput(), checklist);
 	}
 	
-	public boolean isValid(ItemStackHandler input, ItemStackHandler output)
+	public final boolean isValid(ItemStackHandler input, ItemStackHandler output)
 	{
 		return !ModTileEntity.isEmpty(input) && (output.getStackInSlot(0).isEmpty() || (Bewitchment.proxy.areStacksEqual(output.getStackInSlot(0), getOutput()) && output.getStackInSlot(0).getCount() < output.getStackInSlot(0).getMaxStackSize()));
 	}
 	
-	public void giveOutput(ItemStackHandler input, ItemStackHandler output)
+	public final void giveOutput(ItemStackHandler input, ItemStackHandler output)
 	{
 		for (int i = 0; i < input.getSlots(); i++) input.extractItem(i, 1, false);
 		output.insertItem(0, getOutput().copy(), false);

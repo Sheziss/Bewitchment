@@ -17,7 +17,6 @@ import com.bewitchment.api.registry.LoomRecipe;
 import com.bewitchment.api.registry.OvenRecipe;
 import com.bewitchment.api.registry.Ritual;
 import com.bewitchment.common.block.BlockGlyph.GlyphType;
-import com.bewitchment.common.block.tile.entity.TileEntityGlyph;
 import com.bewitchment.common.compat.thaumcraft.ThaumcraftCompat;
 import com.bewitchment.common.entity.living.EntityBlindworm;
 import com.bewitchment.common.entity.living.EntityLizard;
@@ -31,11 +30,29 @@ import com.bewitchment.common.entity.spirits.demons.EntityDemon;
 import com.bewitchment.common.entity.spirits.demons.EntityDemoness;
 import com.bewitchment.common.entity.spirits.demons.EntityHellhound;
 import com.bewitchment.common.entity.spirits.ghosts.EntityBlackDog;
-import com.bewitchment.common.fortune.*;
+import com.bewitchment.common.fortune.FortuneBadLuck;
+import com.bewitchment.common.fortune.FortuneDeath;
+import com.bewitchment.common.fortune.FortuneDropItem;
+import com.bewitchment.common.fortune.FortuneGoodLuck;
+import com.bewitchment.common.fortune.FortuneIllness;
 import com.bewitchment.common.handler.BlockDropHandler;
 import com.bewitchment.common.handler.EventHandler;
 import com.bewitchment.common.handler.GuiHandler;
-import com.bewitchment.common.ritual.*;
+import com.bewitchment.common.ritual.RitualConjureAlphaHellhound;
+import com.bewitchment.common.ritual.RitualConjureBlaze;
+import com.bewitchment.common.ritual.RitualConjureDemon;
+import com.bewitchment.common.ritual.RitualConjureGhast;
+import com.bewitchment.common.ritual.RitualConjureHellhound;
+import com.bewitchment.common.ritual.RitualConjureMagmaCube;
+import com.bewitchment.common.ritual.RitualConjureSerpent;
+import com.bewitchment.common.ritual.RitualConjureVex;
+import com.bewitchment.common.ritual.RitualConjureWitch;
+import com.bewitchment.common.ritual.RitualConjureWither;
+import com.bewitchment.common.ritual.RitualDrawing;
+import com.bewitchment.common.ritual.RitualHighMoon;
+import com.bewitchment.common.ritual.RitualPerception;
+import com.bewitchment.common.ritual.RitualSandsOfTime;
+import com.bewitchment.common.ritual.RitualSolarGlory;
 import com.bewitchment.common.world.gen.WorldGenBeehive;
 import com.bewitchment.common.world.gen.WorldGenCoquina;
 import com.bewitchment.common.world.gen.WorldGenOres;
@@ -233,24 +250,41 @@ public class CommonProxy
 	{
 	}
 	
+	public ItemStack[] toArray(List<ItemStack> list)
+	{
+		return list.toArray(new ItemStack[list.size()]);
+	}
+	
 	public boolean areISListsEqual(List<Ingredient> ings, List<ItemStack> stacks)
 	{
-		if (ings.size() == stacks.size())
+		List<ItemStack> checklist = new ArrayList<>();
+		for (ItemStack stack : stacks)
 		{
-			List<Ingredient> foundList = new ArrayList<>(ings);
-			for (int i = 0; i < stacks.size(); i++)
+			for (int i = 0; i < stack.getCount(); i++)
 			{
-				for (Ingredient ingredient : ings)
+				ItemStack copy = stack.copy();
+				copy.setCount(1);
+				checklist.add(copy);
+			}
+		}
+		if (ings.size() == checklist.size())
+		{
+			List<Ingredient> removalList = new ArrayList<>(ings);
+			for (ItemStack stack : checklist)
+			{
+				Ingredient found = null;
+				for (Ingredient ing : removalList)
 				{
-					if (ingredient.apply(stacks.get(i)))
+					if (ing.apply(stack))
 					{
-						foundList.set(i, Ingredient.EMPTY);
+						found = ing;
 						break;
 					}
 				}
+				if (found == null) return false;
+				removalList.remove(found);
 			}
-			for (Ingredient ing : foundList) if (ing != Ingredient.EMPTY) return false;
-			return true;
+			return removalList.isEmpty();
 		}
 		return false;
 	}
@@ -388,16 +422,11 @@ public class CommonProxy
 		BewitchmentAPI.registerFortune(new FortuneDropItem());
 		BewitchmentAPI.registerFortune(new FortuneGoodLuck());
 		BewitchmentAPI.registerFortune(new FortuneIllness());
-		BewitchmentAPI.registerFortune(new FortuneMeetParrot());
-		BewitchmentAPI.registerFortune(new FortuneMeetCat());
-		BewitchmentAPI.registerFortune(new FortuneMeetDog());
-		BewitchmentAPI.registerFortune(new FortuneMeetLlama());
-		BewitchmentAPI.registerFortune(new FortuneMeetHorse());
 		
 		// Ritual
 		BewitchmentAPI.registerRitual(new RitualHighMoon());
 		BewitchmentAPI.registerRitual(new RitualSolarGlory());
-		BewitchmentAPI.registerRitual(new RitualSandsTime());
+		BewitchmentAPI.registerRitual(new RitualSandsOfTime());
 		BewitchmentAPI.registerRitual(new RitualPerception());
 		BewitchmentAPI.registerRitual(new RitualConjureWitch());
 		BewitchmentAPI.registerRitual(new RitualConjureMagmaCube());
@@ -405,11 +434,27 @@ public class CommonProxy
 		BewitchmentAPI.registerRitual(new RitualConjureBlaze());
 		BewitchmentAPI.registerRitual(new RitualConjureGhast());
 		BewitchmentAPI.registerRitual(new RitualConjureWither());
+		BewitchmentAPI.registerRitual(new RitualConjureDemon());
+		BewitchmentAPI.registerRitual(new RitualConjureHellhound());
+		BewitchmentAPI.registerRitual(new RitualConjureAlphaHellhound());
 		BewitchmentAPI.registerRitual(new RitualConjureSerpent());
-		BewitchmentAPI.registerRitual(new RitualDrawing("draw_small", 0, 0, 0, GlyphType.ANY, null, null, TileEntityGlyph.small));
-		BewitchmentAPI.registerRitual(new RitualDrawing("draw_medium", 0, 0, 0, GlyphType.ANY, GlyphType.ANY, null, TileEntityGlyph.medium));
-		BewitchmentAPI.registerRitual(new RitualDrawing("draw_large", 0, 0, 0, GlyphType.ANY, GlyphType.ANY, GlyphType.ANY, TileEntityGlyph.large));
-		BewitchmentAPI.registerRitual(new Ritual(Bewitchment.MOD_ID, "sanctuary", Ritual.ofi(), Ritual.ofe(), Ritual.ofs(), 250, 500, 4, GlyphType.NORMAL, GlyphType.NORMAL, null));
+		BewitchmentAPI.registerRitual(new RitualDrawing("draw_small",
+				Arrays.asList(
+						Ingredient.fromStacks(new ItemStack(ModObjects.wood_ash))),
+				0, 0, 0, GlyphType.ANY, null, null, Ritual.small));
+		BewitchmentAPI.registerRitual(new RitualDrawing("draw_medium",
+				Arrays.asList(
+						Ingredient.fromStacks(new ItemStack(Items.CLAY_BALL)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.wood_ash))),
+				0, 0, 0, GlyphType.ANY, null, null, Ritual.medium));
+		BewitchmentAPI.registerRitual(new RitualDrawing("draw_large",
+				Arrays.asList(
+						Ingredient.fromStacks(new ItemStack(Items.CLAY_BALL)),
+						Ingredient.fromStacks(new ItemStack(Items.CLAY_BALL)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.wood_ash)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.wood_ash))),
+				0, 0, 0, GlyphType.ANY, GlyphType.ANY, null, Ritual.large));
+//		BewitchmentAPI.registerRitual(new Ritual(Bewitchment.MOD_ID, "sanctuary", Arrays.asList(), Arrays.asList(), Arrays.asList(), 250, 500, 4, GlyphType.NORMAL, GlyphType.NORMAL, null));
 		
 		// Distillery
 		BewitchmentAPI.registerDistilleryRecipe(new DistilleryRecipe(Bewitchment.MOD_ID, "cleansing_balm",

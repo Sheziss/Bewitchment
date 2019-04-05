@@ -14,7 +14,7 @@ import net.minecraftforge.items.IItemHandler;
 
 public class ContainerDistillery extends ModContainer
 {
-	public int burn_time, progress, recipe_time;
+	public int burnTime, progress, recipeTime;
 	
 	private final TileEntityDistillery tile;
 	
@@ -41,9 +41,9 @@ public class ContainerDistillery extends ModContainer
 		super.detectAndSendChanges();
 		for (IContainerListener listener : listeners)
 		{
-			listener.sendWindowProperty(this, 0, tile.burn_time);
+			listener.sendWindowProperty(this, 0, tile.burnTime);
 			listener.sendWindowProperty(this, 1, tile.progress);
-			listener.sendWindowProperty(this, 2, tile.recipe_time);
+			listener.sendWindowProperty(this, 2, tile.recipeTime);
 		}
 	}
 	
@@ -51,8 +51,8 @@ public class ContainerDistillery extends ModContainer
 	@SideOnly(Side.CLIENT)
     public void updateProgressBar(int id, int data)
     {
-		if (id == 0) burn_time = data;
+		if (id == 0) burnTime = data;
 		if (id == 1) progress = data;
-		else recipe_time = data;
+		else recipeTime = data;
     }
 }

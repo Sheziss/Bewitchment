@@ -1,12 +1,9 @@
-package com.bewitchment.common.block.tile.entity;
-
-import com.bewitchment.common.block.tile.entity.util.IAltarStorage;
-import com.bewitchment.common.block.tile.entity.util.ModTileEntity;
+package com.bewitchment.common.block.tile.entity.util;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 
-public class TileEntityTarotTable extends ModTileEntity implements IAltarStorage
+public class TileEntityAltarStorage extends ModTileEntity implements IAltarStorage
 {
 	private BlockPos altarPos;
 	

@@ -17,7 +17,7 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityOven extends ModTileEntity implements ITickable
 {
-	public int burn_time, fuel_burn_time, progress;
+	public int burnTime, fuelBurnTime, progress;
 	
 	private OvenRecipe recipe;
 	
@@ -49,7 +49,7 @@ public class TileEntityOven extends ModTileEntity implements ITickable
 	{
 		if (!world.isRemote)
 		{
-			if (burn_time >= 0) burn_time--;
+			if (burnTime >= 0) burnTime--;
 			else if (progress > 0)
 			{
 				progress -= 2;
@@ -58,13 +58,13 @@ public class TileEntityOven extends ModTileEntity implements ITickable
 			if (recipe == null || !recipe.isValid(inventory_up, inventory_down)) progress = 0;
 			else
 			{
-				if (burn_time == -1 && !inventory_up.getStackInSlot(0).isEmpty() && !inventory_up.getStackInSlot(2).isEmpty())
+				if (burnTime == -1 && !inventory_up.getStackInSlot(0).isEmpty() && !inventory_up.getStackInSlot(2).isEmpty())
 				{
-					burn_time = TileEntityFurnace.getItemBurnTime(inventory_up.getStackInSlot(0));
-					fuel_burn_time = burn_time;
+					burnTime = TileEntityFurnace.getItemBurnTime(inventory_up.getStackInSlot(0));
+					fuelBurnTime = burnTime;
 					inventory_up.extractItem(0, 1, false);
 				}
-				else if (burn_time >= 0)
+				else if (burnTime >= 0)
 				{
 					progress++;
 					if (progress >= 200)
@@ -93,8 +93,8 @@ public class TileEntityOven extends ModTileEntity implements ITickable
 	public NBTTagCompound writeToNBT(NBTTagCompound tag)
 	{
 		tag.setString("recipe", recipe == null ? "" : recipe.getRegistryName().toString());
-		tag.setInteger("burn_time", burn_time);
-		tag.setInteger("fuel_burn_time", fuel_burn_time);
+		tag.setInteger("burnTime", burnTime);
+		tag.setInteger("fuelBurnTime", fuelBurnTime);
 		tag.setInteger("progress", progress);
 		return super.writeToNBT(tag);
 	}
@@ -104,8 +104,8 @@ public class TileEntityOven extends ModTileEntity implements ITickable
 	{
 		super.readFromNBT(tag);
 		recipe = tag.getString("recipe").isEmpty() ? null : BewitchmentAPI.REGISTRY_OVEN.getValue(new ResourceLocation(tag.getString("recipe")));
-		burn_time = tag.getInteger("burn_time");
-		fuel_burn_time = tag.getInteger("fuel_burn_time");
+		burnTime = tag.getInteger("burnTime");
+		fuelBurnTime = tag.getInteger("fuelBurnTime");
 		progress = tag.getInteger("progress");
 	}
 	

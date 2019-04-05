@@ -41,8 +41,8 @@ import net.minecraft.world.World;
 
 public class EntitySnake extends ModEntityTameable
 {
-	public int animation_timer = 0;
-	private int milk_timer = 0;
+	public int animationTimer = 0;
+	private int milkTimer = 0;
 	
 	public EntitySnake(World world)
 	{
@@ -96,26 +96,26 @@ public class EntitySnake extends ModEntityTameable
 	@Override
 	public boolean processInteract(EntityPlayer player, EnumHand hand)
 	{
-		if (getAttackTarget() == null || getAttackTarget().isDead || getRevengeTarget() == null || getRevengeTarget().isDead)
+		if (!world.isRemote && (getAttackTarget() == null || getAttackTarget().isDead || getRevengeTarget() == null || getRevengeTarget().isDead))
 		{
 			ItemStack stack = player.getHeldItem(hand);
 			if (stack.getItem() == ModObjects.glass_jar)
 			{
-				if (milk_timer == 0 && getRNG().nextBoolean())
+				if (milkTimer == 0 && getRNG().nextBoolean())
 				{
-					if (getGrowingAge() >= 0 && !player.isCreative())
+					if (getGrowingAge() >= 0)
 					{
 						stack.shrink(1);
 						if (stack.isEmpty()) player.setHeldItem(hand, new ItemStack(ModObjects.snake_venom));
 						else if (!player.inventory.addItemStackToInventory(new ItemStack(ModObjects.snake_venom))) player.dropItem(new ItemStack(ModObjects.snake_venom), false);
-						milk_timer = 3600;
+						milkTimer = 3600;
 						return true;
 					}
-					else
-					{
-						setAttackTarget(player);
-						setRevengeTarget(player);
-					}
+				}
+				else
+				{
+					setAttackTarget(player);
+					setRevengeTarget(player);
 				}
 			}
 		}
@@ -138,7 +138,7 @@ public class EntitySnake extends ModEntityTameable
 	public void onLivingUpdate()
 	{
 		super.onLivingUpdate();
-		if (milk_timer > 0) milk_timer--;
+		if (milkTimer > 0) milkTimer--;
 	}
 	
 	@Override
@@ -163,16 +163,16 @@ public class EntitySnake extends ModEntityTameable
 	public void writeEntityToNBT(NBTTagCompound tag)
 	{
 		super.writeEntityToNBT(tag);
-		tag.setInteger("animation_timer", animation_timer);
-		tag.setInteger("milk_timer", milk_timer);
+		tag.setInteger("animationTimer", animationTimer);
+		tag.setInteger("milkTimer", milkTimer);
 	}
 	
 	@Override
 	public void readEntityFromNBT(NBTTagCompound tag)
 	{
 		super.readEntityFromNBT(tag);
-		animation_timer = tag.getInteger("animation_timer");
-		milk_timer = tag.getInteger("milk_timer");
+		animationTimer = tag.getInteger("animationTimer");
+		milkTimer = tag.getInteger("milkTimer");
 	}
 	
 	@Override

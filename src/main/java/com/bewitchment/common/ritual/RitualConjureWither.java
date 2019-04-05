@@ -1,7 +1,6 @@
 package com.bewitchment.common.ritual;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 import com.bewitchment.Bewitchment;
 import com.bewitchment.api.registry.Ritual;
@@ -13,7 +12,10 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -22,25 +24,17 @@ public class RitualConjureWither extends Ritual
 {
 	public RitualConjureWither()
 	{
-		super(Bewitchment.MOD_ID, "conjure_wither", ofi(), ofe(), ofs(), 200, 500, 3, GlyphType.NETHER, GlyphType.NETHER, GlyphType.NETHER);
-	}
-	
-	@Override
-	public ItemStack[] getOutput(TileEntityGlyph tile)
-	{
-		List<ItemStack> out = new ArrayList<>();
-		for (ItemStack stack : super.getOutput(tile)) out.add(stack);
-		for (int i = 0; i < tile.inventory.getSlots(); i++)
-		{
-			ItemStack stack = tile.inventory.getStackInSlot(i);
-			if (stack.getItem() == ModObjects.athame)
-			{
-				stack.setItemDamage(stack.getItemDamage() + 50);
-				if (stack.getItemDamage() >= stack.getMaxDamage()) stack.shrink(1);
-				if (!stack.isEmpty()) out.add(stack);
-			}
-		}
-		return out.toArray(new ItemStack[out.size()]);
+		super(Bewitchment.MOD_ID, "conjure_wither",
+				Arrays.asList(
+						Ingredient.fromStacks(new ItemStack(ModObjects.athame, 1, Short.MAX_VALUE)),
+						Ingredient.fromStacks(new ItemStack(Items.SKULL, 1, 1)),
+						Ingredient.fromStacks(new ItemStack(Blocks.SOUL_SAND)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.hellebore)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.wormwood)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.ectoplasm))),
+				Arrays.asList(),
+				Arrays.asList(),
+				200, 500, 3, GlyphType.NETHER, GlyphType.NETHER, GlyphType.NETHER);
 	}
 	
 	@Override

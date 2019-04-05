@@ -39,7 +39,7 @@ public class BlockGlyph extends ModBlockContainer
 	
 	private static final PropertyInteger LETTER = PropertyInteger.create("letter", 0, 5);
 	
-	private static final AxisAlignedBB FLAT_AABB = new AxisAlignedBB(0, 0, 0, 1, 0.0025, 1);
+	private static final AxisAlignedBB BOX = new AxisAlignedBB(0, 0, 0, 1, 0.0025, 1);
 	
 	public BlockGlyph()
 	{
@@ -63,10 +63,11 @@ public class BlockGlyph extends ModBlockContainer
 	{
 		if (state.getValue(TYPE) == GlyphType.GOLDEN)
 		{
+			refreshAltarPos(world, pos);
 			TileEntityGlyph tile = ((TileEntityGlyph) world.getTileEntity(pos));
 			if (!world.isRemote && player.getHeldItem(hand).isEmpty())
 			{
-				if (tile.ritual != null) tile.stopRitual(player, false);
+				if (tile.getRitual() != null) tile.stopRitual(player, false);
 				else tile.startRitual(player);
 				return true;
 			}
@@ -82,7 +83,7 @@ public class BlockGlyph extends ModBlockContainer
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos)
 	{
-		return FLAT_AABB;
+		return BOX;
 	}
 	
 	@Override

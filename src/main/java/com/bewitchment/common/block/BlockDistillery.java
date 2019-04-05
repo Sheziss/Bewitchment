@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 
 public class BlockDistillery extends ModBlockContainer
 {
-	private static final AxisAlignedBB BBOX_X = new AxisAlignedBB(0.125, 0, 0, 0.875, 0.6875, 1), BBOX_Z = new AxisAlignedBB(0, 0, 0.125, 1, 0.6875, 0.875);
+	private static final AxisAlignedBB BOX_X = new AxisAlignedBB(0.125, 0, 0, 0.875, 0.6875, 1), BOX_Z = new AxisAlignedBB(0, 0, 0.125, 1, 0.6875, 0.875);
 	
 	public BlockDistillery()
 	{
@@ -39,13 +39,13 @@ public class BlockDistillery extends ModBlockContainer
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos)
 	{
-		return state.getValue(BlockHorizontal.FACING).getAxis() == Axis.Z ? BBOX_X : BBOX_Z;
+		return state.getValue(BlockHorizontal.FACING).getAxis() == Axis.Z ? BOX_X : BOX_Z;
 	}
 	
 	@Override
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos)
 	{
-		return state.getValue(BlockHorizontal.FACING).getAxis() == Axis.Z ? BBOX_X : BBOX_Z;
+		return state.getValue(BlockHorizontal.FACING).getAxis() == Axis.Z ? BOX_X : BOX_Z;
 	}
 	
 	@Override

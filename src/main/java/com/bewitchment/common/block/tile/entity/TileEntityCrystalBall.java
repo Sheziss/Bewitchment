@@ -7,44 +7,13 @@ import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.api.capability.extendedplayer.ExtendedPlayer;
 import com.bewitchment.api.capability.magicpower.MagicPower;
 import com.bewitchment.api.registry.Fortune;
-import com.bewitchment.common.block.tile.entity.util.IAltarStorage;
-import com.bewitchment.common.block.tile.entity.util.ModTileEntity;
+import com.bewitchment.common.block.tile.entity.util.TileEntityAltarStorage;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 
-public class TileEntityCrystalBall extends ModTileEntity implements IAltarStorage
+public class TileEntityCrystalBall extends TileEntityAltarStorage
 {
-	private BlockPos altarPos;
-	
-	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound tag)
-	{
-		if (altarPos != null) tag.setLong("altarPos", altarPos.toLong());
-		return super.writeToNBT(tag);
-	}
-	
-	@Override
-	public void readFromNBT(NBTTagCompound tag)
-	{
-		super.readFromNBT(tag);
-		if (tag.hasKey("altarPos")) setAltarPosition(BlockPos.fromLong(tag.getLong("altarPos")));
-	}
-	
-	@Override
-	public BlockPos getAltarPosition()
-	{
-		return altarPos;
-	}
-	
-	@Override
-	public void setAltarPosition(BlockPos pos)
-	{
-		altarPos = pos;
-	}
-	
 	public boolean activate(EntityPlayer player)
 	{
 		if (!player.isSneaking())
@@ -53,7 +22,7 @@ public class TileEntityCrystalBall extends ModTileEntity implements IAltarStorag
 			{
 				Fortune fortune = player.getCapability(ExtendedPlayer.CAPABILITY, null).getFortune();
 				if (fortune != null) player.sendStatusMessage(new TextComponentTranslation("fortune.fortune_exists" + new TextComponentTranslation(fortune.getRegistryName().toString())), true);
-				else if (MagicPower.attemptDrain(world, player, altarPos, 3000))
+				else if (MagicPower.attemptDrain(world, player, getAltarPosition(), 3000))
 				{
 					List<Fortune> valid = BewitchmentAPI.REGISTRY_FORTUNE.getValuesCollection().stream().filter(f -> f.canBeUsed(player)).collect(Collectors.toList());
 					if (!valid.isEmpty())

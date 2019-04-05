@@ -88,8 +88,8 @@ public class EntityAlphaHellhound extends EntityHellhound
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(10);
 		getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(4.5);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(48);
 		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100);
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.675);
-		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(48);
 	}
 }

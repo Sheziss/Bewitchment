@@ -3,8 +3,7 @@ package com.bewitchment.common.block.tile.entity;
 import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.api.capability.magicpower.MagicPower;
 import com.bewitchment.api.registry.DistilleryRecipe;
-import com.bewitchment.common.block.tile.entity.util.IAltarStorage;
-import com.bewitchment.common.block.tile.entity.util.ModTileEntity;
+import com.bewitchment.common.block.tile.entity.util.TileEntityAltarStorage;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -12,16 +11,13 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class TileEntityDistillery extends ModTileEntity implements ITickable, IAltarStorage
+public class TileEntityDistillery extends TileEntityAltarStorage implements ITickable
 {
-	public int burn_time, progress, recipe_time;
-	
-	private BlockPos altarPos;
+	public int burnTime, progress, recipeTime;
 	
 	private DistilleryRecipe recipe;
 	
@@ -55,7 +51,7 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable, IA
 	{
 		if (!world.isRemote)
 		{
-			if (burn_time > 0) burn_time--;
+			if (burnTime > 0) burnTime--;
 			else if (progress > 0)
 			{
 				progress -= 2;
@@ -64,19 +60,19 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable, IA
 			if (recipe == null || !recipe.isValid(inventory_up, inventory_down)) progress = 0;
 			else
 			{
-				if (burn_time == 0 && !inventory_side.getStackInSlot(0).isEmpty() && !isEmpty(inventory_up))
+				if (burnTime == 0 && !inventory_side.getStackInSlot(0).isEmpty() && !isEmpty(inventory_up))
 				{
-					burn_time = 1200;
-					recipe_time = recipe.getTime();
+					burnTime = 1200;
+					recipeTime = recipe.getTime();
 					inventory_side.extractItem(0, 1, false);
 				}
-				else if (burn_time > 0)
+				else if (burnTime > 0)
 				{
-					if (MagicPower.attemptDrain(world, world.getClosestPlayer(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 5, false), altarPos, 2)) progress++;
+					if (MagicPower.attemptDrain(world, world.getClosestPlayer(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 5, false), getAltarPosition(), 2)) progress++;
 					if (progress >= recipe.getTime())
 					{
 						progress = 0;
-						recipe_time = 0;
+						recipeTime = 0;
 						recipe.giveOutput(inventory_up, inventory_down);
 					}
 				}
@@ -99,9 +95,8 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable, IA
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound tag)
 	{
-		if (altarPos != null) tag.setLong("altarPos", altarPos.toLong());
 		tag.setString("recipe", recipe == null ? "" : recipe.getRegistryName().toString());
-		tag.setInteger("burn_time", burn_time);
+		tag.setInteger("burnTime", burnTime);
 		tag.setInteger("progress", progress);
 		return super.writeToNBT(tag);
 	}
@@ -110,9 +105,8 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable, IA
 	public void readFromNBT(NBTTagCompound tag)
 	{
 		super.readFromNBT(tag);
-		if (tag.hasKey("altarPos")) setAltarPosition(BlockPos.fromLong(tag.getLong("altarPos")));
 		recipe = tag.getString("recipe").isEmpty() ? null : BewitchmentAPI.REGISTRY_DISTILLERY.getValue(new ResourceLocation(tag.getString("recipe")));
-		burn_time = tag.getInteger("burn_time");
+		burnTime = tag.getInteger("burnTime");
 		progress = tag.getInteger("progress");
 	}
 	
@@ -120,17 +114,5 @@ public class TileEntityDistillery extends ModTileEntity implements ITickable, IA
 	public ItemStackHandler[] getInventories()
 	{
 		return new ItemStackHandler[] {inventory_up, inventory_down, inventory_side};
-	}
-	
-	@Override
-	public BlockPos getAltarPosition()
-	{
-		return altarPos;
-	}
-	
-	@Override
-	public void setAltarPosition(BlockPos pos)
-	{
-		altarPos = pos;
 	}
 }

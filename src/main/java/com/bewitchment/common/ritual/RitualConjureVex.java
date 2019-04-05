@@ -1,7 +1,6 @@
 package com.bewitchment.common.ritual;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 import com.bewitchment.Bewitchment;
 import com.bewitchment.api.registry.Ritual;
@@ -13,7 +12,9 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.monster.EntityVex;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -22,25 +23,14 @@ public class RitualConjureVex extends Ritual
 {
 	public RitualConjureVex()
 	{
-		super(Bewitchment.MOD_ID, "conjure_vex", ofi(), ofe(), ofs(), 200, 500, 3, GlyphType.NORMAL, GlyphType.ENDER, null);
-	}
-	
-	@Override
-	public ItemStack[] getOutput(TileEntityGlyph tile)
-	{
-		List<ItemStack> out = new ArrayList<>();
-		for (ItemStack stack : super.getOutput(tile)) out.add(stack);
-		for (int i = 0; i < tile.inventory.getSlots(); i++)
-		{
-			ItemStack stack = tile.inventory.getStackInSlot(i);
-			if (stack.getItem() == ModObjects.athame)
-			{
-				stack.setItemDamage(stack.getItemDamage() + 50);
-				if (stack.getItemDamage() >= stack.getMaxDamage()) stack.shrink(1);
-				if (!stack.isEmpty()) out.add(stack);
-			}
-		}
-		return out.toArray(new ItemStack[out.size()]);
+		super(Bewitchment.MOD_ID, "conjure_vex",
+				Arrays.asList(
+						Ingredient.fromStacks(new ItemStack(ModObjects.athame, 1, Short.MAX_VALUE)),
+						Ingredient.fromStacks(new ItemStack(Items.APPLE)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.wormwood))),
+				Arrays.asList(),
+				Arrays.asList(),
+				200, 500, 3, GlyphType.NORMAL, GlyphType.ENDER, null);
 	}
 	
 	@Override

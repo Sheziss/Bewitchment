@@ -14,7 +14,7 @@ import net.minecraftforge.items.IItemHandler;
 
 public class ContainerOven extends ModContainer
 {
-	public int burn_time, fuel_burn_time, progress;
+	public int burnTime, fuelBurnTime, progress;
 	
 	private final TileEntityOven tile;
 	
@@ -38,8 +38,8 @@ public class ContainerOven extends ModContainer
 		super.detectAndSendChanges();
 		for (IContainerListener listener : listeners)
 		{
-			listener.sendWindowProperty(this, 0, tile.burn_time);
-			listener.sendWindowProperty(this, 1, tile.fuel_burn_time);
+			listener.sendWindowProperty(this, 0, tile.burnTime);
+			listener.sendWindowProperty(this, 1, tile.fuelBurnTime);
 			listener.sendWindowProperty(this, 2, tile.progress);
 		}
 	}
@@ -48,8 +48,8 @@ public class ContainerOven extends ModContainer
 	@SideOnly(Side.CLIENT)
     public void updateProgressBar(int id, int data)
     {
-		if (id == 0) burn_time = data;
-		if (id == 1) fuel_burn_time = data;
+		if (id == 0) burnTime = data;
+		if (id == 1) fuelBurnTime = data;
 		else progress = data;
     }
 }

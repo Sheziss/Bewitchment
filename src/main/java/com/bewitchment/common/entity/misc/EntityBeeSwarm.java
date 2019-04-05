@@ -25,7 +25,6 @@ public class EntityBeeSwarm extends Entity
 	@Override
 	protected void entityInit()
 	{
-		
 	}
 	
 	@Override

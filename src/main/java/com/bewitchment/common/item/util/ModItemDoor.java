@@ -28,14 +28,14 @@ public class ModItemDoor extends ItemDoor implements IOreDictionaryContainer
 {
 	private final List<String> oreDictionaryNames = new ArrayList<String>();
 	
-	public final FLBlockDoor door;
+	public final ModBlockDoor door;
 	
 	public ModItemDoor(String name, Block base, String... oreDictionaryNames)
 	{
-		this(name, base, new FLBlockDoor("block_" + name, base), oreDictionaryNames);
+		this(name, base, new ModBlockDoor("block_" + name, base), oreDictionaryNames);
 	}
 	
-	private ModItemDoor(String name, Block base, FLBlockDoor door, String... oreDictionaryNames)
+	private ModItemDoor(String name, Block base, ModBlockDoor door, String... oreDictionaryNames)
 	{
 		super(door);
 		Bewitchment.proxy.registerValues(this, name, oreDictionaryNames);
@@ -57,11 +57,11 @@ public class ModItemDoor extends ItemDoor implements IOreDictionaryContainer
 		if (!I18n.format(tip).equals(tip)) tooltip.add(TextFormatting.GRAY + I18n.format(tip));
 	}
 	
-	public static class FLBlockDoor extends BlockDoor
+	public static class ModBlockDoor extends BlockDoor
 	{
 		public ItemStack drop;
 		
-		public FLBlockDoor(String name, Block base)
+		public ModBlockDoor(String name, Block base)
 		{
 			super(base.getDefaultState().getMaterial());
 			Bewitchment.proxy.registerValues(this, name, base);

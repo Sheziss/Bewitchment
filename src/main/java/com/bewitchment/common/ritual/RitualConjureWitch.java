@@ -1,7 +1,6 @@
 package com.bewitchment.common.ritual;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 import com.bewitchment.Bewitchment;
 import com.bewitchment.api.registry.Ritual;
@@ -11,8 +10,10 @@ import com.bewitchment.registry.ModObjects;
 
 import net.minecraft.entity.monster.EntityWitch;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraftforge.fml.relauncher.Side;
@@ -22,25 +23,15 @@ public class RitualConjureWitch extends Ritual
 {
 	public RitualConjureWitch()
 	{
-		super(Bewitchment.MOD_ID, "conjure_witch", ofi(), ofe(), ofs(), 200, 500, 3, GlyphType.NETHER, GlyphType.ENDER, GlyphType.NETHER);
-	}
-	
-	@Override
-	public ItemStack[] getOutput(TileEntityGlyph tile)
-	{
-		List<ItemStack> out = new ArrayList<>();
-		for (ItemStack stack : super.getOutput(tile)) out.add(stack);
-		for (int i = 0; i < tile.inventory.getSlots(); i++)
-		{
-			ItemStack stack = tile.inventory.getStackInSlot(i);
-			if (stack.getItem() == ModObjects.athame)
-			{
-				stack.setItemDamage(stack.getItemDamage() + 50);
-				if (stack.getItemDamage() >= stack.getMaxDamage()) stack.shrink(1);
-				if (!stack.isEmpty()) out.add(stack);
-			}
-		}
-		return out.toArray(new ItemStack[out.size()]);
+		super(Bewitchment.MOD_ID, "conjure_witch",
+				Arrays.asList(
+						Ingredient.fromStacks(new ItemStack(ModObjects.athame, 1, Short.MAX_VALUE)),
+						Ingredient.fromStacks(new ItemStack(Items.APPLE)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.pentacle)),
+						Ingredient.fromStacks(new ItemStack(Items.POISONOUS_POTATO))),
+				Arrays.asList(),
+				Arrays.asList(),
+				200, 500, 3, GlyphType.NETHER, GlyphType.ENDER, GlyphType.NETHER);
 	}
 	
 	@Override

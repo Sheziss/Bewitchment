@@ -1,5 +1,7 @@
 package com.bewitchment.common.ritual;
 
+import java.util.Arrays;
+
 import com.bewitchment.Bewitchment;
 import com.bewitchment.api.registry.Ritual;
 import com.bewitchment.common.block.BlockGlyph.GlyphType;
@@ -7,15 +9,25 @@ import com.bewitchment.common.block.tile.entity.TileEntityGlyph;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class RitualPerception extends Ritual
 {
 	public RitualPerception()
 	{
-		super(Bewitchment.MOD_ID, "perception", ofi(), ofe(), ofs(), -1, 700, 3, GlyphType.NORMAL, GlyphType.NORMAL, GlyphType.NORMAL);
+		super(Bewitchment.MOD_ID, "perception",
+				Arrays.asList(
+						Ingredient.fromStacks(Bewitchment.proxy.toArray(OreDictionary.getOres("glowstone"))),
+						Ingredient.fromStacks(new ItemStack(Items.GOLDEN_CARROT))),
+				Arrays.asList(),
+				Arrays.asList(),
+				-1, 700, 3, GlyphType.NORMAL, GlyphType.NORMAL, GlyphType.NORMAL);
 	}
 	
 	@Override

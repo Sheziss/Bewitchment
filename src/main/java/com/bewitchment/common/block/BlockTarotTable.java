@@ -2,7 +2,7 @@ package com.bewitchment.common.block;
 
 import com.bewitchment.Bewitchment;
 import com.bewitchment.common.CommonProxy.ModGui;
-import com.bewitchment.common.block.tile.entity.TileEntityTarotTable;
+import com.bewitchment.common.block.tile.entity.util.TileEntityAltarStorage;
 import com.bewitchment.common.block.util.ModBlockContainer;
 
 import net.minecraft.block.BlockHorizontal;
@@ -28,7 +28,7 @@ public class BlockTarotTable extends ModBlockContainer
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta)
 	{
-		return new TileEntityTarotTable();
+		return new TileEntityAltarStorage();
 	}
 	
 	@Override

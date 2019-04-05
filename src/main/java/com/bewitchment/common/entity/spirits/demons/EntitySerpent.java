@@ -3,6 +3,7 @@ package com.bewitchment.common.entity.spirits.demons;
 import com.bewitchment.Bewitchment;
 import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.common.entity.util.ModEntityMob;
+import com.bewitchment.registry.ModObjects;
 
 import net.ilexiconn.llibrary.server.animation.Animation;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
@@ -21,9 +22,12 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
@@ -32,6 +36,8 @@ import net.minecraft.world.World;
 public class EntitySerpent extends ModEntityMob
 {
 	public static final Animation BITE = Animation.create(10);
+	
+	private int milkTimer;
 	
 	public EntitySerpent(World world)
 	{
@@ -93,6 +99,32 @@ public class EntitySerpent extends ModEntityMob
 	}
 	
 	@Override
+	public boolean processInteract(EntityPlayer player, EnumHand hand)
+	{
+		if (!world.isRemote && (getAttackTarget() == null || getAttackTarget().isDead || getRevengeTarget() == null || getRevengeTarget().isDead))
+		{
+			ItemStack stack = player.getHeldItem(hand);
+			if (stack.getItem() == ModObjects.glass_jar)
+			{
+				if (milkTimer == 0 && getRNG().nextBoolean())
+				{
+					stack.shrink(1);
+					if (stack.isEmpty()) player.setHeldItem(hand, new ItemStack(ModObjects.liquid_wroth));
+					else if (!player.inventory.addItemStackToInventory(new ItemStack(ModObjects.liquid_wroth))) player.dropItem(new ItemStack(ModObjects.liquid_wroth), false);
+					milkTimer = 6660;
+					return true;
+				}
+				else
+				{
+					setAttackTarget(player);
+					setRevengeTarget(player);
+				}
+			}
+		}
+		return super.processInteract(player, hand);
+	}
+	
+	@Override
 	public void onLivingUpdate()
 	{
 		super.onLivingUpdate();
@@ -108,13 +140,27 @@ public class EntitySerpent extends ModEntityMob
 	}
 	
 	@Override
+	public void writeEntityToNBT(NBTTagCompound tag)
+	{
+		super.writeEntityToNBT(tag);
+		tag.setInteger("milk_timer", milkTimer);
+	}
+	
+	@Override
+	public void readEntityFromNBT(NBTTagCompound tag)
+	{
+		super.readEntityFromNBT(tag);
+		milkTimer = tag.getInteger("milk_timer");
+	}
+	
+	@Override
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(64);
 		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(25);
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.65);
-		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(64);
 	}
 	
 	@Override
