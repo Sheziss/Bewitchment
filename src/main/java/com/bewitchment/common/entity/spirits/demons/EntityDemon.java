@@ -3,6 +3,7 @@ package com.bewitchment.common.entity.spirits.demons;
 import com.bewitchment.Bewitchment;
 import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.common.entity.util.ModEntityMob;
+import com.bewitchment.registry.ModPotions;
 
 import net.ilexiconn.llibrary.server.animation.Animation;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
@@ -148,6 +149,12 @@ public class EntityDemon extends ModEntityMob implements IMerchant
 			}
 		}
 		return flag;
+	}
+	
+	@Override
+	public boolean isPotionApplicable(PotionEffect effect)
+	{
+		return effect.getPotion() != MobEffects.POISON && effect.getPotion() != MobEffects.WITHER && effect.getPotion() != ModPotions.rotting && super.isPotionApplicable(effect);
 	}
 	
 	@Override

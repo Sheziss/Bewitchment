@@ -4,6 +4,7 @@ import com.bewitchment.Bewitchment;
 import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.common.entity.spirits.demons.EntitySerpent;
 import com.bewitchment.common.entity.util.ModEntityMob;
+import com.bewitchment.registry.ModPotions;
 
 import net.ilexiconn.llibrary.server.animation.Animation;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
@@ -93,6 +94,12 @@ public class EntityHellhound extends ModEntityMob
 	public boolean getCanSpawnHere()
 	{
 		return (world.provider.doesWaterVaporize() || world.provider.isNether()) && !world.containsAnyLiquid(getEntityBoundingBox()) && super.getCanSpawnHere();
+	}
+	
+	@Override
+	public boolean isPotionApplicable(PotionEffect effect)
+	{
+		return effect.getPotion() != MobEffects.POISON && effect.getPotion() != MobEffects.WITHER && effect.getPotion() != ModPotions.rotting && super.isPotionApplicable(effect);
 	}
 	
 	@Override

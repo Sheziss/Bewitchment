@@ -111,6 +111,12 @@ public class EntityToad extends ModEntityTameable
 	}
 	
 	@Override
+	public boolean isPotionApplicable(PotionEffect effect)
+	{
+		return effect.getPotion() != MobEffects.SLOWNESS && super.isPotionApplicable(effect);
+	}
+	
+	@Override
 	public int getMaxSpawnedInChunk()
 	{
 		return 2;

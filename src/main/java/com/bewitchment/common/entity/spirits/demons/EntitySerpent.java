@@ -125,6 +125,12 @@ public class EntitySerpent extends ModEntityMob
 	}
 	
 	@Override
+	public boolean isPotionApplicable(PotionEffect effect)
+	{
+		return effect.getPotion() != MobEffects.POISON && super.isPotionApplicable(effect);
+	}
+	
+	@Override
 	public void onLivingUpdate()
 	{
 		super.onLivingUpdate();

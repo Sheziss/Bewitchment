@@ -94,6 +94,12 @@ public class EntitySnake extends ModEntityTameable
 	}
 	
 	@Override
+	public boolean isPotionApplicable(PotionEffect effect)
+	{
+		return effect.getPotion() != MobEffects.POISON && super.isPotionApplicable(effect);
+	}
+	
+	@Override
 	public boolean processInteract(EntityPlayer player, EnumHand hand)
 	{
 		if (!world.isRemote && (getAttackTarget() == null || getAttackTarget().isDead || getRevengeTarget() == null || getRevengeTarget().isDead))
