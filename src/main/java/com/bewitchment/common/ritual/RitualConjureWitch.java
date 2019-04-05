@@ -16,6 +16,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -35,27 +37,27 @@ public class RitualConjureWitch extends Ritual
 	}
 	
 	@Override
-	public void onFinished(TileEntityGlyph tile, EntityPlayer caster)
+	public void onFinished(TileEntityGlyph tile, World world, EntityPlayer caster, BlockPos pos, int dimension, int time)
 	{
-		if (!tile.getWorld().isRemote)
+		if (!world.isRemote)
 		{
-			EntityWitch entity = new EntityWitch(tile.getWorld());
-			entity.setLocationAndAngles(tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ(), tile.getWorld().rand.nextInt(360), 0);
-			entity.onInitialSpawn(tile.getWorld().getDifficultyForLocation(tile.getPos()), null);
-			tile.getWorld().spawnEntity(entity);
-			if (tile.getWorld().rand.nextFloat() < 0.1f) entity.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 6000, 2, false, false));
+			EntityWitch entity = new EntityWitch(world);
+			entity.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), world.rand.nextInt(360), 0);
+			entity.onInitialSpawn(world.getDifficultyForLocation(pos), null);
+			world.spawnEntity(entity);
+			if (world.rand.nextFloat() < 0.1f) entity.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 6000, 2, false, false));
 		}
 	}
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void onRandomDisplayTick(TileEntityGlyph tile)
+	public void onRandomDisplayTick(TileEntityGlyph tile, World world, EntityPlayer caster, BlockPos pos, int dimension, int time)
 	{
 		for (int i = 0; i < 20; i++)
 		{
-			double cx = tile.getPos().getX() + 0.5, cy = tile.getPos().getY() + 0.5, cz = tile.getPos().getZ() + 0.5;
-			double sx = cx + tile.getWorld().rand.nextGaussian() * 0.5, sy = cy + tile.getWorld().rand.nextGaussian() * 0.5, sz = cz + tile.getWorld().rand.nextGaussian() * 0.5;
-			tile.getWorld().spawnParticle(EnumParticleTypes.ENCHANTMENT_TABLE, sx, sy, sz, 0.6 * (sx - cx), 0.6 * (sy - cy), 0.6 * (sz - cz));
+			double cx = pos.getX() + 0.5, cy = pos.getY() + 0.5, cz = pos.getZ() + 0.5;
+			double sx = cx + world.rand.nextGaussian() * 0.5, sy = cy + world.rand.nextGaussian() * 0.5, sz = cz + world.rand.nextGaussian() * 0.5;
+			world.spawnParticle(EnumParticleTypes.ENCHANTMENT_TABLE, sx, sy, sz, 0.6 * (sx - cx), 0.6 * (sy - cy), 0.6 * (sz - cz));
 		}
 	}
 }

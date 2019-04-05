@@ -178,6 +178,21 @@ public class ClientProxy extends CommonProxy
 	}
 	
 	@Override
+	public void registerTextureWaystone()
+	{
+		ModelBakery.registerItemVariants(ModObjects.waystone, new ResourceLocation(Bewitchment.MOD_ID, "waystone_normal"), new ResourceLocation(Bewitchment.MOD_ID, "waystone_bound"));
+		ModelLoader.setCustomMeshDefinition(ModObjects.waystone, new ItemMeshDefinition()
+		{
+			@Override
+			public ModelResourceLocation getModelLocation(ItemStack stack)
+			{
+				if (stack.hasTagCompound() && stack.getTagCompound().hasKey("location")) return new ModelResourceLocation(new ResourceLocation(Bewitchment.MOD_ID, "waystone_bound"), "inventory");
+				return new ModelResourceLocation(new ResourceLocation(Bewitchment.MOD_ID, "waystone_normal"), "inventory");
+			}
+		});
+	}
+	
+	@Override
 	public void spawnParticle(ModParticles particle, double x, double y, double z)
 	{
 		if (FMLCommonHandler.instance().getEffectiveSide().isClient() && Math.random() <= (Minecraft.getMinecraft().gameSettings.particleSetting == 1 ? 0.6f : 0.2f)) Minecraft.getMinecraft().effectRenderer.addEffect(particle.newInstance(x, y, z));

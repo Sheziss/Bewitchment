@@ -16,7 +16,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.potion.PotionEffect;
-import net.minecraftforge.oredict.OreDictionary;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 public class RitualSolarGlory extends Ritual
 {
@@ -24,7 +25,7 @@ public class RitualSolarGlory extends Ritual
 	{
 		super(Bewitchment.MOD_ID, "solar_glory",
 				Arrays.asList(
-						Ingredient.fromStacks(Bewitchment.proxy.toArray(OreDictionary.getOres("ingotGold"))),
+						Ingredient.fromStacks(Bewitchment.proxy.getOres("ingotGold")),
 						Ingredient.fromStacks(new ItemStack(Items.NETHERBRICK)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.chrysanthemum))),
 				Arrays.asList(),
@@ -33,21 +34,21 @@ public class RitualSolarGlory extends Ritual
 	}
 	
 	@Override
-	public boolean isValid(TileEntityGlyph tile, EntityPlayer caster)
+	public boolean isValid(TileEntityGlyph tile, World world, EntityPlayer caster, BlockPos pos, int dimension, int time)
 	{
-		return !tile.getWorld().isDaytime() && caster.getCapability(ExtendedPlayer.CAPABILITY, null).getTransformation() != TransformationType.VAMPIRE;
+		return !world.isDaytime() && caster.getCapability(ExtendedPlayer.CAPABILITY, null).getTransformation() != TransformationType.VAMPIRE;
 	}
 	
 	@Override
-	public void onFinished(TileEntityGlyph tile, EntityPlayer caster)
+	public void onFinished(TileEntityGlyph tile, World world, EntityPlayer caster, BlockPos pos, int dimension, int time)
 	{
-		if (!tile.getWorld().isRemote)
+		if (!world.isRemote)
 		{
-			for (EntityPlayer player0 : tile.getWorld().playerEntities)
+			for (EntityPlayer player : world.playerEntities)
 			{
-				if (player0.getCapability(ExtendedPlayer.CAPABILITY, null).getTransformation() == TransformationType.VAMPIRE) player0.addPotionEffect(new PotionEffect(ModPotions.sun_ward, 30 * 20));
+				if (player.getCapability(ExtendedPlayer.CAPABILITY, null).getTransformation() == TransformationType.VAMPIRE) player.addPotionEffect(new PotionEffect(ModPotions.sun_ward, 30 * 20));
 			}
-			tile.getWorld().setWorldTime(tile.getWorld().getWorldTime() + (30000 - (tile.getWorld().getWorldTime() % 24000)) % 24000);
+			world.setWorldTime(world.getWorldTime() + (30000 - (world.getWorldTime() % 24000)) % 24000);
 		}
 	}
 }

@@ -15,7 +15,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraftforge.oredict.OreDictionary;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 public class RitualPerception extends Ritual
 {
@@ -23,7 +24,7 @@ public class RitualPerception extends Ritual
 	{
 		super(Bewitchment.MOD_ID, "perception",
 				Arrays.asList(
-						Ingredient.fromStacks(Bewitchment.proxy.toArray(OreDictionary.getOres("glowstone"))),
+						Ingredient.fromStacks(Bewitchment.proxy.getOres("glowstone")),
 						Ingredient.fromStacks(new ItemStack(Items.GOLDEN_CARROT))),
 				Arrays.asList(),
 				Arrays.asList(),
@@ -31,14 +32,19 @@ public class RitualPerception extends Ritual
 	}
 	
 	@Override
-	public void onUpdate(TileEntityGlyph tile, EntityPlayer caster)
+	public void onUpdate(TileEntityGlyph tile, World world, EntityPlayer caster, BlockPos pos, int dimension, int time)
 	{
-		if (!tile.getWorld().isRemote && tile.getWorld().getWorldTime() % 100 == 0)
+		if (!world.isRemote && world.getWorldTime() % 100 == 0)
 		{
-			for (EntityLivingBase entity : tile.getWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(tile.getPos()).grow(20)))
+			for (EntityLivingBase entity : world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos).grow(20)))
 			{
 				entity.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 110, 0, false, false));
 			}
 		}
+	}
+	
+	@Override
+	public void onStopped(TileEntityGlyph tile, World world, EntityPlayer caster, BlockPos pos, int dimension, int time)
+	{
 	}
 }

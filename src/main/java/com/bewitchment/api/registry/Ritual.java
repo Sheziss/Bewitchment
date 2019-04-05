@@ -12,6 +12,7 @@ import com.bewitchment.registry.ModObjects;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
@@ -173,7 +174,7 @@ public class Ritual extends IForgeRegistryEntry.Impl<Ritual>
 	 * 
 	 * @return true if the ritual is valid, otherwise false
 	 */
-	public boolean isValid(TileEntityGlyph tile, EntityPlayer caster)
+	public boolean isValid(TileEntityGlyph tile, World world, EntityPlayer caster, BlockPos pos, int dimension, int time)
 	{
 		return true;
 	}
@@ -186,7 +187,7 @@ public class Ritual extends IForgeRegistryEntry.Impl<Ritual>
 	 * @param tile the glyph performing the ritual
 	 * @param caster the player that started the ritual
 	 */
-	public boolean onLowPower(TileEntityGlyph tile, EntityPlayer caster)
+	public boolean onLowPower(TileEntityGlyph tile, World world, EntityPlayer caster, BlockPos pos, int dimension, int time)
 	{
 		return false;
 	}
@@ -200,12 +201,7 @@ public class Ritual extends IForgeRegistryEntry.Impl<Ritual>
 	 * @param tile the glyph performing the ritual
 	 * @param caster the player that started the ritual
 	 */
-	public void onUpdate(TileEntityGlyph tile, EntityPlayer caster)
-	{
-	}
-	
-	@SideOnly(Side.CLIENT)
-	public void onRandomDisplayTick(TileEntityGlyph tile)
+	public void onUpdate(TileEntityGlyph tile, World world, EntityPlayer caster, BlockPos pos, int dimension, int time)
 	{
 	}
 	
@@ -218,8 +214,9 @@ public class Ritual extends IForgeRegistryEntry.Impl<Ritual>
 	 * @param tile the glyph performing the ritual
 	 * @param caster the player that started the ritual
 	 */
-	public void onFinished(TileEntityGlyph tile, EntityPlayer caster)
+	public void onFinished(TileEntityGlyph tile, World world, EntityPlayer caster, BlockPos pos, int dimension, int time)
 	{
+		for (ItemStack stack : getOutput(tile)) InventoryHelper.spawnItemStack(world, tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ(), stack.copy());
 	}
 	
 	/**
@@ -228,7 +225,7 @@ public class Ritual extends IForgeRegistryEntry.Impl<Ritual>
 	 * @param tile the glyph performing the ritual
 	 * @param caster the player that started the ritual
 	 */
-	public void onStarted(TileEntityGlyph tile, EntityPlayer caster)
+	public void onStarted(TileEntityGlyph tile, World world, EntityPlayer caster, BlockPos pos, int dimension, int time)
 	{
 	}
 	
@@ -241,7 +238,13 @@ public class Ritual extends IForgeRegistryEntry.Impl<Ritual>
 	 * @param tile the glyph performing the ritual
 	 * @param caster the player that started the ritual
 	 */
-	public void onStopped(TileEntityGlyph tile, EntityPlayer caster)
+	public void onStopped(TileEntityGlyph tile, World world, EntityPlayer caster, BlockPos pos, int dimension, int time)
+	{
+		for (int i = 0; i < tile.inventory.getSlots(); i++) InventoryHelper.spawnItemStack(world, tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ(), tile.inventory.extractItem(i, tile.inventory.getStackInSlot(i).getCount(), false));
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public void onRandomDisplayTick(TileEntityGlyph tile, World world, EntityPlayer caster, BlockPos pos, int dimension, int time)
 	{
 	}
 	

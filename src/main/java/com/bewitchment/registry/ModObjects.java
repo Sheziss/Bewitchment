@@ -58,6 +58,7 @@ import com.bewitchment.common.item.ItemCypressBroom;
 import com.bewitchment.common.item.ItemElderBroom;
 import com.bewitchment.common.item.ItemJuniperBroom;
 import com.bewitchment.common.item.ItemLantern;
+import com.bewitchment.common.item.ItemWaystone;
 import com.bewitchment.common.item.ItemSalt;
 import com.bewitchment.common.item.ItemTarotsDeck;
 import com.bewitchment.common.item.ItemUndyingSalve;
@@ -407,9 +408,11 @@ public class ModObjects
 	public static final Item axe_silver = new ItemSilverAxe(TOOL_SILVER);
 	public static final Item spade_silver = new ItemSilverSpade(TOOL_SILVER);
 	public static final Item hoe_silver = new ItemSilverHoe(TOOL_SILVER);
-	
+		
 	public static final Item athame = new ItemAthame(TOOL_RITUAL);
 	public static final Item boline = new ItemBoline();
+	
+	public static final Item waystone = new ItemWaystone();
 	
 	public static final Item chalk_normal = new ItemChalk("chalk_normal");
 	public static final Item chalk_golden = new ItemChalk("chalk_golden");
@@ -599,6 +602,7 @@ public class ModObjects
 				Item item = (Item) obj;
 				event.getRegistry().register(item);
 				if (obj == ModObjects.eye_of_old) Bewitchment.proxy.registerTextureEyeOfOld();
+				else if (obj == ModObjects.waystone) Bewitchment.proxy.registerTextureWaystone();
 				else Bewitchment.proxy.registerTexture(item);
 			}
 		}

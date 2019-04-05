@@ -12,7 +12,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraftforge.oredict.OreDictionary;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 public class RitualHighMoon extends Ritual
 {
@@ -20,7 +21,7 @@ public class RitualHighMoon extends Ritual
 	{
 		super(Bewitchment.MOD_ID, "high_moon",
 				Arrays.asList(
-						Ingredient.fromStacks(Bewitchment.proxy.toArray(OreDictionary.getOres("ingotSilver"))),
+						Ingredient.fromStacks(Bewitchment.proxy.getOres("ingotSilver")),
 						Ingredient.fromStacks(new ItemStack(Items.NETHERBRICK)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.hellebore))),
 				Arrays.asList(),
@@ -29,14 +30,14 @@ public class RitualHighMoon extends Ritual
 	}
 	
 	@Override
-	public boolean isValid(TileEntityGlyph tile, EntityPlayer caster)
+	public boolean isValid(TileEntityGlyph tile, World world, EntityPlayer caster, BlockPos pos, int dimension, int time)
 	{
-		return tile.getWorld().isDaytime();
+		return world.isDaytime();
 	}
 	
 	@Override
-	public void onFinished(TileEntityGlyph tile, EntityPlayer caster)
+	public void onFinished(TileEntityGlyph tile, World world, EntityPlayer caster, BlockPos pos, int dimension, int time)
 	{
-		if (!tile.getWorld().isRemote) tile.getWorld().setWorldTime(tile.getWorld().getWorldTime() + (41600 - (tile.getWorld().getWorldTime() % 24000)) % 24000);
+		if (!world.isRemote) world.setWorldTime(world.getWorldTime() + (41600 - (world.getWorldTime() % 24000)) % 24000);
 	}
 }

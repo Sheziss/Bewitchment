@@ -199,6 +199,8 @@ item.bewitchment.hoe_silver.name=Silver Hoe
 item.bewitchment.athame.name=Athame
 item.bewitchment.boline.name=Boline
 
+item.bewitchment.waystone.name=Waystone
+
 item.bewitchment.chalk_normal.name=Ritual Chalk
 item.bewitchment.chalk_golden.name=Focal Chalk
 item.bewitchment.chalk_nether.name=Fiery Chalk
@@ -389,10 +391,14 @@ bewitchment.conjure_demon=Ritual of Conjuration (Demon)
 bewitchment.conjure_hellhound=Ritual of Conjuration (Hellhound)
 bewitchment.conjure_alpha_hellhound=Ritual of Conjuration (Alpha Hellhound)
 bewitchment.conjure_serpent=Ritual of Conjuration (Serpent)
+bewitchment.call_of_the_wild=Call of the Wild
+bewitchment.hungry_flames=Ritual of the Hungry Flames
 bewitchment.draw_small=Ritual of the Lesser Marks
 bewitchment.draw_medium=Ritual of the Marks
 bewitchment.draw_large=Ritual of the Major Marks
-bewitchment.construct_crystal_ball=Ritual of Construction (Crystal Ball)
+bewitchment.crystal_ball=Ritual of Construction (Crystal Ball)
+bewitchment.tarot_table=Ritual of Construction (Tarot Table)
+bewitchment.tarots_deck=Ritual of Engraving
 bewitchment.broom_cypress=Ritual of the Rising Twigs (Cypress)
 bewitchment.broom_elder=Ritual of the Rising Twigs (Elder)
 bewitchment.broom_juniper=Ritual of the Rising Twigs (Juniper)
@@ -443,6 +449,9 @@ tooltip.armor_description_silver=Protects against undead
 tooltip.tool_description_silver=Deals extra damage to undead
 
 tooltip.bewitchment.athame=This ceremonial dagger also allows you to obtain special loot from mobs
+
+tooltip.bewitchment.waystone=Bound to %d %d %d (%s)
+tooltip.bewitchment.waystone.unbound=Not bound
 
 tooltip.bewitchment.tarots_deck=They are receptive to %s's future
 tooltip.bewitchment.tarots_deck.error=The cards predictions make no sense

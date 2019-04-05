@@ -43,6 +43,7 @@ import com.bewitchment.common.fortune.FortuneMeetParrot;
 import com.bewitchment.common.handler.BlockDropHandler;
 import com.bewitchment.common.handler.EventHandler;
 import com.bewitchment.common.handler.GuiHandler;
+import com.bewitchment.common.ritual.RitualCallOfTheWild;
 import com.bewitchment.common.ritual.RitualConjureAlphaHellhound;
 import com.bewitchment.common.ritual.RitualConjureBlaze;
 import com.bewitchment.common.ritual.RitualConjureDemon;
@@ -55,6 +56,7 @@ import com.bewitchment.common.ritual.RitualConjureWitch;
 import com.bewitchment.common.ritual.RitualConjureWither;
 import com.bewitchment.common.ritual.RitualDrawing;
 import com.bewitchment.common.ritual.RitualHighMoon;
+import com.bewitchment.common.ritual.RitualHungryFlames;
 import com.bewitchment.common.ritual.RitualPerception;
 import com.bewitchment.common.ritual.RitualSandsOfTime;
 import com.bewitchment.common.ritual.RitualSolarGlory;
@@ -255,9 +257,15 @@ public class CommonProxy
 	{
 	}
 	
-	public ItemStack[] toArray(List<ItemStack> list)
+	public void registerTextureWaystone()
+	{		
+	}
+	
+	public ItemStack[] getOres(String... oreNames)
 	{
-		return list.toArray(new ItemStack[list.size()]);
+		List<ItemStack> ret = new ArrayList<>();
+		for (String ore : oreNames) for (ItemStack stack : OreDictionary.getOres(ore)) ret.add(stack);
+		return ret.toArray(new ItemStack[ret.size()]);
 	}
 	
 	public boolean areISListsEqual(List<Ingredient> ings, List<ItemStack> stacks)
@@ -448,6 +456,8 @@ public class CommonProxy
 		BewitchmentAPI.registerRitual(new RitualConjureHellhound());
 		BewitchmentAPI.registerRitual(new RitualConjureAlphaHellhound());
 		BewitchmentAPI.registerRitual(new RitualConjureSerpent());
+		BewitchmentAPI.registerRitual(new RitualCallOfTheWild());
+		BewitchmentAPI.registerRitual(new RitualHungryFlames());
 		BewitchmentAPI.registerRitual(new RitualDrawing("draw_small",
 				Arrays.asList(
 						Ingredient.fromStacks(new ItemStack(ModObjects.wood_ash))),
@@ -464,17 +474,38 @@ public class CommonProxy
 						Ingredient.fromStacks(new ItemStack(ModObjects.wood_ash)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.wood_ash))),
 				40, 100, 0, GlyphType.ANY, GlyphType.ANY, null, Ritual.large));
-		BewitchmentAPI.registerRitual(new Ritual(Bewitchment.MOD_ID, "construct_crystal_ball",
+		BewitchmentAPI.registerRitual(new Ritual(Bewitchment.MOD_ID, "crystal_ball",
 				Arrays.asList(
-						Ingredient.fromStacks(Bewitchment.proxy.toArray(OreDictionary.getOres("gemQuartz"))),
-						Ingredient.fromStacks(Bewitchment.proxy.toArray(OreDictionary.getOres("blockGlass"))),
-						Ingredient.fromStacks(Bewitchment.proxy.toArray(OreDictionary.getOres("blockGlass"))),
-						Ingredient.fromStacks(Bewitchment.proxy.toArray(OreDictionary.getOres("blockGlass"))),
-						Ingredient.fromStacks(Bewitchment.proxy.toArray(OreDictionary.getOres("blockGlass"))),
+						Ingredient.fromStacks(getOres("gemQuartz")),
+						Ingredient.fromStacks(getOres("blockGlass")),
+						Ingredient.fromStacks(getOres("blockGlass")),
+						Ingredient.fromStacks(getOres("blockGlass")),
+						Ingredient.fromStacks(getOres("blockGlass")),
 						Ingredient.fromStacks(new ItemStack(ModObjects.liquid_witchcraft))),
 				Arrays.asList(),
 				Arrays.asList(new ItemStack(ModObjects.crystal_ball)),
 				50, 750, 3, GlyphType.NORMAL, GlyphType.ENDER, null));
+		BewitchmentAPI.registerRitual(new Ritual(Bewitchment.MOD_ID, "tarot_table",
+				Arrays.asList(
+						Ingredient.fromStacks(getOres("string")),
+						Ingredient.fromStacks(getOres("dye")),
+						Ingredient.fromStacks(getOres("workbench")),
+						Ingredient.fromStacks(new ItemStack(ModObjects.droplet_of_wisdom)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.droplet_of_wisdom)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.liquid_witchcraft))),
+				Arrays.asList(),
+				Arrays.asList(new ItemStack(ModObjects.tarot_table)),
+				50, 350, 1, GlyphType.NORMAL, GlyphType.NORMAL, null));
+		BewitchmentAPI.registerRitual(new Ritual(Bewitchment.MOD_ID, "tarots_deck",
+				Arrays.asList(
+						Ingredient.fromStacks(getOres("dye")),
+						Ingredient.fromStacks(getOres("dye")),
+						Ingredient.fromStacks(getOres("paper")),
+						Ingredient.fromStacks(new ItemStack(ModObjects.birch_soul)),
+						Ingredient.fromStacks(getOres("materialWax", "materialBeeswax", "wax", "tallow", "materialPressedWax", "itemBeeswax", "clumpWax", "beeswax", "itemWax"))),
+				Arrays.asList(),
+				Arrays.asList(new ItemStack(ModObjects.tarots_deck)),
+				50, 350, 1, GlyphType.NORMAL, null, null));
 		BewitchmentAPI.registerRitual(new Ritual(Bewitchment.MOD_ID, "broom_cypress",
 				Arrays.asList(
 						Ingredient.fromStacks(new ItemStack(ModObjects.broom)),
@@ -519,10 +550,10 @@ public class CommonProxy
 				Arrays.asList(
 						Ingredient.fromStacks(new ItemStack(ModObjects.white_sage)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.sagebrush)),
-						Ingredient.fromStacks(Bewitchment.proxy.toArray(OreDictionary.getOres("salt"))),
-						Ingredient.fromStacks(Bewitchment.proxy.toArray(OreDictionary.getOres("dirt"))),
-						Ingredient.fromStacks(Bewitchment.proxy.toArray(OreDictionary.getOres("dirt"))),
-						Ingredient.fromStacks(Bewitchment.proxy.toArray(OreDictionary.getOres("dirt")))),
+						Ingredient.fromStacks(getOres("salt")),
+						Ingredient.fromStacks(getOres("dirt")),
+						Ingredient.fromStacks(getOres("dirt")),
+						Ingredient.fromStacks(getOres("dirt"))),
 				Arrays.asList(),
 				Arrays.asList(new ItemStack(ModObjects.purifying_earth, 16)),
 				250, 500, 4, GlyphType.NORMAL, GlyphType.NORMAL, null));
