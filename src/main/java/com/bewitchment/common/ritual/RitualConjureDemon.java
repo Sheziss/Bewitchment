@@ -39,7 +39,7 @@ public class RitualConjureDemon extends Ritual
 						Ingredient.fromStacks(new ItemStack(Items.GHAST_TEAR))),
 				Arrays.asList(EntityRegistry.getEntry(EntityVillager.class)),
 				Arrays.asList(),
-				616, 500, 10, GlyphType.NETHER, GlyphType.NETHER, GlyphType.NETHER);
+				616, 4750, 10, GlyphType.NETHER, GlyphType.NETHER, GlyphType.NETHER);
 	}
 	
 	@Override

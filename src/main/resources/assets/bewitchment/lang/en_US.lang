@@ -392,6 +392,11 @@ bewitchment.conjure_serpent=Ritual of Conjuration (Serpent)
 bewitchment.draw_small=Ritual of the Lesser Marks
 bewitchment.draw_medium=Ritual of the Marks
 bewitchment.draw_large=Ritual of the Major Marks
+bewitchment.construct_crystal_ball=Ritual of Construction (Crystal Ball)
+bewitchment.broom_cypress=Ritual of the Rising Twigs (Cypress)
+bewitchment.broom_elder=Ritual of the Rising Twigs (Elder)
+bewitchment.broom_juniper=Ritual of the Rising Twigs (Juniper)
+bewitchment.broom_yew=Ritual of the Rising Twigs (Yew)
 bewitchment.sanctuary=Ritual of the Sanctuary
 
 #Fortune
@@ -400,6 +405,11 @@ bewitchment.death=The path ahead looks very bleak.
 bewitchment.drop_item=Fingers won't obey when they're most needed.
 bewitchment.good_luck=Your future looks very bright indeed.
 bewitchment.illness=Weakness and misfortune dot your future.
+bewitchment.meet_cat=You will soon encounter a new friend.
+bewitchment.meet_dog=You will soon encounter a new friend.
+bewitchment.meet_horse=You will soon encounter a new friend.
+bewitchment.meet_llama=You will soon encounter a new friend.
+bewitchment.meet_parrot=You will soon encounter a new friend.
 
 #Info
 itemGroup.bewitchment=Bewitchment

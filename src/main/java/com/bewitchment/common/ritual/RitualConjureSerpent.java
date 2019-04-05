@@ -34,7 +34,7 @@ public class RitualConjureSerpent extends Ritual
 						Ingredient.fromStacks(new ItemStack(Items.BLAZE_POWDER))),
 				Arrays.asList(),
 				Arrays.asList(),
-				200, 500, 3, GlyphType.NETHER, GlyphType.NETHER, null);
+				600, 3750, 3, GlyphType.NETHER, GlyphType.NETHER, null);
 	}
 	
 	@Override

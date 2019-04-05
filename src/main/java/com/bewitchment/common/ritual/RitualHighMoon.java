@@ -25,7 +25,7 @@ public class RitualHighMoon extends Ritual
 						Ingredient.fromStacks(new ItemStack(ModObjects.hellebore))),
 				Arrays.asList(),
 				Arrays.asList(),
-				100, 100, 0, GlyphType.NORMAL, null, null);
+				100, 800, 0, GlyphType.NORMAL, null, null);
 	}
 	
 	@Override

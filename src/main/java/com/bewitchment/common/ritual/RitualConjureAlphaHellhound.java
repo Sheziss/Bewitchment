@@ -39,7 +39,7 @@ public class RitualConjureAlphaHellhound extends Ritual
 						Ingredient.fromStacks(new ItemStack(Items.BLAZE_POWDER))),
 				Arrays.asList(),
 				Arrays.asList(),
-				200, 500, 3, GlyphType.NETHER, GlyphType.NETHER, GlyphType.NETHER);
+				800, 4150, 6, GlyphType.NETHER, GlyphType.NETHER, GlyphType.NETHER);
 	}
 	
 	@Override

@@ -31,7 +31,7 @@ public class RitualConjureMagmaCube extends Ritual
 						Ingredient.fromStacks(Bewitchment.proxy.toArray(OreDictionary.getOres("slimeball")))),
 				Arrays.asList(),
 				Arrays.asList(),
-				200, 500, 3, GlyphType.NETHER, GlyphType.NETHER, null);
+				120, 1200, 3, GlyphType.NETHER, GlyphType.NETHER, null);
 	}
 	
 	@Override

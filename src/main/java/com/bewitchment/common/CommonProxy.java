@@ -35,6 +35,11 @@ import com.bewitchment.common.fortune.FortuneDeath;
 import com.bewitchment.common.fortune.FortuneDropItem;
 import com.bewitchment.common.fortune.FortuneGoodLuck;
 import com.bewitchment.common.fortune.FortuneIllness;
+import com.bewitchment.common.fortune.FortuneMeetCat;
+import com.bewitchment.common.fortune.FortuneMeetDog;
+import com.bewitchment.common.fortune.FortuneMeetHorse;
+import com.bewitchment.common.fortune.FortuneMeetLlama;
+import com.bewitchment.common.fortune.FortuneMeetParrot;
 import com.bewitchment.common.handler.BlockDropHandler;
 import com.bewitchment.common.handler.EventHandler;
 import com.bewitchment.common.handler.GuiHandler;
@@ -422,6 +427,11 @@ public class CommonProxy
 		BewitchmentAPI.registerFortune(new FortuneDropItem());
 		BewitchmentAPI.registerFortune(new FortuneGoodLuck());
 		BewitchmentAPI.registerFortune(new FortuneIllness());
+		BewitchmentAPI.registerFortune(new FortuneMeetCat());
+		BewitchmentAPI.registerFortune(new FortuneMeetDog());
+		BewitchmentAPI.registerFortune(new FortuneMeetHorse());
+		BewitchmentAPI.registerFortune(new FortuneMeetLlama());
+		BewitchmentAPI.registerFortune(new FortuneMeetParrot());
 		
 		// Ritual
 		BewitchmentAPI.registerRitual(new RitualHighMoon());
@@ -441,20 +451,81 @@ public class CommonProxy
 		BewitchmentAPI.registerRitual(new RitualDrawing("draw_small",
 				Arrays.asList(
 						Ingredient.fromStacks(new ItemStack(ModObjects.wood_ash))),
-				0, 0, 0, GlyphType.ANY, null, null, Ritual.small));
+				40, 100, 0, GlyphType.ANY, null, null, Ritual.small));
 		BewitchmentAPI.registerRitual(new RitualDrawing("draw_medium",
 				Arrays.asList(
 						Ingredient.fromStacks(new ItemStack(Items.CLAY_BALL)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.wood_ash))),
-				0, 0, 0, GlyphType.ANY, null, null, Ritual.medium));
+				40, 100, 0, GlyphType.ANY, null, null, Ritual.medium));
 		BewitchmentAPI.registerRitual(new RitualDrawing("draw_large",
 				Arrays.asList(
 						Ingredient.fromStacks(new ItemStack(Items.CLAY_BALL)),
 						Ingredient.fromStacks(new ItemStack(Items.CLAY_BALL)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.wood_ash)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.wood_ash))),
-				0, 0, 0, GlyphType.ANY, GlyphType.ANY, null, Ritual.large));
-//		BewitchmentAPI.registerRitual(new Ritual(Bewitchment.MOD_ID, "sanctuary", Arrays.asList(), Arrays.asList(), Arrays.asList(), 250, 500, 4, GlyphType.NORMAL, GlyphType.NORMAL, null));
+				40, 100, 0, GlyphType.ANY, GlyphType.ANY, null, Ritual.large));
+		BewitchmentAPI.registerRitual(new Ritual(Bewitchment.MOD_ID, "construct_crystal_ball",
+				Arrays.asList(
+						Ingredient.fromStacks(Bewitchment.proxy.toArray(OreDictionary.getOres("gemQuartz"))),
+						Ingredient.fromStacks(Bewitchment.proxy.toArray(OreDictionary.getOres("blockGlass"))),
+						Ingredient.fromStacks(Bewitchment.proxy.toArray(OreDictionary.getOres("blockGlass"))),
+						Ingredient.fromStacks(Bewitchment.proxy.toArray(OreDictionary.getOres("blockGlass"))),
+						Ingredient.fromStacks(Bewitchment.proxy.toArray(OreDictionary.getOres("blockGlass"))),
+						Ingredient.fromStacks(new ItemStack(ModObjects.liquid_witchcraft))),
+				Arrays.asList(),
+				Arrays.asList(new ItemStack(ModObjects.crystal_ball)),
+				50, 750, 3, GlyphType.NORMAL, GlyphType.ENDER, null));
+		BewitchmentAPI.registerRitual(new Ritual(Bewitchment.MOD_ID, "broom_cypress",
+				Arrays.asList(
+						Ingredient.fromStacks(new ItemStack(ModObjects.broom)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.log_cypress)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.sapling_cypress)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.undying_salve)),
+						Ingredient.fromStacks(new ItemStack(Items.ELYTRA, 1, Short.MAX_VALUE))),
+				Arrays.asList(),
+				Arrays.asList(new ItemStack(ModObjects.broom_cypress)),
+				130, 1000, 4, GlyphType.NORMAL, GlyphType.NORMAL, GlyphType.ENDER));
+		BewitchmentAPI.registerRitual(new Ritual(Bewitchment.MOD_ID, "broom_elder",
+				Arrays.asList(
+						Ingredient.fromStacks(new ItemStack(ModObjects.broom)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.log_elder)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.sapling_elder)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.undying_salve)),
+						Ingredient.fromStacks(new ItemStack(Items.ELYTRA, 1, Short.MAX_VALUE))),
+				Arrays.asList(),
+				Arrays.asList(new ItemStack(ModObjects.broom_elder)),
+				130, 1000, 4, GlyphType.NORMAL, GlyphType.NORMAL, GlyphType.ENDER));
+		BewitchmentAPI.registerRitual(new Ritual(Bewitchment.MOD_ID, "broom_juniper",
+				Arrays.asList(
+						Ingredient.fromStacks(new ItemStack(ModObjects.broom)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.log_juniper)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.sapling_juniper)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.undying_salve)),
+						Ingredient.fromStacks(new ItemStack(Items.ELYTRA, 1, Short.MAX_VALUE))),
+				Arrays.asList(),
+				Arrays.asList(new ItemStack(ModObjects.broom_juniper)),
+				130, 1000, 4, GlyphType.NORMAL, GlyphType.NORMAL, GlyphType.ENDER));
+		BewitchmentAPI.registerRitual(new Ritual(Bewitchment.MOD_ID, "broom_yew",
+				Arrays.asList(
+						Ingredient.fromStacks(new ItemStack(ModObjects.broom)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.log_yew)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.sapling_yew)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.undying_salve)),
+						Ingredient.fromStacks(new ItemStack(Items.ELYTRA, 1, Short.MAX_VALUE))),
+				Arrays.asList(),
+				Arrays.asList(new ItemStack(ModObjects.broom_yew)),
+				130, 1000, 4, GlyphType.NORMAL, GlyphType.NORMAL, GlyphType.ENDER));
+		BewitchmentAPI.registerRitual(new Ritual(Bewitchment.MOD_ID, "sanctuary",
+				Arrays.asList(
+						Ingredient.fromStacks(new ItemStack(ModObjects.white_sage)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.sagebrush)),
+						Ingredient.fromStacks(Bewitchment.proxy.toArray(OreDictionary.getOres("salt"))),
+						Ingredient.fromStacks(Bewitchment.proxy.toArray(OreDictionary.getOres("dirt"))),
+						Ingredient.fromStacks(Bewitchment.proxy.toArray(OreDictionary.getOres("dirt"))),
+						Ingredient.fromStacks(Bewitchment.proxy.toArray(OreDictionary.getOres("dirt")))),
+				Arrays.asList(),
+				Arrays.asList(new ItemStack(ModObjects.purifying_earth, 16)),
+				250, 500, 4, GlyphType.NORMAL, GlyphType.NORMAL, null));
 		
 		// Distillery
 		BewitchmentAPI.registerDistilleryRecipe(new DistilleryRecipe(Bewitchment.MOD_ID, "cleansing_balm",

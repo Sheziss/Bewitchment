@@ -30,7 +30,7 @@ public class RitualConjureVex extends Ritual
 						Ingredient.fromStacks(new ItemStack(ModObjects.wormwood))),
 				Arrays.asList(),
 				Arrays.asList(),
-				200, 500, 3, GlyphType.NORMAL, GlyphType.ENDER, null);
+				100, 1000, 2, GlyphType.NORMAL, GlyphType.ENDER, null);
 	}
 	
 	@Override

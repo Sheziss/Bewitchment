@@ -33,7 +33,7 @@ public class RitualConjureBlaze extends Ritual
 						Ingredient.fromStacks(new ItemStack(ModObjects.wormwood))),
 				Arrays.asList(),
 				Arrays.asList(),
-				200, 500, 3, GlyphType.NETHER, GlyphType.NETHER, null);
+				120, 1200, 2, GlyphType.NETHER, GlyphType.NETHER, null);
 	}
 	
 	@Override

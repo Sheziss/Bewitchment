@@ -31,7 +31,7 @@ public class RitualConjureWitch extends Ritual
 						Ingredient.fromStacks(new ItemStack(Items.POISONOUS_POTATO))),
 				Arrays.asList(),
 				Arrays.asList(),
-				200, 500, 3, GlyphType.NETHER, GlyphType.ENDER, GlyphType.NETHER);
+				200, 3000, 3, GlyphType.NETHER, GlyphType.ENDER, GlyphType.NETHER);
 	}
 	
 	@Override

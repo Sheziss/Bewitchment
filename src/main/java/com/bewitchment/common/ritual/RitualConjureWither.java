@@ -34,7 +34,7 @@ public class RitualConjureWither extends Ritual
 						Ingredient.fromStacks(new ItemStack(ModObjects.ectoplasm))),
 				Arrays.asList(),
 				Arrays.asList(),
-				200, 500, 3, GlyphType.NETHER, GlyphType.NETHER, GlyphType.NETHER);
+				400, 5000, 4, GlyphType.NETHER, GlyphType.NETHER, GlyphType.NETHER);
 	}
 	
 	@Override
