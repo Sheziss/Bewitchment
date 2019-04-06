@@ -1,0 +1,13 @@
+{
+	"name": "Silver",
+	"icon": "bewitchment:ingot_silver",
+	"category": "magical_metallurgy",
+	"pages":
+	[
+		{
+			"type": "spotlight",
+			"item": "bewitchment:ingot_silver",
+			"text": "A precious metal often dug up from the earth, it seems to be one of the things that can kill a vast variety of creatures, and undead are especially averse to it."
+		}
+	]
+}

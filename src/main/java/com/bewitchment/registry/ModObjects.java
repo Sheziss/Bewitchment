@@ -22,6 +22,7 @@ import com.bewitchment.common.block.BlockPlacedItem;
 import com.bewitchment.common.block.BlockPurifyingEarth;
 import com.bewitchment.common.block.BlockSaltBarrier;
 import com.bewitchment.common.block.BlockTarotTable;
+import com.bewitchment.common.block.BlockWitchFire;
 import com.bewitchment.common.block.BlockWitchesAltar;
 import com.bewitchment.common.block.BlockWitchesLight;
 import com.bewitchment.common.block.crop.BlockCropBelladonna;
@@ -58,10 +59,10 @@ import com.bewitchment.common.item.ItemCypressBroom;
 import com.bewitchment.common.item.ItemElderBroom;
 import com.bewitchment.common.item.ItemJuniperBroom;
 import com.bewitchment.common.item.ItemLantern;
-import com.bewitchment.common.item.ItemWaystone;
 import com.bewitchment.common.item.ItemSalt;
 import com.bewitchment.common.item.ItemTarotsDeck;
 import com.bewitchment.common.item.ItemUndyingSalve;
+import com.bewitchment.common.item.ItemWaystone;
 import com.bewitchment.common.item.ItemYewBroom;
 import com.bewitchment.common.item.equipment.ItemColdIronArmor;
 import com.bewitchment.common.item.equipment.ItemSilverArmor;
@@ -151,6 +152,17 @@ public class ModObjects
 {
 	public static final List<Object> REGISTRY = new ArrayList<>();
 	
+	public static final ArmorMaterial ARMOR_COLD_IRON = EnumHelper.addArmorMaterial("cold_iron", Bewitchment.MOD_ID + ":" + "cold_iron", 18, new int[] {2, 6, 7, 2}, 8, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.45f);
+	public static final ArmorMaterial ARMOR_SILVER = EnumHelper.addArmorMaterial("silver", Bewitchment.MOD_ID + ":" + "silver", 12, new int[] {1, 4, 5, 2}, 22, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 1.5f);
+	
+	public static final ToolMaterial TOOL_COLD_IRON = EnumHelper.addToolMaterial("cold_iron", 2, 850, 7, 3, 8);
+	public static final ToolMaterial TOOL_SILVER = EnumHelper.addToolMaterial("silver", 1, 215, 10, 2.5f, 24);
+	
+	public static final ArmorMaterial ARMOR_BEWITCHED_LEATHER = EnumHelper.addArmorMaterial("bewitched_leather", Bewitchment.MOD_ID + ":" + "bewitched_leather", 24, new int[] {1, 4, 5, 1}, 22, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1.5f);
+	public static final ArmorMaterial ARMOR_VAMPIRE = EnumHelper.addArmorMaterial("vampire", Bewitchment.MOD_ID + ":" + "vampire", 9, new int[] {2, 6, 7, 1}, 22, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1.25f);
+	
+	public static final ToolMaterial TOOL_RITUAL = EnumHelper.addToolMaterial("ritual", 2, 300, 2, 1.5f, 30);
+	
 	// Fluids
 	public static final Fluid fluid_honey = createFluid("honey", Material.WATER, 0, 10, 1500, 8000, true, false);
 	public static final Fluid fluid_oil_mundane = createFluid("oil_mundane", Material.WATER, 0, 0, 800, 4000, true, true);
@@ -158,7 +170,10 @@ public class ModObjects
 	// No Item
 	public static final Block glyph = createTileEntity(new BlockGlyph(), TileEntityGlyph.class);
 	public static final Block placed_item = createTileEntity(new BlockPlacedItem(), TileEntityPlacedItem.class);
-	public static final Block witchfire = null;
+	public static final Block witchfire = new BlockWitchFire("witchfire");
+	public static final Block endfire = new BlockWitchFire("endfire");
+	public static final Block frostfire = new BlockWitchFire("frostfire");
+	public static final Block sightfire = new BlockWitchFire("sightfire");
 	public static final Block witches_light = new BlockWitchesLight();
 	public static final Block salt_barrier = new BlockSaltBarrier();
 	public static final Block crop_aconitum = new ModBlockCrop("crop_aconitum", ModObjects.seed_aconitum, new ItemStack(ModObjects.aconitum), 3);
@@ -181,7 +196,6 @@ public class ModObjects
 	public static final Block crop_wormwood = new ModBlockCrop("crop_wormwood", ModObjects.seed_wormwood, new ItemStack(ModObjects.wormwood), 6);
 	
 	// Devices
-	public static final Block apiary = createTileEntity(new BlockApiary(), TileEntityApiary.class);
 	public static final Block witches_altar_unformed = createTileEntity(new BlockWitchesAltar(""), TileEntityWitchesAltar.class);
 	public static final Block witches_altar_white = new BlockWitchesAltar("white").setCreativeTab(null);
 	public static final Block witches_altar_orange = new BlockWitchesAltar("orange").setCreativeTab(null);
@@ -199,12 +213,14 @@ public class ModObjects
 	public static final Block witches_altar_green = new BlockWitchesAltar("green").setCreativeTab(null);
 	public static final Block witches_altar_red = new BlockWitchesAltar("red").setCreativeTab(null);
 	public static final Block witches_altar_black = new BlockWitchesAltar("black").setCreativeTab(null);
+	public static final Block oven = createTileEntity(new BlockOven(), TileEntityOven.class);
 	public static final Block distillery = createTileEntity(new BlockDistillery(), TileEntityDistillery.class);
 	public static final Block loom = createTileEntity(new BlockLoom(), TileEntityLoom.class);
-	public static final Block oven = createTileEntity(new BlockOven(), TileEntityOven.class);
-	public static final Block gem_bowl = createTileEntity(new BlockGemBowl(), TileEntityGemBowl.class);
-	public static final Block crystal_ball = createTileEntity(new BlockCrystalBall(), TileEntityCrystalBall.class);
+	public static final Block apiary = createTileEntity(new BlockApiary(), TileEntityApiary.class);
 	public static final Block tarot_table = createTileEntity(new BlockTarotTable(), TileEntityAltarStorage.class);
+	public static final Item tarots_deck = new ItemTarotsDeck();
+	public static final Block crystal_ball = createTileEntity(new BlockCrystalBall(), TileEntityCrystalBall.class);
+	public static final Block gem_bowl = createTileEntity(new BlockGemBowl(), TileEntityGemBowl.class);	
 	
 	// Material Blocks
 	public static final Block block_cold_iron = new ModBlock("block_cold_iron", Material.IRON, SoundType.METAL, 5, 30, "pickaxe", 1, "blockColdIron");
@@ -358,17 +374,6 @@ public class ModObjects
 	public static final Block button_juniper = new ModBlockButton("button_juniper", planks_juniper);
 	public static final Block button_yew = new ModBlockButton("button_yew", planks_yew);
 	
-	public static final ArmorMaterial ARMOR_COLD_IRON = EnumHelper.addArmorMaterial("cold_iron", Bewitchment.MOD_ID + ":" + "cold_iron", 18, new int[] {2, 6, 7, 2}, 8, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.45f);
-	public static final ArmorMaterial ARMOR_SILVER = EnumHelper.addArmorMaterial("silver", Bewitchment.MOD_ID + ":" + "silver", 12, new int[] {1, 4, 5, 2}, 22, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 1.5f);
-	
-	public static final ToolMaterial TOOL_COLD_IRON = EnumHelper.addToolMaterial("cold_iron", 2, 850, 7, 3, 8);
-	public static final ToolMaterial TOOL_SILVER = EnumHelper.addToolMaterial("silver", 1, 215, 10, 2.5f, 24);
-	
-	public static final ArmorMaterial ARMOR_BEWITCHED_LEATHER = EnumHelper.addArmorMaterial("bewitched_leather", Bewitchment.MOD_ID + ":" + "bewitched_leather", 24, new int[] {1, 4, 5, 1}, 22, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1.5f);
-	public static final ArmorMaterial ARMOR_VAMPIRE = EnumHelper.addArmorMaterial("vampire", Bewitchment.MOD_ID + ":" + "vampire", 9, new int[] {2, 6, 7, 1}, 22, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1.25f);
-	
-	public static final ToolMaterial TOOL_RITUAL = EnumHelper.addToolMaterial("ritual", 2, 300, 2, 1.5f, 30);
-	
 	// Baubles
 	public static final Item girdle_of_the_dryad = new ItemGirdleOfTheDryad();
 	public static final Item hellish_bauble = new ItemHellishBauble();
@@ -419,8 +424,6 @@ public class ModObjects
 	public static final Item chalk_nether = new ItemChalk("chalk_nether");
 	public static final Item chalk_ender = new ItemChalk("chalk_ender");
 	
-	public static final Item tarots_deck = new ItemTarotsDeck();
-	
 	// Brooms
 	public static final Item broom = new ModItem("broom").setMaxStackSize(1);
 	public static final Item broom_cypress = new ItemCypressBroom();
@@ -444,33 +447,45 @@ public class ModObjects
 	public static final Item gem_tourmaline = new ModItem("gem_tourmaline", "gemTourmaline", "gemAll");
 	
 	public static final Item salt = new ItemSalt();
-	public static final Item wax = new ModItem("wax", "materialWax", "materialBeeswax", "materialPressedWax", "itemBeeswax", "wax", "tallow", "clumpWax", "beeswax", "itemWax");
+	public static final Item pentacle = new ModItem("pentacle");
 	public static final Item honey = new ItemHoney();
 	public static final Item empty_honeycomb = new ModItem("empty_honeycomb", "materialWaxcomb");
 	public static final Item honeycomb = new ModItem("honeycomb", "materialHoneycomb");
-	
-	// Jars
+	public static final Item wax = new ModItem("wax", "materialWax", "materialBeeswax", "materialPressedWax", "itemBeeswax", "wax", "tallow", "clumpWax", "beeswax", "itemWax");
+
+	// Oven Jars
 	public static final Item unfired_jar = new ModItem("unfired_jar");
 	public static final Item empty_jar = new ModItem("empty_jar");
-	public static final Item acacia_resin = new ModItem("acacia_resin");
+	public static final Item oak_spirit = new ModItem("oak_spirit");
+	public static final Item spruce_heart = new ModItem("spruce_heart");
 	public static final Item birch_soul = new ModItem("birch_soul");
-	public static final Item cleansing_balm = new ModItem("cleansing_balm");
 	public static final Item cloudy_oil = new ModItem("cloudy_oil");
-	public static final Item demonic_elixir = new ModItem("demonic_elixir");
-	public static final Item droplet_of_wisdom = new ModItem("droplet_of_wisdom");
+	public static final Item acacia_resin = new ModItem("acacia_resin");
 	public static final Item ebb_of_death = new ModItem("ebb_of_death");
-	public static final Item everchanging_dew = new ModItem("everchanging_dew");
+	public static final Item droplet_of_wisdom = new ModItem("droplet_of_wisdom");
+	public static final Item liquid_witchcraft = new ModItem("liquid_witchcraft");
 	public static final Item essence_of_vitality = new ModItem("essence_of_vitality");
+	
+	// Distillery Jars
+	public static final Item cleansing_balm = new ModItem("cleansing_balm");
+	public static final Item demonic_elixir = new ModItem("demonic_elixir");
+	public static final Item everchanging_dew = new ModItem("everchanging_dew");
 	public static final Item fiery_unguent = new ModItem("fiery_unguent");
 	public static final Item heaven_extract = new ModItem("heaven_extract");
-	public static final Item liquid_witchcraft = new ModItem("liquid_witchcraft");
-	public static final Item oak_spirit = new ModItem("oak_spirit");
 	public static final Item otherworldly_tears = new ModItem("otherworldly_tears");
 	public static final Item philter_of_dishonesty = new ModItem("philter_of_dishonesty");
-	public static final Item spruce_heart = new ModItem("spruce_heart");
 	public static final Item stone_ichor = new ModItem("stone_ichor");
 	public static final Item swirl_of_the_depths = new ModItem("swirl_of_the_depths");
 	public static final Item undying_salve = new ItemUndyingSalve();
+	
+	// Loom
+	public static final Item diabolical_vein = new ModItem("diabolical_vein");
+	public static final Item golden_thread = new ModItem("golden_thread");
+	public static final Item pure_filament = new ModItem("pure_filament");
+	public static final Item regal_silk = new ModItem("regal_silk");
+	public static final Item sanguine_fabric = new ModItem("sanguine_fabric");
+	public static final Item soul_string = new ModItem("soul_string");
+	public static final Item witches_stitching = new ModItem("witches_stitching");
 	
 	// Ingredients
 	public static final Item aconitum = new ItemAconitum();
@@ -493,50 +508,6 @@ public class ModObjects
 	public static final Item witchweed = new ModItem("witchweed");
 	public static final Item wormwood = new ItemWormwood();
 	
-	public static final Item adders_fork = new ModItem("adders_fork");
-	public static final Item blindworms_sting = new ModItem("blindworms_sting");
-	public static final Item carnivorous_tooth = new ModItem("carnivorous_tooth");
-	public static final Item chromatic_quill = new ModItem("chromatic_quill");
-	public static final Item demonic_heart = new ModItem("demonic_heart");
-	public static final Item diabolical_vein = new ModItem("diabolical_vein");
-	public static final Item dimensional_sand = new ModItem("dimensional_sand");
-	public static final Item ectoplasm = new ModItem("ectoplasm");
-	public static final Item envenomed_fang = new ModItem("envenomed_fang");
-	public static final Item equine_tail = new ModItem("equine_tail");
-	public static final Item eye_of_ancient = new ModItem("eye_of_ancient");
-	public static final Item eye_of_newt = new ModItem("eye_of_newt");
-	public static final Item eye_of_old = new ModItem("eye_of_old");
-	public static final Item fillet_of_fenny_snake = new ModItem("fillet_of_fenny_snake");
-	public static final Item glass_jar = new ModItem("glass_jar");
-	public static final Item graveyard_dust = new ModItem("graveyard_dust");
-	public static final Item grilled_watermelon = new ModItemFood("grilled_watermelon", 4, 2.5f, false);
-	public static final Item golden_thread = new ModItem("golden_thread");
-	public static final Item heart = new ItemHeart();
-	public static final Item hellhound_horn = new ModItem("hellhound_horn");
-	public static final Item hoof = new ModItem("hoof");
-	public static final Item juniper_berries = new ModItemFood("juniper_berries", 1, 0.5f, false).setPotionEffect(new PotionEffect(MobEffects.POISON, 100, 0), 0.1f);
-	public static final Item lapis_powder = new ModItem("lapis_powder");
-	public static final Item liquid_wroth = new ModItem("liquid_wroth");
-	public static final Item lizard_leg = new ModItem("lizard_leg");
-	public static final Item oak_apple_gall = new ModItem("oak_apple_gall");
-	public static final Item owlets_wing = new ModItem("owlets_wing");
-	public static final Item pentacle = new ModItem("pentacle");
-	public static final Item pure_filament = new ModItem("pure_filament");
-	public static final Item quartz_powder = new ModItem("quartz_powder");
-	public static final Item ravens_feather = new ModItem("ravens_feather");
-	public static final Item regal_silk = new ModItem("regal_silk");
-	public static final Item sanguine_fabric = new ModItem("sanguine_fabric");
-	public static final Item silver_scales = new ModItem("silver_scales");
-	public static final Item snake_venom = new ModItem("snake_venom");
-	public static final Item soul_string = new ModItem("soul_string");
-	public static final Item spectral_dust = new ModItem("spectral_dust");
-	public static final Item toe_of_frog = new ModItem("toe_of_frog");
-	public static final Item tongue_of_dog = new ModItem("tongue_of_dog");
-	public static final Item witches_stitching = new ModItem("witches_stitching");
-	public static final Item wood_ash = new ModItem("wood_ash");
-	public static final Item wool_of_bat = new ModItem("wool_of_bat");
-	public static final Item yew_aril = new ModItemFood("yew_aril", 1, 0.5f, false).setPotionEffect(new PotionEffect(MobEffects.POISON, 100, 0), 0.1f);
-	
 	// Seeds
 	public static final ModItemSeed seed_aconitum = new ModItemSeed("seed_aconitum", ModObjects.crop_aconitum, Blocks.FARMLAND);
 	public static final ModItemSeed seed_asphodel = new ModItemSeed("seed_asphodel", ModObjects.crop_asphodel, Blocks.FARMLAND);
@@ -557,6 +528,49 @@ public class ModObjects
 	public static final ModItemSeed seed_white_sage = new ModItemSeed("seed_white_sage", ModObjects.crop_white_sage, Blocks.FARMLAND);
 	public static final ModItemSeed seed_wormwood = new ModItemSeed("seed_wormwood", ModObjects.crop_wormwood, Blocks.FARMLAND);
 	
+	// Food
+	public static final Item grilled_watermelon = new ModItemFood("grilled_watermelon", 4, 2.5f, false);
+	public static final Item juniper_berries = new ModItemFood("juniper_berries", 1, 0.5f, false).setPotionEffect(new PotionEffect(MobEffects.POISON, 100, 0), 0.1f);
+	public static final Item yew_aril = new ModItemFood("yew_aril", 1, 0.5f, false).setPotionEffect(new PotionEffect(MobEffects.POISON, 100, 0), 0.1f);
+	
+	// Mod Mob Drops
+	public static final Item blindworms_sting = new ModItem("blindworms_sting");
+	public static final Item lizard_leg = new ModItem("lizard_leg");
+	public static final Item eye_of_newt = new ModItem("eye_of_newt");
+	public static final Item owlets_wing = new ModItem("owlets_wing");
+	public static final Item ravens_feather = new ModItem("ravens_feather");
+	public static final Item adders_fork = new ModItem("adders_fork");
+	public static final Item fillet_of_fenny_snake = new ModItem("fillet_of_fenny_snake");
+	public static final Item toe_of_frog = new ModItem("toe_of_frog");
+	public static final Item hellhound_horn = new ModItem("hellhound_horn");
+	public static final Item heart = new ItemHeart();
+	public static final Item demonic_heart = new ModItem("demonic_heart");
+	public static final Item glass_jar = new ModItem("glass_jar");
+	public static final Item snake_venom = new ModItem("snake_venom");
+	public static final Item liquid_wroth = new ModItem("liquid_wroth");
+	
+	// Athame, Etc
+	public static final Item carnivorous_tooth = new ModItem("carnivorous_tooth");
+	public static final Item chromatic_quill = new ModItem("chromatic_quill");
+	public static final Item envenomed_fang = new ModItem("envenomed_fang");
+	public static final Item equine_tail = new ModItem("equine_tail");
+	public static final Item hoof = new ModItem("hoof");
+	public static final Item eye_of_ancient = new ModItem("eye_of_ancient");
+	public static final Item eye_of_old = new ModItem("eye_of_old");
+	public static final Item silver_scales = new ModItem("silver_scales");
+	public static final Item tongue_of_dog = new ModItem("tongue_of_dog");
+	public static final Item wool_of_bat = new ModItem("wool_of_bat");
+	
+	// Misc
+	public static final Item dimensional_sand = new ModItem("dimensional_sand");
+	public static final Item ectoplasm = new ModItem("ectoplasm");
+	public static final Item graveyard_dust = new ModItem("graveyard_dust");
+	public static final Item oak_apple_gall = new ModItem("oak_apple_gall");
+	public static final Item spectral_dust = new ModItem("spectral_dust");
+	public static final Item wood_ash = new ModItem("wood_ash");
+	public static final Item lapis_powder = new ModItem("lapis_powder");
+	public static final Item quartz_powder = new ModItem("quartz_powder");
+
 	@SubscribeEvent
 	public static void registerBlocks(Register<Block> event)
 	{
@@ -590,7 +604,7 @@ public class ModObjects
 					event.getRegistry().register(itemBlock);
 					Bewitchment.proxy.registerTexture(itemBlock);
 				}
-				else if (!(block instanceof BlockWitchesLight) && !(block instanceof BlockGlyph) && !(block instanceof BlockSaltBarrier) && !(block instanceof BlockCrops) && !(block instanceof BlockDoor) && !(block instanceof BlockSlab) && !(block instanceof IFluidBlock))
+				else if (!(block instanceof BlockWitchFire) && !(block instanceof BlockWitchesLight) && !(block instanceof BlockGlyph) && !(block instanceof BlockSaltBarrier) && !(block instanceof BlockCrops) && !(block instanceof BlockDoor) && !(block instanceof BlockSlab) && !(block instanceof IFluidBlock))
 				{
 					Item itemBlock = new ItemBlock(block).setRegistryName(block.getRegistryName()).setTranslationKey(block.getTranslationKey());
 					event.getRegistry().register(itemBlock);

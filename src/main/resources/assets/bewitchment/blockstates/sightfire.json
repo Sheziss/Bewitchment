@@ -1,0 +1,15 @@
+{
+	"forge_marker": 1,
+	"defaults":
+	{
+		"model": "bewitchment:witchfire",
+		"textures":
+		{
+			"fire": "bewitchment:blocks/sightfire"
+		}
+	},
+	"variants":
+	{
+		"normal": [{}]
+	}
+}
