@@ -125,21 +125,24 @@ public class Ritual extends IForgeRegistryEntry.Impl<Ritual>
 	{
 		List<ItemStack> out = new ArrayList<>();
 		for (ItemStack stack : output) out.add(stack);
-		for (int i = 0; i < tile.inventory.getSlots(); i++)
+		if (tile != null)
 		{
-			ItemStack stack = tile.inventory.extractItem(i, tile.inventory.getStackInSlot(i).getCount(), false);
-			if (stack.getItem() == ModObjects.athame) stack.damageItem(50, tile.getWorld().getPlayerEntityByUUID(tile.getCaster()));
-			else
+			for (int i = 0; i < tile.inventory.getSlots(); i++)
 			{
-				for (Ingredient ing : getInputItems())
+				ItemStack stack = tile.inventory.extractItem(i, tile.inventory.getStackInSlot(i).getCount(), false);
+				if (stack.getItem() == ModObjects.athame) stack.damageItem(50, tile.getWorld().getPlayerEntityByUUID(tile.getCaster()));
+				else
 				{
-					for (ItemStack stack0 : ing.getMatchingStacks())
+					for (Ingredient ing : getInputItems())
 					{
-						if (Bewitchment.proxy.areStacksEqual(stack, stack0)) stack.shrink(stack0.getCount());
+						for (ItemStack stack0 : ing.getMatchingStacks())
+						{
+							if (Bewitchment.proxy.areStacksEqual(stack, stack0)) stack.shrink(stack0.getCount());
+						}
 					}
 				}
+				out.add(stack);
 			}
-			out.add(stack);
 		}
 		return out;
 	}

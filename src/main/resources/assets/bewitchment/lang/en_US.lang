@@ -495,6 +495,11 @@ tooltip.bewitchment.white_sage=Used as an aid in exorcisms
 tooltip.bewitchment.witchweed=A small herb that grows over other crops
 tooltip.bewitchment.wormwood=An incredibly weedy herb
 
+#JEI
+jei.ritual=Ritual
+jei.ritual.startingPower=Starting Power: %d
+jei.ritual.runningPower=Running Power: %d
+
 #Demon Names
 demon_name_0=Bael
 demon_name_1=Agares
