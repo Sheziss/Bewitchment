@@ -120,8 +120,8 @@ public class BlockWitchesAltar extends ModBlockContainer
 				{
 					int color = stack.getMetadata();
 					if (state.getValue(TYPE) == AltarType.UNFORMED && !tryFormAltar(world, pos, color)) return false;
-					Block altar = getAltarWithColor(color);
 					refreshAltarContainers(world, pos);
+					Block altar = getAltarWithColor(color);
 					if (world.getBlockState(pos).getBlock() != altar)
 					{
 						TileEntityWitchesAltar tile = (TileEntityWitchesAltar) world.getTileEntity(getAltarPosition(world, pos));
@@ -136,8 +136,8 @@ public class BlockWitchesAltar extends ModBlockContainer
 							tile.magic_power.setMaxAmount(maxAmount);
 						}
 						if (!player.isCreative()) stack.shrink(1);
-						return true;
 					}
+					return true;
 				}
 				else if (world.getBlockState(pos.up()).getBlock().isReplaceable(world, pos.up()) && (TileEntityWitchesAltar.SWORD_MULTIPLIER_VALUES.containsKey(item) || TileEntityWitchesAltar.SWORD_RADIUS_VALUES.containsKey(item) || item == ModObjects.pentacle || item == Items.BUCKET || item == Items.GOLDEN_APPLE || item == ModObjects.demonic_heart || item == ModObjects.heart || item == Items.GOLDEN_CARROT || item == ModObjects.glass_jar || item == Items.NETHER_STAR))
 				{
