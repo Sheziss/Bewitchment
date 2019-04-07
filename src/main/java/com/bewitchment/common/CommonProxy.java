@@ -34,23 +34,7 @@ import com.bewitchment.common.fortune.*;
 import com.bewitchment.common.handler.BlockDropHandler;
 import com.bewitchment.common.handler.EventHandler;
 import com.bewitchment.common.handler.GuiHandler;
-import com.bewitchment.common.ritual.RitualCallOfTheWild;
-import com.bewitchment.common.ritual.RitualConjureAlphaHellhound;
-import com.bewitchment.common.ritual.RitualConjureBlaze;
-import com.bewitchment.common.ritual.RitualConjureDemon;
-import com.bewitchment.common.ritual.RitualConjureGhast;
-import com.bewitchment.common.ritual.RitualConjureHellhound;
-import com.bewitchment.common.ritual.RitualConjureMagmaCube;
-import com.bewitchment.common.ritual.RitualConjureSerpent;
-import com.bewitchment.common.ritual.RitualConjureVex;
-import com.bewitchment.common.ritual.RitualConjureWitch;
-import com.bewitchment.common.ritual.RitualConjureWither;
-import com.bewitchment.common.ritual.RitualDrawing;
-import com.bewitchment.common.ritual.RitualHighMoon;
-import com.bewitchment.common.ritual.RitualHungryFlames;
-import com.bewitchment.common.ritual.RitualPerception;
-import com.bewitchment.common.ritual.RitualSandsOfTime;
-import com.bewitchment.common.ritual.RitualSolarGlory;
+import com.bewitchment.common.ritual.*;
 import com.bewitchment.common.world.gen.WorldGenBeehive;
 import com.bewitchment.common.world.gen.WorldGenCoquina;
 import com.bewitchment.common.world.gen.WorldGenOres;
@@ -431,7 +415,11 @@ public class CommonProxy
 		BewitchmentAPI.registerFortune(new FortuneMeetHorse());
 		BewitchmentAPI.registerFortune(new FortuneMeetLlama());
 		BewitchmentAPI.registerFortune(new FortuneMeetParrot());
+		BewitchmentAPI.registerFortune(new FortuneMeetDonkey());
 		BewitchmentAPI.registerFortune(new FortuneVitality());
+		BewitchmentAPI.registerFortune(new FortuneBlazeIntrigument());
+		BewitchmentAPI.registerFortune(new FortuneSerpentIntrigument());
+		BewitchmentAPI.registerFortune(new FortuneDemonicEncounter());
 		
 		// Ritual
 		BewitchmentAPI.registerRitual(new RitualHighMoon());
@@ -445,6 +433,7 @@ public class CommonProxy
 		BewitchmentAPI.registerRitual(new RitualConjureGhast());
 		BewitchmentAPI.registerRitual(new RitualConjureWither());
 		BewitchmentAPI.registerRitual(new RitualConjureDemon());
+		BewitchmentAPI.registerRitual(new RitualConjureImp());
 		BewitchmentAPI.registerRitual(new RitualConjureHellhound());
 		BewitchmentAPI.registerRitual(new RitualConjureAlphaHellhound());
 		BewitchmentAPI.registerRitual(new RitualConjureSerpent());

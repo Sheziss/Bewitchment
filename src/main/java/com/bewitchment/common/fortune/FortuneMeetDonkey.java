@@ -2,13 +2,14 @@ package com.bewitchment.common.fortune;
 
 import com.bewitchment.Bewitchment;
 import com.bewitchment.api.registry.Fortune;
-import net.minecraft.entity.passive.EntityLlama;
+import net.minecraft.entity.passive.EntityDonkey;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 
-public class FortuneMeetLlama extends Fortune {
-	public FortuneMeetLlama() {
-		super(Bewitchment.MOD_ID, "meet_llama", 3);
+// Oh, this is one of those onion things, isn't it?
+public class FortuneMeetDonkey extends Fortune {
+	public FortuneMeetDonkey() {
+		super(Bewitchment.MOD_ID, "meet_donkey", 2);
 	}
 
 	@Override
@@ -25,7 +26,7 @@ public class FortuneMeetLlama extends Fortune {
 	public boolean apply(EntityPlayer player) {
 		for (int i = 0; i < 10; i++) {
 			BlockPos pos = new BlockPos(player.posX + player.getRNG().nextGaussian() * 4, player.posY, player.posZ + player.getRNG().nextGaussian() * 4);
-			EntityLlama entity = new EntityLlama(player.world);
+			EntityDonkey entity = new EntityDonkey(player.world);
 			if (player.world.isAirBlock(pos) && player.world.isAirBlock(pos.up()) && player.world.getBlockState(pos.down()).canEntitySpawn(entity)) {
 				entity.setPosition(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
 				entity.onInitialSpawn(player.world.getDifficultyForLocation(pos), null);
