@@ -26,9 +26,4 @@ public class FortuneVitality extends Fortune {
 	public boolean isInstant(EntityPlayer player) {
 		return player.getRNG().nextDouble() < 0.0005;
 	}
-
-	@Override
-	public boolean isNegative() {
-		return false;
-	}
 }
