@@ -134,7 +134,7 @@ public class TileEntityGemBowl extends ModTileEntity
 	
 	public int getGemValue()
 	{
-		for (int id : OreDictionary.getOreIDs(inventory.getStackInSlot(0))) if (gainMap.containsKey(OreDictionary.getOreName(id))) return gainMap.get(OreDictionary.getOreName(id));
+		if (!isEmpty(inventory)) for (int id : OreDictionary.getOreIDs(inventory.getStackInSlot(0))) if (gainMap.containsKey(OreDictionary.getOreName(id))) return gainMap.get(OreDictionary.getOreName(id));
 		return 0;
 	}
 }
