@@ -30,16 +30,7 @@ import com.bewitchment.common.entity.spirits.demons.EntityDemon;
 import com.bewitchment.common.entity.spirits.demons.EntityDemoness;
 import com.bewitchment.common.entity.spirits.demons.EntityHellhound;
 import com.bewitchment.common.entity.spirits.ghosts.EntityBlackDog;
-import com.bewitchment.common.fortune.FortuneBadLuck;
-import com.bewitchment.common.fortune.FortuneDeath;
-import com.bewitchment.common.fortune.FortuneDropItem;
-import com.bewitchment.common.fortune.FortuneGoodLuck;
-import com.bewitchment.common.fortune.FortuneIllness;
-import com.bewitchment.common.fortune.FortuneMeetCat;
-import com.bewitchment.common.fortune.FortuneMeetDog;
-import com.bewitchment.common.fortune.FortuneMeetHorse;
-import com.bewitchment.common.fortune.FortuneMeetLlama;
-import com.bewitchment.common.fortune.FortuneMeetParrot;
+import com.bewitchment.common.fortune.*;
 import com.bewitchment.common.handler.BlockDropHandler;
 import com.bewitchment.common.handler.EventHandler;
 import com.bewitchment.common.handler.GuiHandler;
@@ -440,6 +431,7 @@ public class CommonProxy
 		BewitchmentAPI.registerFortune(new FortuneMeetHorse());
 		BewitchmentAPI.registerFortune(new FortuneMeetLlama());
 		BewitchmentAPI.registerFortune(new FortuneMeetParrot());
+		BewitchmentAPI.registerFortune(new FortuneVitality());
 		
 		// Ritual
 		BewitchmentAPI.registerRitual(new RitualHighMoon());
