@@ -3,6 +3,8 @@ package com.bewitchment.common.fortune;
 import com.bewitchment.Bewitchment;
 import com.bewitchment.api.registry.Fortune;
 import com.bewitchment.common.entity.spirits.demons.EntityDemon;
+import com.bewitchment.common.entity.spirits.demons.EntityDemoness;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
@@ -28,12 +30,11 @@ public class FortuneDemonicEncounter extends Fortune {
 		return true;
 	}
 
-	//Todo: Have a 50/50 chance of it being a demon or demoness.
 	@Override
 	public boolean apply(EntityPlayer player) {
 		for (int i = 0; i < 10; i++) {
 			BlockPos pos = new BlockPos(player.posX + player.getRNG().nextGaussian() * 4, player.posY, player.posZ + player.getRNG().nextGaussian() * 4);
-			EntityDemon demon = new EntityDemon(player.world);
+			EntityDemon demon = player.world.rand.nextBoolean() ? new EntityDemon(player.world) : new EntityDemoness(player.world);
 			if (player.world.isAirBlock(pos) && player.world.isAirBlock(pos.up()) && player.world.getBlockState(pos.down()).canEntitySpawn(demon)) {
 				demon.setPosition(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
 				demon.onInitialSpawn(player.world.getDifficultyForLocation(pos), null);
