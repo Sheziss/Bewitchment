@@ -421,6 +421,11 @@ bewitchment.meet_dog=You will soon encounter a new friend.
 bewitchment.meet_horse=You will soon encounter a new friend.
 bewitchment.meet_llama=You will soon encounter a new friend.
 bewitchment.meet_parrot=You will soon encounter a new friend.
+bewitchment.meet_donkey=You will soon encounter a new friend.
+bewitchment.meet_blaze=A lesser fire elemental has seen you scrying, and has emerged to fight you!
+bewitchment.meet_serpent=A lesser demon has seen you scrying, and wishes to challenge you!
+bewitchment.meet_demon=A powerful duke has seen you scrying, and has taken an interest in you.
+bewitchment.vitality=Wounds heal in your time of need.
 
 #Info
 itemGroup.bewitchment=Bewitchment
