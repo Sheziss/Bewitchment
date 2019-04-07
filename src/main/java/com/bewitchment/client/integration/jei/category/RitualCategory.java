@@ -67,7 +67,7 @@ public class RitualCategory implements IRecipeCategory<RitualWrapper>
 		for (int i = 0; i < recipeWrapper.input.size(); i++)
 		{
 			recipeLayout.getItemStacks().init(i, true, 18 * i + (180 - 18 * recipeWrapper.input.size()) / 2, 20);
-			recipeLayout.getItemStacks().set(i, Arrays.asList(recipeWrapper.input.get(i).getMatchingStacks()));
+			recipeLayout.getItemStacks().set(i, recipeWrapper.input.get(i));
 		}
 		for (int i = 0; i < recipeWrapper.output.size(); i++)
 		{
@@ -81,7 +81,7 @@ public class RitualCategory implements IRecipeCategory<RitualWrapper>
 		private static IDrawable center, small, medium, large;
 		
 		private GlyphType[] circles;
-		private List<Ingredient> input;
+		private List<List<ItemStack>> input;
 		private List<ItemStack> output;
 		private String name;
 		private int startingPower, runningPower;
@@ -89,7 +89,8 @@ public class RitualCategory implements IRecipeCategory<RitualWrapper>
 		public RitualWrapper(Ritual ritual, IGuiHelper helper)
 		{
 			circles = ritual.getCircles();
-			input = ritual.getInputItems();
+			input = new ArrayList<List<ItemStack>>();
+			for (Ingredient ing : ritual.getInputItems()) input.add(Arrays.asList(ing.getMatchingStacks()));
 			output = ritual.getOutput(null);
 			name = I18n.format(ritual.getRegistryName().toString().replace(":", "."));
 			startingPower = ritual.getStartingPower();
@@ -103,9 +104,7 @@ public class RitualCategory implements IRecipeCategory<RitualWrapper>
 		@Override
 		public void getIngredients(IIngredients ingredients)
 		{
-			List<List<ItemStack>> lists = new ArrayList<List<ItemStack>>();
-			for (Ingredient ing : input) lists.add(Arrays.asList(ing.getMatchingStacks()));
-			ingredients.setInputLists(VanillaTypes.ITEM, lists);
+			ingredients.setInputLists(VanillaTypes.ITEM, input);
 			if (!output.isEmpty()) ingredients.setOutputs(VanillaTypes.ITEM, output);
 		}
 		

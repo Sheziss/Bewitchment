@@ -28,8 +28,8 @@ public class BewitchmentJEI implements IModPlugin
 	public void registerCategories(IRecipeCategoryRegistration registry)
 	{
 		registry.addRecipeCategories(new DistilleryCategory(registry.getJeiHelpers().getGuiHelper()));
-		registry.addRecipeCategories(new OvenCategory(registry.getJeiHelpers().getGuiHelper()));
 		registry.addRecipeCategories(new LoomCategory(registry.getJeiHelpers().getGuiHelper()));
+		registry.addRecipeCategories(new OvenCategory(registry.getJeiHelpers().getGuiHelper()));
 		registry.addRecipeCategories(new RitualCategory(registry.getJeiHelpers().getGuiHelper()));
 	}
 	
@@ -40,13 +40,13 @@ public class BewitchmentJEI implements IModPlugin
 		registry.addRecipes(BewitchmentAPI.REGISTRY_DISTILLERY.getValuesCollection(), DistilleryCategory.UID);
 		registry.addRecipeCatalyst(new ItemStack(ModObjects.distillery), DistilleryCategory.UID);
 		
-		registry.handleRecipes(OvenRecipe.class, OvenWrapper::new, OvenCategory.UID);
-		registry.addRecipes(BewitchmentAPI.REGISTRY_OVEN.getValuesCollection(), OvenCategory.UID);
-		registry.addRecipeCatalyst(new ItemStack(ModObjects.oven), OvenCategory.UID);
-		
 		registry.handleRecipes(LoomRecipe.class, LoomWrapper::new, LoomCategory.UID);
 		registry.addRecipes(BewitchmentAPI.REGISTRY_LOOM.getValuesCollection(), LoomCategory.UID);
 		registry.addRecipeCatalyst(new ItemStack(ModObjects.loom), LoomCategory.UID);
+		
+		registry.handleRecipes(OvenRecipe.class, OvenWrapper::new, OvenCategory.UID);
+		registry.addRecipes(BewitchmentAPI.REGISTRY_OVEN.getValuesCollection(), OvenCategory.UID);
+		registry.addRecipeCatalyst(new ItemStack(ModObjects.oven), OvenCategory.UID);
 		
 		registry.handleRecipes(Ritual.class, new RitualWrapperFactory(registry.getJeiHelpers().getGuiHelper()), RitualCategory.UID);
 		registry.addRecipes(BewitchmentAPI.REGISTRY_RITUAL.getValuesCollection(), RitualCategory.UID);

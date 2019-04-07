@@ -48,16 +48,16 @@ public class BlockApiary extends ModBlockContainer
 	}
 	
 	@Override
-	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing face, float hitX, float hitY, float hitZ, int meta, EntityLivingBase living, EnumHand hand)
-	{
-		return getDefaultState().withProperty(BlockHorizontal.FACING, EnumFacing.fromAngle(living.rotationYaw));
-	}
-	
-	@Override
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand)
 	{
 		if (!ModTileEntity.isEmpty(((TileEntityApiary) world.getTileEntity(pos)).inventory)) Bewitchment.proxy.spawnParticle(ModParticles.BEE, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
+	}
+	
+	@Override
+	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing face, float hitX, float hitY, float hitZ, int meta, EntityLivingBase living, EnumHand hand)
+	{
+		return getDefaultState().withProperty(BlockHorizontal.FACING, EnumFacing.fromAngle(living.rotationYaw));
 	}
 	
 	@Override

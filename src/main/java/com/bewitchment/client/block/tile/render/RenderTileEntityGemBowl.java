@@ -1,12 +1,9 @@
 package com.bewitchment.client.block.tile.render;
 
-import org.lwjgl.opengl.GL11;
-
 import com.bewitchment.common.block.tile.entity.TileEntityGemBowl;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -25,12 +22,9 @@ public class RenderTileEntityGemBowl extends TileEntitySpecialRenderer<TileEntit
 		if (!tile.inventory.getStackInSlot(0).isEmpty())
 		{
 			ItemStack stack = tile.inventory.getStackInSlot(0);
-			GlStateManager.enableRescaleNormal();
-			GlStateManager.alphaFunc(GL11.GL_GREATER, 0.1f);
-			GlStateManager.enableBlend();
-			RenderHelper.enableStandardItemLighting();
-			GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
 			GlStateManager.pushMatrix();
+			GlStateManager.disableLighting();
+			GlStateManager.enableBlend();
 			GlStateManager.translate(x + 0.5, y + 0.145, z + 0.5);
 			GlStateManager.rotate(90, 1, 0, 0);
 			GlStateManager.translate(0, -0.1, 0);
@@ -38,9 +32,9 @@ public class RenderTileEntityGemBowl extends TileEntitySpecialRenderer<TileEntit
 			IBakedModel model = ForgeHooksClient.handleCameraTransforms(Minecraft.getMinecraft().getRenderItem().getItemModelWithOverrides(stack, tile.getWorld(), null), TransformType.GROUND, false);
 			Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 			Minecraft.getMinecraft().getRenderItem().renderItem(stack, model);
-			GlStateManager.popMatrix();
-			GlStateManager.disableRescaleNormal();
 			GlStateManager.disableBlend();
+			GlStateManager.enableLighting();
+			GlStateManager.popMatrix();
 		}
 	}
 }

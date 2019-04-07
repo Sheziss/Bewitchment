@@ -3,6 +3,7 @@ package com.bewitchment.client;
 import com.bewitchment.Bewitchment;
 import com.bewitchment.client.block.tile.render.RenderTileEntityGemBowl;
 import com.bewitchment.client.block.tile.render.RenderTileEntityPlacedItem;
+import com.bewitchment.client.block.tile.render.RenderTileEntityWitchesCauldron;
 import com.bewitchment.client.handler.ClientHandler;
 import com.bewitchment.client.particle.ParticleBee;
 import com.bewitchment.client.render.entity.living.RenderBlindworm;
@@ -26,12 +27,7 @@ import com.bewitchment.common.block.BlockGlyph;
 import com.bewitchment.common.block.BlockGlyph.GlyphType;
 import com.bewitchment.common.block.tile.entity.TileEntityGemBowl;
 import com.bewitchment.common.block.tile.entity.TileEntityPlacedItem;
-import com.bewitchment.common.entity.spirits.demons.EntityAlphaHellhound;
-import com.bewitchment.common.entity.spirits.ghosts.EntityBlackDog;
-import com.bewitchment.common.entity.spirits.demons.EntityDemon;
-import com.bewitchment.common.entity.spirits.demons.EntityDemoness;
-import com.bewitchment.common.entity.spirits.demons.EntityHellhound;
-import com.bewitchment.common.entity.spirits.demons.EntitySerpent;
+import com.bewitchment.common.block.tile.entity.TileEntityWitchesCauldron;
 import com.bewitchment.common.entity.living.EntityBlindworm;
 import com.bewitchment.common.entity.living.EntityLizard;
 import com.bewitchment.common.entity.living.EntityNewt;
@@ -42,6 +38,12 @@ import com.bewitchment.common.entity.living.EntityToad;
 import com.bewitchment.common.entity.misc.EntityBeeSwarm;
 import com.bewitchment.common.entity.misc.EntityBroom;
 import com.bewitchment.common.entity.misc.EntitySpell;
+import com.bewitchment.common.entity.spirits.demons.EntityAlphaHellhound;
+import com.bewitchment.common.entity.spirits.demons.EntityDemon;
+import com.bewitchment.common.entity.spirits.demons.EntityDemoness;
+import com.bewitchment.common.entity.spirits.demons.EntityHellhound;
+import com.bewitchment.common.entity.spirits.demons.EntitySerpent;
+import com.bewitchment.common.entity.spirits.ghosts.EntityBlackDog;
 import com.bewitchment.registry.ModObjects;
 import com.bewitchment.registry.ModParticles;
 
@@ -102,6 +104,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityDemon.class, RenderDemon::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityDemoness.class, RenderDemoness::new);
 		
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWitchesCauldron.class, new RenderTileEntityWitchesCauldron());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPlacedItem.class, new RenderTileEntityPlacedItem());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGemBowl.class, new RenderTileEntityGemBowl());
 	}

@@ -1,0 +1,13 @@
+{
+	"forge_marker": 1,
+	"defaults":
+	{
+		"model": "bewitchment:witches_cauldron",
+		"transform": "forge:default-block"
+	},
+	"variants":
+	{
+		"inventory": [{}],
+		"normal": [{}]
+	}
+}
