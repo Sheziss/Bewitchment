@@ -63,12 +63,6 @@ public class BlockWitchesCauldron extends ModBlockContainer
 		return super.onBlockActivated(world, pos, state, player, hand, face, hitX, hitY, hitZ);
 	}
 	
-	@Override
-	public boolean isPassable(IBlockAccess world, BlockPos pos)
-	{
-		return true;
-	}
-	
 	@SuppressWarnings("deprecation")
 	@Override
 	public void addCollisionBoxToList(IBlockState state, World world, BlockPos pos, AxisAlignedBB box, List<AxisAlignedBB> boxes, Entity entity, boolean wut)
