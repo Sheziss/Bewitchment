@@ -6,11 +6,13 @@ import com.bewitchment.Bewitchment;
 import com.bewitchment.api.registry.Ritual;
 import com.bewitchment.common.block.BlockGlyph.GlyphType;
 import com.bewitchment.common.block.tile.entity.TileEntityGlyph;
+import com.bewitchment.common.entity.spirits.demons.EntityImp;
 import com.bewitchment.registry.ModObjects;
 
-import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.EnumParticleTypes;
@@ -31,29 +33,27 @@ public class RitualConjureImp extends Ritual
 						Ingredient.fromStacks(new ItemStack(ModObjects.hellebore)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.hellhound_horn)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.liquid_wroth)),
-						Ingredient.fromStacks(Bewitchment.proxy.getOres("ingotGold")),
-						Ingredient.fromStacks(new ItemStack(Items.ENDER_PEARL)),
-						Ingredient.fromStacks(new ItemStack(Items.GHAST_TEAR))),
-				Arrays.asList(EntityRegistry.getEntry(EntityVillager.class)),
+						Ingredient.fromStacks(Bewitchment.proxy.getOres("ingotGold"))),
+				Arrays.asList(EntityRegistry.getEntry(EntityChicken.class)),
 				Arrays.asList(),
-				616, 4750, 10, GlyphType.NETHER, GlyphType.NETHER, GlyphType.NETHER);
+				303, 3800, 6, GlyphType.NETHER, GlyphType.ANY, GlyphType.NETHER);
 	}
 	
-	//@Override
-	//public void onFinished(TileEntityGlyph tile, World world, EntityPlayer caster, BlockPos pos, int dimension, int time)
-	//{
-	//	if (!world.isRemote)
-	//	{
-	//		for (int i = 0; i < world.rand.nextInt(3) + 1; i++)
-	//		{
-	//			EntityImp entity = world.rand.nextBoolean() ? new EntityImp(world);
-	//			entity.onInitialSpawn(world.getDifficultyForLocation(pos), null);
-	//			entity.setLocationAndAngles(pos.getX() + world.rand.nextInt(11) - 1, pos.getY(), pos.getZ() + world.rand.nextInt(11) - 1, world.rand.nextInt(360), 0);
-	//			for (EntityPlayerMP player : world.getEntitiesWithinAABB(EntityPlayerMP.class, entity.getEntityBoundingBox().grow(50))) CriteriaTriggers.SUMMONED_ENTITY.trigger(player, entity);
-	//			world.spawnEntity(entity);
-	//		}
-	//	}
-	//}
+	@Override
+	public void onFinished(TileEntityGlyph tile, World world, EntityPlayer caster, BlockPos pos, int dimension, int time)
+	{
+		if (!world.isRemote)
+		{
+			for (int i = 0; i < world.rand.nextInt(3) + 1; i++)
+			{
+				EntityImp entity = new EntityImp(world);
+				entity.onInitialSpawn(world.getDifficultyForLocation(pos), null);
+				entity.setLocationAndAngles(pos.getX() + world.rand.nextInt(11) - 1, pos.getY(), pos.getZ() + world.rand.nextInt(11) - 1, world.rand.nextInt(360), 0);
+				for (EntityPlayerMP player : world.getEntitiesWithinAABB(EntityPlayerMP.class, entity.getEntityBoundingBox().grow(50))) CriteriaTriggers.SUMMONED_ENTITY.trigger(player, entity);
+				world.spawnEntity(entity);
+			}
+		}
+	}
 	
 	@Override
 	@SideOnly(Side.CLIENT)

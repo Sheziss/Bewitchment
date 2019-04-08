@@ -20,6 +20,7 @@ import com.bewitchment.client.render.entity.spirits.demons.RenderAlphaHellhound;
 import com.bewitchment.client.render.entity.spirits.demons.RenderDemon;
 import com.bewitchment.client.render.entity.spirits.demons.RenderDemoness;
 import com.bewitchment.client.render.entity.spirits.demons.RenderHellhound;
+import com.bewitchment.client.render.entity.spirits.demons.RenderImp;
 import com.bewitchment.client.render.entity.spirits.demons.RenderSerpent;
 import com.bewitchment.client.render.entity.spirits.ghosts.RenderBlackDog;
 import com.bewitchment.common.CommonProxy;
@@ -42,6 +43,7 @@ import com.bewitchment.common.entity.spirits.demons.EntityAlphaHellhound;
 import com.bewitchment.common.entity.spirits.demons.EntityDemon;
 import com.bewitchment.common.entity.spirits.demons.EntityDemoness;
 import com.bewitchment.common.entity.spirits.demons.EntityHellhound;
+import com.bewitchment.common.entity.spirits.demons.EntityImp;
 import com.bewitchment.common.entity.spirits.demons.EntitySerpent;
 import com.bewitchment.common.entity.spirits.ghosts.EntityBlackDog;
 import com.bewitchment.registry.ModObjects;
@@ -103,6 +105,7 @@ public class ClientProxy extends CommonProxy
 		
 		RenderingRegistry.registerEntityRenderingHandler(EntityDemon.class, RenderDemon::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityDemoness.class, RenderDemoness::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityImp.class, RenderImp::new);
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWitchesCauldron.class, new RenderTileEntityWitchesCauldron());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPlacedItem.class, new RenderTileEntityPlacedItem());

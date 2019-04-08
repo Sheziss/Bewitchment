@@ -367,6 +367,7 @@ entity.serpent.name=Serpent
 
 entity.demon.name=Demon
 entity.demoness.name=Demoness
+entity.imp.name=Imp
 
 #Enchantment
 enchantment.bewitchment.desperate_ward=Desperate Ward

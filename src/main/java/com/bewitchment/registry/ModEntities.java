@@ -6,12 +6,6 @@ import java.util.List;
 import java.util.Set;
 
 import com.bewitchment.Bewitchment;
-import com.bewitchment.common.entity.spirits.demons.EntityAlphaHellhound;
-import com.bewitchment.common.entity.spirits.ghosts.EntityBlackDog;
-import com.bewitchment.common.entity.spirits.demons.EntityDemon;
-import com.bewitchment.common.entity.spirits.demons.EntityDemoness;
-import com.bewitchment.common.entity.spirits.demons.EntityHellhound;
-import com.bewitchment.common.entity.spirits.demons.EntitySerpent;
 import com.bewitchment.common.entity.living.EntityBlindworm;
 import com.bewitchment.common.entity.living.EntityLizard;
 import com.bewitchment.common.entity.living.EntityNewt;
@@ -22,6 +16,13 @@ import com.bewitchment.common.entity.living.EntityToad;
 import com.bewitchment.common.entity.misc.EntityBeeSwarm;
 import com.bewitchment.common.entity.misc.EntityBroom;
 import com.bewitchment.common.entity.misc.EntitySpell;
+import com.bewitchment.common.entity.spirits.demons.EntityAlphaHellhound;
+import com.bewitchment.common.entity.spirits.demons.EntityDemon;
+import com.bewitchment.common.entity.spirits.demons.EntityDemoness;
+import com.bewitchment.common.entity.spirits.demons.EntityHellhound;
+import com.bewitchment.common.entity.spirits.demons.EntityImp;
+import com.bewitchment.common.entity.spirits.demons.EntitySerpent;
+import com.bewitchment.common.entity.spirits.ghosts.EntityBlackDog;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
@@ -64,6 +65,7 @@ public class ModEntities
 	
 	public static final EntityEntry demon = createEntityEntry(EntityDemon.class, "demon", 0x555555, 0xed2939);
 	public static final EntityEntry demoness = createEntityEntry(EntityDemoness.class, "demoness", 0x555555, 0xed2939);
+	public static final EntityEntry imp = createEntityEntry(EntityImp.class, "imp", 0x555555, 0xed2939);
 
 	@SubscribeEvent
 	public static void registerEntities(Register<EntityEntry> event)
