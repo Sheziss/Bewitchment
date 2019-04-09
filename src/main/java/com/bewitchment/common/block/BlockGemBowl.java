@@ -80,7 +80,7 @@ public class BlockGemBowl extends ModBlockContainer implements IInfusionStabilis
 	@Optional.Method(modid = "thaumcraft")
 	public float getStabilizationAmount(World world, BlockPos pos)
 	{
-		return 4;
+		return 0.7f;
 	}
 	
 	@Override
