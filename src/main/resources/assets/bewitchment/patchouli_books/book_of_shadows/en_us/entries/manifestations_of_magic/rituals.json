@@ -30,7 +30,7 @@
 		{
 			"type": "multiblock",
 			"name": "The greater circle",
-			"multiblock_id": "bewitchment:circle_big"
+			"multiblock_id": "bewitchment:circle_large"
 		}
 	]
 }
