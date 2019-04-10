@@ -67,6 +67,7 @@ public class BlockMoonbell extends ModBlockBush implements IInfusionStabiliserEx
 		return getDefaultState().withProperty(PLACED, true);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 		return getDefaultState().withProperty(PLACED, meta == 0);
