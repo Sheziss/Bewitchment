@@ -1,0 +1,69 @@
+package com.bewitchment.common.compat.chisel;
+
+import com.bewitchment.common.block.util.ModBlock;
+import com.bewitchment.registry.ModObjects;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.NonNullList;
+
+/**
+ * Created by Joseph on 4/10/2019.
+ */
+public class BlockCoquinaChiseled extends ModBlock {
+	public static final PropertyEnum<BlockCoquinaVariant> VARIANT = PropertyEnum.create("variant", BlockCoquinaVariant.class);
+
+	public BlockCoquinaChiseled(Material material, SoundType sound) {
+		super(ModObjects.coquina + "_chisel", material, sound);
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		return state.getValue(VARIANT).ordinal();
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+		return getDefaultState().withProperty(VARIANT, BlockCoquinaVariant.values()[meta]);
+	}
+
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, VARIANT);
+	}
+
+	@Override
+	public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
+		for (int i = 0; i < BlockCoquinaVariant.values().length; i++) {
+			items.add(new ItemStack(this, 1, i));
+		}
+	}
+
+	@Override
+	public int damageDropped(IBlockState state) {
+		return getMetaFromState(state);
+	}
+
+	@Override
+	public void registerModel() {
+		for (BlockCoquinaChiseled.BlockCoquinaVariant v : BlockCoquinaChiseled.BlockCoquinaVariant.values()) {
+			ModelHandler.registerForgeModel(this, v.ordinal(), "variant=" + v.getName());
+		}
+	}
+
+	public static enum BlockCoquinaVariant implements IStringSerializable {
+
+		BRICKS, CHISELED, SHELL, SMOOTH;
+
+		@Override
+		public String getName() {
+			return name().toLowerCase();
+		}
+	}
+}
