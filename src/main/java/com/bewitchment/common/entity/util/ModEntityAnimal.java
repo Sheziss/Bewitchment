@@ -12,88 +12,75 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
-public abstract class ModEntityAnimal extends EntityAnimal implements IAnimatedEntity
-{
+public abstract class ModEntityAnimal extends EntityAnimal implements IAnimatedEntity {
 	public static final DataParameter<Integer> SKIN = EntityDataManager.createKey(ModEntityAnimal.class, DataSerializers.VARINT);
-	
+
 	private final ResourceLocation lootTableLocation;
-	
+
 	protected Animation currentAnimation;
 	protected int animationTick;
-	
-	public ModEntityAnimal(World world, ResourceLocation lootTableLocation)
-	{
+
+	public ModEntityAnimal(World world, ResourceLocation lootTableLocation) {
 		super(world);
 		this.lootTableLocation = lootTableLocation;
 	}
-	
+
 	@Override
 	public abstract Animation[] getAnimations();
-	
+
 	@Override
-	public Animation getAnimation()
-	{
+	public Animation getAnimation() {
 		return currentAnimation;
 	}
-	
+
 	@Override
-	public int getAnimationTick()
-	{
+	public int getAnimationTick() {
 		return animationTick;
 	}
-	
+
 	@Override
-	public void setAnimation(Animation animation)
-	{
+	public void setAnimation(Animation animation) {
 		currentAnimation = animation;
 	}
-	
+
 	@Override
-	public void setAnimationTick(int tick)
-	{
+	public void setAnimationTick(int tick) {
 		animationTick = tick;
 	}
-	
+
 	@Override
-	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData data)
-    {
+	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData data) {
 		if (getSkinTypes() > 1) dataManager.set(SKIN, rand.nextInt(getSkinTypes()));
 		return super.onInitialSpawn(difficulty, data);
-    }
-	
+	}
+
 	@Override
-	protected ResourceLocation getLootTable()
-	{
+	protected ResourceLocation getLootTable() {
 		return lootTableLocation;
 	}
-	
+
 	@Override
-	protected void entityInit()
-	{
+	protected void entityInit() {
 		super.entityInit();
 		if (getSkinTypes() > 1) dataManager.register(SKIN, 0);
 	}
-	
+
 	@Override
-	public void writeEntityToNBT(NBTTagCompound tag)
-	{
+	public void writeEntityToNBT(NBTTagCompound tag) {
 		super.writeEntityToNBT(tag);
-		if (getSkinTypes() > 1)
-		{
+		if (getSkinTypes() > 1) {
 			tag.setInteger("skin", dataManager.get(SKIN));
 			dataManager.setDirty(SKIN);
 		}
 	}
-	
+
 	@Override
-	public void readEntityFromNBT(NBTTagCompound tag)
-	{
+	public void readEntityFromNBT(NBTTagCompound tag) {
 		super.readEntityFromNBT(tag);
 		if (getSkinTypes() > 1) dataManager.set(SKIN, tag.getInteger("skin"));
 	}
-	
-	protected int getSkinTypes()
-	{
+
+	protected int getSkinTypes() {
 		return 1;
 	}
 }

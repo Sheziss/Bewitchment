@@ -1,15 +1,13 @@
 package com.bewitchment.client.model.entity.living;
 
 import com.bewitchment.common.entity.living.EntitySnake;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
-public class ModelSnake extends ModelBase
-{
+public class ModelSnake extends ModelBase {
 	private static final int COIL_ANIMATION_LENGTH = 160;
 	public ModelRenderer neck01a;
 	public ModelRenderer neck01b;
@@ -31,9 +29,8 @@ public class ModelSnake extends ModelBase
 	public ModelRenderer tail03b;
 	public ModelRenderer tail04;
 	public ModelRenderer tail05;
-	
-	public ModelSnake()
-	{
+
+	public ModelSnake() {
 		textureWidth = 64;
 		textureHeight = 64;
 		tongue = new ModelRenderer(this, 25, 0);
@@ -120,18 +117,15 @@ public class ModelSnake extends ModelBase
 		head.addChild(upperJawM);
 		body01.addChild(tail01);
 	}
-	
+
 	@Override
-	public void render(Entity entity, float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale)
-	{
+	public void render(Entity entity, float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale) {
 		float pticks = Minecraft.getMinecraft().getRenderPartialTicks();
 		float time = (entity.ticksExisted + pticks) * 0.2f;
 		float angle = 0.34906585039f;
 		EntitySnake snek = (EntitySnake) entity;
-		if (snek.isSitting())
-		{
-			if (snek.animationTimer < COIL_ANIMATION_LENGTH)
-			{
+		if (snek.isSitting()) {
+			if (snek.animationTimer < COIL_ANIMATION_LENGTH) {
 				snek.animationTimer++;
 				int timer = snek.animationTimer;
 				neck01a.rotateAngleY = neck01a.rotateAngleY + (-0.09110618695f - neck01a.rotateAngleY) * timer / COIL_ANIMATION_LENGTH;
@@ -146,9 +140,7 @@ public class ModelSnake extends ModelBase
 				head.rotateAngleX = head.rotateAngleX + (0.13665928043f - head.rotateAngleX) * timer / COIL_ANIMATION_LENGTH;
 				head.rotateAngleY = head.rotateAngleY + (-0.77405352325f - head.rotateAngleY) * timer / COIL_ANIMATION_LENGTH;
 				head.rotateAngleZ = head.rotateAngleZ + (-0.18203784098f - head.rotateAngleZ) * timer / COIL_ANIMATION_LENGTH;
-			}
-			else
-			{
+			} else {
 				neck01a.offsetX = -0.3f;
 				neck01a.rotateAngleY = -0.09110618695f;
 				neck02.rotateAngleY = -1.27478848566f;
@@ -163,9 +155,7 @@ public class ModelSnake extends ModelBase
 				head.rotateAngleY = -0.77405352325f;
 				head.rotateAngleZ = -0.18203784098f;
 			}
-		}
-		else if (snek.motionX != 0 || snek.motionZ != 0)
-		{
+		} else if (snek.motionX != 0 || snek.motionZ != 0) {
 			neck01a.offsetX = 0.3f * MathHelper.cos(time);
 			neck01a.rotateAngleY = angle * MathHelper.sin(time);
 			neck02.rotateAngleY = angle * MathHelper.sin(time - 5);
@@ -181,9 +171,7 @@ public class ModelSnake extends ModelBase
 			head.rotateAngleX = 0;
 			head.rotateAngleZ = 0;
 			snek.animationTimer = 0;
-		}
-		else
-		{
+		} else {
 			// TODO: This is the cause of the clipping. Additionally, boxes probably
 			// shouldn't be added during render() ... may be a memory leak.
 			// this.neck01b.addBox(-2.3f, -1.49f, -6, 2, 3, 8, MathHelper.sin(time));
@@ -191,9 +179,8 @@ public class ModelSnake extends ModelBase
 		neck01a.render(scale);
 		head.rotateAngleY = 0.001f * MathHelper.sin(time);
 	}
-	
-	public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
-	{
+
+	public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
 		modelRenderer.rotateAngleX = x;
 		modelRenderer.rotateAngleY = y;
 		modelRenderer.rotateAngleZ = z;

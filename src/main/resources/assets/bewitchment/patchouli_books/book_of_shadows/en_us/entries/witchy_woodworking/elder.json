@@ -1,13 +1,12 @@
 {
-	"name": "Elder",
-	"icon": "bewitchment:log_elder",
-	"category": "witchy_woodworking",
-	"pages":
-	[
-		{
-			"type": "spotlight",
-			"item": "bewitchment:sapling_elder",
-			"text": "The wisest of them all, these trees seem to be associated with knowledge. Furthermore, extracting an essence from one seems to bear some properties of interest which need further investigation."
-		}
-	]
+  "name": "Elder",
+  "icon": "bewitchment:log_elder",
+  "category": "witchy_woodworking",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "bewitchment:sapling_elder",
+      "text": "The wisest of them all, these trees seem to be associated with knowledge. Furthermore, extracting an essence from one seems to bear some properties of interest which need further investigation."
+    }
+  ]
 }

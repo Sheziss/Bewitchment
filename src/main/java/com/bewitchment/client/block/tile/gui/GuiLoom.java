@@ -2,36 +2,31 @@ package com.bewitchment.client.block.tile.gui;
 
 import com.bewitchment.Bewitchment;
 import com.bewitchment.common.block.tile.container.ContainerLoom;
-
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class GuiLoom extends GuiContainer
-{
+public class GuiLoom extends GuiContainer {
 	private static final ResourceLocation TEX = new ResourceLocation(Bewitchment.MOD_ID, "textures/gui/loom.png");
-	
+
 	private final ContainerLoom container;
-	
-	public GuiLoom(ContainerLoom container)
-	{
+
+	public GuiLoom(ContainerLoom container) {
 		super(container);
 		this.container = container;
 	}
-	
+
 	@Override
-	public void drawScreen(int mouseX, int mouseY, float partialTicks)
-	{
+	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		drawDefaultBackground();
 		super.drawScreen(mouseX, mouseY, partialTicks);
 		renderHoveredToolTip(mouseX, mouseY);
 	}
-	
+
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
-	{
+	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
 		mc.getTextureManager().bindTexture(TEX);
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;

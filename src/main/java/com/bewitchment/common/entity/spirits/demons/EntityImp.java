@@ -3,19 +3,12 @@ package com.bewitchment.common.entity.spirits.demons;
 import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.common.entity.util.ModEntityMob;
 import com.bewitchment.registry.ModPotions;
-
 import net.ilexiconn.llibrary.server.animation.Animation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest2;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.pathfinding.PathNodeType;
@@ -23,10 +16,8 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
-public class EntityImp extends ModEntityMob
-{
-	public EntityImp(World world)
-	{
+public class EntityImp extends ModEntityMob {
+	public EntityImp(World world) {
 		super(world, null);
 		setSize(1, 2);
 		isImmuneToFire = true;
@@ -36,63 +27,53 @@ public class EntityImp extends ModEntityMob
 		setPathPriority(PathNodeType.DAMAGE_FIRE, 0);
 		experienceValue = 100;
 	}
-	
+
 	@Override
-	public Animation[] getAnimations()
-	{
-		return new Animation[] {};
+	public Animation[] getAnimations() {
+		return new Animation[]{};
 	}
-	
+
 	@Override
-	protected boolean isValidLightLevel()
-	{
+	protected boolean isValidLightLevel() {
 		return true;
 	}
-	
+
 	@Override
-	public EnumCreatureAttribute getCreatureAttribute()
-	{
+	public EnumCreatureAttribute getCreatureAttribute() {
 		return BewitchmentAPI.DEMON;
 	}
-	
+
 	@Override
-	protected int getSkinTypes()
-	{
+	protected int getSkinTypes() {
 		return 6;
 	}
-	
+
 	@Override
-	public boolean attackEntityAsMob(Entity entity)
-	{
+	public boolean attackEntityAsMob(Entity entity) {
 		super.attackEntityAsMob(entity);
 		boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue());
-		if (flag)
-		{
+		if (flag) {
 			applyEnchantments(this, entity);
-			if (entity instanceof EntityLivingBase)
-			{
+			if (entity instanceof EntityLivingBase) {
 				((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 500, 1, false, false));
 				entity.setFire(20);
 			}
 		}
 		return flag;
 	}
-	
+
 	@Override
-	public boolean getCanSpawnHere()
-	{
+	public boolean getCanSpawnHere() {
 		return (world.provider.doesWaterVaporize() || world.provider.isNether()) && !world.containsAnyLiquid(getEntityBoundingBox()) && super.getCanSpawnHere();
 	}
-	
+
 	@Override
-	public boolean isPotionApplicable(PotionEffect effect)
-	{
+	public boolean isPotionApplicable(PotionEffect effect) {
 		return effect.getPotion() != MobEffects.POISON && effect.getPotion() != MobEffects.WITHER && effect.getPotion() != ModPotions.rotting && super.isPotionApplicable(effect);
 	}
-	
+
 	@Override
-	protected void applyEntityAttributes()
-	{
+	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(10);
 		getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(6.16);
@@ -100,10 +81,9 @@ public class EntityImp extends ModEntityMob
 		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(90);
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.8);
 	}
-	
+
 	@Override
-	protected void initEntityAI()
-	{
+	protected void initEntityAI() {
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, new EntityAIAttackMelee(this, 0.5, false));
 		tasks.addTask(2, new EntityAIWatchClosest2(this, EntityPlayer.class, 5, 1));

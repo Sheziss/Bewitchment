@@ -1,21 +1,19 @@
 package com.bewitchment.registry;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.bewitchment.Bewitchment;
-
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @EventBusSubscriber(modid = Bewitchment.MOD_ID)
-public class ModSounds
-{
+public class ModSounds {
 	public static final List<SoundEvent> REGISTRY = new ArrayList<>();
-	
+
 	public static final SoundEvent BUZZ = createSoundEvent("buzz");
 	public static final SoundEvent BROOM_SWEEP = createSoundEvent("broom_sweep");
 	public static final SoundEvent CHALK_SCRIBBLE = createSoundEvent("chalk_scribble");
@@ -24,15 +22,13 @@ public class ModSounds
 	public static final SoundEvent TOAD_DEATH = createSoundEvent("toad_death");
 	public static final SoundEvent TOAD_HURT = createSoundEvent("toad_hurt");
 	public static final SoundEvent TOAD_IDLE = createSoundEvent("toad_idle");
-	
+
 	@SubscribeEvent
-	public static void registerSounds(Register<SoundEvent> event)
-	{
+	public static void registerSounds(Register<SoundEvent> event) {
 		for (SoundEvent sound : REGISTRY) event.getRegistry().register(sound);
 	}
-	
-	private static final SoundEvent createSoundEvent(String name)
-	{
+
+	private static final SoundEvent createSoundEvent(String name) {
 		ResourceLocation id = new ResourceLocation(Bewitchment.MOD_ID, name);
 		SoundEvent event = new SoundEvent(id).setRegistryName(id);
 		REGISTRY.add(event);

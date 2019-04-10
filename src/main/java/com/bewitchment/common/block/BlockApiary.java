@@ -1,14 +1,11 @@
 package com.bewitchment.common.block;
 
-import java.util.Random;
-
 import com.bewitchment.Bewitchment;
 import com.bewitchment.common.CommonProxy.ModGui;
 import com.bewitchment.common.block.tile.entity.TileEntityApiary;
 import com.bewitchment.common.block.tile.entity.util.ModTileEntity;
 import com.bewitchment.common.block.util.ModBlockContainer;
 import com.bewitchment.registry.ModParticles;
-
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -25,56 +22,50 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockApiary extends ModBlockContainer
-{
+import java.util.Random;
+
+public class BlockApiary extends ModBlockContainer {
 	private static final AxisAlignedBB BOX = new AxisAlignedBB(0.12, 0, 0.12, 0.88, 1, 0.88);
-	
-	public BlockApiary()
-	{
+
+	public BlockApiary() {
 		super(Bewitchment.instance, "apiary", Material.WOOD, SoundType.WOOD, 2, 2, "axe", 0, ModGui.APIARY.ordinal());
 		setDefaultState(blockState.getBaseState().withProperty(BlockHorizontal.FACING, EnumFacing.SOUTH));
 	}
-	
+
 	@Override
-	public TileEntity createNewTileEntity(World world, int meta)
-	{
+	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityApiary();
 	}
-	
+
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos)
-	{
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) {
 		return BOX;
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand)
-	{
-		if (!ModTileEntity.isEmpty(((TileEntityApiary) world.getTileEntity(pos)).inventory)) Bewitchment.proxy.spawnParticle(ModParticles.BEE, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
+	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
+		if (!ModTileEntity.isEmpty(((TileEntityApiary) world.getTileEntity(pos)).inventory))
+			Bewitchment.proxy.spawnParticle(ModParticles.BEE, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
 	}
-	
+
 	@Override
-	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing face, float hitX, float hitY, float hitZ, int meta, EntityLivingBase living, EnumHand hand)
-	{
+	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing face, float hitX, float hitY, float hitZ, int meta, EntityLivingBase living, EnumHand hand) {
 		return getDefaultState().withProperty(BlockHorizontal.FACING, EnumFacing.fromAngle(living.rotationYaw));
 	}
-	
+
 	@Override
-	public IBlockState getStateFromMeta(int meta)
-	{
+	public IBlockState getStateFromMeta(int meta) {
 		return getDefaultState().withProperty(BlockHorizontal.FACING, EnumFacing.HORIZONTALS[meta]);
 	}
-	
+
 	@Override
-	public int getMetaFromState(IBlockState state)
-	{
+	public int getMetaFromState(IBlockState state) {
 		return state.getValue(BlockHorizontal.FACING).getHorizontalIndex();
 	}
-	
+
 	@Override
-	protected BlockStateContainer createBlockState()
-	{
+	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, BlockHorizontal.FACING);
 	}
 }

@@ -1,15 +1,14 @@
 {
-	"forge_marker": 1,
-	"defaults":
-	{
-		"model": "bewitchment:witchfire",
-		"textures":
-		{
-			"fire": "bewitchment:blocks/frostfire"
-		}
-	},
-	"variants":
-	{
-		"normal": [{}]
-	}
+  "forge_marker": 1,
+  "defaults": {
+    "model": "bewitchment:witchfire",
+    "textures": {
+      "fire": "bewitchment:blocks/frostfire"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ]
+  }
 }

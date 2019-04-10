@@ -1,28 +1,16 @@
 package com.bewitchment.common.block.tile.entity;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.bewitchment.common.block.tile.entity.util.ModTileEntity;
-
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class TileEntityGemBowl extends ModTileEntity
-{
+import java.util.HashMap;
+import java.util.Map;
+
+public class TileEntityGemBowl extends ModTileEntity {
 	public static final Map<String, Integer> gainMap = new HashMap<>();
-	
-	public final ItemStackHandler inventory = new ItemStackHandler(18)
-	{
-		@Override
-		public int getSlotLimit(int slot)
-		{
-			return 1;
-		}
-	};
-	
-	static
-	{
+
+	static {
 		gainMap.put("fossil", 1);
 		gainMap.put("gemDiamond", 4);
 		gainMap.put("gemEmerald", 4);
@@ -125,16 +113,22 @@ public class TileEntityGemBowl extends ModTileEntity
 		gainMap.put("materialCoraliumPearl", 1);
 		gainMap.put("gemShadow", 1);
 	}
-	
+
+	public final ItemStackHandler inventory = new ItemStackHandler(18) {
+		@Override
+		public int getSlotLimit(int slot) {
+			return 1;
+		}
+	};
+
 	@Override
-	public ItemStackHandler[] getInventories()
-	{
-		return new ItemStackHandler[] {inventory};
+	public ItemStackHandler[] getInventories() {
+		return new ItemStackHandler[]{inventory};
 	}
-	
-	public int getGemValue()
-	{
-		if (!isEmpty(inventory)) for (int id : OreDictionary.getOreIDs(inventory.getStackInSlot(0))) if (gainMap.containsKey(OreDictionary.getOreName(id))) return gainMap.get(OreDictionary.getOreName(id));
+
+	public int getGemValue() {
+		if (!isEmpty(inventory)) for (int id : OreDictionary.getOreIDs(inventory.getStackInSlot(0)))
+			if (gainMap.containsKey(OreDictionary.getOreName(id))) return gainMap.get(OreDictionary.getOreName(id));
 		return 0;
 	}
 }

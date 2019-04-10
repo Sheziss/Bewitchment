@@ -1,15 +1,13 @@
 package com.bewitchment.client.model.entity.living;
 
 import com.bewitchment.common.entity.living.EntityBlindworm;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
-public class ModelBlindworm extends ModelBase
-{
+public class ModelBlindworm extends ModelBase {
 	public ModelRenderer neck01a;
 	public ModelRenderer neck01b;
 	public ModelRenderer neck02;
@@ -25,9 +23,8 @@ public class ModelBlindworm extends ModelBase
 	public ModelRenderer tail01b;
 	public ModelRenderer tail02;
 	public ModelRenderer tail03;
-	
-	public ModelBlindworm()
-	{
+
+	public ModelBlindworm() {
 		textureWidth = 64;
 		textureHeight = 65;
 		neck02 = new ModelRenderer(this, 0, 16);
@@ -96,16 +93,14 @@ public class ModelBlindworm extends ModelBase
 		tail0a.addChild(tail01b);
 		tail02.addChild(tail03);
 	}
-	
+
 	@Override
-	public void render(Entity entity, float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale)
-	{
+	public void render(Entity entity, float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale) {
 		float pticks = Minecraft.getMinecraft().getRenderPartialTicks();
 		float time = (entity.ticksExisted + pticks) * 0.2f;
 		float angle = 0.34906585039f;
 		EntityBlindworm blindworm = (EntityBlindworm) entity;
-		if (blindworm.motionX != 0 || blindworm.motionZ != 0)
-		{
+		if (blindworm.motionX != 0 || blindworm.motionZ != 0) {
 			neck01a.offsetX = 0.3f * MathHelper.cos(time);
 			neck01a.rotateAngleY = angle * MathHelper.sin(time);
 			neck02.rotateAngleY = angle * MathHelper.sin(time - 5);
@@ -118,9 +113,7 @@ public class ModelBlindworm extends ModelBase
 			head.rotateAngleZ = 0.174532925f * MathHelper.cos(time - 5);
 			head.rotateAngleX = 0;
 			head.rotateAngleZ = 0;
-		}
-		else
-		{
+		} else {
 			// TODO: This is the cause of the clipping. Additionally, boxes probably
 			// shouldn't be added during render() ... may be a memory leak.
 			// neck01b.addBox(-2.3f, -1.49f, -6, 2, 3, 8, MathHelper.sin(time));
@@ -128,9 +121,8 @@ public class ModelBlindworm extends ModelBase
 		neck01a.render(scale);
 		head.rotateAngleY = 0.001f * MathHelper.sin(time);
 	}
-	
-	public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
-	{
+
+	public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
 		modelRenderer.rotateAngleX = x;
 		modelRenderer.rotateAngleY = y;
 		modelRenderer.rotateAngleZ = z;

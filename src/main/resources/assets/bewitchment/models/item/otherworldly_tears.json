@@ -1,7 +1,6 @@
 {
-	"parent": "item/generated",
-	"textures":
-	{
-		"layer0": "bewitchment:items/otherworldly_tears"
-	}
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "bewitchment:items/otherworldly_tears"
+  }
 }

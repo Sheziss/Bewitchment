@@ -2,10 +2,8 @@ package com.bewitchment.client.model.equipment;
 
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelGirdleOfTheDryadArmor extends ModelGirdleOfTheDryad
-{
-	public ModelGirdleOfTheDryadArmor()
-	{
+public class ModelGirdleOfTheDryadArmor extends ModelGirdleOfTheDryad {
+	public ModelGirdleOfTheDryadArmor() {
 		this.textureWidth = 32;
 		this.textureHeight = 32;
 		this.barkBack3c = new ModelRenderer(this, 1, 13);

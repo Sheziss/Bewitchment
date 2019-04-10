@@ -1,18 +1,17 @@
 {
-	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
-		"PP",
-		"PP",
-		"PP"
-	],
-	"key":
-	{
-		"P": {"item": "bewitchment:planks_elder"}
-	},
-	"result":
-	{
-		"item": "bewitchment:door_elder",
-		"count": 3
-	}
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PP",
+    "PP",
+    "PP"
+  ],
+  "key": {
+    "P": {
+      "item": "bewitchment:planks_elder"
+    }
+  },
+  "result": {
+    "item": "bewitchment:door_elder",
+    "count": 3
+  }
 }

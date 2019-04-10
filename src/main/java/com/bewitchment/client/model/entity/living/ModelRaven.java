@@ -1,15 +1,13 @@
 package com.bewitchment.client.model.entity.living;
 
 import com.bewitchment.common.entity.living.EntityRaven;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.MathHelper;
 
-public class ModelRaven extends ModelBase
-{
+public class ModelRaven extends ModelBase {
 	public ModelRenderer ravenBody;
 	public ModelRenderer ravenLeftLeg1;
 	public ModelRenderer ravenRightLeg;
@@ -42,8 +40,7 @@ public class ModelRaven extends ModelBase
 	public ModelRenderer wingLeft3Feathers;
 	public ModelRenderer wingRight3Feathers;
 
-	public ModelRaven()
-	{
+	public ModelRaven() {
 		this.textureWidth = 64;
 		this.textureHeight = 64;
 		this.ravenBeak2 = new ModelRenderer(this, 42, 12);
@@ -187,35 +184,28 @@ public class ModelRaven extends ModelBase
 		this.wingLeft2.addChild(this.wingLeft2Feathers);
 		this.wingLeft3.addChild(this.wingLeft3Feathers);
 	}
-	
+
 	@Override
-	public void setRotationAngles(float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale, Entity entity)
-	{
-		if (entity.onGround) setRotateAngle(ravenHead, (float) (0.6981317007977318F + rotationPitch * Math.PI / 360), (float) (rotationYaw * Math.PI / 360), 0);
+	public void setRotationAngles(float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale, Entity entity) {
+		if (entity.onGround)
+			setRotateAngle(ravenHead, (float) (0.6981317007977318F + rotationPitch * Math.PI / 360), (float) (rotationYaw * Math.PI / 360), 0);
 	}
-	
+
 	@Override
-	public void setLivingAnimations(EntityLivingBase living, float limbSwing, float limbSwingAmount, float partialTickTime)
-	{
+	public void setLivingAnimations(EntityLivingBase living, float limbSwing, float limbSwingAmount, float partialTickTime) {
 		super.setLivingAnimations(living, limbSwing, limbSwingAmount, partialTickTime);
 		EntityRaven raven = (EntityRaven) living;
-		if (raven.onGround)
-		{
-			if (raven.isSitting())
-			{
+		if (raven.onGround) {
+			if (raven.isSitting()) {
 				setSittingStance();
 				float time = (raven.ticksExisted + partialTickTime) * 0.10471975512F;
 				ravenBody.rotateAngleX = -0.64577182323F + 0.00484813681f * MathHelper.sin(time);
-			}
-			else
-			{
+			} else {
 				setWanderingStance();
 				float time = (raven.ticksExisted + partialTickTime) * 0.10471975512F;
 				ravenBody.rotateAngleX = -0.64577182323F + 0.00484813681f * MathHelper.sin(time);
 			}
-		}
-		else
-		{
+		} else {
 			setFlyingStance();
 			float time = (raven.ticksExisted + partialTickTime) / 4.71238898F;
 			wingRight1.rotateAngleZ = 0.26179938779914943f + 1.047166666666666f * MathHelper.cos(time);
@@ -228,25 +218,22 @@ public class ModelRaven extends ModelBase
 			ravenLeftLeg2.rotateAngleX = ravenRightLeg2.rotateAngleX;
 		}
 	}
-	
+
 	@Override
-	public void render(Entity entity, float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale)
-	{
+	public void render(Entity entity, float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale) {
 		this.ravenBody.render(scale);
 	}
-	
+
 	/**
 	 * This is a helper function from Tabula to set the rotation of model parts
 	 */
-	public void setRotateAngle(ModelRenderer renderer, float x, float y, float z)
-	{
+	public void setRotateAngle(ModelRenderer renderer, float x, float y, float z) {
 		renderer.rotateAngleX = x;
 		renderer.rotateAngleY = y;
 		renderer.rotateAngleZ = z;
 	}
-	
-	private void setFlyingStance()
-	{
+
+	private void setFlyingStance() {
 		this.setRotateAngle(ravenBody, 0.08726646259971647F, 0, 0);
 		this.setRotateAngle(ravenHead, -0.06981317007977318F, 0, 0);
 		this.setRotateAngle(wingLeft1, -0.08726646259971647F, 0F, 1.2217304763960306F);
@@ -269,9 +256,8 @@ public class ModelRaven extends ModelBase
 		this.wingRight3Feathers.isHidden = false;
 
 	}
-	
-	private void setWanderingStance()
-	{
+
+	private void setWanderingStance() {
 		this.setRotateAngle(tailRight, -0.17453292519943295F, -0.12217304763960307F, -0.2617993877991494F);
 		this.setRotateAngle(wingRight3, 0, 0.2617993877991494F, 0);
 		this.setRotateAngle(ravenBodyTail, 0.22689280275926282F, 0, 0);
@@ -298,9 +284,8 @@ public class ModelRaven extends ModelBase
 		this.wingLeft3Feathers.isHidden = true;
 		this.wingRight3Feathers.isHidden = true;
 	}
-	
-	private void setSittingStance()
-	{
+
+	private void setSittingStance() {
 		setWanderingStance();
 		this.setRotateAngle(ravenLeftLeg2, -0.08726646259971647F, -0.26179938779F, 0);
 		this.setRotateAngle(ravenRightLeg2, -0.08726646259971647F, 0.26179938779F, 0);

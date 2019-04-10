@@ -1,17 +1,23 @@
 {
-	"forge_marker": 1,
-	"defaults":
-	{
-		"transform": "forge:default-item",
-		"model": "cross",
-		"textures":
-		{
-			"cross": "bewitchment:blocks/sapling_juniper"
-		}
-	},
-	"variants":
-	{
-		"inventory": [{"model": "builtin/generated", "textures": {"layer0": "#cross"}}],
-		"normal": [{}]
-	}
+  "forge_marker": 1,
+  "defaults": {
+    "transform": "forge:default-item",
+    "model": "cross",
+    "textures": {
+      "cross": "bewitchment:blocks/sapling_juniper"
+    }
+  },
+  "variants": {
+    "inventory": [
+      {
+        "model": "builtin/generated",
+        "textures": {
+          "layer0": "#cross"
+        }
+      }
+    ],
+    "normal": [
+      {}
+    ]
+  }
 }

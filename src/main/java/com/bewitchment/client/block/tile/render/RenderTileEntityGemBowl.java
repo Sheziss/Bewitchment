@@ -1,7 +1,6 @@
 package com.bewitchment.client.block.tile.render;
 
 import com.bewitchment.common.block.tile.entity.TileEntityGemBowl;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.IBakedModel;
@@ -14,13 +13,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderTileEntityGemBowl extends TileEntitySpecialRenderer<TileEntityGemBowl>
-{
+public class RenderTileEntityGemBowl extends TileEntitySpecialRenderer<TileEntityGemBowl> {
 	@Override
-	public void render(TileEntityGemBowl tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha)
-	{
-		if (!tile.inventory.getStackInSlot(0).isEmpty())
-		{
+	public void render(TileEntityGemBowl tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+		if (!tile.inventory.getStackInSlot(0).isEmpty()) {
 			ItemStack stack = tile.inventory.getStackInSlot(0);
 			GlStateManager.pushMatrix();
 			GlStateManager.disableLighting();

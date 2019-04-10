@@ -1,19 +1,22 @@
 {
-	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
-		"WFW",
-		"WCW",
-		"WCW"
-	],
-	"key":
-	{
-		"W": {"item": "bewitchment:wood_ash"},
-		"F": {"item": "bewitchment:birch_soul"},
-		"C": {"item": "minecraft:cobblestone"}
-	},
-	"result":
-	{
-		"item": "bewitchment:chalk_normal"
-	}
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WFW",
+    "WCW",
+    "WCW"
+  ],
+  "key": {
+    "W": {
+      "item": "bewitchment:wood_ash"
+    },
+    "F": {
+      "item": "bewitchment:birch_soul"
+    },
+    "C": {
+      "item": "minecraft:cobblestone"
+    }
+  },
+  "result": {
+    "item": "bewitchment:chalk_normal"
+  }
 }

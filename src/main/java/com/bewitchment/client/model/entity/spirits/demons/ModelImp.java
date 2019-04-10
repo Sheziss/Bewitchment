@@ -6,8 +6,7 @@ import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.entity.Entity;
 
-public class ModelImp extends AdvancedModelBase
-{
+public class ModelImp extends AdvancedModelBase {
 	public AdvancedModelRenderer bipedRightArm;
 	public AdvancedModelRenderer bipedRightLeg;
 	public AdvancedModelRenderer bipedHead;
@@ -63,9 +62,8 @@ public class ModelImp extends AdvancedModelBase
 	public AdvancedModelRenderer lLeg03;
 	public AdvancedModelRenderer lLegfur;
 	public AdvancedModelRenderer lHoof;
-	
-	public ModelImp()
-	{
+
+	public ModelImp() {
 		this.textureWidth = 64;
 		this.textureHeight = 64;
 		this.bipedLeftLeg = new AdvancedModelRenderer(this, 0, 16);
@@ -345,10 +343,9 @@ public class ModelImp extends AdvancedModelBase
 		this.updateDefaultPose();
 		ModelAnimator.create();
 	}
-	
+
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	{
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		this.bipedLeftLeg.render(f5);
 		this.bipedRightLeg.render(f5);
 		this.bipedRightArm.render(f5);
@@ -358,10 +355,9 @@ public class ModelImp extends AdvancedModelBase
 		this.bipedHead.render(f5);
 		this.bipedLeftArm.render(f5);
 	}
-	
+
 	@Override
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
-	{
+	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		this.resetToDefaultPose();
 		float globalSpeed = 1;
@@ -375,16 +371,14 @@ public class ModelImp extends AdvancedModelBase
 		flap(lWing01, 0.6f, 0.5f, true, 0, 0.2f, f, f1);
 		flap(rWing01, 0.6f, 0.5f, false, 0, 0.2f, f, f1);
 	}
-	
-	public void setRotateAngle(AdvancedModelRenderer AdvancedModelRenderer, float x, float y, float z)
-	{
+
+	public void setRotateAngle(AdvancedModelRenderer AdvancedModelRenderer, float x, float y, float z) {
 		AdvancedModelRenderer.rotateAngleX = x;
 		AdvancedModelRenderer.rotateAngleY = y;
 		AdvancedModelRenderer.rotateAngleZ = z;
 	}
-	
-	public void animate(IAnimatedEntity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	{
+
+	public void animate(IAnimatedEntity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		this.resetToDefaultPose();
 		this.setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
 	}

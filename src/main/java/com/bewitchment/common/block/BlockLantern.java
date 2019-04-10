@@ -1,8 +1,5 @@
 package com.bewitchment.common.block;
 
-import java.util.List;
-import java.util.Random;
-
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -25,55 +22,50 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockLantern extends BlockCandleBase
-{
+import java.util.List;
+import java.util.Random;
+
+public class BlockLantern extends BlockCandleBase {
 	private static final AxisAlignedBB BOX = new AxisAlignedBB(0.2, 0, 0.2, 0.8, 0.9375, 0.8);
-	
-	public BlockLantern(String color)
-	{
+
+	public BlockLantern(String color) {
 		super("lantern_" + color, Material.IRON, SoundType.METAL, 3, 3, "pickaxe", 0);
 	}
-	
+
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos)
-	{
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) {
 		return BOX;
 	}
-	
+
 	@Override
-	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase living, EnumHand hand)
-    {
+	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase living, EnumHand hand) {
 		return getDefaultState().withProperty(LIT, living.getHeldItem(hand).hasTagCompound() && living.getHeldItem(hand).getTagCompound().getBoolean("lit") ? true : false);
-    }
-	
+	}
+
 	@Override
-	public ItemStack getPickBlock(IBlockState state, RayTraceResult result, World world, BlockPos pos, EntityPlayer player)
-	{
+	public ItemStack getPickBlock(IBlockState state, RayTraceResult result, World world, BlockPos pos, EntityPlayer player) {
 		ItemStack stack = new ItemStack(this);
-		if (state.getValue(LIT))
-		{
+		if (state.getValue(LIT)) {
 			stack.setTagCompound(new NBTTagCompound());
 			stack.getTagCompound().setBoolean("lit", true);
 		}
 		return stack;
 	}
-	
+
 	@Override
-	public int getLightValue(IBlockState state)
-    {
-        return state.getValue(LIT) ? 15 : 0;
-    }
-	
+	public int getLightValue(IBlockState state) {
+		return state.getValue(LIT) ? 15 : 0;
+	}
+
 	@Override
 	@SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced)
-    {
-		if (stack.hasTagCompound() && stack.getTagCompound().getBoolean("lit")) tooltip.add(new TextComponentTranslation("tooltip.lantern_lit").getFormattedText());
-    }
-	
+	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
+		if (stack.hasTagCompound() && stack.getTagCompound().getBoolean("lit"))
+			tooltip.add(new TextComponentTranslation("tooltip.lantern_lit").getFormattedText());
+	}
+
 	@Override
-	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
-	{
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
 		ItemStack unlit = new ItemStack(this);
 		list.add(unlit);
 		ItemStack lit = new ItemStack(this);
@@ -81,10 +73,10 @@ public class BlockLantern extends BlockCandleBase
 		lit.getTagCompound().setBoolean("lit", true);
 		list.add(lit);
 	}
-	
+
 	@Override
-	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand)
-	{
-		if (state.getValue(LIT)) world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5, pos.getY() + 0.6, pos.getZ() + 0.5, 0, 0, 0);
+	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
+		if (state.getValue(LIT))
+			world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5, pos.getY() + 0.6, pos.getZ() + 0.5, 0, 0, 0);
 	}
 }

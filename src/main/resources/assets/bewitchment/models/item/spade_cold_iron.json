@@ -1,7 +1,6 @@
 {
-	"parent": "item/generated",
-	"textures":
-	{
-		"layer0": "bewitchment:items/spade_cold_iron"
-	}
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "bewitchment:items/spade_cold_iron"
+  }
 }

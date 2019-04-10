@@ -1,13 +1,12 @@
 {
-	"name": "Wormwood",
-	"icon": "bewitchment:wormwood",
-	"category": "herbology",
-	"pages":
-	[
-		{
-			"type": "spotlight",
-			"item": "bewitchment:wormwood",
-			"text": "An incredibly bitter herb, it is used by some to create alcoholic drinks. Some believe it can be used to summon the spirits of the dead."
-		}
-	]
+  "name": "Wormwood",
+  "icon": "bewitchment:wormwood",
+  "category": "herbology",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "bewitchment:wormwood",
+      "text": "An incredibly bitter herb, it is used by some to create alcoholic drinks. Some believe it can be used to summon the spirits of the dead."
+    }
+  ]
 }

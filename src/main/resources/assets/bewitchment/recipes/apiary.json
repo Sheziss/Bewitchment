@@ -1,18 +1,21 @@
 {
-	"type": "forge:ore_shaped",
-	"pattern":
-	[
-		"PPP",
-		"PWP",
-		"PPP"
-	],
-	"key":
-	{
-		"P": {"type": "forge:ore_dict", "ore": "plankWood"},
-		"W": {"type": "forge:ore_dict", "ore": "materialWaxcomb"}
-	},
-	"result":
-	{
-		"item": "bewitchment:apiary"
-	}
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "PPP",
+    "PWP",
+    "PPP"
+  ],
+  "key": {
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "plankWood"
+    },
+    "W": {
+      "type": "forge:ore_dict",
+      "ore": "materialWaxcomb"
+    }
+  },
+  "result": {
+    "item": "bewitchment:apiary"
+  }
 }

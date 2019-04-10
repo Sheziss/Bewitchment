@@ -1,7 +1,5 @@
 package com.bewitchment.common.block;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.EnumPushReaction;
@@ -21,48 +19,40 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockCandle extends BlockCandleBase
-{
+import java.util.Random;
+
+public class BlockCandle extends BlockCandleBase {
 	private static final AxisAlignedBB BOX = new AxisAlignedBB(0.31, 0, 0.31, 0.69, 0.75, 0.69);
-	
-	public BlockCandle(String name)
-	{
+
+	public BlockCandle(String name) {
 		super(name, Material.CLOTH, SoundType.CLOTH, 1, 1, "", 0);
 		Blocks.FIRE.setFireInfo(this, 0, 0);
 	}
-	
+
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos)
-	{
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) {
 		return BOX;
 	}
-	
+
 	@Override
-	public EnumPushReaction getPushReaction(IBlockState state)
-	{
+	public EnumPushReaction getPushReaction(IBlockState state) {
 		return EnumPushReaction.DESTROY;
 	}
-	
+
 	@Override
-	public boolean canPlaceBlockAt(World world, BlockPos pos)
-	{
+	public boolean canPlaceBlockAt(World world, BlockPos pos) {
 		return world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP);
 	}
-	
+
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing face, float hitX, float hitY, float hitZ)
-	{
-		if (state.getValue(LIT))
-		{
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing face, float hitX, float hitY, float hitZ) {
+		if (state.getValue(LIT)) {
 			world.setBlockState(pos, getDefaultState().withProperty(LIT, false));
 			world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5f, 2.6f + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8f, false);
 			return true;
-		}
-		else
-		{
+		} else {
 			ItemStack stack = player.getHeldItem(hand);
-			if (stack.getItem() == Items.FLINT_AND_STEEL)
-			{
+			if (stack.getItem() == Items.FLINT_AND_STEEL) {
 				stack.damageItem(1, player);
 				world.setBlockState(pos, getDefaultState().withProperty(LIT, true));
 				world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1, world.rand.nextFloat() * 0.4f + 0.8f, false);
@@ -71,22 +61,20 @@ public class BlockCandle extends BlockCandleBase
 		}
 		return super.onBlockActivated(world, pos, state, player, hand, face, hitX, hitY, hitZ);
 	}
-	
+
 	@Override
-	public int getLightValue(IBlockState state)
-	{
+	public int getLightValue(IBlockState state) {
 		return state.getValue(LIT) ? 14 : 0;
 	}
-	
+
 	@Override
-	public void neighborChanged(IBlockState state, World world, BlockPos to, Block block, BlockPos from)
-	{
+	public void neighborChanged(IBlockState state, World world, BlockPos to, Block block, BlockPos from) {
 		if (!canPlaceBlockAt(world, to)) world.destroyBlock(to, true);
 	}
-	
+
 	@Override
-	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand)
-	{
-		if (state.getValue(LIT)) world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5, pos.getY() + 0.925, pos.getZ() + 0.5, 0, 0, 0);
+	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
+		if (state.getValue(LIT))
+			world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5, pos.getY() + 0.925, pos.getZ() + 0.5, 0, 0, 0);
 	}
 }

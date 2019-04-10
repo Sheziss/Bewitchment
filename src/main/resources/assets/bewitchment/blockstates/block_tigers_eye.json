@@ -1,18 +1,19 @@
 {
-	"forge_marker": 1,
-	"defaults":
-	{
-		"model": "cube_all",
-		"textures":
-		{
-			"all": "bewitchment:blocks/block_tigers_eye_side",
-			"up": "bewitchment:blocks/block_tigers_eye_top",
-			"down": "bewitchment:blocks/block_tigers_eye_top"
-		}
-	},
-	"variants":
-	{
-		"inventory": [{}],
-		"normal": [{}]
-	}
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "textures": {
+      "all": "bewitchment:blocks/block_tigers_eye_side",
+      "up": "bewitchment:blocks/block_tigers_eye_top",
+      "down": "bewitchment:blocks/block_tigers_eye_top"
+    }
+  },
+  "variants": {
+    "inventory": [
+      {}
+    ],
+    "normal": [
+      {}
+    ]
+  }
 }

@@ -1,21 +1,27 @@
 {
-	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
-		"ESE",
-		"BLB",
-		"BLB"
-	],
-	"key":
-	{
-		"E": {"item": "bewitchment:empty_jar"},
-		"S": {"item": "bewitchment:salt"},
-		"B": {"item": "minecraft:stonebrick", "data": 0},
-		"L": {"item": "bewitchment:log_elder"}
-	},
-	"result":
-	{
-		"item": "bewitchment:witches_altar",
-		"count": 3
-	}
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ESE",
+    "BLB",
+    "BLB"
+  ],
+  "key": {
+    "E": {
+      "item": "bewitchment:empty_jar"
+    },
+    "S": {
+      "item": "bewitchment:salt"
+    },
+    "B": {
+      "item": "minecraft:stonebrick",
+      "data": 0
+    },
+    "L": {
+      "item": "bewitchment:log_elder"
+    }
+  },
+  "result": {
+    "item": "bewitchment:witches_altar",
+    "count": 3
+  }
 }

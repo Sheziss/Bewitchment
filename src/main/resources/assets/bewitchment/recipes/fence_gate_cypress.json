@@ -1,17 +1,19 @@
 {
-	"type": "forge:ore_shaped",
-	"pattern":
-	[
-		"SPS",
-		"SPS"
-	],
-	"key":
-	{
-		"S": {"type": "forge:ore_dict", "ore": "stickWood"},
-		"P": {"item": "bewitchment:planks_cypress"}
-	},
-	"result":
-	{
-		"item": "bewitchment:fence_gate_cypress"
-	}
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "SPS",
+    "SPS"
+  ],
+  "key": {
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "stickWood"
+    },
+    "P": {
+      "item": "bewitchment:planks_cypress"
+    }
+  },
+  "result": {
+    "item": "bewitchment:fence_gate_cypress"
+  }
 }

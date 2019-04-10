@@ -3,7 +3,6 @@ package com.bewitchment.common.block.tile.container;
 import com.bewitchment.common.block.tile.container.util.ModContainer;
 import com.bewitchment.common.block.tile.container.util.ModSlot;
 import com.bewitchment.common.block.tile.entity.TileEntityOven;
-
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.util.EnumFacing;
@@ -12,14 +11,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-public class ContainerOven extends ModContainer
-{
-	public int burnTime, fuelBurnTime, progress;
-	
+public class ContainerOven extends ModContainer {
 	private final TileEntityOven tile;
-	
-	public ContainerOven(InventoryPlayer inventory, TileEntityOven tile)
-	{
+	public int burnTime, fuelBurnTime, progress;
+
+	public ContainerOven(InventoryPlayer inventory, TileEntityOven tile) {
 		this.tile = tile;
 		IItemHandler up = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
 		IItemHandler down = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.DOWN);
@@ -31,25 +27,22 @@ public class ContainerOven extends ModContainer
 		addSlotToContainer(new ModSlot(down, di++, 116, 55));
 		addPlayerSlots(inventory);
 	}
-	
+
 	@Override
-	public void detectAndSendChanges()
-	{
+	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
-		for (IContainerListener listener : listeners)
-		{
+		for (IContainerListener listener : listeners) {
 			listener.sendWindowProperty(this, 0, tile.burnTime);
 			listener.sendWindowProperty(this, 1, tile.fuelBurnTime);
 			listener.sendWindowProperty(this, 2, tile.progress);
 		}
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
-    public void updateProgressBar(int id, int data)
-    {
+	public void updateProgressBar(int id, int data) {
 		if (id == 0) burnTime = data;
 		if (id == 1) fuelBurnTime = data;
 		else progress = data;
-    }
+	}
 }

@@ -1,7 +1,6 @@
 package com.bewitchment.client.model.entity.spirits.ghosts;
 
 import com.bewitchment.common.entity.spirits.ghosts.EntityBlackDog;
-
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelBase;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
@@ -9,8 +8,7 @@ import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelBlackDog extends AdvancedModelBase
-{
+public class ModelBlackDog extends AdvancedModelBase {
 	public AdvancedModelRenderer lArm01;
 	public AdvancedModelRenderer body;
 	public AdvancedModelRenderer lHindLeg01;
@@ -28,11 +26,10 @@ public class ModelBlackDog extends AdvancedModelBase
 	public AdvancedModelRenderer lowerJaw;
 	public AdvancedModelRenderer lEar02;
 	public AdvancedModelRenderer rEar02;
-	
+
 	private ModelAnimator animator;
-	
-	public ModelBlackDog()
-	{
+
+	public ModelBlackDog() {
 		this.textureWidth = 64;
 		this.textureHeight = 64;
 		this.neck = new AdvancedModelRenderer(this, 0, 32);
@@ -114,10 +111,9 @@ public class ModelBlackDog extends AdvancedModelBase
 		this.updateDefaultPose();
 		animator = ModelAnimator.create();
 	}
-	
+
 	@Override
-	public void render(Entity entity, float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale)
-	{
+	public void render(Entity entity, float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale) {
 		this.setRotationAngles(limbSwing, limbSwingAmount, age, rotationYaw, rotationPitch, scale, entity);
 		this.animate((IAnimatedEntity) entity, limbSwing, limbSwingAmount, age, rotationYaw, rotationPitch, scale);
 		this.rHindLeg01.render(scale);
@@ -126,17 +122,15 @@ public class ModelBlackDog extends AdvancedModelBase
 		this.rArm01.render(scale);
 		this.body.render(scale);
 	}
-	
-	public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
-	{
+
+	public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
 		modelRenderer.rotateAngleX = x;
 		modelRenderer.rotateAngleY = y;
 		modelRenderer.rotateAngleZ = z;
 	}
-	
+
 	@Override
-	public void setRotationAngles(float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale, Entity entity)
-	{
+	public void setRotationAngles(float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale, Entity entity) {
 		super.setRotationAngles(limbSwing, limbSwingAmount, age, rotationYaw, rotationPitch, scale, entity);
 		this.resetToDefaultPose();
 		float globalSpeed = 1;
@@ -147,9 +141,8 @@ public class ModelBlackDog extends AdvancedModelBase
 		walk(rHindLeg01, 0.6f, 0.5f, true, 0, 0.2f, limbSwing, limbSwingAmount);
 		walk(lHindLeg01, 0.6f, 0.5f, false, 0, 0.2f, limbSwing, limbSwingAmount);
 	}
-	
-	public void animate(IAnimatedEntity entity, float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale)
-	{
+
+	public void animate(IAnimatedEntity entity, float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale) {
 		this.resetToDefaultPose();
 		this.setRotationAngles(limbSwing, limbSwingAmount, age, rotationYaw, rotationPitch, scale, (Entity) entity);
 		animator.update(entity);

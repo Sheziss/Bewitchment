@@ -1,18 +1,17 @@
 {
-	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
-		"PP",
-		"PP",
-		"PP"
-	],
-	"key":
-	{
-		"P": {"item": "bewitchment:planks_cypress"}
-	},
-	"result":
-	{
-		"item": "bewitchment:door_cypress",
-		"count": 3
-	}
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PP",
+    "PP",
+    "PP"
+  ],
+  "key": {
+    "P": {
+      "item": "bewitchment:planks_cypress"
+    }
+  },
+  "result": {
+    "item": "bewitchment:door_cypress",
+    "count": 3
+  }
 }

@@ -1,7 +1,6 @@
 package com.bewitchment.client.model.entity.spirits.demons;
 
 import com.bewitchment.common.entity.spirits.demons.EntitySerpent;
-
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelBase;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
@@ -9,8 +8,7 @@ import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelSerpent extends AdvancedModelBase
-{
+public class ModelSerpent extends AdvancedModelBase {
 	public AdvancedModelRenderer neck01a;
 	public AdvancedModelRenderer neck01b;
 	public AdvancedModelRenderer neck02;
@@ -63,11 +61,10 @@ public class ModelSerpent extends AdvancedModelBase
 	public AdvancedModelRenderer rWing02;
 	public AdvancedModelRenderer rWing03;
 	public AdvancedModelRenderer rWing04;
-	
+
 	private ModelAnimator animator;
-	
-	public ModelSerpent()
-	{
+
+	public ModelSerpent() {
 		this.textureWidth = 64;
 		this.textureHeight = 64;
 		this.rHorn02d = new AdvancedModelRenderer(this, 52, 6);
@@ -327,18 +324,16 @@ public class ModelSerpent extends AdvancedModelBase
 		this.updateDefaultPose();
 		animator = ModelAnimator.create();
 	}
-	
+
 	@Override
-	public void render(Entity entity, float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale)
-	{
+	public void render(Entity entity, float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale) {
 		this.setRotationAngles(limbSwing, limbSwingAmount, age, rotationYaw, rotationPitch, scale, entity);
 		this.animate((IAnimatedEntity) entity, limbSwing, limbSwingAmount, age, rotationYaw, rotationPitch, scale);
 		this.neck01a.render(scale);
 	}
-	
+
 	@Override
-	public void setRotationAngles(float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale, Entity entity)
-	{
+	public void setRotationAngles(float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale, Entity entity) {
 		super.setRotationAngles(limbSwing, limbSwingAmount, age, rotationYaw, rotationPitch, scale, entity);
 		this.resetToDefaultPose();
 		AdvancedModelRenderer[] TAIL_PARTS = new AdvancedModelRenderer[]{tail01, tail02, tail03, tail04, tail05};
@@ -346,16 +341,14 @@ public class ModelSerpent extends AdvancedModelBase
 		float globalDegree = 0.6f;
 		chainSwing(TAIL_PARTS, globalSpeed, globalDegree, -3, limbSwing, limbSwingAmount);
 	}
-	
-	public void setRotateAngle(ModelRenderer renderer, float x, float y, float z)
-	{
+
+	public void setRotateAngle(ModelRenderer renderer, float x, float y, float z) {
 		renderer.rotateAngleX = x;
 		renderer.rotateAngleY = y;
 		renderer.rotateAngleZ = z;
 	}
-	
-	public void animate(IAnimatedEntity entity, float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale)
-	{
+
+	public void animate(IAnimatedEntity entity, float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale) {
 		this.resetToDefaultPose();
 		this.setRotationAngles(limbSwing, limbSwingAmount, age, rotationYaw, rotationPitch, scale, (Entity) entity);
 		animator.update(entity);

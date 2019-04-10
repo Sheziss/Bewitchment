@@ -1,24 +1,23 @@
 {
-	"name": "Alpha Hellhound",
-	"icon": "bewitchment:hellhound_horn",
-	"category": "nethers_firstborn",
-	"pages":
-	[
-		{
-			"type": "text",
-			"text": "Some hellhounds, near the end of their lives, undergo a rapid metamorphosis into a beast to command various legions of other hellhounds. This transformation usually occurs after it has consumed enough souls of the living."
-		},
-		{
-			"type": "entity",
-			"name": "Alpha Hellhound",
-			"entity": "bewitchment:alpha_hellhound",
-			"scale": 0.75,
-			"rotate": true,
-			"text": "Diabolic Beast"
-		},
-		{
-			"type": "ritual",
-			"ritual": "bewitchment:conjure_alpha_hellhound"
-		}
-	]
+  "name": "Alpha Hellhound",
+  "icon": "bewitchment:hellhound_horn",
+  "category": "nethers_firstborn",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Some hellhounds, near the end of their lives, undergo a rapid metamorphosis into a beast to command various legions of other hellhounds. This transformation usually occurs after it has consumed enough souls of the living."
+    },
+    {
+      "type": "entity",
+      "name": "Alpha Hellhound",
+      "entity": "bewitchment:alpha_hellhound",
+      "scale": 0.75,
+      "rotate": true,
+      "text": "Diabolic Beast"
+    },
+    {
+      "type": "ritual",
+      "ritual": "bewitchment:conjure_alpha_hellhound"
+    }
+  ]
 }

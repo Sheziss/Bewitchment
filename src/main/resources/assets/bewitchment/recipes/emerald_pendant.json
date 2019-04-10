@@ -1,18 +1,20 @@
 {
-	"type": "forge:ore_shaped",
-	"pattern":
-	[
-		"S S",
-		" S ",
-		" E "
-	],
-	"key":
-	{
-		"S": {"type": "forge:ore_dict", "ore": "string"},
-		"E": {"item": "minecraft:emerald"}
-	},
-	"result":
-	{
-		"item": "bewitchment:emerald_pendant"
-	}
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "S S",
+    " S ",
+    " E "
+  ],
+  "key": {
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "string"
+    },
+    "E": {
+      "item": "minecraft:emerald"
+    }
+  },
+  "result": {
+    "item": "bewitchment:emerald_pendant"
+  }
 }

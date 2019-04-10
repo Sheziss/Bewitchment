@@ -1,20 +1,29 @@
 {
-	"forge_marker": 1,
-	"defaults":
-	{
-		"model": "cube_all",
-		"textures":
-		{
-			"all": "bewitchment:blocks/leaves_cypress"
-		}
-	},
-	"variants":
-	{
-		"inventory": [{}],
-		"normal": [{}],
-		"check_decay=true,decayable=true": [{}],
-		"check_decay=true,decayable=false": [{}],
-		"check_decay=false,decayable=true": [{}],
-		"check_decay=false,decayable=false": [{}]
-	}
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "textures": {
+      "all": "bewitchment:blocks/leaves_cypress"
+    }
+  },
+  "variants": {
+    "inventory": [
+      {}
+    ],
+    "normal": [
+      {}
+    ],
+    "check_decay=true,decayable=true": [
+      {}
+    ],
+    "check_decay=true,decayable=false": [
+      {}
+    ],
+    "check_decay=false,decayable=true": [
+      {}
+    ],
+    "check_decay=false,decayable=false": [
+      {}
+    ]
+  }
 }

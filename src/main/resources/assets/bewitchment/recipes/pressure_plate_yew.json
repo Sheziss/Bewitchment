@@ -1,15 +1,14 @@
 {
-	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
-		"PP"
-	],
-	"key":
-	{
-		"P": {"item": "bewitchment:planks_yew"}
-	},
-	"result":
-	{
-		"item": "bewitchment:pressure_plate_yew"
-	}
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PP"
+  ],
+  "key": {
+    "P": {
+      "item": "bewitchment:planks_yew"
+    }
+  },
+  "result": {
+    "item": "bewitchment:pressure_plate_yew"
+  }
 }

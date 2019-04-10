@@ -1,17 +1,18 @@
 {
-	"forge_marker": 1,
-	"defaults":
-	{
-		"model": "bewitchment:cube_overlay",
-		"textures":
-		{
-			"base": "blocks/stone",
-			"overlay": "bewitchment:blocks/ore_salt"
-		}
-	},
-	"variants":
-	{
-		"inventory": [{}],
-		"normal": [{}]
-	}
+  "forge_marker": 1,
+  "defaults": {
+    "model": "bewitchment:cube_overlay",
+    "textures": {
+      "base": "blocks/stone",
+      "overlay": "bewitchment:blocks/ore_salt"
+    }
+  },
+  "variants": {
+    "inventory": [
+      {}
+    ],
+    "normal": [
+      {}
+    ]
+  }
 }

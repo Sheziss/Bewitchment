@@ -2,7 +2,6 @@ package com.bewitchment.common.compat.thaumcraft;
 
 import com.bewitchment.Bewitchment;
 import com.bewitchment.registry.ModObjects;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -14,33 +13,17 @@ import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.aspects.AspectRegistryEvent;
-import thaumcraft.common.entities.monster.EntityBrainyZombie;
-import thaumcraft.common.entities.monster.EntityEldritchCrab;
-import thaumcraft.common.entities.monster.EntityEldritchGuardian;
-import thaumcraft.common.entities.monster.EntityFireBat;
-import thaumcraft.common.entities.monster.EntityMindSpider;
-import thaumcraft.common.entities.monster.EntityPech;
-import thaumcraft.common.entities.monster.EntityThaumicSlime;
-import thaumcraft.common.entities.monster.EntityWisp;
-import thaumcraft.common.entities.monster.boss.EntityCultistLeader;
-import thaumcraft.common.entities.monster.boss.EntityCultistPortalGreater;
-import thaumcraft.common.entities.monster.boss.EntityEldritchGolem;
-import thaumcraft.common.entities.monster.boss.EntityEldritchWarden;
-import thaumcraft.common.entities.monster.boss.EntityTaintacleGiant;
+import thaumcraft.common.entities.monster.*;
+import thaumcraft.common.entities.monster.boss.*;
 import thaumcraft.common.entities.monster.cult.EntityCultist;
 import thaumcraft.common.entities.monster.cult.EntityCultistPortalLesser;
-import thaumcraft.common.entities.monster.tainted.EntityTaintCrawler;
-import thaumcraft.common.entities.monster.tainted.EntityTaintSeed;
-import thaumcraft.common.entities.monster.tainted.EntityTaintSeedPrime;
-import thaumcraft.common.entities.monster.tainted.EntityTaintSwarm;
-import thaumcraft.common.entities.monster.tainted.EntityTaintacle;
+import thaumcraft.common.entities.monster.tainted.*;
 
 /**
  * Created by Joseph on 3/28/2019.
  */
 @Deprecated
-public class ThaumcraftAspectCompat
-{
+public class ThaumcraftAspectCompat {
 	/*
 	 * DO NOT USE THIS CLASS DIRECTLY.
 	 * USE METHODS IN ThaumcraftCompatBridge
@@ -55,58 +38,48 @@ public class ThaumcraftAspectCompat
 	static final Aspect DEMON = getOrCreateAspect("diabolus", 0X960018, new Aspect[]{Aspect.SOUL, Aspect.AVERSION}, new ResourceLocation(Bewitchment.MOD_ID, "textures/thaumcraft/diabolus.png"), 1);
 	private static final ThaumcraftCompat INSTANCE = new ThaumcraftCompat();
 	private static boolean registered = false;
-	
-	static Aspect getOrCreateAspect(String tag, int color, Aspect[] components, ResourceLocation image, int blend)
-	{
+
+	static Aspect getOrCreateAspect(String tag, int color, Aspect[] components, ResourceLocation image, int blend) {
 		Aspect a = Aspect.getAspect(tag);
 		if (a != null) return a;
 		return new Aspect(tag, color, components, image, blend);
 	}
-	
+
 	@Deprecated
-	static boolean isEldritchMob(Entity target)
-	{
+	static boolean isEldritchMob(Entity target) {
 		return target instanceof EntityEldritchGuardian || target instanceof EntityEldritchCrab || target instanceof EntityMindSpider || target instanceof EntityEldritchGolem || target instanceof EntityEldritchWarden;
 	}
-	
+
 	@Deprecated
-	static boolean isTCSpiritMob(Entity target)
-	{
+	static boolean isTCSpiritMob(Entity target) {
 		return target instanceof EntityEldritchGuardian || target instanceof EntityEldritchCrab || target instanceof EntityFireBat || target instanceof EntityWisp || target instanceof EntityPech || target instanceof EntityMindSpider || target instanceof EntityEldritchGolem || target instanceof EntityEldritchWarden;
 	}
-	
+
 	@Deprecated
-	static boolean isCrimsonCultMob(Entity target)
-	{
+	static boolean isCrimsonCultMob(Entity target) {
 		return target instanceof EntityCultistLeader || target instanceof EntityCultist || target instanceof EntityCultistPortalGreater || target instanceof EntityCultistPortalLesser;
 	}
-	
+
 	@Deprecated
-	static boolean isThaumcraftMob(Entity target)
-	{
+	static boolean isThaumcraftMob(Entity target) {
 		return target instanceof EntityEldritchGuardian || target instanceof EntityEldritchCrab || target instanceof EntityFireBat || target instanceof EntityWisp || target instanceof EntityPech || target instanceof EntityMindSpider || target instanceof EntityEldritchGolem || target instanceof EntityEldritchWarden || target instanceof EntityCultistLeader || target instanceof EntityCultist || target instanceof EntityCultistPortalGreater || target instanceof EntityCultistPortalLesser || target instanceof EntityTaintacleGiant || target instanceof EntityTaintacle || target instanceof EntityTaintCrawler || target instanceof EntityTaintSeedPrime || target instanceof EntityTaintSeed || target instanceof EntityTaintSwarm || target instanceof EntityBrainyZombie || target instanceof EntityThaumicSlime;
 	}
-	
+
 	@Deprecated
-	static boolean isTaintedMob(Entity target)
-	{
+	static boolean isTaintedMob(Entity target) {
 		return target instanceof EntityTaintacleGiant || target instanceof EntityTaintacle || target instanceof EntityTaintCrawler || target instanceof EntityTaintSeedPrime || target instanceof EntityTaintSeed || target instanceof EntityTaintSwarm || target instanceof EntityThaumicSlime;
 	}
-	
+
 	@Deprecated
-	static void register()
-	{
-		if (!registered)
-		{
+	static void register() {
+		if (!registered) {
 			registered = true;
 			MinecraftForge.EVENT_BUS.register(INSTANCE);
-		}
-		else throw new RuntimeException("You can only call ThaumcraftAspectCompat.register() once");
+		} else throw new RuntimeException("You can only call ThaumcraftAspectCompat.register() once");
 	}
 
 	@SubscribeEvent
-	public void aspectRegistrationEvent(AspectRegistryEvent evt)
-	{
+	public void aspectRegistrationEvent(AspectRegistryEvent evt) {
 		// Items
 		evt.register.registerObjectTag(new ItemStack(ModObjects.ectoplasm), new AspectList().add(Aspect.SOUL, 5).add(Aspect.DEATH, 5));
 //		evt.register.registerObjectTag(new ItemStack(ModObjects.tarots), new AspectList().add(Aspect.MAGIC, 15).add(Aspect.CRAFT, 10));

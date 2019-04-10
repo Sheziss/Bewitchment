@@ -1,18 +1,23 @@
 {
-	"forge_marker": 1,
-	"defaults":
-	{
-		"model": "cube_all",
-		"textures":
-		{
-			"all": "blocks/ice"
-		}
-	},
-	"variants":
-	{
-		"inventory": [{}],
-		"normal": [{}],
-		"half=bottom,variant=default": [{}],
-        "half=top,variant=default": [{}]
-	}
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "textures": {
+      "all": "blocks/ice"
+    }
+  },
+  "variants": {
+    "inventory": [
+      {}
+    ],
+    "normal": [
+      {}
+    ],
+    "half=bottom,variant=default": [
+      {}
+    ],
+    "half=top,variant=default": [
+      {}
+    ]
+  }
 }

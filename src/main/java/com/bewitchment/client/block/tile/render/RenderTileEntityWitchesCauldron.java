@@ -1,9 +1,6 @@
 package com.bewitchment.client.block.tile.render;
 
-import org.lwjgl.opengl.GL11;
-
 import com.bewitchment.common.block.tile.entity.TileEntityWitchesCauldron;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -17,16 +14,14 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class RenderTileEntityWitchesCauldron extends TileEntitySpecialRenderer<TileEntityWitchesCauldron>
-{
+public class RenderTileEntityWitchesCauldron extends TileEntitySpecialRenderer<TileEntityWitchesCauldron> {
 	@Override
-	public void render(TileEntityWitchesCauldron tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha)
-	{
+	public void render(TileEntityWitchesCauldron tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
 		FluidTank tank = (FluidTank) tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-		if (tank.getFluid() != null)
-		{
+		if (tank.getFluid() != null) {
 			FluidStack stack = tank.getFluid();
 			GlStateManager.pushMatrix();
 			GlStateManager.disableLighting();

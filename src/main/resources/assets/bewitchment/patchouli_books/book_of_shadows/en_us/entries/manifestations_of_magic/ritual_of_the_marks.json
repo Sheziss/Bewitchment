@@ -1,25 +1,24 @@
 {
-	"name": "Ritual of the Marks",
-	"icon": "bewitchment:wood_ash",
-	"sortnum": "4",
-	"category": "manifestations_of_magic",
-	"pages":
-	[
-		{
-			"type": "text",
-			"text": "A very basic ritual, this ritual will aid you in drawing ritual circles."
-		},
-		{
-			"type": "ritual",
-			"ritual": "bewitchment:draw_small"
-		},
-		{
-			"type": "ritual",
-			"ritual": "bewitchment:draw_medium"
-		},
-		{
-			"type": "ritual",
-			"ritual": "bewitchment:draw_large"
-		}
-	]
+  "name": "Ritual of the Marks",
+  "icon": "bewitchment:wood_ash",
+  "sortnum": "4",
+  "category": "manifestations_of_magic",
+  "pages": [
+    {
+      "type": "text",
+      "text": "A very basic ritual, this ritual will aid you in drawing ritual circles."
+    },
+    {
+      "type": "ritual",
+      "ritual": "bewitchment:draw_small"
+    },
+    {
+      "type": "ritual",
+      "ritual": "bewitchment:draw_medium"
+    },
+    {
+      "type": "ritual",
+      "ritual": "bewitchment:draw_large"
+    }
+  ]
 }

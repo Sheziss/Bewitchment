@@ -1,18 +1,21 @@
 {
-	"type": "forge:ore_shaped",
-	"pattern":
-	[
-		"II",
-		"IS",
-		" S"
-	],
-	"key":
-	{
-		"I": {"type": "forge:ore_dict", "ore": "ingotColdIron"},
-		"S": {"type": "forge:ore_dict", "ore": "stickWood"}
-	},
-	"result":
-	{
-		"item": "bewitchment:axe_cold_iron"
-	}
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "II",
+    "IS",
+    " S"
+  ],
+  "key": {
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotColdIron"
+    },
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "stickWood"
+    }
+  },
+  "result": {
+    "item": "bewitchment:axe_cold_iron"
+  }
 }

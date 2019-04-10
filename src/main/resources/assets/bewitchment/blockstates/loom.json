@@ -1,17 +1,35 @@
 {
-	"forge_marker": 1,
-	"defaults":
-	{
-		"model": "bewitchment:loom",
-		"transform": "forge:default-block"
-	},
-	"variants":
-	{
-		"inventory": [{"y": 180}],
-		"normal": [{}],
-		"facing=north": [{}],
-		"facing=south": [{"y": 180}],
-		"facing=east": [{"y": 90}],
-		"facing=west": [{"y": 270}]
-	}
+  "forge_marker": 1,
+  "defaults": {
+    "model": "bewitchment:loom",
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "inventory": [
+      {
+        "y": 180
+      }
+    ],
+    "normal": [
+      {}
+    ],
+    "facing=north": [
+      {}
+    ],
+    "facing=south": [
+      {
+        "y": 180
+      }
+    ],
+    "facing=east": [
+      {
+        "y": 90
+      }
+    ],
+    "facing=west": [
+      {
+        "y": 270
+      }
+    ]
+  }
 }

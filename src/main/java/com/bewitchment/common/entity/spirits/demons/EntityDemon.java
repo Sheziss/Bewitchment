@@ -4,22 +4,10 @@ import com.bewitchment.Bewitchment;
 import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.common.entity.util.ModEntityMob;
 import com.bewitchment.registry.ModPotions;
-
 import net.ilexiconn.llibrary.server.animation.Animation;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.IMerchant;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest2;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
@@ -35,16 +23,14 @@ import net.minecraft.village.MerchantRecipeList;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
-public class EntityDemon extends ModEntityMob implements IMerchant
-{
+public class EntityDemon extends ModEntityMob implements IMerchant {
 	public static final Animation TOSS = Animation.create(10);
-	
+
 	private MerchantRecipeList recipeList;
 	private EntityPlayer buyer;
 	private int careerID, careerLevel, wealth;
-	
-	public EntityDemon(World world)
-	{
+
+	public EntityDemon(World world) {
 		super(world, new ResourceLocation(Bewitchment.MOD_ID, "entities/demon"));
 		setSize(1.8f, 4.6f);
 		isImmuneToFire = true;
@@ -54,94 +40,78 @@ public class EntityDemon extends ModEntityMob implements IMerchant
 		setPathPriority(PathNodeType.DAMAGE_FIRE, 0);
 		experienceValue = 165;
 	}
-	
+
 	@Override
-	public Animation[] getAnimations()
-	{
-		return new Animation[] {IAnimatedEntity.NO_ANIMATION, TOSS};
+	public Animation[] getAnimations() {
+		return new Animation[]{IAnimatedEntity.NO_ANIMATION, TOSS};
 	}
-	
+
 	@Override
-	protected boolean isValidLightLevel()
-	{
+	protected boolean isValidLightLevel() {
 		return true;
 	}
-	
+
 	@Override
-	public void setCustomer(EntityPlayer player)
-	{
+	public void setCustomer(EntityPlayer player) {
 		buyer = player;
 	}
 
 	@Override
-	public EntityPlayer getCustomer()
-	{
+	public EntityPlayer getCustomer() {
 		return buyer;
 	}
 
 	@Override
-	public MerchantRecipeList getRecipes(EntityPlayer player)
-	{
+	public MerchantRecipeList getRecipes(EntityPlayer player) {
 		return recipeList;
 	}
 
 	@Override
-	public void setRecipes(MerchantRecipeList recipeList)
-	{
+	public void setRecipes(MerchantRecipeList recipeList) {
 		this.recipeList = recipeList;
 	}
 
 	@Override
-	public void useRecipe(MerchantRecipe recipe)
-	{
+	public void useRecipe(MerchantRecipe recipe) {
 	}
 
 	@Override
-	public void verifySellingItem(ItemStack stack)
-	{
+	public void verifySellingItem(ItemStack stack) {
 	}
-	
+
 	@Override
-	public World getWorld()
-	{
+	public World getWorld() {
 		return world;
 	}
-	
+
 	@Override
-	public BlockPos getPos()
-	{
+	public BlockPos getPos() {
 		return getPos();
 	}
-	
+
 	@Override
-	public EnumCreatureAttribute getCreatureAttribute()
-	{
+	public EnumCreatureAttribute getCreatureAttribute() {
 		return BewitchmentAPI.DEMON;
 	}
-	
+
 	@Override
-	protected int getSkinTypes()
-	{
+	protected int getSkinTypes() {
 		return 6;
 	}
-	
+
 	@Override
-	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData data)
-    {
+	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData data) {
 		setCustomNameTag((rand.nextInt(3) == 0 ? new TextComponentTranslation("demon_prefix_" + rand.nextInt(53)).getFormattedText() + " " : "") + new TextComponentTranslation("demon_name_" + rand.nextInt(326)).getFormattedText());
 		return super.onInitialSpawn(difficulty, data);
-    }
-	
+	}
+
 	@Override
-	public boolean attackEntityAsMob(Entity entity)
-	{
+	public boolean attackEntityAsMob(Entity entity) {
 		super.attackEntityAsMob(entity);
 		boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue());
-		if (flag)
-		{
+		if (flag) {
 			applyEnchantments(this, entity);
-			if (entity instanceof EntityLivingBase && getAnimation() != TOSS)
-			{
+			if (entity instanceof EntityLivingBase && getAnimation() != TOSS) {
 				setAnimation(TOSS);
 				((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 2000, 1, false, false));
 				entity.setFire(25);
@@ -150,36 +120,32 @@ public class EntityDemon extends ModEntityMob implements IMerchant
 		}
 		return flag;
 	}
-	
+
 	@Override
-	public boolean isPotionApplicable(PotionEffect effect)
-	{
+	public boolean isPotionApplicable(PotionEffect effect) {
 		return effect.getPotion() != MobEffects.POISON && effect.getPotion() != MobEffects.WITHER && effect.getPotion() != ModPotions.rotting && super.isPotionApplicable(effect);
 	}
-	
+
 	@Override
-	public void writeEntityToNBT(NBTTagCompound tag)
-	{
+	public void writeEntityToNBT(NBTTagCompound tag) {
 		super.writeEntityToNBT(tag);
 		tag.setInteger("careerID", careerID);
 		tag.setInteger("careerLevel", careerLevel);
 		tag.setInteger("wealth", wealth);
 		if (recipeList != null) tag.setTag("recipeList", recipeList.getRecipiesAsTags());
 	}
-	
+
 	@Override
-	public void readEntityFromNBT(NBTTagCompound tag)
-	{
+	public void readEntityFromNBT(NBTTagCompound tag) {
 		super.readEntityFromNBT(tag);
 		careerID = tag.getInteger("careerID");
 		careerLevel = tag.getInteger("careerLevel");
 		wealth = tag.getInteger("wealth");
 		if (tag.hasKey("recipeList")) recipeList.readRecipiesFromTags((NBTTagCompound) tag.getTag("recipeList"));
 	}
-	
+
 	@Override
-	protected void applyEntityAttributes()
-	{
+	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(16);
 		getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(6.66);
@@ -187,10 +153,9 @@ public class EntityDemon extends ModEntityMob implements IMerchant
 		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(175);
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.8);
 	}
-	
+
 	@Override
-	protected void initEntityAI()
-	{
+	protected void initEntityAI() {
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, new EntityAIAttackMelee(this, 0.5, false));
 		tasks.addTask(2, new EntityAIWatchClosest2(this, EntityPlayer.class, 5, 1));

@@ -1,16 +1,17 @@
 {
-	"forge_marker": 1,
-	"defaults":
-	{
-		"model": "bewitchment:candle_small",
-		"textures":
-		{
-			"0": "bewitchment:blocks/candle_light_blue"
-		}
-	},
-	"variants":
-	{
-		"inventory": [{}],
-		"normal": [{}]
-	}
+  "forge_marker": 1,
+  "defaults": {
+    "model": "bewitchment:candle_small",
+    "textures": {
+      "0": "bewitchment:blocks/candle_light_blue"
+    }
+  },
+  "variants": {
+    "inventory": [
+      {}
+    ],
+    "normal": [
+      {}
+    ]
+  }
 }

@@ -4,24 +4,12 @@ import com.bewitchment.Bewitchment;
 import com.bewitchment.common.entity.spirits.demons.EntitySerpent;
 import com.bewitchment.common.entity.util.ModEntityTameable;
 import com.bewitchment.registry.ModObjects;
-
 import net.ilexiconn.llibrary.server.animation.Animation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIFollowOwner;
-import net.minecraft.entity.ai.EntityAIFollowParent;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMate;
-import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
-import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAITargetNonTamed;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest2;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityChicken;
@@ -39,87 +27,73 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class EntitySnake extends ModEntityTameable
-{
+public class EntitySnake extends ModEntityTameable {
 	public int animationTimer = 0;
 	private int milkTimer = 0;
-	
-	public EntitySnake(World world)
-	{
+
+	public EntitySnake(World world) {
 		super(world, new ResourceLocation(Bewitchment.MOD_ID, "entities/snake"), Items.CHICKEN, Items.RABBIT);
 		setSize(1, 0.3f);
 	}
-	
+
 	@Override
-	public Animation[] getAnimations()
-	{
-		return new Animation[] {};
+	public Animation[] getAnimations() {
+		return new Animation[]{};
 	}
-	
+
 	@Override
-	public EntityAgeable createChild(EntityAgeable ageable)
-	{
+	public EntityAgeable createChild(EntityAgeable ageable) {
 		return new EntitySnake(world);
 	}
-	
+
 	@Override
-	public boolean isBreedingItem(ItemStack stack)
-	{
+	public boolean isBreedingItem(ItemStack stack) {
 		return stack.getItem() == Items.RABBIT;
 	}
-	
+
 	@Override
-	public boolean attackEntityAsMob(Entity entity)
-	{
-		if (entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue()))
-		{
+	public boolean attackEntityAsMob(Entity entity) {
+		if (entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue())) {
 			applyEnchantments(this, entity);
-			if (entity instanceof EntityLivingBase) ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.POISON, 2000, 1, false, false));
+			if (entity instanceof EntityLivingBase)
+				((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.POISON, 2000, 1, false, false));
 		}
 		return super.attackEntityAsMob(entity);
 	}
-	
+
 	@Override
-	public boolean attackEntityFrom(DamageSource source, float amount)
-	{
-		if (source.getTrueSource() != null && !(source.getTrueSource() instanceof EntityPlayer) && !(source.getTrueSource() instanceof EntityArrow)) amount = (amount + 1) / 2f;
+	public boolean attackEntityFrom(DamageSource source, float amount) {
+		if (source.getTrueSource() != null && !(source.getTrueSource() instanceof EntityPlayer) && !(source.getTrueSource() instanceof EntityArrow))
+			amount = (amount + 1) / 2f;
 		return super.attackEntityFrom(source, amount);
 	}
-	
+
 	@Override
-	public boolean canMateWith(EntityAnimal other)
-	{
+	public boolean canMateWith(EntityAnimal other) {
 		if (other == this || !(other instanceof EntitySnake)) return false;
 		return isTamed() && isInLove() && ((EntityTameable) other).isTamed() && other.isInLove() && !((EntityTameable) other).isSitting();
 	}
-	
+
 	@Override
-	public boolean isPotionApplicable(PotionEffect effect)
-	{
+	public boolean isPotionApplicable(PotionEffect effect) {
 		return effect.getPotion() != MobEffects.POISON && super.isPotionApplicable(effect);
 	}
-	
+
 	@Override
-	public boolean processInteract(EntityPlayer player, EnumHand hand)
-	{
-		if (!world.isRemote && (getAttackTarget() == null || getAttackTarget().isDead || getRevengeTarget() == null || getRevengeTarget().isDead))
-		{
+	public boolean processInteract(EntityPlayer player, EnumHand hand) {
+		if (!world.isRemote && (getAttackTarget() == null || getAttackTarget().isDead || getRevengeTarget() == null || getRevengeTarget().isDead)) {
 			ItemStack stack = player.getHeldItem(hand);
-			if (stack.getItem() == ModObjects.glass_jar)
-			{
-				if (milkTimer == 0 && getRNG().nextBoolean())
-				{
-					if (getGrowingAge() >= 0)
-					{
+			if (stack.getItem() == ModObjects.glass_jar) {
+				if (milkTimer == 0 && getRNG().nextBoolean()) {
+					if (getGrowingAge() >= 0) {
 						stack.shrink(1);
 						if (stack.isEmpty()) player.setHeldItem(hand, new ItemStack(ModObjects.snake_venom));
-						else if (!player.inventory.addItemStackToInventory(new ItemStack(ModObjects.snake_venom))) player.dropItem(new ItemStack(ModObjects.snake_venom), false);
+						else if (!player.inventory.addItemStackToInventory(new ItemStack(ModObjects.snake_venom)))
+							player.dropItem(new ItemStack(ModObjects.snake_venom), false);
 						milkTimer = 3600;
 						return true;
 					}
-				}
-				else
-				{
+				} else {
 					setAttackTarget(player);
 					setRevengeTarget(player);
 				}
@@ -127,36 +101,30 @@ public class EntitySnake extends ModEntityTameable
 		}
 		return super.processInteract(player, hand);
 	}
-	
+
 	@Override
-	public int getMaxSpawnedInChunk()
-	{
+	public int getMaxSpawnedInChunk() {
 		return 2;
 	}
-	
+
 	@Override
-	protected int getSkinTypes()
-	{
+	protected int getSkinTypes() {
 		return 6;
 	}
-	
+
 	@Override
-	public void onLivingUpdate()
-	{
+	public void onLivingUpdate() {
 		super.onLivingUpdate();
 		if (milkTimer > 0) milkTimer--;
 	}
-	
+
 	@Override
-	public void onStruckByLightning(EntityLightningBolt bolt)
-	{
-		if (!world.isRemote && !isDead)
-		{
+	public void onStruckByLightning(EntityLightningBolt bolt) {
+		if (!world.isRemote && !isDead) {
 			EntitySerpent entity = new EntitySerpent(world);
 			entity.setLocationAndAngles(posX, posY, posZ, rotationYaw, rotationPitch);
 			entity.setNoAI(isAIDisabled());
-			if (hasCustomName())
-			{
+			if (hasCustomName()) {
 				entity.setCustomNameTag(getCustomNameTag());
 				entity.setAlwaysRenderNameTag(getAlwaysRenderNameTag());
 			}
@@ -164,26 +132,23 @@ public class EntitySnake extends ModEntityTameable
 			setDead();
 		}
 	}
-	
+
 	@Override
-	public void writeEntityToNBT(NBTTagCompound tag)
-	{
+	public void writeEntityToNBT(NBTTagCompound tag) {
 		super.writeEntityToNBT(tag);
 		tag.setInteger("animationTimer", animationTimer);
 		tag.setInteger("milkTimer", milkTimer);
 	}
-	
+
 	@Override
-	public void readEntityFromNBT(NBTTagCompound tag)
-	{
+	public void readEntityFromNBT(NBTTagCompound tag) {
 		super.readEntityFromNBT(tag);
 		animationTimer = tag.getInteger("animationTimer");
 		milkTimer = tag.getInteger("milkTimer");
 	}
-	
+
 	@Override
-	protected void applyEntityAttributes()
-	{
+	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
 		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.5);
@@ -191,10 +156,9 @@ public class EntitySnake extends ModEntityTameable
 		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10);
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.6);
 	}
-	
+
 	@Override
-	protected void initEntityAI()
-	{
+	protected void initEntityAI() {
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(0, new EntityAIMate(this, getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue() / 2));
 		tasks.addTask(1, new EntityAIAttackMelee(this, 0.5, false));

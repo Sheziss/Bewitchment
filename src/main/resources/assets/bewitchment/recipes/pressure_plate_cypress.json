@@ -1,15 +1,14 @@
 {
-	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
-		"PP"
-	],
-	"key":
-	{
-		"P": {"item": "bewitchment:planks_cypress"}
-	},
-	"result":
-	{
-		"item": "bewitchment:pressure_plate_cypress"
-	}
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PP"
+  ],
+  "key": {
+    "P": {
+      "item": "bewitchment:planks_cypress"
+    }
+  },
+  "result": {
+    "item": "bewitchment:pressure_plate_cypress"
+  }
 }

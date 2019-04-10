@@ -1,22 +1,51 @@
 {
-	"forge_marker": 1,
-	"defaults":
-	{
-		"model": "crop",
-		"textures":
-		{
-			"crop": "bewitchment:blocks/crop/crop_mint_0"
-		}
-	},
-	"variants":
-	{
-		"age=0": [{"textures": {"crop": "bewitchment:blocks/crop/crop_mint_0"}}],
-		"age=1": [{"textures": {"crop": "bewitchment:blocks/crop/crop_mint_1"}}],
-		"age=2": [{"textures": {"crop": "bewitchment:blocks/crop/crop_mint_2"}}],
-		"age=3": [{"textures": {"crop": "bewitchment:blocks/crop/crop_mint_3"}}],
-		"age=4": [{}],
-		"age=5": [{}],
-		"age=6": [{}],
-		"age=7": [{}]
-	}
+  "forge_marker": 1,
+  "defaults": {
+    "model": "crop",
+    "textures": {
+      "crop": "bewitchment:blocks/crop/crop_mint_0"
+    }
+  },
+  "variants": {
+    "age=0": [
+      {
+        "textures": {
+          "crop": "bewitchment:blocks/crop/crop_mint_0"
+        }
+      }
+    ],
+    "age=1": [
+      {
+        "textures": {
+          "crop": "bewitchment:blocks/crop/crop_mint_1"
+        }
+      }
+    ],
+    "age=2": [
+      {
+        "textures": {
+          "crop": "bewitchment:blocks/crop/crop_mint_2"
+        }
+      }
+    ],
+    "age=3": [
+      {
+        "textures": {
+          "crop": "bewitchment:blocks/crop/crop_mint_3"
+        }
+      }
+    ],
+    "age=4": [
+      {}
+    ],
+    "age=5": [
+      {}
+    ],
+    "age=6": [
+      {}
+    ],
+    "age=7": [
+      {}
+    ]
+  }
 }

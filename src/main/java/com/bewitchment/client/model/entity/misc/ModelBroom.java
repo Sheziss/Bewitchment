@@ -6,15 +6,13 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
-public class ModelBroom extends ModelBase
-{
+public class ModelBroom extends ModelBase {
 	public ModelRenderer handle;
 	public ModelRenderer twigs_bound;
 	public ModelRenderer twigs;
 	private float time1, time2;
-	
-	public ModelBroom()
-	{
+
+	public ModelBroom() {
 		textureWidth = 64;
 		textureHeight = 32;
 		handle = new ModelRenderer(this, 0, 0);
@@ -26,14 +24,13 @@ public class ModelBroom extends ModelBase
 		twigs = new ModelRenderer(this, 39, 0);
 		twigs.setRotationPoint(18f, -2, -2);
 		twigs.addBox(0, 0, 0, 6, 5, 5, 0.5f);
-		
+
 		handle.addChild(twigs_bound);
 		handle.addChild(twigs);
 	}
 
 	@Override
-	public void render(Entity entity, float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale)
-	{
+	public void render(Entity entity, float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale) {
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(handle.offsetX, handle.offsetY, handle.offsetZ);
 		GlStateManager.translate(handle.rotationPointX * scale, handle.rotationPointY * scale, handle.rotationPointZ * scale);
@@ -44,14 +41,11 @@ public class ModelBroom extends ModelBase
 		GlStateManager.popMatrix();
 		time1 = MathHelper.sin(entity.ticksExisted * 0.10471975512f);
 		time2 = MathHelper.cos(entity.ticksExisted * 0.10471975512f);
-		if (entity.getPassengers().isEmpty())
-		{
+		if (entity.getPassengers().isEmpty()) {
 			handle.setRotationPoint(-13 + 0.2f * time1, 16f + 0.3f * time1, 0.2f * time2);
 			handle.rotateAngleX = time1 * 0.05235987755f - limbSwing * time1 * 0.17453292516f;
 			handle.rotateAngleY = time2 * 0.05235987755f - limbSwing * time1 * 0.17453292516f;
-		}
-		else
-		{
+		} else {
 			handle.setRotationPoint(-13 + 0.02f * time1, 16f + 0.03f * time1, 0.02f * time2);
 			handle.rotateAngleX = time1 * 0.01745329251f;
 			handle.rotateAngleY = time2 * 0.01745329251f;

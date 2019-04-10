@@ -1,14 +1,12 @@
 {
-	"type": "minecraft:crafting_shapeless",
-	"ingredients":
-	[
-		{
-			"item": "bewitchment:block_malachite"
-		}
-	],
-	"result":
-	{
-		"item": "bewitchment:gem_malachite",
-		"count": 9
-	}
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "bewitchment:block_malachite"
+    }
+  ],
+  "result": {
+    "item": "bewitchment:gem_malachite",
+    "count": 9
+  }
 }

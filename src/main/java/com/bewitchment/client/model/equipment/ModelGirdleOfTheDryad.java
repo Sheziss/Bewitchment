@@ -2,7 +2,6 @@ package com.bewitchment.client.model.equipment;
 
 import com.bewitchment.Bewitchment;
 import com.bewitchment.common.item.equipment.bauble.ItemGirdleOfTheDryad;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -11,10 +10,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-public class ModelGirdleOfTheDryad extends ModelBase
-{
+public class ModelGirdleOfTheDryad extends ModelBase {
 	public static final ResourceLocation TEXTURE = new ResourceLocation(Bewitchment.MOD_ID, "textures/models/bauble/girdle_of_the_dryad.png");
-	
+
 	public ModelRenderer rootRight1;
 	public ModelRenderer rootLeft1;
 	public ModelRenderer belt2;
@@ -45,9 +43,8 @@ public class ModelGirdleOfTheDryad extends ModelBase
 	public ModelRenderer barkBack2c;
 	public ModelRenderer barkBack1b;
 	public ModelRenderer barkBack1c;
-	
-	public ModelGirdleOfTheDryad()
-	{
+
+	public ModelGirdleOfTheDryad() {
 		this.textureWidth = 32;
 		this.textureHeight = 32;
 		this.barkfront2c = new ModelRenderer(this, 25, 14);
@@ -183,38 +180,31 @@ public class ModelGirdleOfTheDryad extends ModelBase
 		this.barkBack2a.addChild(this.barkBack2c);
 		this.barkBack2a.addChild(this.barkBack2b);
 	}
-	
+
 	@Override
-	public void render(Entity entity, float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale)
-	{
-		if (entity instanceof EntityPlayer)
-		{
+	public void render(Entity entity, float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale) {
+		if (entity instanceof EntityPlayer) {
 			Minecraft.getMinecraft().renderEngine.bindTexture(TEXTURE);
 			this.belt1.render(scale);
 			this.belt2.render(scale);
 			this.belt3.render(scale);
 			this.belt4.render(scale);
 			ItemStack girdle = ItemGirdleOfTheDryad.getGirdle((EntityPlayer) entity);
-			if (girdle.hasTagCompound() && girdle.getTagCompound().hasKey("bark"))
-			{
+			if (girdle.hasTagCompound() && girdle.getTagCompound().hasKey("bark")) {
 				int barkPieces = ItemGirdleOfTheDryad.getGirdle((EntityPlayer) entity).getTagCompound().getInteger("bark");
-				if (barkPieces > 0)
-				{
+				if (barkPieces > 0) {
 					barkBack1a.render(1);
 					barkfront1a.render(1);
 				}
-				if (barkPieces > 1)
-				{
+				if (barkPieces > 1) {
 					barkfront2a.render(1);
 					barkBack2a.render(1);
 				}
-				if (barkPieces > 2)
-				{
+				if (barkPieces > 2) {
 					barkfront3a.render(1);
 					barkBack3a.render(1);
 				}
-				if (barkPieces > 3)
-				{
+				if (barkPieces > 3) {
 					rootRight1.render(1);
 					rootLeft1.render(1);
 					rootRight3.render(1);
@@ -223,9 +213,8 @@ public class ModelGirdleOfTheDryad extends ModelBase
 			}
 		}
 	}
-	
-	protected void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
-	{
+
+	protected void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
 		modelRenderer.rotateAngleX = x;
 		modelRenderer.rotateAngleY = y;
 		modelRenderer.rotateAngleZ = z;

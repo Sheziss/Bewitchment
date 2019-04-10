@@ -1,22 +1,67 @@
 {
-	"forge_marker": 1,
-	"defaults":
-	{
-		"model": "crop",
-		"textures":
-		{
-			"crop": "bewitchment:blocks/crop/crop_kelp_0"
-		}
-	},
-	"variants":
-	{
-		"age=0": [{"textures": {"crop": "bewitchment:blocks/crop/crop_kelp_0"}}],
-		"age=1": [{"textures": {"crop": "bewitchment:blocks/crop/crop_kelp_1"}}],
-		"age=2": [{"textures": {"crop": "bewitchment:blocks/crop/crop_kelp_2"}}],
-		"age=3": [{"textures": {"crop": "bewitchment:blocks/crop/crop_kelp_3"}}],
-		"age=4": [{"textures": {"crop": "bewitchment:blocks/crop/crop_kelp_4"}}],
-		"age=5": [{"textures": {"crop": "bewitchment:blocks/crop/crop_kelp_5"}}],
-		"age=6": [{"textures": {"crop": "bewitchment:blocks/crop/crop_kelp_6"}}],
-		"age=7": [{"textures": {"crop": "bewitchment:blocks/crop/crop_kelp_7"}}]
-	}
+  "forge_marker": 1,
+  "defaults": {
+    "model": "crop",
+    "textures": {
+      "crop": "bewitchment:blocks/crop/crop_kelp_0"
+    }
+  },
+  "variants": {
+    "age=0": [
+      {
+        "textures": {
+          "crop": "bewitchment:blocks/crop/crop_kelp_0"
+        }
+      }
+    ],
+    "age=1": [
+      {
+        "textures": {
+          "crop": "bewitchment:blocks/crop/crop_kelp_1"
+        }
+      }
+    ],
+    "age=2": [
+      {
+        "textures": {
+          "crop": "bewitchment:blocks/crop/crop_kelp_2"
+        }
+      }
+    ],
+    "age=3": [
+      {
+        "textures": {
+          "crop": "bewitchment:blocks/crop/crop_kelp_3"
+        }
+      }
+    ],
+    "age=4": [
+      {
+        "textures": {
+          "crop": "bewitchment:blocks/crop/crop_kelp_4"
+        }
+      }
+    ],
+    "age=5": [
+      {
+        "textures": {
+          "crop": "bewitchment:blocks/crop/crop_kelp_5"
+        }
+      }
+    ],
+    "age=6": [
+      {
+        "textures": {
+          "crop": "bewitchment:blocks/crop/crop_kelp_6"
+        }
+      }
+    ],
+    "age=7": [
+      {
+        "textures": {
+          "crop": "bewitchment:blocks/crop/crop_kelp_7"
+        }
+      }
+    ]
+  }
 }

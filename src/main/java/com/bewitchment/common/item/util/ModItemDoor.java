@@ -1,12 +1,7 @@
 package com.bewitchment.common.item.util;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import com.bewitchment.Bewitchment;
 import com.bewitchment.registry.util.IOreDictionaryContainer;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.material.Material;
@@ -24,66 +19,59 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ModItemDoor extends ItemDoor implements IOreDictionaryContainer
-{
-	private final List<String> oreDictionaryNames = new ArrayList<String>();
-	
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+public class ModItemDoor extends ItemDoor implements IOreDictionaryContainer {
 	public final ModBlockDoor door;
-	
-	public ModItemDoor(String name, Block base, String... oreDictionaryNames)
-	{
+	private final List<String> oreDictionaryNames = new ArrayList<String>();
+
+	public ModItemDoor(String name, Block base, String... oreDictionaryNames) {
 		this(name, base, new ModBlockDoor("block_" + name, base), oreDictionaryNames);
 	}
-	
-	private ModItemDoor(String name, Block base, ModBlockDoor door, String... oreDictionaryNames)
-	{
+
+	private ModItemDoor(String name, Block base, ModBlockDoor door, String... oreDictionaryNames) {
 		super(door);
 		Bewitchment.proxy.registerValues(this, name, oreDictionaryNames);
 		this.door = door;
 		this.door.drop = new ItemStack(this);
 	}
-	
+
 	@Override
-	public List<String> getOreDictionaryNames()
-	{
+	public List<String> getOreDictionaryNames() {
 		return oreDictionaryNames;
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced)
-	{
+	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
 		String tip = "tooltip." + getTranslationKey().substring(5);
 		if (!I18n.format(tip).equals(tip)) tooltip.add(TextFormatting.GRAY + I18n.format(tip));
 	}
-	
-	public static class ModBlockDoor extends BlockDoor
-	{
+
+	public static class ModBlockDoor extends BlockDoor {
 		public ItemStack drop;
-		
-		public ModBlockDoor(String name, Block base)
-		{
+
+		public ModBlockDoor(String name, Block base) {
 			super(base.getDefaultState().getMaterial());
 			Bewitchment.proxy.registerValues(this, name, base);
 			setCreativeTab(null);
 		}
-		
+
 		@Override
 		@SideOnly(Side.CLIENT)
-		public BlockRenderLayer getRenderLayer()
-		{
+		public BlockRenderLayer getRenderLayer() {
 			return getDefaultState().getMaterial() == Material.ICE || getDefaultState().getMaterial() == Material.GLASS ? BlockRenderLayer.TRANSLUCENT : BlockRenderLayer.CUTOUT;
 		}
-		
+
 		@Override
-		public ItemStack getItem(World world, BlockPos pos, IBlockState state)
-		{
+		public ItemStack getItem(World world, BlockPos pos, IBlockState state) {
 			return drop;
 		}
-		
+
 		@Override
-		public Item getItemDropped(IBlockState state, Random rand, int fortune)
-		{
+		public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 			return state.getValue(HALF) == EnumDoorHalf.UPPER ? Items.AIR : drop.getItem();
 		}
 	}

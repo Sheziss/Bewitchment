@@ -1,18 +1,10 @@
 package com.bewitchment.common.block.tile.entity;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.api.capability.magicpower.MagicPower;
-import com.bewitchment.common.block.BlockCandleBase;
-import com.bewitchment.common.block.BlockGemBowl;
-import com.bewitchment.common.block.BlockGoblet;
-import com.bewitchment.common.block.BlockLantern;
-import com.bewitchment.common.block.BlockWitchesAltar;
+import com.bewitchment.common.block.*;
 import com.bewitchment.common.block.tile.entity.util.ModTileEntity;
 import com.bewitchment.registry.ModObjects;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlowerPot;
 import net.minecraft.block.BlockSkull;
@@ -29,35 +21,31 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 
-public class TileEntityWitchesAltar extends ModTileEntity implements ITickable
-{
+import java.util.HashMap;
+import java.util.Map;
+
+public class TileEntityWitchesAltar extends ModTileEntity implements ITickable {
 	public static final Map<Block, Integer> SCAN_VALUES = new HashMap<>();
 	public static final Map<Item, Double> SWORD_MULTIPLIER_VALUES = new HashMap<>();
 	public static final Map<Item, Integer> SWORD_RADIUS_VALUES = new HashMap<>();
-	
+
 	private static final int RADIUS = 18;
-	
-	public int gain = 1, multiplier = 1;
-	
 	public final MagicPower magic_power = MagicPower.CAPABILITY.getDefaultInstance();
-	
+	public int gain = 1, multiplier = 1;
+
 	@Override
-	public <T> T getCapability(Capability<T> capability, EnumFacing face)
-	{
+	public <T> T getCapability(Capability<T> capability, EnumFacing face) {
 		return capability == MagicPower.CAPABILITY ? MagicPower.CAPABILITY.cast(magic_power) : super.getCapability(capability, face);
 	}
-	
+
 	@Override
-	public boolean hasCapability(Capability<?> capability, EnumFacing face)
-	{
+	public boolean hasCapability(Capability<?> capability, EnumFacing face) {
 		return capability == MagicPower.CAPABILITY || super.hasCapability(capability, face);
 	}
-	
+
 	@Override
-	public void update()
-	{
-		if (!world.isRemote && world.getTotalWorldTime() % 20 == 0)
-		{
+	public void update() {
+		if (!world.isRemote && world.getTotalWorldTime() % 20 == 0) {
 			BlockPos altarPos = BlockWitchesAltar.getAltarPosition(world, getPos());
 			multiplier = 1;
 			gain = 1;
@@ -65,82 +53,64 @@ public class TileEntityWitchesAltar extends ModTileEntity implements ITickable
 			double varietyMultiplier = 1;
 			// Upgrades
 			boolean found_pentacle = false, found_skull = false, found_sword = false, found_light = false, found_pot = false, found_goblet = false, found_bowl = false;
-			for (BlockPos pos0 : BlockWitchesAltar.getAltarPositions(world, getPos()))
-			{
+			for (BlockPos pos0 : BlockWitchesAltar.getAltarPositions(world, getPos())) {
 				IBlockState state = world.getBlockState(pos0.up());
-				if (state.getBlock() instanceof BlockSkull && !found_skull)
-				{
+				if (state.getBlock() instanceof BlockSkull && !found_skull) {
 					int type = ((TileEntitySkull) world.getTileEntity(pos0.up())).getSkullType();
-					if (type == 1 || type == 3)
-					{
+					if (type == 1 || type == 3) {
 						multiplier += 2;
 						varietyMultiplier += 0.2;
 					}
-					if (type == 0 || type == 2 || type == 4)
-					{
+					if (type == 0 || type == 2 || type == 4) {
 						multiplier++;
 						varietyMultiplier += 0.05;
 					}
-					if (type == 5)
-					{
+					if (type == 5) {
 						multiplier += 2;
 						varietyMultiplier += 0.4;
 					}
 					found_skull = true;
 				}
-				if(state.getBlock() instanceof BlockGoblet && !found_goblet)
-				{
+				if (state.getBlock() instanceof BlockGoblet && !found_goblet) {
 					varietyMultiplier += state.getValue(BlockGoblet.FULL) ? 0.25 : 0.05;
 					found_goblet = true;
 				}
-				if (!found_light)
-				{
-					if (state.getBlock() instanceof BlockTorch)
-					{
+				if (!found_light) {
+					if (state.getBlock() instanceof BlockTorch) {
 						multiplier += 1;
 						found_light = true;
 					}
-					if (state.getBlock() instanceof BlockCandleBase)
-					{
+					if (state.getBlock() instanceof BlockCandleBase) {
 						multiplier += state.getBlock() instanceof BlockLantern ? (state.getValue(BlockCandleBase.LIT) ? 3 : 2) : (state.getValue(BlockCandleBase.LIT) ? 2 : 1);
 						found_light = true;
 					}
 				}
-				if (state.getBlock() instanceof BlockFlowerPot && !found_pot)
-				{
-					if (state.getBlock().hasTileEntity(state))
-					{
+				if (state.getBlock() instanceof BlockFlowerPot && !found_pot) {
+					if (state.getBlock().hasTileEntity(state)) {
 						TileEntityFlowerPot tile = (TileEntityFlowerPot) world.getTileEntity(pos0.up());
 						varietyMultiplier += tile.getFlowerItemStack().isEmpty() ? 0.05 : 0.1;
 						found_pot = true;
 					}
 				}
-				if (state.getBlock() instanceof BlockGemBowl && !found_bowl)
-				{
+				if (state.getBlock() instanceof BlockGemBowl && !found_bowl) {
 					TileEntityGemBowl tile = (TileEntityGemBowl) world.getTileEntity(pos0.up());
-					if (tile.getGemValue() != 0)
-					{
+					if (tile.getGemValue() != 0) {
 						varietyMultiplier += 0.05 * tile.getGemValue();
 						found_bowl = true;
 					}
 				}
-				if (state.getBlock() == ModObjects.placed_item)
-				{
+				if (state.getBlock() == ModObjects.placed_item) {
 					Item item = ((TileEntityPlacedItem) world.getTileEntity(pos0.up())).inventory.getStackInSlot(0).getItem();
-					if (item == ModObjects.pentacle && !found_pentacle)
-					{
+					if (item == ModObjects.pentacle && !found_pentacle) {
 						multiplier += 3;
 						varietyMultiplier -= 0.2;
 						found_pentacle = true;
 					}
-					if ((SWORD_MULTIPLIER_VALUES.containsKey(item) || SWORD_RADIUS_VALUES.containsKey(item)) && !found_sword)
-					{
+					if ((SWORD_MULTIPLIER_VALUES.containsKey(item) || SWORD_RADIUS_VALUES.containsKey(item)) && !found_sword) {
 						varietyMultiplier += BewitchmentAPI.getAltarSwordMultiplierValue(item);
 						radiusAlter += BewitchmentAPI.getAltarSwordRadiusValue(item);
-						if (item == ModObjects.athame)
-						{
-							for (EntityPlayer player : world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).grow(5)))
-							{
+						if (item == ModObjects.athame) {
+							for (EntityPlayer player : world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).grow(5))) {
 								MagicPower cap = player.getCapability(MagicPower.CAPABILITY, null);
 								int amount = Math.min(20, (cap.getMaxAmount() + cap.getBonusAmount()) - cap.getAmount());
 								if (magic_power.drain(amount)) cap.fill(amount / 10);
@@ -152,16 +122,12 @@ public class TileEntityWitchesAltar extends ModTileEntity implements ITickable
 			}
 			// Plants
 			int radius = RADIUS / 2 + radiusAlter;
-			for (int x = -radius; x < radius; x++)
-			{
-				for (int y = -radius; y < radius; y++)
-				{
-					for (int z = -radius; z < radius; z++)
-					{
+			for (int x = -radius; x < radius; x++) {
+				for (int y = -radius; y < radius; y++) {
+					for (int z = -radius; z < radius; z++) {
 						Block block = world.getBlockState(altarPos.add(x, y, z)).getBlock();
 						int value = BewitchmentAPI.getAltarScanValue(block);
-						if (value != 0)
-						{
+						if (value != 0) {
 							gain += value;
 							variety++;
 						}
@@ -175,19 +141,17 @@ public class TileEntityWitchesAltar extends ModTileEntity implements ITickable
 			magic_power.fill(gain);
 		}
 	}
-	
+
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound tag)
-	{
+	public NBTTagCompound writeToNBT(NBTTagCompound tag) {
 		magic_power.serialize(tag);
 		tag.setInteger("gain", gain);
 		tag.setInteger("multiplier", multiplier);
 		return super.writeToNBT(tag);
 	}
-	
+
 	@Override
-	public void readFromNBT(NBTTagCompound tag)
-	{
+	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
 		magic_power.deserialize(tag);
 		gain = tag.getInteger("gain");

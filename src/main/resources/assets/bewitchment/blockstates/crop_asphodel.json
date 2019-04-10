@@ -1,22 +1,55 @@
 {
-	"forge_marker": 1,
-	"defaults":
-	{
-		"model": "crop",
-		"textures":
-		{
-			"crop": "bewitchment:blocks/crop/crop_asphodel_0"
-		}
-	},
-	"variants":
-	{
-		"age=0": [{"textures": {"crop": "bewitchment:blocks/crop/crop_asphodel_0"}}],
-		"age=1": [{"textures": {"crop": "bewitchment:blocks/crop/crop_asphodel_1"}}],
-		"age=2": [{"textures": {"crop": "bewitchment:blocks/crop/crop_asphodel_2"}}],
-		"age=3": [{"textures": {"crop": "bewitchment:blocks/crop/crop_asphodel_3"}}],
-		"age=4": [{"textures": {"crop": "bewitchment:blocks/crop/crop_asphodel_4"}}],
-		"age=5": [{}],
-		"age=6": [{}],
-		"age=7": [{}]
-	}
+  "forge_marker": 1,
+  "defaults": {
+    "model": "crop",
+    "textures": {
+      "crop": "bewitchment:blocks/crop/crop_asphodel_0"
+    }
+  },
+  "variants": {
+    "age=0": [
+      {
+        "textures": {
+          "crop": "bewitchment:blocks/crop/crop_asphodel_0"
+        }
+      }
+    ],
+    "age=1": [
+      {
+        "textures": {
+          "crop": "bewitchment:blocks/crop/crop_asphodel_1"
+        }
+      }
+    ],
+    "age=2": [
+      {
+        "textures": {
+          "crop": "bewitchment:blocks/crop/crop_asphodel_2"
+        }
+      }
+    ],
+    "age=3": [
+      {
+        "textures": {
+          "crop": "bewitchment:blocks/crop/crop_asphodel_3"
+        }
+      }
+    ],
+    "age=4": [
+      {
+        "textures": {
+          "crop": "bewitchment:blocks/crop/crop_asphodel_4"
+        }
+      }
+    ],
+    "age=5": [
+      {}
+    ],
+    "age=6": [
+      {}
+    ],
+    "age=7": [
+      {}
+    ]
+  }
 }

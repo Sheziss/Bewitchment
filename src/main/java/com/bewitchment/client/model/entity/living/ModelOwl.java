@@ -1,7 +1,6 @@
 package com.bewitchment.client.model.entity.living;
 
 import com.bewitchment.common.entity.living.EntityOwl;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -9,8 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.MathHelper;
 
-public class ModelOwl extends ModelBase
-{
+public class ModelOwl extends ModelBase {
 	public ModelRenderer owlBody;
 	public ModelRenderer tail;
 	public ModelRenderer tailRight;
@@ -54,9 +52,8 @@ public class ModelOwl extends ModelBase
 	public ModelRenderer wingRightAlt02c;
 	public ModelRenderer wingRightAlt01b;
 	public ModelRenderer wingRightAlt01c;
-	
-	public ModelOwl()
-	{
+
+	public ModelOwl() {
 		textureWidth = 64;
 		textureHeight = 64;
 		lTalon03 = new ModelRenderer(this, 56, 0);
@@ -207,10 +204,9 @@ public class ModelOwl extends ModelBase
 		owlRightClaw.addChild(rTalon03);
 		setWanderingStance();
 	}
-	
+
 	@Override
-	public void render(Entity entity, float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale)
-	{
+	public void render(Entity entity, float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale) {
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(owlBody.offsetX, owlBody.offsetY, owlBody.offsetZ);
 		GlStateManager.translate(owlBody.rotationPointX * scale, owlBody.rotationPointY * scale, owlBody.rotationPointZ * scale);
@@ -220,30 +216,23 @@ public class ModelOwl extends ModelBase
 		owlBody.render(scale);
 		GlStateManager.popMatrix();
 	}
-	
+
 	@Override
-	public void setLivingAnimations(EntityLivingBase entity, float limbSwing, float limbSwingAmount, float partialTickTime)
-	{
+	public void setLivingAnimations(EntityLivingBase entity, float limbSwing, float limbSwingAmount, float partialTickTime) {
 		super.setLivingAnimations(entity, limbSwing, limbSwingAmount, partialTickTime);
 		EntityOwl owl = (EntityOwl) entity;
-		if (owl.onGround)
-		{
-			if (owl.isSitting())
-			{
+		if (owl.onGround) {
+			if (owl.isSitting()) {
 				setSittingStance();
 				float time = (owl.ticksExisted + partialTickTime) * 0.10471975512f;
 				owlBody.rotateAngleX = 0.08726646259f + 0.00484813681f * MathHelper.sin(time);
 
-			}
-			else
-			{
+			} else {
 				setWanderingStance();
 				float time = (owl.ticksExisted + partialTickTime) * 0.10471975512f;
 				owlBody.rotateAngleX = 0.08726646259f + 0.00484813681f * MathHelper.sin(time);
 			}
-		}
-		else
-		{
+		} else {
 			setflyingStance();
 			float time = (owl.ticksExisted + partialTickTime) / 4.71238898f;
 			wingRight01.rotateAngleY = 0.26179938779914943f + 1.047166666666666f * MathHelper.cos(time);
@@ -259,22 +248,20 @@ public class ModelOwl extends ModelBase
 			owlLeftClaw.rotateAngleX = owlRightClaw.rotateAngleX;
 		}
 	}
-	
+
 	@Override
-	public void setRotationAngles(float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale, Entity entity)
-	{
-		if (entity.onGround) setRotationAngles(owlHead, (float) (rotationPitch * Math.PI / 360), (float) (rotationYaw * Math.PI / 360), 0);
+	public void setRotationAngles(float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale, Entity entity) {
+		if (entity.onGround)
+			setRotationAngles(owlHead, (float) (rotationPitch * Math.PI / 360), (float) (rotationYaw * Math.PI / 360), 0);
 	}
-	
-	public void setRotationAngles(ModelRenderer renderer, float x, float y, float z)
-	{
+
+	public void setRotationAngles(ModelRenderer renderer, float x, float y, float z) {
 		renderer.rotateAngleX = x;
 		renderer.rotateAngleY = y;
 		renderer.rotateAngleZ = z;
 	}
-	
-	private void setflyingStance()
-	{
+
+	private void setflyingStance() {
 		wingLeftAlt03a.setRotationPoint(0, 0, 1);
 		wingRightAlt01a.setRotationPoint(0, 0, 0);
 		owlRightClaw.setRotationPoint(-3, 6, -1.5f);
@@ -344,17 +331,15 @@ public class ModelOwl extends ModelBase
 		rTalon02.setRotationPoint(0.699999988079071f, 1, -3.5999999046325684f);
 		this.setRotationAngles(rTalon02, -0.17453292519943295f, -0.10471975511965977f, 0);
 	}
-	
-	private void setSittingStance()
-	{
+
+	private void setSittingStance() {
 		setWanderingStance();
 		this.setRotationAngles(owlLeftClaw, -0.08726646259971647f, -0.3f, 0);
 		this.setRotationAngles(owlRightClaw, -0.08726646259971647f, 0.3f, 0);
 		this.setRotationAngles(owlBody, 0.08726646259971647f, 0, 0);
 	}
-	
-	private void setWanderingStance()
-	{
+
+	private void setWanderingStance() {
 		lTalon03.setRotationPoint(0.6000000238418579f, 1.2000000476837158f, 0.5f);
 		this.setRotationAngles(lTalon03, -0.17453292519943295f, 0.06981317007977318f, 0);
 		wingRightAlt02a.setRotationPoint(0, 0, -1);

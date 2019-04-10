@@ -1,13 +1,12 @@
 {
-	"name": "Chrysanthemum",
-	"icon": "bewitchment:chrysanthemum",
-	"category": "herbology",
-	"pages":
-	[
-		{
-			"type": "spotlight",
-			"item": "bewitchment:chrysanthemum",
-			"text": "A very popular flower, it is often linked to nobility and royalty in some places."
-		}
-	]
+  "name": "Chrysanthemum",
+  "icon": "bewitchment:chrysanthemum",
+  "category": "herbology",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "bewitchment:chrysanthemum",
+      "text": "A very popular flower, it is often linked to nobility and royalty in some places."
+    }
+  ]
 }

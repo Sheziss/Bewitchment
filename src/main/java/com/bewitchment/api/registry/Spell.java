@@ -7,60 +7,52 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-public abstract class Spell extends IForgeRegistryEntry.Impl<Spell>
-{
-	public enum SpellType
-	{
-		INSTANT, BLOCK, ENTITY, ALL;
-	}
-	
+public abstract class Spell extends IForgeRegistryEntry.Impl<Spell> {
 	private final SpellType type;
 	private final String name;
-	
 	private final int color, cost;
-	
-	public Spell(String modid, String name, int cost, int color, SpellType type)
-	{
+
+	public Spell(String modid, String name, int cost, int color, SpellType type) {
 		this.setRegistryName(new ResourceLocation(modid, name));
 		this.name = getRegistryName().toString();
 		this.cost = cost;
 		this.color = color;
 		this.type = type;
 	}
-	
+
 	public abstract boolean canBeUsed(World world, BlockPos pos, EntityLivingBase caster);
-	
+
 	/**
 	 * @return the color of the spell
 	 */
-	public int getColor()
-	{
+	public int getColor() {
 		return color;
 	}
-	
+
 	/**
 	 * @return the cost of the spell
 	 */
-	public int getCost()
-	{
+	public int getCost() {
 		return cost;
 	}
-	
+
 	/**
 	 * @return the name of the spell
 	 */
-	public String getName()
-	{
+	public String getName() {
 		return name;
 	}
-	
+
 	/**
 	 * @return the type of the spell
 	 */
-	public SpellType getType()
-	{
+	public SpellType getType() {
 		return type;
 	}
-	
+
 	public abstract void performEffect(World world, RayTraceResult result, EntityLivingBase caster);
+
+	public enum SpellType {
+		INSTANT, BLOCK, ENTITY, ALL;
+	}
 }

@@ -1,19 +1,21 @@
 {
-	"type": "forge:ore_shaped",
-	"pattern":
-	[
-		" S ",
-		"G G",
-		" G "
-	],
-	"key":
-	{
-		"G": {"item": "minecraft:glass_pane"},
-		"S": {"type": "forge:ore_dict", "ore": "slabWood"}
-	},
-	"result":
-	{
-		"item": "bewitchment:glass_jar",
-		"count": 3
-	}
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " S ",
+    "G G",
+    " G "
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glass_pane"
+    },
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "slabWood"
+    }
+  },
+  "result": {
+    "item": "bewitchment:glass_jar",
+    "count": 3
+  }
 }

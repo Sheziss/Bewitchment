@@ -5,7 +5,6 @@ import com.bewitchment.common.block.BlockGlyph.GlyphType;
 import com.bewitchment.common.item.util.ModItem;
 import com.bewitchment.registry.ModObjects;
 import com.bewitchment.registry.ModSounds;
-
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,22 +17,18 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class ItemChalk extends ModItem
-{
-	public ItemChalk(String name)
-	{
+public class ItemChalk extends ModItem {
+	public ItemChalk(String name) {
 		super(name);
 		setMaxStackSize(1);
 		setMaxDamage(40);
 		setNoRepair();
 	}
-	
+
 	@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing face, float hitX, float hitY, float hitZ)
-	{
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing face, float hitX, float hitY, float hitZ) {
 		boolean isReplacing = world.getBlockState(pos).getBlock() == ModObjects.glyph && world.getBlockState(pos).getValue(BlockGlyph.TYPE) != GlyphType.GOLDEN;
-		if (!world.isRemote && (face == EnumFacing.UP && ModObjects.glyph.canPlaceBlockAt(world, pos.up()) || isReplacing))
-		{
+		if (!world.isRemote && (face == EnumFacing.UP && ModObjects.glyph.canPlaceBlockAt(world, pos.up()) || isReplacing)) {
 			ItemStack stack = player.getHeldItem(hand);
 			Item item = stack.getItem();
 			if (!player.isCreative()) stack.damageItem(1, player);
@@ -42,16 +37,14 @@ public class ItemChalk extends ModItem
 		}
 		return EnumActionResult.SUCCESS;
 	}
-	
+
 	@Override
-	public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment)
-	{
+	public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
 		return false;
 	}
-	
+
 	@Override
-	public boolean canItemEditBlocks()
-	{
+	public boolean canItemEditBlocks() {
 		return true;
 	}
 }

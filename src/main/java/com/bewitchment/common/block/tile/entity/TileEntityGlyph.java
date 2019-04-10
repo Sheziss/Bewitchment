@@ -1,107 +1,86 @@
 package com.bewitchment.common.block.tile.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.api.capability.magicpower.MagicPower;
 import com.bewitchment.api.registry.Ritual;
 import com.bewitchment.common.block.tile.entity.util.TileEntityAltarStorage;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.ITickable;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class TileEntityGlyph extends TileEntityAltarStorage implements ITickable
-{
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+public class TileEntityGlyph extends TileEntityAltarStorage implements ITickable {
+	public final ItemStackHandler inventory = new ItemStackHandler(Byte.MAX_VALUE) {
+		@Override
+		public int getSlotLimit(int slot) {
+			return Integer.MAX_VALUE;
+		}
+	};
 	private Ritual ritual;
 	private BlockPos effectivePos = getPos();
 	private UUID caster;
 	private int cooldown = -1, effectiveDim = 0;
-	
-	public final ItemStackHandler inventory = new ItemStackHandler(Byte.MAX_VALUE)
-	{
-		@Override
-	    public int getSlotLimit(int slot)
-	    {
-	        return Integer.MAX_VALUE;
-	    }
-	};
-	
+
 	@Override
-	public void update()
-	{
-		if (ritual != null && caster != null)
-		{
+	public void update() {
+		if (ritual != null && caster != null) {
 			EntityPlayer player = world.getPlayerEntityByUUID(caster);
-			if (cooldown > ritual.getTime())
-			{
+			if (cooldown > ritual.getTime()) {
 				cooldown--;
-				if (cooldown % 20 == 0)
-				{
+				if (cooldown % 20 == 0) {
 					List<EntityItem> entities = world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(getPos()).grow(3, 0, 3));
-					if (!entities.isEmpty())
-					{
-						if (!world.isRemote)
-						{
+					if (!entities.isEmpty()) {
+						if (!world.isRemote) {
 							inventory.insertItem(getFirstEmptySlot(inventory), entities.get(0).getItem().splitStack(entities.get(0).getItem().getCount()), false);
 							world.playSound(null, getPos(), SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.BLOCKS, 0.7f, 0.7f);
-						}
-						else for (int i = 0; i < 20; i++) world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, entities.get(0).posX + world.rand.nextGaussian() / 3, entities.get(0).posY + world.rand.nextGaussian() / 3, entities.get(0).posZ + world.rand.nextGaussian() / 3, 0, 0, 0);
+						} else for (int i = 0; i < 20; i++)
+							world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, entities.get(0).posX + world.rand.nextGaussian() / 3, entities.get(0).posY + world.rand.nextGaussian() / 3, entities.get(0).posZ + world.rand.nextGaussian() / 3, 0, 0, 0);
 					}
 				}
-				if (!world.isRemote && cooldown == ritual.getTime())
-				{
+				if (!world.isRemote && cooldown == ritual.getTime()) {
 					List<EntityLivingBase> living_on_ground = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(getPos()).grow(3, 0, 3));
 					ritual.onStarted(this, getWorld(), player, getEffectivePos(), getEffectiveDim(), cooldown);
 					world.playSound(null, getPos(), SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.7f, 0.7f);
-					if (!ritual.getInputEntities().isEmpty())
-					{
-						for (EntityLivingBase entity : living_on_ground)
-						{
-							if (ritual.getInputEntities().parallelStream().anyMatch(p -> p.getEntityClass().equals(entity.getClass())))
-							{
+					if (!ritual.getInputEntities().isEmpty()) {
+						for (EntityLivingBase entity : living_on_ground) {
+							if (ritual.getInputEntities().parallelStream().anyMatch(p -> p.getEntityClass().equals(entity.getClass()))) {
 								entity.attackEntityFrom(DamageSource.MAGIC, Integer.MAX_VALUE);
 								break;
 							}
 						}
 					}
 				}
-			}
-			else
-			{
-				if (world.isRemote) ritual.onRandomDisplayTick(this, getWorld(), player, getEffectivePos(), getEffectiveDim(), cooldown);
-				if (MagicPower.attemptDrain(world, player, getAltarPosition(), ritual.getRunningPower() * (getEffectivePos() == getPos() ? 1 : MathHelper.ceil(getEffectivePos().distanceSq(getPos()) / 400))))
-				{
-					if (!world.isRemote) ritual.onUpdate(this, getWorld(), player, getEffectivePos(), getEffectiveDim(), cooldown);
+			} else {
+				if (world.isRemote)
+					ritual.onRandomDisplayTick(this, getWorld(), player, getEffectivePos(), getEffectiveDim(), cooldown);
+				if (MagicPower.attemptDrain(world, player, getAltarPosition(), ritual.getRunningPower() * (getEffectivePos() == getPos() ? 1 : MathHelper.ceil(getEffectivePos().distanceSq(getPos()) / 400)))) {
+					if (!world.isRemote)
+						ritual.onUpdate(this, getWorld(), player, getEffectivePos(), getEffectiveDim(), cooldown);
 					cooldown--;
 				}
-				if (!world.isRemote)
-				{
-					if (ritual.onLowPower(this, getWorld(), player, getEffectivePos(), getEffectiveDim(), cooldown)) stopRitual(player, false);
+				if (!world.isRemote) {
+					if (ritual.onLowPower(this, getWorld(), player, getEffectivePos(), getEffectiveDim(), cooldown))
+						stopRitual(player, false);
 					if (cooldown <= 0 && ritual.getTime() >= 0) stopRitual(player, true);
 				}
 			}
 		}
 	}
-	
+
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound tag)
-	{
+	public NBTTagCompound writeToNBT(NBTTagCompound tag) {
 		tag.setString("ritual", ritual == null ? "" : ritual.getRegistryName().toString());
 		tag.setLong("effectivePos", getEffectivePos().toLong());
 		tag.setInteger("effectiveDim", getEffectiveDim());
@@ -109,10 +88,9 @@ public class TileEntityGlyph extends TileEntityAltarStorage implements ITickable
 		tag.setInteger("cooldown", cooldown);
 		return super.writeToNBT(tag);
 	}
-	
+
 	@Override
-	public void readFromNBT(NBTTagCompound tag)
-	{
+	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
 		ritual = tag.getString("ritual").isEmpty() ? null : BewitchmentAPI.REGISTRY_RITUAL.getValue(new ResourceLocation(tag.getString("ritual")));
 		setEffectivePos(BlockPos.fromLong(tag.getLong("effectivePos")));
@@ -120,23 +98,18 @@ public class TileEntityGlyph extends TileEntityAltarStorage implements ITickable
 		caster = tag.getString("caster").isEmpty() ? null : UUID.fromString(tag.getString("caster"));
 		cooldown = tag.getInteger("cooldown");
 	}
-	
+
 	@Override
-	public ItemStackHandler[] getInventories()
-	{
-		return new ItemStackHandler[] {inventory};
+	public ItemStackHandler[] getInventories() {
+		return new ItemStackHandler[]{inventory};
 	}
-	
-	public void startRitual(EntityPlayer player)
-	{
-		if (!world.isRemote && cooldown < 0)
-		{
+
+	public void startRitual(EntityPlayer player) {
+		if (!world.isRemote && cooldown < 0) {
 			List<ItemStack> items_on_ground = new ArrayList<>();
 			List<EntityItem> entityItemsOnGround = world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(getPos()).grow(3, 0, 3));
-			for (EntityItem item : entityItemsOnGround) 
-			{
-				for (int i = 0; i < item.getItem().getCount(); i++)
-				{
+			for (EntityItem item : entityItemsOnGround) {
+				for (int i = 0; i < item.getItem().getCount(); i++) {
 					ItemStack copy = item.getItem().copy();
 					copy.setCount(1);
 					items_on_ground.add(copy);
@@ -144,46 +117,36 @@ public class TileEntityGlyph extends TileEntityAltarStorage implements ITickable
 			}
 			List<EntityLivingBase> living_on_ground = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(getPos()).grow(3, 0, 3));
 			ritual = BewitchmentAPI.REGISTRY_RITUAL.getValuesCollection().parallelStream().filter(p -> p.matches(world, getPos(), items_on_ground, living_on_ground)).findFirst().orElse(null);
-			if (ritual != null)
-			{
+			if (ritual != null) {
 				setEffectiveDim(world.provider.getDimension());
-				if (ritual.isValid(this, getWorld(), player, getEffectivePos(), getEffectiveDim(), cooldown))
-				{
-					if (MagicPower.attemptDrain(world, player, getAltarPosition(), ritual.getStartingPower() * (getEffectivePos() == getPos() ? 1 : MathHelper.ceil(getEffectivePos().distanceSq(getPos()) / 400))))
-					{
+				if (ritual.isValid(this, getWorld(), player, getEffectivePos(), getEffectiveDim(), cooldown)) {
+					if (MagicPower.attemptDrain(world, player, getAltarPosition(), ritual.getStartingPower() * (getEffectivePos() == getPos() ? 1 : MathHelper.ceil(getEffectivePos().distanceSq(getPos()) / 400)))) {
 						world.notifyBlockUpdate(getPos(), world.getBlockState(getPos()), world.getBlockState(getPos()), 2);
 						caster = player.getPersistentID();
 						cooldown = ritual.getTime() + (entityItemsOnGround.size() * 20) + (ritual.getInputEntities().isEmpty() ? 0 : 20) + 20;
 						for (EntityItem entity : entityItemsOnGround) entity.setInfinitePickupDelay();
 						player.sendStatusMessage(new TextComponentTranslation(ritual.getRegistryName().toString().replace(":", ".")), true);
 						return;
-					}
-					else player.sendStatusMessage(new TextComponentTranslation("magic.no_power"), true);
-				}
-				else player.sendStatusMessage(new TextComponentTranslation("ritual.precondition"), true);
-			}
-			else player.sendStatusMessage(new TextComponentTranslation("ritual.invalid_input"), true);
+					} else player.sendStatusMessage(new TextComponentTranslation("magic.no_power"), true);
+				} else player.sendStatusMessage(new TextComponentTranslation("ritual.precondition"), true);
+			} else player.sendStatusMessage(new TextComponentTranslation("ritual.invalid_input"), true);
 			world.playSound(null, getPos(), SoundEvents.BLOCK_NOTE_SNARE, SoundCategory.BLOCKS, 1, 1);
 		}
 	}
-	
-	public void stopRitual(EntityPlayer player, boolean finished)
-	{
+
+	public void stopRitual(EntityPlayer player, boolean finished) {
 		world.notifyBlockUpdate(getPos(), world.getBlockState(getPos()), world.getBlockState(getPos()), 2);
-		if (ritual != null)
-		{
-			if (finished)
-			{
+		if (ritual != null) {
+			if (finished) {
 				ritual.onFinished(this, getWorld(), player, getEffectivePos(), getEffectiveDim(), cooldown);
 				world.playSound(null, getPos(), SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.BLOCKS, 0.7f, 0.7f);
-			}
-			else
-			{
+			} else {
 				ritual.onStopped(this, getWorld(), player, getEffectivePos(), getEffectiveDim(), cooldown);
 				world.playSound(null, getPos(), SoundEvents.ENTITY_CHICKEN_EGG, SoundCategory.BLOCKS, 0.7f, 0.7f);
 			}
 		}
-		for (EntityItem entity : world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(getPos()).grow(3, 0, 3))) entity.setDefaultPickupDelay();
+		for (EntityItem entity : world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(getPos()).grow(3, 0, 3)))
+			entity.setDefaultPickupDelay();
 		clear(inventory);
 		setEffectivePos(getPos());
 		setEffectiveDim(getWorld().provider.getDimension());
@@ -191,34 +154,28 @@ public class TileEntityGlyph extends TileEntityAltarStorage implements ITickable
 		caster = null;
 		cooldown = -1;
 	}
-	
-	public Ritual getRitual()
-	{
+
+	public Ritual getRitual() {
 		return ritual;
 	}
-	
-	public UUID getCaster()
-	{
+
+	public UUID getCaster() {
 		return caster;
 	}
-	
-	public BlockPos getEffectivePos()
-	{
+
+	public BlockPos getEffectivePos() {
 		return effectivePos;
 	}
-	
-	public void setEffectivePos(BlockPos pos)
-	{
+
+	public void setEffectivePos(BlockPos pos) {
 		effectivePos = pos;
 	}
-	
-	public int getEffectiveDim()
-	{
+
+	public int getEffectiveDim() {
 		return effectiveDim;
 	}
-	
-	public void setEffectiveDim(int dim)
-	{
+
+	public void setEffectiveDim(int dim) {
 		effectiveDim = dim;
 	}
 }

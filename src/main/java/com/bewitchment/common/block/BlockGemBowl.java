@@ -2,7 +2,6 @@ package com.bewitchment.common.block;
 
 import com.bewitchment.common.block.tile.entity.TileEntityGemBowl;
 import com.bewitchment.common.block.util.ModBlockContainer;
-
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -23,42 +22,34 @@ import net.minecraftforge.oredict.OreDictionary;
 import thaumcraft.api.crafting.IInfusionStabiliserExt;
 
 @Optional.Interface(iface = "thaumcraft.api.crafting.IInfusionStabiliserExt", modid = "thaumcraft")
-public class BlockGemBowl extends ModBlockContainer implements IInfusionStabiliserExt
-{
+public class BlockGemBowl extends ModBlockContainer implements IInfusionStabiliserExt {
 	private static final AxisAlignedBB BOX = new AxisAlignedBB(0.25, 0, 0.25, 0.75, 0.1875, 0.75);
-	
-	public BlockGemBowl()
-	{
+
+	public BlockGemBowl() {
 		super(null, "gem_bowl", Material.IRON, SoundType.METAL, 1, 1, "pickaxe", 0, -1);
 		setLightOpacity(0);
 	}
-	
+
 	@Override
-	public TileEntity createNewTileEntity(World world, int meta)
-	{
+	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityGemBowl();
 	}
-	
+
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos)
-	{
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) {
 		return BOX;
 	}
-	
+
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing face, float hitX, float hitY, float hitZ)
-	{
-		if (!world.isRemote && !player.isSneaking())
-		{
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing face, float hitX, float hitY, float hitZ) {
+		if (!world.isRemote && !player.isSneaking()) {
 			TileEntityGemBowl tile = ((TileEntityGemBowl) world.getTileEntity(pos));
 			ItemStack stack = player.getHeldItem(hand);
-			if (stack.isEmpty() && !tile.inventory.getStackInSlot(0).isEmpty()) player.setHeldItem(hand, tile.inventory.getStackInSlot(0).splitStack(1));
-			else if (!stack.isEmpty() && tile.inventory.getStackInSlot(0).isEmpty())
-			{
-				for (int id : OreDictionary.getOreIDs(stack))
-				{
-					if (TileEntityGemBowl.gainMap.keySet().contains(OreDictionary.getOreName(id)))
-					{
+			if (stack.isEmpty() && !tile.inventory.getStackInSlot(0).isEmpty())
+				player.setHeldItem(hand, tile.inventory.getStackInSlot(0).splitStack(1));
+			else if (!stack.isEmpty() && tile.inventory.getStackInSlot(0).isEmpty()) {
+				for (int id : OreDictionary.getOreIDs(stack)) {
+					if (TileEntityGemBowl.gainMap.keySet().contains(OreDictionary.getOreName(id))) {
 						tile.inventory.setStackInSlot(0, stack.splitStack(1));
 						break;
 					}
@@ -68,42 +59,36 @@ public class BlockGemBowl extends ModBlockContainer implements IInfusionStabilis
 		}
 		return super.onBlockActivated(world, pos, state, player, hand, face, hitX, hitY, hitZ);
 	}
-	
+
 	@Override
 	@Optional.Method(modid = "thaumcraft")
-	public boolean canStabaliseInfusion(World world, BlockPos pos)
-	{
+	public boolean canStabaliseInfusion(World world, BlockPos pos) {
 		return true;
 	}
-	
+
 	@Override
 	@Optional.Method(modid = "thaumcraft")
-	public float getStabilizationAmount(World world, BlockPos pos)
-	{
+	public float getStabilizationAmount(World world, BlockPos pos) {
 		return 0.7f;
 	}
-	
+
 	@Override
-	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing face, float hitX, float hitY, float hitZ, int meta, EntityLivingBase entity, EnumHand hand)
-	{
+	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing face, float hitX, float hitY, float hitZ, int meta, EntityLivingBase entity, EnumHand hand) {
 		return getDefaultState().withProperty(BlockHorizontal.FACING, EnumFacing.fromAngle(entity.rotationYaw));
 	}
-	
+
 	@Override
-	public IBlockState getStateFromMeta(int meta)
-	{
+	public IBlockState getStateFromMeta(int meta) {
 		return getDefaultState().withProperty(BlockHorizontal.FACING, EnumFacing.HORIZONTALS[meta]);
 	}
-	
+
 	@Override
-	public int getMetaFromState(IBlockState state)
-	{
+	public int getMetaFromState(IBlockState state) {
 		return state.getValue(BlockHorizontal.FACING).getHorizontalIndex();
 	}
-	
+
 	@Override
-	protected BlockStateContainer createBlockState()
-	{
+	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, BlockHorizontal.FACING);
 	}
 }

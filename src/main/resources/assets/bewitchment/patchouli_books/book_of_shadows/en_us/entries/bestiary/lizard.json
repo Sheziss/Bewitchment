@@ -1,19 +1,18 @@
 {
-	"name": "Lizard",
-	"icon": "bewitchment:lizard_leg",
-	"category": "bestiary",
-	"pages":
-	[
-		{
-			"type": "text",
-			"text": "It's a lizard. What did you expect?"
-		},
-		{
-			"type": "entity",
-			"name": "Lizard",
-			"entity": "bewitchment:lizard",
-			"scale": 0.75,
-			"text": "HENLO LIZER"
-		}
-	]
+  "name": "Lizard",
+  "icon": "bewitchment:lizard_leg",
+  "category": "bestiary",
+  "pages": [
+    {
+      "type": "text",
+      "text": "It's a lizard. What did you expect?"
+    },
+    {
+      "type": "entity",
+      "name": "Lizard",
+      "entity": "bewitchment:lizard",
+      "scale": 0.75,
+      "text": "HENLO LIZER"
+    }
+  ]
 }

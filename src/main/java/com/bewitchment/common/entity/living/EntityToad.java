@@ -4,24 +4,12 @@ import com.bewitchment.Bewitchment;
 import com.bewitchment.common.entity.util.ModEntityTameable;
 import com.bewitchment.registry.ModObjects;
 import com.bewitchment.registry.ModSounds;
-
 import net.ilexiconn.llibrary.server.animation.Animation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIFollowOwner;
-import net.minecraft.entity.ai.EntityAIFollowParent;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMate;
-import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
-import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAITargetNonTamed;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest2;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityEndermite;
 import net.minecraft.entity.monster.EntitySilverfish;
 import net.minecraft.entity.passive.EntityAnimal;
@@ -39,92 +27,78 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
-public class EntityToad extends ModEntityTameable
-{
+public class EntityToad extends ModEntityTameable {
 	public static final DataParameter<Integer> ANIMATION_TIME = EntityDataManager.createKey(EntityToad.class, DataSerializers.VARINT);
 	public static final DataParameter<Float> ANIMATION_HEIGHT = EntityDataManager.createKey(EntityToad.class, DataSerializers.FLOAT);
-	
-	public EntityToad(World world)
-	{
+
+	public EntityToad(World world) {
 		super(world, new ResourceLocation(Bewitchment.MOD_ID, "entities/toad"), Items.SPIDER_EYE, Items.FERMENTED_SPIDER_EYE, ModObjects.silver_scales, ModObjects.envenomed_fang);
 		setSize(1, 0.3f);
 	}
-	
+
 	@Override
-	public Animation[] getAnimations()
-	{
-		return new Animation[] {};
+	public Animation[] getAnimations() {
+		return new Animation[]{};
 	}
-	
+
 	@Override
-	public EntityAgeable createChild(EntityAgeable ageable)
-	{
+	public EntityAgeable createChild(EntityAgeable ageable) {
 		return new EntityToad(world);
 	}
-	
+
 	@Override
-	protected SoundEvent getAmbientSound()
-	{
+	protected SoundEvent getAmbientSound() {
 		return ModSounds.TOAD_IDLE;
 	}
-	
+
 	@Override
-	protected SoundEvent getDeathSound()
-	{
+	protected SoundEvent getDeathSound() {
 		return ModSounds.TOAD_DEATH;
 	}
-	
+
 	@Override
-	protected SoundEvent getHurtSound(DamageSource source)
-	{
+	protected SoundEvent getHurtSound(DamageSource source) {
 		return ModSounds.TOAD_HURT;
 	}
-	
+
 	@Override
-	protected int getSkinTypes()
-	{
+	protected int getSkinTypes() {
 		return 4;
 	}
-	
+
 	@Override
-	public boolean isBreedingItem(ItemStack stack)
-	{
+	public boolean isBreedingItem(ItemStack stack) {
 		return stack.getItem() == ModObjects.envenomed_fang;
 	}
-	
+
 	@Override
-	public boolean attackEntityAsMob(Entity entity)
-	{
-		if (entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue()))
-		{
+	public boolean attackEntityAsMob(Entity entity) {
+		if (entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue())) {
 			applyEnchantments(this, entity);
-			if (entity instanceof EntityLivingBase) ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 2000, 1, false, false));
+			if (entity instanceof EntityLivingBase)
+				((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 2000, 1, false, false));
 		}
 		return super.attackEntityAsMob(entity);
 	}
-	
+
 	@Override
-	public boolean canMateWith(EntityAnimal other)
-	{
+	public boolean canMateWith(EntityAnimal other) {
 		if (other == this || !(other instanceof EntityToad)) return false;
 		return isTamed() && isInLove() && ((EntityTameable) other).isTamed() && other.isInLove() && !((EntityTameable) other).isSitting();
 	}
-	
+
 	@Override
-	public boolean isPotionApplicable(PotionEffect effect)
-	{
+	public boolean isPotionApplicable(PotionEffect effect) {
 		return effect.getPotion() != MobEffects.SLOWNESS && super.isPotionApplicable(effect);
 	}
-	
+
 	@Override
-	public int getMaxSpawnedInChunk()
-	{
+	public int getMaxSpawnedInChunk() {
 		return 2;
 	}
-	
+
 	@Override
-	protected void applyEntityAttributes()
-	{
+	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
 		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(0.5);
@@ -132,18 +106,16 @@ public class EntityToad extends ModEntityTameable
 		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10);
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5);
 	}
-	
+
 	@Override
-	protected void entityInit()
-	{
+	protected void entityInit() {
 		super.entityInit();
 		dataManager.register(ANIMATION_TIME, 0);
 		dataManager.register(ANIMATION_HEIGHT, 0f);
 	}
-	
+
 	@Override
-	protected void initEntityAI()
-	{
+	protected void initEntityAI() {
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(0, new EntityAIMate(this, getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue() / 2));
 		tasks.addTask(1, new EntityAIAttackMelee(this, getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue(), false));

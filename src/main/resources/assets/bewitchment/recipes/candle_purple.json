@@ -1,19 +1,23 @@
 {
-	"type": "forge:ore_shaped",
-	"pattern":
-	[
-		"S  ",
-		"W  ",
-		"WD "
-	],
-	"key":
-	{
-		"S": {"item": "bewitchment:candle_small_purple"},
-		"W": {"item": "#GENERIC_WAX"},
-		"D": {"type": "forge:ore_dict", "ore": "dyePurple"}
-	},
-	"result":
-	{
-		"item": "bewitchment:candle_purple"
-	}
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "S  ",
+    "W  ",
+    "WD "
+  ],
+  "key": {
+    "S": {
+      "item": "bewitchment:candle_small_purple"
+    },
+    "W": {
+      "item": "#GENERIC_WAX"
+    },
+    "D": {
+      "type": "forge:ore_dict",
+      "ore": "dyePurple"
+    }
+  },
+  "result": {
+    "item": "bewitchment:candle_purple"
+  }
 }

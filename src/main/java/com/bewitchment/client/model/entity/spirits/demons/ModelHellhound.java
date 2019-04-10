@@ -1,15 +1,13 @@
 package com.bewitchment.client.model.entity.spirits.demons;
 
 import com.bewitchment.common.entity.spirits.demons.EntityHellhound;
-
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelBase;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.entity.Entity;
 
-public class ModelHellhound extends AdvancedModelBase
-{
+public class ModelHellhound extends AdvancedModelBase {
 	public AdvancedModelRenderer lArm01;
 	public AdvancedModelRenderer body;
 	public AdvancedModelRenderer lHindLeg01;
@@ -58,8 +56,7 @@ public class ModelHellhound extends AdvancedModelBase
 
 	private ModelAnimator animator;
 
-	public ModelHellhound()
-	{
+	public ModelHellhound() {
 		this.textureWidth = 64;
 		this.textureHeight = 64;
 		this.lHorn03a = new AdvancedModelRenderer(this, 52, 7);
@@ -277,10 +274,9 @@ public class ModelHellhound extends AdvancedModelBase
 		this.updateDefaultPose();
 		animator = ModelAnimator.create();
 	}
-	
+
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	{
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		this.animate((IAnimatedEntity) entity, f, f1, f2, f3, f4, f5);
 		this.rHindLeg01.render(f5);
@@ -289,17 +285,15 @@ public class ModelHellhound extends AdvancedModelBase
 		this.body.render(f5);
 		this.lArm01.render(f5);
 	}
-	
-	public void setRotateAngle(AdvancedModelRenderer renderer, float x, float y, float z)
-	{
+
+	public void setRotateAngle(AdvancedModelRenderer renderer, float x, float y, float z) {
 		renderer.rotateAngleX = x;
 		renderer.rotateAngleY = y;
 		renderer.rotateAngleZ = z;
 	}
-	
+
 	@Override
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
-	{
+	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		this.resetToDefaultPose();
 		float globalSpeed = 1;
@@ -310,9 +304,8 @@ public class ModelHellhound extends AdvancedModelBase
 		walk(rHindLeg01, 0.6f, 0.5f, true, 0, 0.2f, f, f1);
 		walk(lHindLeg01, 0.6f, 0.5f, false, 0, 0.2f, f, f1);
 	}
-	
-	public void animate(IAnimatedEntity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	{
+
+	public void animate(IAnimatedEntity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		this.resetToDefaultPose();
 		this.setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
 		animator.update(entity);

@@ -1,17 +1,17 @@
 {
-	"type": "forge:ore_shaped",
-	"pattern":
-	[
-		"I I",
-		"III",
-		"III"
-	],
-	"key":
-	{
-		"I": {"type": "forge:ore_dict", "ore": "ingotColdIron"}
-	},
-	"result":
-	{
-		"item": "bewitchment:chestplate_cold_iron"
-	}
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "I I",
+    "III",
+    "III"
+  ],
+  "key": {
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotColdIron"
+    }
+  },
+  "result": {
+    "item": "bewitchment:chestplate_cold_iron"
+  }
 }

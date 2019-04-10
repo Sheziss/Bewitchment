@@ -3,21 +3,13 @@ package com.bewitchment.common.entity.spirits.ghosts;
 import com.bewitchment.Bewitchment;
 import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.common.entity.util.ModEntityMob;
-
 import net.ilexiconn.llibrary.server.animation.Animation;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIBreakDoor;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest2;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.AbstractIllager;
 import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.monster.EntityWitch;
@@ -31,84 +23,71 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class EntityBlackDog extends ModEntityMob
-{
+public class EntityBlackDog extends ModEntityMob {
 	public static final Animation BITE = Animation.create(10);
-	
-	public EntityBlackDog(World world)
-	{
+
+	public EntityBlackDog(World world) {
 		super(world, new ResourceLocation(Bewitchment.MOD_ID, "entities/black_dog"));
 		setSize(1.08f, 1.53f);
 		experienceValue = 35;
 	}
-	
+
 	@Override
-	public Animation[] getAnimations()
-	{
-		return new Animation[] {IAnimatedEntity.NO_ANIMATION, BITE};
+	public Animation[] getAnimations() {
+		return new Animation[]{IAnimatedEntity.NO_ANIMATION, BITE};
 	}
-	
+
 	@Override
-	protected boolean isValidLightLevel()
-	{
+	protected boolean isValidLightLevel() {
 		return !world.isDaytime();
 	}
-	
+
 	@Override
-	public EnumCreatureAttribute getCreatureAttribute()
-	{
+	public EnumCreatureAttribute getCreatureAttribute() {
 		return BewitchmentAPI.SPIRIT;
 	}
-	
+
 	@Override
-	protected PathNavigate createNavigator(World world)
-	{
+	protected PathNavigate createNavigator(World world) {
 		PathNavigateGround path = new PathNavigateGround(this, world);
 		path.setBreakDoors(true);
 		return path;
 	}
-	
+
 	@Override
-	protected int getSkinTypes()
-	{
+	protected int getSkinTypes() {
 		return 5;
 	}
-	
+
 	@Override
-	public boolean attackEntityAsMob(Entity entity)
-	{
+	public boolean attackEntityAsMob(Entity entity) {
 		super.attackEntityAsMob(entity);
 		boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue());
-		if (flag)
-		{
+		if (flag) {
 			applyEnchantments(this, entity);
 			if (entity instanceof EntityLivingBase && getAnimation() != BITE) setAnimation(BITE);
 		}
 		return flag;
 	}
-	
+
 	@Override
-	public boolean attackEntityFrom(DamageSource source, float amount)
-	{
+	public boolean attackEntityFrom(DamageSource source, float amount) {
 		boolean flag = super.attackEntityFrom(source, amount);
-		if (flag)
-		{
+		if (flag) {
 			addPotionEffect(new PotionEffect(MobEffects.INVISIBILITY, 100, 1, false, false));
 			addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 100, 1, false, false));
 		}
 		return flag;
 	}
-	
+
 	@Override
-	public void onLivingUpdate()
-	{
+	public void onLivingUpdate() {
 		super.onLivingUpdate();
 		if (!world.isRemote && world.isDaytime()) setDead();
 	}
-	
+
 	@Override
-	protected void applyEntityAttributes()
-	{
+	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4);
 		getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.25);
@@ -116,10 +95,9 @@ public class EntityBlackDog extends ModEntityMob
 		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(25);
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.6);
 	}
-	
+
 	@Override
-	protected void initEntityAI()
-	{
+	protected void initEntityAI() {
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(0, new EntityAIBreakDoor(this));
 		tasks.addTask(1, new EntityAIAttackMelee(this, 0.5, false));

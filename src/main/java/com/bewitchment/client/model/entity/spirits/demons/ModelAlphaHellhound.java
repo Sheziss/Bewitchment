@@ -1,15 +1,13 @@
 package com.bewitchment.client.model.entity.spirits.demons;
 
 import com.bewitchment.common.entity.spirits.demons.EntityAlphaHellhound;
-
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelBase;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.entity.Entity;
 
-public class ModelAlphaHellhound extends AdvancedModelBase
-{
+public class ModelAlphaHellhound extends AdvancedModelBase {
 	public AdvancedModelRenderer body;
 	public AdvancedModelRenderer lArm01;
 	public AdvancedModelRenderer rArm01;
@@ -77,11 +75,10 @@ public class ModelAlphaHellhound extends AdvancedModelBase
 	public AdvancedModelRenderer tailThin03;
 	public AdvancedModelRenderer tailThin04;
 	public AdvancedModelRenderer tailThin05;
-	
+
 	private ModelAnimator animator;
-	
-	public ModelAlphaHellhound()
-	{
+
+	public ModelAlphaHellhound() {
 		this.textureWidth = 64;
 		this.textureHeight = 64;
 		this.mane01 = new AdvancedModelRenderer(this, 0, 48);
@@ -412,10 +409,9 @@ public class ModelAlphaHellhound extends AdvancedModelBase
 		this.updateDefaultPose();
 		animator = ModelAnimator.create();
 	}
-	
+
 	@Override
-	public void render(Entity entity, float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale)
-	{
+	public void render(Entity entity, float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale) {
 		this.setRotationAngles(limbSwing, limbSwingAmount, age, rotationYaw, rotationPitch, scale, entity);
 		this.animate((IAnimatedEntity) entity, limbSwing, limbSwingAmount, age, rotationYaw, rotationPitch, scale);
 		this.lArm01.render(scale);
@@ -424,17 +420,15 @@ public class ModelAlphaHellhound extends AdvancedModelBase
 		this.body.render(scale);
 		this.rArm01.render(scale);
 	}
-	
-	public void setRotateAngle(AdvancedModelRenderer renderer, float x, float y, float z)
-	{
+
+	public void setRotateAngle(AdvancedModelRenderer renderer, float x, float y, float z) {
 		renderer.rotateAngleX = x;
 		renderer.rotateAngleY = y;
 		renderer.rotateAngleZ = z;
 	}
-	
+
 	@Override
-	public void setRotationAngles(float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale, Entity entity)
-	{
+	public void setRotationAngles(float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale, Entity entity) {
 		super.setRotationAngles(limbSwing, limbSwingAmount, age, rotationYaw, rotationPitch, scale, entity);
 		this.resetToDefaultPose();
 		float globalSpeed = 1;
@@ -445,9 +439,8 @@ public class ModelAlphaHellhound extends AdvancedModelBase
 		walk(rHindLeg, 0.6f, 0.5f, true, 0, 0.2f, limbSwing, limbSwingAmount);
 		walk(lHindLeg01, 0.6f, 0.5f, false, 0, 0.2f, limbSwing, limbSwingAmount);
 	}
-	
-	public void animate(IAnimatedEntity entity, float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale)
-	{
+
+	public void animate(IAnimatedEntity entity, float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale) {
 		this.resetToDefaultPose();
 		this.setRotationAngles(limbSwing, limbSwingAmount, age, rotationYaw, rotationPitch, scale, (Entity) entity);
 		animator.update(entity);

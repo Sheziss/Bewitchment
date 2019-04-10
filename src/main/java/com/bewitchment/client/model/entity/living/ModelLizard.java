@@ -5,8 +5,7 @@ import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
-public class ModelLizard extends AdvancedModelBase
-{
+public class ModelLizard extends AdvancedModelBase {
 	public AdvancedModelRenderer body01;
 	public AdvancedModelRenderer body02;
 	public AdvancedModelRenderer neck;
@@ -37,9 +36,8 @@ public class ModelLizard extends AdvancedModelBase
 	public AdvancedModelRenderer rArm02;
 	public AdvancedModelRenderer rforefoot;
 	public AdvancedModelRenderer rfToes01;
-	
-	public ModelLizard()
-	{
+
+	public ModelLizard() {
 		textureWidth = 64;
 		textureHeight = 64;
 		rArm01 = new AdvancedModelRenderer(this, 0, 28);
@@ -201,23 +199,20 @@ public class ModelLizard extends AdvancedModelBase
 		tail03.addChild(tail04);
 		updateDefaultPose();
 	}
-	
+
 	@Override
-	public void render(Entity entity, float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale)
-	{
+	public void render(Entity entity, float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale) {
 		body01.render(scale);
 	}
-	
-	public void setRotateAngle(AdvancedModelRenderer renderer, float x, float y, float z)
-	{
+
+	public void setRotateAngle(AdvancedModelRenderer renderer, float x, float y, float z) {
 		renderer.rotateAngleX = x;
 		renderer.rotateAngleY = y;
 		renderer.rotateAngleZ = z;
 	}
-	
+
 	@Override
-	public void setRotationAngles(float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale, Entity entity)
-	{
+	public void setRotationAngles(float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale, Entity entity) {
 		super.setRotationAngles(limbSwing, limbSwingAmount, age, rotationYaw, rotationPitch, scale, entity);
 		resetToDefaultPose();
 		lArm01.rotateAngleY = MathHelper.cos(limbSwing * 0.66f) * 1.4f * limbSwingAmount;

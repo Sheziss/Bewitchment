@@ -1,15 +1,13 @@
 package com.bewitchment.client.model.entity.spirits.demons;
 
 import com.bewitchment.common.entity.spirits.demons.EntityDemon;
-
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelBase;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.entity.Entity;
 
-public class ModelDemon extends AdvancedModelBase
-{
+public class ModelDemon extends AdvancedModelBase {
 	public AdvancedModelRenderer bipedBody;
 	public AdvancedModelRenderer tail01;
 	public AdvancedModelRenderer lWing01;
@@ -53,11 +51,10 @@ public class ModelDemon extends AdvancedModelBase
 	public AdvancedModelRenderer rLeg02;
 	public AdvancedModelRenderer rLeg03;
 	public AdvancedModelRenderer rHoof;
-	
+
 	private ModelAnimator animator;
-	
-	public ModelDemon()
-	{
+
+	public ModelDemon() {
 		this.textureWidth = 64;
 		this.textureHeight = 64;
 		this.bipedRightArm = new AdvancedModelRenderer(this, 44, 16);
@@ -284,18 +281,16 @@ public class ModelDemon extends AdvancedModelBase
 		this.updateDefaultPose();
 		animator = ModelAnimator.create();
 	}
-	
+
 	@Override
-	public void render(Entity entity, float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale)
-	{
+	public void render(Entity entity, float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale) {
 		this.setRotationAngles(limbSwing, limbSwingAmount, age, rotationYaw, rotationPitch, scale, entity);
 		this.animate((IAnimatedEntity) entity, limbSwing, limbSwingAmount, age, rotationYaw, rotationPitch, scale);
 		this.bipedBody.render(scale);
 	}
-	
+
 	@Override
-	public void setRotationAngles(float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale, Entity entity)
-	{
+	public void setRotationAngles(float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale, Entity entity) {
 		super.setRotationAngles(limbSwing, limbSwingAmount, age, rotationYaw, rotationPitch, scale, entity);
 		this.resetToDefaultPose();
 		float globalSpeed = 1;
@@ -309,15 +304,14 @@ public class ModelDemon extends AdvancedModelBase
 		flap(lWing01, 0.6f, 0.5f, true, 0, 0.2f, limbSwing, limbSwingAmount);
 		flap(rWing01, 0.6f, 0.5f, false, 0, 0.2f, limbSwing, limbSwingAmount);
 	}
-	
+
 	public void setRotateAngle(AdvancedModelRenderer renderer, float x, float y, float z) {
 		renderer.rotateAngleX = x;
 		renderer.rotateAngleY = y;
 		renderer.rotateAngleZ = z;
 	}
-	
-	public void animate(IAnimatedEntity entity, float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale)
-	{
+
+	public void animate(IAnimatedEntity entity, float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale) {
 		this.resetToDefaultPose();
 		this.setRotationAngles(limbSwing, limbSwingAmount, age, rotationYaw, rotationPitch, scale, (Entity) entity);
 		animator.update(entity);

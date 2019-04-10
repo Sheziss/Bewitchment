@@ -1,15 +1,13 @@
 package com.bewitchment.client.model.entity.living;
 
 import com.bewitchment.common.entity.living.EntityToad;
-
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.MathHelper;
 
-public class ModelToad extends AdvancedModelBase
-{
+public class ModelToad extends AdvancedModelBase {
 	public ModelRenderer stomach;
 	public ModelRenderer head01;
 	public ModelRenderer lArm01;
@@ -29,8 +27,7 @@ public class ModelToad extends AdvancedModelBase
 	public ModelRenderer rLeg02;
 	public ModelRenderer rLeg03;
 
-	public ModelToad()
-	{
+	public ModelToad() {
 		this.textureWidth = 64;
 		this.textureHeight = 32;
 		this.head01 = new ModelRenderer(this, 0, 17);
@@ -129,10 +126,9 @@ public class ModelToad extends AdvancedModelBase
 		this.head01.addChild(this.head02);
 		this.rLeg02.addChild(this.rLeg03);
 	}
-	
+
 	@Override
-	public void render(Entity entity, float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale)
-	{
+	public void render(Entity entity, float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale) {
 		this.stomach.render(scale);
 		// Must reset the animations after rendering so it doesn't show up on all entities
 		this.stomach.offsetY = 0;
@@ -147,37 +143,31 @@ public class ModelToad extends AdvancedModelBase
 		this.rArm01.rotateAngleX = lArm01.rotateAngleX;
 		this.rArm02.rotateAngleX = lArm02.rotateAngleX;
 	}
-	
+
 	@Override
-	public void setRotationAngles(float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale, Entity entity)
-	{
-		if (entity.onGround) setRotateAngle(head02, (float) (0.6981317007977318f + rotationPitch * Math.PI / 360), (float) (rotationYaw * Math.PI / 360), 0);
+	public void setRotationAngles(float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale, Entity entity) {
+		if (entity.onGround)
+			setRotateAngle(head02, (float) (0.6981317007977318f + rotationPitch * Math.PI / 360), (float) (rotationYaw * Math.PI / 360), 0);
 	}
-	
+
 	@Override
-	public void setLivingAnimations(EntityLivingBase living, float limbSwing, float limbSwingAmount, float partialTickTime)
-	{
+	public void setLivingAnimations(EntityLivingBase living, float limbSwing, float limbSwingAmount, float partialTickTime) {
 		super.setLivingAnimations(living, limbSwing, limbSwingAmount, partialTickTime);
 		float time = living.ticksExisted * 0.2f;
 		this.jaw.rotationPointY = (float) (0.5f + 0.02 * MathHelper.sin(time));
 		EntityToad toad = (EntityToad) living;
-		if (toad.isSitting())
-		{
+		if (toad.isSitting()) {
 			lLeg03.rotateAngleY = 1.0471975512f;
 			rLeg03.rotateAngleY = -1.0471975512f;
-		}
-		else
-		{
+		} else {
 			lLeg03.rotateAngleY = -0.6f;
 			rLeg03.rotateAngleY = 0.6f;
 		}
 		float timer = toad.getDataManager().get(EntityToad.ANIMATION_TIME);
-		if (limbSwingAmount > 0.1 || timer != 0)
-		{
+		if (limbSwingAmount > 0.1 || timer != 0) {
 			toad.getDataManager().set(EntityToad.ANIMATION_TIME, toad.getDataManager().get(EntityToad.ANIMATION_TIME) + 1);
 			timer = toad.getDataManager().get(EntityToad.ANIMATION_TIME);
-			if (timer < 25)
-			{
+			if (timer < 25) {
 				this.stomach.offsetY = toad.getDataManager().get(EntityToad.ANIMATION_HEIGHT) + (-1.5f - toad.getDataManager().get(EntityToad.ANIMATION_HEIGHT)) * (timer / 100);
 				toad.getDataManager().set(EntityToad.ANIMATION_HEIGHT, stomach.offsetY);
 				this.stomach.rotateAngleX = this.stomach.rotateAngleX + (0 - this.stomach.rotateAngleX) * (timer / 100f);
@@ -192,9 +182,7 @@ public class ModelToad extends AdvancedModelBase
 				this.rArm01.rotateAngleX = lArm01.rotateAngleX;
 				this.rArm02.rotateAngleX = lArm02.rotateAngleX;
 
-			}
-			else if (timer < 50)
-			{
+			} else if (timer < 50) {
 				this.stomach.offsetY = toad.getDataManager().get(EntityToad.ANIMATION_HEIGHT) + -toad.getDataManager().get(EntityToad.ANIMATION_HEIGHT) * ((timer - 25) / 100);
 				toad.getDataManager().set(EntityToad.ANIMATION_HEIGHT, stomach.offsetY);
 				this.stomach.rotateAngleX = this.stomach.rotateAngleX + (0.36651914291f - this.stomach.rotateAngleX) * ((timer - 24f) / 100f);
@@ -209,10 +197,9 @@ public class ModelToad extends AdvancedModelBase
 				this.rArm01.rotateAngleX = lArm01.rotateAngleX;
 				this.rArm02.rotateAngleX = lArm02.rotateAngleX;
 
-			}
-			else if (timer < 75) this.stomach.rotateAngleX = this.stomach.rotateAngleX + (-0.36651914291f - this.stomach.rotateAngleX) * ((timer - 49f) / 100f);
-			else
-			{
+			} else if (timer < 75)
+				this.stomach.rotateAngleX = this.stomach.rotateAngleX + (-0.36651914291f - this.stomach.rotateAngleX) * ((timer - 49f) / 100f);
+			else {
 				toad.getDataManager().set(EntityToad.ANIMATION_TIME, 0);
 				this.stomach.offsetY = 0;
 				toad.getDataManager().set(EntityToad.ANIMATION_HEIGHT, 0f);
@@ -227,9 +214,7 @@ public class ModelToad extends AdvancedModelBase
 				this.rArm01.rotateAngleX = lArm01.rotateAngleX;
 				this.rArm02.rotateAngleX = lArm02.rotateAngleX;
 			}
-		}
-		else
-		{
+		} else {
 			toad.getDataManager().set(EntityToad.ANIMATION_TIME, 0);
 			this.stomach.offsetY = 0;
 			toad.getDataManager().set(EntityToad.ANIMATION_HEIGHT, 0f);
@@ -239,8 +224,7 @@ public class ModelToad extends AdvancedModelBase
 	/**
 	 * This is a helper function from Tabula to set the rotation of model parts
 	 */
-	public void setRotateAngle(ModelRenderer renderer, float x, float y, float z)
-	{
+	public void setRotateAngle(ModelRenderer renderer, float x, float y, float z) {
 		renderer.rotateAngleX = x;
 		renderer.rotateAngleY = y;
 		renderer.rotateAngleZ = z;

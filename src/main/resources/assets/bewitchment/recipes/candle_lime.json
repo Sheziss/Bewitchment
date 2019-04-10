@@ -1,19 +1,23 @@
 {
-	"type": "forge:ore_shaped",
-	"pattern":
-	[
-		"S  ",
-		"W  ",
-		"WD "
-	],
-	"key":
-	{
-		"S": {"item": "bewitchment:candle_small_lime"},
-		"W": {"item": "#GENERIC_WAX"},
-		"D": {"type": "forge:ore_dict", "ore": "dyeLime"}
-	},
-	"result":
-	{
-		"item": "bewitchment:candle_lime"
-	}
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "S  ",
+    "W  ",
+    "WD "
+  ],
+  "key": {
+    "S": {
+      "item": "bewitchment:candle_small_lime"
+    },
+    "W": {
+      "item": "#GENERIC_WAX"
+    },
+    "D": {
+      "type": "forge:ore_dict",
+      "ore": "dyeLime"
+    }
+  },
+  "result": {
+    "item": "bewitchment:candle_lime"
+  }
 }

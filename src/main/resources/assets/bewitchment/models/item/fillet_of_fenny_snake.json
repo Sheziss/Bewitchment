@@ -1,7 +1,6 @@
 {
-	"parent": "item/generated",
-	"textures":
-	{
-		"layer0": "bewitchment:items/fillet_of_fenny_snake"
-	}
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "bewitchment:items/fillet_of_fenny_snake"
+  }
 }

@@ -5,8 +5,7 @@ import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
-public class ModelNewt extends AdvancedModelBase
-{
+public class ModelNewt extends AdvancedModelBase {
 	public AdvancedModelRenderer body01;
 	public AdvancedModelRenderer body02;
 	public AdvancedModelRenderer neck;
@@ -54,9 +53,8 @@ public class ModelNewt extends AdvancedModelBase
 	public AdvancedModelRenderer rfToe02;
 	public AdvancedModelRenderer rfToe03;
 	public AdvancedModelRenderer rfToe04;
-	
-	public ModelNewt()
-	{
+
+	public ModelNewt() {
 		textureWidth = 64;
 		textureHeight = 64;
 		lfToe04 = new AdvancedModelRenderer(this, 0, 59);
@@ -313,26 +311,23 @@ public class ModelNewt extends AdvancedModelBase
 		lfoot.addChild(lBToe02);
 		updateDefaultPose();
 	}
-	
+
 	@Override
-	public void render(Entity entity, float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale)
-	{
+	public void render(Entity entity, float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale) {
 		body01.render(scale);
 	}
-	
+
 	/**
 	 * This is a helper function from Tabula to set the rotation of model parts
 	 */
-	public void setRotateAngle(AdvancedModelRenderer AdvancedModelRenderer, float x, float y, float z)
-	{
+	public void setRotateAngle(AdvancedModelRenderer AdvancedModelRenderer, float x, float y, float z) {
 		AdvancedModelRenderer.rotateAngleX = x;
 		AdvancedModelRenderer.rotateAngleY = y;
 		AdvancedModelRenderer.rotateAngleZ = z;
 	}
-	
+
 	@Override
-	public void setRotationAngles(float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale, Entity entity)
-	{
+	public void setRotationAngles(float limbSwing, float limbSwingAmount, float age, float rotationYaw, float rotationPitch, float scale, Entity entity) {
 		super.setRotationAngles(limbSwing, limbSwingAmount, age, rotationYaw, rotationPitch, scale, entity);
 		resetToDefaultPose();
 		lArm01.rotateAngleY = MathHelper.cos(limbSwing * 0.66f) * 1.4f * limbSwingAmount;

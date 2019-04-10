@@ -1,10 +1,6 @@
 package com.bewitchment;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.bewitchment.common.CommonProxy;
-
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -12,6 +8,8 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 //R DZH SVIV
 //HFMXLMFIV11
@@ -37,28 +35,25 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 //GSVB DROO YV NVG DRGS DIZGS
 
 @Mod(modid = Bewitchment.MOD_ID, name = Bewitchment.MOD_NAME, version = Bewitchment.MOD_VERSION)
-public class Bewitchment
-{
+public class Bewitchment {
 	public static final String MOD_ID = "bewitchment", MOD_NAME = "Bewitchment", MOD_VERSION = "0.20";
 	public static final Logger LOGGER = LogManager.getLogger(MOD_NAME);
-	
+
 	@Instance(Bewitchment.MOD_ID)
 	public static Bewitchment instance;
-	
+
 	@SidedProxy(serverSide = "com.bewitchment.common.CommonProxy", clientSide = "com.bewitchment.client.ClientProxy")
 	public static CommonProxy proxy;
-	
+
 	@EventHandler
-	public void preInit(FMLPreInitializationEvent event)
-	{
+	public void preInit(FMLPreInitializationEvent event) {
 		proxy.preInit(event);
 		LOGGER.info("Remember when I told you how my");
 		LOGGER.info("Kin is different in some ways?");
 	}
-	
+
 	@EventHandler
-	public void init(FMLInitializationEvent event)
-	{
+	public void init(FMLInitializationEvent event) {
 		proxy.init(event);
 		LOGGER.info("It's a fact, she is exactly that!");
 		LOGGER.info("A harbinger of death from the world of witchcraft,");
@@ -68,10 +63,9 @@ public class Bewitchment
 		LOGGER.info("I hear her in the wind, the bane of our town");
 		LOGGER.info("Come with me, father, I'm to expose a heathen");
 	}
-	
+
 	@EventHandler
-	public void postInit(FMLPostInitializationEvent event)
-	{
+	public void postInit(FMLPostInitializationEvent event) {
 		proxy.postInit(event);
 	}
 }
