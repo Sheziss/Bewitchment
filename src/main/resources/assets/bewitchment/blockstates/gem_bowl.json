@@ -4,9 +4,6 @@
     "model": "bewitchment:gem_bowl"
   },
   "variants": {
-    "inventory": [
-      {}
-    ],
     "normal": [
       {}
     ],

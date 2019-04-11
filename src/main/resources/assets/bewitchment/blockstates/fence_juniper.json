@@ -8,13 +8,10 @@
     }
   },
   "variants": {
-    "inventory": [
+    "normal": [
       {
         "model": "fence_inventory"
       }
-    ],
-    "normal": [
-      {}
     ],
     "north": {
       "true": {

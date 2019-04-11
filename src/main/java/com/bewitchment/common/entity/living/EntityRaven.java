@@ -44,8 +44,10 @@ public class EntityRaven extends ModEntityTameable {
 	}
 
 	@Override
-	public EntityAgeable createChild(EntityAgeable ageable) {
-		return new EntityRaven(world);
+	public EntityAgeable createChild(EntityAgeable other) {
+		EntityAgeable entity = new EntityRaven(world);
+		entity.getDataManager().set(SKIN, world.rand.nextBoolean() ? getDataManager().get(SKIN) : other.getDataManager().get(SKIN));
+		return entity;
 	}
 
 	@Override

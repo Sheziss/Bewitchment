@@ -3,7 +3,7 @@
   "defaults": {
     "model": "bewitchment:witchfire",
     "textures": {
-      "fire": "bewitchment:blocks/sightfire"
+      "fire": "bewitchment:blocks/fire/sightfire"
     }
   },
   "variants": {

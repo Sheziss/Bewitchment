@@ -8,7 +8,7 @@
     }
   },
   "variants": {
-    "inventory": [
+    "normal": [
       {
         "model": "fence_inventory"
       }

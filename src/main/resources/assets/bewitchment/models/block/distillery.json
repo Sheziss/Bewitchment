@@ -1,10 +1,10 @@
 {
   "credit": "Made with Blockbench",
   "textures": {
-    "0": "bewitchment:blocks/distillery_front",
-    "1": "bewitchment:blocks/distillery_top",
-    "2": "bewitchment:blocks/distillery_bottom",
-    "particle": "bewitchment:blocks/distillery_front"
+    "0": "bewitchment:blocks/distillery/distillery_front",
+    "1": "bewitchment:blocks/distillery/distillery_top",
+    "2": "bewitchment:blocks/distillery/distillery_bottom",
+    "particle": "bewitchment:blocks/distillery/distillery_front"
   },
   "elements": [
     {

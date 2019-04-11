@@ -2,8 +2,8 @@
   "forge_marker": 1,
   "defaults": {
     "textures": {
-      "bottom": "bewitchment:blocks/door_cypress_bottom",
-      "top": "bewitchment:blocks/door_cypress_top"
+      "bottom": "bewitchment:blocks/door/door_cypress_bottom",
+      "top": "bewitchment:blocks/door/door_cypress_top"
     }
   },
   "variants": {

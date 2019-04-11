@@ -1,10 +1,10 @@
 {
   "credit": "Model made by Ingoleth",
   "textures": {
-    "1": "bewitchment:blocks/oven_door",
-    "2": "bewitchment:blocks/oven_side",
-    "4": "bewitchment:blocks/oven_up",
-    "particle": "bewitchment:blocks/oven_side"
+    "1": "bewitchment:blocks/oven/oven_door",
+    "2": "bewitchment:blocks/oven/oven_side",
+    "4": "bewitchment:blocks/oven/oven_up",
+    "particle": "bewitchment:blocks/oven/oven_side"
   },
   "elements": [
     {

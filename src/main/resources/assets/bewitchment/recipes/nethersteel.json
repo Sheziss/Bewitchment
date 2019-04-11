@@ -1,17 +1,21 @@
 {
-  "type": "minecraft:crafting_shapeless",
+  "type": "forge:ore_shapeless",
   "ingredients": [
     {
-      "item": "minecraft:iron_ingot"
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
     },
     {
-      "item": "minecraft:iron_ingot"
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
     },
     {
-      "item": "minecraft:quartz"
+      "type": "forge:ore_dict",
+      "ore": "gemQuartz"
     },
     {
-      "item": "minecraft:netherbrick"
+      "type": "forge:ore_dict",
+      "ore": "ingotBrickNether"
     }
   ],
   "result": {

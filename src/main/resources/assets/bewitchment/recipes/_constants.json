@@ -39,5 +39,58 @@
         "ore": "itemWax"
       }
     ]
+  },
+  {
+    "name": "CANDLE_ANY",
+    "ingredient": [
+      {
+        "item": "bewitchment:candle_white"
+      },
+	  {
+        "item": "bewitchment:candle_orange"
+      },
+	  {
+        "item": "bewitchment:candle_magenta"
+      },
+	  {
+        "item": "bewitchment:candle_light_blue"
+      },
+	  {
+        "item": "bewitchment:candle_yellow"
+      },
+	  {
+        "item": "bewitchment:candle_lime"
+      },
+	  {
+        "item": "bewitchment:candle_pink"
+      },
+	  {
+        "item": "bewitchment:candle_gray"
+      },
+	  {
+        "item": "bewitchment:candle_light_gray"
+      },
+	  {
+        "item": "bewitchment:candle_cyan"
+      },
+	  {
+        "item": "bewitchment:candle_purple"
+      },
+	  {
+        "item": "bewitchment:candle_blue"
+      },
+	  {
+        "item": "bewitchment:candle_brown"
+      },
+	  {
+        "item": "bewitchment:candle_green"
+      },
+	  {
+        "item": "bewitchment:candle_red"
+      },
+	  {
+        "item": "bewitchment:candle_black"
+      }
+    ]
   }
 ]

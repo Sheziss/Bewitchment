@@ -2,9 +2,9 @@
   "parent": "block/block",
   "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
   "textures": {
-    "particle": "bewitchment:blocks/beehive",
-    "0": "bewitchment:blocks/beehive",
-    "1": "bewitchment:blocks/beehive"
+    "particle": "bewitchment:blocks/apiary/beehive",
+    "0": "bewitchment:blocks/apiary/beehive",
+    "1": "bewitchment:blocks/apiary/beehive"
   },
   "elements": [
     {

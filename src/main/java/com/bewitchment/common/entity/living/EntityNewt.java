@@ -25,8 +25,10 @@ public class EntityNewt extends ModEntityAnimal {
 	}
 
 	@Override
-	public EntityAgeable createChild(EntityAgeable ageable) {
-		return new EntityNewt(world);
+	public EntityAgeable createChild(EntityAgeable other) {
+		EntityAgeable entity = new EntityNewt(world);
+		entity.getDataManager().set(SKIN, world.rand.nextBoolean() ? getDataManager().get(SKIN) : other.getDataManager().get(SKIN));
+		return entity;
 	}
 
 	@Override

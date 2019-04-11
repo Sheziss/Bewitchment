@@ -3,7 +3,7 @@
   "defaults": {
     "model": "bewitchment:witchfire",
     "textures": {
-      "fire": "bewitchment:blocks/endfire"
+      "fire": "bewitchment:blocks/fire/endfire"
     }
   },
   "variants": {

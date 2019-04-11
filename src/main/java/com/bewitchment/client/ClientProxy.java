@@ -121,8 +121,8 @@ public class ClientProxy extends CommonProxy {
 	}
 
 	@Override
-	public void registerTexture(Item item) {
-		ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
+	public void registerTexture(Item item, String variant) {
+		ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), variant));
 	}
 
 	@Override

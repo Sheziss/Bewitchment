@@ -4,9 +4,6 @@
     "model": "bewitchment:crystal_ball"
   },
   "variants": {
-    "inventory": [
-      {}
-    ],
     "normal": [
       {}
     ]

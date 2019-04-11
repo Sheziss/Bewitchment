@@ -23,8 +23,10 @@ public class EntityOwl extends EntityRaven {
 	}
 
 	@Override
-	public EntityAgeable createChild(EntityAgeable ageable) {
-		return new EntityOwl(world);
+	public EntityAgeable createChild(EntityAgeable other) {
+		EntityAgeable entity = new EntityOwl(world);
+		entity.getDataManager().set(SKIN, world.rand.nextBoolean() ? getDataManager().get(SKIN) : other.getDataManager().get(SKIN));
+		return entity;
 	}
 
 	@Override

@@ -21,32 +21,32 @@
     "letter": {
       "0": {
         "textures": {
-          "texture": "bewitchment:blocks/glyph0"
+          "texture": "bewitchment:blocks/glyph/glyph0"
         }
       },
       "1": {
         "textures": {
-          "texture": "bewitchment:blocks/glyph1"
+          "texture": "bewitchment:blocks/glyph/glyph1"
         }
       },
       "2": {
         "textures": {
-          "texture": "bewitchment:blocks/glyph2"
+          "texture": "bewitchment:blocks/glyph/glyph2"
         }
       },
       "3": {
         "textures": {
-          "texture": "bewitchment:blocks/glyph3"
+          "texture": "bewitchment:blocks/glyph/glyph3"
         }
       },
       "4": {
         "textures": {
-          "texture": "bewitchment:blocks/glyph4"
+          "texture": "bewitchment:blocks/glyph/glyph4"
         }
       },
       "5": {
         "textures": {
-          "texture": "bewitchment:blocks/glyph5"
+          "texture": "bewitchment:blocks/glyph/glyph5"
         }
       }
     },

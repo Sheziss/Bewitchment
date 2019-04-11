@@ -2,7 +2,7 @@
   "credit": "Model made by Ingoleth",
   "parent": "block/block",
   "textures": {
-    "0": "bewitchment:blocks/candle_white",
+    "0": "bewitchment:blocks/candle/candle_white",
     "1": "blocks/cauldron_inner",
     "2": "blocks/cauldron_side",
     "3": "blocks/glass",

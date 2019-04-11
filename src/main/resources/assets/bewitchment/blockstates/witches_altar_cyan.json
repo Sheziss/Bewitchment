@@ -3,15 +3,12 @@
   "defaults": {
     "model": "cube_bottom_top",
     "textures": {
-      "top": "bewitchment:blocks/altar_cyan_top",
-      "bottom": "bewitchment:blocks/altar_bottom",
-      "side": "bewitchment:blocks/altar_cyan_side"
+      "top": "bewitchment:blocks/altar/altar_cyan_top",
+      "bottom": "bewitchment:blocks/altar/altar_bottom",
+      "side": "bewitchment:blocks/altar/altar_cyan_side"
     }
   },
   "variants": {
-    "inventory": [
-      {}
-    ],
     "normal": [
       {}
     ],

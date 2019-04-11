@@ -2,8 +2,8 @@
   "forge_marker": 1,
   "defaults": {
     "textures": {
-      "bottom": "bewitchment:blocks/door_elder_bottom",
-      "top": "bewitchment:blocks/door_elder_top"
+      "bottom": "bewitchment:blocks/door/door_elder_bottom",
+      "top": "bewitchment:blocks/door/door_elder_top"
     }
   },
   "variants": {

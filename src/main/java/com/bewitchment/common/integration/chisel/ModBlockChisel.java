@@ -1,0 +1,37 @@
+package com.bewitchment.common.integration.chisel;
+
+import java.util.Arrays;
+import java.util.List;
+
+import com.bewitchment.Bewitchment;
+import com.bewitchment.common.block.util.ModBlock;
+import com.bewitchment.registry.util.IOreDictionaryContainer;
+
+import net.minecraft.block.Block;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+public class ModBlockChisel extends ModBlock
+{
+	private final String name;
+	
+	public ModBlockChisel(String name, Block base)
+	{
+		super(base.getDefaultState().getMaterial());
+		Bewitchment.proxy.registerValues(this, base.getTranslationKey().substring(6 + Bewitchment.MOD_ID.length(), base.getTranslationKey().length()) + "_" + name, base, Bewitchment.proxy.toArray(base instanceof IOreDictionaryContainer ? ((IOreDictionaryContainer) base).getOreDictionaryNames() : Arrays.asList("")));
+		setTranslationKey(base.getTranslationKey().substring(5));
+		String finalName = "";
+		for (String s : name.split("_")) finalName += s.replaceFirst(String.valueOf(s.charAt(0)), String.valueOf(s.charAt(0)).toUpperCase()) + " ";
+		this.name = finalName;
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
+		tooltip.add(I18n.format(name));
+	}
+}

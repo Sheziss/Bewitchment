@@ -20,8 +20,13 @@ public class ModBlock extends Block implements IOreDictionaryContainer {
 	private final List<String> oreDictionaryNames = new ArrayList<String>();
 
 	public ModBlock(String name, Material mat, SoundType sound, float hardness, float resistance, String tool, int level, String... oreDictionaryNames) {
-		super(mat);
+		this(mat);
 		Bewitchment.proxy.registerValues(this, name, mat, sound, hardness, resistance, tool, level, oreDictionaryNames);
+	}
+	
+	public ModBlock(Material mat)
+	{
+		super(mat);
 	}
 
 	@Override

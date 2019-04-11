@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "forge:ore_shaped",
   "pattern": [
     "ESE",
     "BLB",
@@ -10,7 +10,8 @@
       "item": "bewitchment:empty_jar"
     },
     "S": {
-      "item": "bewitchment:salt"
+      "type": "forge:ore_dict",
+      "ore": "salt"
     },
     "B": {
       "item": "minecraft:stonebrick",

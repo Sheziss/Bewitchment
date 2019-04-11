@@ -1,7 +1,7 @@
 {
   "credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
   "textures": {
-    "fire": "bewitchment:blocks/witchfire",
+    "fire": "bewitchment:blocks/fire/witchfire",
     "particle": "#fire"
   },
   "elements": [

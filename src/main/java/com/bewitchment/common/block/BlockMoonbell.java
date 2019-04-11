@@ -21,7 +21,7 @@ import java.util.Random;
 
 @Optional.Interface(iface = "thaumcraft.api.crafting.IInfusionStabiliserExt", modid = "thaumcraft")
 public class BlockMoonbell extends ModBlockBush implements IInfusionStabiliserExt {
-	private static final PropertyBool PLACED = PropertyBool.create("placed");
+	public static final PropertyBool PLACED = PropertyBool.create("placed");
 
 	public BlockMoonbell() {
 		super("moonbell");

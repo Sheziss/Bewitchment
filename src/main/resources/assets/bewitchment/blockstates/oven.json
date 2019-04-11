@@ -5,13 +5,10 @@
     "transform": "forge:default-block"
   },
   "variants": {
-    "inventory": [
+    "normal": [
       {
         "y": 180
       }
-    ],
-    "normal": [
-      {}
     ],
     "facing=north": [
       {

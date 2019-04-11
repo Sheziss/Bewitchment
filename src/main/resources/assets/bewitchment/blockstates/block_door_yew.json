@@ -2,8 +2,8 @@
   "forge_marker": 1,
   "defaults": {
     "textures": {
-      "bottom": "bewitchment:blocks/door_yew_bottom",
-      "top": "bewitchment:blocks/door_yew_top"
+      "bottom": "bewitchment:blocks/door/door_yew_bottom",
+      "top": "bewitchment:blocks/door/door_yew_top"
     }
   },
   "variants": {

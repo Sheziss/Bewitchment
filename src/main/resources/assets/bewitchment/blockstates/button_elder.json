@@ -8,13 +8,10 @@
     }
   },
   "variants": {
-    "inventory": [
+    "normal": [
       {
         "model": "button_inventory"
       }
-    ],
-    "normal": [
-      {}
     ],
     "facing=up,powered=false": {
       "model": "button"

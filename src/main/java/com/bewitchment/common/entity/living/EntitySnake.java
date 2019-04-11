@@ -42,8 +42,10 @@ public class EntitySnake extends ModEntityTameable {
 	}
 
 	@Override
-	public EntityAgeable createChild(EntityAgeable ageable) {
-		return new EntitySnake(world);
+	public EntityAgeable createChild(EntityAgeable other) {
+		EntityAgeable entity = new EntitySnake(world);
+		entity.getDataManager().set(SKIN, world.rand.nextBoolean() ? getDataManager().get(SKIN) : other.getDataManager().get(SKIN));
+		return entity;
 	}
 
 	@Override

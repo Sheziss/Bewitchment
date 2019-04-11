@@ -3,13 +3,10 @@
   "defaults": {
     "model": "bewitchment:lantern",
     "textures": {
-      "0": "bewitchment:blocks/candle_pink"
+      "0": "bewitchment:blocks/candle/candle_pink"
     }
   },
   "variants": {
-    "inventory": [
-      {}
-    ],
     "normal": [
       {}
     ]

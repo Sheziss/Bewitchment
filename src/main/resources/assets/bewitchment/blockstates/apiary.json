@@ -4,9 +4,6 @@
     "model": "bewitchment:apiary"
   },
   "variants": {
-    "inventory": [
-      {}
-    ],
     "normal": [
       {}
     ],

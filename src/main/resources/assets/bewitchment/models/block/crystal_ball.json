@@ -1,11 +1,11 @@
 {
   "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
   "textures": {
-    "base": "bewitchment:blocks/crystal_ball_base_large_plate",
-    "glass_large": "bewitchment:blocks/crystal_ball_core",
-    "glass_small": "bewitchment:blocks/crystal_ball_core_bump_plate",
-    "smoke": "bewitchment:blocks/crystal_ball_smoke",
-    "particle": "bewitchment:blocks/crystal_ball_base_large_plate"
+    "base": "bewitchment:blocks/crystal_ball/crystal_ball_base_large_plate",
+    "glass_large": "bewitchment:blocks/crystal_ball/crystal_ball_core",
+    "glass_small": "bewitchment:blocks/crystal_ball/crystal_ball_core_bump_plate",
+    "smoke": "bewitchment:blocks/crystal_ball/crystal_ball_smoke",
+    "particle": "bewitchment:blocks/crystal_ball/crystal_ball_base_large_plate"
   },
   "elements": [
     {

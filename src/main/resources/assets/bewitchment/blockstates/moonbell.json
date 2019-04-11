@@ -8,7 +8,7 @@
     }
   },
   "variants": {
-    "inventory": [
+     "inventory": [
       {
         "model": "builtin/generated",
         "textures": {
@@ -16,13 +16,7 @@
         }
       }
     ],
-    "normal": [
-      {}
-    ],
-    "placed=false": [
-      {}
-    ],
-    "placed=true": [
+	"normal": [
       {}
     ]
   }

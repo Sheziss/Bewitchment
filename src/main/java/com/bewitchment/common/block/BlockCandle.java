@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class BlockCandle extends BlockCandleBase {
-	private static final AxisAlignedBB BOX = new AxisAlignedBB(0.31, 0, 0.31, 0.69, 0.75, 0.69);
+	private static final AxisAlignedBB BOX = new AxisAlignedBB(0.38, 0, 0.38, 0.62, 0.5, 0.62);
 
 	public BlockCandle(String name) {
 		super(name, Material.CLOTH, SoundType.CLOTH, 1, 1, "", 0);
@@ -64,7 +64,7 @@ public class BlockCandle extends BlockCandleBase {
 
 	@Override
 	public int getLightValue(IBlockState state) {
-		return state.getValue(LIT) ? 14 : 0;
+		return state.getValue(LIT) ? 9 : 0;
 	}
 
 	@Override
@@ -75,6 +75,6 @@ public class BlockCandle extends BlockCandleBase {
 	@Override
 	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
 		if (state.getValue(LIT))
-			world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5, pos.getY() + 0.925, pos.getZ() + 0.5, 0, 0, 0);
+			world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5, pos.getY() + 0.7, pos.getZ() + 0.5, 0, 0, 0);
 	}
 }

@@ -4,9 +4,6 @@
     "model": "bewitchment:tarot_table"
   },
   "variants": {
-    "inventory": [
-      {}
-    ],
     "normal": [
       {}
     ],

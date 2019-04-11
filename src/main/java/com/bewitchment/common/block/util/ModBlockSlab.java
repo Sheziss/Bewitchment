@@ -38,7 +38,7 @@ public class ModBlockSlab extends BlockSlab implements IOreDictionaryContainer {
 		double_slab.half = this;
 		Item item = new ItemSlab(this, this, double_slab).setRegistryName(getRegistryName()).setTranslationKey(getTranslationKey());
 		ModObjects.REGISTRY.add(item);
-		Bewitchment.proxy.registerTexture(item);
+		Bewitchment.proxy.registerTexture(item, "normal");
 	}
 
 	public ModBlockSlab(String name, Block base, boolean isDouble, String... oreDictionaryNames) {

@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "bewitchment:items/scarlet_orb"
+    "layer0": "bewitchment:items/equipment/scarlet_orb"
   }
 }

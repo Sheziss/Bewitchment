@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "forge:ore_shaped",
   "pattern": [
     "WFW",
     "WCW",
@@ -13,7 +13,8 @@
       "item": "bewitchment:birch_soul"
     },
     "C": {
-      "item": "minecraft:cobblestone"
+      "type": "forge:ore_dict",
+      "ore": "cobblestone"
     }
   },
   "result": {
