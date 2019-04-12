@@ -8,6 +8,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -42,7 +43,7 @@ public class FortuneTreasure extends Fortune {
 
 	@Override
 	public boolean apply(@Nonnull EntityPlayer player) {
-		player.getCapability(ExtendedPlayer.CAPABILITY, null).setActive();
+		player.getCapability(ExtendedPlayer.CAPABILITY, null).setFortuneActive(true);;
 		return false;
 	}
 
@@ -55,14 +56,14 @@ public class FortuneTreasure extends Fortune {
 	public void onDig(BlockEvent.BreakEvent evt) {
 		ExtendedPlayer cap = evt.getPlayer().getCapability(ExtendedPlayer.CAPABILITY, null);
 		if (cap.getFortune() == this) {
-			if (cap.isActive()) {
+			if (cap.isFortuneActive()) {
 				Block block = evt.getState().getBlock();
 				if (block == Blocks.DIRT || block == Blocks.GRASS || block == Blocks.SAND || block == Blocks.MYCELIUM || block == Blocks.GRAVEL || block == Blocks.SOUL_SAND) {
-					LootTable lt = evt.getWorld().getLootTableManager().getLootTableFromLocation(ModLootTables.MATERIALS);
+					LootTable lt = evt.getWorld().getLootTableManager().getLootTableFromLocation(new ResourceLocation(Bewitchment.MOD_ID, "chests/materials"));
 					LootContext lc = (new LootContext.Builder((WorldServer) evt.getWorld()).withLuck(evt.getPlayer().getLuck()).withPlayer(evt.getPlayer())).build();
 					List<ItemStack> spawn = lt.generateLootForPools(evt.getPlayer().getRNG(), lc);
 					spawn.forEach(s -> spawn(s, evt.getWorld(), evt.getPos()));
-					cap.setRemovable();
+					cap.setFortuneRemoveable(true);
 				}
 			}
 		}
