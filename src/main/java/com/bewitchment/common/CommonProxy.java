@@ -173,6 +173,9 @@ public class CommonProxy {
 	public void registerTextureEyeOfOld() {
 	}
 
+	public void registerTextureColdIronSword() {
+	}
+
 	public void registerTextureWaystone() {
 	}
 

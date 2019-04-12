@@ -473,6 +473,7 @@ public class ModObjects {
 				Item item = (Item) obj;
 				event.getRegistry().register(item);
 				if (obj == ModObjects.eye_of_old) Bewitchment.proxy.registerTextureEyeOfOld();
+				else if (obj == ModObjects.sword_cold_iron) Bewitchment.proxy.registerTextureColdIronSword();
 				else if (obj == ModObjects.waystone) Bewitchment.proxy.registerTextureWaystone();
 				else Bewitchment.proxy.registerTexture(item, "normal");
 			}
