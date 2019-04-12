@@ -23,9 +23,8 @@ public class ModBlock extends Block implements IOreDictionaryContainer {
 		this(mat);
 		Bewitchment.proxy.registerValues(this, name, mat, sound, hardness, resistance, tool, level, oreDictionaryNames);
 	}
-	
-	public ModBlock(Material mat)
-	{
+
+	public ModBlock(Material mat) {
 		super(mat);
 	}
 

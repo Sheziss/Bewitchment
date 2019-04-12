@@ -1,9 +1,6 @@
 package com.bewitchment.common.block.util;
 
-import java.util.Random;
-
 import com.bewitchment.common.world.gen.tree.util.WorldGenModTree;
-
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
@@ -13,9 +10,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import java.util.Random;
+
 public class ModBlockSapling extends ModBlockBush implements IGrowable {
 	public static final PropertyBool READY = PropertyBool.create("ready");
-	
+
 	private static final AxisAlignedBB BOX = new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.8, 0.9);
 
 	private final Class<? extends WorldGenModTree> gen;
@@ -40,18 +39,16 @@ public class ModBlockSapling extends ModBlockBush implements IGrowable {
 	public boolean canUseBonemeal(World world, Random rand, BlockPos pos, IBlockState state) {
 		return rand.nextFloat() < 0.45f;
 	}
-	
+
 	@Override
-	public int damageDropped(IBlockState state)
-	{
+	public int damageDropped(IBlockState state) {
 		return 0;
 	}
 
 	@Override
 	public void grow(World world, Random rand, BlockPos pos, IBlockState state) {
 		if (!state.getValue(READY)) world.setBlockState(pos, state.cycleProperty(READY));
-		else
-		{
+		else {
 			WorldGenModTree generator = null;
 			try {
 				generator = gen.getDeclaredConstructor(boolean.class).newInstance(false);
@@ -71,7 +68,7 @@ public class ModBlockSapling extends ModBlockBush implements IGrowable {
 				this.grow(world, rand, pos, state);
 		}
 	}
-	
+
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 		return getDefaultState().withProperty(READY, meta == 0);
