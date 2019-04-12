@@ -31,6 +31,7 @@ public class EntityLizard extends ModEntityAnimal {
 		return entity;
 	}
 
+	//Todo: Give this the same breeding items as the toad's taming items
 	@Override
 	public boolean isBreedingItem(ItemStack stack) {
 		return stack.getItem() == Items.SPIDER_EYE;

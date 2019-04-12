@@ -31,6 +31,7 @@ public class EntityBlindworm extends ModEntityAnimal {
 		return new EntityBlindworm(world);
 	}
 
+	//Todo: Give this the same breeding items as the toad's taming items
 	@Override
 	public boolean isBreedingItem(ItemStack stack) {
 		return stack.getItem() == Items.SPIDER_EYE;
