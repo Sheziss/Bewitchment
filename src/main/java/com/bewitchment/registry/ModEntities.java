@@ -60,13 +60,13 @@ public class ModEntities {
 	}
 
 	private static final EntityEntry createEntityEntry(Class<? extends Entity> clazz, String name) {
-		EntityEntry entry = EntityEntryBuilder.create().entity(clazz).id(new ResourceLocation(Bewitchment.MOD_ID, name), entity_id++).name(name).tracker(64, 1, true).build();
+		EntityEntry entry = EntityEntryBuilder.create().entity(clazz).id(new ResourceLocation(Bewitchment.MOD_ID, name), entity_id++).name(Bewitchment.MOD_ID + "." + name).tracker(64, 1, true).build();
 		REGISTRY.add(entry);
 		return entry;
 	}
 
 	private static final EntityEntry createEntityEntry(Class<? extends Entity> clazz, String name, int solidColor, int spotColor) {
-		EntityEntry entry = EntityEntryBuilder.create().entity(clazz).id(new ResourceLocation(Bewitchment.MOD_ID, name), entity_id++).name(name).tracker(64, 1, true).egg(solidColor, spotColor).build();
+		EntityEntry entry = EntityEntryBuilder.create().entity(clazz).id(new ResourceLocation(Bewitchment.MOD_ID, name), entity_id++).name(Bewitchment.MOD_ID + "." + name).tracker(64, 1, true).egg(solidColor, spotColor).build();
 		REGISTRY.add(entry);
 		return entry;
 	}
@@ -75,7 +75,7 @@ public class ModEntities {
 		Set<Biome> biomes = new HashSet<>();
 		for (Biome biome : ForgeRegistries.BIOMES)
 			for (Type biomeType : biomeTypes) if (BiomeDictionary.hasType(biome, biomeType)) biomes.add(biome);
-		EntityEntry entry = EntityEntryBuilder.create().entity(clazz).id(new ResourceLocation(Bewitchment.MOD_ID, name), entity_id++).name(name).tracker(64, 1, true).egg(solidColor, spotColor).spawn(type, weight, min, max, biomes).build();
+		EntityEntry entry = EntityEntryBuilder.create().entity(clazz).id(new ResourceLocation(Bewitchment.MOD_ID, name), entity_id++).name(Bewitchment.MOD_ID + "." + name).tracker(64, 1, true).egg(solidColor, spotColor).spawn(type, weight, min, max, biomes).build();
 		REGISTRY.add(entry);
 		return entry;
 	}

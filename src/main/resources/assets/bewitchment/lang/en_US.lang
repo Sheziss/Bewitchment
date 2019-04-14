@@ -337,25 +337,25 @@ item.bewitchment.book_of_shadows.name=Book of Shadows
 item.bewitchment.codex_infernalis.name=Codex Infernalis
 
 #Entity
-entity.broom.name=Broom
+entity.bewitchment.broom.name=Broom
 
-entity.blindworm.name=Blindworm
-entity.lizard.name=Lizard
-entity.newt.name=Newt
-entity.owl.name=Owl
-entity.raven.name=Raven
-entity.snake.name=Snake
-entity.toad.name=Toad
+entity.bewitchment.blindworm.name=Blindworm
+entity.bewitchment.lizard.name=Lizard
+entity.bewitchment.newt.name=Newt
+entity.bewitchment.owl.name=Owl
+entity.bewitchment.raven.name=Raven
+entity.bewitchment.snake.name=Snake
+entity.bewitchment.toad.name=Toad
 
-entity.black_dog.name=Black Dog
+entity.bewitchment.black_dog.name=Black Dog
 
-entity.hellhound.name=Hellhound
-entity.alpha_hellhound.name=Alpha Hellhound
-entity.serpent.name=Serpent
+entity.bewitchment.hellhound.name=Hellhound
+entity.bewitchment.alpha_hellhound.name=Alpha Hellhound
+entity.bewitchment.serpent.name=Serpent
 
-entity.demon.name=Demon
-entity.demoness.name=Demoness
-entity.imp.name=Imp
+entity.bewitchment.demon.name=Demon
+entity.bewitchment.demoness.name=Demoness
+entity.bewitchment.imp.name=Imp
 
 #Enchantment
 enchantment.bewitchment.desperate_ward=Desperate Ward
