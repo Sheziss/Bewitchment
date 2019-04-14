@@ -2,6 +2,7 @@ package com.bewitchment.common.handler;
 
 import com.bewitchment.registry.ModObjects;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -35,5 +36,8 @@ public class BlockDropHandler {
 
 		replaceDrop(event, ModObjects.leaves_juniper, new ItemStack(ModObjects.juniper_berries), 15, false, false);
 		replaceDrop(event, ModObjects.leaves_yew, new ItemStack(ModObjects.yew_aril), 15, false, false);
+
+		replaceDrop(event, Blocks.DEADBUSH, new ItemStack(ModObjects.seed_white_sage), 15, false, false);
+		replaceDrop(event, Blocks.DEADBUSH, new ItemStack(ModObjects.seed_sagebrush), 15, false, false);
 	}
 }
