@@ -43,7 +43,8 @@ public class FortuneTreasure extends Fortune {
 
 	@Override
 	public boolean apply(@Nonnull EntityPlayer player) {
-		player.getCapability(ExtendedPlayer.CAPABILITY, null).setFortuneActive(true);;
+		player.getCapability(ExtendedPlayer.CAPABILITY, null).setFortuneActive(true);
+		;
 		return false;
 	}
 

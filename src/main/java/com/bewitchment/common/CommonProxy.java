@@ -646,19 +646,19 @@ public class CommonProxy {
 		GameRegistry.registerWorldGenerator(new WorldGenCoquina(), 0);
 		GameRegistry.registerWorldGenerator(new WorldGenBeehive(), 0);
 
-		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_aconitum), 6);
-		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_asphodel), 6);
-		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_belladonna), 8);
-		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_chrysanthemum), 6);
+		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_aconitum), 3);
+		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_asphodel), 3);
+		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_belladonna), 3);
+		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_chrysanthemum), 3);
 		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_ginger), 3);
 		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_hellebore), 3);
 		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_kenaf), 3);
-		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_lavender), 4);
-		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_mandrake), 4);
-		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_mint), 6);
-		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_thistle), 8);
+		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_lavender), 3);
+		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_mandrake), 3);
+		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_mint), 3);
+		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_thistle), 3);
 		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_tulsi), 3);
-		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_wormwood), 8);
+		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_wormwood), 3);
 
 		LootTableList.register(new ResourceLocation(Bewitchment.MOD_ID, "chests/books"));
 		LootTableList.register(new ResourceLocation(Bewitchment.MOD_ID, "chests/materials"));
