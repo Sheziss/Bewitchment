@@ -23,6 +23,7 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
+//Todo: Set up functionality
 public class BlockWitchFire extends ModBlock {
 	private static final AxisAlignedBB BOX = new AxisAlignedBB(0, 0, 0, 1, 0.0025, 1);
 
