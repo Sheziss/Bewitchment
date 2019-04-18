@@ -39,5 +39,8 @@ public class BlockDropHandler {
 
 		replaceDrop(event, Blocks.DEADBUSH, new ItemStack(ModObjects.seed_white_sage), 15, false, false);
 		replaceDrop(event, Blocks.DEADBUSH, new ItemStack(ModObjects.seed_sagebrush), 15, false, false);
+
+		//Set this to drop from oak and dark oak leaves
+		replaceDrop(event, Blocks.LEAVES, new ItemStack(ModObjects.oak_apple_gall), 15, false, false);
 	}
 }
