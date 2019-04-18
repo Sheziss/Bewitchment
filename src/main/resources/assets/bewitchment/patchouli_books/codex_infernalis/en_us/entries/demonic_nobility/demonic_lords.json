@@ -27,7 +27,7 @@
       "type": "entity",
       "name": "Imp",
       "entity": "bewitchment:imp",
-      "scale": 0.95,
+      "scale": 0.50,
       "rotate": true,
       "text": "One of the many peasants of hell"
     },
