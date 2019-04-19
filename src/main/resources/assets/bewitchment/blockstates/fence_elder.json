@@ -13,9 +13,6 @@
         "model": "fence_inventory"
       }
     ],
-    "normal": [
-      {}
-    ],
     "north": {
       "true": {
         "submodel": "fence_side"

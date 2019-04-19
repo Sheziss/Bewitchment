@@ -28,7 +28,7 @@ public class MagicPower implements ICapabilitySerializable<NBTTagCompound>, ISto
 		if (amount == 0) return true;
 		if (pos != null && world.getTileEntity(pos) instanceof TileEntityWitchesAltar)
 			return world.getTileEntity(pos).getCapability(CAPABILITY, null).drain(amount);
-		return player != null && player.getCapability(CAPABILITY, null).drain(amount);
+		return false; //check for grimoire
 	}
 
 	public boolean drain(int amount) {

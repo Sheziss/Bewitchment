@@ -10,8 +10,6 @@ import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.api.capability.extendedplayer.ExtendedPlayer;
 import com.bewitchment.api.capability.extendedplayer.ExtendedPlayerHandler;
 import com.bewitchment.api.capability.magicpower.MagicPower;
-import com.bewitchment.api.capability.magicpower.MagicPowerHandler;
-import com.bewitchment.api.capability.magicpower.MagicPowerMessage;
 import com.bewitchment.api.registry.DistilleryRecipe;
 import com.bewitchment.api.registry.LoomRecipe;
 import com.bewitchment.api.registry.OvenRecipe;
@@ -148,7 +146,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class CommonProxy {
@@ -297,13 +294,9 @@ public class CommonProxy {
 	}
 
 	protected void registerCapabilities() {
-		byte id = 0;
 		CapabilityManager.INSTANCE.register(ExtendedPlayer.class, new ExtendedPlayer(), ExtendedPlayer::new);
 		MinecraftForge.EVENT_BUS.register(new ExtendedPlayerHandler());
-		WRAPPER.registerMessage(MagicPowerMessage.Handler.class, MagicPowerMessage.class, id++, Side.CLIENT);
-
 		CapabilityManager.INSTANCE.register(MagicPower.class, new MagicPower(), MagicPower::new);
-		MinecraftForge.EVENT_BUS.register(new MagicPowerHandler());
 	}
 
 	protected void registerEventHandlers() {
