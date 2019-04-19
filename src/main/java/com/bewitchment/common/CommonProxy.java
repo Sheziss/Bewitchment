@@ -706,8 +706,7 @@ public class CommonProxy {
 	private void registerWorldGenerators() {
 		GameRegistry.registerWorldGenerator(new WorldGenOres(), 0);
 		GameRegistry.registerWorldGenerator(new WorldGenCoquina(), 0);
-
-		//Todo: Allow silphium to be obtained from dungeon loot
+		
 		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_aconitum), 3);
 		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_asphodel), 3);
 		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_belladonna), 3);
