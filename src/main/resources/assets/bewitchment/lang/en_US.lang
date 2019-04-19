@@ -1,4 +1,4 @@
-#Fluids
+﻿#Fluids
 fluid.oil_mundane=Oil
 
 #Blocks
@@ -460,6 +460,12 @@ tooltip.bewitchment.seed_thistle=Seed from a thorny flower
 tooltip.bewitchment.seed_tulsi=Seed from a small herb
 tooltip.bewitchment.seed_white_sage=Seed from an evergreen perennial shrub
 tooltip.bewitchment.seed_wormwood=Seed from a weedy herb
+
+#TC Aspects
+tc.aspect.diabolus=Demon, Unholy, Profane
+tc.aspect.stellae=Stars, Constellation, Asterism
+tc.aspect.luna=The Moon
+tc.aspect.sol=The Sun
 
 #JEI
 jei.ritual=Ritual
