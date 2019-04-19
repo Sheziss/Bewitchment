@@ -3,7 +3,7 @@
   "defaults": {
     "model": "cube_all",
     "textures": {
-      "all": "bewitchment:blocks/chisel/scorned_bricks_smooth_cracked"
+      "all": "bewitchment:blocks/chisel/scorned_bricks_french_2"
     }
   },
   "variants": {

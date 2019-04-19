@@ -128,7 +128,7 @@ public class ModObjects {
 	public static final Block nethersteel = new ModBlock("nethersteel", Material.IRON, SoundType.METAL, 5, 30, "pickaxe", 1, "blockNethersteel");
 	public static final Block[] nethersteel_chiseled = createChiselBlocks(nethersteel, "symbol", "bevel", "polished", "sentient", "pentacle", "pentagram", "skull", "eye", "watching_eye", "hellish", "watching_hellish");
 	public static final Block scorned_bricks = new ModBlock("scorned_bricks", Material.ROCK, SoundType.STONE, 5, 5, "pickaxe", 3);
-	public static final Block[] scorned_bricks_chiseled = createChiselBlocks(scorned_bricks, "raw", "cracked", "smooth_cracked", "symbol", "bevel", "hellish", "circular");
+	public static final Block[] scorned_bricks_chiseled = createChiselBlocks(scorned_bricks, "raw", "raw_cracked", "cracked", "symbol", "bevel", "hellish", "circular", "braid", "dent", "french_1", "french_2", "layers", "ornate", "panel", "prism", "road", "small");
 	public static final Block stairs_scorned_bricks = new ModBlockStairs("stairs_scorned_bricks", scorned_bricks);
 	public static final Block slab_scorned_bricks = new ModBlockSlab("slab_scorned_bricks", scorned_bricks);
 	public static final Block fence_scorned_bricks = new ModBlockFence("fence_scorned_bricks", scorned_bricks);
