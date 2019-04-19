@@ -471,8 +471,8 @@ public class CommonProxy {
 				Arrays.asList(new ItemStack(ModObjects.cleansing_balm), new ItemStack(ModObjects.wood_ash)),
 				0, 300));
 		BewitchmentAPI.registerDistilleryRecipe(new DistilleryRecipe(Bewitchment.MOD_ID, "demonic_elixir",
-				Arrays.asList(Ingredient.fromStacks(new ItemStack(Items.BLAZE_POWDER)), Ingredient.fromStacks(new ItemStack(ModObjects.cloudy_oil)), Ingredient.fromStacks(new ItemStack(ModObjects.demonic_heart)), Ingredient.fromStacks(new ItemStack(ModObjects.graveyard_dust))),
-				Arrays.asList(new ItemStack(ModObjects.demonic_elixir)),
+				Arrays.asList(Ingredient.fromStacks(new ItemStack(Items.BLAZE_POWDER)), Ingredient.fromStacks(new ItemStack(ModObjects.cloudy_oil, 2)), Ingredient.fromStacks(new ItemStack(ModObjects.demonic_heart)), Ingredient.fromStacks(new ItemStack(ModObjects.graveyard_dust))),
+				Arrays.asList(new ItemStack(ModObjects.demonic_elixir, 2)),
 				0, 300));
 		BewitchmentAPI.registerDistilleryRecipe(new DistilleryRecipe(Bewitchment.MOD_ID, "everchanging_dew",
 				Arrays.asList(Ingredient.fromStacks(new ItemStack(Items.DYE, 1, Short.MAX_VALUE)), Ingredient.fromStacks(new ItemStack(ModObjects.essence_of_vitality)), Ingredient.fromStacks(new ItemStack(Items.PAPER))),
