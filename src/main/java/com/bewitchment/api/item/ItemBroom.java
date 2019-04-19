@@ -59,7 +59,7 @@ public abstract class ItemBroom extends ModItem {
 		}
 		return EnumActionResult.SUCCESS;
 	}
-	
+
 	@SubscribeEvent(receiveCanceled = false, priority = EventPriority.LOWEST)
 	public void unmount(EntityMountEvent event) {
 		if (event.getEntityBeingMounted() instanceof EntityBroom && event.isDismounting()) {

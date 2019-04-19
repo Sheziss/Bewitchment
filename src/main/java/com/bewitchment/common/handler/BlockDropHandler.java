@@ -1,20 +1,14 @@
 package com.bewitchment.common.handler;
 
-import java.util.Random;
-
 import com.bewitchment.registry.ModObjects;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockFlower;
-import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockNewLeaf;
-import net.minecraft.block.BlockOldLeaf;
-import net.minecraft.block.BlockPlanks;
+import net.minecraft.block.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import java.util.Random;
 
 public class BlockDropHandler {
 	private static int getFortuneDropAmount(Random rand, int fortuneLevel) {

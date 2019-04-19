@@ -4,12 +4,12 @@
     {
       "item": "bewitchment:ectoplasm"
     },
-	{
+    {
       "item": "bewitchment:spectral_dust"
     },
-	{
+    {
       "item": "minecraft:dye",
-	  "data": 15
+      "data": 15
     }
   ],
   "result": {

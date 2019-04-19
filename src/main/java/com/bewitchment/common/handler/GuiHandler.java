@@ -10,7 +10,6 @@ import com.bewitchment.common.block.tile.container.ContainerOven;
 import com.bewitchment.common.block.tile.entity.TileEntityDistillery;
 import com.bewitchment.common.block.tile.entity.TileEntityLoom;
 import com.bewitchment.common.block.tile.entity.TileEntityOven;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;

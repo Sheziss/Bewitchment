@@ -2,7 +2,6 @@ package com.bewitchment.common.block;
 
 import com.bewitchment.common.block.util.ModBlockBush;
 import com.bewitchment.registry.ModObjects;
-
 import net.minecraft.block.BlockGrass;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
@@ -92,7 +91,7 @@ public class BlockMoonbell extends ModBlockBush implements IInfusionStabiliserEx
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, PLACED);
 	}
-	
+
 	@SubscribeEvent
 	public void playerTick(PlayerTickEvent event) {
 		if (event.side == Side.SERVER && event.phase == Phase.START) {

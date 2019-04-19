@@ -2,7 +2,6 @@ package com.bewitchment.common.integration.thaumcraft;
 
 import com.bewitchment.Bewitchment;
 import com.bewitchment.registry.ModObjects;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
@@ -15,26 +14,11 @@ import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.aspects.AspectRegistryEvent;
-import thaumcraft.common.entities.monster.EntityBrainyZombie;
-import thaumcraft.common.entities.monster.EntityEldritchCrab;
-import thaumcraft.common.entities.monster.EntityEldritchGuardian;
-import thaumcraft.common.entities.monster.EntityFireBat;
-import thaumcraft.common.entities.monster.EntityMindSpider;
-import thaumcraft.common.entities.monster.EntityPech;
-import thaumcraft.common.entities.monster.EntityThaumicSlime;
-import thaumcraft.common.entities.monster.EntityWisp;
-import thaumcraft.common.entities.monster.boss.EntityCultistLeader;
-import thaumcraft.common.entities.monster.boss.EntityCultistPortalGreater;
-import thaumcraft.common.entities.monster.boss.EntityEldritchGolem;
-import thaumcraft.common.entities.monster.boss.EntityEldritchWarden;
-import thaumcraft.common.entities.monster.boss.EntityTaintacleGiant;
+import thaumcraft.common.entities.monster.*;
+import thaumcraft.common.entities.monster.boss.*;
 import thaumcraft.common.entities.monster.cult.EntityCultist;
 import thaumcraft.common.entities.monster.cult.EntityCultistPortalLesser;
-import thaumcraft.common.entities.monster.tainted.EntityTaintCrawler;
-import thaumcraft.common.entities.monster.tainted.EntityTaintSeed;
-import thaumcraft.common.entities.monster.tainted.EntityTaintSeedPrime;
-import thaumcraft.common.entities.monster.tainted.EntityTaintSwarm;
-import thaumcraft.common.entities.monster.tainted.EntityTaintacle;
+import thaumcraft.common.entities.monster.tainted.*;
 
 /**
  * Created by Joseph on 3/28/2019.
@@ -239,10 +223,14 @@ public class ThaumcraftAspectCompat {
 		evt.register.registerObjectTag(new ItemStack(ModObjects.nethersteel), new AspectList().add(Aspect.FIRE, 5).add(Aspect.MAGIC, 5).add(Aspect.METAL, 5).add(DEMON, 10));
 		evt.register.registerObjectTag(new ItemStack(ModObjects.ore_salt), new AspectList().add(Aspect.EARTH, 4).add(Aspect.WATER, 4).add(Aspect.PROTECT, 4));
 		evt.register.registerObjectTag(new ItemStack(ModObjects.coquina), new AspectList().add(Aspect.EARTH, 4).add(Aspect.WATER, 4).add(Aspect.PROTECT, 4));
-		for (Block block : ModObjects.block_cold_iron_chiseled) evt.register.registerObjectTag(new ItemStack(block), new AspectList().add(Aspect.AVERSION, 101).add(Aspect.COLD, 101).add(Aspect.METAL, 101));
-		for (Block block : ModObjects.block_silver_chiseled) evt.register.registerObjectTag(new ItemStack(block), new AspectList().add(Aspect.METAL, 67).add(Aspect.DESIRE, 33).add(MOON, 20));
-		for (Block block : ModObjects.coquina_chiseled) evt.register.registerObjectTag(new ItemStack(block), new AspectList().add(Aspect.EARTH, 4).add(Aspect.WATER, 4).add(Aspect.PROTECT, 4));
-		for (Block block : ModObjects.nethersteel_chiseled) evt.register.registerObjectTag(new ItemStack(block), new AspectList().add(Aspect.FIRE, 5).add(Aspect.MAGIC, 5).add(Aspect.METAL, 5).add(DEMON, 10));
+		for (Block block : ModObjects.block_cold_iron_chiseled)
+			evt.register.registerObjectTag(new ItemStack(block), new AspectList().add(Aspect.AVERSION, 101).add(Aspect.COLD, 101).add(Aspect.METAL, 101));
+		for (Block block : ModObjects.block_silver_chiseled)
+			evt.register.registerObjectTag(new ItemStack(block), new AspectList().add(Aspect.METAL, 67).add(Aspect.DESIRE, 33).add(MOON, 20));
+		for (Block block : ModObjects.coquina_chiseled)
+			evt.register.registerObjectTag(new ItemStack(block), new AspectList().add(Aspect.EARTH, 4).add(Aspect.WATER, 4).add(Aspect.PROTECT, 4));
+		for (Block block : ModObjects.nethersteel_chiseled)
+			evt.register.registerObjectTag(new ItemStack(block), new AspectList().add(Aspect.FIRE, 5).add(Aspect.MAGIC, 5).add(Aspect.METAL, 5).add(DEMON, 10));
 		evt.register.registerObjectTag(new ItemStack(ModObjects.graveyard_dirt), new AspectList().add(Aspect.EARTH, 5).add(Aspect.UNDEAD, 5));
 		evt.register.registerObjectTag(new ItemStack(ModObjects.purifying_earth), new AspectList().add(Aspect.EARTH, 5).add(SUN, 5));
 //		evt.register.registerObjectTag(new ItemStack(ModObjects.infested_farmland), new AspectList().add(Aspect.EARTH, 5).add(Aspect.DEATH, 5));

@@ -3,10 +3,10 @@
   "pattern": [
     "GSG",
     "SPS",
-	"GSG"
+    "GSG"
   ],
   "key": {
-	"G": {
+    "G": {
       "type": "forge:ore_dict",
       "ore": "gemAmethyst"
     },
@@ -14,7 +14,7 @@
       "type": "forge:ore_dict",
       "ore": "stone"
     },
-	"P": {
+    "P": {
       "item": "bewitchment:pentacle"
     }
   },
