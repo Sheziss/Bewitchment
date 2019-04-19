@@ -4,7 +4,6 @@ import com.bewitchment.api.capability.extendedplayer.ExtendedPlayer;
 import com.bewitchment.api.capability.extendedplayer.ExtendedPlayer.TransformationType;
 import com.bewitchment.common.item.util.ModItemArmor;
 import com.bewitchment.registry.ModObjects;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.player.EntityPlayer;

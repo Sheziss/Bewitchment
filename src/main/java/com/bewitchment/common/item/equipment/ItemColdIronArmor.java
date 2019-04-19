@@ -3,7 +3,6 @@ package com.bewitchment.common.item.equipment;
 import com.bewitchment.common.item.util.ModItemArmor;
 import com.bewitchment.registry.ModEnchantments;
 import com.bewitchment.registry.ModObjects;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;

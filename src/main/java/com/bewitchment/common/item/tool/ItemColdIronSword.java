@@ -3,7 +3,6 @@ package com.bewitchment.common.item.tool;
 import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.common.item.util.ModItemSword;
 import com.bewitchment.registry.ModObjects;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityEnderman;
