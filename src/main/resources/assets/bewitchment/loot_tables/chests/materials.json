@@ -70,20 +70,6 @@
         },
         {
           "type": "item",
-          "name": "bewitchment:gem_alexandrite",
-          "weight": 8,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 0,
-                "max": 3
-              }
-            }
-          ]
-        },
-        {
-          "type": "item",
           "name": "bewitchment:gem_amethyst",
           "weight": 8,
           "functions": [
@@ -98,91 +84,7 @@
         },
         {
           "type": "item",
-          "name": "bewitchment:gem_bloodstone",
-          "weight": 8,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 0,
-                "max": 3
-              }
-            }
-          ]
-        },
-        {
-          "type": "item",
           "name": "bewitchment:gem_garnet",
-          "weight": 8,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 0,
-                "max": 3
-              }
-            }
-          ]
-        },
-        {
-          "type": "item",
-          "name": "bewitchment:gem_jasper",
-          "weight": 8,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 0,
-                "max": 3
-              }
-            }
-          ]
-        },
-        {
-          "type": "item",
-          "name": "bewitchment:gem_malachite",
-          "weight": 8,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 0,
-                "max": 3
-              }
-            }
-          ]
-        },
-        {
-          "type": "item",
-          "name": "bewitchment:gem_nuummite",
-          "weight": 8,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 0,
-                "max": 3
-              }
-            }
-          ]
-        },
-        {
-          "type": "item",
-          "name": "bewitchment:gem_tigers_eye",
-          "weight": 8,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 0,
-                "max": 3
-              }
-            }
-          ]
-        },
-        {
-          "type": "item",
-          "name": "bewitchment:gem_tourmaline",
           "weight": 8,
           "functions": [
             {

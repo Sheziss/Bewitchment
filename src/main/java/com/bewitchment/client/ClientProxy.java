@@ -5,12 +5,21 @@ import com.bewitchment.client.block.tile.render.RenderTileEntityGemBowl;
 import com.bewitchment.client.block.tile.render.RenderTileEntityPlacedItem;
 import com.bewitchment.client.block.tile.render.RenderTileEntityWitchesCauldron;
 import com.bewitchment.client.handler.ClientHandler;
-import com.bewitchment.client.particle.ParticleBee;
-import com.bewitchment.client.render.entity.living.*;
-import com.bewitchment.client.render.entity.misc.RenderBeeSwarm;
+import com.bewitchment.client.render.entity.living.RenderBlindworm;
+import com.bewitchment.client.render.entity.living.RenderLizard;
+import com.bewitchment.client.render.entity.living.RenderNewt;
+import com.bewitchment.client.render.entity.living.RenderOwl;
+import com.bewitchment.client.render.entity.living.RenderRaven;
+import com.bewitchment.client.render.entity.living.RenderSnake;
+import com.bewitchment.client.render.entity.living.RenderToad;
 import com.bewitchment.client.render.entity.misc.RenderBroom;
 import com.bewitchment.client.render.entity.misc.RenderSpell;
-import com.bewitchment.client.render.entity.spirits.demons.*;
+import com.bewitchment.client.render.entity.spirits.demons.RenderAlphaHellhound;
+import com.bewitchment.client.render.entity.spirits.demons.RenderDemon;
+import com.bewitchment.client.render.entity.spirits.demons.RenderDemoness;
+import com.bewitchment.client.render.entity.spirits.demons.RenderHellhound;
+import com.bewitchment.client.render.entity.spirits.demons.RenderImp;
+import com.bewitchment.client.render.entity.spirits.demons.RenderSerpent;
 import com.bewitchment.client.render.entity.spirits.ghosts.RenderBlackDog;
 import com.bewitchment.common.CommonProxy;
 import com.bewitchment.common.block.BlockGlyph;
@@ -18,14 +27,24 @@ import com.bewitchment.common.block.BlockGlyph.GlyphType;
 import com.bewitchment.common.block.tile.entity.TileEntityGemBowl;
 import com.bewitchment.common.block.tile.entity.TileEntityPlacedItem;
 import com.bewitchment.common.block.tile.entity.TileEntityWitchesCauldron;
-import com.bewitchment.common.entity.living.*;
-import com.bewitchment.common.entity.misc.EntityBeeSwarm;
+import com.bewitchment.common.entity.living.EntityBlindworm;
+import com.bewitchment.common.entity.living.EntityLizard;
+import com.bewitchment.common.entity.living.EntityNewt;
+import com.bewitchment.common.entity.living.EntityOwl;
+import com.bewitchment.common.entity.living.EntityRaven;
+import com.bewitchment.common.entity.living.EntitySnake;
+import com.bewitchment.common.entity.living.EntityToad;
 import com.bewitchment.common.entity.misc.EntityBroom;
 import com.bewitchment.common.entity.misc.EntitySpell;
-import com.bewitchment.common.entity.spirits.demons.*;
+import com.bewitchment.common.entity.spirits.demons.EntityAlphaHellhound;
+import com.bewitchment.common.entity.spirits.demons.EntityDemon;
+import com.bewitchment.common.entity.spirits.demons.EntityDemoness;
+import com.bewitchment.common.entity.spirits.demons.EntityHellhound;
+import com.bewitchment.common.entity.spirits.demons.EntityImp;
+import com.bewitchment.common.entity.spirits.demons.EntitySerpent;
 import com.bewitchment.common.entity.spirits.ghosts.EntityBlackDog;
 import com.bewitchment.registry.ModObjects;
-import com.bewitchment.registry.ModParticles;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
@@ -41,32 +60,23 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
-	@SubscribeEvent
-	public static void stitchTexture(TextureStitchEvent.Pre event) {
-		event.getMap().registerSprite(ParticleBee.TEX);
-	}
-
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
 		super.preInit(event);
-		RenderingRegistry.registerEntityRenderingHandler(EntityBeeSwarm.class, RenderBeeSwarm::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpell.class, RenderSpell::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityBroom.class, RenderBroom::new);
 
@@ -172,12 +182,6 @@ public class ClientProxy extends CommonProxy {
 				return new ModelResourceLocation(new ResourceLocation(Bewitchment.MOD_ID, "waystone_normal"), "inventory");
 			}
 		});
-	}
-
-	@Override
-	public void spawnParticle(ModParticles particle, double x, double y, double z) {
-		if (FMLCommonHandler.instance().getEffectiveSide().isClient() && Math.random() <= (Minecraft.getMinecraft().gameSettings.particleSetting == 1 ? 0.6f : 0.2f))
-			Minecraft.getMinecraft().effectRenderer.addEffect(particle.newInstance(x, y, z));
 	}
 
 	private static class StateMapper extends StateMapperBase implements ItemMeshDefinition {

@@ -1,6 +1,9 @@
 package com.bewitchment.common.block;
 
 import com.bewitchment.common.block.util.ModBlockBush;
+import com.bewitchment.registry.ModObjects;
+
+import net.minecraft.block.BlockGrass;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -10,9 +13,16 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Optional;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
+import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import thaumcraft.api.crafting.IInfusionStabiliserExt;
@@ -27,6 +37,7 @@ public class BlockMoonbell extends ModBlockBush implements IInfusionStabiliserEx
 		super("moonbell");
 		setLightOpacity(0).setLightLevel(0.5f);
 		setDefaultState(blockState.getBaseState().withProperty(PLACED, false));
+		MinecraftForge.EVENT_BUS.register(this);
 	}
 
 	@Override
@@ -80,5 +91,24 @@ public class BlockMoonbell extends ModBlockBush implements IInfusionStabiliserEx
 	@Override
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, PLACED);
+	}
+	
+	@SubscribeEvent
+	public void playerTick(PlayerTickEvent event) {
+		if (event.side == Side.SERVER && event.phase == Phase.START) {
+			World world = event.player.world;
+			if (world.getTotalWorldTime() % 20 == 0 && BiomeDictionary.hasType(world.getBiome(event.player.getPosition()), Type.FOREST)) {
+				Random rand = event.player.getRNG();
+				if (world.provider.getDimension() == 0 && world.provider.getMoonPhase(world.getWorldTime()) == 4 && !world.isDaytime() && rand.nextDouble() < 0.2) {
+					MutableBlockPos pos = new MutableBlockPos(event.player.getPosition().add((rand.nextInt(7) - 3) * 10, 0, (rand.nextInt(7) - 3) * 10));
+					int y = pos.getY();
+					for (int i = -5; i <= 5; i++) {
+						pos.setY(y + i);
+						if ((world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos)) && world.getBlockState(pos.down()).getBlock() instanceof BlockGrass)
+							world.setBlockState(pos, ModObjects.moonbell.getDefaultState());
+					}
+				}
+			}
+		}
 	}
 }

@@ -1,19 +1,110 @@
 package com.bewitchment.registry;
 
-import baubles.api.BaubleType;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.bewitchment.Bewitchment;
-import com.bewitchment.common.block.*;
-import com.bewitchment.common.block.crop.*;
-import com.bewitchment.common.block.tile.entity.*;
+import com.bewitchment.common.block.BlockCandle;
+import com.bewitchment.common.block.BlockCandleBase;
+import com.bewitchment.common.block.BlockCrystalBall;
+import com.bewitchment.common.block.BlockDistillery;
+import com.bewitchment.common.block.BlockGemBowl;
+import com.bewitchment.common.block.BlockGlyph;
+import com.bewitchment.common.block.BlockGoblet;
+import com.bewitchment.common.block.BlockLantern;
+import com.bewitchment.common.block.BlockLoom;
+import com.bewitchment.common.block.BlockMoonbell;
+import com.bewitchment.common.block.BlockOven;
+import com.bewitchment.common.block.BlockPlacedItem;
+import com.bewitchment.common.block.BlockPurifyingEarth;
+import com.bewitchment.common.block.BlockSaltBarrier;
+import com.bewitchment.common.block.BlockTarotTable;
+import com.bewitchment.common.block.BlockWitchFire;
+import com.bewitchment.common.block.BlockWitchesAltar;
+import com.bewitchment.common.block.BlockWitchesCauldron;
+import com.bewitchment.common.block.BlockWitchesLight;
+import com.bewitchment.common.block.crop.BlockCropBelladonna;
+import com.bewitchment.common.block.crop.BlockCropKelp;
+import com.bewitchment.common.block.crop.BlockCropKenaf;
+import com.bewitchment.common.block.crop.BlockCropMint;
+import com.bewitchment.common.block.crop.BlockCropSilphium;
+import com.bewitchment.common.block.crop.BlockCropThistle;
+import com.bewitchment.common.block.tile.entity.TileEntityCrystalBall;
+import com.bewitchment.common.block.tile.entity.TileEntityDistillery;
+import com.bewitchment.common.block.tile.entity.TileEntityGemBowl;
+import com.bewitchment.common.block.tile.entity.TileEntityGlyph;
+import com.bewitchment.common.block.tile.entity.TileEntityLoom;
+import com.bewitchment.common.block.tile.entity.TileEntityOven;
+import com.bewitchment.common.block.tile.entity.TileEntityPlacedItem;
+import com.bewitchment.common.block.tile.entity.TileEntityWitchesAltar;
+import com.bewitchment.common.block.tile.entity.TileEntityWitchesCauldron;
 import com.bewitchment.common.block.tile.entity.util.TileEntityAltarStorage;
-import com.bewitchment.common.block.util.*;
+import com.bewitchment.common.block.util.ModBlock;
+import com.bewitchment.common.block.util.ModBlockBush;
+import com.bewitchment.common.block.util.ModBlockButton;
+import com.bewitchment.common.block.util.ModBlockCrop;
+import com.bewitchment.common.block.util.ModBlockExp;
+import com.bewitchment.common.block.util.ModBlockFence;
+import com.bewitchment.common.block.util.ModBlockFenceGate;
+import com.bewitchment.common.block.util.ModBlockLeaves;
+import com.bewitchment.common.block.util.ModBlockPillar;
+import com.bewitchment.common.block.util.ModBlockPressurePlate;
+import com.bewitchment.common.block.util.ModBlockSapling;
+import com.bewitchment.common.block.util.ModBlockSlab;
+import com.bewitchment.common.block.util.ModBlockStairs;
+import com.bewitchment.common.block.util.ModBlockTrapdoor;
 import com.bewitchment.common.integration.chisel.ModBlockChisel;
-import com.bewitchment.common.item.*;
+import com.bewitchment.common.item.ItemChalk;
+import com.bewitchment.common.item.ItemCypressBroom;
+import com.bewitchment.common.item.ItemElderBroom;
+import com.bewitchment.common.item.ItemJuniperBroom;
+import com.bewitchment.common.item.ItemLantern;
+import com.bewitchment.common.item.ItemSalt;
+import com.bewitchment.common.item.ItemTarotsDeck;
+import com.bewitchment.common.item.ItemUndyingSalve;
+import com.bewitchment.common.item.ItemWaystone;
+import com.bewitchment.common.item.ItemYewBroom;
 import com.bewitchment.common.item.equipment.ItemColdIronArmor;
 import com.bewitchment.common.item.equipment.ItemSilverArmor;
-import com.bewitchment.common.item.equipment.bauble.*;
-import com.bewitchment.common.item.food.*;
-import com.bewitchment.common.item.tool.*;
+import com.bewitchment.common.item.equipment.bauble.ItemGirdleOfTheDryad;
+import com.bewitchment.common.item.equipment.bauble.ItemHellishBauble;
+import com.bewitchment.common.item.equipment.bauble.ItemHorseshoe;
+import com.bewitchment.common.item.equipment.bauble.ItemNazar;
+import com.bewitchment.common.item.equipment.bauble.ItemTalisman;
+import com.bewitchment.common.item.equipment.bauble.ItemTokenOfRemedies;
+import com.bewitchment.common.item.equipment.bauble.ItemTriskelionAmulet;
+import com.bewitchment.common.item.equipment.bauble.ItemWrathfulEye;
+import com.bewitchment.common.item.food.ItemAconitum;
+import com.bewitchment.common.item.food.ItemAsphodel;
+import com.bewitchment.common.item.food.ItemBelladonna;
+import com.bewitchment.common.item.food.ItemChrysanthemum;
+import com.bewitchment.common.item.food.ItemGarlic;
+import com.bewitchment.common.item.food.ItemGinger;
+import com.bewitchment.common.item.food.ItemHeart;
+import com.bewitchment.common.item.food.ItemHellebore;
+import com.bewitchment.common.item.food.ItemKelp;
+import com.bewitchment.common.item.food.ItemKenaf;
+import com.bewitchment.common.item.food.ItemLavender;
+import com.bewitchment.common.item.food.ItemMandrakeRoot;
+import com.bewitchment.common.item.food.ItemMint;
+import com.bewitchment.common.item.food.ItemSagebrush;
+import com.bewitchment.common.item.food.ItemSilphium;
+import com.bewitchment.common.item.food.ItemThistle;
+import com.bewitchment.common.item.food.ItemTulsi;
+import com.bewitchment.common.item.food.ItemWhiteSage;
+import com.bewitchment.common.item.food.ItemWormwood;
+import com.bewitchment.common.item.tool.ItemAthame;
+import com.bewitchment.common.item.tool.ItemBoline;
+import com.bewitchment.common.item.tool.ItemColdIronAxe;
+import com.bewitchment.common.item.tool.ItemColdIronHoe;
+import com.bewitchment.common.item.tool.ItemColdIronPickaxe;
+import com.bewitchment.common.item.tool.ItemColdIronSpade;
+import com.bewitchment.common.item.tool.ItemColdIronSword;
+import com.bewitchment.common.item.tool.ItemSilverAxe;
+import com.bewitchment.common.item.tool.ItemSilverHoe;
+import com.bewitchment.common.item.tool.ItemSilverPickaxe;
+import com.bewitchment.common.item.tool.ItemSilverSpade;
+import com.bewitchment.common.item.tool.ItemSilverSword;
 import com.bewitchment.common.item.util.ModItem;
 import com.bewitchment.common.item.util.ModItemDoor;
 import com.bewitchment.common.item.util.ModItemFood;
@@ -22,7 +113,15 @@ import com.bewitchment.common.world.gen.tree.WorldGenCypressTree;
 import com.bewitchment.common.world.gen.tree.WorldGenElderTree;
 import com.bewitchment.common.world.gen.tree.WorldGenJuniperTree;
 import com.bewitchment.common.world.gen.tree.WorldGenYewTree;
-import net.minecraft.block.*;
+
+import baubles.api.BaubleType;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockCrops;
+import net.minecraft.block.BlockDoor;
+import net.minecraft.block.BlockFenceGate;
+import net.minecraft.block.BlockLiquid;
+import net.minecraft.block.BlockSlab;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
@@ -49,9 +148,6 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import team.chisel.api.carving.CarvingUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @EventBusSubscriber(modid = Bewitchment.MOD_ID)
 public class ModObjects {
 	public static final List<Object> REGISTRY = new ArrayList<>();
@@ -68,7 +164,6 @@ public class ModObjects {
 	public static final ToolMaterial TOOL_RITUAL = EnumHelper.addToolMaterial("ritual", 2, 300, 2, 1.5f, 30);
 
 	// Fluids
-	public static final Fluid fluid_honey = createFluid("honey", Material.WATER, 0, 10, 1500, 8000, true, false);
 	public static final Fluid fluid_oil_mundane = createFluid("oil_mundane", Material.WATER, 0, 0, 800, 4000, true, true);
 
 	// No Item
@@ -108,7 +203,6 @@ public class ModObjects {
 	public static final Block distillery = createTileEntity(new BlockDistillery(), TileEntityDistillery.class);
 	public static final Block cauldron = createTileEntity(new BlockWitchesCauldron(), TileEntityWitchesCauldron.class);
 	public static final Block loom = createTileEntity(new BlockLoom(), TileEntityLoom.class);
-	public static final Block apiary = createTileEntity(new BlockApiary(), TileEntityApiary.class);
 	public static final Block tarot_table = createTileEntity(new BlockTarotTable(), TileEntityAltarStorage.class);
 	public static final Item tarots_deck = new ItemTarotsDeck();
 	public static final Block crystal_ball = createTileEntity(new BlockCrystalBall(), TileEntityCrystalBall.class);
@@ -118,29 +212,14 @@ public class ModObjects {
 	public static final Block[] block_cold_iron_chiseled = createChiselBlocks(block_cold_iron, "symbol", "bevel", "sun", "moon", "sword", "cup", "wand", "pentacle", "pentagram");
 	public static final Block block_silver = new ModBlock("block_silver", Material.IRON, SoundType.METAL, 5, 30, "pickaxe", 0, "blockSilver");
 	public static final Block[] block_silver_chiseled = createChiselBlocks(block_silver, "symbol", "bevel", "sun", "moon", "sword", "cup", "wand", "pentacle", "pentagram");
-	public static final Block block_alexandrite = new ModBlock("block_alexandrite", Material.GLASS, SoundType.GLASS, 5, 30, "pickaxe", 2, "blockAlexandrite");
 	public static final Block block_amethyst = new ModBlock("block_amethyst", Material.GLASS, SoundType.GLASS, 5, 30, "pickaxe", 2, "blockAmethyst");
-	public static final Block block_bloodstone = new ModBlock("block_bloodstone", Material.GLASS, SoundType.GLASS, 5, 30, "pickaxe", 2, "blockBloodstone");
 	public static final Block block_garnet = new ModBlock("block_garnet", Material.GLASS, SoundType.GLASS, 5, 30, "pickaxe", 2, "blockGarnet");
-	public static final Block block_jasper = new ModBlock("block_jasper", Material.GLASS, SoundType.GLASS, 5, 30, "pickaxe", 2, "blockJasper");
-	public static final Block block_malachite = new ModBlock("block_malachite", Material.GLASS, SoundType.GLASS, 5, 30, "pickaxe", 2, "blockMalachite");
-	public static final Block block_nuummite = new ModBlock("block_nuummite", Material.GLASS, SoundType.GLASS, 5, 30, "pickaxe", 2, "blockNuummite");
-	public static final Block block_tigers_eye = new ModBlock("block_tigers_eye", Material.GLASS, SoundType.GLASS, 5, 30, "pickaxe", 2, "blockTigersEye");
-	public static final Block block_tourmaline = new ModBlock("block_tourmaline", Material.GLASS, SoundType.GLASS, 5, 30, "pickaxe", 2, "blockTourmaline");
 	// Ores
 	public static final Block ore_silver = new ModBlock("ore_silver", Material.ROCK, SoundType.STONE, 3, 15, "pickaxe", 1, "oreSilver");
 	public static final Block ore_salt = new ModBlockExp("ore_salt", Material.ROCK, SoundType.STONE, 3, 15, "pickaxe", 0, "oreSalt");
-	public static final Block ore_alexandrite = new ModBlockExp("ore_alexandrite", Material.ROCK, SoundType.STONE, 3, 15, "pickaxe", 2, "oreAlexandrite");
 	public static final Block ore_amethyst = new ModBlockExp("ore_amethyst", Material.ROCK, SoundType.STONE, 3, 15, "pickaxe", 2, "oreAmethyst");
-	public static final Block ore_bloodstone = new ModBlockExp("ore_bloodstone", Material.ROCK, SoundType.STONE, 3, 15, "pickaxe", 2, "oreBloodstone");
 	public static final Block ore_garnet = new ModBlockExp("ore_garnet", Material.ROCK, SoundType.STONE, 3, 15, "pickaxe", 2, "oreGarnet");
-	public static final Block ore_jasper = new ModBlockExp("ore_jasper", Material.ROCK, SoundType.STONE, 3, 15, "pickaxe", 2, "oreJasper");
-	public static final Block ore_malachite = new ModBlockExp("ore_malachite", Material.ROCK, SoundType.STONE, 3, 15, "pickaxe", 2, "oreMalachite");
-	public static final Block ore_nuummite = new ModBlockExp("ore_nuummite", Material.ROCK, SoundType.STONE, 3, 15, "pickaxe", 2, "oreNuummite");
-	public static final Block ore_tigers_eye = new ModBlockExp("ore_tigers_eye", Material.ROCK, SoundType.STONE, 3, 15, "pickaxe", 2, "oreTigersEye");
-	public static final Block ore_tourmaline = new ModBlockExp("ore_tourmaline", Material.ROCK, SoundType.STONE, 3, 15, "pickaxe", 2, "oreTourmaline");
 	// Misc
-	public static final Block beehive = new BlockBeehive();
 	public static final Block perpetual_ice = new ModBlock("perpetual_ice", Material.ICE, SoundType.GLASS, 0.5f, 2.5f, "", 0);
 	public static final Block nethersteel = new ModBlock("nethersteel", Material.IRON, SoundType.METAL, 5, 30, "pickaxe", 1, "blockNethersteel");
 	public static final Block[] nethersteel_chiseled = createChiselBlocks(nethersteel, "symbol", "bevel", "polished", "sentient", "pentacle", "pentagram", "skull", "eye", "watching_eye", "hellish", "watching_hellish");
@@ -296,21 +375,11 @@ public class ModObjects {
 	public static final Item ingot_silver = new ModItem("ingot_silver", "ingotSilver");
 	public static final Item nugget_cold_iron = new ModItem("nugget_cold_iron", "nuggetColdIron");
 	public static final Item nugget_silver = new ModItem("nugget_silver", "nuggetSilver");
-	public static final Item gem_alexandrite = new ModItem("gem_alexandrite", "gemAlexandrite", "gemAll");
 	public static final Item gem_amethyst = new ModItem("gem_amethyst", "gemAmethyst", "gemAll");
-	public static final Item gem_bloodstone = new ModItem("gem_bloodstone", "gemBloodstone", "gemAll");
 	public static final Item gem_garnet = new ModItem("gem_garnet", "gemGarnet", "gemAll");
-	public static final Item gem_jasper = new ModItem("gem_jasper", "gemJasper", "gemAll");
-	public static final Item gem_malachite = new ModItem("gem_malachite", "gemMalachite", "gemAll");
-	public static final Item gem_nuummite = new ModItem("gem_nuummite", "gemNuummite", "gemAll");
-	public static final Item gem_tigers_eye = new ModItem("gem_tigers_eye", "gemTigersEye", "gemAll");
-	public static final Item gem_tourmaline = new ModItem("gem_tourmaline", "gemTourmaline", "gemAll");
 	public static final Item salt = new ItemSalt();
 	public static final Item pentacle = new ModItem("pentacle");
-	public static final Item honey = new ItemHoney();
-	public static final Item empty_honeycomb = new ModItem("empty_honeycomb", "materialWaxcomb");
-	public static final Item honeycomb = new ModItem("honeycomb", "materialHoneycomb");
-	public static final Item wax = new ModItem("wax", "materialWax", "materialBeeswax", "materialPressedWax", "itemBeeswax", "wax", "tallow", "clumpWax", "beeswax", "itemWax");
+	public static final Item tallow = new ModItem("tallow", "materialWax", "materialBeeswax", "materialPressedWax", "itemBeeswax", "wax", "tallow", "clumpWax", "beeswax", "itemWax");
 	// Oven Jars
 	public static final Item unfired_jar = new ModItem("unfired_jar");
 	public static final Item empty_jar = new ModItem("empty_jar");
@@ -394,7 +463,6 @@ public class ModObjects {
 	public static final Block crop_wormwood = new ModBlockCrop("crop_wormwood", ModObjects.seed_wormwood, new ItemStack(ModObjects.wormwood), 6);
 	public static final ModItemSeed seed_wormwood = new ModItemSeed("seed_wormwood", ModObjects.crop_wormwood, Blocks.FARMLAND);
 	// Food
-	public static final Item grilled_watermelon = new ModItemFood("grilled_watermelon", 4, 2.5f, false);
 	public static final Item juniper_berries = new ModItemFood("juniper_berries", 1, 0.5f, false).setPotionEffect(new PotionEffect(MobEffects.POISON, 100, 0), 0.1f);
 	public static final Item yew_aril = new ModItemFood("yew_aril", 1, 0.5f, false).setPotionEffect(new PotionEffect(MobEffects.POISON, 100, 0), 0.1f);
 
@@ -418,9 +486,7 @@ public class ModObjects {
 	public static final Item carnivorous_tooth = new ModItem("carnivorous_tooth");
 	public static final Item chromatic_quill = new ModItem("chromatic_quill");
 	public static final Item envenomed_fang = new ModItem("envenomed_fang");
-	public static final Item equine_tail = new ModItem("equine_tail");
 	public static final Item hoof = new ModItem("hoof");
-	public static final Item eye_of_ancient = new ModItem("eye_of_ancient");
 	public static final Item eye_of_old = new ModItem("eye_of_old");
 	public static final Item silver_scales = new ModItem("silver_scales");
 	public static final Item tongue_of_dog = new ModItem("tongue_of_dog");
@@ -433,8 +499,6 @@ public class ModObjects {
 	public static final Item oak_apple_gall = new ModItem("oak_apple_gall");
 	public static final Item spectral_dust = new ModItem("spectral_dust");
 	public static final Item wood_ash = new ModItem("wood_ash");
-	public static final Item lapis_powder = new ModItem("lapis_powder");
-	public static final Item quartz_powder = new ModItem("quartz_powder");
 
 	@SubscribeEvent
 	public static void registerBlocks(Register<Block> event) {

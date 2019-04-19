@@ -1,12 +1,28 @@
 package com.bewitchment.registry;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import com.bewitchment.Bewitchment;
-import com.bewitchment.common.entity.living.*;
-import com.bewitchment.common.entity.misc.EntityBeeSwarm;
+import com.bewitchment.common.entity.living.EntityBlindworm;
+import com.bewitchment.common.entity.living.EntityLizard;
+import com.bewitchment.common.entity.living.EntityNewt;
+import com.bewitchment.common.entity.living.EntityOwl;
+import com.bewitchment.common.entity.living.EntityRaven;
+import com.bewitchment.common.entity.living.EntitySnake;
+import com.bewitchment.common.entity.living.EntityToad;
 import com.bewitchment.common.entity.misc.EntityBroom;
 import com.bewitchment.common.entity.misc.EntitySpell;
-import com.bewitchment.common.entity.spirits.demons.*;
+import com.bewitchment.common.entity.spirits.demons.EntityAlphaHellhound;
+import com.bewitchment.common.entity.spirits.demons.EntityDemon;
+import com.bewitchment.common.entity.spirits.demons.EntityDemoness;
+import com.bewitchment.common.entity.spirits.demons.EntityHellhound;
+import com.bewitchment.common.entity.spirits.demons.EntityImp;
+import com.bewitchment.common.entity.spirits.demons.EntitySerpent;
 import com.bewitchment.common.entity.spirits.ghosts.EntityBlackDog;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.ResourceLocation;
@@ -20,18 +36,12 @@ import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 @EventBusSubscriber(modid = Bewitchment.MOD_ID)
 public class ModEntities {
 	public static final List<EntityEntry> REGISTRY = new ArrayList<>();
 
 	private static int entity_id = 0;
 
-	public static final EntityEntry bee_swarm = createEntityEntry(EntityBeeSwarm.class, "bee_swarm");
 	public static final EntityEntry spell = createEntityEntry(EntitySpell.class, "spell");
 
 	public static final EntityEntry entity_broom = createEntityEntry(EntityBroom.class, "broom");

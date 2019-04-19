@@ -14,7 +14,7 @@
     },
     "G": {
       "type": "forge:ore_dict",
-      "ore": "gemTigersEye"
+      "ore": "gemGarnet"
     }
   },
   "result": {

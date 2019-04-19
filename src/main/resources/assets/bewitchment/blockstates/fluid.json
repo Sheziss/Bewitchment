@@ -4,13 +4,6 @@
     "model": "forge:fluid"
   },
   "variants": {
-    "honey": [
-      {
-        "custom": {
-          "fluid": "honey"
-        }
-      }
-    ],
     "oil_mundane": [
       {
         "custom": {

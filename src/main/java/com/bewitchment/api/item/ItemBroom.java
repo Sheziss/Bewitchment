@@ -6,11 +6,16 @@ import com.bewitchment.registry.ModObjects;
 import com.bewitchment.registry.ModSounds;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.EntityMountEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +36,7 @@ public abstract class ItemBroom extends ModItem {
 		setMaxStackSize(1);
 		TEX.add(entity_texture);
 		type = TEX.size();
+		MinecraftForge.EVENT_BUS.register(this);
 	}
 
 	public abstract void handleMovement(EntityBroom broom, Vec3d look, float front, float strafe, float up);
@@ -52,5 +58,22 @@ public abstract class ItemBroom extends ModItem {
 			player.getHeldItem(hand).shrink(1);
 		}
 		return EnumActionResult.SUCCESS;
+	}
+	
+	@SubscribeEvent(receiveCanceled = false, priority = EventPriority.LOWEST)
+	public void unmount(EntityMountEvent event) {
+		if (event.getEntityBeingMounted() instanceof EntityBroom && event.isDismounting()) {
+			EntityBroom broom = (EntityBroom) event.getEntityBeingMounted();
+			EntityPlayer source = (EntityPlayer) event.getEntityMounting();
+			if (!source.isDead) {
+				if (broom.item != null) ((ItemBroom) broom.item.getItem()).onDismount(broom, source);
+				if (!broom.world.isRemote) {
+					EntityItem entity = new EntityItem(broom.world, source.posX, source.posY, source.posZ, broom.item);
+					broom.world.spawnEntity(entity);
+					broom.setDead();
+					entity.onCollideWithPlayer(source);
+				}
+			}
+		}
 	}
 }
