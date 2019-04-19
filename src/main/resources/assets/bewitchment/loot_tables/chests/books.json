@@ -1,7 +1,7 @@
 {
   "pools": [
     {
-      "name": "infernal",
+      "name": "books",
       "rolls": 1,
       "entries": [
         {
