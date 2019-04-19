@@ -1,8 +1,9 @@
 package com.bewitchment.common.block;
 
+import java.util.Random;
+
 import com.bewitchment.common.block.util.ModBlockBush;
-import com.bewitchment.registry.ModObjects;
-import net.minecraft.block.BlockGrass;
+
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -12,21 +13,16 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraft.world.WorldProviderSurface;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import thaumcraft.api.crafting.IInfusionStabiliserExt;
-
-import java.util.Random;
 
 @Optional.Interface(iface = "thaumcraft.api.crafting.IInfusionStabiliserExt", modid = "thaumcraft")
 public class BlockMoonbell extends ModBlockBush implements IInfusionStabiliserExt {
@@ -53,7 +49,7 @@ public class BlockMoonbell extends ModBlockBush implements IInfusionStabiliserEx
 
 	@Override
 	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
-		if (!state.getValue(PLACED) && world.isDaytime()) {
+		if (!world.isRemote && !state.getValue(PLACED) && world.isDaytime()) {
 			world.setBlockToAir(pos);
 			for (int i = 0; i < 7; i++)
 				world.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, pos.getX() + rand.nextDouble(), pos.getY() + rand.nextDouble(), pos.getZ() + rand.nextDouble(), rand.nextGaussian() * 0.1, rand.nextGaussian() * 0.1, rand.nextGaussian() * 0.1);
@@ -93,18 +89,29 @@ public class BlockMoonbell extends ModBlockBush implements IInfusionStabiliserEx
 	}
 
 	@SubscribeEvent
-	public void playerTick(PlayerTickEvent event) {
-		if (event.side == Side.SERVER && event.phase == Phase.START) {
-			World world = event.player.world;
-			if (world.getTotalWorldTime() % 20 == 0 && BiomeDictionary.hasType(world.getBiome(event.player.getPosition()), Type.FOREST)) {
-				Random rand = event.player.getRNG();
-				if (world.provider.getDimension() == 0 && world.provider.getMoonPhase(world.getWorldTime()) == 4 && !world.isDaytime() && rand.nextDouble() < 0.2) {
-					MutableBlockPos pos = new MutableBlockPos(event.player.getPosition().add((rand.nextInt(7) - 3) * 10, 0, (rand.nextInt(7) - 3) * 10));
-					int y = pos.getY();
-					for (int i = -5; i <= 5; i++) {
-						pos.setY(y + i);
-						if ((world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos)) && world.getBlockState(pos.down()).getBlock() instanceof BlockGrass)
-							world.setBlockState(pos, ModObjects.moonbell.getDefaultState());
+	public void playerTick(PlayerTickEvent event)
+	{
+		EntityPlayer player = event.player;
+		World world = player.world;
+		if (!world.isRemote)
+		{
+			if (world.getTotalWorldTime() % 200 == 0)
+			{
+				Random rand = player.getRNG();
+				if (world.provider instanceof WorldProviderSurface)
+				{
+					if (world.provider.getMoonPhase(world.getWorldTime()) == 4 && !world.isDaytime() && rand.nextDouble() < 0.2)
+					{
+						BlockPos pos = player.getPosition().add(rand.nextInt(7) - 3, rand.nextInt(7) - 3, rand.nextInt(7) - 3);
+						IBlockState state = world.getBlockState(pos);
+						if (state.getMaterial().isReplaceable())
+						{
+							if (canBlockStay(world, pos, state))
+							{
+								world.setBlockState(pos, getDefaultState());
+								return;
+							}
+						}
 					}
 				}
 			}
