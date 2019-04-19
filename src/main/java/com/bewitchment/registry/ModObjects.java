@@ -431,8 +431,8 @@ public class ModObjects {
 	public static final Item white_sage = new ItemWhiteSage();
 	public static final Item witchweed = new ModItem("witchweed");
 	public static final Item wormwood = new ItemWormwood();
-	public static final Block crop_aconitum = new ModBlockCrop("crop_aconitum", ModObjects.seed_aconitum, new ItemStack(ModObjects.aconitum), 3);
 	// Seeds
+	public static final Block crop_aconitum = new ModBlockCrop("crop_aconitum", ModObjects.seed_aconitum, new ItemStack(ModObjects.aconitum), 3);
 	public static final ModItemSeed seed_aconitum = new ModItemSeed("seed_aconitum", ModObjects.crop_aconitum, Blocks.FARMLAND);
 	public static final Block crop_asphodel = new ModBlockCrop("crop_asphodel", ModObjects.seed_asphodel, new ItemStack(ModObjects.asphodel), 4);
 	public static final ModItemSeed seed_asphodel = new ModItemSeed("seed_asphodel", ModObjects.crop_asphodel, Blocks.FARMLAND);
