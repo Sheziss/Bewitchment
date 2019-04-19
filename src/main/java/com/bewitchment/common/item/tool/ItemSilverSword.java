@@ -2,7 +2,6 @@ package com.bewitchment.common.item.tool;
 
 import com.bewitchment.common.item.util.ModItemSword;
 import com.bewitchment.registry.ModObjects;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,9 +1,6 @@
 package com.bewitchment.common.block;
 
-import java.util.Random;
-
 import com.bewitchment.common.block.util.ModBlockBush;
-
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -23,6 +20,8 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import thaumcraft.api.crafting.IInfusionStabiliserExt;
+
+import java.util.Random;
 
 @Optional.Interface(iface = "thaumcraft.api.crafting.IInfusionStabiliserExt", modid = "thaumcraft")
 public class BlockMoonbell extends ModBlockBush implements IInfusionStabiliserExt {
@@ -89,25 +88,18 @@ public class BlockMoonbell extends ModBlockBush implements IInfusionStabiliserEx
 	}
 
 	@SubscribeEvent
-	public void playerTick(PlayerTickEvent event)
-	{
+	public void playerTick(PlayerTickEvent event) {
 		EntityPlayer player = event.player;
 		World world = player.world;
-		if (!world.isRemote)
-		{
-			if (world.getTotalWorldTime() % 200 == 0)
-			{
+		if (!world.isRemote) {
+			if (world.getTotalWorldTime() % 200 == 0) {
 				Random rand = player.getRNG();
-				if (world.provider instanceof WorldProviderSurface)
-				{
-					if (world.provider.getMoonPhase(world.getWorldTime()) == 4 && !world.isDaytime() && rand.nextDouble() < 0.2)
-					{
+				if (world.provider instanceof WorldProviderSurface) {
+					if (world.provider.getMoonPhase(world.getWorldTime()) == 4 && !world.isDaytime() && rand.nextDouble() < 0.2) {
 						BlockPos pos = player.getPosition().add(rand.nextInt(7) - 3, rand.nextInt(7) - 3, rand.nextInt(7) - 3);
 						IBlockState state = world.getBlockState(pos);
-						if (state.getMaterial().isReplaceable())
-						{
-							if (canBlockStay(world, pos, state))
-							{
+						if (state.getMaterial().isReplaceable()) {
+							if (canBlockStay(world, pos, state)) {
 								world.setBlockState(pos, getDefaultState());
 								return;
 							}
