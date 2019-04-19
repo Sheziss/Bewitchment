@@ -650,6 +650,7 @@ public class CommonProxy {
 		LootTableList.register(new ResourceLocation(Bewitchment.MOD_ID, "chests/books"));
 		LootTableList.register(new ResourceLocation(Bewitchment.MOD_ID, "chests/materials"));
 		LootTableList.register(new ResourceLocation(Bewitchment.MOD_ID, "chests/saplings"));
+		LootTableList.register(new ResourceLocation(Bewitchment.MOD_ID, "chests/dungeon_exclusives"));
 
 		LootTableList.register(new ResourceLocation(Bewitchment.MOD_ID, "entities/blindworm"));
 		LootTableList.register(new ResourceLocation(Bewitchment.MOD_ID, "entities/lizard"));
