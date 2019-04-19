@@ -1,9 +1,4 @@
 {
-  "buzz": {
-    "sounds": [
-      "bewitchment:buzz"
-    ]
-  },
   "broom_sweep": {
     "sounds": [
       "bewitchment:broom_sweep"

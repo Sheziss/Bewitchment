@@ -137,13 +137,13 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void registerTextureColdIronSword() {
-		ModelBakery.registerItemVariants(ModObjects.sword_cold_iron, new ResourceLocation(Bewitchment.MOD_ID, "sword_cold_iron"), new ResourceLocation(Bewitchment.MOD_ID, "hudson_bat"));
-		ModelLoader.setCustomMeshDefinition(ModObjects.sword_cold_iron, new ItemMeshDefinition() {
+		ModelBakery.registerItemVariants(ModObjects.cold_iron_sword, new ResourceLocation(Bewitchment.MOD_ID, "cold_iron_sword"), new ResourceLocation(Bewitchment.MOD_ID, "hudson_bat"));
+		ModelLoader.setCustomMeshDefinition(ModObjects.cold_iron_sword, new ItemMeshDefinition() {
 			@Override
 			public ModelResourceLocation getModelLocation(ItemStack stack) {
 				if (stack.getDisplayName().equalsIgnoreCase("Hudson Bat") || stack.getDisplayName().equalsIgnoreCase("Masashi Bat") || stack.getDisplayName().equalsIgnoreCase("Emmanuel Bat") || stack.getDisplayName().equalsIgnoreCase("Michael Bat") || stack.getDisplayName().equalsIgnoreCase("Yoshihiro Bat") || stack.getDisplayName().equalsIgnoreCase("Lewis Bat") || stack.getDisplayName().equalsIgnoreCase("Katushiro Bat") || stack.getDisplayName().equalsIgnoreCase("Ashley Bat"))
 					return new ModelResourceLocation(new ResourceLocation(Bewitchment.MOD_ID, "hudson_bat"), "inventory");
-				return new ModelResourceLocation(new ResourceLocation(Bewitchment.MOD_ID, "sword_cold_iron"), "inventory");
+				return new ModelResourceLocation(new ResourceLocation(Bewitchment.MOD_ID, "cold_iron_sword"), "inventory");
 			}
 		});
 	}

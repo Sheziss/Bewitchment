@@ -1,19 +1,110 @@
 package com.bewitchment.registry;
 
-import baubles.api.BaubleType;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.bewitchment.Bewitchment;
-import com.bewitchment.common.block.*;
-import com.bewitchment.common.block.crop.*;
-import com.bewitchment.common.block.tile.entity.*;
+import com.bewitchment.common.block.BlockCandle;
+import com.bewitchment.common.block.BlockCandleBase;
+import com.bewitchment.common.block.BlockCrystalBall;
+import com.bewitchment.common.block.BlockDistillery;
+import com.bewitchment.common.block.BlockGemBowl;
+import com.bewitchment.common.block.BlockGlyph;
+import com.bewitchment.common.block.BlockGoblet;
+import com.bewitchment.common.block.BlockLantern;
+import com.bewitchment.common.block.BlockLoom;
+import com.bewitchment.common.block.BlockMoonbell;
+import com.bewitchment.common.block.BlockOven;
+import com.bewitchment.common.block.BlockPlacedItem;
+import com.bewitchment.common.block.BlockPurifyingEarth;
+import com.bewitchment.common.block.BlockSaltBarrier;
+import com.bewitchment.common.block.BlockTarotTable;
+import com.bewitchment.common.block.BlockWitchFire;
+import com.bewitchment.common.block.BlockWitchesAltar;
+import com.bewitchment.common.block.BlockWitchesCauldron;
+import com.bewitchment.common.block.BlockWitchesLight;
+import com.bewitchment.common.block.crop.BlockCropBelladonna;
+import com.bewitchment.common.block.crop.BlockCropKelp;
+import com.bewitchment.common.block.crop.BlockCropKenaf;
+import com.bewitchment.common.block.crop.BlockCropMint;
+import com.bewitchment.common.block.crop.BlockCropSilphium;
+import com.bewitchment.common.block.crop.BlockCropThistle;
+import com.bewitchment.common.block.tile.entity.TileEntityCrystalBall;
+import com.bewitchment.common.block.tile.entity.TileEntityDistillery;
+import com.bewitchment.common.block.tile.entity.TileEntityGemBowl;
+import com.bewitchment.common.block.tile.entity.TileEntityGlyph;
+import com.bewitchment.common.block.tile.entity.TileEntityLoom;
+import com.bewitchment.common.block.tile.entity.TileEntityOven;
+import com.bewitchment.common.block.tile.entity.TileEntityPlacedItem;
+import com.bewitchment.common.block.tile.entity.TileEntityWitchesAltar;
+import com.bewitchment.common.block.tile.entity.TileEntityWitchesCauldron;
 import com.bewitchment.common.block.tile.entity.util.TileEntityAltarStorage;
-import com.bewitchment.common.block.util.*;
+import com.bewitchment.common.block.util.ModBlock;
+import com.bewitchment.common.block.util.ModBlockBush;
+import com.bewitchment.common.block.util.ModBlockButton;
+import com.bewitchment.common.block.util.ModBlockCrop;
+import com.bewitchment.common.block.util.ModBlockExp;
+import com.bewitchment.common.block.util.ModBlockFence;
+import com.bewitchment.common.block.util.ModBlockFenceGate;
+import com.bewitchment.common.block.util.ModBlockLeaves;
+import com.bewitchment.common.block.util.ModBlockPillar;
+import com.bewitchment.common.block.util.ModBlockPressurePlate;
+import com.bewitchment.common.block.util.ModBlockSapling;
+import com.bewitchment.common.block.util.ModBlockSlab;
+import com.bewitchment.common.block.util.ModBlockStairs;
+import com.bewitchment.common.block.util.ModBlockTrapdoor;
 import com.bewitchment.common.integration.chisel.ModBlockChisel;
-import com.bewitchment.common.item.*;
+import com.bewitchment.common.item.ItemChalk;
+import com.bewitchment.common.item.ItemCypressBroom;
+import com.bewitchment.common.item.ItemElderBroom;
+import com.bewitchment.common.item.ItemJuniperBroom;
+import com.bewitchment.common.item.ItemLantern;
+import com.bewitchment.common.item.ItemSalt;
+import com.bewitchment.common.item.ItemTarotsDeck;
+import com.bewitchment.common.item.ItemUndyingSalve;
+import com.bewitchment.common.item.ItemWaystone;
+import com.bewitchment.common.item.ItemYewBroom;
 import com.bewitchment.common.item.equipment.ItemColdIronArmor;
 import com.bewitchment.common.item.equipment.ItemSilverArmor;
-import com.bewitchment.common.item.equipment.bauble.*;
-import com.bewitchment.common.item.food.*;
-import com.bewitchment.common.item.tool.*;
+import com.bewitchment.common.item.equipment.bauble.ItemGirdleOfTheDryad;
+import com.bewitchment.common.item.equipment.bauble.ItemHellishBauble;
+import com.bewitchment.common.item.equipment.bauble.ItemHorseshoe;
+import com.bewitchment.common.item.equipment.bauble.ItemNazar;
+import com.bewitchment.common.item.equipment.bauble.ItemTalisman;
+import com.bewitchment.common.item.equipment.bauble.ItemTokenOfRemedies;
+import com.bewitchment.common.item.equipment.bauble.ItemTriskelionAmulet;
+import com.bewitchment.common.item.equipment.bauble.ItemWrathfulEye;
+import com.bewitchment.common.item.food.ItemAconitum;
+import com.bewitchment.common.item.food.ItemAsphodel;
+import com.bewitchment.common.item.food.ItemBelladonna;
+import com.bewitchment.common.item.food.ItemChrysanthemum;
+import com.bewitchment.common.item.food.ItemGarlic;
+import com.bewitchment.common.item.food.ItemGinger;
+import com.bewitchment.common.item.food.ItemHeart;
+import com.bewitchment.common.item.food.ItemHellebore;
+import com.bewitchment.common.item.food.ItemKelp;
+import com.bewitchment.common.item.food.ItemKenaf;
+import com.bewitchment.common.item.food.ItemLavender;
+import com.bewitchment.common.item.food.ItemMandrakeRoot;
+import com.bewitchment.common.item.food.ItemMint;
+import com.bewitchment.common.item.food.ItemSagebrush;
+import com.bewitchment.common.item.food.ItemSilphium;
+import com.bewitchment.common.item.food.ItemThistle;
+import com.bewitchment.common.item.food.ItemTulsi;
+import com.bewitchment.common.item.food.ItemWhiteSage;
+import com.bewitchment.common.item.food.ItemWormwood;
+import com.bewitchment.common.item.tool.ItemAthame;
+import com.bewitchment.common.item.tool.ItemBoline;
+import com.bewitchment.common.item.tool.ItemColdIronAxe;
+import com.bewitchment.common.item.tool.ItemColdIronHoe;
+import com.bewitchment.common.item.tool.ItemColdIronPickaxe;
+import com.bewitchment.common.item.tool.ItemColdIronSpade;
+import com.bewitchment.common.item.tool.ItemColdIronSword;
+import com.bewitchment.common.item.tool.ItemSilverAxe;
+import com.bewitchment.common.item.tool.ItemSilverHoe;
+import com.bewitchment.common.item.tool.ItemSilverPickaxe;
+import com.bewitchment.common.item.tool.ItemSilverSpade;
+import com.bewitchment.common.item.tool.ItemSilverSword;
 import com.bewitchment.common.item.util.ModItem;
 import com.bewitchment.common.item.util.ModItemDoor;
 import com.bewitchment.common.item.util.ModItemFood;
@@ -22,7 +113,15 @@ import com.bewitchment.common.world.gen.tree.WorldGenCypressTree;
 import com.bewitchment.common.world.gen.tree.WorldGenElderTree;
 import com.bewitchment.common.world.gen.tree.WorldGenJuniperTree;
 import com.bewitchment.common.world.gen.tree.WorldGenYewTree;
-import net.minecraft.block.*;
+
+import baubles.api.BaubleType;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockCrops;
+import net.minecraft.block.BlockDoor;
+import net.minecraft.block.BlockFenceGate;
+import net.minecraft.block.BlockLiquid;
+import net.minecraft.block.BlockSlab;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
@@ -49,26 +148,21 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import team.chisel.api.carving.CarvingUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @EventBusSubscriber(modid = Bewitchment.MOD_ID)
 public class ModObjects {
 	public static final List<Object> REGISTRY = new ArrayList<>();
 
-	public static final ArmorMaterial ARMOR_COLD_IRON = EnumHelper.addArmorMaterial("cold_iron", Bewitchment.MOD_ID + ":" + "cold_iron", 18, new int[]{2, 6, 7, 2}, 8, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.45f);
-	public static final ArmorMaterial ARMOR_SILVER = EnumHelper.addArmorMaterial("silver", Bewitchment.MOD_ID + ":" + "silver", 12, new int[]{1, 4, 5, 2}, 22, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 1.5f);
+	public static final ArmorMaterial ARMOR_COLD_IRON = EnumHelper.addArmorMaterial("cold_iron", Bewitchment.MOD_ID + ":" + "cold_iron", 15, new int[]{2, 5, 6, 2}, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0);
+	public static final ArmorMaterial ARMOR_SILVER = EnumHelper.addArmorMaterial("silver", Bewitchment.MOD_ID + ":" + "silver", 7, new int[]{1, 3, 5, 2}, 25, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 0);
 
-	public static final ToolMaterial TOOL_COLD_IRON = EnumHelper.addToolMaterial("cold_iron", 2, 850, 7, 3, 8);
-	public static final ToolMaterial TOOL_SILVER = EnumHelper.addToolMaterial("silver", 1, 215, 10, 2.5f, 24);
+	public static final ToolMaterial TOOL_COLD_IRON = EnumHelper.addToolMaterial("cold_iron", 2, 250, 6, 2, 14);
+	public static final ToolMaterial TOOL_SILVER = EnumHelper.addToolMaterial("silver", 1, 32, 12, 0, 22);
 
 	public static final ArmorMaterial ARMOR_BEWITCHED_LEATHER = EnumHelper.addArmorMaterial("bewitched_leather", Bewitchment.MOD_ID + ":" + "bewitched_leather", 24, new int[]{1, 4, 5, 1}, 22, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1.5f);
 	public static final ArmorMaterial ARMOR_VAMPIRE = EnumHelper.addArmorMaterial("vampire", Bewitchment.MOD_ID + ":" + "vampire", 9, new int[]{2, 6, 7, 1}, 22, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1.25f);
 
-	public static final ToolMaterial TOOL_RITUAL = EnumHelper.addToolMaterial("ritual", 2, 300, 2, 1.5f, 30);
-
 	// Fluids
-	public static final Fluid fluid_oil_mundane = createFluid("oil_mundane", Material.WATER, 0, 0, 800, 4000, true, true);
+	public static final Fluid fluid_magic_oil = createFluid("magic_oil", Material.WATER, 0, 0, 800, 4000, true, true);
 
 	// No Item
 	public static final Block glyph = createTileEntity(new BlockGlyph(), TileEntityGlyph.class);
@@ -112,17 +206,19 @@ public class ModObjects {
 	public static final Block crystal_ball = createTileEntity(new BlockCrystalBall(), TileEntityCrystalBall.class);
 	public static final Block gem_bowl = createTileEntity(new BlockGemBowl(), TileEntityGemBowl.class);
 	// Material Blocks
-	public static final Block block_cold_iron = new ModBlock("block_cold_iron", Material.IRON, SoundType.METAL, 5, 30, "pickaxe", 2, "blockColdIron");
-	public static final Block[] block_cold_iron_chiseled = createChiselBlocks(block_cold_iron, "symbol", "bevel", "sun", "moon", "sword", "cup", "wand", "pentacle", "pentagram");
-	public static final Block block_silver = new ModBlock("block_silver", Material.IRON, SoundType.METAL, 5, 30, "pickaxe", 0, "blockSilver");
-	public static final Block[] block_silver_chiseled = createChiselBlocks(block_silver, "symbol", "bevel", "sun", "moon", "sword", "cup", "wand", "pentacle", "pentagram");
-	public static final Block block_amethyst = new ModBlock("block_amethyst", Material.GLASS, SoundType.GLASS, 5, 30, "pickaxe", 2, "blockAmethyst");
-	public static final Block block_garnet = new ModBlock("block_garnet", Material.GLASS, SoundType.GLASS, 5, 30, "pickaxe", 2, "blockGarnet");
+	public static final Block block_of_cold_iron = new ModBlock("block_of_cold_iron", Material.IRON, SoundType.METAL, 5, 30, "pickaxe", 2, "blockColdIron");
+	public static final Block[] block_of_cold_iron_chiseled = createChiselBlocks(block_of_cold_iron, "symbol", "bevel", "sun", "moon", "sword", "cup", "wand", "pentacle", "pentagram");
+	public static final Block block_of_silver = new ModBlock("block_of_silver", Material.IRON, SoundType.METAL, 5, 30, "pickaxe", 0, "blockSilver");
+	public static final Block[] block_of_silver_chiseled = createChiselBlocks(block_of_silver, "symbol", "bevel", "sun", "moon", "sword", "cup", "wand", "pentacle", "pentagram");
+	public static final Block block_of_amethyst = new ModBlock("block_of_amethyst", Material.GLASS, SoundType.GLASS, 5, 30, "pickaxe", 2, "blockAmethyst");
+	public static final Block block_of_garnet = new ModBlock("block_of_garnet", Material.GLASS, SoundType.GLASS, 5, 30, "pickaxe", 2, "blockGarnet");
+	public static final Block block_of_moonstone = new ModBlock("block_of_moonstone", Material.GLASS, SoundType.GLASS, 5, 30, "pickaxe", 2, "blockMoonstone");
 	// Ores
-	public static final Block ore_silver = new ModBlock("ore_silver", Material.ROCK, SoundType.STONE, 3, 15, "pickaxe", 1, "oreSilver");
-	public static final Block ore_salt = new ModBlockExp("ore_salt", Material.ROCK, SoundType.STONE, 3, 15, "pickaxe", 0, "oreSalt");
-	public static final Block ore_amethyst = new ModBlockExp("ore_amethyst", Material.ROCK, SoundType.STONE, 3, 15, "pickaxe", 2, "oreAmethyst");
-	public static final Block ore_garnet = new ModBlockExp("ore_garnet", Material.ROCK, SoundType.STONE, 3, 15, "pickaxe", 2, "oreGarnet");
+	public static final Block silver_ore = new ModBlock("silver_ore", Material.ROCK, SoundType.STONE, 3, 15, "pickaxe", 1, "oreSilver");
+	public static final Block salt_ore = new ModBlockExp("salt_ore", Material.ROCK, SoundType.STONE, 3, 15, "pickaxe", 0, "oreSalt");
+	public static final Block amethyst_ore = new ModBlockExp("amethyst_ore", Material.ROCK, SoundType.STONE, 3, 15, "pickaxe", 2, "oreAmethyst");
+	public static final Block garnet_ore = new ModBlockExp("garnet_ore", Material.ROCK, SoundType.STONE, 3, 15, "pickaxe", 2, "oreGarnet");
+	public static final Block moonstone_ore = new ModBlockExp("moonstone_ore", Material.ROCK, SoundType.STONE, 3, 15, "pickaxe", 2, "oreMoonstone");
 	// Misc
 	public static final Block perpetual_ice = new ModBlock("perpetual_ice", Material.ICE, SoundType.GLASS, 0.5f, 2.5f, "", 0);
 	public static final Block nethersteel = new ModBlock("nethersteel", Material.IRON, SoundType.METAL, 5, 30, "pickaxe", 1, "blockNethersteel");
@@ -240,26 +336,26 @@ public class ModObjects {
 	public static final Item ring_of_the_adamantine_star = new ItemTalisman("ring_of_the_adamantine_star", BaubleType.RING);
 	public static final Item scarlet_orb = new ItemTalisman("scarlet_orb", BaubleType.BELT);
 	// Armor
-	public static final Item helmet_cold_iron = new ItemColdIronArmor("helmet_cold_iron", ARMOR_COLD_IRON, EntityEquipmentSlot.HEAD);
-	public static final Item chestplate_cold_iron = new ItemColdIronArmor("chestplate_cold_iron", ARMOR_COLD_IRON, EntityEquipmentSlot.CHEST);
-	public static final Item leggings_cold_iron = new ItemColdIronArmor("leggings_cold_iron", ARMOR_COLD_IRON, EntityEquipmentSlot.LEGS);
-	public static final Item boots_cold_iron = new ItemColdIronArmor("boots_cold_iron", ARMOR_COLD_IRON, EntityEquipmentSlot.FEET);
-	public static final Item helmet_silver = new ItemSilverArmor("helmet_silver", ARMOR_SILVER, EntityEquipmentSlot.HEAD);
-	public static final Item chestplate_silver = new ItemSilverArmor("chestplate_silver", ARMOR_SILVER, EntityEquipmentSlot.CHEST);
-	public static final Item leggings_silver = new ItemSilverArmor("leggings_silver", ARMOR_SILVER, EntityEquipmentSlot.LEGS);
-	public static final Item boots_silver = new ItemSilverArmor("boots_silver", ARMOR_SILVER, EntityEquipmentSlot.FEET);
+	public static final Item cold_iron_helmet = new ItemColdIronArmor("cold_iron_helmet", EntityEquipmentSlot.HEAD);
+	public static final Item cold_iron_chestplate = new ItemColdIronArmor("cold_iron_chestplate", EntityEquipmentSlot.CHEST);
+	public static final Item cold_iron_leggings = new ItemColdIronArmor("cold_iron_leggings", EntityEquipmentSlot.LEGS);
+	public static final Item cold_iron_boots = new ItemColdIronArmor("cold_iron_boots", EntityEquipmentSlot.FEET);
+	public static final Item silver_helmet = new ItemSilverArmor("silver_helmet", EntityEquipmentSlot.HEAD);
+	public static final Item silver_chestplate = new ItemSilverArmor("silver_chestplate", EntityEquipmentSlot.CHEST);
+	public static final Item silver_leggings = new ItemSilverArmor("silver_leggings", EntityEquipmentSlot.LEGS);
+	public static final Item silver_boots = new ItemSilverArmor("silver_boots", EntityEquipmentSlot.FEET);
 	// Tools
-	public static final Item sword_cold_iron = new ItemColdIronSword(TOOL_COLD_IRON);
-	public static final Item pickaxe_cold_iron = new ItemColdIronPickaxe(TOOL_COLD_IRON);
-	public static final Item axe_cold_iron = new ItemColdIronAxe(TOOL_COLD_IRON);
-	public static final Item spade_cold_iron = new ItemColdIronSpade(TOOL_COLD_IRON);
-	public static final Item hoe_cold_iron = new ItemColdIronHoe(TOOL_COLD_IRON);
-	public static final Item sword_silver = new ItemSilverSword(TOOL_SILVER);
-	public static final Item pickaxe_silver = new ItemSilverPickaxe(TOOL_SILVER);
-	public static final Item axe_silver = new ItemSilverAxe(TOOL_SILVER);
-	public static final Item spade_silver = new ItemSilverSpade(TOOL_SILVER);
-	public static final Item hoe_silver = new ItemSilverHoe(TOOL_SILVER);
-	public static final Item athame = new ItemAthame(TOOL_RITUAL);
+	public static final Item cold_iron_sword = new ItemColdIronSword();
+	public static final Item cold_iron_pickaxe = new ItemColdIronPickaxe();
+	public static final Item cold_iron_axe = new ItemColdIronAxe();
+	public static final Item cold_iron_spade = new ItemColdIronSpade();
+	public static final Item cold_iron_hoe = new ItemColdIronHoe();
+	public static final Item silver_sword = new ItemSilverSword();
+	public static final Item silver_pickaxe = new ItemSilverPickaxe();
+	public static final Item silver_axe = new ItemSilverAxe();
+	public static final Item silver_spade = new ItemSilverSpade();
+	public static final Item silver_hoe = new ItemSilverHoe();
+	public static final Item athame = new ItemAthame();
 	public static final Item boline = new ItemBoline();
 
 	//	public static final Item witcharmor
@@ -275,12 +371,13 @@ public class ModObjects {
 	public static final Item broom_juniper = new ItemJuniperBroom();
 	public static final Item broom_yew = new ItemYewBroom();
 	// Material Items
-	public static final Item ingot_cold_iron = new ModItem("ingot_cold_iron", "ingotColdIron");
-	public static final Item ingot_silver = new ModItem("ingot_silver", "ingotSilver");
-	public static final Item nugget_cold_iron = new ModItem("nugget_cold_iron", "nuggetColdIron");
-	public static final Item nugget_silver = new ModItem("nugget_silver", "nuggetSilver");
-	public static final Item gem_amethyst = new ModItem("gem_amethyst", "gemAmethyst", "gemAll");
-	public static final Item gem_garnet = new ModItem("gem_garnet", "gemGarnet", "gemAll");
+	public static final Item cold_iron_ingot = new ModItem("cold_iron_ingot", "ingotColdIron");
+	public static final Item silver_ingot = new ModItem("silver_ingot", "ingotSilver");
+	public static final Item cold_iron_nugget = new ModItem("cold_iron_nugget", "nuggetColdIron");
+	public static final Item silver_nugget = new ModItem("silver_nugget", "nuggetSilver");
+	public static final Item amethyst = new ModItem("amethyst", "gemAmethyst", "gemAll");
+	public static final Item garnet = new ModItem("garnet", "gemGarnet", "gemAll");
+	public static final Item moonstone = new ModItem("moonstone", "gemMoonstone", "gemAll");
 	public static final Item salt = new ItemSalt();
 	public static final Item pentacle = new ModItem("pentacle");
 	public static final Item tallow = new ModItem("tallow", "materialWax", "materialBeeswax", "materialPressedWax", "itemBeeswax", "wax", "tallow", "clumpWax", "beeswax", "itemWax");
@@ -441,7 +538,7 @@ public class ModObjects {
 				Item item = (Item) obj;
 				event.getRegistry().register(item);
 				if (obj == ModObjects.eye_of_old) Bewitchment.proxy.registerTextureEyeOfOld();
-				else if (obj == ModObjects.sword_cold_iron) Bewitchment.proxy.registerTextureColdIronSword();
+				else if (obj == ModObjects.cold_iron_sword) Bewitchment.proxy.registerTextureColdIronSword();
 				else if (obj == ModObjects.waystone) Bewitchment.proxy.registerTextureWaystone();
 				else Bewitchment.proxy.registerTexture(item, "normal");
 			}

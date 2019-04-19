@@ -4,10 +4,10 @@
     "model": "forge:fluid"
   },
   "variants": {
-    "oil_mundane": [
+    "magic_oil": [
       {
         "custom": {
-          "fluid": "oil_mundane"
+          "fluid": "magic_oil"
         }
       }
     ]

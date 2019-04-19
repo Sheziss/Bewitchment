@@ -14,13 +14,14 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 import java.util.Random;
 
 public class WorldGenOres implements IWorldGenerator {
-	private final WorldGenerator silver, salt, amethyst, garnet;
+	private final WorldGenerator silver, salt, amethyst, garnet, moonstone;
 
 	public WorldGenOres() {
-		silver = new WorldGenMinable(ModObjects.ore_silver.getDefaultState(), Bewitchment.proxy.config.silverSize);
-		salt = new WorldGenMinable(ModObjects.ore_salt.getDefaultState(), Bewitchment.proxy.config.saltSize);
-		amethyst = new WorldGenMinable(ModObjects.ore_amethyst.getDefaultState(), Bewitchment.proxy.config.amethystSize);
-		garnet = new WorldGenMinable(ModObjects.ore_garnet.getDefaultState(), Bewitchment.proxy.config.garnetSize);
+		silver = new WorldGenMinable(ModObjects.silver_ore.getDefaultState(), Bewitchment.proxy.config.silverSize);
+		salt = new WorldGenMinable(ModObjects.salt_ore.getDefaultState(), Bewitchment.proxy.config.saltSize);
+		amethyst = new WorldGenMinable(ModObjects.amethyst_ore.getDefaultState(), Bewitchment.proxy.config.amethystSize);
+		garnet = new WorldGenMinable(ModObjects.garnet_ore.getDefaultState(), Bewitchment.proxy.config.garnetSize);
+		moonstone = new WorldGenMinable(ModObjects.moonstone_ore.getDefaultState(), Bewitchment.proxy.config.moonstoneSize);
 	}
 
 	@Override
@@ -35,6 +36,8 @@ public class WorldGenOres implements IWorldGenerator {
 				amethyst.generate(world, rand, new BlockPos(chunkX * 16 + rand.nextInt(16), rand.nextInt(Bewitchment.proxy.config.amethystMax - Bewitchment.proxy.config.amethystMin) + Bewitchment.proxy.config.amethystMin, chunkZ * 16 + rand.nextInt(16)));
 			for (int i = 0; i < Bewitchment.proxy.config.garnetChance; i++)
 				garnet.generate(world, rand, new BlockPos(chunkX * 16 + rand.nextInt(16), rand.nextInt(Bewitchment.proxy.config.garnetMax - Bewitchment.proxy.config.garnetMin) + Bewitchment.proxy.config.garnetMin, chunkZ * 16 + rand.nextInt(16)));
+			for (int i = 0; i < Bewitchment.proxy.config.moonstoneChance; i++)
+				moonstone.generate(world, rand, new BlockPos(chunkX * 16 + rand.nextInt(16), rand.nextInt(Bewitchment.proxy.config.moonstoneMax - Bewitchment.proxy.config.moonstoneMin) + Bewitchment.proxy.config.moonstoneMin, chunkZ * 16 + rand.nextInt(16)));
 		}
 	}
 }

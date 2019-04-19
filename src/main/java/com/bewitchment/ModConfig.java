@@ -8,7 +8,8 @@ public class ModConfig extends Configuration {
 	public int silverSize, silverChance, silverMin, silverMax,
 			saltSize, saltChance, saltMin, saltMax,
 			amethystSize, amethystChance, amethystMin, amethystMax,
-			garnetSize, garnetChance, garnetMin, garnetMax;
+			garnetSize, garnetChance, garnetMin, garnetMax,
+			moonstoneSize, moonstoneChance, moonstoneMin, moonstoneMax;
 
 	public ModConfig(File file) {
 		super(file);
@@ -21,17 +22,22 @@ public class ModConfig extends Configuration {
 		saltSize = this.getInt("saltSize", "ore", 2, 0, Byte.MAX_VALUE, "The size of salt ore veins.");
 		saltChance = this.getInt("saltChance", "ore", 6, 0, Byte.MAX_VALUE, "The chance for salt ore veins to spawn.");
 		saltMin = this.getInt("saltMin", "ore", 10, 0, 0, "The minimum height for salt ore veins to spawn.");
-		saltMax = this.getInt("saltMax", "ore", 128, 0, 255, "The maximum height for salt ore veins to spawn.");
+		saltMax = this.getInt("saltMax", "ore", 120, 0, 255, "The maximum height for salt ore veins to spawn.");
 
 		amethystSize = this.getInt("amethystSize", "ore", 2, 0, Byte.MAX_VALUE, "The size of amethyst ore veins.");
 		amethystChance = this.getInt("amethystChance", "ore", 6, 0, Byte.MAX_VALUE, "The chance for amethyst ore veins to spawn.");
 		amethystMin = this.getInt("amethystMin", "ore", 10, 0, 0, "The minimum height for amethyst ore veins to spawn.");
-		amethystMax = this.getInt("amethystMax", "ore", 65, 0, 255, "The maximum height for amethyst ore veins to spawn.");
+		amethystMax = this.getInt("amethystMax", "ore", 64, 0, 255, "The maximum height for amethyst ore veins to spawn.");
 
 		garnetSize = this.getInt("garnetSize", "ore", 2, 0, Byte.MAX_VALUE, "The size of garnet ore veins.");
 		garnetChance = this.getInt("garnetChance", "ore", 6, 0, Byte.MAX_VALUE, "The chance for garnet ore veins to spawn.");
 		garnetMin = this.getInt("garnetMin", "ore", 12, 0, 0, "The minimum height for garnet ore veins to spawn.");
-		garnetMax = this.getInt("garnetMax", "ore", 65, 0, 255, "The maximum height for garnet ore veins to spawn.");
+		garnetMax = this.getInt("garnetMax", "ore", 80, 0, 255, "The maximum height for garnet ore veins to spawn.");
+
+		moonstoneSize = this.getInt("moonstoneSize", "ore", 2, 0, Byte.MAX_VALUE, "The size of moonstone ore veins.");
+		moonstoneChance = this.getInt("moonstoneChance", "ore", 6, 0, Byte.MAX_VALUE, "The chance for moonstone ore veins to spawn.");
+		moonstoneMin = this.getInt("moonstoneMin", "ore", 16, 0, 0, "The minimum height for moonstone ore veins to spawn.");
+		moonstoneMax = this.getInt("moonstoneMax", "ore", 120, 0, 255, "The maximum height for moonstone ore veins to spawn.");
 		save();
 	}
 }

@@ -1,7 +1,13 @@
 package com.bewitchment.common.item.tool;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.bewitchment.common.item.util.ModItemSword;
 import com.bewitchment.registry.ModObjects;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
@@ -21,16 +27,11 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class ItemAthame extends ModItemSword {
 	public static final Map<EntityEntry, Collection<ItemStack>> LOOT_TABLE = new HashMap<>();
 
-	public ItemAthame(ToolMaterial mat) {
-		super("athame", mat);
+	public ItemAthame() {
+		super("athame", ModObjects.TOOL_SILVER);
 		setMaxDamage(600);
 		MinecraftForge.EVENT_BUS.register(this);
 	}

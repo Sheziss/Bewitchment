@@ -1,6 +1,8 @@
 package com.bewitchment.common.item.tool;
 
 import com.bewitchment.common.item.util.ModItemAxe;
+import com.bewitchment.registry.ModObjects;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,8 +10,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 
 public class ItemSilverAxe extends ModItemAxe {
-	public ItemSilverAxe(ToolMaterial mat) {
-		super("axe_silver", mat);
+	public ItemSilverAxe() {
+		super("silver_axe", ModObjects.TOOL_SILVER);
 	}
 
 	@Override

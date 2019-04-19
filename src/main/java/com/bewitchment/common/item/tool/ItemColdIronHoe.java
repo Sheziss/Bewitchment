@@ -2,6 +2,8 @@ package com.bewitchment.common.item.tool;
 
 import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.common.item.util.ModItemHoe;
+import com.bewitchment.registry.ModObjects;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityEnderman;
@@ -11,8 +13,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 
 public class ItemColdIronHoe extends ModItemHoe {
-	public ItemColdIronHoe(ToolMaterial mat) {
-		super("hoe_cold_iron", mat);
+	public ItemColdIronHoe() {
+		super("cold_iron_hoe", ModObjects.TOOL_COLD_IRON);
 	}
 
 	@Override

@@ -42,7 +42,7 @@
         },
         {
           "type": "item",
-          "name": "bewitchment:ingot_silver",
+          "name": "bewitchment:silver_ingot",
           "weight": 1,
           "functions": [
             {
@@ -56,7 +56,7 @@
         },
         {
           "type": "item",
-          "name": "bewitchment:ingot_cold_iron",
+          "name": "bewitchment:cold_iron_ingot",
           "weight": 1,
           "functions": [
             {
@@ -70,7 +70,7 @@
         },
         {
           "type": "item",
-          "name": "bewitchment:gem_amethyst",
+          "name": "bewitchment:amethyst",
           "weight": 8,
           "functions": [
             {
@@ -84,7 +84,21 @@
         },
         {
           "type": "item",
-          "name": "bewitchment:gem_garnet",
+          "name": "bewitchment:garnet",
+          "weight": 8,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 0,
+                "max": 3
+              }
+            }
+          ]
+        },
+		{
+          "type": "item",
+          "name": "bewitchment:moonstone",
           "weight": 8,
           "functions": [
             {

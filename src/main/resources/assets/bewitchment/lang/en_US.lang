@@ -1,5 +1,5 @@
 ﻿#Fluids
-fluid.oil_mundane=Oil
+fluid.magic_oil=Oil
 
 #Blocks
 tile.bewitchment.glyph.name=Glyph
@@ -14,15 +14,17 @@ item.bewitchment.tarots_deck.name=Tarots Deck
 tile.bewitchment.crystal_ball.name=Crystal Ball
 tile.bewitchment.gem_bowl.name=Gem Bowl
 
-tile.bewitchment.block_cold_iron.name=Block of Cold Iron
-tile.bewitchment.block_silver.name=Block of Silver
-tile.bewitchment.block_amethyst.name=Block of Amethyst
-tile.bewitchment.block_garnet.name=Block of Garnet
+tile.bewitchment.block_of_cold_iron.name=Block of Cold Iron
+tile.bewitchment.block_of_silver.name=Block of Silver
+tile.bewitchment.block_of_amethyst.name=Block of Amethyst
+tile.bewitchment.block_of_garnet.name=Block of Garnet
+tile.bewitchment.block_of_moonstone.name=Block of Moonstone
 
-tile.bewitchment.ore_silver.name=Silver Ore
-tile.bewitchment.ore_salt.name=Salt Ore
-tile.bewitchment.ore_amethyst.name=Amethyst Ore
-tile.bewitchment.ore_garnet.name=Garnet Ore
+tile.bewitchment.silver_ore.name=Silver Ore
+tile.bewitchment.salt_ore.name=Salt Ore
+tile.bewitchment.amethyst_ore.name=Amethyst Ore
+tile.bewitchment.garnet_ore.name=Garnet Ore
+tile.bewitchment.moonstone_ore.name=Moonstone Ore
 
 tile.bewitchment.perpetual_ice.name=Perpetual Ice
 tile.bewitchment.nethersteel.name=Nethersteel
@@ -146,27 +148,27 @@ item.bewitchment.everwatching_eye.name=Everwatching Eye
 item.bewitchment.ring_of_the_adamantine_star.name=Ring of the Adamantine Star
 item.bewitchment.scarlet_orb.name=Scarlet Orb
 
-item.bewitchment.helmet_cold_iron.name=Cold Iron Helmet
-item.bewitchment.chestplate_cold_iron.name=Cold Iron Chestplate
-item.bewitchment.leggings_cold_iron.name=Cold Iron Leggings
-item.bewitchment.boots_cold_iron.name=Cold Iron Boots
+item.bewitchment.cold_iron_helmet.name=Cold Iron Helmet
+item.bewitchment.cold_iron_chestplate.name=Cold Iron Chestplate
+item.bewitchment.cold_iron_leggings.name=Cold Iron Leggings
+item.bewitchment.cold_iron_boots.name=Cold Iron Boots
 
-item.bewitchment.helmet_silver.name=Silver Helmet
-item.bewitchment.chestplate_silver.name=Silver Chestplate
-item.bewitchment.leggings_silver.name=Silver Leggings
-item.bewitchment.boots_silver.name=Silver Boots
+item.bewitchment.silver_helmet.name=Silver Helmet
+item.bewitchment.silver_chestplate.name=Silver Chestplate
+item.bewitchment.silver_leggings.name=Silver Leggings
+item.bewitchment.silver_boots.name=Silver Boots
 
-item.bewitchment.sword_cold_iron.name=Cold Iron Sword
-item.bewitchment.pickaxe_cold_iron.name=Cold Iron Pickaxe
-item.bewitchment.axe_cold_iron.name=Cold Iron Axe
-item.bewitchment.spade_cold_iron.name=Cold Iron Shovel
-item.bewitchment.hoe_cold_iron.name=Cold Iron Hoe
+item.bewitchment.cold_iron_sword.name=Cold Iron Sword
+item.bewitchment.cold_iron_pickaxe.name=Cold Iron Pickaxe
+item.bewitchment.cold_iron_axe.name=Cold Iron Axe
+item.bewitchment.cold_iron_spade.name=Cold Iron Shovel
+item.bewitchment.cold_iron_hoe.name=Cold Iron Hoe
 
-item.bewitchment.sword_silver.name=Silver Sword
-item.bewitchment.pickaxe_silver.name=Silver Pickaxe
-item.bewitchment.axe_silver.name=Silver Axe
-item.bewitchment.spade_silver.name=Silver Shovel
-item.bewitchment.hoe_silver.name=Silver Hoe
+item.bewitchment.silver_sword.name=Silver Sword
+item.bewitchment.silver_pickaxe.name=Silver Pickaxe
+item.bewitchment.silver_axe.name=Silver Axe
+item.bewitchment.silver_spade.name=Silver Shovel
+item.bewitchment.silver_hoe.name=Silver Hoe
 
 item.bewitchment.athame.name=Athame
 item.bewitchment.boline.name=Boline
@@ -184,12 +186,13 @@ item.bewitchment.broom_elder.name=Elder Broom
 item.bewitchment.broom_juniper.name=Juniper Broom
 item.bewitchment.broom_yew.name=Yew Broom
 
-item.bewitchment.ingot_cold_iron.name=Cold Iron Ingot
-item.bewitchment.ingot_silver.name=Silver Ingot
-item.bewitchment.nugget_cold_iron.name=Cold Iron Nugget
-item.bewitchment.nugget_silver.name=Silver Nugget
-item.bewitchment.gem_amethyst.name=Amethyst
-item.bewitchment.gem_garnet.name=Garnet
+item.bewitchment.cold_iron_ingot.name=Cold Iron Ingot
+item.bewitchment.silver_ingot.name=Silver Ingot
+item.bewitchment.cold_iron_nugget.name=Cold Iron Nugget
+item.bewitchment.silver_nugget.name=Silver Nugget
+item.bewitchment.amethyst.name=Amethyst
+item.bewitchment.garnet.name=Garnet
+item.bewitchment.moonstone.name=Moonstone
 
 item.bewitchment.salt.name=Salt
 item.bewitchment.pentacle.name=Pentacle

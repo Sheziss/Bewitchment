@@ -1,6 +1,8 @@
 package com.bewitchment.common.item.tool;
 
 import com.bewitchment.common.item.util.ModItemHoe;
+import com.bewitchment.registry.ModObjects;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,8 +10,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 
 public class ItemSilverHoe extends ModItemHoe {
-	public ItemSilverHoe(ToolMaterial mat) {
-		super("hoe_silver", mat);
+	public ItemSilverHoe() {
+		super("silver_hoe", ModObjects.TOOL_SILVER);
 	}
 
 	@Override

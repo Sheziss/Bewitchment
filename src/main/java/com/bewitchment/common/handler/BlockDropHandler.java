@@ -38,9 +38,10 @@ public class BlockDropHandler {
 
 	@SubscribeEvent
 	public void harvestDrops(HarvestDropsEvent event) {
-		replaceDrop(event, ModObjects.ore_salt, new ItemStack(ModObjects.salt, getFortuneDropAmount(event.getWorld().rand, event.getFortuneLevel())), 100, true, false);
-		replaceDrop(event, ModObjects.ore_amethyst, new ItemStack(ModObjects.gem_amethyst, getFortuneDropAmount(event.getWorld().rand, event.getFortuneLevel())), 100, true, false);
-		replaceDrop(event, ModObjects.ore_garnet, new ItemStack(ModObjects.gem_garnet, getFortuneDropAmount(event.getWorld().rand, event.getFortuneLevel())), 100, true, false);
+		replaceDrop(event, ModObjects.salt_ore, new ItemStack(ModObjects.salt, getFortuneDropAmount(event.getWorld().rand, event.getFortuneLevel())), 100, true, false);
+		replaceDrop(event, ModObjects.amethyst_ore, new ItemStack(ModObjects.amethyst, getFortuneDropAmount(event.getWorld().rand, event.getFortuneLevel())), 100, true, false);
+		replaceDrop(event, ModObjects.garnet_ore, new ItemStack(ModObjects.garnet, getFortuneDropAmount(event.getWorld().rand, event.getFortuneLevel())), 100, true, false);
+		replaceDrop(event, ModObjects.moonstone_ore, new ItemStack(ModObjects.moonstone, getFortuneDropAmount(event.getWorld().rand, event.getFortuneLevel())), 100, true, false);
 
 		replaceDrop(event, ModObjects.leaves_juniper, new ItemStack(ModObjects.juniper_berries), 15, false, false);
 		replaceDrop(event, ModObjects.leaves_yew, new ItemStack(ModObjects.yew_aril), 15, false, false);

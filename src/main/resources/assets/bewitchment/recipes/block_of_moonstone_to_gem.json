@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "bewitchment:block_of_moonstone"
+    }
+  ],
+  "result": {
+    "item": "bewitchment:moonstone",
+    "count": 9
+  }
+}
