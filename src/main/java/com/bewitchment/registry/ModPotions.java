@@ -18,10 +18,8 @@ public class ModPotions {
 	public static final Potion wolfsbane = null;
 	public static final Potion absence = null;
 	public static final Potion garlicked = null;
-	public static final Potion magical_boon = null;
 	public static final Potion demons_bane = null;
 	public static final Potion holy_water = null;
-	public static final Potion rotting = null;
 
 	@SubscribeEvent
 	public static void registerEntities(Register<Potion> event) {

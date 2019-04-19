@@ -47,6 +47,5 @@ public class BlockDropHandler {
 		replaceDrop(event, ModObjects.leaves_yew, new ItemStack(ModObjects.yew_aril), 15, false, false);
 
 		replaceDrop(event, Blocks.DEADBUSH, new ItemStack(ModObjects.seed_white_sage), 15, false, false);
-		replaceDrop(event, Blocks.DEADBUSH, new ItemStack(ModObjects.seed_sagebrush), 15, false, false);
 	}
 }

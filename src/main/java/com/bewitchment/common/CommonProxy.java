@@ -532,7 +532,7 @@ public class CommonProxy {
 		BewitchmentAPI.registerRitual(new Ritual(Bewitchment.MOD_ID, "sanctuary",
 				Arrays.asList(
 						Ingredient.fromStacks(new ItemStack(ModObjects.white_sage)),
-						Ingredient.fromStacks(new ItemStack(ModObjects.sagebrush)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.salt)),
 						Ingredient.fromStacks(getOres("salt")),
 						Ingredient.fromStacks(getOres("dirt")),
 						Ingredient.fromStacks(getOres("dirt")),
@@ -543,7 +543,7 @@ public class CommonProxy {
 
 		// Distillery
 		BewitchmentAPI.registerDistilleryRecipe(new DistilleryRecipe(Bewitchment.MOD_ID, "cleansing_balm",
-				Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.acacia_resin)), Ingredient.fromStacks(new ItemStack(ModObjects.sagebrush)), Ingredient.fromStacks(new ItemStack(ModObjects.tulsi)), Ingredient.fromStacks(new ItemStack(ModObjects.white_sage))),
+				Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.acacia_resin)), Ingredient.fromStacks(new ItemStack(ModObjects.white_sage)), Ingredient.fromStacks(new ItemStack(ModObjects.salt))),
 				Arrays.asList(new ItemStack(ModObjects.cleansing_balm), new ItemStack(ModObjects.wood_ash)),
 				0, 300));
 		BewitchmentAPI.registerDistilleryRecipe(new DistilleryRecipe(Bewitchment.MOD_ID, "demonic_elixir",
@@ -605,9 +605,6 @@ public class CommonProxy {
 		BewitchmentAPI.registerLoomRecipe(new LoomRecipe(Bewitchment.MOD_ID, "soul_string",
 				Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.witches_stitching)), Ingredient.fromStacks(new ItemStack(ModObjects.witches_stitching)), Ingredient.fromStacks(new ItemStack(ModObjects.undying_salve)), Ingredient.fromStacks(new ItemStack(ModObjects.ectoplasm))),
 				new ItemStack(ModObjects.soul_string, 2)));
-		BewitchmentAPI.registerLoomRecipe(new LoomRecipe(Bewitchment.MOD_ID, "string",
-				Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.kenaf)), Ingredient.fromStacks(new ItemStack(ModObjects.kenaf)), Ingredient.fromStacks(new ItemStack(ModObjects.kenaf)), Ingredient.fromStacks(new ItemStack(ModObjects.kenaf))),
-				new ItemStack(Items.STRING, 12)));
 		BewitchmentAPI.registerLoomRecipe(new LoomRecipe(Bewitchment.MOD_ID, "sanguine_fabric",
 				Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.diabolical_vein)), Ingredient.fromStacks(new ItemStack(ModObjects.diabolical_vein)), Ingredient.fromStacks(new ItemStack(ModObjects.diabolical_vein)), Ingredient.fromStacks(new ItemStack(ModObjects.diabolical_vein))),
 				new ItemStack(ModObjects.sanguine_fabric, 4)));
@@ -708,23 +705,15 @@ public class CommonProxy {
 		GameRegistry.registerWorldGenerator(new WorldGenCoquina(), 0);
 
 		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_aconitum), 3);
-		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_asphodel), 3);
 		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_belladonna), 3);
 		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_chrysanthemum), 3);
-		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_ginger), 3);
 		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_hellebore), 3);
-		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_kenaf), 3);
-		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_lavender), 3);
 		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_mandrake), 3);
-		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_mint), 3);
-		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_thistle), 3);
-		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_tulsi), 3);
 		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_wormwood), 3);
 
 		LootTableList.register(new ResourceLocation(Bewitchment.MOD_ID, "chests/books"));
 		LootTableList.register(new ResourceLocation(Bewitchment.MOD_ID, "chests/materials"));
 		LootTableList.register(new ResourceLocation(Bewitchment.MOD_ID, "chests/saplings"));
-		LootTableList.register(new ResourceLocation(Bewitchment.MOD_ID, "chests/dungeon_exclusives"));
 
 		LootTableList.register(new ResourceLocation(Bewitchment.MOD_ID, "entities/blindworm"));
 		LootTableList.register(new ResourceLocation(Bewitchment.MOD_ID, "entities/lizard"));
