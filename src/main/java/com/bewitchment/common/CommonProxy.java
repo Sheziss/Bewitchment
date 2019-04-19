@@ -1,5 +1,9 @@
 package com.bewitchment.common;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import com.bewitchment.Bewitchment;
 import com.bewitchment.ModConfig;
 import com.bewitchment.api.BewitchmentAPI;
@@ -13,30 +17,112 @@ import com.bewitchment.api.registry.LoomRecipe;
 import com.bewitchment.api.registry.OvenRecipe;
 import com.bewitchment.api.registry.Ritual;
 import com.bewitchment.common.block.BlockGlyph.GlyphType;
-import com.bewitchment.common.entity.living.*;
+import com.bewitchment.common.entity.living.EntityBlindworm;
+import com.bewitchment.common.entity.living.EntityLizard;
+import com.bewitchment.common.entity.living.EntityNewt;
+import com.bewitchment.common.entity.living.EntityOwl;
+import com.bewitchment.common.entity.living.EntityRaven;
+import com.bewitchment.common.entity.living.EntitySnake;
+import com.bewitchment.common.entity.living.EntityToad;
 import com.bewitchment.common.entity.spirits.demons.EntityAlphaHellhound;
 import com.bewitchment.common.entity.spirits.demons.EntityDemon;
 import com.bewitchment.common.entity.spirits.demons.EntityDemoness;
 import com.bewitchment.common.entity.spirits.demons.EntityHellhound;
 import com.bewitchment.common.entity.spirits.ghosts.EntityBlackDog;
-import com.bewitchment.common.fortune.*;
+import com.bewitchment.common.fortune.FortuneBadLuck;
+import com.bewitchment.common.fortune.FortuneBlazeIntrigument;
+import com.bewitchment.common.fortune.FortuneDeath;
+import com.bewitchment.common.fortune.FortuneDemonicEncounter;
+import com.bewitchment.common.fortune.FortuneDropItem;
+import com.bewitchment.common.fortune.FortuneGoodLuck;
+import com.bewitchment.common.fortune.FortuneIllness;
+import com.bewitchment.common.fortune.FortuneMeetCat;
+import com.bewitchment.common.fortune.FortuneMeetDireWolf;
+import com.bewitchment.common.fortune.FortuneMeetDog;
+import com.bewitchment.common.fortune.FortuneMeetDonkey;
+import com.bewitchment.common.fortune.FortuneMeetHorse;
+import com.bewitchment.common.fortune.FortuneMeetLlama;
+import com.bewitchment.common.fortune.FortuneMeetMerchant;
+import com.bewitchment.common.fortune.FortuneMeetParrot;
+import com.bewitchment.common.fortune.FortuneMeetWitch;
+import com.bewitchment.common.fortune.FortuneMeetZombie;
+import com.bewitchment.common.fortune.FortuneSerpentIntrigument;
+import com.bewitchment.common.fortune.FortuneSilverfish;
+import com.bewitchment.common.fortune.FortuneTreasure;
+import com.bewitchment.common.fortune.FortuneVitality;
 import com.bewitchment.common.handler.BlockDropHandler;
 import com.bewitchment.common.handler.GuiHandler;
 import com.bewitchment.common.integration.patchouli.BewitchmentPatchouli;
 import com.bewitchment.common.integration.thaumcraft.ThaumcraftCompat;
-import com.bewitchment.common.ritual.*;
+import com.bewitchment.common.ritual.RitualCallOfTheWild;
+import com.bewitchment.common.ritual.RitualConjureAlphaHellhound;
+import com.bewitchment.common.ritual.RitualConjureBlaze;
+import com.bewitchment.common.ritual.RitualConjureDemon;
+import com.bewitchment.common.ritual.RitualConjureGhast;
+import com.bewitchment.common.ritual.RitualConjureHellhound;
+import com.bewitchment.common.ritual.RitualConjureImp;
+import com.bewitchment.common.ritual.RitualConjureMagmaCube;
+import com.bewitchment.common.ritual.RitualConjureSerpent;
+import com.bewitchment.common.ritual.RitualConjureVex;
+import com.bewitchment.common.ritual.RitualConjureWitch;
+import com.bewitchment.common.ritual.RitualConjureWither;
+import com.bewitchment.common.ritual.RitualDrawing;
+import com.bewitchment.common.ritual.RitualHighMoon;
+import com.bewitchment.common.ritual.RitualHungryFlames;
+import com.bewitchment.common.ritual.RitualPerception;
+import com.bewitchment.common.ritual.RitualSandsOfTime;
+import com.bewitchment.common.ritual.RitualSolarGlory;
 import com.bewitchment.common.world.gen.WorldGenCoquina;
 import com.bewitchment.common.world.gen.WorldGenOres;
 import com.bewitchment.registry.ModObjects;
 import com.bewitchment.registry.util.IOreDictionaryContainer;
 import com.google.common.collect.Sets;
-import net.minecraft.block.*;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockGrass;
+import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.BlockLog;
+import net.minecraft.block.BlockMelon;
+import net.minecraft.block.BlockPumpkin;
+import net.minecraft.block.IGrowable;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.boss.EntityWither;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.passive.*;
+import net.minecraft.entity.monster.EntityBlaze;
+import net.minecraft.entity.monster.EntityCaveSpider;
+import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.entity.monster.EntityElderGuardian;
+import net.minecraft.entity.monster.EntityEnderman;
+import net.minecraft.entity.monster.EntityEndermite;
+import net.minecraft.entity.monster.EntityGhast;
+import net.minecraft.entity.monster.EntityGuardian;
+import net.minecraft.entity.monster.EntityHusk;
+import net.minecraft.entity.monster.EntityPigZombie;
+import net.minecraft.entity.monster.EntityPolarBear;
+import net.minecraft.entity.monster.EntitySilverfish;
+import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntitySpider;
+import net.minecraft.entity.monster.EntityStray;
+import net.minecraft.entity.monster.EntityVex;
+import net.minecraft.entity.monster.EntityWitherSkeleton;
+import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.monster.EntityZombieVillager;
+import net.minecraft.entity.passive.EntityBat;
+import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.passive.EntityDonkey;
+import net.minecraft.entity.passive.EntityHorse;
+import net.minecraft.entity.passive.EntityLlama;
+import net.minecraft.entity.passive.EntityMule;
+import net.minecraft.entity.passive.EntityOcelot;
+import net.minecraft.entity.passive.EntityParrot;
+import net.minecraft.entity.passive.EntityPig;
+import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.entity.passive.EntitySkeletonHorse;
+import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.entity.passive.EntityWolf;
+import net.minecraft.entity.passive.EntityZombieHorse;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -52,6 +138,7 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -63,10 +150,6 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.OreDictionary;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class CommonProxy {
 	public static final SimpleNetworkWrapper WRAPPER = NetworkRegistry.INSTANCE.newSimpleChannel(Bewitchment.MOD_ID);
@@ -114,7 +197,6 @@ public class CommonProxy {
 		}
 		registerAltarValues();
 		registerAthameValues();
-		ThaumcraftCompat.loadThaumcraftCompat();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -226,6 +308,7 @@ public class CommonProxy {
 
 	protected void registerEventHandlers() {
 		MinecraftForge.EVENT_BUS.register(new BlockDropHandler());
+		if (Loader.isModLoaded("thaumcraft")) MinecraftForge.EVENT_BUS.register(new ThaumcraftCompat());
 	}
 
 	private void registerAltarValues() {
