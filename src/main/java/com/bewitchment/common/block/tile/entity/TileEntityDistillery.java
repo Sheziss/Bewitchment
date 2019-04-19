@@ -32,7 +32,7 @@ public class TileEntityDistillery extends TileEntityAltarStorage implements ITic
 	public final ItemStackHandler inventory_up = new ItemStackHandler(6) {
 		@Override
 		protected void onContentsChanged(int index) {
-			recipe = BewitchmentAPI.REGISTRY_DISTILLERY.getValuesCollection().parallelStream().filter(p -> p.matches(this)).findFirst().orElse(null);
+			recipe = BewitchmentAPI.REGISTRY_DISTILLERY.getValuesCollection().stream().filter(p -> p.matches(this)).findFirst().orElse(null);
 		}
 	};
 

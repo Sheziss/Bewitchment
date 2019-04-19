@@ -55,7 +55,7 @@ public class TileEntityGlyph extends TileEntityAltarStorage implements ITickable
 					world.playSound(null, getPos(), SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.7f, 0.7f);
 					if (!ritual.getInputEntities().isEmpty()) {
 						for (EntityLivingBase entity : living_on_ground) {
-							if (ritual.getInputEntities().parallelStream().anyMatch(p -> p.getEntityClass().equals(entity.getClass()))) {
+							if (ritual.getInputEntities().stream().anyMatch(p -> p.getEntityClass().equals(entity.getClass()))) {
 								entity.attackEntityFrom(DamageSource.MAGIC, Integer.MAX_VALUE);
 								break;
 							}
@@ -116,7 +116,7 @@ public class TileEntityGlyph extends TileEntityAltarStorage implements ITickable
 				}
 			}
 			List<EntityLivingBase> living_on_ground = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(getPos()).grow(3, 0, 3));
-			ritual = BewitchmentAPI.REGISTRY_RITUAL.getValuesCollection().parallelStream().filter(p -> p.matches(world, getPos(), items_on_ground, living_on_ground)).findFirst().orElse(null);
+			ritual = BewitchmentAPI.REGISTRY_RITUAL.getValuesCollection().stream().filter(p -> p.matches(world, getPos(), items_on_ground, living_on_ground)).findFirst().orElse(null);
 			if (ritual != null) {
 				setEffectiveDim(world.provider.getDimension());
 				if (ritual.isValid(this, getWorld(), player, getEffectivePos(), getEffectiveDim(), cooldown)) {

@@ -25,7 +25,7 @@ public class TileEntityLoom extends TileEntityAltarStorage implements ITickable 
 	public final ItemStackHandler inventory_up = new ItemStackHandler(4) {
 		@Override
 		protected void onContentsChanged(int index) {
-			recipe = BewitchmentAPI.REGISTRY_LOOM.getValuesCollection().parallelStream().filter(p -> p.matches(this)).findFirst().orElse(null);
+			recipe = BewitchmentAPI.REGISTRY_LOOM.getValuesCollection().stream().filter(p -> p.matches(this)).findFirst().orElse(null);
 		}
 	};
 

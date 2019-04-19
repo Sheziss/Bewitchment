@@ -105,7 +105,7 @@ public class CommonProxy {
 		// Oven Post
 		for (ItemStack stack : FurnaceRecipes.instance().getSmeltingList().keySet()) {
 			ItemStack output = FurnaceRecipes.instance().getSmeltingResult(stack);
-			if (!BewitchmentAPI.REGISTRY_OVEN.getValuesCollection().parallelStream().anyMatch(r -> stack.getItem() == r.getInput().getItem() && (stack.getMetadata() == r.getInput().getMetadata() || r.getInput().getMetadata() == Short.MAX_VALUE))) {
+			if (!BewitchmentAPI.REGISTRY_OVEN.getValuesCollection().stream().anyMatch(r -> stack.getItem() == r.getInput().getItem() && (stack.getMetadata() == r.getInput().getMetadata() || r.getInput().getMetadata() == Short.MAX_VALUE))) {
 				String name = stack.getItem().getRegistryName().toString();
 				BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MOD_ID, name.substring(name.indexOf(":") + 1) + stack.getMetadata(),
 						stack,
