@@ -3,6 +3,8 @@ package com.bewitchment.common.item.equipment;
 import com.bewitchment.api.capability.extendedplayer.ExtendedPlayer;
 import com.bewitchment.api.capability.extendedplayer.ExtendedPlayer.TransformationType;
 import com.bewitchment.common.item.util.ModItemArmor;
+import com.bewitchment.registry.ModObjects;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,8 +18,8 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class ItemSilverArmor extends ModItemArmor {
-	public ItemSilverArmor(String name, ArmorMaterial mat, EntityEquipmentSlot slot) {
-		super(name, mat, slot);
+	public ItemSilverArmor(String name, EntityEquipmentSlot slot) {
+		super(name, ModObjects.ARMOR_SILVER, slot);
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 

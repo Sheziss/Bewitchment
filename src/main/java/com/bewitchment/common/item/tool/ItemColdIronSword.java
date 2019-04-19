@@ -2,6 +2,8 @@ package com.bewitchment.common.item.tool;
 
 import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.common.item.util.ModItemSword;
+import com.bewitchment.registry.ModObjects;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityEnderman;
@@ -11,8 +13,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 
 public class ItemColdIronSword extends ModItemSword {
-	public ItemColdIronSword(ToolMaterial mat) {
-		super("sword_cold_iron", mat);
+	public ItemColdIronSword() {
+		super("cold_iron_sword", ModObjects.TOOL_COLD_IRON);
 	}
 
 	@Override

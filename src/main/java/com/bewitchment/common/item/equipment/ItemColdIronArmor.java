@@ -2,6 +2,8 @@ package com.bewitchment.common.item.equipment;
 
 import com.bewitchment.common.item.util.ModItemArmor;
 import com.bewitchment.registry.ModEnchantments;
+import com.bewitchment.registry.ModObjects;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
@@ -10,8 +12,8 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class ItemColdIronArmor extends ModItemArmor {
-	public ItemColdIronArmor(String name, ArmorMaterial mat, EntityEquipmentSlot slot) {
-		super(name, mat, slot);
+	public ItemColdIronArmor(String name, EntityEquipmentSlot slot) {
+		super(name, ModObjects.ARMOR_COLD_IRON, slot);
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
