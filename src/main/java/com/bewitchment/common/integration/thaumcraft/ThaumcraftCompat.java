@@ -2,7 +2,6 @@ package com.bewitchment.common.integration.thaumcraft;
 
 import com.bewitchment.Bewitchment;
 import com.bewitchment.registry.ModObjects;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -14,17 +13,21 @@ import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.aspects.AspectRegistryEvent;
 
-public class ThaumcraftCompat
-{
+public class ThaumcraftCompat {
 	public static final Aspect SUN = getOrCreateAspect("sol", 0xffd300, new Aspect[]{Aspect.FIRE, Aspect.LIGHT}, new ResourceLocation(Bewitchment.MOD_ID, "textures/thaumcraft/sol.png"));
 	public static final Aspect MOON = getOrCreateAspect("luna", 0x808080, new Aspect[]{Aspect.EARTH, Aspect.DARKNESS}, new ResourceLocation(Bewitchment.MOD_ID, "textures/thaumcraft/luna.png"));
 	public static final Aspect STAR = getOrCreateAspect("stellae", 0x73c2fb, new Aspect[]{SUN, Aspect.VOID}, new ResourceLocation(Bewitchment.MOD_ID, "textures/thaumcraft/stellae.png"));
 	public static final Aspect DEMON = getOrCreateAspect("diabolus", 0x960018, new Aspect[]{Aspect.SOUL, Aspect.AVERSION}, new ResourceLocation(Bewitchment.MOD_ID, "textures/thaumcraft/diabolus.png"));
-	
+
+	private static Aspect getOrCreateAspect(String tag, int color, Aspect[] components, ResourceLocation image) {
+		Aspect a = Aspect.getAspect(tag);
+		if (a != null) return a;
+		return new Aspect(tag, color, components, image, 1);
+	}
+
 	@SuppressWarnings("deprecation")
 	@SubscribeEvent
-	public void aspectRegistrationEvent(AspectRegistryEvent event)
-	{
+	public void aspectRegistrationEvent(AspectRegistryEvent event) {
 		// Items
 		event.register.registerObjectTag(new ItemStack(ModObjects.ectoplasm), new AspectList().add(Aspect.SOUL, 5).add(Aspect.DEATH, 5));
 		event.register.registerObjectTag(new ItemStack(ModObjects.tarots_deck), new AspectList().add(Aspect.MAGIC, 15).add(Aspect.CRAFT, 10));
@@ -167,10 +170,14 @@ public class ThaumcraftCompat
 		event.register.registerObjectTag(new ItemStack(ModObjects.nethersteel), new AspectList().add(Aspect.FIRE, 5).add(Aspect.MAGIC, 5).add(Aspect.METAL, 5).add(DEMON, 10));
 		event.register.registerObjectTag(new ItemStack(ModObjects.ore_salt), new AspectList().add(Aspect.EARTH, 4).add(Aspect.WATER, 4).add(Aspect.PROTECT, 4));
 		event.register.registerObjectTag(new ItemStack(ModObjects.coquina), new AspectList().add(Aspect.EARTH, 4).add(Aspect.WATER, 4).add(Aspect.PROTECT, 4));
-		for (Block block : ModObjects.block_cold_iron_chiseled) event.register.registerObjectTag(new ItemStack(block), new AspectList().add(Aspect.AVERSION, 101).add(Aspect.COLD, 101).add(Aspect.METAL, 101));
-		for (Block block : ModObjects.block_silver_chiseled) event.register.registerObjectTag(new ItemStack(block), new AspectList().add(Aspect.METAL, 67).add(Aspect.DESIRE, 33).add(MOON, 20));
-		for (Block block : ModObjects.coquina_chiseled) event.register.registerObjectTag(new ItemStack(block), new AspectList().add(Aspect.EARTH, 4).add(Aspect.WATER, 4).add(Aspect.PROTECT, 4));
-		for (Block block : ModObjects.nethersteel_chiseled) event.register.registerObjectTag(new ItemStack(block), new AspectList().add(Aspect.FIRE, 5).add(Aspect.MAGIC, 5).add(Aspect.METAL, 5).add(DEMON, 10));
+		for (Block block : ModObjects.block_cold_iron_chiseled)
+			event.register.registerObjectTag(new ItemStack(block), new AspectList().add(Aspect.AVERSION, 101).add(Aspect.COLD, 101).add(Aspect.METAL, 101));
+		for (Block block : ModObjects.block_silver_chiseled)
+			event.register.registerObjectTag(new ItemStack(block), new AspectList().add(Aspect.METAL, 67).add(Aspect.DESIRE, 33).add(MOON, 20));
+		for (Block block : ModObjects.coquina_chiseled)
+			event.register.registerObjectTag(new ItemStack(block), new AspectList().add(Aspect.EARTH, 4).add(Aspect.WATER, 4).add(Aspect.PROTECT, 4));
+		for (Block block : ModObjects.nethersteel_chiseled)
+			event.register.registerObjectTag(new ItemStack(block), new AspectList().add(Aspect.FIRE, 5).add(Aspect.MAGIC, 5).add(Aspect.METAL, 5).add(DEMON, 10));
 		event.register.registerObjectTag(new ItemStack(ModObjects.graveyard_dirt), new AspectList().add(Aspect.EARTH, 5).add(Aspect.UNDEAD, 5));
 		event.register.registerObjectTag(new ItemStack(ModObjects.purifying_earth), new AspectList().add(Aspect.EARTH, 5).add(SUN, 5));
 //		evt.register.registerObjectTag(new ItemStack(ModObjects.infested_farmland), new AspectList().add(Aspect.EARTH, 5).add(Aspect.DEATH, 5));
@@ -237,12 +244,5 @@ public class ThaumcraftCompat
 		ThaumcraftApi.registerEntityTag("demoness", new AspectList().add(Aspect.SOUL, 25).add(DEMON, 25).add(Aspect.FIRE, 16));
 		ThaumcraftApi.registerEntityTag("imp", new AspectList().add(Aspect.SOUL, 25).add(DEMON, 25).add(Aspect.FIRE, 16));
 		ThaumcraftApi.registerEntityTag("black_dog", new AspectList().add(Aspect.SOUL, 25).add(Aspect.BEAST, 25).add(Aspect.AVERSION, 16));
-	}
-	
-	private static Aspect getOrCreateAspect(String tag, int color, Aspect[] components, ResourceLocation image)
-	{
-		Aspect a = Aspect.getAspect(tag);
-		if (a != null) return a;
-		return new Aspect(tag, color, components, image, 1);
 	}
 }
