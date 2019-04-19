@@ -57,7 +57,6 @@ import com.bewitchment.common.item.ItemJuniperBroom;
 import com.bewitchment.common.item.ItemLantern;
 import com.bewitchment.common.item.ItemSalt;
 import com.bewitchment.common.item.ItemTarotsDeck;
-import com.bewitchment.common.item.ItemUndyingSalve;
 import com.bewitchment.common.item.ItemWaystone;
 import com.bewitchment.common.item.ItemYewBroom;
 import com.bewitchment.common.item.equipment.ItemColdIronArmor;
@@ -385,7 +384,7 @@ public class ModObjects {
 	public static final Item philter_of_dishonesty = new ModItem("philter_of_dishonesty");
 	public static final Item stone_ichor = new ModItem("stone_ichor");
 	public static final Item swirl_of_the_depths = new ModItem("swirl_of_the_depths");
-	public static final Item undying_salve = new ItemUndyingSalve();
+	public static final Item undying_salve = new ModItem("undying_salve");
 	// Loom
 	public static final Item diabolical_vein = new ModItem("diabolical_vein");
 	public static final Item golden_thread = new ModItem("golden_thread");
