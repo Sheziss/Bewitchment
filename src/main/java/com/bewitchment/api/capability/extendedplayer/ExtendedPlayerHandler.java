@@ -3,7 +3,6 @@ package com.bewitchment.api.capability.extendedplayer;
 import com.bewitchment.Bewitchment;
 import com.bewitchment.api.registry.Fortune;
 import com.bewitchment.registry.ModObjects;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;

@@ -1,13 +1,9 @@
 package com.bewitchment.common.block;
 
-import java.util.List;
-import java.util.Random;
-
 import com.bewitchment.Bewitchment;
 import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.api.capability.extendedplayer.ExtendedPlayer;
 import com.bewitchment.registry.ModObjects;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRedstoneWire;
 import net.minecraft.block.SoundType;
@@ -28,9 +24,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import java.util.List;
+import java.util.Random;
+
 public class BlockSaltBarrier extends BlockRedstoneWire {
 	private static final AxisAlignedBB WALL = new AxisAlignedBB(0, -5, 0, 1, 5, 1);
-	
+
 	public BlockSaltBarrier() {
 		super();
 		Bewitchment.proxy.registerValues(this, "salt_barrier", Material.CIRCUITS, SoundType.SAND, 0, 0, "", 0);
@@ -46,23 +45,20 @@ public class BlockSaltBarrier extends BlockRedstoneWire {
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		return ModObjects.salt;
 	}
-	
+
 	@Override
-	public boolean canConnectRedstone(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side)
-	{
+	public boolean canConnectRedstone(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
 		return state.getBlock() == this;
 	}
-	
-	public int getStrongPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
-	{
+
+	public int getStrongPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
 		return 0;
 	}
-	
-	public int getWeakPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
-	{
+
+	public int getWeakPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
 		return 0;
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	@Override
 	public void addCollisionBoxToList(IBlockState state, World world, BlockPos pos, AxisAlignedBB box, List<AxisAlignedBB> boxes, Entity entity, boolean wut) {
@@ -72,7 +68,7 @@ public class BlockSaltBarrier extends BlockRedstoneWire {
 				addCollisionBoxToList(pos, box, boxes, WALL);
 		}
 	}
-	
+
 	@Override
 	public void neighborChanged(IBlockState state, World world, BlockPos to, Block block, BlockPos from) {
 		if (!world.isRemote && !canPlaceBlockAt(world, to)) {
@@ -80,14 +76,12 @@ public class BlockSaltBarrier extends BlockRedstoneWire {
 			world.setBlockToAir(to);
 		}
 	}
-	
+
 	@Override
-	public void breakBlock(World world, BlockPos pos, IBlockState state)
-	{
+	public void breakBlock(World world, BlockPos pos, IBlockState state) {
 	}
-	
+
 	@Override
-	public void onBlockAdded(World world, BlockPos pos, IBlockState state)
-	{
+	public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
 	}
 }

@@ -416,9 +416,12 @@ public class ModObjects {
 			if (obj instanceof Item) {
 				Item item = (Item) obj;
 				event.getRegistry().register(item);
-				if (obj == ModObjects.eye_of_old) Bewitchment.proxy.registerTextureWithVariant(item, Arrays.asList(s -> s.getDisplayName().equalsIgnoreCase("Haru") || s.getDisplayName().equalsIgnoreCase("Haruspex") || s.getDisplayName().equalsIgnoreCase("H4rv5p3x"), s -> s.getDisplayName().equalsIgnoreCase("Izuxe") || s.getDisplayName().equalsIgnoreCase("Izu") || s.getDisplayName().equalsIgnoreCase("Izuxe43ui520815")));
-				else if (obj == ModObjects.cold_iron_sword) Bewitchment.proxy.registerTextureWithVariant(item, Arrays.asList(s -> s.getDisplayName().equalsIgnoreCase("Hudson Bat") || s.getDisplayName().equalsIgnoreCase("Masashi Bat") || s.getDisplayName().equalsIgnoreCase("Emmanuel Bat") || s.getDisplayName().equalsIgnoreCase("Michael Bat") || s.getDisplayName().equalsIgnoreCase("Yoshihiro Bat") || s.getDisplayName().equalsIgnoreCase("Lewis Bat") || s.getDisplayName().equalsIgnoreCase("Katushiro Bat") || s.getDisplayName().equalsIgnoreCase("Ashley Bat")));
-				else if (obj == ModObjects.waystone) Bewitchment.proxy.registerTextureWithVariant(item, Arrays.asList(s -> s.hasTagCompound() && s.getTagCompound().hasKey("location")));
+				if (obj == ModObjects.eye_of_old)
+					Bewitchment.proxy.registerTextureWithVariant(item, Arrays.asList(s -> s.getDisplayName().equalsIgnoreCase("Haru") || s.getDisplayName().equalsIgnoreCase("Haruspex") || s.getDisplayName().equalsIgnoreCase("H4rv5p3x"), s -> s.getDisplayName().equalsIgnoreCase("Izuxe") || s.getDisplayName().equalsIgnoreCase("Izu") || s.getDisplayName().equalsIgnoreCase("Izuxe43ui520815")));
+				else if (obj == ModObjects.cold_iron_sword)
+					Bewitchment.proxy.registerTextureWithVariant(item, Arrays.asList(s -> s.getDisplayName().equalsIgnoreCase("Hudson Bat") || s.getDisplayName().equalsIgnoreCase("Masashi Bat") || s.getDisplayName().equalsIgnoreCase("Emmanuel Bat") || s.getDisplayName().equalsIgnoreCase("Michael Bat") || s.getDisplayName().equalsIgnoreCase("Yoshihiro Bat") || s.getDisplayName().equalsIgnoreCase("Lewis Bat") || s.getDisplayName().equalsIgnoreCase("Katushiro Bat") || s.getDisplayName().equalsIgnoreCase("Ashley Bat")));
+				else if (obj == ModObjects.waystone)
+					Bewitchment.proxy.registerTextureWithVariant(item, Arrays.asList(s -> s.hasTagCompound() && s.getTagCompound().hasKey("location")));
 				else Bewitchment.proxy.registerTexture(item, "normal");
 			}
 		}
