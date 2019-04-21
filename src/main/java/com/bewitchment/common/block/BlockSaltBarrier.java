@@ -39,7 +39,7 @@ public class BlockSaltBarrier extends ModBlock {
 	private static final AxisAlignedBB WALL = new AxisAlignedBB(0, -5, 0, 1, 5, 1);
 
 	public BlockSaltBarrier() {
-		super("salt_barrier", Material.CIRCUITS, SoundType.CLOTH, 0, 0, "", 0);
+		super("salt_barrier", Material.CIRCUITS, SoundType.SAND, 0, 0, "", 0);
 		setCreativeTab(null);
 		setDefaultState(blockState.getBaseState().withProperty(NORTH, EnumAttachPosition.NONE).withProperty(EAST, EnumAttachPosition.NONE).withProperty(SOUTH, EnumAttachPosition.NONE).withProperty(WEST, EnumAttachPosition.NONE));
 	}

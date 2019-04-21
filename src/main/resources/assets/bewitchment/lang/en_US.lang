@@ -19,12 +19,13 @@ tile.bewitchment.block_of_silver.name=Block of Silver
 tile.bewitchment.block_of_amethyst.name=Block of Amethyst
 tile.bewitchment.block_of_garnet.name=Block of Garnet
 tile.bewitchment.block_of_moonstone.name=Block of Moonstone
+tile.bewitchment.block_of_salt.name=Block of Salt
 
 tile.bewitchment.silver_ore.name=Silver Ore
-tile.bewitchment.salt_ore.name=Salt Ore
 tile.bewitchment.amethyst_ore.name=Amethyst Ore
 tile.bewitchment.garnet_ore.name=Garnet Ore
 tile.bewitchment.moonstone_ore.name=Moonstone Ore
+tile.bewitchment.salt_ore.name=Salt Ore
 
 tile.bewitchment.perpetual_ice.name=Perpetual Ice
 tile.bewitchment.nethersteel.name=Nethersteel

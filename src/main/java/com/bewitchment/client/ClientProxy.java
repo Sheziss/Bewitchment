@@ -1,14 +1,28 @@
 package com.bewitchment.client;
 
+import java.util.List;
+import java.util.function.Predicate;
+
 import com.bewitchment.Bewitchment;
 import com.bewitchment.client.block.tile.render.RenderTileEntityGemBowl;
 import com.bewitchment.client.block.tile.render.RenderTileEntityPlacedItem;
 import com.bewitchment.client.block.tile.render.RenderTileEntityWitchesCauldron;
 import com.bewitchment.client.handler.ClientHandler;
-import com.bewitchment.client.render.entity.living.*;
+import com.bewitchment.client.render.entity.living.RenderBlindworm;
+import com.bewitchment.client.render.entity.living.RenderLizard;
+import com.bewitchment.client.render.entity.living.RenderNewt;
+import com.bewitchment.client.render.entity.living.RenderOwl;
+import com.bewitchment.client.render.entity.living.RenderRaven;
+import com.bewitchment.client.render.entity.living.RenderSnake;
+import com.bewitchment.client.render.entity.living.RenderToad;
 import com.bewitchment.client.render.entity.misc.RenderBroom;
 import com.bewitchment.client.render.entity.misc.RenderSpell;
-import com.bewitchment.client.render.entity.spirits.demons.*;
+import com.bewitchment.client.render.entity.spirits.demons.RenderAlphaHellhound;
+import com.bewitchment.client.render.entity.spirits.demons.RenderDemon;
+import com.bewitchment.client.render.entity.spirits.demons.RenderDemoness;
+import com.bewitchment.client.render.entity.spirits.demons.RenderHellhound;
+import com.bewitchment.client.render.entity.spirits.demons.RenderImp;
+import com.bewitchment.client.render.entity.spirits.demons.RenderSerpent;
 import com.bewitchment.client.render.entity.spirits.ghosts.RenderBlackDog;
 import com.bewitchment.common.CommonProxy;
 import com.bewitchment.common.block.BlockGlyph;
@@ -16,12 +30,24 @@ import com.bewitchment.common.block.BlockGlyph.GlyphType;
 import com.bewitchment.common.block.tile.entity.TileEntityGemBowl;
 import com.bewitchment.common.block.tile.entity.TileEntityPlacedItem;
 import com.bewitchment.common.block.tile.entity.TileEntityWitchesCauldron;
-import com.bewitchment.common.entity.living.*;
+import com.bewitchment.common.entity.living.EntityBlindworm;
+import com.bewitchment.common.entity.living.EntityLizard;
+import com.bewitchment.common.entity.living.EntityNewt;
+import com.bewitchment.common.entity.living.EntityOwl;
+import com.bewitchment.common.entity.living.EntityRaven;
+import com.bewitchment.common.entity.living.EntitySnake;
+import com.bewitchment.common.entity.living.EntityToad;
 import com.bewitchment.common.entity.misc.EntityBroom;
 import com.bewitchment.common.entity.misc.EntitySpell;
-import com.bewitchment.common.entity.spirits.demons.*;
+import com.bewitchment.common.entity.spirits.demons.EntityAlphaHellhound;
+import com.bewitchment.common.entity.spirits.demons.EntityDemon;
+import com.bewitchment.common.entity.spirits.demons.EntityDemoness;
+import com.bewitchment.common.entity.spirits.demons.EntityHellhound;
+import com.bewitchment.common.entity.spirits.demons.EntityImp;
+import com.bewitchment.common.entity.spirits.demons.EntitySerpent;
 import com.bewitchment.common.entity.spirits.ghosts.EntityBlackDog;
 import com.bewitchment.registry.ModObjects;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
@@ -111,6 +137,23 @@ public class ClientProxy extends CommonProxy {
 	public void registerTexture(Item item, String variant) {
 		ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), variant));
 	}
+	
+	@Override
+	public void registerTextureWithVariant(Item item, List<Predicate<ItemStack>> predicates)
+	{
+		ResourceLocation[] names = new ResourceLocation[predicates.size() + 1];
+		for (int i = 0; i <= predicates.size(); i++) names[i] = new ResourceLocation(item.getRegistryName().toString() + (i == 0 ? "" : "_variant" + (predicates.size() == 1 ? "" : (i - 1))));
+		ModelBakery.registerItemVariants(item, names);
+		ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition()
+		{
+			@Override
+			public ModelResourceLocation getModelLocation(ItemStack stack)
+			{
+				for (int i = 0; i < predicates.size(); i++) if (predicates.get(i).test(stack)) return new ModelResourceLocation(names[i + 1], "inventory");
+				return new ModelResourceLocation(item.getRegistryName(), "inventory");
+			}
+		});
+	}
 
 	@Override
 	public void registerTexture(Fluid fluid) {
@@ -118,47 +161,6 @@ public class ClientProxy extends CommonProxy {
 		ModelBakery.registerItemVariants(Item.getItemFromBlock(fluid.getBlock()));
 		ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(fluid.getBlock()), mapper);
 		ModelLoader.setCustomStateMapper(fluid.getBlock(), mapper);
-	}
-
-	@Override
-	public void registerTextureEyeOfOld() {
-		ModelBakery.registerItemVariants(ModObjects.eye_of_old, new ResourceLocation(Bewitchment.MOD_ID, "eye_of_old_normal"), new ResourceLocation(Bewitchment.MOD_ID, "eye_of_old_haru"), new ResourceLocation(Bewitchment.MOD_ID, "eye_of_old_izu"));
-		ModelLoader.setCustomMeshDefinition(ModObjects.eye_of_old, new ItemMeshDefinition() {
-			@Override
-			public ModelResourceLocation getModelLocation(ItemStack stack) {
-				if (stack.getDisplayName().equalsIgnoreCase("Haru") || stack.getDisplayName().equalsIgnoreCase("Haruspex") || stack.getDisplayName().equalsIgnoreCase("H4rv5p3x"))
-					return new ModelResourceLocation(new ResourceLocation(Bewitchment.MOD_ID, "eye_of_old_haru"), "inventory");
-				if (stack.getDisplayName().equalsIgnoreCase("Izuxe") || stack.getDisplayName().equalsIgnoreCase("Izu") || stack.getDisplayName().equalsIgnoreCase("Izuxe43ui520815"))
-					return new ModelResourceLocation(new ResourceLocation(Bewitchment.MOD_ID, "eye_of_old_izu"), "inventory");
-				return new ModelResourceLocation(new ResourceLocation(Bewitchment.MOD_ID, "eye_of_old_normal"), "inventory");
-			}
-		});
-	}
-
-	@Override
-	public void registerTextureColdIronSword() {
-		ModelBakery.registerItemVariants(ModObjects.cold_iron_sword, new ResourceLocation(Bewitchment.MOD_ID, "cold_iron_sword"), new ResourceLocation(Bewitchment.MOD_ID, "hudson_bat"));
-		ModelLoader.setCustomMeshDefinition(ModObjects.cold_iron_sword, new ItemMeshDefinition() {
-			@Override
-			public ModelResourceLocation getModelLocation(ItemStack stack) {
-				if (stack.getDisplayName().equalsIgnoreCase("Hudson Bat") || stack.getDisplayName().equalsIgnoreCase("Masashi Bat") || stack.getDisplayName().equalsIgnoreCase("Emmanuel Bat") || stack.getDisplayName().equalsIgnoreCase("Michael Bat") || stack.getDisplayName().equalsIgnoreCase("Yoshihiro Bat") || stack.getDisplayName().equalsIgnoreCase("Lewis Bat") || stack.getDisplayName().equalsIgnoreCase("Katushiro Bat") || stack.getDisplayName().equalsIgnoreCase("Ashley Bat"))
-					return new ModelResourceLocation(new ResourceLocation(Bewitchment.MOD_ID, "hudson_bat"), "inventory");
-				return new ModelResourceLocation(new ResourceLocation(Bewitchment.MOD_ID, "cold_iron_sword"), "inventory");
-			}
-		});
-	}
-
-	@Override
-	public void registerTextureWaystone() {
-		ModelBakery.registerItemVariants(ModObjects.waystone, new ResourceLocation(Bewitchment.MOD_ID, "waystone_normal"), new ResourceLocation(Bewitchment.MOD_ID, "waystone_bound"));
-		ModelLoader.setCustomMeshDefinition(ModObjects.waystone, new ItemMeshDefinition() {
-			@Override
-			public ModelResourceLocation getModelLocation(ItemStack stack) {
-				if (stack.hasTagCompound() && stack.getTagCompound().hasKey("location"))
-					return new ModelResourceLocation(new ResourceLocation(Bewitchment.MOD_ID, "waystone_bound"), "inventory");
-				return new ModelResourceLocation(new ResourceLocation(Bewitchment.MOD_ID, "waystone_normal"), "inventory");
-			}
-		});
 	}
 
 	private static class StateMapper extends StateMapperBase implements ItemMeshDefinition {

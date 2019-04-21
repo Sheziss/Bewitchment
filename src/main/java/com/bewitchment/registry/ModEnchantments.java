@@ -23,7 +23,7 @@ public class ModEnchantments {
 	public static final EnchantmentSpiritProtection spirit_protection = new EnchantmentSpiritProtection();
 
 	@SubscribeEvent
-	public static void registerEntities(Register<Enchantment> event) {
+	public static void registerEnchantments(Register<Enchantment> event) {
 		for (Enchantment enchantment : REGISTRY) event.getRegistry().register(enchantment);
 	}
 }

@@ -52,6 +52,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import team.chisel.api.carving.CarvingUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @EventBusSubscriber(modid = Bewitchment.MOD_ID)
@@ -115,12 +116,13 @@ public class ModObjects {
 	public static final Block block_of_amethyst = new ModBlock("block_of_amethyst", Material.GLASS, SoundType.GLASS, 5, 30, "pickaxe", 2, "blockAmethyst");
 	public static final Block block_of_garnet = new ModBlock("block_of_garnet", Material.GLASS, SoundType.GLASS, 5, 30, "pickaxe", 2, "blockGarnet");
 	public static final Block block_of_moonstone = new ModBlock("block_of_moonstone", Material.GLASS, SoundType.GLASS, 5, 30, "pickaxe", 2, "blockMoonstone");
+	public static final Block block_of_salt = new ModBlock("block_of_salt", Material.ROCK, SoundType.STONE, 5, 30, "pickaxe", 0, "blockSalt");
 	// Ores
 	public static final Block silver_ore = new ModBlock("silver_ore", Material.ROCK, SoundType.STONE, 3, 15, "pickaxe", 1, "oreSilver");
-	public static final Block salt_ore = new ModBlockExp("salt_ore", Material.ROCK, SoundType.STONE, 3, 15, "pickaxe", 0, "oreSalt");
 	public static final Block amethyst_ore = new ModBlockExp("amethyst_ore", Material.ROCK, SoundType.STONE, 3, 15, "pickaxe", 2, "oreAmethyst");
 	public static final Block garnet_ore = new ModBlockExp("garnet_ore", Material.ROCK, SoundType.STONE, 3, 15, "pickaxe", 2, "oreGarnet");
 	public static final Block moonstone_ore = new ModBlockExp("moonstone_ore", Material.ROCK, SoundType.STONE, 3, 15, "pickaxe", 2, "oreMoonstone");
+	public static final Block salt_ore = new ModBlockExp("salt_ore", Material.ROCK, SoundType.STONE, 3, 15, "pickaxe", 0, "oreSalt");
 	// Misc
 	public static final Block perpetual_ice = new ModBlock("perpetual_ice", Material.ICE, SoundType.GLASS, 0.5f, 2.5f, "", 0);
 	public static final Block nethersteel = new ModBlock("nethersteel", Material.IRON, SoundType.METAL, 5, 30, "pickaxe", 1, "blockNethersteel");
@@ -414,9 +416,9 @@ public class ModObjects {
 			if (obj instanceof Item) {
 				Item item = (Item) obj;
 				event.getRegistry().register(item);
-				if (obj == ModObjects.eye_of_old) Bewitchment.proxy.registerTextureEyeOfOld();
-				else if (obj == ModObjects.cold_iron_sword) Bewitchment.proxy.registerTextureColdIronSword();
-				else if (obj == ModObjects.waystone) Bewitchment.proxy.registerTextureWaystone();
+				if (obj == ModObjects.eye_of_old) Bewitchment.proxy.registerTextureWithVariant(item, Arrays.asList(s -> s.getDisplayName().equalsIgnoreCase("Haru") || s.getDisplayName().equalsIgnoreCase("Haruspex") || s.getDisplayName().equalsIgnoreCase("H4rv5p3x"), s -> s.getDisplayName().equalsIgnoreCase("Izuxe") || s.getDisplayName().equalsIgnoreCase("Izu") || s.getDisplayName().equalsIgnoreCase("Izuxe43ui520815")));
+				else if (obj == ModObjects.cold_iron_sword) Bewitchment.proxy.registerTextureWithVariant(item, Arrays.asList(s -> s.getDisplayName().equalsIgnoreCase("Hudson Bat") || s.getDisplayName().equalsIgnoreCase("Masashi Bat") || s.getDisplayName().equalsIgnoreCase("Emmanuel Bat") || s.getDisplayName().equalsIgnoreCase("Michael Bat") || s.getDisplayName().equalsIgnoreCase("Yoshihiro Bat") || s.getDisplayName().equalsIgnoreCase("Lewis Bat") || s.getDisplayName().equalsIgnoreCase("Katushiro Bat") || s.getDisplayName().equalsIgnoreCase("Ashley Bat")));
+				else if (obj == ModObjects.waystone) Bewitchment.proxy.registerTextureWithVariant(item, Arrays.asList(s -> s.hasTagCompound() && s.getTagCompound().hasKey("location")));
 				else Bewitchment.proxy.registerTexture(item, "normal");
 			}
 		}
