@@ -21,6 +21,8 @@ import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntitySerpent extends ModEntityMob {
 	public static final Animation BITE = Animation.create(10);
@@ -101,6 +103,17 @@ public class EntitySerpent extends ModEntityMob {
 	@Override
 	public boolean isPotionApplicable(PotionEffect effect) {
 		return effect.getPotion() != MobEffects.POISON && super.isPotionApplicable(effect);
+	}
+
+	@SideOnly(Side.CLIENT)
+	public int getBrightnessForRender()
+	{
+		return 15728880;
+	}
+
+
+	public float getBrightness() {
+		return 0.3F;
 	}
 
 	@Override

@@ -17,6 +17,8 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityHellhound extends ModEntityMob {
 	public static final Animation BITE = Animation.create(10);
@@ -54,6 +56,17 @@ public class EntityHellhound extends ModEntityMob {
 	@Override
 	protected int getSkinTypes() {
 		return 6;
+	}
+
+	@SideOnly(Side.CLIENT)
+	public int getBrightnessForRender()
+	{
+		return 15728880;
+	}
+
+
+	public float getBrightness() {
+		return 0.3F;
 	}
 
 	@Override

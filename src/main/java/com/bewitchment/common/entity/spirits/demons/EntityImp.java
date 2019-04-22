@@ -14,6 +14,8 @@ import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityImp extends ModEntityMob {
 	public EntityImp(World world) {
@@ -25,6 +27,17 @@ public class EntityImp extends ModEntityMob {
 		setPathPriority(PathNodeType.DANGER_FIRE, 0);
 		setPathPriority(PathNodeType.DAMAGE_FIRE, 0);
 		experienceValue = 100;
+	}
+
+	@SideOnly(Side.CLIENT)
+	public int getBrightnessForRender()
+	{
+		return 15728880;
+	}
+
+
+	public float getBrightness() {
+		return 0.3F;
 	}
 
 	@Override

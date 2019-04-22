@@ -11,6 +11,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityAlphaHellhound extends EntityHellhound {
 	private final BossInfoServer bossInfo = (BossInfoServer) (new BossInfoServer(getDisplayName(), BossInfo.Color.RED, BossInfo.Overlay.PROGRESS)).setDarkenSky(false);
@@ -33,6 +35,17 @@ public class EntityAlphaHellhound extends EntityHellhound {
 			}
 		}
 		return flag;
+	}
+
+	@SideOnly(Side.CLIENT)
+	public int getBrightnessForRender()
+	{
+		return 15728880;
+	}
+
+
+	public float getBrightness() {
+		return 0.3F;
 	}
 
 	@Override

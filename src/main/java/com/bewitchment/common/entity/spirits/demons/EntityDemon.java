@@ -21,6 +21,8 @@ import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityDemon extends ModEntityMob implements IMerchant {
 	public static final Animation TOSS = Animation.create(10);
@@ -118,6 +120,17 @@ public class EntityDemon extends ModEntityMob implements IMerchant {
 			}
 		}
 		return flag;
+	}
+
+	@SideOnly(Side.CLIENT)
+	public int getBrightnessForRender()
+	{
+		return 15728880;
+	}
+
+
+	public float getBrightness() {
+		return 0.3F;
 	}
 
 	@Override
