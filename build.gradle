@@ -2,7 +2,6 @@ buildscript {
     repositories {
 	jcenter()
 	maven {url = "http://files.minecraftforge.net/maven"}
-	maven {url = "https://minecraft.curseforge.com/api/maven"}
     }
     dependencies {
 	classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
@@ -33,6 +32,7 @@ repositories {
     maven {url = "http://dvs1.progwml6.com/files/maven"}
     maven {url = "https://minecraft.curseforge.com/api/maven"}
     maven {url "http://maven.tterrag.com"}
+    maven {url "https://maven.blamejared.com"}
 }
 
 dependencies {
@@ -41,7 +41,7 @@ dependencies {
 	deobfProvided "team.chisel:Chisel:MC1.12.2-0.2.1.35"
 	deobfProvided "thaumcraft:Thaumcraft:1.12.2:6.1.BETA26"
 	compile "baubles:Baubles:1.12:1.5.2"
-	compile "vazkii.patchouli:Patchouli:1.0-18"
+	compile "vazkii.patchouli:Patchouli:1.0-18.93"
 }
 
 processResources {
