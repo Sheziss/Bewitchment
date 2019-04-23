@@ -1,7 +1,6 @@
 package com.bewitchment.common.entity.spirits.demons;
 
 import com.bewitchment.Bewitchment;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;

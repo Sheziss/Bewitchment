@@ -1,7 +1,6 @@
 package com.bewitchment.common.entity.misc;
 
 import com.bewitchment.api.entity.misc.EntityBroom;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -10,31 +9,26 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-public class EntityYewBroom extends EntityBroom
-{
+public class EntityYewBroom extends EntityBroom {
 	public BlockPos originalPos;
 	public int originalDimension;
-	
-	public EntityYewBroom(World world)
-	{
+
+	public EntityYewBroom(World world) {
 		super(world);
 	}
-	
+
 	@Override
-	public boolean processInitialInteract(EntityPlayer player, EnumHand hand)
-	{
+	public boolean processInitialInteract(EntityPlayer player, EnumHand hand) {
 		boolean flag = super.processInitialInteract(player, hand);
-		if (flag)
-		{
+		if (flag) {
 			originalPos = getPosition();
 			originalDimension = player.dimension;
 		}
 		return flag;
 	}
-	
+
 	@Override
-	protected void handleMovement(Vec3d look, float front, float strafe, float up)
-	{
+	protected void handleMovement(Vec3d look, float front, float strafe, float up) {
 		if (front >= 0) {
 			motionX += 0.1 * look.x / 8;
 			motionY += 0.1 * look.y / 8;
@@ -46,22 +40,19 @@ public class EntityYewBroom extends EntityBroom
 			motionZ = limit.z;
 		}
 	}
-	
+
 	@Override
-	public void setDead()
-	{
-		if (isBeingRidden())
-		{
+	public void setDead() {
+		if (isBeingRidden()) {
 			Entity rider = getControllingPassenger();
-			if (rider != null && dimension == originalDimension)
-			{
+			if (rider != null && dimension == originalDimension) {
 				setPositionAndRotation(originalPos.getX(), originalPos.getY(), originalPos.getZ(), rotationYaw, rotationPitch);
 				rider.setPositionAndRotation(originalPos.getX(), originalPos.getY(), originalPos.getZ(), rider.rotationYaw, rider.rotationPitch);
 			}
 		}
 		super.setDead();
 	}
-	
+
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound tag) {
 		super.writeEntityToNBT(tag);

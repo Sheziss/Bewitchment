@@ -1,7 +1,6 @@
 package com.bewitchment.common.entity.util;
 
 import com.bewitchment.api.BewitchmentAPI;
-
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.nbt.NBTTagCompound;
@@ -43,15 +42,14 @@ public abstract class ModEntityMob extends EntityMob {
 		dataManager.set(SKIN, rand.nextInt(getSkinTypes()));
 		return super.onInitialSpawn(difficulty, data);
 	}
-	
+
 	@Override
 	public float getBrightness() {
 		return getCreatureAttribute() == BewitchmentAPI.DEMON ? 0.3f : super.getBrightness();
 	}
-	
+
 	@SideOnly(Side.CLIENT)
-	public int getBrightnessForRender()
-	{
+	public int getBrightnessForRender() {
 		return getCreatureAttribute() == BewitchmentAPI.DEMON ? 15728880 : super.getBrightnessForRender();
 	}
 

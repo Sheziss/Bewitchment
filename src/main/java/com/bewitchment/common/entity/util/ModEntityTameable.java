@@ -1,11 +1,6 @@
 package com.bewitchment.common.entity.util;
 
-import java.util.Set;
-
-import javax.annotation.Nullable;
-
 import com.google.common.collect.Sets;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.ai.EntityAISit;
@@ -24,6 +19,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
+
+import javax.annotation.Nullable;
+import java.util.Set;
 
 public abstract class ModEntityTameable extends EntityTameable {
 	public static final DataParameter<Integer> SKIN = EntityDataManager.createKey(ModEntityTameable.class, DataSerializers.VARINT);
