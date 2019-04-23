@@ -414,7 +414,6 @@ public class ModObjects {
 	// Food
 	public static final Item juniper_berries = new ModItemFood("juniper_berries", 1, 0.5f, false).setPotionEffect(new PotionEffect(MobEffects.POISON, 100, 0), 0.1f);
 	public static final Item yew_aril = new ModItemFood("yew_aril", 1, 0.5f, false).setPotionEffect(new PotionEffect(MobEffects.POISON, 100, 0), 0.1f);
-
 	// Mod Mob Drops
 	public static final Item blindworms_sting = new ModItem("blindworms_sting");
 	public static final Item lizard_leg = new ModItem("lizard_leg");
