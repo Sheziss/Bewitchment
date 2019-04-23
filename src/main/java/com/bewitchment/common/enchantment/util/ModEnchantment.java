@@ -22,7 +22,7 @@ public class ModEnchantment extends Enchantment {
 
 	public ModEnchantment(String name, Rarity rarity, int maxLevel) {
 		super(rarity, EnumEnchantmentType.WEARABLE, new EntityEquipmentSlot[]{});
-		setRegistryName(new ResourceLocation(Bewitchment.MOD_ID, name));
+		setRegistryName(new ResourceLocation(Bewitchment.MODID, name));
 		setName(getRegistryName().toString().replace(":", "."));
 		this.maxLevel = maxLevel;
 		ModEnchantments.REGISTRY.add(this);

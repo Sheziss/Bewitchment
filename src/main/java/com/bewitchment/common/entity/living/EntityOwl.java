@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 
 public class EntityOwl extends EntityRaven {
 	public EntityOwl(World world) {
-		super(world, new ResourceLocation(Bewitchment.MOD_ID, "entities/owl"), Items.RABBIT, Items.CHICKEN);
+		super(world, new ResourceLocation(Bewitchment.MODID, "entities/owl"), Items.RABBIT, Items.CHICKEN);
 		setSize(0.4f, 0.9f);
 		moveHelper = new EntityFlyHelper(this);
 	}

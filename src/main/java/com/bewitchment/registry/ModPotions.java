@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-@EventBusSubscriber(modid = Bewitchment.MOD_ID)
+@EventBusSubscriber(modid = Bewitchment.MODID)
 public class ModPotions {
 	public static final List<Potion> REGISTRY = new ArrayList<>();
 

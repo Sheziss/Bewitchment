@@ -22,7 +22,7 @@ import java.util.Arrays;
 
 public class RitualConjureMagmaCube extends Ritual {
 	public RitualConjureMagmaCube() {
-		super(Bewitchment.MOD_ID, "conjure_magma_cube",
+		super(Bewitchment.MODID, "conjure_magma_cube",
 				Arrays.asList(
 						Ingredient.fromStacks(new ItemStack(ModObjects.athame, 1, Short.MAX_VALUE)),
 						Ingredient.fromStacks(new ItemStack(Items.BLAZE_POWDER)),

@@ -22,7 +22,7 @@ import java.util.Arrays;
 
 public class RitualConjureVex extends Ritual {
 	public RitualConjureVex() {
-		super(Bewitchment.MOD_ID, "conjure_vex",
+		super(Bewitchment.MODID, "conjure_vex",
 				Arrays.asList(
 						Ingredient.fromStacks(new ItemStack(ModObjects.athame, 1, Short.MAX_VALUE)),
 						Ingredient.fromStacks(new ItemStack(Items.APPLE)),

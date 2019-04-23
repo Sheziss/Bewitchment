@@ -30,7 +30,7 @@ import net.minecraft.world.World;
 
 public class EntityBlackDog extends ModEntityMob {
 	public EntityBlackDog(World world) {
-		super(world, new ResourceLocation(Bewitchment.MOD_ID, "entities/black_dog"));
+		super(world, new ResourceLocation(Bewitchment.MODID, "entities/black_dog"));
 		setSize(1.08f, 1.53f);
 		experienceValue = 35;
 	}

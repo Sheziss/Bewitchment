@@ -22,7 +22,7 @@ import java.util.Arrays;
 
 public class RitualConjureGhast extends Ritual {
 	public RitualConjureGhast() {
-		super(Bewitchment.MOD_ID, "conjure_ghast",
+		super(Bewitchment.MODID, "conjure_ghast",
 				Arrays.asList(
 						Ingredient.fromStacks(new ItemStack(ModObjects.athame, 1, Short.MAX_VALUE)),
 						Ingredient.fromStacks(Bewitchment.proxy.getOres("dustGlowstone")),

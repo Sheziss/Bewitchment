@@ -20,7 +20,7 @@ import java.util.Arrays;
 
 public class RitualSolarGlory extends Ritual {
 	public RitualSolarGlory() {
-		super(Bewitchment.MOD_ID, "solar_glory",
+		super(Bewitchment.MODID, "solar_glory",
 				Arrays.asList(
 						Ingredient.fromStacks(Bewitchment.proxy.getOres("ingotGold")),
 						Ingredient.fromStacks(new ItemStack(Items.NETHERBRICK)),

@@ -9,7 +9,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiDistillery extends GuiContainer {
-	private static final ResourceLocation TEX = new ResourceLocation(Bewitchment.MOD_ID, "textures/gui/distillery.png");
+	private static final ResourceLocation TEX = new ResourceLocation(Bewitchment.MODID, "textures/gui/distillery.png");
 
 	private final ContainerDistillery container;
 

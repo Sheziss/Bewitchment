@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class FortuneDropItem extends Fortune {
 	public FortuneDropItem() {
-		super(Bewitchment.MOD_ID, "drop_item", 7);
+		super(Bewitchment.MODID, "drop_item", 7);
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 

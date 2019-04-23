@@ -11,7 +11,7 @@ import net.minecraft.util.math.BlockPos;
 
 public class FortuneMeetDemon extends Fortune {
 	public FortuneMeetDemon() {
-		super(Bewitchment.MOD_ID, "meet_demon", 2);
+		super(Bewitchment.MODID, "meet_demon", 2);
 	}
 
 	@Override

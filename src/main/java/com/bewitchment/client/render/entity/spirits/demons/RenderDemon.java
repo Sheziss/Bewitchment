@@ -13,12 +13,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderDemon extends RenderLiving<EntityDemon> {
 	private static final ResourceLocation[] TEX = {
-			new ResourceLocation(Bewitchment.MOD_ID, "textures/entity/demon_0.png"),
-			new ResourceLocation(Bewitchment.MOD_ID, "textures/entity/demon_1.png"),
-			new ResourceLocation(Bewitchment.MOD_ID, "textures/entity/demon_2.png"),
-			new ResourceLocation(Bewitchment.MOD_ID, "textures/entity/demon_3.png"),
-			new ResourceLocation(Bewitchment.MOD_ID, "textures/entity/demon_4.png"),
-			new ResourceLocation(Bewitchment.MOD_ID, "textures/entity/demon_5.png")};
+			new ResourceLocation(Bewitchment.MODID, "textures/entity/demon_0.png"),
+			new ResourceLocation(Bewitchment.MODID, "textures/entity/demon_1.png"),
+			new ResourceLocation(Bewitchment.MODID, "textures/entity/demon_2.png"),
+			new ResourceLocation(Bewitchment.MODID, "textures/entity/demon_3.png"),
+			new ResourceLocation(Bewitchment.MODID, "textures/entity/demon_4.png"),
+			new ResourceLocation(Bewitchment.MODID, "textures/entity/demon_5.png")};
 
 	public RenderDemon(RenderManager manager) {
 		super(manager, new ModelDemon(), 0.3f);

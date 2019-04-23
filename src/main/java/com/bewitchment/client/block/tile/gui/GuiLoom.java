@@ -9,7 +9,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiLoom extends GuiContainer {
-	private static final ResourceLocation TEX = new ResourceLocation(Bewitchment.MOD_ID, "textures/gui/loom.png");
+	private static final ResourceLocation TEX = new ResourceLocation(Bewitchment.MODID, "textures/gui/loom.png");
 
 	private final ContainerLoom container;
 

@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 public class ModelGirdleOfTheDryad extends ModelBase {
-	public static final ResourceLocation TEXTURE = new ResourceLocation(Bewitchment.MOD_ID, "textures/models/bauble/girdle_of_the_dryad.png");
+	public static final ResourceLocation TEXTURE = new ResourceLocation(Bewitchment.MODID, "textures/models/bauble/girdle_of_the_dryad.png");
 
 	public ModelRenderer rootRight1;
 	public ModelRenderer rootLeft1;

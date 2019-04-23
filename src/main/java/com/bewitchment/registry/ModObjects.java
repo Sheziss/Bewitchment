@@ -124,18 +124,18 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import team.chisel.api.carving.CarvingUtils;
 
-@EventBusSubscriber(modid = Bewitchment.MOD_ID)
+@EventBusSubscriber(modid = Bewitchment.MODID)
 public class ModObjects {
 	public static final List<Object> REGISTRY = new ArrayList<>();
 
-	public static final ArmorMaterial ARMOR_COLD_IRON = EnumHelper.addArmorMaterial("cold_iron", Bewitchment.MOD_ID + ":" + "cold_iron", 15, new int[]{2, 5, 6, 2}, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0);
-	public static final ArmorMaterial ARMOR_SILVER = EnumHelper.addArmorMaterial("silver", Bewitchment.MOD_ID + ":" + "silver", 7, new int[]{1, 3, 5, 2}, 25, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 0);
+	public static final ArmorMaterial ARMOR_COLD_IRON = EnumHelper.addArmorMaterial("cold_iron", Bewitchment.MODID + ":" + "cold_iron", 15, new int[]{2, 5, 6, 2}, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0);
+	public static final ArmorMaterial ARMOR_SILVER = EnumHelper.addArmorMaterial("silver", Bewitchment.MODID + ":" + "silver", 7, new int[]{1, 3, 5, 2}, 25, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 0);
 
 	public static final ToolMaterial TOOL_COLD_IRON = EnumHelper.addToolMaterial("cold_iron", 2, 250, 6, 2, 14);
 	public static final ToolMaterial TOOL_SILVER = EnumHelper.addToolMaterial("silver", 1, 32, 12, 0, 22);
 
-	public static final ArmorMaterial ARMOR_BEWITCHED_LEATHER = EnumHelper.addArmorMaterial("bewitched_leather", Bewitchment.MOD_ID + ":" + "bewitched_leather", 24, new int[]{1, 4, 5, 1}, 22, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1.5f);
-	public static final ArmorMaterial ARMOR_VAMPIRE = EnumHelper.addArmorMaterial("vampire", Bewitchment.MOD_ID + ":" + "vampire", 9, new int[]{2, 6, 7, 1}, 22, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1.25f);
+	public static final ArmorMaterial ARMOR_BEWITCHED_LEATHER = EnumHelper.addArmorMaterial("bewitched_leather", Bewitchment.MODID + ":" + "bewitched_leather", 24, new int[]{1, 4, 5, 1}, 22, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1.5f);
+	public static final ArmorMaterial ARMOR_VAMPIRE = EnumHelper.addArmorMaterial("vampire", Bewitchment.MODID + ":" + "vampire", 9, new int[]{2, 6, 7, 1}, 22, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1.25f);
 
 	// Fluids
 	public static final Fluid fluid_magic_oil = createFluid("magic_oil", Material.WATER, 0, 0, 800, 4000, true, true);
@@ -344,11 +344,11 @@ public class ModObjects {
 	public static final Item chalk_nether = new ItemChalk("chalk_nether");
 	public static final Item chalk_ender = new ItemChalk("chalk_ender");
 	// Brooms
-	public static final Item broom = new ItemBroom(Bewitchment.MOD_ID, "broom", Bewitchment.proxy.tab, null);
-	public static final Item broom_cypress = new ItemBroom(Bewitchment.MOD_ID, "broom_cypress", Bewitchment.proxy.tab, ModEntities.entity_cypress_broom);
-	public static final Item broom_elder = new ItemBroom(Bewitchment.MOD_ID, "broom_elder", Bewitchment.proxy.tab, ModEntities.entity_elder_broom);
-	public static final Item broom_juniper = new ItemBroom(Bewitchment.MOD_ID, "broom_juniper", Bewitchment.proxy.tab, ModEntities.entity_juniper_broom);
-	public static final Item broom_yew = new ItemBroom(Bewitchment.MOD_ID, "broom_yew", Bewitchment.proxy.tab, ModEntities.entity_yew_broom);
+	public static final Item broom = new ItemBroom(Bewitchment.MODID, "broom", Bewitchment.proxy.tab, null);
+	public static final Item broom_cypress = new ItemBroom(Bewitchment.MODID, "broom_cypress", Bewitchment.proxy.tab, ModEntities.entity_cypress_broom);
+	public static final Item broom_elder = new ItemBroom(Bewitchment.MODID, "broom_elder", Bewitchment.proxy.tab, ModEntities.entity_elder_broom);
+	public static final Item broom_juniper = new ItemBroom(Bewitchment.MODID, "broom_juniper", Bewitchment.proxy.tab, ModEntities.entity_juniper_broom);
+	public static final Item broom_yew = new ItemBroom(Bewitchment.MODID, "broom_yew", Bewitchment.proxy.tab, ModEntities.entity_yew_broom);
 	// Material Items
 	public static final Item cold_iron_ingot = new ModItem("cold_iron_ingot", "ingotColdIron");
 	public static final Item silver_ingot = new ModItem("silver_ingot", "ingotSilver");
@@ -513,9 +513,9 @@ public class ModObjects {
 
 	private static final Fluid createFluid(String name, Material mat, int temperature, int luminosity, int density, int viscosity, boolean useBucket, boolean useFlowTexture) {
 		if (!FluidRegistry.isFluidRegistered(name)) {
-			Fluid fluid = new Fluid(name, new ResourceLocation(Bewitchment.MOD_ID, "blocks/fluid/" + name + "_still"), new ResourceLocation(Bewitchment.MOD_ID, "blocks/fluid/" + name + (useFlowTexture ? "_flowing" : "_still"))).setTemperature(temperature).setLuminosity(luminosity).setDensity(density).setViscosity(viscosity);
+			Fluid fluid = new Fluid(name, new ResourceLocation(Bewitchment.MODID, "blocks/fluid/" + name + "_still"), new ResourceLocation(Bewitchment.MODID, "blocks/fluid/" + name + (useFlowTexture ? "_flowing" : "_still"))).setTemperature(temperature).setLuminosity(luminosity).setDensity(density).setViscosity(viscosity);
 			FluidRegistry.registerFluid(fluid);
-			Block block = new BlockFluidClassic(fluid, mat).setTemperature(temperature).setDensity(density).setRegistryName(new ResourceLocation(Bewitchment.MOD_ID, "fluid_" + name)).setTranslationKey(fluid.getUnlocalizedName());
+			Block block = new BlockFluidClassic(fluid, mat).setTemperature(temperature).setDensity(density).setRegistryName(new ResourceLocation(Bewitchment.MODID, "fluid_" + name)).setTranslationKey(fluid.getUnlocalizedName());
 			fluid.setBlock(block);
 			if (useBucket) FluidRegistry.addBucketForFluid(fluid);
 			Bewitchment.proxy.registerTexture(fluid);

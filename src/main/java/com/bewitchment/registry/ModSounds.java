@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-@EventBusSubscriber(modid = Bewitchment.MOD_ID)
+@EventBusSubscriber(modid = Bewitchment.MODID)
 public class ModSounds {
 	public static final List<SoundEvent> REGISTRY = new ArrayList<>();
 	
@@ -28,7 +28,7 @@ public class ModSounds {
 	}
 
 	private static final SoundEvent createSoundEvent(String name) {
-		ResourceLocation id = new ResourceLocation(Bewitchment.MOD_ID, name);
+		ResourceLocation id = new ResourceLocation(Bewitchment.MODID, name);
 		SoundEvent event = new SoundEvent(id).setRegistryName(id);
 		REGISTRY.add(event);
 		return event;

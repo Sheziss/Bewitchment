@@ -9,7 +9,7 @@ import net.minecraft.util.math.BlockPos;
 // Oh, this is one of those onion things, isn't it?
 public class FortuneMeetDonkey extends Fortune {
 	public FortuneMeetDonkey() {
-		super(Bewitchment.MOD_ID, "meet_donkey", 2);
+		super(Bewitchment.MODID, "meet_donkey", 2);
 	}
 
 	@Override

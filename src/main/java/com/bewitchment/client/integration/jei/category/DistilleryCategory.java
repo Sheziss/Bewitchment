@@ -26,7 +26,7 @@ public class DistilleryCategory implements IRecipeCategory<DistilleryWrapper> {
 	private IDrawable bg;
 
 	public DistilleryCategory(IGuiHelper helper) {
-		bg = helper.drawableBuilder(new ResourceLocation(Bewitchment.MOD_ID, "textures/gui/jei_distillery.png"), 0, 0, 93, 54).setTextureSize(93, 54).build();
+		bg = helper.drawableBuilder(new ResourceLocation(Bewitchment.MODID, "textures/gui/jei_distillery.png"), 0, 0, 93, 54).setTextureSize(93, 54).build();
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class DistilleryCategory implements IRecipeCategory<DistilleryWrapper> {
 
 	@Override
 	public String getModName() {
-		return Bewitchment.MOD_NAME;
+		return Bewitchment.NAME;
 	}
 
 	@Override

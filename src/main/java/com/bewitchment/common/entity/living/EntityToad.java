@@ -43,7 +43,7 @@ public class EntityToad extends ModEntityTameable {
 	public static final DataParameter<Float> ANIMATION_HEIGHT = EntityDataManager.createKey(EntityToad.class, DataSerializers.FLOAT);
 
 	public EntityToad(World world) {
-		super(world, new ResourceLocation(Bewitchment.MOD_ID, "entities/toad"), Items.SPIDER_EYE, Items.FERMENTED_SPIDER_EYE, ModObjects.silver_scales, ModObjects.envenomed_fang);
+		super(world, new ResourceLocation(Bewitchment.MODID, "entities/toad"), Items.SPIDER_EYE, Items.FERMENTED_SPIDER_EYE, ModObjects.silver_scales, ModObjects.envenomed_fang);
 		setSize(1, 0.3f);
 	}
 

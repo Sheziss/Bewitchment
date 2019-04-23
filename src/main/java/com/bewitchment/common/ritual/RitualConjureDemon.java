@@ -25,7 +25,7 @@ import java.util.Arrays;
 
 public class RitualConjureDemon extends Ritual {
 	public RitualConjureDemon() {
-		super(Bewitchment.MOD_ID, "conjure_demon",
+		super(Bewitchment.MODID, "conjure_demon",
 				Arrays.asList(
 						Ingredient.fromStacks(new ItemStack(ModObjects.athame, 1, Short.MAX_VALUE)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.heart)),

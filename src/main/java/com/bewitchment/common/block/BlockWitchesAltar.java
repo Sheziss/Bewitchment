@@ -41,7 +41,7 @@ public class BlockWitchesAltar extends ModBlockContainer {
 
 	public BlockWitchesAltar(String color) {
 		super(null, "witches_altar" + (color.isEmpty() ? "" : "_" + color), Material.ROCK, SoundType.STONE, 2, 30, "pickaxe", 0, -1);
-		setTranslationKey(new ResourceLocation(Bewitchment.MOD_ID, "witches_altar").toString().replace(":", "."));
+		setTranslationKey(new ResourceLocation(Bewitchment.MODID, "witches_altar").toString().replace(":", "."));
 		setDefaultState(blockState.getBaseState().withProperty(TYPE, AltarType.UNFORMED));
 	}
 

@@ -16,7 +16,7 @@ import java.util.Arrays;
 
 public class RitualHighMoon extends Ritual {
 	public RitualHighMoon() {
-		super(Bewitchment.MOD_ID, "high_moon",
+		super(Bewitchment.MODID, "high_moon",
 				Arrays.asList(
 						Ingredient.fromStacks(Bewitchment.proxy.getOres("ingotSilver")),
 						Ingredient.fromStacks(new ItemStack(Items.NETHERBRICK)),

@@ -26,9 +26,9 @@ public class BewitchmentAPI {
 	public static final IForgeRegistry<LoomRecipe> REGISTRY_LOOM = new RegistryBuilder<LoomRecipe>().setName(ModObjects.loom.getRegistryName()).setType(LoomRecipe.class).create();
 	public static final IForgeRegistry<OvenRecipe> REGISTRY_OVEN = new RegistryBuilder<OvenRecipe>().setName(ModObjects.oven.getRegistryName()).setType(OvenRecipe.class).create();
 	public static final IForgeRegistry<Ritual> REGISTRY_RITUAL = new RegistryBuilder<Ritual>().setName(ModObjects.glyph.getRegistryName()).setType(Ritual.class).create();
-	public static final IForgeRegistry<Spell> REGISTRY_SPELL = new RegistryBuilder<Spell>().setName(new ResourceLocation(Bewitchment.MOD_ID, "spell")).setType(Spell.class).create();
+	public static final IForgeRegistry<Spell> REGISTRY_SPELL = new RegistryBuilder<Spell>().setName(new ResourceLocation(Bewitchment.MODID, "spell")).setType(Spell.class).create();
 
-	public static final IForgeRegistry<Fortune> REGISTRY_FORTUNE = new RegistryBuilder<Fortune>().setName(new ResourceLocation(Bewitchment.MOD_ID, "fortune")).setType(Fortune.class).create();
+	public static final IForgeRegistry<Fortune> REGISTRY_FORTUNE = new RegistryBuilder<Fortune>().setName(new ResourceLocation(Bewitchment.MODID, "fortune")).setType(Fortune.class).create();
 
 	/**
 	 * The Demon creature attribute.

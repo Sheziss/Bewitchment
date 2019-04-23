@@ -34,12 +34,12 @@ import org.apache.logging.log4j.Logger;
 //ZIIREV SVIV, YVZIRMT SLHGRORGRVH
 //GSVB DROO YV NVG DRGS DIZGS
 
-@Mod(modid = Bewitchment.MOD_ID, name = Bewitchment.MOD_NAME, version = Bewitchment.MOD_VERSION)
+@Mod(modid = Bewitchment.MODID, name = Bewitchment.NAME, version = Bewitchment.VERSION)
 public class Bewitchment {
-	public static final String MOD_ID = "bewitchment", MOD_NAME = "Bewitchment", MOD_VERSION = "0.20-rewrite";
-	public static final Logger LOGGER = LogManager.getLogger(MOD_NAME);
+	public static final String MODID = "bewitchment", NAME = "Bewitchment", VERSION = "0.20-rewrite";
+	public static final Logger LOGGER = LogManager.getLogger(NAME);
 
-	@Instance(Bewitchment.MOD_ID)
+	@Instance(Bewitchment.MODID)
 	public static Bewitchment instance;
 
 	@SidedProxy(serverSide = "com.bewitchment.common.CommonProxy", clientSide = "com.bewitchment.client.ClientProxy")

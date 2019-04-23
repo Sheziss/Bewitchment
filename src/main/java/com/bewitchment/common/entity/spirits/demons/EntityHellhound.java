@@ -25,7 +25,7 @@ import net.minecraft.world.World;
 
 public class EntityHellhound extends ModEntityMob {
 	public EntityHellhound(World world) {
-		this(world, new ResourceLocation(Bewitchment.MOD_ID, "entities/hellhound"));
+		this(world, new ResourceLocation(Bewitchment.MODID, "entities/hellhound"));
 	}
 
 	protected EntityHellhound(World world, ResourceLocation lootTableLocation) {

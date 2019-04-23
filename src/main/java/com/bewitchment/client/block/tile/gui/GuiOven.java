@@ -12,7 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiOven extends GuiContainer {
-	private static final ResourceLocation TEX = new ResourceLocation(Bewitchment.MOD_ID, "textures/gui/oven.png");
+	private static final ResourceLocation TEX = new ResourceLocation(Bewitchment.MODID, "textures/gui/oven.png");
 
 	private final InventoryPlayer inventory;
 	private final ContainerOven container;

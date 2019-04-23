@@ -13,7 +13,7 @@ import java.util.Arrays;
 
 public class RitualSandsOfTime extends Ritual {
 	public RitualSandsOfTime() {
-		super(Bewitchment.MOD_ID, "sands_of_time",
+		super(Bewitchment.MODID, "sands_of_time",
 				Arrays.asList(
 						Ingredient.fromStacks(Bewitchment.proxy.getOres("sand")),
 						Ingredient.fromStacks(Bewitchment.proxy.getOres("oreDiamond"))),

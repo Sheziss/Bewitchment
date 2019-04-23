@@ -8,7 +8,7 @@ import net.minecraft.potion.PotionEffect;
 
 public class FortuneBadLuck extends Fortune {
 	public FortuneBadLuck() {
-		super(Bewitchment.MOD_ID, "bad_luck", 3);
+		super(Bewitchment.MODID, "bad_luck", 3);
 	}
 
 	@Override

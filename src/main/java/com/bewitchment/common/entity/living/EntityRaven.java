@@ -40,7 +40,7 @@ import net.minecraft.world.World;
 
 public class EntityRaven extends ModEntityTameable {
 	public EntityRaven(World world) {
-		this(world, new ResourceLocation(Bewitchment.MOD_ID, "entities/raven"), Items.GOLD_NUGGET, ModObjects.silver_nugget);
+		this(world, new ResourceLocation(Bewitchment.MODID, "entities/raven"), Items.GOLD_NUGGET, ModObjects.silver_nugget);
 	}
 
 	protected EntityRaven(World world, ResourceLocation lootTableLocation, Item... tameItems) {

@@ -28,7 +28,7 @@ import java.util.List;
 public class FortuneTreasure extends Fortune {
 
 	public FortuneTreasure() {
-		super(Bewitchment.MOD_ID, "treasure", 3);
+		super(Bewitchment.MODID, "treasure", 3);
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class FortuneTreasure extends Fortune {
 			if (cap.isFortuneActive()) {
 				Block block = evt.getState().getBlock();
 				if (block == Blocks.DIRT || block == Blocks.GRASS || block == Blocks.SAND || block == Blocks.MYCELIUM || block == Blocks.GRAVEL || block == Blocks.SOUL_SAND) {
-					LootTable lt = evt.getWorld().getLootTableManager().getLootTableFromLocation(new ResourceLocation(Bewitchment.MOD_ID, "chests/materials"));
+					LootTable lt = evt.getWorld().getLootTableManager().getLootTableFromLocation(new ResourceLocation(Bewitchment.MODID, "chests/materials"));
 					LootContext lc = (new LootContext.Builder((WorldServer) evt.getWorld()).withLuck(evt.getPlayer().getLuck()).withPlayer(evt.getPlayer())).build();
 					List<ItemStack> spawn = lt.generateLootForPools(evt.getPlayer().getRNG(), lc);
 					spawn.forEach(s -> spawn(s, evt.getWorld(), evt.getPos()));

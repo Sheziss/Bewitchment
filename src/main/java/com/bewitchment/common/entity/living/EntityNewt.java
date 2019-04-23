@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 
 public class EntityNewt extends ModEntityAnimal {
 	public EntityNewt(World world) {
-		super(world, new ResourceLocation(Bewitchment.MOD_ID, "entities/newt"));
+		super(world, new ResourceLocation(Bewitchment.MODID, "entities/newt"));
 		setSize(1, 0.3f);
 	}
 

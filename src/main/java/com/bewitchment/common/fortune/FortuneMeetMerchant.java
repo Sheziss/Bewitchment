@@ -11,7 +11,7 @@ import java.util.Random;
 
 public class FortuneMeetMerchant extends Fortune {
 	public FortuneMeetMerchant() {
-		super(Bewitchment.MOD_ID, "meet_merchant", 6);
+		super(Bewitchment.MODID, "meet_merchant", 6);
 	}
 
 	@Override

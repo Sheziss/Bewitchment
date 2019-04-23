@@ -17,7 +17,7 @@ public class EntityAlphaHellhound extends EntityHellhound {
 	private final BossInfoServer bossInfo = (BossInfoServer) (new BossInfoServer(getDisplayName(), BossInfo.Color.RED, BossInfo.Overlay.PROGRESS)).setDarkenSky(false);
 
 	public EntityAlphaHellhound(World world) {
-		super(world, new ResourceLocation(Bewitchment.MOD_ID, "entities/alpha_hellhound"));
+		super(world, new ResourceLocation(Bewitchment.MODID, "entities/alpha_hellhound"));
 		setSize(0.96f, 1.36f);
 		experienceValue = 65;
 		bossInfo.setName(getDisplayName());

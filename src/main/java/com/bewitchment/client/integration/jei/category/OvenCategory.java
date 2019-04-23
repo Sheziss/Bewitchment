@@ -23,7 +23,7 @@ public class OvenCategory implements IRecipeCategory<OvenWrapper> {
 	private IDrawable bg;
 
 	public OvenCategory(IGuiHelper helper) {
-		bg = helper.drawableBuilder(new ResourceLocation(Bewitchment.MOD_ID, "textures/gui/jei_oven.png"), 0, 0, 82, 54).setTextureSize(82, 54).build();
+		bg = helper.drawableBuilder(new ResourceLocation(Bewitchment.MODID, "textures/gui/jei_oven.png"), 0, 0, 82, 54).setTextureSize(82, 54).build();
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class OvenCategory implements IRecipeCategory<OvenWrapper> {
 
 	@Override
 	public String getModName() {
-		return Bewitchment.MOD_NAME;
+		return Bewitchment.NAME;
 	}
 
 	@Override

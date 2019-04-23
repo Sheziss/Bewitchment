@@ -1,7 +1,5 @@
 package com.bewitchment.api.entity.misc;
 
-import java.lang.reflect.Field;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -86,12 +84,7 @@ public abstract class EntityBroom extends Entity {
 		EntityPlayer rider = (EntityPlayer) getControllingPassenger();
 		if (isBeingRidden()) {
 			if (rider != null) {
-				float front = rider.moveForward, strafe = rider.moveStrafing, up = 0;
-				try {
-					up = jumpField("field_70703_bu", "isJumping", EntityLivingBase.class).getBoolean(rider) ? 1 : 0;
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				float front = rider.moveForward, strafe = rider.moveStrafing, up = ObfuscationReflectionHelper.getPrivateValue(EntityLivingBase.class, rider, 49);
 				handleMovement(rider.getLookVec(), front, strafe, up);
 			}
 		}
@@ -132,12 +125,4 @@ public abstract class EntityBroom extends Entity {
 	}
 	
 	protected abstract void handleMovement(Vec3d look, float front, float strafe, float up);
-	
-	protected static Field jumpField(String isJumping, String field, Class<EntityLivingBase> base) {
-		try {
-			return ObfuscationReflectionHelper.findField(base, field);
-		} catch (Exception e) {
-			return ObfuscationReflectionHelper.findField(base, isJumping);
-		}
-	}
 }

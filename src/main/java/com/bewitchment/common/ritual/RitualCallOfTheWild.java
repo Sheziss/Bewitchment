@@ -22,7 +22,7 @@ import java.util.Arrays;
 
 public class RitualCallOfTheWild extends Ritual {
 	public RitualCallOfTheWild() {
-		super(Bewitchment.MOD_ID, "call_of_the_wild",
+		super(Bewitchment.MODID, "call_of_the_wild",
 				Arrays.asList(
 						Ingredient.fromStacks(new ItemStack(ModObjects.oak_spirit)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.spruce_heart)),

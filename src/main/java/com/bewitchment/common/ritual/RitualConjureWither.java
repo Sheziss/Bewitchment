@@ -23,7 +23,7 @@ import java.util.Arrays;
 
 public class RitualConjureWither extends Ritual {
 	public RitualConjureWither() {
-		super(Bewitchment.MOD_ID, "conjure_wither",
+		super(Bewitchment.MODID, "conjure_wither",
 				Arrays.asList(
 						Ingredient.fromStacks(new ItemStack(ModObjects.athame, 1, Short.MAX_VALUE)),
 						Ingredient.fromStacks(new ItemStack(Items.SKULL, 1, 1)),

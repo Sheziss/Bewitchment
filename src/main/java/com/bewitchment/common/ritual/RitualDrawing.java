@@ -20,7 +20,7 @@ public class RitualDrawing extends Ritual {
 	private GlyphType type;
 
 	public RitualDrawing(String name, List<Ingredient> inputItems, int time, int starting_power, int running_power, GlyphType small, GlyphType medium, GlyphType big, int[][] circle) {
-		super(Bewitchment.MOD_ID, name, inputItems, Arrays.asList(), Arrays.asList(), time, starting_power, running_power, small, medium, big);
+		super(Bewitchment.MODID, name, inputItems, Arrays.asList(), Arrays.asList(), time, starting_power, running_power, small, medium, big);
 		this.circle = circle;
 	}
 

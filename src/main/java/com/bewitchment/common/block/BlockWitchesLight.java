@@ -20,7 +20,7 @@ import java.util.Random;
 public class BlockWitchesLight extends BlockAir {
 	public BlockWitchesLight() {
 		super();
-		setRegistryName(Bewitchment.MOD_ID, "witches_light");
+		setRegistryName(Bewitchment.MODID, "witches_light");
 		ModObjects.REGISTRY.add(this);
 	}
 

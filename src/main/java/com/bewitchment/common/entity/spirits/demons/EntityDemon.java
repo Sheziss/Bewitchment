@@ -37,7 +37,7 @@ public class EntityDemon extends ModEntityMob implements IMerchant {
 	private int careerID, careerLevel, wealth;
 
 	public EntityDemon(World world) {
-		super(world, new ResourceLocation(Bewitchment.MOD_ID, "entities/demon"));
+		super(world, new ResourceLocation(Bewitchment.MODID, "entities/demon"));
 		setSize(1.8f, 4.6f);
 		isImmuneToFire = true;
 		setPathPriority(PathNodeType.WATER, -1);

@@ -43,7 +43,7 @@ public class EntitySnake extends ModEntityTameable {
 	private int milkTimer = 0;
 
 	public EntitySnake(World world) {
-		super(world, new ResourceLocation(Bewitchment.MOD_ID, "entities/snake"), Items.CHICKEN, Items.RABBIT);
+		super(world, new ResourceLocation(Bewitchment.MODID, "entities/snake"), Items.CHICKEN, Items.RABBIT);
 		setSize(1, 0.3f);
 	}
 

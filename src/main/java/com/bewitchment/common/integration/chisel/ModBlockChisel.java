@@ -19,7 +19,7 @@ public class ModBlockChisel extends ModBlock {
 
 	public ModBlockChisel(String name, Block base) {
 		super(base.getDefaultState().getMaterial());
-		Bewitchment.proxy.registerValues(this, base.getTranslationKey().substring(6 + Bewitchment.MOD_ID.length(), base.getTranslationKey().length()) + "_" + name, base, Bewitchment.proxy.toArray(base instanceof IOreDictionaryContainer ? ((IOreDictionaryContainer) base).getOreDictionaryNames() : Arrays.asList("")));
+		Bewitchment.proxy.registerValues(this, base.getTranslationKey().substring(6 + Bewitchment.MODID.length(), base.getTranslationKey().length()) + "_" + name, base, Bewitchment.proxy.toArray(base instanceof IOreDictionaryContainer ? ((IOreDictionaryContainer) base).getOreDictionaryNames() : Arrays.asList("")));
 		setTranslationKey(base.getTranslationKey().substring(5));
 		String finalName = "";
 		for (String s : name.split("_"))

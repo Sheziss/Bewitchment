@@ -35,7 +35,7 @@ public class EntitySerpent extends ModEntityMob {
 	private int milkTimer;
 
 	public EntitySerpent(World world) {
-		super(world, new ResourceLocation(Bewitchment.MOD_ID, "entities/snake"));
+		super(world, new ResourceLocation(Bewitchment.MODID, "entities/snake"));
 		setSize(1, 0.85f);
 		isImmuneToFire = true;
 		setPathPriority(PathNodeType.WATER, -1);

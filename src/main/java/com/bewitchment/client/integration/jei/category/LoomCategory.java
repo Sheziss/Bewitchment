@@ -26,7 +26,7 @@ public class LoomCategory implements IRecipeCategory<LoomWrapper> {
 	private IDrawable bg;
 
 	public LoomCategory(IGuiHelper helper) {
-		bg = helper.drawableBuilder(new ResourceLocation(Bewitchment.MOD_ID, "textures/gui/jei_loom.png"), 0, 0, 90, 36).setTextureSize(90, 36).build();
+		bg = helper.drawableBuilder(new ResourceLocation(Bewitchment.MODID, "textures/gui/jei_loom.png"), 0, 0, 90, 36).setTextureSize(90, 36).build();
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class LoomCategory implements IRecipeCategory<LoomWrapper> {
 
 	@Override
 	public String getModName() {
-		return Bewitchment.MOD_NAME;
+		return Bewitchment.NAME;
 	}
 
 	@Override

@@ -19,7 +19,7 @@ import java.util.Arrays;
 
 public class RitualPerception extends Ritual {
 	public RitualPerception() {
-		super(Bewitchment.MOD_ID, "perception",
+		super(Bewitchment.MODID, "perception",
 				Arrays.asList(
 						Ingredient.fromStacks(Bewitchment.proxy.getOres("glowstone")),
 						Ingredient.fromStacks(new ItemStack(Items.GOLDEN_CARROT))),

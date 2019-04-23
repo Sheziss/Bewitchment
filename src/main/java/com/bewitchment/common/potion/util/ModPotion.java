@@ -9,13 +9,13 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ModPotion extends Potion {
-	public static final ResourceLocation EXTRA_EFFECTS_ALT = new ResourceLocation(Bewitchment.MOD_ID, "textures/gui/potions.png");
+	public static final ResourceLocation EXTRA_EFFECTS_ALT = new ResourceLocation(Bewitchment.MODID, "textures/gui/potions.png");
 
 	private final boolean instant;
 
 	public ModPotion(String name, boolean is_bad, int color, boolean instant) {
 		super(is_bad, color);
-		setRegistryName(Bewitchment.MOD_ID, name);
+		setRegistryName(Bewitchment.MODID, name);
 		setPotionName(getRegistryName().toString().replace(":", "."));
 		this.instant = instant;
 		ModPotions.REGISTRY.add(this);

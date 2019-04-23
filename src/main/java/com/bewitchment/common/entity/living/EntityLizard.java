@@ -21,7 +21,7 @@ import net.minecraft.world.World;
 
 public class EntityLizard extends ModEntityAnimal {
 	public EntityLizard(World world) {
-		super(world, new ResourceLocation(Bewitchment.MOD_ID, "entities/lizard"));
+		super(world, new ResourceLocation(Bewitchment.MODID, "entities/lizard"));
 		setSize(1, 0.3f);
 	}
 

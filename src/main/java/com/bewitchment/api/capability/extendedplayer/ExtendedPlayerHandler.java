@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
 public class ExtendedPlayerHandler {
-	private static final ResourceLocation CAP = new ResourceLocation(Bewitchment.MOD_ID, "extendedPlayer");
+	private static final ResourceLocation CAP = new ResourceLocation(Bewitchment.MODID, "extendedPlayer");
 
 	@SubscribeEvent
 	public void attachCapabilityE(AttachCapabilitiesEvent<Entity> event) {

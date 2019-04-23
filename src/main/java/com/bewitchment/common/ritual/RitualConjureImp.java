@@ -23,7 +23,7 @@ import java.util.Arrays;
 
 public class RitualConjureImp extends Ritual {
 	public RitualConjureImp() {
-		super(Bewitchment.MOD_ID, "conjure_imp",
+		super(Bewitchment.MODID, "conjure_imp",
 				Arrays.asList(
 						Ingredient.fromStacks(new ItemStack(ModObjects.athame, 1, Short.MAX_VALUE)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.heart)),

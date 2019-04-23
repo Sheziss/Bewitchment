@@ -1,5 +1,10 @@
 package com.bewitchment.common;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Predicate;
+
 import com.bewitchment.Bewitchment;
 import com.bewitchment.ModConfig;
 import com.bewitchment.api.BewitchmentAPI;
@@ -11,30 +16,112 @@ import com.bewitchment.api.registry.LoomRecipe;
 import com.bewitchment.api.registry.OvenRecipe;
 import com.bewitchment.api.registry.Ritual;
 import com.bewitchment.common.block.BlockGlyph.GlyphType;
-import com.bewitchment.common.entity.living.*;
+import com.bewitchment.common.entity.living.EntityBlindworm;
+import com.bewitchment.common.entity.living.EntityLizard;
+import com.bewitchment.common.entity.living.EntityNewt;
+import com.bewitchment.common.entity.living.EntityOwl;
+import com.bewitchment.common.entity.living.EntityRaven;
+import com.bewitchment.common.entity.living.EntitySnake;
+import com.bewitchment.common.entity.living.EntityToad;
 import com.bewitchment.common.entity.spirits.demons.EntityAlphaHellhound;
 import com.bewitchment.common.entity.spirits.demons.EntityDemon;
 import com.bewitchment.common.entity.spirits.demons.EntityDemoness;
 import com.bewitchment.common.entity.spirits.demons.EntityHellhound;
 import com.bewitchment.common.entity.spirits.ghosts.EntityBlackDog;
-import com.bewitchment.common.fortune.*;
+import com.bewitchment.common.fortune.FortuneBadLuck;
+import com.bewitchment.common.fortune.FortuneDeath;
+import com.bewitchment.common.fortune.FortuneDropItem;
+import com.bewitchment.common.fortune.FortuneGoodLuck;
+import com.bewitchment.common.fortune.FortuneIllness;
+import com.bewitchment.common.fortune.FortuneMeetBlaze;
+import com.bewitchment.common.fortune.FortuneMeetCat;
+import com.bewitchment.common.fortune.FortuneMeetDemon;
+import com.bewitchment.common.fortune.FortuneMeetDireWolf;
+import com.bewitchment.common.fortune.FortuneMeetDog;
+import com.bewitchment.common.fortune.FortuneMeetDonkey;
+import com.bewitchment.common.fortune.FortuneMeetHorse;
+import com.bewitchment.common.fortune.FortuneMeetLlama;
+import com.bewitchment.common.fortune.FortuneMeetMerchant;
+import com.bewitchment.common.fortune.FortuneMeetParrot;
+import com.bewitchment.common.fortune.FortuneMeetSerpent;
+import com.bewitchment.common.fortune.FortuneMeetSilverfish;
+import com.bewitchment.common.fortune.FortuneMeetWitch;
+import com.bewitchment.common.fortune.FortuneMeetZombie;
+import com.bewitchment.common.fortune.FortuneTreasure;
+import com.bewitchment.common.fortune.FortuneVitality;
 import com.bewitchment.common.handler.BlockDropHandler;
 import com.bewitchment.common.handler.GuiHandler;
 import com.bewitchment.common.integration.patchouli.BewitchmentPatchouli;
 import com.bewitchment.common.integration.thaumcraft.ThaumcraftCompat;
-import com.bewitchment.common.ritual.*;
+import com.bewitchment.common.ritual.RitualCallOfTheWild;
+import com.bewitchment.common.ritual.RitualConjureAlphaHellhound;
+import com.bewitchment.common.ritual.RitualConjureBlaze;
+import com.bewitchment.common.ritual.RitualConjureDemon;
+import com.bewitchment.common.ritual.RitualConjureGhast;
+import com.bewitchment.common.ritual.RitualConjureHellhound;
+import com.bewitchment.common.ritual.RitualConjureImp;
+import com.bewitchment.common.ritual.RitualConjureMagmaCube;
+import com.bewitchment.common.ritual.RitualConjureSerpent;
+import com.bewitchment.common.ritual.RitualConjureVex;
+import com.bewitchment.common.ritual.RitualConjureWitch;
+import com.bewitchment.common.ritual.RitualConjureWither;
+import com.bewitchment.common.ritual.RitualDrawing;
+import com.bewitchment.common.ritual.RitualHighMoon;
+import com.bewitchment.common.ritual.RitualHungryFlames;
+import com.bewitchment.common.ritual.RitualPerception;
+import com.bewitchment.common.ritual.RitualSandsOfTime;
+import com.bewitchment.common.ritual.RitualSolarGlory;
 import com.bewitchment.common.world.gen.WorldGenCoquina;
 import com.bewitchment.common.world.gen.WorldGenOres;
 import com.bewitchment.registry.ModObjects;
 import com.bewitchment.registry.util.IOreDictionaryContainer;
 import com.google.common.collect.Sets;
-import net.minecraft.block.*;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockGrass;
+import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.BlockLog;
+import net.minecraft.block.BlockMelon;
+import net.minecraft.block.BlockPumpkin;
+import net.minecraft.block.IGrowable;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.boss.EntityWither;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.passive.*;
+import net.minecraft.entity.monster.EntityBlaze;
+import net.minecraft.entity.monster.EntityCaveSpider;
+import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.entity.monster.EntityElderGuardian;
+import net.minecraft.entity.monster.EntityEnderman;
+import net.minecraft.entity.monster.EntityEndermite;
+import net.minecraft.entity.monster.EntityGhast;
+import net.minecraft.entity.monster.EntityGuardian;
+import net.minecraft.entity.monster.EntityHusk;
+import net.minecraft.entity.monster.EntityPigZombie;
+import net.minecraft.entity.monster.EntityPolarBear;
+import net.minecraft.entity.monster.EntitySilverfish;
+import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntitySpider;
+import net.minecraft.entity.monster.EntityStray;
+import net.minecraft.entity.monster.EntityVex;
+import net.minecraft.entity.monster.EntityWitherSkeleton;
+import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.monster.EntityZombieVillager;
+import net.minecraft.entity.passive.EntityBat;
+import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.passive.EntityDonkey;
+import net.minecraft.entity.passive.EntityHorse;
+import net.minecraft.entity.passive.EntityLlama;
+import net.minecraft.entity.passive.EntityMule;
+import net.minecraft.entity.passive.EntityOcelot;
+import net.minecraft.entity.passive.EntityParrot;
+import net.minecraft.entity.passive.EntityPig;
+import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.entity.passive.EntitySkeletonHorse;
+import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.entity.passive.EntityWolf;
+import net.minecraft.entity.passive.EntityZombieHorse;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -62,14 +149,9 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.function.Predicate;
-
 public class CommonProxy {
-	public static final SimpleNetworkWrapper WRAPPER = NetworkRegistry.INSTANCE.newSimpleChannel(Bewitchment.MOD_ID);
-	public final CreativeTabs tab = new CreativeTabs(Bewitchment.MOD_ID) {
+	public static final SimpleNetworkWrapper WRAPPER = NetworkRegistry.INSTANCE.newSimpleChannel(Bewitchment.MODID);
+	public final CreativeTabs tab = new CreativeTabs(Bewitchment.MODID) {
 		@Override
 		public ItemStack createIcon() {
 			return new ItemStack(ModObjects.witches_altar_red);
@@ -120,9 +202,8 @@ public class CommonProxy {
 		registerValues(block, name, base.getDefaultState().getMaterial(), base.getSoundType(), base.getBlockHardness(null, null, null), base.getExplosionResistance(null) * 5, base.getHarvestTool(base.getDefaultState()), base.getHarvestLevel(base.getDefaultState()), oreDictionaryNames);
 	}
 
-	@SuppressWarnings("deprecation")
 	public void registerValues(Block block, String name, Material mat, SoundType sound, float hardness, float resistance, String tool, int level, String... oreDictionaryNames) {
-		block.setRegistryName(new ResourceLocation(Bewitchment.MOD_ID, name));
+		block.setRegistryName(new ResourceLocation(Bewitchment.MODID, name));
 		block.setTranslationKey(block.getRegistryName().toString().replace(":", "."));
 		block.setCreativeTab(tab);
 		ObfuscationReflectionHelper.setPrivateValue(Block.class, block, sound, 16);
@@ -141,7 +222,7 @@ public class CommonProxy {
 	}
 
 	public void registerValues(Item item, String name, String... oreDictionaryNames) {
-		item.setRegistryName(new ResourceLocation(Bewitchment.MOD_ID, name));
+		item.setRegistryName(new ResourceLocation(Bewitchment.MODID, name));
 		item.setTranslationKey(item.getRegistryName().toString().replace(":", "."));
 		item.setCreativeTab(tab);
 		if (item instanceof IOreDictionaryContainer)
@@ -370,7 +451,7 @@ public class CommonProxy {
 						Ingredient.fromStacks(new ItemStack(ModObjects.wood_ash)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.wood_ash))),
 				40, 100, 0, GlyphType.ANY, GlyphType.ANY, null, Ritual.large));
-		BewitchmentAPI.registerRitual(new Ritual(Bewitchment.MOD_ID, "crystal_ball",
+		BewitchmentAPI.registerRitual(new Ritual(Bewitchment.MODID, "crystal_ball",
 				Arrays.asList(
 						Ingredient.fromStacks(getOres("gemQuartz")),
 						Ingredient.fromStacks(getOres("blockGlass")),
@@ -381,7 +462,7 @@ public class CommonProxy {
 				Arrays.asList(),
 				Arrays.asList(new ItemStack(ModObjects.crystal_ball)),
 				50, 750, 3, GlyphType.NORMAL, GlyphType.ENDER, null));
-		BewitchmentAPI.registerRitual(new Ritual(Bewitchment.MOD_ID, "tarot_table",
+		BewitchmentAPI.registerRitual(new Ritual(Bewitchment.MODID, "tarot_table",
 				Arrays.asList(
 						Ingredient.fromStacks(getOres("string")),
 						Ingredient.fromStacks(getOres("dye")),
@@ -392,7 +473,7 @@ public class CommonProxy {
 				Arrays.asList(),
 				Arrays.asList(new ItemStack(ModObjects.tarot_table)),
 				50, 350, 1, GlyphType.NORMAL, GlyphType.NORMAL, null));
-		BewitchmentAPI.registerRitual(new Ritual(Bewitchment.MOD_ID, "tarots_deck",
+		BewitchmentAPI.registerRitual(new Ritual(Bewitchment.MODID, "tarots_deck",
 				Arrays.asList(
 						Ingredient.fromStacks(getOres("dye")),
 						Ingredient.fromStacks(getOres("dye")),
@@ -402,7 +483,7 @@ public class CommonProxy {
 				Arrays.asList(),
 				Arrays.asList(new ItemStack(ModObjects.tarots_deck)),
 				50, 350, 1, GlyphType.NORMAL, null, null));
-		BewitchmentAPI.registerRitual(new Ritual(Bewitchment.MOD_ID, "broom_cypress",
+		BewitchmentAPI.registerRitual(new Ritual(Bewitchment.MODID, "broom_cypress",
 				Arrays.asList(
 						Ingredient.fromStacks(new ItemStack(ModObjects.broom)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.log_cypress)),
@@ -412,7 +493,7 @@ public class CommonProxy {
 				Arrays.asList(),
 				Arrays.asList(new ItemStack(ModObjects.broom_cypress)),
 				130, 1000, 4, GlyphType.NORMAL, GlyphType.NORMAL, GlyphType.ENDER));
-		BewitchmentAPI.registerRitual(new Ritual(Bewitchment.MOD_ID, "broom_elder",
+		BewitchmentAPI.registerRitual(new Ritual(Bewitchment.MODID, "broom_elder",
 				Arrays.asList(
 						Ingredient.fromStacks(new ItemStack(ModObjects.broom)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.log_elder)),
@@ -422,7 +503,7 @@ public class CommonProxy {
 				Arrays.asList(),
 				Arrays.asList(new ItemStack(ModObjects.broom_elder)),
 				130, 1000, 4, GlyphType.NORMAL, GlyphType.NORMAL, GlyphType.ENDER));
-		BewitchmentAPI.registerRitual(new Ritual(Bewitchment.MOD_ID, "broom_juniper",
+		BewitchmentAPI.registerRitual(new Ritual(Bewitchment.MODID, "broom_juniper",
 				Arrays.asList(
 						Ingredient.fromStacks(new ItemStack(ModObjects.broom)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.log_juniper)),
@@ -432,7 +513,7 @@ public class CommonProxy {
 				Arrays.asList(),
 				Arrays.asList(new ItemStack(ModObjects.broom_juniper)),
 				130, 1000, 4, GlyphType.NORMAL, GlyphType.NORMAL, GlyphType.ENDER));
-		BewitchmentAPI.registerRitual(new Ritual(Bewitchment.MOD_ID, "broom_yew",
+		BewitchmentAPI.registerRitual(new Ritual(Bewitchment.MODID, "broom_yew",
 				Arrays.asList(
 						Ingredient.fromStacks(new ItemStack(ModObjects.broom)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.log_yew)),
@@ -442,7 +523,7 @@ public class CommonProxy {
 				Arrays.asList(),
 				Arrays.asList(new ItemStack(ModObjects.broom_yew)),
 				130, 1000, 4, GlyphType.NORMAL, GlyphType.NORMAL, GlyphType.ENDER));
-		BewitchmentAPI.registerRitual(new Ritual(Bewitchment.MOD_ID, "sanctuary",
+		BewitchmentAPI.registerRitual(new Ritual(Bewitchment.MODID, "sanctuary",
 				Arrays.asList(
 						Ingredient.fromStacks(new ItemStack(ModObjects.white_sage)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.salt)),
@@ -455,150 +536,150 @@ public class CommonProxy {
 				250, 500, 4, GlyphType.NORMAL, GlyphType.NORMAL, null));
 
 		// Distillery
-		BewitchmentAPI.registerDistilleryRecipe(new DistilleryRecipe(Bewitchment.MOD_ID, "cleansing_balm",
+		BewitchmentAPI.registerDistilleryRecipe(new DistilleryRecipe(Bewitchment.MODID, "cleansing_balm",
 				Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.acacia_resin)), Ingredient.fromStacks(new ItemStack(ModObjects.white_sage)), Ingredient.fromStacks(new ItemStack(ModObjects.salt))),
 				Arrays.asList(new ItemStack(ModObjects.cleansing_balm), new ItemStack(ModObjects.wood_ash)),
 				0, 300));
-		BewitchmentAPI.registerDistilleryRecipe(new DistilleryRecipe(Bewitchment.MOD_ID, "demonic_elixir",
+		BewitchmentAPI.registerDistilleryRecipe(new DistilleryRecipe(Bewitchment.MODID, "demonic_elixir",
 				Arrays.asList(Ingredient.fromStacks(new ItemStack(Items.BLAZE_POWDER)), Ingredient.fromStacks(new ItemStack(ModObjects.cloudy_oil, 2)), Ingredient.fromStacks(new ItemStack(ModObjects.demonic_heart)), Ingredient.fromStacks(new ItemStack(ModObjects.graveyard_dust))),
 				Arrays.asList(new ItemStack(ModObjects.demonic_elixir, 2), new ItemStack(ModObjects.diabolical_vein, 1)),
 				0, 300));
-		BewitchmentAPI.registerDistilleryRecipe(new DistilleryRecipe(Bewitchment.MOD_ID, "everchanging_dew",
+		BewitchmentAPI.registerDistilleryRecipe(new DistilleryRecipe(Bewitchment.MODID, "everchanging_dew",
 				Arrays.asList(Ingredient.fromStacks(new ItemStack(Items.DYE, 1, Short.MAX_VALUE)), Ingredient.fromStacks(new ItemStack(ModObjects.essence_of_vitality)), Ingredient.fromStacks(new ItemStack(Items.PAPER))),
 				Arrays.asList(new ItemStack(ModObjects.everchanging_dew), new ItemStack(Items.SLIME_BALL, 3)),
 				0, 300));
-		BewitchmentAPI.registerDistilleryRecipe(new DistilleryRecipe(Bewitchment.MOD_ID, "fiery_unguent",
+		BewitchmentAPI.registerDistilleryRecipe(new DistilleryRecipe(Bewitchment.MODID, "fiery_unguent",
 				Arrays.asList(Ingredient.fromStacks(new ItemStack(Items.BLAZE_POWDER)), Ingredient.fromStacks(new ItemStack(ModObjects.cloudy_oil)), Ingredient.fromStacks(new ItemStack(Blocks.OBSIDIAN)), Ingredient.fromStacks(new ItemStack(ModObjects.wood_ash))),
 				Arrays.asList(new ItemStack(ModObjects.fiery_unguent)),
 				0, 900));
-		BewitchmentAPI.registerDistilleryRecipe(new DistilleryRecipe(Bewitchment.MOD_ID, "heaven_extract",
+		BewitchmentAPI.registerDistilleryRecipe(new DistilleryRecipe(Bewitchment.MODID, "heaven_extract",
 				Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.birch_soul)), Ingredient.fromStacks(new ItemStack(Items.GLOWSTONE_DUST)), Ingredient.fromStacks(new ItemStack(ModObjects.garnet)), Ingredient.fromStacks(new ItemStack(Items.QUARTZ))),
 				Arrays.asList(new ItemStack(ModObjects.heaven_extract)),
 				0, 900));
-		BewitchmentAPI.registerDistilleryRecipe(new DistilleryRecipe(Bewitchment.MOD_ID, "otherworldly_tears",
+		BewitchmentAPI.registerDistilleryRecipe(new DistilleryRecipe(Bewitchment.MODID, "otherworldly_tears",
 				Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.birch_soul)), Ingredient.fromStacks(new ItemStack(Items.ENDER_PEARL)), Ingredient.fromStacks(new ItemStack(Items.DYE, 1, EnumDyeColor.BLUE.getDyeDamage()))),
 				Arrays.asList(new ItemStack(ModObjects.dimensional_sand, 2), new ItemStack(ModObjects.otherworldly_tears)),
 				0, 600));
-		BewitchmentAPI.registerDistilleryRecipe(new DistilleryRecipe(Bewitchment.MOD_ID, "philter_of_dishonesty",
+		BewitchmentAPI.registerDistilleryRecipe(new DistilleryRecipe(Bewitchment.MODID, "philter_of_dishonesty",
 				Arrays.asList(Ingredient.fromStacks(new ItemStack(Items.BLAZE_POWDER)), Ingredient.fromStacks(new ItemStack(ModObjects.graveyard_dust)), Ingredient.fromStacks(new ItemStack(ModObjects.liquid_witchcraft)), Ingredient.fromStacks(new ItemStack(ModObjects.oak_apple_gall))),
 				Arrays.asList(new ItemStack(ModObjects.philter_of_dishonesty), new ItemStack(ModObjects.spectral_dust, 3)),
 				0, 300));
-		BewitchmentAPI.registerDistilleryRecipe(new DistilleryRecipe(Bewitchment.MOD_ID, "stone_ichor",
+		BewitchmentAPI.registerDistilleryRecipe(new DistilleryRecipe(Bewitchment.MODID, "stone_ichor",
 				Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.coquina)), Ingredient.fromStacks(new ItemStack(ModObjects.liquid_witchcraft)), Ingredient.fromStacks(new ItemStack(Blocks.OBSIDIAN)), Ingredient.fromStacks(new ItemStack(Blocks.STONE))),
 				Arrays.asList(new ItemStack(ModObjects.stone_ichor), new ItemStack(ModObjects.salt, 4)),
 				0, 900));
-		BewitchmentAPI.registerDistilleryRecipe(new DistilleryRecipe(Bewitchment.MOD_ID, "swirl_of_the_depths",
+		BewitchmentAPI.registerDistilleryRecipe(new DistilleryRecipe(Bewitchment.MODID, "swirl_of_the_depths",
 				Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.coquina)), Ingredient.fromStacks(new ItemStack(ModObjects.kelp)), Ingredient.fromStacks(new ItemStack(Items.DYE, 1, EnumDyeColor.BLUE.getDyeDamage())), Ingredient.fromStacks(new ItemStack(ModObjects.otherworldly_tears))),
 				Arrays.asList(new ItemStack(Items.SLIME_BALL, 2), new ItemStack(ModObjects.swirl_of_the_depths)),
 				0, 900));
-		BewitchmentAPI.registerDistilleryRecipe(new DistilleryRecipe(Bewitchment.MOD_ID, "undying_salve",
+		BewitchmentAPI.registerDistilleryRecipe(new DistilleryRecipe(Bewitchment.MODID, "undying_salve",
 				Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.ectoplasm)), Ingredient.fromStacks(new ItemStack(ModObjects.ebb_of_death)), Ingredient.fromStacks(new ItemStack(ModObjects.essence_of_vitality))),
 				Arrays.asList(new ItemStack(ModObjects.ectoplasm, 2), new ItemStack(ModObjects.undying_salve, 2)),
 				0, 300));
 
 		// Loom
-		BewitchmentAPI.registerLoomRecipe(new LoomRecipe(Bewitchment.MOD_ID, "spider_web",
+		BewitchmentAPI.registerLoomRecipe(new LoomRecipe(Bewitchment.MODID, "spider_web",
 				Arrays.asList(Ingredient.fromStacks(new ItemStack(Items.STRING)), Ingredient.fromStacks(new ItemStack(Items.STRING)), Ingredient.fromStacks(new ItemStack(Items.STRING))),
 				new ItemStack(Blocks.WEB)));
-		BewitchmentAPI.registerLoomRecipe(new LoomRecipe(Bewitchment.MOD_ID, "regal_silk",
+		BewitchmentAPI.registerLoomRecipe(new LoomRecipe(Bewitchment.MODID, "regal_silk",
 				Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.chromatic_quill)), Ingredient.fromStacks(new ItemStack(Blocks.WEB)), Ingredient.fromStacks(new ItemStack(Blocks.WEB)), Ingredient.fromStacks(new ItemStack(ModObjects.everchanging_dew))),
 				new ItemStack(ModObjects.regal_silk, 12)));
-		BewitchmentAPI.registerLoomRecipe(new LoomRecipe(Bewitchment.MOD_ID, "golden_thread",
+		BewitchmentAPI.registerLoomRecipe(new LoomRecipe(Bewitchment.MODID, "golden_thread",
 				Arrays.asList(Ingredient.fromStacks(new ItemStack(Items.WHEAT)), Ingredient.fromStacks(new ItemStack(Items.WHEAT)), Ingredient.fromStacks(new ItemStack(Blocks.HAY_BLOCK)), Ingredient.fromStacks(new ItemStack(ModObjects.everchanging_dew))),
 				new ItemStack(ModObjects.golden_thread, 3)));
-		BewitchmentAPI.registerLoomRecipe(new LoomRecipe(Bewitchment.MOD_ID, "witches_stitching",
+		BewitchmentAPI.registerLoomRecipe(new LoomRecipe(Bewitchment.MODID, "witches_stitching",
 				Arrays.asList(Ingredient.fromStacks(new ItemStack(Items.STRING)), Ingredient.fromStacks(new ItemStack(Items.STRING)), Ingredient.fromStacks(new ItemStack(ModObjects.oak_spirit)), Ingredient.fromStacks(new ItemStack(ModObjects.oak_spirit))),
 				new ItemStack(ModObjects.witches_stitching, 4)));
-		BewitchmentAPI.registerLoomRecipe(new LoomRecipe(Bewitchment.MOD_ID, "diabolical_vein",
+		BewitchmentAPI.registerLoomRecipe(new LoomRecipe(Bewitchment.MODID, "diabolical_vein",
 				Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.soul_string)), Ingredient.fromStacks(new ItemStack(ModObjects.demonic_heart)), Ingredient.fromStacks(new ItemStack(ModObjects.philter_of_dishonesty)), Ingredient.fromStacks(new ItemStack(ModObjects.fiery_unguent))),
 				new ItemStack(ModObjects.diabolical_vein, 8)));
-		BewitchmentAPI.registerLoomRecipe(new LoomRecipe(Bewitchment.MOD_ID, "pure_filament",
+		BewitchmentAPI.registerLoomRecipe(new LoomRecipe(Bewitchment.MODID, "pure_filament",
 				Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.witches_stitching)), Ingredient.fromStacks(new ItemStack(ModObjects.witches_stitching)), Ingredient.fromStacks(new ItemStack(ModObjects.cleansing_balm)), Ingredient.fromStacks(new ItemStack(ModObjects.cleansing_balm))),
 				new ItemStack(ModObjects.pure_filament, 4)));
-		BewitchmentAPI.registerLoomRecipe(new LoomRecipe(Bewitchment.MOD_ID, "soul_string",
+		BewitchmentAPI.registerLoomRecipe(new LoomRecipe(Bewitchment.MODID, "soul_string",
 				Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.witches_stitching)), Ingredient.fromStacks(new ItemStack(ModObjects.witches_stitching)), Ingredient.fromStacks(new ItemStack(ModObjects.undying_salve)), Ingredient.fromStacks(new ItemStack(ModObjects.ectoplasm))),
 				new ItemStack(ModObjects.soul_string, 2)));
-		BewitchmentAPI.registerLoomRecipe(new LoomRecipe(Bewitchment.MOD_ID, "sanguine_fabric",
+		BewitchmentAPI.registerLoomRecipe(new LoomRecipe(Bewitchment.MODID, "sanguine_fabric",
 				Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.diabolical_vein)), Ingredient.fromStacks(new ItemStack(ModObjects.diabolical_vein)), Ingredient.fromStacks(new ItemStack(ModObjects.diabolical_vein)), Ingredient.fromStacks(new ItemStack(ModObjects.diabolical_vein))),
 				new ItemStack(ModObjects.sanguine_fabric, 4)));
 
 		// Oven
-		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MOD_ID, "wheat",
+		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MODID, "wheat",
 				new ItemStack(Items.WHEAT),
 				new ItemStack(Items.BREAD),
 				new ItemStack(ModObjects.cloudy_oil),
 				0.85f));
-		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MOD_ID, "cactus",
+		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MODID, "cactus",
 				new ItemStack(Blocks.CACTUS),
 				new ItemStack(Items.DYE, 1, 2),
 				new ItemStack(ModObjects.cloudy_oil),
 				0.85f));
-		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MOD_ID, "chorus_fruit",
+		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MODID, "chorus_fruit",
 				new ItemStack(Items.CHORUS_FRUIT),
 				new ItemStack(Items.CHORUS_FRUIT_POPPED),
 				new ItemStack(ModObjects.dimensional_sand, 2),
 				0.85f));
-		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MOD_ID, "mandrake_root",
+		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MODID, "mandrake_root",
 				new ItemStack(ModObjects.mandrake_root),
 				new ItemStack(ModObjects.wood_ash),
 				new ItemStack(ModObjects.cloudy_oil),
 				0.85f));
-		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MOD_ID, "sapling_oak",
+		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MODID, "sapling_oak",
 				new ItemStack(Blocks.SAPLING),
 				new ItemStack(ModObjects.wood_ash, 4),
 				new ItemStack(ModObjects.oak_spirit),
 				0.85f));
-		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MOD_ID, "sapling_spruce",
+		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MODID, "sapling_spruce",
 				new ItemStack(Blocks.SAPLING, 1, 1),
 				new ItemStack(ModObjects.wood_ash, 4),
 				new ItemStack(ModObjects.spruce_heart),
 				0.85f));
-		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MOD_ID, "sapling_birch",
+		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MODID, "sapling_birch",
 				new ItemStack(Blocks.SAPLING, 1, 2),
 				new ItemStack(ModObjects.wood_ash, 4),
 				new ItemStack(ModObjects.birch_soul),
 				0.85f));
-		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MOD_ID, "sapling_jungle",
+		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MODID, "sapling_jungle",
 				new ItemStack(Blocks.SAPLING, 1, 3),
 				new ItemStack(ModObjects.wood_ash, 4),
 				new ItemStack(ModObjects.cloudy_oil),
 				0.85f));
-		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MOD_ID, "sapling_acacia",
+		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MODID, "sapling_acacia",
 				new ItemStack(Blocks.SAPLING, 1, 4),
 				new ItemStack(ModObjects.wood_ash, 4),
 				new ItemStack(ModObjects.acacia_resin),
 				0.85f));
-		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MOD_ID, "sapling_dark_oak",
+		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MODID, "sapling_dark_oak",
 				new ItemStack(Blocks.SAPLING, 1, 5),
 				new ItemStack(ModObjects.wood_ash, 4),
 				new ItemStack(ModObjects.oak_spirit),
 				0.85f));
-		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MOD_ID, "sapling_cypress",
+		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MODID, "sapling_cypress",
 				new ItemStack(ModObjects.sapling_cypress),
 				new ItemStack(ModObjects.wood_ash),
 				new ItemStack(ModObjects.ebb_of_death),
 				0.85f));
-		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MOD_ID, "sapling_elder",
+		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MODID, "sapling_elder",
 				new ItemStack(ModObjects.sapling_elder),
 				new ItemStack(ModObjects.wood_ash),
 				new ItemStack(ModObjects.droplet_of_wisdom),
 				0.85f));
-		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MOD_ID, "sapling_juniper",
+		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MODID, "sapling_juniper",
 				new ItemStack(ModObjects.sapling_juniper),
 				new ItemStack(ModObjects.wood_ash),
 				new ItemStack(ModObjects.liquid_witchcraft),
 				0.85f));
-		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MOD_ID, "sapling_yew",
+		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MODID, "sapling_yew",
 				new ItemStack(ModObjects.sapling_yew),
 				new ItemStack(ModObjects.wood_ash),
 				new ItemStack(ModObjects.essence_of_vitality),
 				0.85f));
-		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MOD_ID, "rotten_flesh",
+		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MODID, "rotten_flesh",
 				new ItemStack(Items.ROTTEN_FLESH),
 				new ItemStack(Items.LEATHER),
 				new ItemStack(ModObjects.ectoplasm, 3),
 				0.85f));
-		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MOD_ID, "bone",
+		BewitchmentAPI.registerOvenRecipe(new OvenRecipe(Bewitchment.MODID, "bone",
 				new ItemStack(Items.BONE),
 				new ItemStack(Items.DYE, 1, 15),
 				new ItemStack(ModObjects.ectoplasm),
@@ -624,24 +705,24 @@ public class CommonProxy {
 		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_mandrake), 3);
 		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_wormwood), 3);
 
-		LootTableList.register(new ResourceLocation(Bewitchment.MOD_ID, "chests/books"));
-		LootTableList.register(new ResourceLocation(Bewitchment.MOD_ID, "chests/materials"));
-		LootTableList.register(new ResourceLocation(Bewitchment.MOD_ID, "chests/saplings"));
+		LootTableList.register(new ResourceLocation(Bewitchment.MODID, "chests/books"));
+		LootTableList.register(new ResourceLocation(Bewitchment.MODID, "chests/materials"));
+		LootTableList.register(new ResourceLocation(Bewitchment.MODID, "chests/saplings"));
 
-		LootTableList.register(new ResourceLocation(Bewitchment.MOD_ID, "entities/blindworm"));
-		LootTableList.register(new ResourceLocation(Bewitchment.MOD_ID, "entities/lizard"));
-		LootTableList.register(new ResourceLocation(Bewitchment.MOD_ID, "entities/newt"));
-		LootTableList.register(new ResourceLocation(Bewitchment.MOD_ID, "entities/owl"));
-		LootTableList.register(new ResourceLocation(Bewitchment.MOD_ID, "entities/snake"));
-		LootTableList.register(new ResourceLocation(Bewitchment.MOD_ID, "entities/raven"));
-		LootTableList.register(new ResourceLocation(Bewitchment.MOD_ID, "entities/toad"));
+		LootTableList.register(new ResourceLocation(Bewitchment.MODID, "entities/blindworm"));
+		LootTableList.register(new ResourceLocation(Bewitchment.MODID, "entities/lizard"));
+		LootTableList.register(new ResourceLocation(Bewitchment.MODID, "entities/newt"));
+		LootTableList.register(new ResourceLocation(Bewitchment.MODID, "entities/owl"));
+		LootTableList.register(new ResourceLocation(Bewitchment.MODID, "entities/snake"));
+		LootTableList.register(new ResourceLocation(Bewitchment.MODID, "entities/raven"));
+		LootTableList.register(new ResourceLocation(Bewitchment.MODID, "entities/toad"));
 
-		LootTableList.register(new ResourceLocation(Bewitchment.MOD_ID, "entities/black_dog"));
+		LootTableList.register(new ResourceLocation(Bewitchment.MODID, "entities/black_dog"));
 
-		LootTableList.register(new ResourceLocation(Bewitchment.MOD_ID, "entities/hellhound"));
-		LootTableList.register(new ResourceLocation(Bewitchment.MOD_ID, "entities/alpha_hellhound"));
+		LootTableList.register(new ResourceLocation(Bewitchment.MODID, "entities/hellhound"));
+		LootTableList.register(new ResourceLocation(Bewitchment.MODID, "entities/alpha_hellhound"));
 
-		LootTableList.register(new ResourceLocation(Bewitchment.MOD_ID, "entities/demon"));
+		LootTableList.register(new ResourceLocation(Bewitchment.MODID, "entities/demon"));
 	}
 
 	public enum ModGui {

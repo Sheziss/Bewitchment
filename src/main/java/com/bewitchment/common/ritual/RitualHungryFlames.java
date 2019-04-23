@@ -26,7 +26,7 @@ import java.util.List;
 
 public class RitualHungryFlames extends Ritual {
 	public RitualHungryFlames() {
-		super(Bewitchment.MOD_ID, "hungry_flames",
+		super(Bewitchment.MODID, "hungry_flames",
 				Arrays.asList(
 						Ingredient.fromStacks(new ItemStack(Items.BLAZE_ROD)),
 						Ingredient.fromStacks(new ItemStack(Items.COAL, 1, Short.MAX_VALUE))),

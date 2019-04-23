@@ -12,7 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderBlindworm extends RenderLiving<EntityBlindworm> {
-	private static final ResourceLocation TEX = new ResourceLocation(Bewitchment.MOD_ID, "textures/entity/blindworm.png");
+	private static final ResourceLocation TEX = new ResourceLocation(Bewitchment.MODID, "textures/entity/blindworm.png");
 
 	public RenderBlindworm(RenderManager manager) {
 		super(manager, new ModelBlindworm(), 0.1f);

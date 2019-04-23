@@ -23,7 +23,7 @@ import java.util.Arrays;
 
 public class RitualConjureAlphaHellhound extends Ritual {
 	public RitualConjureAlphaHellhound() {
-		super(Bewitchment.MOD_ID, "conjure_alpha_hellhound",
+		super(Bewitchment.MODID, "conjure_alpha_hellhound",
 				Arrays.asList(
 						Ingredient.fromStacks(new ItemStack(ModObjects.athame, 1, Short.MAX_VALUE)),
 						Ingredient.fromStacks(Bewitchment.proxy.getOres("obsidian")),

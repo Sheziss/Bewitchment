@@ -45,7 +45,7 @@ public class RitualCategory implements IRecipeCategory<RitualWrapper> {
 
 	@Override
 	public String getModName() {
-		return Bewitchment.MOD_NAME;
+		return Bewitchment.NAME;
 	}
 
 	@Override
@@ -82,10 +82,10 @@ public class RitualCategory implements IRecipeCategory<RitualWrapper> {
 			name = I18n.format(ritual.getRegistryName().toString().replace(":", "."));
 			startingPower = ritual.getStartingPower();
 			runningPower = ritual.getRunningPower();
-			center = helper.drawableBuilder(new ResourceLocation(Bewitchment.MOD_ID, "textures/gui/jei_ritual_0.png"), 0, 0, 34, 34).setTextureSize(34, 34).build();
-			small = helper.drawableBuilder(new ResourceLocation(Bewitchment.MOD_ID, "textures/gui/jei_ritual_1.png"), 0, 0, 34, 34).setTextureSize(34, 34).build();
-			medium = helper.drawableBuilder(new ResourceLocation(Bewitchment.MOD_ID, "textures/gui/jei_ritual_2.png"), 0, 0, 34, 34).setTextureSize(34, 34).build();
-			large = helper.drawableBuilder(new ResourceLocation(Bewitchment.MOD_ID, "textures/gui/jei_ritual_3.png"), 0, 0, 34, 34).setTextureSize(34, 34).build();
+			center = helper.drawableBuilder(new ResourceLocation(Bewitchment.MODID, "textures/gui/jei_ritual_0.png"), 0, 0, 34, 34).setTextureSize(34, 34).build();
+			small = helper.drawableBuilder(new ResourceLocation(Bewitchment.MODID, "textures/gui/jei_ritual_1.png"), 0, 0, 34, 34).setTextureSize(34, 34).build();
+			medium = helper.drawableBuilder(new ResourceLocation(Bewitchment.MODID, "textures/gui/jei_ritual_2.png"), 0, 0, 34, 34).setTextureSize(34, 34).build();
+			large = helper.drawableBuilder(new ResourceLocation(Bewitchment.MODID, "textures/gui/jei_ritual_3.png"), 0, 0, 34, 34).setTextureSize(34, 34).build();
 		}
 
 		@Override

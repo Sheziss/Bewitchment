@@ -9,7 +9,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderElderBroom extends RenderBroom
 {
-	private static final ResourceLocation TEX = new ResourceLocation(Bewitchment.MOD_ID, "textures/entity/broom_elder.png");
+	private static final ResourceLocation TEX = new ResourceLocation(Bewitchment.MODID, "textures/entity/broom_elder.png");
 	
 	public RenderElderBroom(RenderManager manager)
 	{

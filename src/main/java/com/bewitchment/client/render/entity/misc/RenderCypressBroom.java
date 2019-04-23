@@ -9,7 +9,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderCypressBroom extends RenderBroom
 {
-	private static final ResourceLocation TEX = new ResourceLocation(Bewitchment.MOD_ID, "textures/entity/broom_cypress.png");
+	private static final ResourceLocation TEX = new ResourceLocation(Bewitchment.MODID, "textures/entity/broom_cypress.png");
 	
 	public RenderCypressBroom(RenderManager manager)
 	{
