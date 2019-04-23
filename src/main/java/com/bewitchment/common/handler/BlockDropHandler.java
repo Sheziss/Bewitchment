@@ -1,10 +1,6 @@
 package com.bewitchment.common.handler;
 
-import java.util.Random;
-import java.util.function.Predicate;
-
 import com.bewitchment.registry.ModObjects;
-
 import net.minecraft.block.BlockFlower.EnumFlowerType;
 import net.minecraft.block.BlockNewLeaf;
 import net.minecraft.block.BlockOldLeaf;
@@ -14,6 +10,9 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import java.util.Random;
+import java.util.function.Predicate;
 
 public class BlockDropHandler {
 	private static int getFortuneDropAmount(Random rand, int fortuneLevel) {
@@ -39,7 +38,7 @@ public class BlockDropHandler {
 		replaceDrop(event, s -> s.getBlock() == ModObjects.leaves_elder, new ItemStack(ModObjects.sapling_elder), 5, true, false, false);
 		replaceDrop(event, s -> s.getBlock() == ModObjects.leaves_juniper, new ItemStack(ModObjects.sapling_juniper), 5, true, false, false);
 		replaceDrop(event, s -> s.getBlock() == ModObjects.leaves_yew, new ItemStack(ModObjects.sapling_yew), 5, true, false, false);
-		
+
 		replaceDrop(event, s -> s.getBlock() == ModObjects.leaves_juniper, new ItemStack(ModObjects.juniper_berries), 1, false, false, false);
 		replaceDrop(event, s -> s.getBlock() == ModObjects.leaves_yew, new ItemStack(ModObjects.yew_aril), 1, false, false, false);
 

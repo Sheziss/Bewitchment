@@ -13,7 +13,7 @@ import java.util.List;
 @EventBusSubscriber(modid = Bewitchment.MODID)
 public class ModSounds {
 	public static final List<SoundEvent> REGISTRY = new ArrayList<>();
-	
+
 	public static final SoundEvent BROOM_SWEEP = createSoundEvent("broom_sweep");
 	public static final SoundEvent CHALK_SCRIBBLE = createSoundEvent("chalk_scribble");
 	public static final SoundEvent OWL_HOOT = createSoundEvent("owl_hoot");

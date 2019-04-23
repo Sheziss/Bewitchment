@@ -18,7 +18,7 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 public abstract class EntityBroom extends Entity {
 	protected ItemStack item;
-	
+
 	public EntityBroom(World world) {
 		super(world);
 		setSize(0.7f, 0.7f);
@@ -55,12 +55,10 @@ public abstract class EntityBroom extends Entity {
 	public boolean canBePushed() {
 		return true;
 	}
-	
+
 	@Override
-	public boolean processInitialInteract(EntityPlayer player, EnumHand hand)
-	{
-		if (item == null)
-		{
+	public boolean processInitialInteract(EntityPlayer player, EnumHand hand) {
+		if (item == null) {
 			item = player.getHeldItem(hand).splitStack(1);
 			return true;
 		}
@@ -97,10 +95,9 @@ public abstract class EntityBroom extends Entity {
 		move(MoverType.SELF, motionX, motionY, motionZ);
 		if (isBeingRidden()) setSize(0.7f, 0.7f);
 	}
-	
+
 	@Override
-	public void setDead()
-	{
+	public void setDead() {
 		if (!world.isRemote) InventoryHelper.spawnItemStack(world, posX, posY, posZ, item);
 		super.setDead();
 	}
@@ -113,7 +110,7 @@ public abstract class EntityBroom extends Entity {
 	protected void entityInit() {
 //		setEntityBoundingBox(new AxisAlignedBB(getPosition()).contract(0, 1, 0));
 	}
-	
+
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound tag) {
 		if (item != null) tag.setTag("item", item.serializeNBT());
@@ -123,6 +120,6 @@ public abstract class EntityBroom extends Entity {
 	protected void readEntityFromNBT(NBTTagCompound tag) {
 		item = tag.hasKey("item") ? new ItemStack(tag.getCompoundTag("item")) : ItemStack.EMPTY;
 	}
-	
+
 	protected abstract void handleMovement(Vec3d look, float front, float strafe, float up);
 }

@@ -1,7 +1,6 @@
 package com.bewitchment.api.entity.misc;
 
 import com.bewitchment.client.model.entity.misc.ModelBroom;
-
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;

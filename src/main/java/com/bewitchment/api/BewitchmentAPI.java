@@ -5,7 +5,6 @@ import com.bewitchment.api.registry.*;
 import com.bewitchment.common.block.tile.entity.TileEntityWitchesAltar;
 import com.bewitchment.common.item.tool.ItemAthame;
 import com.bewitchment.registry.ModObjects;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.item.Item;
