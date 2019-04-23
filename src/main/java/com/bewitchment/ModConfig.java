@@ -1,10 +1,15 @@
 package com.bewitchment;
 
+import net.minecraft.init.Blocks;
 import net.minecraftforge.common.config.Configuration;
 
 import java.io.File;
 
+import com.bewitchment.registry.ModObjects;
+
 public class ModConfig extends Configuration {
+	public String[] broomSweepables;
+	
 	public int silverSize, silverChance, silverMin, silverMax,
 			saltSize, saltChance, saltMin, saltMax,
 			amethystSize, amethystChance, amethystMin, amethystMax,
@@ -14,6 +19,8 @@ public class ModConfig extends Configuration {
 	public ModConfig(File file) {
 		super(file);
 		load();
+		broomSweepables = this.getStringList("broomSweepables", "misc", new String[] {Blocks.REDSTONE_WIRE.getTranslationKey(), ModObjects.glyph.getTranslationKey(), ModObjects.salt_barrier.getTranslationKey()}, "The list of blocks that the broom will sweep when right clicked on.");
+		
 		silverSize = this.getInt("silverSize", "ore", 4, 0, Byte.MAX_VALUE, "The size of silver ore veins.");
 		silverChance = this.getInt("silverChance", "ore", 8, 0, Byte.MAX_VALUE, "The chance for silver ore veins to spawn.");
 		silverMin = this.getInt("silverMin", "ore", 10, 0, 0, "The minimum height for silver ore veins to spawn.");

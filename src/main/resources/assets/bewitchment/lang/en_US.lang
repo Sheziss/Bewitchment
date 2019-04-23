@@ -289,7 +289,10 @@ item.bewitchment.book_of_shadows.name=Book of Shadows
 item.bewitchment.codex_infernalis.name=Codex Infernalis
 
 #Entity
-entity.bewitchment.broom.name=Broom
+entity.bewitchment.cypress_broom.name=Cypress Broom
+entity.bewitchment.elder_broom.name=Elder Broom
+entity.bewitchment.Juniper_broom.name=Juniper Broom
+entity.bewitchment.yew_broom.name=Yew Broom
 
 entity.bewitchment.blindworm.name=Blindworm
 entity.bewitchment.lizard.name=Lizard
@@ -363,10 +366,16 @@ bewitchment.meet_horse=You will soon encounter a new friend.
 bewitchment.meet_llama=You will soon encounter a new friend.
 bewitchment.meet_parrot=You will soon encounter a new friend.
 bewitchment.meet_donkey=You will soon encounter a new friend.
+bewitchment.meet_merchant=SUN PLS NAME YOUR FORTUNES
+bewitchment.meet_dire_wolf=SUN PLS NAME YOUR FORTUNES
+bewitchment.meet_witch=SUN PLS NAME YOUR FORTUNES
+bewitchment.meet_zombie=SUN PLS NAME YOUR FORTUNES
+bewitchment.meet_silverfish=SUN PLS NAME YOUR FORTUNES
 bewitchment.meet_blaze=A lesser fire elemental has seen you scrying, and has emerged to fight you!
 bewitchment.meet_serpent=A lesser demon has seen you scrying, and wishes to challenge you!
 bewitchment.meet_demon=A powerful duke has seen you scrying, and has taken an interest in you.
 bewitchment.vitality=Wounds heal in your time of need.
+bewitchment.treasure=SUN PLS NAME YOUR FORTUNES
 
 #Info
 itemGroup.bewitchment=Bewitchment

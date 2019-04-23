@@ -1,14 +1,31 @@
 package com.bewitchment.client;
 
+import java.util.List;
+import java.util.function.Predicate;
+
 import com.bewitchment.Bewitchment;
 import com.bewitchment.client.block.tile.render.RenderTileEntityGemBowl;
 import com.bewitchment.client.block.tile.render.RenderTileEntityPlacedItem;
 import com.bewitchment.client.block.tile.render.RenderTileEntityWitchesCauldron;
 import com.bewitchment.client.handler.ClientHandler;
-import com.bewitchment.client.render.entity.living.*;
-import com.bewitchment.client.render.entity.misc.RenderBroom;
+import com.bewitchment.client.render.entity.living.RenderBlindworm;
+import com.bewitchment.client.render.entity.living.RenderLizard;
+import com.bewitchment.client.render.entity.living.RenderNewt;
+import com.bewitchment.client.render.entity.living.RenderOwl;
+import com.bewitchment.client.render.entity.living.RenderRaven;
+import com.bewitchment.client.render.entity.living.RenderSnake;
+import com.bewitchment.client.render.entity.living.RenderToad;
+import com.bewitchment.client.render.entity.misc.RenderCypressBroom;
+import com.bewitchment.client.render.entity.misc.RenderElderBroom;
+import com.bewitchment.client.render.entity.misc.RenderJuniperBroom;
 import com.bewitchment.client.render.entity.misc.RenderSpell;
-import com.bewitchment.client.render.entity.spirits.demons.*;
+import com.bewitchment.client.render.entity.misc.RenderYewBroom;
+import com.bewitchment.client.render.entity.spirits.demons.RenderAlphaHellhound;
+import com.bewitchment.client.render.entity.spirits.demons.RenderDemon;
+import com.bewitchment.client.render.entity.spirits.demons.RenderDemoness;
+import com.bewitchment.client.render.entity.spirits.demons.RenderHellhound;
+import com.bewitchment.client.render.entity.spirits.demons.RenderImp;
+import com.bewitchment.client.render.entity.spirits.demons.RenderSerpent;
 import com.bewitchment.client.render.entity.spirits.ghosts.RenderBlackDog;
 import com.bewitchment.common.CommonProxy;
 import com.bewitchment.common.block.BlockGlyph;
@@ -16,12 +33,27 @@ import com.bewitchment.common.block.BlockGlyph.GlyphType;
 import com.bewitchment.common.block.tile.entity.TileEntityGemBowl;
 import com.bewitchment.common.block.tile.entity.TileEntityPlacedItem;
 import com.bewitchment.common.block.tile.entity.TileEntityWitchesCauldron;
-import com.bewitchment.common.entity.living.*;
-import com.bewitchment.common.entity.misc.EntityBroom;
+import com.bewitchment.common.entity.living.EntityBlindworm;
+import com.bewitchment.common.entity.living.EntityLizard;
+import com.bewitchment.common.entity.living.EntityNewt;
+import com.bewitchment.common.entity.living.EntityOwl;
+import com.bewitchment.common.entity.living.EntityRaven;
+import com.bewitchment.common.entity.living.EntitySnake;
+import com.bewitchment.common.entity.living.EntityToad;
+import com.bewitchment.common.entity.misc.EntityCypressBroom;
+import com.bewitchment.common.entity.misc.EntityElderBroom;
+import com.bewitchment.common.entity.misc.EntityJuniperBroom;
 import com.bewitchment.common.entity.misc.EntitySpell;
-import com.bewitchment.common.entity.spirits.demons.*;
+import com.bewitchment.common.entity.misc.EntityYewBroom;
+import com.bewitchment.common.entity.spirits.demons.EntityAlphaHellhound;
+import com.bewitchment.common.entity.spirits.demons.EntityDemon;
+import com.bewitchment.common.entity.spirits.demons.EntityDemoness;
+import com.bewitchment.common.entity.spirits.demons.EntityHellhound;
+import com.bewitchment.common.entity.spirits.demons.EntityImp;
+import com.bewitchment.common.entity.spirits.demons.EntitySerpent;
 import com.bewitchment.common.entity.spirits.ghosts.EntityBlackDog;
 import com.bewitchment.registry.ModObjects;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
@@ -48,9 +80,6 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.List;
-import java.util.function.Predicate;
-
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
@@ -58,7 +87,10 @@ public class ClientProxy extends CommonProxy {
 	public void preInit(FMLPreInitializationEvent event) {
 		super.preInit(event);
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpell.class, RenderSpell::new);
-		RenderingRegistry.registerEntityRenderingHandler(EntityBroom.class, RenderBroom::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityCypressBroom.class, RenderCypressBroom::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityElderBroom.class, RenderElderBroom::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityJuniperBroom.class, RenderJuniperBroom::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityYewBroom.class, RenderYewBroom::new);
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityBlindworm.class, RenderBlindworm::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityLizard.class, RenderLizard::new);

@@ -1,26 +1,19 @@
-package com.bewitchment.client.render.entity.misc;
+package com.bewitchment.api.entity.misc;
 
-import com.bewitchment.api.item.ItemBroom;
 import com.bewitchment.client.model.entity.misc.ModelBroom;
-import com.bewitchment.common.entity.misc.EntityBroom;
+
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderBroom extends Render<EntityBroom> {
+public abstract class RenderBroom extends Render<EntityBroom> {
 	private static final ModelBroom model = new ModelBroom();
 
 	public RenderBroom(RenderManager manager) {
 		super(manager);
-	}
-
-	@Override
-	protected ResourceLocation getEntityTexture(EntityBroom entity) {
-		return ItemBroom.TEX.get(entity.getType() - 1);
 	}
 
 	@Override

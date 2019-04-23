@@ -326,12 +326,12 @@ public class CommonProxy {
 		BewitchmentAPI.registerFortune(new FortuneMeetParrot());
 		BewitchmentAPI.registerFortune(new FortuneMeetDonkey());
 		BewitchmentAPI.registerFortune(new FortuneVitality());
-		BewitchmentAPI.registerFortune(new FortuneBlazeIntrigument());
-		BewitchmentAPI.registerFortune(new FortuneSerpentIntrigument());
-		BewitchmentAPI.registerFortune(new FortuneDemonicEncounter());
+		BewitchmentAPI.registerFortune(new FortuneMeetBlaze());
+		BewitchmentAPI.registerFortune(new FortuneMeetSerpent());
+		BewitchmentAPI.registerFortune(new FortuneMeetDemon());
 		BewitchmentAPI.registerFortune(new FortuneTreasure());
 		BewitchmentAPI.registerFortune(new FortuneMeetWitch());
-		BewitchmentAPI.registerFortune(new FortuneSilverfish());
+		BewitchmentAPI.registerFortune(new FortuneMeetSilverfish());
 		BewitchmentAPI.registerFortune(new FortuneMeetZombie());
 		BewitchmentAPI.registerFortune(new FortuneMeetMerchant());
 		BewitchmentAPI.registerFortune(new FortuneMeetDireWolf());
