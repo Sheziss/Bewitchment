@@ -2,20 +2,23 @@ package com.bewitchment.common.entity.spirits.demons;
 
 import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.common.entity.util.ModEntityMob;
-import net.ilexiconn.llibrary.server.animation.Animation;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest2;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityImp extends ModEntityMob {
 	public EntityImp(World world) {
@@ -27,22 +30,6 @@ public class EntityImp extends ModEntityMob {
 		setPathPriority(PathNodeType.DANGER_FIRE, 0);
 		setPathPriority(PathNodeType.DAMAGE_FIRE, 0);
 		experienceValue = 100;
-	}
-
-	@SideOnly(Side.CLIENT)
-	public int getBrightnessForRender()
-	{
-		return 15728880;
-	}
-
-
-	public float getBrightness() {
-		return 0.3F;
-	}
-
-	@Override
-	public Animation[] getAnimations() {
-		return new Animation[]{};
 	}
 
 	@Override
@@ -62,12 +49,10 @@ public class EntityImp extends ModEntityMob {
 
 	@Override
 	public boolean attackEntityAsMob(Entity entity) {
-		super.attackEntityAsMob(entity);
-		boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue());
+		boolean flag = super.attackEntityAsMob(entity);
 		if (flag) {
-			applyEnchantments(this, entity);
 			if (entity instanceof EntityLivingBase) {
-				((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 500, 1, false, false));
+				((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 100, 1, false, false));
 				entity.setFire(20);
 			}
 		}

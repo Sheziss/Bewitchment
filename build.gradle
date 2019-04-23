@@ -62,7 +62,7 @@ minecraft {
     runDir = "run"
 
     replace "@VERSION@", project.version
-    replaceIn "BloodMagic.java"
+    replaceIn "Bewitchment.java"
 
     clientRunArgs += "--username=${username}"
 }
@@ -124,7 +124,6 @@ dependencies {
     compile "vazkii.patchouli:Patchouli:${patchouli_version}"
     deobfCompile "team.chisel.ctm:CTM:MC1.12.2-0.3.3.22"
     deobfCompile "team.chisel:Chisel:MC1.12.2-0.2.1.35"
-    compile "net.ilexiconn:llibrary:1.7.17-1.12.2:dev"	
 }
 
 tasks.withType(JavaCompile) {

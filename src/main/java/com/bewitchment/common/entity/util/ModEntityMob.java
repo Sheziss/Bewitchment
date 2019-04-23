@@ -1,8 +1,7 @@
 package com.bewitchment.common.entity.util;
 
-import net.ilexiconn.llibrary.server.animation.Animation;
-import net.ilexiconn.llibrary.server.animation.AnimationHandler;
-import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
+import com.bewitchment.api.BewitchmentAPI;
+
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.nbt.NBTTagCompound;
@@ -12,41 +11,17 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class ModEntityMob extends EntityMob implements IAnimatedEntity {
+public abstract class ModEntityMob extends EntityMob {
 	public static final DataParameter<Integer> SKIN = EntityDataManager.createKey(ModEntityMob.class, DataSerializers.VARINT);
 
 	private final ResourceLocation lootTableLocation;
 
-	protected Animation currentAnimation;
-	protected int animationTick;
-
 	public ModEntityMob(World world, ResourceLocation lootTableLocation) {
 		super(world);
 		this.lootTableLocation = lootTableLocation;
-	}
-
-	@Override
-	public abstract Animation[] getAnimations();
-
-	@Override
-	public Animation getAnimation() {
-		return currentAnimation;
-	}
-
-	@Override
-	public int getAnimationTick() {
-		return animationTick;
-	}
-
-	@Override
-	public void setAnimation(Animation animation) {
-		currentAnimation = animation;
-	}
-
-	@Override
-	public void setAnimationTick(int tick) {
-		animationTick = tick;
 	}
 
 	@Override
@@ -55,12 +30,6 @@ public abstract class ModEntityMob extends EntityMob implements IAnimatedEntity 
 	@Override
 	protected ResourceLocation getLootTable() {
 		return lootTableLocation;
-	}
-
-	@Override
-	public void onLivingUpdate() {
-		super.onLivingUpdate();
-		AnimationHandler.INSTANCE.updateAnimations(this);
 	}
 
 	@Override
@@ -73,6 +42,17 @@ public abstract class ModEntityMob extends EntityMob implements IAnimatedEntity 
 	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData data) {
 		dataManager.set(SKIN, rand.nextInt(getSkinTypes()));
 		return super.onInitialSpawn(difficulty, data);
+	}
+	
+	@Override
+	public float getBrightness() {
+		return getCreatureAttribute() == BewitchmentAPI.DEMON ? 0.3f : super.getBrightness();
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public int getBrightnessForRender()
+	{
+		return getCreatureAttribute() == BewitchmentAPI.DEMON ? 15728880 : super.getBrightnessForRender();
 	}
 
 	@Override

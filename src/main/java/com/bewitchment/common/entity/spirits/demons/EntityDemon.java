@@ -3,17 +3,26 @@ package com.bewitchment.common.entity.spirits.demons;
 import com.bewitchment.Bewitchment;
 import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.common.entity.util.ModEntityMob;
-import net.ilexiconn.llibrary.server.animation.Animation;
-import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.IMerchant;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest2;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -21,12 +30,8 @@ import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityDemon extends ModEntityMob implements IMerchant {
-	public static final Animation TOSS = Animation.create(10);
-
 	private MerchantRecipeList recipeList;
 	private EntityPlayer buyer;
 	private int careerID, careerLevel, wealth;
@@ -40,11 +45,6 @@ public class EntityDemon extends ModEntityMob implements IMerchant {
 		setPathPriority(PathNodeType.DANGER_FIRE, 0);
 		setPathPriority(PathNodeType.DAMAGE_FIRE, 0);
 		experienceValue = 165;
-	}
-
-	@Override
-	public Animation[] getAnimations() {
-		return new Animation[]{IAnimatedEntity.NO_ANIMATION, TOSS};
 	}
 
 	@Override
@@ -105,32 +105,18 @@ public class EntityDemon extends ModEntityMob implements IMerchant {
 		setCustomNameTag((rand.nextInt(3) == 0 ? new TextComponentTranslation("demon_prefix_" + rand.nextInt(53)).getFormattedText() + " " : "") + new TextComponentTranslation("demon_name_" + rand.nextInt(326)).getFormattedText());
 		return super.onInitialSpawn(difficulty, data);
 	}
-
+	
 	@Override
 	public boolean attackEntityAsMob(Entity entity) {
-		super.attackEntityAsMob(entity);
-		boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue());
+		boolean flag = super.attackEntityAsMob(entity);
 		if (flag) {
-			applyEnchantments(this, entity);
-			if (entity instanceof EntityLivingBase && getAnimation() != TOSS) {
-				setAnimation(TOSS);
-				((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 2000, 1, false, false));
+			if (entity instanceof EntityLivingBase) {
+				((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 200, 1, false, false));
 				entity.setFire(25);
 				entity.motionY += 0.6;
 			}
 		}
 		return flag;
-	}
-
-	@SideOnly(Side.CLIENT)
-	public int getBrightnessForRender()
-	{
-		return 15728880;
-	}
-
-
-	public float getBrightness() {
-		return 0.3F;
 	}
 
 	@Override

@@ -4,12 +4,23 @@ import com.bewitchment.Bewitchment;
 import com.bewitchment.common.entity.util.ModEntityTameable;
 import com.bewitchment.registry.ModObjects;
 import com.bewitchment.registry.ModSounds;
-import net.ilexiconn.llibrary.server.animation.Animation;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIFollowOwner;
+import net.minecraft.entity.ai.EntityAIFollowParent;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIMate;
+import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
+import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAITargetNonTamed;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest2;
 import net.minecraft.entity.monster.EntityEndermite;
 import net.minecraft.entity.monster.EntitySilverfish;
 import net.minecraft.entity.passive.EntityAnimal;
@@ -34,11 +45,6 @@ public class EntityToad extends ModEntityTameable {
 	public EntityToad(World world) {
 		super(world, new ResourceLocation(Bewitchment.MOD_ID, "entities/toad"), Items.SPIDER_EYE, Items.FERMENTED_SPIDER_EYE, ModObjects.silver_scales, ModObjects.envenomed_fang);
 		setSize(1, 0.3f);
-	}
-
-	@Override
-	public Animation[] getAnimations() {
-		return new Animation[]{};
 	}
 
 	@Override

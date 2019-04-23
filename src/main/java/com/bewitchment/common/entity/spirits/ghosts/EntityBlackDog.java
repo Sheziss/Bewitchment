@@ -3,13 +3,18 @@ package com.bewitchment.common.entity.spirits.ghosts;
 import com.bewitchment.Bewitchment;
 import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.common.entity.util.ModEntityMob;
-import net.ilexiconn.llibrary.server.animation.Animation;
-import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
-import net.minecraft.entity.Entity;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIBreakDoor;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest2;
 import net.minecraft.entity.monster.AbstractIllager;
 import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.monster.EntityWitch;
@@ -24,17 +29,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 public class EntityBlackDog extends ModEntityMob {
-	public static final Animation BITE = Animation.create(10);
-
 	public EntityBlackDog(World world) {
 		super(world, new ResourceLocation(Bewitchment.MOD_ID, "entities/black_dog"));
 		setSize(1.08f, 1.53f);
 		experienceValue = 35;
-	}
-
-	@Override
-	public Animation[] getAnimations() {
-		return new Animation[]{IAnimatedEntity.NO_ANIMATION, BITE};
 	}
 
 	@Override
@@ -57,17 +55,6 @@ public class EntityBlackDog extends ModEntityMob {
 	@Override
 	protected int getSkinTypes() {
 		return 5;
-	}
-
-	@Override
-	public boolean attackEntityAsMob(Entity entity) {
-		super.attackEntityAsMob(entity);
-		boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue());
-		if (flag) {
-			applyEnchantments(this, entity);
-			if (entity instanceof EntityLivingBase && getAnimation() != BITE) setAnimation(BITE);
-		}
-		return flag;
 	}
 
 	@Override

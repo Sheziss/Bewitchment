@@ -3,13 +3,18 @@ package com.bewitchment.common.entity.spirits.demons;
 import com.bewitchment.Bewitchment;
 import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.common.entity.util.ModEntityMob;
-import net.ilexiconn.llibrary.server.animation.Animation;
-import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest2;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.pathfinding.PathNodeType;
@@ -17,12 +22,8 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityHellhound extends ModEntityMob {
-	public static final Animation BITE = Animation.create(10);
-
 	public EntityHellhound(World world) {
 		this(world, new ResourceLocation(Bewitchment.MOD_ID, "entities/hellhound"));
 	}
@@ -36,11 +37,6 @@ public class EntityHellhound extends ModEntityMob {
 		setPathPriority(PathNodeType.DANGER_FIRE, 0);
 		setPathPriority(PathNodeType.DAMAGE_FIRE, 0);
 		experienceValue = 20;
-	}
-
-	@Override
-	public Animation[] getAnimations() {
-		return new Animation[]{IAnimatedEntity.NO_ANIMATION, BITE};
 	}
 
 	@Override
@@ -58,26 +54,12 @@ public class EntityHellhound extends ModEntityMob {
 		return 6;
 	}
 
-	@SideOnly(Side.CLIENT)
-	public int getBrightnessForRender()
-	{
-		return 15728880;
-	}
-
-
-	public float getBrightness() {
-		return 0.3F;
-	}
-
 	@Override
 	public boolean attackEntityAsMob(Entity entity) {
-		super.attackEntityAsMob(entity);
-		boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue());
+		boolean flag = super.attackEntityAsMob(entity);
 		if (flag) {
-			applyEnchantments(this, entity);
-			if (entity instanceof EntityLivingBase && getAnimation() != BITE) {
-				setAnimation(BITE);
-				((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 2000, 1, false, false));
+			if (entity instanceof EntityLivingBase) {
+				((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 100, 1, false, false));
 				entity.setFire(5);
 			}
 		}

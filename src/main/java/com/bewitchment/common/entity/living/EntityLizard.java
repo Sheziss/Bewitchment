@@ -2,10 +2,16 @@ package com.bewitchment.common.entity.living;
 
 import com.bewitchment.Bewitchment;
 import com.bewitchment.common.entity.util.ModEntityAnimal;
-import net.ilexiconn.llibrary.server.animation.Animation;
+
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.EntityAIFollowParent;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIMate;
+import net.minecraft.entity.ai.EntityAIPanic;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest2;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -17,11 +23,6 @@ public class EntityLizard extends ModEntityAnimal {
 	public EntityLizard(World world) {
 		super(world, new ResourceLocation(Bewitchment.MOD_ID, "entities/lizard"));
 		setSize(1, 0.3f);
-	}
-
-	@Override
-	public Animation[] getAnimations() {
-		return new Animation[]{};
 	}
 
 	@Override

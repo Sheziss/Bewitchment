@@ -1,6 +1,7 @@
 package com.bewitchment.common.entity.spirits.demons;
 
 import com.bewitchment.Bewitchment;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -11,8 +12,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityAlphaHellhound extends EntityHellhound {
 	private final BossInfoServer bossInfo = (BossInfoServer) (new BossInfoServer(getDisplayName(), BossInfo.Color.RED, BossInfo.Overlay.PROGRESS)).setDarkenSky(false);
@@ -28,24 +27,12 @@ public class EntityAlphaHellhound extends EntityHellhound {
 	public boolean attackEntityAsMob(Entity entity) {
 		boolean flag = super.attackEntityAsMob(entity);
 		if (flag) {
-			if (entity instanceof EntityLivingBase && getAnimation() != BITE) {
-				setAnimation(BITE);
-				((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 2000, 3, false, false));
+			if (entity instanceof EntityLivingBase) {
+				((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 200, 1, false, false));
 				entity.setFire(20);
 			}
 		}
 		return flag;
-	}
-
-	@SideOnly(Side.CLIENT)
-	public int getBrightnessForRender()
-	{
-		return 15728880;
-	}
-
-
-	public float getBrightness() {
-		return 0.3F;
 	}
 
 	@Override

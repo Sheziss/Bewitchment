@@ -5,12 +5,23 @@ import com.bewitchment.common.entity.util.ModEntityTameable;
 import com.bewitchment.common.item.util.ModItemSeed;
 import com.bewitchment.registry.ModObjects;
 import com.bewitchment.registry.ModSounds;
-import net.ilexiconn.llibrary.server.animation.Animation;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIFollowOwnerFlying;
+import net.minecraft.entity.ai.EntityAIFollowParent;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAIMate;
+import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
+import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWanderAvoidWaterFlying;
+import net.minecraft.entity.ai.EntityAIWatchClosest2;
+import net.minecraft.entity.ai.EntityFlyHelper;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
@@ -36,11 +47,6 @@ public class EntityRaven extends ModEntityTameable {
 		super(world, lootTableLocation, tameItems);
 		setSize(0.4f, 0.4f);
 		moveHelper = new EntityFlyHelper(this);
-	}
-
-	@Override
-	public Animation[] getAnimations() {
-		return new Animation[]{};
 	}
 
 	@Override
