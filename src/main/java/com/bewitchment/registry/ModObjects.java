@@ -205,9 +205,6 @@ public class ModObjects {
 	public static final Block[] nethersteel_chiseled = createChiselBlocks(nethersteel, "symbol", "bevel", "polished", "sentient", "pentacle", "pentagram", "skull", "eye", "watching_eye", "hellish", "watching_hellish");
 	public static final Block scorned_bricks = new ModBlock("scorned_bricks", Material.ROCK, SoundType.STONE, 5, 5, "pickaxe", 3);
 	public static final Block[] scorned_bricks_chiseled = createChiselBlocks(scorned_bricks, "raw", "raw_cracked", "cracked", "symbol", "bevel", "hellish", "circular", "braid", "dent", "french_1", "french_2", "layers", "ornate", "panel", "prism", "road", "small");
-	public static final Block stairs_scorned_bricks = new ModBlockStairs("stairs_scorned_bricks", scorned_bricks);
-	public static final Block slab_scorned_bricks = new ModBlockSlab("slab_scorned_bricks", scorned_bricks);
-	public static final Block fence_scorned_bricks = new ModBlockFence("fence_scorned_bricks", scorned_bricks);
 	public static final Block coquina = new ModBlock("coquina", Material.ROCK, SoundType.STONE, 5, 30, "pickaxe", 0, "coquina");
 	public static final Block[] coquina_chiseled = createChiselBlocks(coquina, "smooth", "bricks", "chiseled", "shell");
 	public static final Block purifying_earth = new BlockPurifyingEarth();
@@ -271,11 +268,13 @@ public class ModObjects {
 	public static final ModItemDoor door_elder = new ModItemDoor("door_elder", planks_elder);
 	public static final ModItemDoor door_juniper = new ModItemDoor("door_juniper", planks_juniper);
 	public static final ModItemDoor door_yew = new ModItemDoor("door_yew", planks_yew);
+	public static final Block stairs_scorned_bricks = new ModBlockStairs("stairs_scorned_bricks", scorned_bricks);
 	public static final Block stairs_cypress = new ModBlockStairs("stairs_cypress", planks_cypress, "stairWood");
 	public static final Block stairs_elder = new ModBlockStairs("stairs_elder", planks_elder, "stairWood");
 	public static final Block stairs_juniper = new ModBlockStairs("stairs_juniper", planks_juniper, "stairWood");
 	public static final Block stairs_yew = new ModBlockStairs("stairs_yew", planks_yew, "stairWood");
 	public static final Block stairs_perpetual_ice = new ModBlockStairs("stairs_perpetual_ice", perpetual_ice);
+	public static final Block slab_scorned_bricks = new ModBlockSlab("slab_scorned_bricks", scorned_bricks);
 	public static final Block slab_cypress = new ModBlockSlab("slab_cypress", planks_cypress, "slabWood");
 	public static final Block slab_elder = new ModBlockSlab("slab_elder", planks_elder, "slabWood");
 	public static final Block slab_juniper = new ModBlockSlab("slab_juniper", planks_juniper, "slabWood");
@@ -289,6 +288,7 @@ public class ModObjects {
 	public static final Block fence_gate_elder = new ModBlockFenceGate("fence_gate_elder", planks_elder, "fenceGateWood");
 	public static final Block fence_gate_juniper = new ModBlockFenceGate("fence_gate_juniper", planks_juniper, "fenceGateWood");
 	public static final Block fence_gate_yew = new ModBlockFenceGate("fence_gate_yew", planks_yew, "fenceGateWood");
+	public static final Block fence_scorned_bricks = new ModBlockFence("fence_scorned_bricks", scorned_bricks);
 	public static final Block fence_cypress = new ModBlockFence("fence_cypress", planks_cypress, "fenceWood");
 	public static final Block fence_elder = new ModBlockFence("fence_elder", planks_elder, "fenceWood");
 	public static final Block fence_juniper = new ModBlockFence("fence_juniper", planks_juniper, "fenceWood");

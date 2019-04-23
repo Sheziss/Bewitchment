@@ -1,4 +1,4 @@
-﻿#Fluids
+ï»¿#Fluids
 fluid.magic_oil=Oil
 
 #Blocks
@@ -30,9 +30,6 @@ tile.bewitchment.salt_ore.name=Salt Ore
 tile.bewitchment.perpetual_ice.name=Perpetual Ice
 tile.bewitchment.nethersteel.name=Nethersteel
 tile.bewitchment.scorned_bricks.name=Scorned Bricks
-tile.bewitchment.stairs_scorned_bricks.name=Scorned Brick Stairs
-tile.bewitchment.slab_scorned_bricks.name=Scorned Brick Slab
-tile.bewitchment.fence_scorned_bricks.name=Scorned Brick Fence
 tile.bewitchment.coquina.name=Coquina
 tile.bewitchment.purifying_earth.name=Purifying Earth
 tile.bewitchment.graveyard_dirt.name=Graveyard Dirt
@@ -97,12 +94,14 @@ item.bewitchment.door_elder.name=Elder Door
 item.bewitchment.door_juniper.name=Juniper Door
 item.bewitchment.door_yew.name=Yew Door
 
+tile.bewitchment.stairs_scorned_bricks.name=Scorned Brick Stairs
 tile.bewitchment.stairs_cypress.name=Cypress Wood Stairs
 tile.bewitchment.stairs_elder.name=Elder Wood Stairs
 tile.bewitchment.stairs_juniper.name=Juniper Wood Stairs
 tile.bewitchment.stairs_yew.name=Yew Wood Stairs
 tile.bewitchment.stairs_perpetual_ice.name=Perpetual Ice Stairs
 
+tile.bewitchment.slab_scorned_bricks.name=Scorned Brick Slab
 tile.bewitchment.slab_cypress.name=Cypress Wood Slab
 tile.bewitchment.slab_elder.name=Elder Wood Slab
 tile.bewitchment.slab_juniper.name=Juniper Wood Slab
@@ -119,6 +118,7 @@ tile.bewitchment.fence_gate_elder.name=Elder Fence Gate
 tile.bewitchment.fence_gate_juniper.name=Juniper Fence Gate
 tile.bewitchment.fence_gate_yew.name=Yew Fence Gate
 
+tile.bewitchment.fence_scorned_bricks.name=Scorned Brick Fence
 tile.bewitchment.fence_cypress.name=Cypress Fence
 tile.bewitchment.fence_elder.name=Elder Fence
 tile.bewitchment.fence_juniper.name=Juniper Fence
