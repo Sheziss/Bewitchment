@@ -1,4 +1,4 @@
-ï»¿#Fluids
+#Fluids
 fluid.magic_oil=Oil
 
 #Blocks
@@ -366,16 +366,16 @@ bewitchment.meet_horse=You will soon encounter a new friend.
 bewitchment.meet_llama=You will soon encounter a new friend.
 bewitchment.meet_parrot=You will soon encounter a new friend.
 bewitchment.meet_donkey=You will soon encounter a new friend.
-bewitchment.meet_merchant=SUN PLS NAME YOUR FORTUNES
-bewitchment.meet_dire_wolf=SUN PLS NAME YOUR FORTUNES
-bewitchment.meet_witch=SUN PLS NAME YOUR FORTUNES
-bewitchment.meet_zombie=SUN PLS NAME YOUR FORTUNES
-bewitchment.meet_silverfish=SUN PLS NAME YOUR FORTUNES
+bewitchment.meet_merchant=You will stumble upon some good deals.
+bewitchment.meet_dire_wolf=A rabid beast will soon stumble upon you.
+bewitchment.meet_witch=Something wicked this way comes.
+bewitchment.meet_zombie=Those who lie underground will be awakened.
+bewitchment.meet_silverfish=A foul vermin hides in the path.
 bewitchment.meet_blaze=A lesser fire elemental has seen you scrying, and has emerged to fight you!
 bewitchment.meet_serpent=A lesser demon has seen you scrying, and wishes to challenge you!
 bewitchment.meet_demon=A powerful duke has seen you scrying, and has taken an interest in you.
 bewitchment.vitality=Wounds heal in your time of need.
-bewitchment.treasure=SUN PLS NAME YOUR FORTUNES
+bewitchment.treasure=You might be very rich, very soon.
 
 #Info
 itemGroup.bewitchment=Bewitchment
