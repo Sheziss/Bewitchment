@@ -185,8 +185,14 @@ public class CommonProxy {
 		for (ItemStack stack : FurnaceRecipes.instance().getSmeltingList().keySet()) {
 			ItemStack output = FurnaceRecipes.instance().getSmeltingResult(stack);
 			if (!BewitchmentAPI.REGISTRY_OVEN.getValuesCollection().stream().anyMatch(r -> stack.getItem() == r.getInput().getItem() && (stack.getMetadata() == r.getInput().getMetadata() || r.getInput().getMetadata() == Short.MAX_VALUE))) {
-				ResourceLocation name = stack.getItem().getRegistryName();
-				BewitchmentAPI.registerOvenRecipe(new OvenRecipe(name.getNamespace(), name.getPath() + stack.getMetadata(),
+				ResourceLocation loc = new ResourceLocation(Bewitchment.MODID, stack.getItem().getRegistryName().getPath().toString() + stack.getMetadata());
+				int index = 0;
+				while (true)
+				{
+					if (BewitchmentAPI.REGISTRY_OVEN.containsKey(loc)) loc = new ResourceLocation(loc.getNamespace(), loc.getPath() + index++);
+					else break;
+				}
+				BewitchmentAPI.registerOvenRecipe(new OvenRecipe(loc.getNamespace(), loc.getPath(),
 						stack,
 						output,
 						stack.getItem() instanceof ItemFood ? new ItemStack(ModObjects.cloudy_oil) : ItemStack.EMPTY,
