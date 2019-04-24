@@ -36,7 +36,7 @@ import org.apache.logging.log4j.Logger;
 
 @Mod(modid = Bewitchment.MODID, name = Bewitchment.NAME, version = Bewitchment.VERSION)
 public class Bewitchment {
-	public static final String MODID = "bewitchment", NAME = "Bewitchment", VERSION = "0.20-rewrite8";
+	public static final String MODID = "bewitchment", NAME = "Bewitchment", VERSION = "0.20-rewrite9";
 	public static final Logger LOGGER = LogManager.getLogger(NAME);
 
 	@Instance(Bewitchment.MODID)
