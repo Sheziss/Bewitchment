@@ -1,8 +1,11 @@
 package com.bewitchment.client.model.entity.living;
 
+import com.bewitchment.common.entity.living.EntityBlindworm;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.math.MathHelper;
 
 /**
  * blindworm - cybercat5555
@@ -95,9 +98,33 @@ public class ModelBlindworm extends ModelBase {
 		this.head.addChild(this.headB);
 	}
 
+	//FIXME: These animations are likely fucked due to the change in naming.
 	@Override
-	public void render(Entity entity, float limbSwing, float limbSwingAmount, float age, float yaw, float pitch, float scale) {
-		this.body.render(scale);
+	public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float rotationYaw, float rotationPitch, float scale) {
+		float pticks = Minecraft.getMinecraft().getRenderPartialTicks();
+		float time = ((entity.ticksExisted + pticks) * 0.2F);
+		float angle = 0.34906585039F;
+		EntityBlindworm blindworm = (EntityBlindworm) entity;
+		if (blindworm.motionX != 0 || blindworm.motionZ != 0) {
+			this.neck01.offsetX = 0.3F * MathHelper.cos(time);
+			this.neck01.rotateAngleY = angle * MathHelper.sin(time);
+			this.neck00.rotateAngleY = angle * MathHelper.sin(time - 5);
+			this.neck00.rotateAngleX = 0;
+			this.body.rotateAngleY = angle * MathHelper.sin(time + 5);
+			this.tail01b.rotateAngleY = angle * MathHelper.sin(time + 11);
+			this.tail02.rotateAngleY = angle * MathHelper.sin(time + 4);
+			this.tail03.rotateAngleY = angle * MathHelper.sin(time + 2);
+			this.head.rotateAngleY = this.neck00.rotateAngleY;
+			this.head.rotateAngleZ = 0.174532925F * MathHelper.cos(time - 5);
+			this.head.rotateAngleX = 0;
+			this.head.rotateAngleZ = 0;
+		} else {
+			// TODO: This is the cause of the clipping. Additionally, boxes probably shouldn't be added during render() ... may be a memory leak.
+			// this.neck01b.addBox(-2.3F, -1.49F, -6.0F, 2, 3, 8, MathHelper.sin(time));
+
+		}
+		this.neck01.render(scale);
+		this.head.rotateAngleY = 0.001F * MathHelper.sin(time);
 	}
 
 	/**
