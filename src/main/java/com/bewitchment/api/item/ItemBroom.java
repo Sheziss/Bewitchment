@@ -5,20 +5,24 @@ import com.bewitchment.api.entity.misc.EntityBroom;
 import com.bewitchment.common.item.util.ModItem;
 import com.bewitchment.registry.ModObjects;
 import com.bewitchment.registry.ModSounds;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.*;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityMountEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
-
-import java.util.Arrays;
 
 public class ItemBroom extends ModItem {
 	private final EntityEntry entry;
@@ -39,7 +43,7 @@ public class ItemBroom extends ModItem {
 	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing face, float hitX, float hitY, float hitZ) {
 		IBlockState state = world.getBlockState(pos);
 		Block block = state.getBlock();
-		if (Arrays.asList(Bewitchment.proxy.config.broomSweepables).contains(block.getTranslationKey())) {
+		if (Bewitchment.proxy.config.broomSweepables.contains(block.getTranslationKey())) {
 			if (!world.isRemote) {
 				block.dropBlockAsItem(world, pos, state, 0);
 				world.setBlockToAir(pos);

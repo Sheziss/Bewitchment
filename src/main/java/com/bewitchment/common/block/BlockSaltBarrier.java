@@ -1,9 +1,13 @@
 package com.bewitchment.common.block;
 
-import com.bewitchment.Bewitchment;
+import java.util.List;
+import java.util.Random;
+
+import com.bewitchment.Util;
 import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.api.capability.extendedplayer.ExtendedPlayer;
 import com.bewitchment.registry.ModObjects;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRedstoneWire;
 import net.minecraft.block.SoundType;
@@ -24,15 +28,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import java.util.List;
-import java.util.Random;
-
 public class BlockSaltBarrier extends BlockRedstoneWire {
 	private static final AxisAlignedBB WALL = new AxisAlignedBB(0, -5, 0, 1, 5, 1);
 
 	public BlockSaltBarrier() {
 		super();
-		Bewitchment.proxy.registerValues(this, "salt_barrier", Material.CIRCUITS, SoundType.SAND, 0, 0, "", 0);
+		Util.registerValues(this, "salt_barrier", Material.CIRCUITS, SoundType.SAND, 0, 0, "", 0);
 		setCreativeTab(null);
 	}
 

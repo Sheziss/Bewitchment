@@ -1,7 +1,11 @@
 package com.bewitchment.common.block.util;
 
-import com.bewitchment.Bewitchment;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.bewitchment.Util;
 import com.bewitchment.registry.util.IOreDictionaryContainer;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.material.Material;
@@ -9,15 +13,12 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ModBlockFence extends BlockFence implements IOreDictionaryContainer {
 	private final List<String> oreDictionaryNames = new ArrayList<String>();
 
 	public ModBlockFence(String name, Block base, String... oreDictionaryNames) {
 		super(base.getDefaultState().getMaterial(), base.getDefaultState().getMaterial().getMaterialMapColor());
-		Bewitchment.proxy.registerValues(this, name, base, oreDictionaryNames);
+		Util.registerValues(this, name, base, oreDictionaryNames);
 	}
 
 	@Override

@@ -1,11 +1,18 @@
 package com.bewitchment.common.block;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+
 import com.bewitchment.Bewitchment;
+import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.api.capability.magicpower.MagicPower;
 import com.bewitchment.common.block.tile.entity.TileEntityPlacedItem;
 import com.bewitchment.common.block.tile.entity.TileEntityWitchesAltar;
 import com.bewitchment.common.block.util.ModBlockContainer;
 import com.bewitchment.registry.ModObjects;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
@@ -16,7 +23,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -31,11 +37,6 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-
 public class BlockWitchesAltar extends ModBlockContainer {
 	public static final PropertyAltar TYPE = new PropertyAltar("type", AltarType.class, Arrays.asList(AltarType.values()));
 
@@ -43,40 +44,6 @@ public class BlockWitchesAltar extends ModBlockContainer {
 		super(null, "witches_altar" + (color.isEmpty() ? "" : "_" + color), Material.ROCK, SoundType.STONE, 2, 30, "pickaxe", 0, -1);
 		setTranslationKey(new ResourceLocation(Bewitchment.MODID, "witches_altar").toString().replace(":", "."));
 		setDefaultState(blockState.getBaseState().withProperty(TYPE, AltarType.UNFORMED));
-	}
-
-	public static BlockPos getAltarPosition(IBlockAccess world, BlockPos pos) {
-		for (int x = -1; x <= 1; x++) {
-			for (int z = -1; z <= 1; z++) {
-				BlockPos pos0 = pos.add(x, 0, z);
-				IBlockState state = world.getBlockState(pos0);
-				if (state.getBlock() instanceof BlockWitchesAltar && state.getValue(TYPE) == AltarType.TILE)
-					return pos0;
-			}
-		}
-		return pos;
-	}
-
-	public static List<BlockPos> getAltarPositions(World world, BlockPos pos) {
-		List<BlockPos> positions = new ArrayList<>();
-		for (int x = -1; x <= 1; x++) {
-			for (int z = -1; z <= 1; z++) {
-				BlockPos pos0 = getAltarPosition(world, pos).add(x, 0, z);
-				if (world.getBlockState(pos0).getBlock() instanceof BlockWitchesAltar) positions.add(pos0);
-			}
-		}
-		return positions;
-	}
-
-	public static BlockPos getNearestAltar(World world, BlockPos pos) {
-		if (pos != null) {
-			for (BlockPos pos0 : BlockPos.getAllInBoxMutable(pos.add(-8, -8, -8), pos.add(8, 8, 8))) {
-				IBlockState state = world.getBlockState(getAltarPosition(world, pos0));
-				if (state.getBlock() instanceof BlockWitchesAltar && state.getValue(TYPE) == AltarType.TILE)
-					return getAltarPosition(world, pos0);
-			}
-		}
-		return null;
 	}
 
 	@Override
@@ -146,18 +113,19 @@ public class BlockWitchesAltar extends ModBlockContainer {
 							world.setBlockState(pos0, altar.getDefaultState().withProperty(TYPE, world.getBlockState(pos0).getValue(TYPE)));
 						if (tile != null) {
 							int amount = 0, maxAmount = 0;
-							amount = tile.magic_power.getAmount();
-							maxAmount = tile.magic_power.getMaxAmount();
+							amount = tile.magicPower.getAmount();
+							maxAmount = tile.magicPower.getMaxAmount();
 							tile = (TileEntityWitchesAltar) world.getTileEntity(getAltarPosition(world, pos));
-							tile.magic_power.setAmount(amount);
-							tile.magic_power.setMaxAmount(maxAmount);
+							tile.magicPower.setAmount(amount);
+							tile.magicPower.setMaxAmount(maxAmount);
 						}
 						if (!player.isCreative()) stack.shrink(1);
 					}
 					return true;
-				} else if (world.getBlockState(pos.up()).getBlock().isReplaceable(world, pos.up()) && (TileEntityWitchesAltar.SWORD_MULTIPLIER_VALUES.containsKey(item) || TileEntityWitchesAltar.SWORD_RADIUS_VALUES.containsKey(item) || item == ModObjects.pentacle || item == Items.BUCKET || item == Items.GOLDEN_APPLE || item == ModObjects.demonic_heart || item == ModObjects.heart || item == Items.GOLDEN_CARROT || item == ModObjects.glass_jar || item == Items.NETHER_STAR)) {
+				} else if (world.getBlockState(pos.up()).getBlock().isReplaceable(world, pos.up()) && (BewitchmentAPI.ALTAR_GAIN_VALUES.get(item) != null || BewitchmentAPI.ALTAR_MULTIPLIER_VALUES.get(item) != null)) {
 					world.setBlockState(pos.up(), ModObjects.placed_item.getDefaultState().withProperty(BlockHorizontal.FACING, EnumFacing.fromAngle(player.rotationYaw)));
 					((TileEntityPlacedItem) world.getTileEntity(pos.up())).inventory.setStackInSlot(0, stack.splitStack(1));
+					((TileEntityWitchesAltar) world.getTileEntity(getAltarPosition(world, pos))).refreshUpgrades(pos.up());
 				}
 			}
 			if (hand == EnumHand.MAIN_HAND && stack.isEmpty() && world.getBlockState(pos).getValue(TYPE) != AltarType.UNFORMED) {
@@ -191,12 +159,45 @@ public class BlockWitchesAltar extends ModBlockContainer {
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, TYPE);
 	}
+	
+	public static BlockPos getAltarPosition(IBlockAccess world, BlockPos pos) {
+		for (int x = -1; x <= 1; x++) {
+			for (int z = -1; z <= 1; z++) {
+				BlockPos pos0 = pos.add(x, 0, z);
+				IBlockState state = world.getBlockState(pos0);
+				if (state.getBlock() instanceof BlockWitchesAltar && state.getValue(TYPE) == AltarType.TILE)
+					return pos0;
+			}
+		}
+		return pos;
+	}
+
+	public static List<BlockPos> getAltarPositions(World world, BlockPos pos) {
+		List<BlockPos> positions = new ArrayList<>();
+		for (int x = -1; x <= 1; x++) {
+			for (int z = -1; z <= 1; z++) {
+				BlockPos pos0 = getAltarPosition(world, pos).add(x, 0, z);
+				if (world.getBlockState(pos0).getBlock() instanceof BlockWitchesAltar) positions.add(pos0);
+			}
+		}
+		return positions;
+	}
+
+	public static BlockPos getNearestAltar(World world, BlockPos pos) {
+		if (pos != null) {
+			for (BlockPos pos0 : BlockPos.getAllInBoxMutable(pos.add(-8, -8, -8), pos.add(8, 8, 8))) {
+				IBlockState state = world.getBlockState(getAltarPosition(world, pos0));
+				if (state.getBlock() instanceof BlockWitchesAltar && state.getValue(TYPE) == AltarType.TILE)
+					return getAltarPosition(world, pos0);
+			}
+		}
+		return null;
+	}
 
 	private void refreshAltarContainers(World world, BlockPos pos) {
 		for (BlockPos pos0 : BlockPos.getAllInBoxMutable(pos.add(-8, -8, -8), pos.add(8, 8, 8))) {
 			if (world.getBlockState(pos0).getBlock() instanceof ModBlockContainer)
 				((ModBlockContainer) world.getBlockState(pos0).getBlock()).refreshAltarPos(world, pos0);
-			;
 		}
 	}
 

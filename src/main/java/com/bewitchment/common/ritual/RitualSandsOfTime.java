@@ -1,22 +1,24 @@
 package com.bewitchment.common.ritual;
 
+import java.util.Arrays;
+
 import com.bewitchment.Bewitchment;
+import com.bewitchment.Util;
 import com.bewitchment.api.registry.Ritual;
 import com.bewitchment.common.block.BlockGlyph.GlyphType;
 import com.bewitchment.common.block.tile.entity.TileEntityGlyph;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import java.util.Arrays;
-
 public class RitualSandsOfTime extends Ritual {
 	public RitualSandsOfTime() {
 		super(Bewitchment.MODID, "sands_of_time",
 				Arrays.asList(
-						Ingredient.fromStacks(Bewitchment.proxy.getOres("sand")),
-						Ingredient.fromStacks(Bewitchment.proxy.getOres("oreDiamond"))),
+						Ingredient.fromStacks(Util.getOres("sand")),
+						Ingredient.fromStacks(Util.getOres("oreDiamond"))),
 				Arrays.asList(),
 				Arrays.asList(),
 				-1, 1000, 5, GlyphType.NORMAL, GlyphType.NORMAL, GlyphType.NORMAL);

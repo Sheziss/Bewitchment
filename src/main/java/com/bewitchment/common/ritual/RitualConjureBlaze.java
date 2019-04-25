@@ -1,10 +1,14 @@
 package com.bewitchment.common.ritual;
 
+import java.util.Arrays;
+
 import com.bewitchment.Bewitchment;
+import com.bewitchment.Util;
 import com.bewitchment.api.registry.Ritual;
 import com.bewitchment.common.block.BlockGlyph.GlyphType;
 import com.bewitchment.common.block.tile.entity.TileEntityGlyph;
 import com.bewitchment.registry.ModObjects;
+
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,14 +22,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.Arrays;
-
 public class RitualConjureBlaze extends Ritual {
 	public RitualConjureBlaze() {
 		super(Bewitchment.MODID, "conjure_blaze",
 				Arrays.asList(
 						Ingredient.fromStacks(new ItemStack(ModObjects.athame, 1, Short.MAX_VALUE)),
-						Ingredient.fromStacks(Bewitchment.proxy.getOres("logWood")),
+						Ingredient.fromStacks(Util.getOres("logWood")),
 						Ingredient.fromStacks(new ItemStack(Items.NETHERBRICK)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.hellebore)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.wormwood))),

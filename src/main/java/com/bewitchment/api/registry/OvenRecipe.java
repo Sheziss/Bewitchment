@@ -1,12 +1,13 @@
 package com.bewitchment.api.registry;
 
-import com.bewitchment.Bewitchment;
+import java.util.Random;
+
+import com.bewitchment.Util;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-
-import java.util.Random;
 
 public class OvenRecipe extends IForgeRegistryEntry.Impl<OvenRecipe> {
 	private final ItemStack input, output, byproduct;
@@ -49,12 +50,12 @@ public class OvenRecipe extends IForgeRegistryEntry.Impl<OvenRecipe> {
 	}
 
 	public final boolean matches(ItemStack input) {
-		return Bewitchment.proxy.areStacksEqual(input, getInput());
+		return Util.areStacksEqual(input, getInput());
 	}
 
 	public final boolean isValid(ItemStackHandler input, ItemStackHandler output) {
-		boolean outputValid = output.getStackInSlot(0).isEmpty() || (Bewitchment.proxy.areStacksEqual(output.getStackInSlot(0), getOutput()) && output.getStackInSlot(0).getCount() < output.getStackInSlot(0).getMaxStackSize());
-		boolean byproductValid = output.getStackInSlot(1).isEmpty() || (Bewitchment.proxy.areStacksEqual(output.getStackInSlot(1), getByproduct()) && output.getStackInSlot(1).getCount() < output.getStackInSlot(1).getMaxStackSize() - (getByproduct().getCount() - 1));
+		boolean outputValid = output.getStackInSlot(0).isEmpty() || (Util.areStacksEqual(output.getStackInSlot(0), getOutput()) && output.getStackInSlot(0).getCount() < output.getStackInSlot(0).getMaxStackSize());
+		boolean byproductValid = output.getStackInSlot(1).isEmpty() || (Util.areStacksEqual(output.getStackInSlot(1), getByproduct()) && output.getStackInSlot(1).getCount() < output.getStackInSlot(1).getMaxStackSize() - (getByproduct().getCount() - 1));
 		return !input.getStackInSlot(2).isEmpty() && outputValid && byproductValid;
 	}
 

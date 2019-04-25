@@ -1,6 +1,9 @@
 package com.bewitchment.common.item.util;
 
-import com.bewitchment.Bewitchment;
+import java.util.List;
+
+import com.bewitchment.Util;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemAxe;
@@ -10,12 +13,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.List;
-
 public class ModItemAxe extends ItemAxe {
 	public ModItemAxe(String name, ToolMaterial mat) {
 		super(mat, mat.getAttackDamage(), -3.1f);
-		Bewitchment.proxy.registerValues(this, name);
+		Util.registerValues(this, name);
 	}
 
 	@Override

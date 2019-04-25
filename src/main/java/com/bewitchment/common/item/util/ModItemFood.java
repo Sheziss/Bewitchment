@@ -1,7 +1,11 @@
 package com.bewitchment.common.item.util;
 
-import com.bewitchment.Bewitchment;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.bewitchment.Util;
 import com.bewitchment.registry.util.IOreDictionaryContainer;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemFood;
@@ -11,15 +15,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ModItemFood extends ItemFood implements IOreDictionaryContainer {
 	private final List<String> oreDictionaryNames = new ArrayList<String>();
 
 	public ModItemFood(String name, int amount, float saturation, boolean wolfFood, String... oreDictionaryNames) {
 		super(amount, saturation, wolfFood);
-		Bewitchment.proxy.registerValues(this, name, oreDictionaryNames);
+		Util.registerValues(this, name, oreDictionaryNames);
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package com.bewitchment.common.block.tile.entity.util;
 
-import com.bewitchment.Bewitchment;
+import com.bewitchment.Util;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -21,7 +22,7 @@ public abstract class ModTileEntity extends TileEntity {
 	public static int getFirstValidSlot(ItemStackHandler handler, ItemStack stack) {
 		boolean hasEmpty = false;
 		for (int i = 0; i < handler.getSlots(); i++) {
-			if (Bewitchment.proxy.areStacksEqual(handler.getStackInSlot(i), stack)) return i;
+			if (Util.areStacksEqual(handler.getStackInSlot(i), stack)) return i;
 			if (handler.getStackInSlot(i).isEmpty()) hasEmpty = true;
 		}
 		return hasEmpty ? getFirstEmptySlot(handler) : -1;

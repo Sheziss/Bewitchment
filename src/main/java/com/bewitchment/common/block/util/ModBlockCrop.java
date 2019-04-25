@@ -1,7 +1,8 @@
 package com.bewitchment.common.block.util;
 
-import com.bewitchment.Bewitchment;
+import com.bewitchment.Util;
 import com.bewitchment.common.item.util.ModItemSeed;
+
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -18,7 +19,7 @@ public class ModBlockCrop extends BlockCrops {
 
 	public ModBlockCrop(String name, ModItemSeed seed, ItemStack crop, int maxAge) {
 		super();
-		Bewitchment.proxy.registerValues(this, name, Material.PLANTS, SoundType.PLANT, 0, 0, "", 0);
+		Util.registerValues(this, name, Material.PLANTS, SoundType.PLANT, 0, 0, "", 0);
 		setCreativeTab(null);
 		this.maxAge = maxAge;
 		this.seed = seed;

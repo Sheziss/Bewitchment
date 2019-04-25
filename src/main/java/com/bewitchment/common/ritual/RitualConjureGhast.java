@@ -1,10 +1,14 @@
 package com.bewitchment.common.ritual;
 
+import java.util.Arrays;
+
 import com.bewitchment.Bewitchment;
+import com.bewitchment.Util;
 import com.bewitchment.api.registry.Ritual;
 import com.bewitchment.common.block.BlockGlyph.GlyphType;
 import com.bewitchment.common.block.tile.entity.TileEntityGlyph;
 import com.bewitchment.registry.ModObjects;
+
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.monster.EntityGhast;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,14 +22,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.Arrays;
-
 public class RitualConjureGhast extends Ritual {
 	public RitualConjureGhast() {
 		super(Bewitchment.MODID, "conjure_ghast",
 				Arrays.asList(
 						Ingredient.fromStacks(new ItemStack(ModObjects.athame, 1, Short.MAX_VALUE)),
-						Ingredient.fromStacks(Bewitchment.proxy.getOres("dustGlowstone")),
+						Ingredient.fromStacks(Util.getOres("dustGlowstone")),
 						Ingredient.fromStacks(new ItemStack(Blocks.SOUL_SAND)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.ebb_of_death)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.hellebore)),

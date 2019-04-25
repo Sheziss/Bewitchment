@@ -1,8 +1,11 @@
 package com.bewitchment.common.item.tool;
 
-import com.bewitchment.Bewitchment;
+import java.util.List;
+
+import com.bewitchment.Util;
 import com.bewitchment.registry.ModObjects;
 import com.google.common.collect.Multimap;
+
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
@@ -28,13 +31,11 @@ import net.minecraftforge.common.IShearable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.List;
-
 public class ItemBoline extends ItemShears {
 	public ItemBoline() {
 		super();
-		Bewitchment.proxy.registerValues(this, "boline");
-		setMaxDamage(600);
+		Util.registerValues(this, "boline");
+		setMaxDamage(ModObjects.TOOL_SILVER.getMaxUses());
 	}
 
 	@Override

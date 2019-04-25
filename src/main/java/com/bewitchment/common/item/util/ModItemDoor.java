@@ -1,7 +1,12 @@
 package com.bewitchment.common.item.util;
 
-import com.bewitchment.Bewitchment;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import com.bewitchment.Util;
 import com.bewitchment.registry.util.IOreDictionaryContainer;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.material.Material;
@@ -19,10 +24,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 public class ModItemDoor extends ItemDoor implements IOreDictionaryContainer {
 	public final ModBlockDoor door;
 	private final List<String> oreDictionaryNames = new ArrayList<String>();
@@ -33,7 +34,7 @@ public class ModItemDoor extends ItemDoor implements IOreDictionaryContainer {
 
 	private ModItemDoor(String name, Block base, ModBlockDoor door, String... oreDictionaryNames) {
 		super(door);
-		Bewitchment.proxy.registerValues(this, name, oreDictionaryNames);
+		Util.registerValues(this, name, oreDictionaryNames);
 		this.door = door;
 		this.door.drop = new ItemStack(this);
 	}
@@ -55,7 +56,7 @@ public class ModItemDoor extends ItemDoor implements IOreDictionaryContainer {
 
 		public ModBlockDoor(String name, Block base) {
 			super(base.getDefaultState().getMaterial());
-			Bewitchment.proxy.registerValues(this, name, base);
+			Util.registerValues(this, name, base);
 			setCreativeTab(null);
 		}
 

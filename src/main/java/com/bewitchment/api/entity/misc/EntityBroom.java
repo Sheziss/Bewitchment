@@ -1,5 +1,7 @@
 package com.bewitchment.api.entity.misc;
 
+import java.lang.reflect.Field;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,6 +19,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 public abstract class EntityBroom extends Entity {
+	private static Field isJumping;
+	
 	protected ItemStack item;
 
 	public EntityBroom(World world) {
@@ -82,7 +86,12 @@ public abstract class EntityBroom extends Entity {
 		EntityPlayer rider = (EntityPlayer) getControllingPassenger();
 		if (isBeingRidden()) {
 			if (rider != null) {
-				float front = rider.moveForward, strafe = rider.moveStrafing, up = ObfuscationReflectionHelper.getPrivateValue(EntityLivingBase.class, rider, 49);
+				float front = rider.moveForward, strafe = rider.moveStrafing, up = 0;
+				try {
+					up = getJump(rider);
+				} catch (IllegalArgumentException | IllegalAccessException e) {
+					e.printStackTrace();
+				}
 				handleMovement(rider.getLookVec(), front, strafe, up);
 			}
 		}
@@ -101,14 +110,14 @@ public abstract class EntityBroom extends Entity {
 		if (!world.isRemote) InventoryHelper.spawnItemStack(world, posX, posY, posZ, item);
 		super.setDead();
 	}
-
+	
 	@Override
-	protected void updateFallState(double y, boolean onGround, IBlockState state, BlockPos pos) {
+	protected void entityInit()
+	{
 	}
 
 	@Override
-	protected void entityInit() {
-//		setEntityBoundingBox(new AxisAlignedBB(getPosition()).contract(0, 1, 0));
+	protected void updateFallState(double y, boolean onGround, IBlockState state, BlockPos pos) {
 	}
 
 	@Override
@@ -122,4 +131,14 @@ public abstract class EntityBroom extends Entity {
 	}
 
 	protected abstract void handleMovement(Vec3d look, float front, float strafe, float up);
+	
+	protected static float getJump(EntityLivingBase rider) throws IllegalArgumentException, IllegalAccessException
+	{
+		if (isJumping == null)
+		{
+			isJumping = ObfuscationReflectionHelper.getPrivateValue(EntityLivingBase.class, rider, "isJumping", "field_70703_bu");
+			isJumping.setAccessible(true);
+		}
+		return isJumping.getFloat(rider);
+	}
 }

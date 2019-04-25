@@ -1,7 +1,11 @@
 package com.bewitchment.common.block.util;
 
-import com.bewitchment.Bewitchment;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.bewitchment.Util;
 import com.bewitchment.registry.util.IOreDictionaryContainer;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.material.Material;
@@ -10,15 +14,12 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ModBlockStairs extends BlockStairs implements IOreDictionaryContainer {
 	private final List<String> oreDictionaryNames = new ArrayList<String>();
 
 	public ModBlockStairs(String name, Block base, String... oreDictionaryNams) {
 		super(base.getDefaultState());
-		Bewitchment.proxy.registerValues(this, name, base, oreDictionaryNams);
+		Util.registerValues(this, name, base, oreDictionaryNams);
 	}
 
 	@Override

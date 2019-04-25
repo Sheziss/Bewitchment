@@ -1,7 +1,11 @@
 package com.bewitchment.common.item.tool;
 
+import java.util.List;
+
+import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.common.item.util.ModItemSword;
 import com.bewitchment.registry.ModObjects;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
@@ -16,22 +20,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class ItemAthame extends ModItemSword {
-	public static final Map<EntityEntry, Collection<ItemStack>> LOOT_TABLE = new HashMap<>();
-
 	public ItemAthame() {
 		super("athame", ModObjects.TOOL_SILVER);
-		setMaxDamage(600);
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
@@ -55,8 +50,8 @@ public class ItemAthame extends ModItemSword {
 
 	@SubscribeEvent
 	public void livingDrop(LivingDropsEvent event) {
-		if (event.isRecentlyHit() && event.getSource().getTrueSource() instanceof EntityLivingBase && ((EntityLivingBase) event.getSource().getTrueSource()).getHeldItemMainhand().getItem() == ModObjects.athame && LOOT_TABLE.containsKey(EntityRegistry.getEntry(event.getEntityLiving().getClass()))) {
-			for (ItemStack stack : LOOT_TABLE.get(EntityRegistry.getEntry(event.getEntityLiving().getClass())))
+		if (event.isRecentlyHit() && event.getSource().getTrueSource() instanceof EntityLivingBase && ((EntityLivingBase) event.getSource().getTrueSource()).getHeldItemMainhand().getItem() == ModObjects.athame && BewitchmentAPI.ATHAME_LOOT.containsKey(EntityRegistry.getEntry(event.getEntityLiving().getClass()))) {
+			for (ItemStack stack : BewitchmentAPI.ATHAME_LOOT.get(EntityRegistry.getEntry(event.getEntityLiving().getClass())))
 				if (event.getEntityLiving().getRNG().nextInt(5) <= 2 + (2 * event.getLootingLevel())) {
 					if (event.getEntityLiving() instanceof EntityPlayer && stack.getItem() instanceof ItemSkull) {
 						NBTTagCompound tag = new NBTTagCompound();

@@ -1,15 +1,16 @@
 package com.bewitchment.api.registry;
 
-import com.bewitchment.Bewitchment;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.bewitchment.Util;
 import com.bewitchment.common.block.tile.entity.util.ModTileEntity;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class DistilleryRecipe extends IForgeRegistryEntry.Impl<DistilleryRecipe> {
 	private final List<Ingredient> input;
@@ -56,7 +57,7 @@ public class DistilleryRecipe extends IForgeRegistryEntry.Impl<DistilleryRecipe>
 		List<ItemStack> checklist = new ArrayList<>();
 		for (int i = 0; i < handler.getSlots(); i++)
 			if (!handler.getStackInSlot(i).isEmpty()) checklist.add(handler.extractItem(i, 1, true));
-		return Bewitchment.proxy.areISListsEqual(getInput(), checklist);
+		return Util.areISListsEqual(getInput(), checklist);
 	}
 
 	public final boolean isValid(ItemStackHandler input, ItemStackHandler output) {

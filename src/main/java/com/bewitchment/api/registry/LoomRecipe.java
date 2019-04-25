@@ -1,15 +1,16 @@
 package com.bewitchment.api.registry;
 
-import com.bewitchment.Bewitchment;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.bewitchment.Util;
 import com.bewitchment.common.block.tile.entity.util.ModTileEntity;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class LoomRecipe extends IForgeRegistryEntry.Impl<LoomRecipe> {
 	private final List<Ingredient> input;
@@ -39,11 +40,11 @@ public class LoomRecipe extends IForgeRegistryEntry.Impl<LoomRecipe> {
 		List<ItemStack> checklist = new ArrayList<>();
 		for (int i = 0; i < handler.getSlots(); i++)
 			if (!handler.getStackInSlot(i).isEmpty()) checklist.add(handler.extractItem(i, 1, true));
-		return Bewitchment.proxy.areISListsEqual(getInput(), checklist);
+		return Util.areISListsEqual(getInput(), checklist);
 	}
 
 	public final boolean isValid(ItemStackHandler input, ItemStackHandler output) {
-		return !ModTileEntity.isEmpty(input) && (output.getStackInSlot(0).isEmpty() || (Bewitchment.proxy.areStacksEqual(output.getStackInSlot(0), getOutput()) && output.getStackInSlot(0).getCount() < output.getStackInSlot(0).getMaxStackSize()));
+		return !ModTileEntity.isEmpty(input) && (output.getStackInSlot(0).isEmpty() || (Util.areStacksEqual(output.getStackInSlot(0), getOutput()) && output.getStackInSlot(0).getCount() < output.getStackInSlot(0).getMaxStackSize()));
 	}
 
 	public final void giveOutput(ItemStackHandler input, ItemStackHandler output) {

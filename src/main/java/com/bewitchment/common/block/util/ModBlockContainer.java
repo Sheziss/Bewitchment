@@ -1,9 +1,10 @@
 package com.bewitchment.common.block.util;
 
-import com.bewitchment.Bewitchment;
+import com.bewitchment.Util;
 import com.bewitchment.common.block.BlockWitchesAltar;
 import com.bewitchment.common.block.tile.entity.util.IAltarStorage;
 import com.bewitchment.common.block.tile.entity.util.ModTileEntity;
+
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -30,7 +31,7 @@ public abstract class ModBlockContainer extends BlockContainer {
 
 	public ModBlockContainer(Object modInstance, String name, Material mat, SoundType sound, float hardness, float resistance, String tool, int level, int guiID) {
 		super(mat);
-		Bewitchment.proxy.registerValues(this, name, mat, sound, hardness, resistance, tool, level);
+		Util.registerValues(this, name, mat, sound, hardness, resistance, tool, level);
 		this.modInstance = modInstance;
 		this.guiID = guiID;
 	}

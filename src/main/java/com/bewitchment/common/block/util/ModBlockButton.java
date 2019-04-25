@@ -1,7 +1,11 @@
 package com.bewitchment.common.block.util;
 
-import com.bewitchment.Bewitchment;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.bewitchment.Util;
 import com.bewitchment.registry.util.IOreDictionaryContainer;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockButton;
 import net.minecraft.block.material.Material;
@@ -14,15 +18,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ModBlockButton extends BlockButton implements IOreDictionaryContainer {
 	private final List<String> oreDictionaryNames = new ArrayList<String>();
 
 	public ModBlockButton(String name, Block base, String... oreDictionaryNames) {
 		super(base.getDefaultState().getMaterial() == Material.WOOD);
-		Bewitchment.proxy.registerValues(this, name, base, oreDictionaryNames);
+		Util.registerValues(this, name, base, oreDictionaryNames);
 	}
 
 	@Override

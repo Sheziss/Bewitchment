@@ -1,10 +1,14 @@
 package com.bewitchment.api.registry;
 
-import com.bewitchment.Bewitchment;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.bewitchment.Util;
 import com.bewitchment.common.block.BlockGlyph;
 import com.bewitchment.common.block.BlockGlyph.GlyphType;
 import com.bewitchment.common.block.tile.entity.TileEntityGlyph;
 import com.bewitchment.registry.ModObjects;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,9 +22,6 @@ import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Ritual extends IForgeRegistryEntry.Impl<Ritual> {
 	public static final int[][] small = {
@@ -126,7 +127,7 @@ public class Ritual extends IForgeRegistryEntry.Impl<Ritual> {
 				else {
 					for (Ingredient ing : getInputItems()) {
 						for (ItemStack stack0 : ing.getMatchingStacks()) {
-							if (Bewitchment.proxy.areStacksEqual(stack, stack0)) stack.shrink(stack0.getCount());
+							if (Util.areStacksEqual(stack, stack0)) stack.shrink(stack0.getCount());
 						}
 					}
 				}
@@ -257,7 +258,7 @@ public class Ritual extends IForgeRegistryEntry.Impl<Ritual> {
 				}
 			}
 		}
-		if (Bewitchment.proxy.areISListsEqual(getInputItems(), ground)) {
+		if (Util.areISListsEqual(getInputItems(), ground)) {
 			if (!getInputEntities().isEmpty()) {
 				boolean found = false;
 				for (EntityLivingBase entity : living)

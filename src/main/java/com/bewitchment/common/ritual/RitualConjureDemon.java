@@ -1,12 +1,16 @@
 package com.bewitchment.common.ritual;
 
+import java.util.Arrays;
+
 import com.bewitchment.Bewitchment;
+import com.bewitchment.Util;
 import com.bewitchment.api.registry.Ritual;
 import com.bewitchment.common.block.BlockGlyph.GlyphType;
 import com.bewitchment.common.block.tile.entity.TileEntityGlyph;
 import com.bewitchment.common.entity.spirits.demons.EntityDemon;
 import com.bewitchment.common.entity.spirits.demons.EntityDemoness;
 import com.bewitchment.registry.ModObjects;
+
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,8 +25,6 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.Arrays;
-
 public class RitualConjureDemon extends Ritual {
 	public RitualConjureDemon() {
 		super(Bewitchment.MODID, "conjure_demon",
@@ -32,7 +34,7 @@ public class RitualConjureDemon extends Ritual {
 						Ingredient.fromStacks(new ItemStack(ModObjects.hellebore)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.hellhound_horn)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.liquid_wroth)),
-						Ingredient.fromStacks(Bewitchment.proxy.getOres("ingotGold")),
+						Ingredient.fromStacks(Util.getOres("ingotGold")),
 						Ingredient.fromStacks(new ItemStack(Items.ENDER_PEARL)),
 						Ingredient.fromStacks(new ItemStack(Items.GHAST_TEAR))),
 				Arrays.asList(EntityRegistry.getEntry(EntityVillager.class)),

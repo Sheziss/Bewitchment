@@ -1,7 +1,15 @@
 package com.bewitchment.common.block.util;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import javax.annotation.Nullable;
+
 import com.bewitchment.Bewitchment;
+import com.bewitchment.Util;
 import com.bewitchment.registry.util.IOreDictionaryContainer;
+
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks.EnumType;
 import net.minecraft.block.SoundType;
@@ -20,11 +28,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 public class ModBlockLeaves extends BlockLeaves implements IOreDictionaryContainer {
 	private final List<String> oreDictionaryNames = new ArrayList<String>();
 
@@ -32,7 +35,7 @@ public class ModBlockLeaves extends BlockLeaves implements IOreDictionaryContain
 
 	public ModBlockLeaves(String name, ItemStack drop, String... oreDictionaryNames) {
 		super();
-		Bewitchment.proxy.registerValues(this, name, Material.LEAVES, SoundType.PLANT, 0.2f, 0, "shears", 0, oreDictionaryNames);
+		Util.registerValues(this, name, Material.LEAVES, SoundType.PLANT, 0.2f, 0, "shears", 0, oreDictionaryNames);
 		setDefaultState(this.getBlockState().getBaseState().withProperty(CHECK_DECAY, true).withProperty(DECAYABLE, true));
 		this.drop = drop;
 	}

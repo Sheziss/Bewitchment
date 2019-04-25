@@ -1,11 +1,21 @@
 package com.bewitchment.common.ritual;
 
+import java.util.Arrays;
+
 import com.bewitchment.Bewitchment;
+import com.bewitchment.Util;
 import com.bewitchment.api.registry.Ritual;
 import com.bewitchment.common.block.BlockGlyph.GlyphType;
 import com.bewitchment.common.block.tile.entity.TileEntityGlyph;
-import com.bewitchment.common.entity.living.*;
+import com.bewitchment.common.entity.living.EntityBlindworm;
+import com.bewitchment.common.entity.living.EntityLizard;
+import com.bewitchment.common.entity.living.EntityNewt;
+import com.bewitchment.common.entity.living.EntityOwl;
+import com.bewitchment.common.entity.living.EntityRaven;
+import com.bewitchment.common.entity.living.EntitySnake;
+import com.bewitchment.common.entity.living.EntityToad;
 import com.bewitchment.registry.ModObjects;
+
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,8 +28,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.Arrays;
-
 public class RitualCallOfTheWild extends Ritual {
 	public RitualCallOfTheWild() {
 		super(Bewitchment.MODID, "call_of_the_wild",
@@ -29,7 +37,7 @@ public class RitualCallOfTheWild extends Ritual {
 						Ingredient.fromStacks(new ItemStack(ModObjects.birch_soul)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.chrysanthemum)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.moonbell)),
-						Ingredient.fromStacks(Bewitchment.proxy.getOres("treeLeaves"))),
+						Ingredient.fromStacks(Util.getOres("treeLeaves"))),
 				Arrays.asList(),
 				Arrays.asList(),
 				135, 1050, 3, GlyphType.ANY, GlyphType.ANY, GlyphType.ANY);

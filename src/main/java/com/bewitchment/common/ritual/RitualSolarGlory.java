@@ -1,6 +1,9 @@
 package com.bewitchment.common.ritual;
 
+import java.util.Arrays;
+
 import com.bewitchment.Bewitchment;
+import com.bewitchment.Util;
 import com.bewitchment.api.capability.extendedplayer.ExtendedPlayer;
 import com.bewitchment.api.capability.extendedplayer.ExtendedPlayer.TransformationType;
 import com.bewitchment.api.registry.Ritual;
@@ -8,6 +11,7 @@ import com.bewitchment.common.block.BlockGlyph.GlyphType;
 import com.bewitchment.common.block.tile.entity.TileEntityGlyph;
 import com.bewitchment.registry.ModObjects;
 import com.bewitchment.registry.ModPotions;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -16,13 +20,11 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import java.util.Arrays;
-
 public class RitualSolarGlory extends Ritual {
 	public RitualSolarGlory() {
 		super(Bewitchment.MODID, "solar_glory",
 				Arrays.asList(
-						Ingredient.fromStacks(Bewitchment.proxy.getOres("ingotGold")),
+						Ingredient.fromStacks(Util.getOres("ingotGold")),
 						Ingredient.fromStacks(new ItemStack(Items.NETHERBRICK)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.chrysanthemum))),
 				Arrays.asList(),

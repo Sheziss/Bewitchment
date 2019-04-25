@@ -93,11 +93,6 @@ public class ClientProxy extends CommonProxy {
 				return type == GlyphType.GOLDEN ? 0xe3dc3c : type == GlyphType.NETHER ? 0xbb0000 : type == GlyphType.ENDER ? 0x770077 : 0xffffff;
 			}
 		}, ModObjects.glyph);
-	}
-
-	@Override
-	protected void registerEventHandlers() {
-		super.registerEventHandlers();
 		MinecraftForge.EVENT_BUS.register(new ClientHandler());
 	}
 

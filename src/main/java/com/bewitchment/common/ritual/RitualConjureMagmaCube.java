@@ -1,10 +1,14 @@
 package com.bewitchment.common.ritual;
 
+import java.util.Arrays;
+
 import com.bewitchment.Bewitchment;
+import com.bewitchment.Util;
 import com.bewitchment.api.registry.Ritual;
 import com.bewitchment.common.block.BlockGlyph.GlyphType;
 import com.bewitchment.common.block.tile.entity.TileEntityGlyph;
 import com.bewitchment.registry.ModObjects;
+
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.monster.EntityMagmaCube;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,15 +22,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.Arrays;
-
 public class RitualConjureMagmaCube extends Ritual {
 	public RitualConjureMagmaCube() {
 		super(Bewitchment.MODID, "conjure_magma_cube",
 				Arrays.asList(
 						Ingredient.fromStacks(new ItemStack(ModObjects.athame, 1, Short.MAX_VALUE)),
 						Ingredient.fromStacks(new ItemStack(Items.BLAZE_POWDER)),
-						Ingredient.fromStacks(Bewitchment.proxy.getOres("slimeball"))),
+						Ingredient.fromStacks(Util.getOres("slimeball"))),
 				Arrays.asList(),
 				Arrays.asList(),
 				120, 1200, 3, GlyphType.NETHER, GlyphType.NETHER, null);

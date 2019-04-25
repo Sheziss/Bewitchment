@@ -1,11 +1,15 @@
 package com.bewitchment.common.ritual;
 
+import java.util.Arrays;
+
 import com.bewitchment.Bewitchment;
+import com.bewitchment.Util;
 import com.bewitchment.api.registry.Ritual;
 import com.bewitchment.common.block.BlockGlyph.GlyphType;
 import com.bewitchment.common.block.tile.entity.TileEntityGlyph;
 import com.bewitchment.common.entity.spirits.demons.EntityImp;
 import com.bewitchment.registry.ModObjects;
+
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,8 +23,6 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.Arrays;
-
 public class RitualConjureImp extends Ritual {
 	public RitualConjureImp() {
 		super(Bewitchment.MODID, "conjure_imp",
@@ -30,7 +32,7 @@ public class RitualConjureImp extends Ritual {
 						Ingredient.fromStacks(new ItemStack(ModObjects.hellebore)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.hellhound_horn)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.liquid_wroth)),
-						Ingredient.fromStacks(Bewitchment.proxy.getOres("ingotGold"))),
+						Ingredient.fromStacks(Util.getOres("ingotGold"))),
 				Arrays.asList(EntityRegistry.getEntry(EntityChicken.class)),
 				Arrays.asList(),
 				303, 3800, 6, GlyphType.NETHER, GlyphType.ANY, GlyphType.NETHER);

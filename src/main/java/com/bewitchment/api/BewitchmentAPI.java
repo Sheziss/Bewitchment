@@ -1,12 +1,27 @@
 package com.bewitchment.api;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
 import com.bewitchment.Bewitchment;
-import com.bewitchment.api.registry.*;
-import com.bewitchment.common.block.tile.entity.TileEntityWitchesAltar;
-import com.bewitchment.common.item.tool.ItemAthame;
+import com.bewitchment.api.capability.extendedplayer.ExtendedPlayer;
+import com.bewitchment.api.capability.extendedplayer.ExtendedPlayer.TransformationType;
+import com.bewitchment.api.registry.DistilleryRecipe;
+import com.bewitchment.api.registry.Fortune;
+import com.bewitchment.api.registry.LoomRecipe;
+import com.bewitchment.api.registry.OvenRecipe;
+import com.bewitchment.api.registry.Ritual;
+import com.bewitchment.api.registry.Spell;
 import com.bewitchment.registry.ModObjects;
+
 import net.minecraft.block.Block;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.monster.EntityBlaze;
+import net.minecraft.entity.monster.EntityEnderman;
+import net.minecraft.entity.monster.EntityVex;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -14,8 +29,6 @@ import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
-
-import java.util.Collection;
 
 /**
  * The Bewitchment API, use this for creating addons.
@@ -27,8 +40,13 @@ public class BewitchmentAPI {
 	public static final IForgeRegistry<Ritual> REGISTRY_RITUAL = new RegistryBuilder<Ritual>().setName(ModObjects.glyph.getRegistryName()).setType(Ritual.class).create();
 	public static final IForgeRegistry<Spell> REGISTRY_SPELL = new RegistryBuilder<Spell>().setName(new ResourceLocation(Bewitchment.MODID, "spell")).setType(Spell.class).create();
 
-	public static final IForgeRegistry<Fortune> REGISTRY_FORTUNE = new RegistryBuilder<Fortune>().setName(new ResourceLocation(Bewitchment.MODID, "fortune")).setType(Fortune.class).create();
+	public static final IForgeRegistry<Fortune> REGISTRY_FORTUNE = new RegistryBuilder<Fortune>().setName(ModObjects.crystal_ball.getRegistryName()).setType(Fortune.class).create();
 
+	public static final Map<EntityEntry, Collection<ItemStack>> ATHAME_LOOT = new HashMap<>();
+	public static final Map<Block, Integer> ALTAR_NATURE_VALUES = new HashMap<>();
+	public static final Map<Item, Double> ALTAR_GAIN_VALUES = new HashMap<>();
+	public static final Map<Item, Integer> ALTAR_MULTIPLIER_VALUES = new HashMap<>();
+	
 	/**
 	 * The Demon creature attribute.
 	 */
@@ -39,139 +57,40 @@ public class BewitchmentAPI {
 	 */
 	public static EnumCreatureAttribute SPIRIT = EnumHelper.addCreatureAttribute("SPIRIT");
 
+	
 	/**
-	 * Gets the scan value associated with a block
-	 *
-	 * @param block the block to be checked
-	 * @return the scan value of the block
+	 * @param entity the entity to check
+	 * @return true if the entity is a vampire, false otherwise
 	 */
-	public static final int getAltarScanValue(Block block) {
-		return TileEntityWitchesAltar.SCAN_VALUES.getOrDefault(block, 0);
+	public static final boolean isVampire(EntityLivingBase entity)
+	{
+		return entity instanceof EntityPlayer && entity.getCapability(ExtendedPlayer.CAPABILITY, null).getTransformation() == TransformationType.VAMPIRE;
 	}
-
+	
 	/**
-	 * Gets the sword multiplier value associated with a block
-	 *
-	 * @param item the item to be checked
-	 * @return the multiplier value of the item
+	 * @param entity the entity to check
+	 * @return true if the entity is a werewolf, false otherwise
 	 */
-	public static final double getAltarSwordMultiplierValue(Item item) {
-		return TileEntityWitchesAltar.SWORD_MULTIPLIER_VALUES.getOrDefault(item, 0d);
+	public static final boolean isWerewolf(EntityLivingBase entity)
+	{
+		return entity instanceof EntityPlayer && entity.getCapability(ExtendedPlayer.CAPABILITY, null).getTransformation() == TransformationType.WEREWOLF;
 	}
-
+	
 	/**
-	 * Gets the sword radius value associated with a block
-	 *
-	 * @param item the item to be checked
-	 * @return the radius value of the item
+	 * @param entity the entity to check
+	 * @return true if the entity is weak to cold iron, false otherwise
 	 */
-	public static final int getAltarSwordRadiusValue(Item item) {
-		return TileEntityWitchesAltar.SWORD_RADIUS_VALUES.getOrDefault(item, 0);
+	public static final boolean isWeakToColdIron(EntityLivingBase entity)
+	{
+		return entity.getCreatureAttribute() == DEMON || entity.getCreatureAttribute() == SPIRIT || entity instanceof EntityBlaze || entity instanceof EntityEnderman || entity instanceof EntityVex;
 	}
-
+	
 	/**
-	 * Registers a new scan value for the Witches' Altar.
-	 *
-	 * @param block the block to be registered
-	 * @param power the value associated with the block
+	 * @param entity the entity to check
+	 * @return true if the entity is weak to silver, false otherwise
 	 */
-	public static final void registerAltarScanValue(Block block, int power) {
-		TileEntityWitchesAltar.SCAN_VALUES.put(block, power);
-	}
-
-	/**
-	 * Registers a new sword multiplier value for the Witches' Altar.
-	 *
-	 * @param item              the item to be registered
-	 * @param varietyMultiplier the multiplier associated with the item
-	 */
-	public static final void registerAltarSwordMultiplier(Item item, double varietyMultiplier) {
-		TileEntityWitchesAltar.SWORD_MULTIPLIER_VALUES.put(item, varietyMultiplier);
-	}
-
-	/**
-	 * Registers a new sword radius value for the Witches' Altar.
-	 *
-	 * @param item   the item to be registered
-	 * @param radius the radius associated with the item
-	 */
-	public static final void registerAltarSwordRadius(Item item, int radius) {
-		TileEntityWitchesAltar.SWORD_RADIUS_VALUES.put(item, radius);
-	}
-
-	/**
-	 * Registers a new special drop for the Athame
-	 *
-	 * @param entry the EntityEntry associated with the drop
-	 * @param drops the list of ItemStacks dropped when the Entity is killed with the Athame
-	 */
-	public static final void registerAthameLoot(EntityEntry entry, Collection<ItemStack> drops) {
-		ItemAthame.LOOT_TABLE.put(entry, drops);
-	}
-
-	/**
-	 * Registers a new DistilleryRecipe, for use in the Distillery.
-	 *
-	 * @param recipe the recipe to register
-	 * @return the recipe registered
-	 */
-	public static final DistilleryRecipe registerDistilleryRecipe(DistilleryRecipe recipe) {
-		REGISTRY_DISTILLERY.register(recipe);
-		return recipe;
-	}
-
-	/**
-	 * Registers a new LoomRecipe, for use with the Loom.
-	 *
-	 * @param recipe the recipe to register
-	 * @return the recipe registered
-	 */
-	public static final LoomRecipe registerLoomRecipe(LoomRecipe recipe) {
-		REGISTRY_LOOM.register(recipe);
-		return recipe;
-	}
-
-	/**
-	 * Registers a new OvenRecipe, for use in the Oven.
-	 *
-	 * @param recipe the recipe to register
-	 * @return the recipe registered
-	 */
-	public static final OvenRecipe registerOvenRecipe(OvenRecipe recipe) {
-		REGISTRY_OVEN.register(recipe);
-		return recipe;
-	}
-
-	/**
-	 * Registers a new Ritual, for use with rituals.
-	 *
-	 * @param ritual the ritual to register
-	 * @return the ritual registered
-	 */
-	public static final Ritual registerRitual(Ritual ritual) {
-		REGISTRY_RITUAL.register(ritual);
-		return ritual;
-	}
-
-	/**
-	 * Registers a new Spell.
-	 *
-	 * @param recipe the spell to register
-	 * @return the spell registered
-	 */
-	public static final Spell registerSpell(Spell spell) {
-		REGISTRY_SPELL.register(spell);
-		return spell;
-	}
-
-	/**
-	 * Registers a new Fortune.
-	 *
-	 * @param recipe the fortune to register
-	 * @return the fortune registered
-	 */
-	public static final Fortune registerFortune(Fortune fortune) {
-		REGISTRY_FORTUNE.register(fortune);
-		return fortune;
+	public static final boolean isWeakToSilver(EntityLivingBase entity)
+	{
+		return isWerewolf(entity) || isVampire(entity) || entity.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD;
 	}
 }

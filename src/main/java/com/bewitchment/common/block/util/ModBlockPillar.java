@@ -1,7 +1,11 @@
 package com.bewitchment.common.block.util;
 
-import com.bewitchment.Bewitchment;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.bewitchment.Util;
 import com.bewitchment.registry.util.IOreDictionaryContainer;
+
 import net.minecraft.block.BlockRotatedPillar;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -14,15 +18,12 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ModBlockPillar extends BlockRotatedPillar implements IOreDictionaryContainer {
 	private final List<String> oreDictionaryNames = new ArrayList<String>();
 
 	public ModBlockPillar(String name, Material mat, SoundType sound, float hardness, float resistance, String tool, int level, String... oreDictionaryNames) {
 		super(mat);
-		Bewitchment.proxy.registerValues(this, name, mat, sound, hardness, resistance, tool, level, oreDictionaryNames);
+		Util.registerValues(this, name, mat, sound, hardness, resistance, tool, level, oreDictionaryNames);
 		setDefaultState(blockState.getBaseState().withProperty(AXIS, Axis.Y));
 	}
 

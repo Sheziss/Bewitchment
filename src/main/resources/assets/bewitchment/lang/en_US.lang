@@ -316,14 +316,12 @@ entity.bewitchment.imp.name=Imp
 enchantment.bewitchment.desperate_ward=Desperate Ward
 enchantment.bewitchment.potent_ward=Potent Ward
 enchantment.bewitchment.natural_attuning=Natural Attuning
-enchantment.bewitchment.demon_protection=Demon Protection
 enchantment.bewitchment.spirit_protection=Spirit Protection
 
 enchantment.bewitchment.desperate_ward.desc=Consumes infusion power to reduce or nullify damage.
 enchantment.bewitchment.potent_ward.desc=Consumes infusion power to reduce or nullify damage.
 enchantment.bewitchment.natural_attuning.desc=Extends the wearer's infusion bar.
-enchantment.bewitchment.demon_protection.desc=Reduces damage from demons.
-enchantment.bewitchment.spirit_protection.desc=Reduces damage from spirits.
+enchantment.bewitchment.spirit_protection.desc=Reduces damage from spirits and demons.
 
 #Ritual
 bewitchment.high_moon=Ritual of the High Moon
