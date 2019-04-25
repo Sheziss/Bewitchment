@@ -1,13 +1,29 @@
 package com.bewitchment.client;
 
+import java.util.List;
+import java.util.function.Predicate;
+
 import com.bewitchment.Bewitchment;
 import com.bewitchment.client.block.tile.render.RenderTileEntityGemBowl;
 import com.bewitchment.client.block.tile.render.RenderTileEntityPlacedItem;
 import com.bewitchment.client.block.tile.render.RenderTileEntityWitchesCauldron;
 import com.bewitchment.client.handler.ClientHandler;
-import com.bewitchment.client.render.entity.living.*;
-import com.bewitchment.client.render.entity.misc.*;
-import com.bewitchment.client.render.entity.spirits.demons.*;
+import com.bewitchment.client.render.entity.living.RenderBlindworm;
+import com.bewitchment.client.render.entity.living.RenderLizard;
+import com.bewitchment.client.render.entity.living.RenderNewt;
+import com.bewitchment.client.render.entity.living.RenderOwl;
+import com.bewitchment.client.render.entity.living.RenderRaven;
+import com.bewitchment.client.render.entity.living.RenderSnake;
+import com.bewitchment.client.render.entity.living.RenderToad;
+import com.bewitchment.client.render.entity.misc.RenderCypressBroom;
+import com.bewitchment.client.render.entity.misc.RenderElderBroom;
+import com.bewitchment.client.render.entity.misc.RenderJuniperBroom;
+import com.bewitchment.client.render.entity.misc.RenderSpell;
+import com.bewitchment.client.render.entity.misc.RenderYewBroom;
+import com.bewitchment.client.render.entity.spirits.demons.RenderDemon;
+import com.bewitchment.client.render.entity.spirits.demons.RenderDemoness;
+import com.bewitchment.client.render.entity.spirits.demons.RenderHellhound;
+import com.bewitchment.client.render.entity.spirits.demons.RenderImp;
 import com.bewitchment.client.render.entity.spirits.ghosts.RenderBlackDog;
 import com.bewitchment.common.CommonProxy;
 import com.bewitchment.common.block.BlockGlyph;
@@ -15,11 +31,25 @@ import com.bewitchment.common.block.BlockGlyph.GlyphType;
 import com.bewitchment.common.block.tile.entity.TileEntityGemBowl;
 import com.bewitchment.common.block.tile.entity.TileEntityPlacedItem;
 import com.bewitchment.common.block.tile.entity.TileEntityWitchesCauldron;
-import com.bewitchment.common.entity.living.*;
-import com.bewitchment.common.entity.misc.*;
-import com.bewitchment.common.entity.spirits.demons.*;
+import com.bewitchment.common.entity.living.EntityBlindworm;
+import com.bewitchment.common.entity.living.EntityLizard;
+import com.bewitchment.common.entity.living.EntityNewt;
+import com.bewitchment.common.entity.living.EntityOwl;
+import com.bewitchment.common.entity.living.EntityRaven;
+import com.bewitchment.common.entity.living.EntitySnake;
+import com.bewitchment.common.entity.living.EntityToad;
+import com.bewitchment.common.entity.misc.EntityCypressBroom;
+import com.bewitchment.common.entity.misc.EntityElderBroom;
+import com.bewitchment.common.entity.misc.EntityJuniperBroom;
+import com.bewitchment.common.entity.misc.EntitySpell;
+import com.bewitchment.common.entity.misc.EntityYewBroom;
+import com.bewitchment.common.entity.spirits.demons.EntityDemon;
+import com.bewitchment.common.entity.spirits.demons.EntityDemoness;
+import com.bewitchment.common.entity.spirits.demons.EntityHellhound;
+import com.bewitchment.common.entity.spirits.demons.EntityImp;
 import com.bewitchment.common.entity.spirits.ghosts.EntityBlackDog;
 import com.bewitchment.registry.ModObjects;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
@@ -30,6 +60,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.renderer.color.IBlockColor;
+import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -45,9 +76,6 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.List;
-import java.util.function.Predicate;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(Side.CLIENT)
@@ -71,8 +99,6 @@ public class ClientProxy extends CommonProxy {
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityBlackDog.class, RenderBlackDog::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityHellhound.class, RenderHellhound::new);
-		RenderingRegistry.registerEntityRenderingHandler(EntityAlphaHellhound.class, RenderAlphaHellhound::new);
-		RenderingRegistry.registerEntityRenderingHandler(EntitySerpent.class, RenderSerpent::new);
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityDemon.class, RenderDemon::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityDemoness.class, RenderDemoness::new);
@@ -93,6 +119,14 @@ public class ClientProxy extends CommonProxy {
 				return type == GlyphType.GOLDEN ? 0xe3dc3c : type == GlyphType.NETHER ? 0xbb0000 : type == GlyphType.ENDER ? 0x770077 : 0xffffff;
 			}
 		}, ModObjects.glyph);
+		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new IItemColor()
+		{
+			@Override
+			public int colorMultiplier(ItemStack stack, int tintIndex)
+			{
+				return tintIndex == 0 ? 0xe6c44f : 0xffffff;
+			}
+		}, ModObjects.snake_venom);
 		MinecraftForge.EVENT_BUS.register(new ClientHandler());
 	}
 

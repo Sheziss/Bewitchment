@@ -1,15 +1,25 @@
 package com.bewitchment.common.entity.living;
 
 import com.bewitchment.Bewitchment;
-import com.bewitchment.common.entity.spirits.demons.EntitySerpent;
 import com.bewitchment.common.entity.util.ModEntityTameable;
 import com.bewitchment.registry.ModObjects;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.EntityLightningBolt;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIFollowOwner;
+import net.minecraft.entity.ai.EntityAIFollowParent;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIMate;
+import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
+import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAITargetNonTamed;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest2;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityRabbit;
@@ -18,12 +28,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
 public class EntitySnake extends ModEntityTameable {
@@ -79,9 +91,10 @@ public class EntitySnake extends ModEntityTameable {
 	public boolean processInteract(EntityPlayer player, EnumHand hand) {
 		if (!world.isRemote && (getAttackTarget() == null || getAttackTarget().isDead || getRevengeTarget() == null || getRevengeTarget().isDead)) {
 			ItemStack stack = player.getHeldItem(hand);
-			if (stack.getItem() == ModObjects.glass_jar) {
+			if (stack.getItem() == Items.GLASS_BOTTLE) {
 				if (milkTimer == 0 && getRNG().nextBoolean()) {
 					if (getGrowingAge() >= 0) {
+						world.playSound(null, getPosition(), SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.NEUTRAL, 1, 1);
 						stack.shrink(1);
 						if (stack.isEmpty()) player.setHeldItem(hand, new ItemStack(ModObjects.snake_venom));
 						else if (!player.inventory.addItemStackToInventory(new ItemStack(ModObjects.snake_venom)))
@@ -112,21 +125,6 @@ public class EntitySnake extends ModEntityTameable {
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
 		if (milkTimer > 0) milkTimer--;
-	}
-
-	@Override
-	public void onStruckByLightning(EntityLightningBolt bolt) {
-		if (!world.isRemote && !isDead) {
-			EntitySerpent entity = new EntitySerpent(world);
-			entity.setLocationAndAngles(posX, posY, posZ, rotationYaw, rotationPitch);
-			entity.setNoAI(isAIDisabled());
-			if (hasCustomName()) {
-				entity.setCustomNameTag(getCustomNameTag());
-				entity.setAlwaysRenderNameTag(getAlwaysRenderNameTag());
-			}
-			world.spawnEntity(entity);
-			setDead();
-		}
 	}
 
 	@Override

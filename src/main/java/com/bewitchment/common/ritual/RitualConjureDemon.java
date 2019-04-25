@@ -33,7 +33,7 @@ public class RitualConjureDemon extends Ritual {
 						Ingredient.fromStacks(new ItemStack(ModObjects.heart)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.hellebore)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.hellhound_horn)),
-						Ingredient.fromStacks(new ItemStack(ModObjects.liquid_wroth)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.snake_venom)),
 						Ingredient.fromStacks(Util.getOres("ingotGold")),
 						Ingredient.fromStacks(new ItemStack(Items.ENDER_PEARL)),
 						Ingredient.fromStacks(new ItemStack(Items.GHAST_TEAR))),
