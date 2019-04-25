@@ -30,11 +30,6 @@ public class RenderDemoness extends RenderLiving<EntityDemoness> {
 	}
 
 	@Override
-	protected boolean canRenderName(EntityDemoness entity) {
-		return true;
-	}
-
-	@Override
 	protected void preRenderCallback(EntityDemoness entity, float partialTickTime) {
 		super.preRenderCallback(entity, partialTickTime);
 		GlStateManager.scale(1.6, 1.6, 1.6);
