@@ -31,7 +31,7 @@ public class RitualConjureImp extends Ritual {
 						Ingredient.fromStacks(new ItemStack(ModObjects.heart)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.hellebore)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.hellhound_horn)),
-						Ingredient.fromStacks(new ItemStack(ModObjects.snake_venom)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.liquid_wroth)),
 						Ingredient.fromStacks(Util.getOres("ingotGold"))),
 				Arrays.asList(EntityRegistry.getEntry(EntityChicken.class)),
 				Arrays.asList(),

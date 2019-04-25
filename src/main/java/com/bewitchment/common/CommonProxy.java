@@ -121,6 +121,7 @@ public class CommonProxy {
 		LootTableList.register(new ResourceLocation(Bewitchment.MODID, "entities/black_dog"));
 
 		LootTableList.register(new ResourceLocation(Bewitchment.MODID, "entities/hellhound"));
+		LootTableList.register(new ResourceLocation(Bewitchment.MODID, "entities/alpha_hellhound"));
 
 		LootTableList.register(new ResourceLocation(Bewitchment.MODID, "entities/demon"));
 		

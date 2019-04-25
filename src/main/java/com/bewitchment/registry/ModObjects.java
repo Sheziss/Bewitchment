@@ -416,11 +416,14 @@ public class ModObjects {
 	public static final Item owlets_wing = new ModItem("owlets_wing");
 	public static final Item ravens_feather = new ModItem("ravens_feather");
 	public static final Item adders_fork = new ModItem("adders_fork");
+	public static final Item fillet_of_fenny_snake = new ModItem("fillet_of_fenny_snake");
 	public static final Item toe_of_frog = new ModItem("toe_of_frog");
 	public static final Item hellhound_horn = new ModItem("hellhound_horn");
 	public static final Item heart = new ItemHeart();
 	public static final Item demonic_heart = new ModItem("demonic_heart");
+	public static final Item glass_jar = new ModItem("glass_jar");
 	public static final Item snake_venom = new ModItem("snake_venom");
+	public static final Item liquid_wroth = new ModItem("liquid_wroth");
 
 	// Athame, Etc
 	public static final Item carnivorous_tooth = new ModItem("carnivorous_tooth");

@@ -47,6 +47,8 @@ public class ModEntities {
 	public static final EntityEntry entity_black_dog = createEntityEntry(EntityBlackDog.class, "black_dog", 0x000000, 0x000000, EnumCreatureType.MONSTER, 6, 1, 4, Type.PLAINS, Type.WASTELAND, Type.FOREST);
 
 	public static final EntityEntry entity_hellhound = createEntityEntry(EntityHellhound.class, "hellhound", 0x555555, 0xed2939, EnumCreatureType.MONSTER, 6, 1, 4, Type.NETHER);
+	public static final EntityEntry entity_alpha_hellhound = createEntityEntry(EntityAlphaHellhound.class, "alpha_hellhound", 0x555555, 0xed2939, EnumCreatureType.MONSTER, 1, 1, 4, Type.NETHER);
+	public static final EntityEntry entity_serpent = createEntityEntry(EntitySerpent.class, "serpent", 0x555555, 0xff9966, EnumCreatureType.MONSTER, 6, 1, 4, Type.NETHER);
 
 	public static final EntityEntry demon = createEntityEntry(EntityDemon.class, "demon", 0x555555, 0xed2939);
 	public static final EntityEntry demoness = createEntityEntry(EntityDemoness.class, "demoness", 0x555555, 0xed2939);

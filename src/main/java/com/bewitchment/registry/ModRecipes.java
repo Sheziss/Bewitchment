@@ -17,6 +17,7 @@ import com.bewitchment.common.entity.living.EntityOwl;
 import com.bewitchment.common.entity.living.EntityRaven;
 import com.bewitchment.common.entity.living.EntitySnake;
 import com.bewitchment.common.entity.living.EntityToad;
+import com.bewitchment.common.entity.spirits.demons.EntityAlphaHellhound;
 import com.bewitchment.common.entity.spirits.demons.EntityDemon;
 import com.bewitchment.common.entity.spirits.demons.EntityDemoness;
 import com.bewitchment.common.entity.spirits.demons.EntityHellhound;
@@ -36,18 +37,21 @@ import com.bewitchment.common.fortune.FortuneMeetHorse;
 import com.bewitchment.common.fortune.FortuneMeetLlama;
 import com.bewitchment.common.fortune.FortuneMeetMerchant;
 import com.bewitchment.common.fortune.FortuneMeetParrot;
+import com.bewitchment.common.fortune.FortuneMeetSerpent;
 import com.bewitchment.common.fortune.FortuneMeetSilverfish;
 import com.bewitchment.common.fortune.FortuneMeetWitch;
 import com.bewitchment.common.fortune.FortuneMeetZombie;
 import com.bewitchment.common.fortune.FortuneTreasure;
 import com.bewitchment.common.fortune.FortuneVitality;
 import com.bewitchment.common.ritual.RitualCallOfTheWild;
+import com.bewitchment.common.ritual.RitualConjureAlphaHellhound;
 import com.bewitchment.common.ritual.RitualConjureBlaze;
 import com.bewitchment.common.ritual.RitualConjureDemon;
 import com.bewitchment.common.ritual.RitualConjureGhast;
 import com.bewitchment.common.ritual.RitualConjureHellhound;
 import com.bewitchment.common.ritual.RitualConjureImp;
 import com.bewitchment.common.ritual.RitualConjureMagmaCube;
+import com.bewitchment.common.ritual.RitualConjureSerpent;
 import com.bewitchment.common.ritual.RitualConjureVex;
 import com.bewitchment.common.ritual.RitualConjureWitch;
 import com.bewitchment.common.ritual.RitualConjureWither;
@@ -172,11 +176,12 @@ public class ModRecipes
 		BewitchmentAPI.ATHAME_LOOT.put(EntityRegistry.getEntry(EntityOwl.class), Sets.newHashSet(new ItemStack(ModObjects.owlets_wing, 2)));
 		BewitchmentAPI.ATHAME_LOOT.put(EntityRegistry.getEntry(EntityRaven.class), Sets.newHashSet(new ItemStack(ModObjects.ravens_feather, 4)));
 		BewitchmentAPI.ATHAME_LOOT.put(EntityRegistry.getEntry(EntityToad.class), Sets.newHashSet(new ItemStack(ModObjects.toe_of_frog, 4)));
-		BewitchmentAPI.ATHAME_LOOT.put(EntityRegistry.getEntry(EntitySnake.class), Sets.newHashSet(new ItemStack(ModObjects.adders_fork, 3)));
+		BewitchmentAPI.ATHAME_LOOT.put(EntityRegistry.getEntry(EntitySnake.class), Sets.newHashSet(new ItemStack(ModObjects.fillet_of_fenny_snake, 3), new ItemStack(ModObjects.adders_fork, 3)));
 
 		BewitchmentAPI.ATHAME_LOOT.put(EntityRegistry.getEntry(EntityBlackDog.class), Sets.newHashSet(new ItemStack(ModObjects.tongue_of_dog), new ItemStack(ModObjects.ectoplasm, 4), new ItemStack(ModObjects.spectral_dust)));
 
 		BewitchmentAPI.ATHAME_LOOT.put(EntityRegistry.getEntry(EntityHellhound.class), Sets.newHashSet(new ItemStack(ModObjects.tongue_of_dog), new ItemStack(ModObjects.hellhound_horn, 2), new ItemStack(Items.BLAZE_POWDER, 4)));
+		BewitchmentAPI.ATHAME_LOOT.put(EntityRegistry.getEntry(EntityAlphaHellhound.class), Sets.newHashSet(new ItemStack(ModObjects.tongue_of_dog), new ItemStack(ModObjects.hellhound_horn, 4), new ItemStack(Items.BLAZE_POWDER, 8)));
 
 		BewitchmentAPI.ATHAME_LOOT.put(EntityRegistry.getEntry(EntityDemon.class), Sets.newHashSet(new ItemStack(ModObjects.demonic_heart)));
 		BewitchmentAPI.ATHAME_LOOT.put(EntityRegistry.getEntry(EntityDemoness.class), Sets.newHashSet(new ItemStack(ModObjects.demonic_heart)));
@@ -374,6 +379,8 @@ public class ModRecipes
 		BewitchmentAPI.REGISTRY_RITUAL.register(new RitualConjureDemon());
 		BewitchmentAPI.REGISTRY_RITUAL.register(new RitualConjureImp());
 		BewitchmentAPI.REGISTRY_RITUAL.register(new RitualConjureHellhound());
+		BewitchmentAPI.REGISTRY_RITUAL.register(new RitualConjureAlphaHellhound());
+		BewitchmentAPI.REGISTRY_RITUAL.register(new RitualConjureSerpent());
 		BewitchmentAPI.REGISTRY_RITUAL.register(new RitualCallOfTheWild());
 		BewitchmentAPI.REGISTRY_RITUAL.register(new RitualHungryFlames());
 		BewitchmentAPI.REGISTRY_RITUAL.register(new RitualDrawing("draw_small",
@@ -492,6 +499,7 @@ public class ModRecipes
 		BewitchmentAPI.REGISTRY_FORTUNE.register(new FortuneMeetDonkey());
 		BewitchmentAPI.REGISTRY_FORTUNE.register(new FortuneVitality());
 		BewitchmentAPI.REGISTRY_FORTUNE.register(new FortuneMeetBlaze());
+		BewitchmentAPI.REGISTRY_FORTUNE.register(new FortuneMeetSerpent());
 		BewitchmentAPI.REGISTRY_FORTUNE.register(new FortuneMeetDemon());
 		BewitchmentAPI.REGISTRY_FORTUNE.register(new FortuneTreasure());
 		BewitchmentAPI.REGISTRY_FORTUNE.register(new FortuneMeetWitch());
