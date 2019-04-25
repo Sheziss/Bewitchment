@@ -1,13 +1,12 @@
 package com.bewitchment.api.registry;
 
-import java.util.Random;
-
 import com.bewitchment.Util;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.registries.IForgeRegistryEntry;
+
+import java.util.Random;
 
 public class OvenRecipe extends IForgeRegistryEntry.Impl<OvenRecipe> {
 	private final ItemStack input, output, byproduct;

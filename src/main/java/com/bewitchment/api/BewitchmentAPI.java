@@ -1,20 +1,10 @@
 package com.bewitchment.api;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-
 import com.bewitchment.Bewitchment;
 import com.bewitchment.api.capability.extendedplayer.ExtendedPlayer;
 import com.bewitchment.api.capability.extendedplayer.ExtendedPlayer.TransformationType;
-import com.bewitchment.api.registry.DistilleryRecipe;
-import com.bewitchment.api.registry.Fortune;
-import com.bewitchment.api.registry.LoomRecipe;
-import com.bewitchment.api.registry.OvenRecipe;
-import com.bewitchment.api.registry.Ritual;
-import com.bewitchment.api.registry.Spell;
+import com.bewitchment.api.registry.*;
 import com.bewitchment.registry.ModObjects;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -29,6 +19,10 @@ import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The Bewitchment API, use this for creating addons.
@@ -46,7 +40,7 @@ public class BewitchmentAPI {
 	public static final Map<Block, Integer> ALTAR_NATURE_VALUES = new HashMap<>();
 	public static final Map<Item, Double> ALTAR_GAIN_VALUES = new HashMap<>();
 	public static final Map<Item, Integer> ALTAR_MULTIPLIER_VALUES = new HashMap<>();
-	
+
 	/**
 	 * The Demon creature attribute.
 	 */
@@ -57,40 +51,36 @@ public class BewitchmentAPI {
 	 */
 	public static EnumCreatureAttribute SPIRIT = EnumHelper.addCreatureAttribute("SPIRIT");
 
-	
+
 	/**
 	 * @param entity the entity to check
 	 * @return true if the entity is a vampire, false otherwise
 	 */
-	public static final boolean isVampire(EntityLivingBase entity)
-	{
+	public static final boolean isVampire(EntityLivingBase entity) {
 		return entity instanceof EntityPlayer && entity.getCapability(ExtendedPlayer.CAPABILITY, null).getTransformation() == TransformationType.VAMPIRE;
 	}
-	
+
 	/**
 	 * @param entity the entity to check
 	 * @return true if the entity is a werewolf, false otherwise
 	 */
-	public static final boolean isWerewolf(EntityLivingBase entity)
-	{
+	public static final boolean isWerewolf(EntityLivingBase entity) {
 		return entity instanceof EntityPlayer && entity.getCapability(ExtendedPlayer.CAPABILITY, null).getTransformation() == TransformationType.WEREWOLF;
 	}
-	
+
 	/**
 	 * @param entity the entity to check
 	 * @return true if the entity is weak to cold iron, false otherwise
 	 */
-	public static final boolean isWeakToColdIron(EntityLivingBase entity)
-	{
+	public static final boolean isWeakToColdIron(EntityLivingBase entity) {
 		return entity.getCreatureAttribute() == DEMON || entity.getCreatureAttribute() == SPIRIT || entity instanceof EntityBlaze || entity instanceof EntityEnderman || entity instanceof EntityVex;
 	}
-	
+
 	/**
 	 * @param entity the entity to check
 	 * @return true if the entity is weak to silver, false otherwise
 	 */
-	public static final boolean isWeakToSilver(EntityLivingBase entity)
-	{
+	public static final boolean isWeakToSilver(EntityLivingBase entity) {
 		return isWerewolf(entity) || isVampire(entity) || entity.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD;
 	}
 }

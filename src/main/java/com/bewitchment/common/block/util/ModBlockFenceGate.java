@@ -1,11 +1,7 @@
 package com.bewitchment.common.block.util;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.bewitchment.Util;
 import com.bewitchment.registry.util.IOreDictionaryContainer;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.BlockPlanks.EnumType;
@@ -13,6 +9,9 @@ import net.minecraft.block.material.Material;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ModBlockFenceGate extends BlockFenceGate implements IOreDictionaryContainer {
 	private final List<String> oreDictionaryNames = new ArrayList<String>();

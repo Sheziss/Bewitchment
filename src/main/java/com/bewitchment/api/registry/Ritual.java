@@ -1,14 +1,10 @@
 package com.bewitchment.api.registry;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.bewitchment.Util;
 import com.bewitchment.common.block.BlockGlyph;
 import com.bewitchment.common.block.BlockGlyph.GlyphType;
 import com.bewitchment.common.block.tile.entity.TileEntityGlyph;
 import com.bewitchment.registry.ModObjects;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,6 +18,9 @@ import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistryEntry;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Ritual extends IForgeRegistryEntry.Impl<Ritual> {
 	public static final int[][] small = {

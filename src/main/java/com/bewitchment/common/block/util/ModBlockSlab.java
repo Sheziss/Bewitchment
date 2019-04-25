@@ -1,14 +1,9 @@
 package com.bewitchment.common.block.util;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import com.bewitchment.Bewitchment;
 import com.bewitchment.Util;
 import com.bewitchment.registry.ModObjects;
 import com.bewitchment.registry.util.IOreDictionaryContainer;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPurpurSlab;
 import net.minecraft.block.BlockSlab;
@@ -26,6 +21,10 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class ModBlockSlab extends BlockSlab implements IOreDictionaryContainer {
 	private final List<String> oreDictionaryNames = new ArrayList<String>();

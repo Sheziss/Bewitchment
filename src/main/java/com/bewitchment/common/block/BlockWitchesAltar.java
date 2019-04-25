@@ -1,10 +1,5 @@
 package com.bewitchment.common.block;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-
 import com.bewitchment.Bewitchment;
 import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.api.capability.magicpower.MagicPower;
@@ -12,7 +7,6 @@ import com.bewitchment.common.block.tile.entity.TileEntityPlacedItem;
 import com.bewitchment.common.block.tile.entity.TileEntityWitchesAltar;
 import com.bewitchment.common.block.util.ModBlockContainer;
 import com.bewitchment.registry.ModObjects;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
@@ -37,6 +31,11 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+
 public class BlockWitchesAltar extends ModBlockContainer {
 	public static final PropertyAltar TYPE = new PropertyAltar("type", AltarType.class, Arrays.asList(AltarType.values()));
 
@@ -44,6 +43,40 @@ public class BlockWitchesAltar extends ModBlockContainer {
 		super(null, "witches_altar" + (color.isEmpty() ? "" : "_" + color), Material.ROCK, SoundType.STONE, 2, 30, "pickaxe", 0, -1);
 		setTranslationKey(new ResourceLocation(Bewitchment.MODID, "witches_altar").toString().replace(":", "."));
 		setDefaultState(blockState.getBaseState().withProperty(TYPE, AltarType.UNFORMED));
+	}
+
+	public static BlockPos getAltarPosition(IBlockAccess world, BlockPos pos) {
+		for (int x = -1; x <= 1; x++) {
+			for (int z = -1; z <= 1; z++) {
+				BlockPos pos0 = pos.add(x, 0, z);
+				IBlockState state = world.getBlockState(pos0);
+				if (state.getBlock() instanceof BlockWitchesAltar && state.getValue(TYPE) == AltarType.TILE)
+					return pos0;
+			}
+		}
+		return pos;
+	}
+
+	public static List<BlockPos> getAltarPositions(World world, BlockPos pos) {
+		List<BlockPos> positions = new ArrayList<>();
+		for (int x = -1; x <= 1; x++) {
+			for (int z = -1; z <= 1; z++) {
+				BlockPos pos0 = getAltarPosition(world, pos).add(x, 0, z);
+				if (world.getBlockState(pos0).getBlock() instanceof BlockWitchesAltar) positions.add(pos0);
+			}
+		}
+		return positions;
+	}
+
+	public static BlockPos getNearestAltar(World world, BlockPos pos) {
+		if (pos != null) {
+			for (BlockPos pos0 : BlockPos.getAllInBoxMutable(pos.add(-8, -8, -8), pos.add(8, 8, 8))) {
+				IBlockState state = world.getBlockState(getAltarPosition(world, pos0));
+				if (state.getBlock() instanceof BlockWitchesAltar && state.getValue(TYPE) == AltarType.TILE)
+					return getAltarPosition(world, pos0);
+			}
+		}
+		return null;
 	}
 
 	@Override
@@ -158,40 +191,6 @@ public class BlockWitchesAltar extends ModBlockContainer {
 	@Override
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, TYPE);
-	}
-	
-	public static BlockPos getAltarPosition(IBlockAccess world, BlockPos pos) {
-		for (int x = -1; x <= 1; x++) {
-			for (int z = -1; z <= 1; z++) {
-				BlockPos pos0 = pos.add(x, 0, z);
-				IBlockState state = world.getBlockState(pos0);
-				if (state.getBlock() instanceof BlockWitchesAltar && state.getValue(TYPE) == AltarType.TILE)
-					return pos0;
-			}
-		}
-		return pos;
-	}
-
-	public static List<BlockPos> getAltarPositions(World world, BlockPos pos) {
-		List<BlockPos> positions = new ArrayList<>();
-		for (int x = -1; x <= 1; x++) {
-			for (int z = -1; z <= 1; z++) {
-				BlockPos pos0 = getAltarPosition(world, pos).add(x, 0, z);
-				if (world.getBlockState(pos0).getBlock() instanceof BlockWitchesAltar) positions.add(pos0);
-			}
-		}
-		return positions;
-	}
-
-	public static BlockPos getNearestAltar(World world, BlockPos pos) {
-		if (pos != null) {
-			for (BlockPos pos0 : BlockPos.getAllInBoxMutable(pos.add(-8, -8, -8), pos.add(8, 8, 8))) {
-				IBlockState state = world.getBlockState(getAltarPosition(world, pos0));
-				if (state.getBlock() instanceof BlockWitchesAltar && state.getValue(TYPE) == AltarType.TILE)
-					return getAltarPosition(world, pos0);
-			}
-		}
-		return null;
 	}
 
 	private void refreshAltarContainers(World world, BlockPos pos) {

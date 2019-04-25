@@ -1,7 +1,5 @@
 package com.bewitchment.registry;
 
-import java.util.Arrays;
-
 import com.bewitchment.Bewitchment;
 import com.bewitchment.Util;
 import com.bewitchment.api.BewitchmentAPI;
@@ -10,93 +8,18 @@ import com.bewitchment.api.registry.LoomRecipe;
 import com.bewitchment.api.registry.OvenRecipe;
 import com.bewitchment.api.registry.Ritual;
 import com.bewitchment.common.block.BlockGlyph.GlyphType;
-import com.bewitchment.common.entity.living.EntityBlindworm;
-import com.bewitchment.common.entity.living.EntityLizard;
-import com.bewitchment.common.entity.living.EntityNewt;
-import com.bewitchment.common.entity.living.EntityOwl;
-import com.bewitchment.common.entity.living.EntityRaven;
-import com.bewitchment.common.entity.living.EntitySnake;
-import com.bewitchment.common.entity.living.EntityToad;
+import com.bewitchment.common.entity.living.*;
 import com.bewitchment.common.entity.spirits.demons.EntityAlphaHellhound;
 import com.bewitchment.common.entity.spirits.demons.EntityDemon;
 import com.bewitchment.common.entity.spirits.demons.EntityDemoness;
 import com.bewitchment.common.entity.spirits.demons.EntityHellhound;
 import com.bewitchment.common.entity.spirits.ghosts.EntityBlackDog;
-import com.bewitchment.common.fortune.FortuneBadLuck;
-import com.bewitchment.common.fortune.FortuneDeath;
-import com.bewitchment.common.fortune.FortuneDropItem;
-import com.bewitchment.common.fortune.FortuneGoodLuck;
-import com.bewitchment.common.fortune.FortuneIllness;
-import com.bewitchment.common.fortune.FortuneMeetBlaze;
-import com.bewitchment.common.fortune.FortuneMeetCat;
-import com.bewitchment.common.fortune.FortuneMeetDemon;
-import com.bewitchment.common.fortune.FortuneMeetDireWolf;
-import com.bewitchment.common.fortune.FortuneMeetDog;
-import com.bewitchment.common.fortune.FortuneMeetDonkey;
-import com.bewitchment.common.fortune.FortuneMeetHorse;
-import com.bewitchment.common.fortune.FortuneMeetLlama;
-import com.bewitchment.common.fortune.FortuneMeetMerchant;
-import com.bewitchment.common.fortune.FortuneMeetParrot;
-import com.bewitchment.common.fortune.FortuneMeetSerpent;
-import com.bewitchment.common.fortune.FortuneMeetSilverfish;
-import com.bewitchment.common.fortune.FortuneMeetWitch;
-import com.bewitchment.common.fortune.FortuneMeetZombie;
-import com.bewitchment.common.fortune.FortuneTreasure;
-import com.bewitchment.common.fortune.FortuneVitality;
-import com.bewitchment.common.ritual.RitualCallOfTheWild;
-import com.bewitchment.common.ritual.RitualConjureAlphaHellhound;
-import com.bewitchment.common.ritual.RitualConjureBlaze;
-import com.bewitchment.common.ritual.RitualConjureDemon;
-import com.bewitchment.common.ritual.RitualConjureGhast;
-import com.bewitchment.common.ritual.RitualConjureHellhound;
-import com.bewitchment.common.ritual.RitualConjureImp;
-import com.bewitchment.common.ritual.RitualConjureMagmaCube;
-import com.bewitchment.common.ritual.RitualConjureSerpent;
-import com.bewitchment.common.ritual.RitualConjureVex;
-import com.bewitchment.common.ritual.RitualConjureWitch;
-import com.bewitchment.common.ritual.RitualConjureWither;
-import com.bewitchment.common.ritual.RitualDrawing;
-import com.bewitchment.common.ritual.RitualHighMoon;
-import com.bewitchment.common.ritual.RitualHungryFlames;
-import com.bewitchment.common.ritual.RitualPerception;
-import com.bewitchment.common.ritual.RitualSandsOfTime;
-import com.bewitchment.common.ritual.RitualSolarGlory;
+import com.bewitchment.common.fortune.*;
+import com.bewitchment.common.ritual.*;
 import com.google.common.collect.Sets;
-
 import net.minecraft.entity.boss.EntityWither;
-import net.minecraft.entity.monster.EntityBlaze;
-import net.minecraft.entity.monster.EntityCaveSpider;
-import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.entity.monster.EntityElderGuardian;
-import net.minecraft.entity.monster.EntityEnderman;
-import net.minecraft.entity.monster.EntityEndermite;
-import net.minecraft.entity.monster.EntityGhast;
-import net.minecraft.entity.monster.EntityGuardian;
-import net.minecraft.entity.monster.EntityHusk;
-import net.minecraft.entity.monster.EntityPigZombie;
-import net.minecraft.entity.monster.EntityPolarBear;
-import net.minecraft.entity.monster.EntitySilverfish;
-import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.monster.EntitySpider;
-import net.minecraft.entity.monster.EntityStray;
-import net.minecraft.entity.monster.EntityVex;
-import net.minecraft.entity.monster.EntityWitherSkeleton;
-import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.monster.EntityZombieVillager;
-import net.minecraft.entity.passive.EntityBat;
-import net.minecraft.entity.passive.EntityCow;
-import net.minecraft.entity.passive.EntityDonkey;
-import net.minecraft.entity.passive.EntityHorse;
-import net.minecraft.entity.passive.EntityLlama;
-import net.minecraft.entity.passive.EntityMule;
-import net.minecraft.entity.passive.EntityOcelot;
-import net.minecraft.entity.passive.EntityParrot;
-import net.minecraft.entity.passive.EntityPig;
-import net.minecraft.entity.passive.EntitySheep;
-import net.minecraft.entity.passive.EntitySkeletonHorse;
-import net.minecraft.entity.passive.EntityVillager;
-import net.minecraft.entity.passive.EntityWolf;
-import net.minecraft.entity.passive.EntityZombieHorse;
+import net.minecraft.entity.monster.*;
+import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -109,10 +32,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class ModRecipes
-{
-	public static void initFurnace()
-	{
+import java.util.Arrays;
+
+public class ModRecipes {
+	public static void initFurnace() {
 		GameRegistry.addSmelting(ModObjects.silver_ore, new ItemStack(ModObjects.silver_ingot), 0.35f);
 		GameRegistry.addSmelting(Blocks.SAPLING, new ItemStack(ModObjects.wood_ash, 4), 0.15f);
 		GameRegistry.addSmelting(ModObjects.amethyst_ore, new ItemStack(ModObjects.amethyst), 0.35f);
@@ -121,9 +44,8 @@ public class ModRecipes
 		GameRegistry.addSmelting(ModObjects.golden_thread, new ItemStack(Items.GOLD_NUGGET), 1);
 		GameRegistry.addSmelting(ModObjects.unfired_jar, new ItemStack(ModObjects.empty_jar), 0.45f);
 	}
-	
-	public static void postInitAthame()
-	{
+
+	public static void postInitAthame() {
 		BewitchmentAPI.ATHAME_LOOT.put(EntityRegistry.getEntry(EntityPlayer.class), Sets.newHashSet(new ItemStack(ModObjects.heart), new ItemStack(Items.SKULL, 1, 3)));
 		BewitchmentAPI.ATHAME_LOOT.put(EntityRegistry.getEntry(EntityVillager.class), Sets.newHashSet(new ItemStack(ModObjects.heart)));
 		BewitchmentAPI.ATHAME_LOOT.put(EntityRegistry.getEntry(EntityZombieVillager.class), Sets.newHashSet(new ItemStack(ModObjects.spectral_dust)));
@@ -186,9 +108,8 @@ public class ModRecipes
 		BewitchmentAPI.ATHAME_LOOT.put(EntityRegistry.getEntry(EntityDemon.class), Sets.newHashSet(new ItemStack(ModObjects.demonic_heart)));
 		BewitchmentAPI.ATHAME_LOOT.put(EntityRegistry.getEntry(EntityDemoness.class), Sets.newHashSet(new ItemStack(ModObjects.demonic_heart)));
 	}
-	
-	public static void initDistillery()
-	{
+
+	public static void initDistillery() {
 		BewitchmentAPI.REGISTRY_DISTILLERY.register(new DistilleryRecipe(Bewitchment.MODID, "cleansing_balm",
 				Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.acacia_resin)), Ingredient.fromStacks(new ItemStack(ModObjects.white_sage)), Ingredient.fromStacks(new ItemStack(ModObjects.salt))),
 				Arrays.asList(new ItemStack(ModObjects.cleansing_balm), new ItemStack(ModObjects.wood_ash)),
@@ -230,9 +151,8 @@ public class ModRecipes
 				Arrays.asList(new ItemStack(ModObjects.ectoplasm, 2), new ItemStack(ModObjects.undying_salve, 2)),
 				0, 300));
 	}
-	
-	public static void initLoom()
-	{
+
+	public static void initLoom() {
 		BewitchmentAPI.REGISTRY_LOOM.register(new LoomRecipe(Bewitchment.MODID, "spider_web",
 				Arrays.asList(Ingredient.fromStacks(new ItemStack(Items.STRING)), Ingredient.fromStacks(new ItemStack(Items.STRING)), Ingredient.fromStacks(new ItemStack(Items.STRING))),
 				new ItemStack(Blocks.WEB)));
@@ -258,9 +178,8 @@ public class ModRecipes
 				Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.diabolical_vein)), Ingredient.fromStacks(new ItemStack(ModObjects.diabolical_vein)), Ingredient.fromStacks(new ItemStack(ModObjects.diabolical_vein)), Ingredient.fromStacks(new ItemStack(ModObjects.diabolical_vein))),
 				new ItemStack(ModObjects.sanguine_fabric, 4)));
 	}
-	
-	public static void initOven()
-	{
+
+	public static void initOven() {
 		BewitchmentAPI.REGISTRY_OVEN.register(new OvenRecipe(Bewitchment.MODID, "wheat",
 				new ItemStack(Items.WHEAT),
 				new ItemStack(Items.BREAD),
@@ -342,9 +261,8 @@ public class ModRecipes
 				new ItemStack(ModObjects.ectoplasm),
 				0.85f));
 	}
-	
-	public static void postInitOven()
-	{
+
+	public static void postInitOven() {
 		for (ItemStack stack : FurnaceRecipes.instance().getSmeltingList().keySet()) {
 			ItemStack output = FurnaceRecipes.instance().getSmeltingResult(stack);
 			if (!BewitchmentAPI.REGISTRY_OVEN.getValuesCollection().stream().anyMatch(r -> stack.getItem() == r.getInput().getItem() && (stack.getMetadata() == r.getInput().getMetadata() || r.getInput().getMetadata() == Short.MAX_VALUE))) {
@@ -363,9 +281,8 @@ public class ModRecipes
 			}
 		}
 	}
-	
-	public static void initRitual()
-	{
+
+	public static void initRitual() {
 		BewitchmentAPI.REGISTRY_RITUAL.register(new RitualHighMoon());
 		BewitchmentAPI.REGISTRY_RITUAL.register(new RitualSolarGlory());
 		BewitchmentAPI.REGISTRY_RITUAL.register(new RitualSandsOfTime());
@@ -483,9 +400,8 @@ public class ModRecipes
 				Arrays.asList(new ItemStack(ModObjects.purifying_earth, 16)),
 				250, 500, 4, GlyphType.NORMAL, GlyphType.NORMAL, null));
 	}
-	
-	public static void initFortune()
-	{
+
+	public static void initFortune() {
 		BewitchmentAPI.REGISTRY_FORTUNE.register(new FortuneBadLuck());
 		BewitchmentAPI.REGISTRY_FORTUNE.register(new FortuneDeath());
 		BewitchmentAPI.REGISTRY_FORTUNE.register(new FortuneDropItem());

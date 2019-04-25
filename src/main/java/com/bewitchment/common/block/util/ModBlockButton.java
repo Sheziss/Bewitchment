@@ -1,11 +1,7 @@
 package com.bewitchment.common.block.util;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.bewitchment.Util;
 import com.bewitchment.registry.util.IOreDictionaryContainer;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockButton;
 import net.minecraft.block.material.Material;
@@ -17,6 +13,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ModBlockButton extends BlockButton implements IOreDictionaryContainer {
 	private final List<String> oreDictionaryNames = new ArrayList<String>();

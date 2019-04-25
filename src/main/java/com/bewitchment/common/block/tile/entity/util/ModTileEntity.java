@@ -1,7 +1,6 @@
 package com.bewitchment.common.block.tile.entity.util;
 
 import com.bewitchment.Util;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;

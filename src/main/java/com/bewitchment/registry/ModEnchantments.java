@@ -1,15 +1,14 @@
 package com.bewitchment.registry;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.bewitchment.Bewitchment;
 import com.bewitchment.common.enchantment.EnchantmentSpiritProtection;
-
 import net.minecraft.enchantment.Enchantment;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @EventBusSubscriber(modid = Bewitchment.MODID)
 public class ModEnchantments {

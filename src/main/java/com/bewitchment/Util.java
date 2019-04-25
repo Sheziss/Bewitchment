@@ -1,29 +1,22 @@
 package com.bewitchment;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.bewitchment.registry.ModObjects;
 import com.bewitchment.registry.util.IOreDictionaryContainer;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
+import net.minecraft.item.*;
 import net.minecraft.item.Item.ToolMaterial;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemHoe;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
-import net.minecraft.item.ItemTool;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class Util
-{
+import java.util.ArrayList;
+import java.util.List;
+
+public class Util {
 	@SuppressWarnings("deprecation")
 	public static void registerValues(Block block, String name, Block base, String... oreDictionaryNames) {
 		registerValues(block, name, base.getDefaultState().getMaterial(), base.getSoundType(), base.getBlockHardness(null, null, null), base.getExplosionResistance(null) * 5, base.getHarvestTool(base.getDefaultState()), base.getHarvestLevel(base.getDefaultState()), oreDictionaryNames);
@@ -60,32 +53,28 @@ public class Util
 	public static boolean areStacksEqual(ItemStack stack0, ItemStack stack1) {
 		return stack0.getItem() == stack1.getItem() && (stack0.getMetadata() == stack1.getMetadata() || stack1.getMetadata() == Short.MAX_VALUE);
 	}
-	
-	public static final boolean isRelated(ItemStack stack, String oreDictionaryEntry)
-	{
-		for (ItemStack ore : OreDictionary.getOres(oreDictionaryEntry))
-		{
+
+	public static final boolean isRelated(ItemStack stack, String oreDictionaryEntry) {
+		for (ItemStack ore : OreDictionary.getOres(oreDictionaryEntry)) {
 			if (ore.getItem() == stack.getItem()) return true;
-			if (stack.getItem() instanceof ItemSword)
-			{
+			if (stack.getItem() instanceof ItemSword) {
 				ToolMaterial mat = ObfuscationReflectionHelper.getPrivateValue(ItemSword.class, ((ItemSword) stack.getItem()), 1);
 				return mat.getRepairItemStack().getItem() == ore.getItem();
 			}
-			if (stack.getItem() instanceof ItemTool)
-			{
+			if (stack.getItem() instanceof ItemTool) {
 				ToolMaterial mat = ObfuscationReflectionHelper.getPrivateValue(ItemTool.class, ((ItemTool) stack.getItem()), 4);
 				return mat.getRepairItemStack().getItem() == ore.getItem();
 			}
-			if (stack.getItem() instanceof ItemHoe)
-			{
+			if (stack.getItem() instanceof ItemHoe) {
 				ToolMaterial mat = ObfuscationReflectionHelper.getPrivateValue(ItemHoe.class, ((ItemHoe) stack.getItem()), 1);
 				return mat.getRepairItemStack().getItem() == ore.getItem();
 			}
-			if (stack.getItem() instanceof ItemArmor) return ((ItemArmor) stack.getItem()).getArmorMaterial().getRepairItemStack().getItem() == ore.getItem();
+			if (stack.getItem() instanceof ItemArmor)
+				return ((ItemArmor) stack.getItem()).getArmorMaterial().getRepairItemStack().getItem() == ore.getItem();
 		}
 		return false;
 	}
-	
+
 	public static String[] toArray(List<String> list) {
 		return list.toArray(new String[list.size()]);
 	}

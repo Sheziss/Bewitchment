@@ -4,7 +4,6 @@ import com.bewitchment.Util;
 import com.bewitchment.common.block.BlockWitchesAltar;
 import com.bewitchment.common.block.tile.entity.util.IAltarStorage;
 import com.bewitchment.common.block.tile.entity.util.ModTileEntity;
-
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

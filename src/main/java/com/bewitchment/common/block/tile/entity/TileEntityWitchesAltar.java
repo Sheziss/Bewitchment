@@ -4,7 +4,6 @@ import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.api.capability.magicpower.MagicPower;
 import com.bewitchment.common.block.BlockWitchesAltar;
 import com.bewitchment.common.block.tile.entity.util.ModTileEntity;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
@@ -32,7 +31,8 @@ public class TileEntityWitchesAltar extends ModTileEntity implements ITickable {
 	@Override
 	public void update() {
 		if (!world.isRemote && world.getTotalWorldTime() % 20 == 0) {
-			if (world.getTotalWorldTime() % 200 == 0) for (BlockPos pos : BlockWitchesAltar.getAltarPositions(world, getPos())) refreshUpgrades(pos.up());
+			if (world.getTotalWorldTime() % 200 == 0)
+				for (BlockPos pos : BlockWitchesAltar.getAltarPositions(world, getPos())) refreshUpgrades(pos.up());
 			int natureValue = 0, variety = 1;
 			for (int x = -RADIUS; x < RADIUS; x++) {
 				for (int y = -RADIUS; y < RADIUS; y++) {
@@ -67,9 +67,8 @@ public class TileEntityWitchesAltar extends ModTileEntity implements ITickable {
 		gain = tag.getInteger("gain");
 		multiplier = tag.getDouble("multiplier");
 	}
-	
-	public void refreshUpgrades(BlockPos pos)
-	{
+
+	public void refreshUpgrades(BlockPos pos) {
 		gain = 1;
 		multiplier = 1;
 		Block block = world.getBlockState(pos).getBlock();
@@ -86,6 +85,6 @@ public class TileEntityWitchesAltar extends ModTileEntity implements ITickable {
 //				}
 //			}
 //		}
-		
+
 	}
 }

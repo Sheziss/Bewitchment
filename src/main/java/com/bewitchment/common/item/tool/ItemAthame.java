@@ -1,11 +1,8 @@
 package com.bewitchment.common.item.tool;
 
-import java.util.List;
-
 import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.common.item.util.ModItemSword;
 import com.bewitchment.registry.ModObjects;
-
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
@@ -23,6 +20,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 public class ItemAthame extends ModItemSword {
 	public ItemAthame() {

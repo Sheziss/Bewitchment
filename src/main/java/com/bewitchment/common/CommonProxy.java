@@ -1,8 +1,5 @@
 package com.bewitchment.common;
 
-import java.util.List;
-import java.util.function.Predicate;
-
 import com.bewitchment.Bewitchment;
 import com.bewitchment.ModConfig;
 import com.bewitchment.api.BewitchmentAPI;
@@ -19,13 +16,7 @@ import com.bewitchment.common.world.gen.WorldGenOres;
 import com.bewitchment.registry.ModObjects;
 import com.bewitchment.registry.ModRecipes;
 import com.bewitchment.registry.util.IOreDictionaryContainer;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockLog;
-import net.minecraft.block.BlockMelon;
-import net.minecraft.block.BlockPumpkin;
-import net.minecraft.block.IGrowable;
+import net.minecraft.block.*;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
@@ -46,6 +37,9 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
+
+import java.util.List;
+import java.util.function.Predicate;
 
 public class CommonProxy {
 	public static final SimpleNetworkWrapper WRAPPER = NetworkRegistry.INSTANCE.newSimpleChannel(Bewitchment.MODID);
@@ -79,14 +73,14 @@ public class CommonProxy {
 		MinecraftForge.EVENT_BUS.register(new BlockDropHandler());
 		MinecraftForge.EVENT_BUS.register(new EventHandler());
 		if (Loader.isModLoaded("thaumcraft")) MinecraftForge.EVENT_BUS.register(new ThaumcraftCompat());
-		
+
 		ModRecipes.initFurnace();
 		ModRecipes.initDistillery();
 		ModRecipes.initLoom();
 		ModRecipes.initOven();
 		ModRecipes.initRitual();
 		ModRecipes.initFortune();
-		
+
 		// Tool Repair
 		ModObjects.TOOL_COLD_IRON.setRepairItem(new ItemStack(ModObjects.cold_iron_ingot));
 		ModObjects.TOOL_SILVER.setRepairItem(new ItemStack(ModObjects.silver_ingot));
@@ -94,7 +88,7 @@ public class CommonProxy {
 		ModObjects.ARMOR_SILVER.setRepairItem(new ItemStack(ModObjects.silver_ingot));
 		ModObjects.ARMOR_BEWITCHED_LEATHER.setRepairItem(new ItemStack(ModObjects.witches_stitching));
 		ModObjects.ARMOR_VAMPIRE.setRepairItem(new ItemStack(ModObjects.sanguine_fabric));
-		
+
 		// World
 		GameRegistry.registerWorldGenerator(new WorldGenOres(), 0);
 		GameRegistry.registerWorldGenerator(new WorldGenCoquina(), 0);
@@ -124,7 +118,7 @@ public class CommonProxy {
 		LootTableList.register(new ResourceLocation(Bewitchment.MODID, "entities/alpha_hellhound"));
 
 		LootTableList.register(new ResourceLocation(Bewitchment.MODID, "entities/demon"));
-		
+
 		BewitchmentPatchouli.init();
 	}
 
@@ -134,7 +128,8 @@ public class CommonProxy {
 		// Altar Values
 		for (final Block block : ForgeRegistries.BLOCKS) {
 			int amount = 0;
-			if (block instanceof IPlantable || block instanceof IGrowable || block instanceof BlockMelon || block instanceof BlockPumpkin) amount = 30;
+			if (block instanceof IPlantable || block instanceof IGrowable || block instanceof BlockMelon || block instanceof BlockPumpkin)
+				amount = 30;
 			if (block instanceof BlockLog) amount = 15;
 			if (block instanceof BlockLeaves) amount = 8;
 			BewitchmentAPI.ALTAR_NATURE_VALUES.put(block, amount);
