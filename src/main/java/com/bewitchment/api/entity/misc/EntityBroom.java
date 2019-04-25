@@ -88,7 +88,7 @@ public abstract class EntityBroom extends Entity {
 			if (rider != null) {
 				float front = rider.moveForward, strafe = rider.moveStrafing, up = 0;
 				try {
-					up = getJump(rider);
+					up = getJump(rider) ? 1 : 0;
 				} catch (IllegalArgumentException | IllegalAccessException e) {
 					e.printStackTrace();
 				}
@@ -132,13 +132,13 @@ public abstract class EntityBroom extends Entity {
 
 	protected abstract void handleMovement(Vec3d look, float front, float strafe, float up);
 	
-	protected static float getJump(EntityLivingBase rider) throws IllegalArgumentException, IllegalAccessException
+	protected static boolean getJump(EntityLivingBase rider) throws IllegalArgumentException, IllegalAccessException
 	{
 		if (isJumping == null)
 		{
 			isJumping = ObfuscationReflectionHelper.getPrivateValue(EntityLivingBase.class, rider, "isJumping", "field_70703_bu");
 			isJumping.setAccessible(true);
 		}
-		return isJumping.getFloat(rider);
+		return isJumping.getBoolean(rider);
 	}
 }
