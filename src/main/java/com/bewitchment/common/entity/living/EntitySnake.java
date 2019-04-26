@@ -150,6 +150,7 @@ public class EntitySnake extends ModEntityTameable {
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.6);
 	}
 
+	//Todo: Revised version of MobHelper. https://github.com/Um-Mitternacht/Bewitchment/blob/diabolic-update/src/main/java/com/bewitchment/common/core/helper/MobHelper.java
 	@Override
 	protected void initEntityAI() {
 		tasks.addTask(0, new EntityAISwimming(this));
