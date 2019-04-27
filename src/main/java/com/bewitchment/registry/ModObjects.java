@@ -333,10 +333,10 @@ public class ModObjects {
 	public static final Item chalk_ender = new ItemChalk("chalk_ender");
 	// Brooms
 	public static final Item broom = new ItemBroom(Bewitchment.MODID, "broom", Bewitchment.proxy.tab, null);
-	public static final Item broom_cypress = new ItemBroom(Bewitchment.MODID, "broom_cypress", Bewitchment.proxy.tab, ModEntities.entity_cypress_broom);
-	public static final Item broom_elder = new ItemBroom(Bewitchment.MODID, "broom_elder", Bewitchment.proxy.tab, ModEntities.entity_elder_broom);
-	public static final Item broom_juniper = new ItemBroom(Bewitchment.MODID, "broom_juniper", Bewitchment.proxy.tab, ModEntities.entity_juniper_broom);
-	public static final Item broom_yew = new ItemBroom(Bewitchment.MODID, "broom_yew", Bewitchment.proxy.tab, ModEntities.entity_yew_broom);
+	public static final Item broom_cypress = new ItemBroom(Bewitchment.MODID, "broom_cypress", Bewitchment.proxy.tab, ModEntities.cypress_broom);
+	public static final Item broom_elder = new ItemBroom(Bewitchment.MODID, "broom_elder", Bewitchment.proxy.tab, ModEntities.elder_broom);
+	public static final Item broom_juniper = new ItemBroom(Bewitchment.MODID, "broom_juniper", Bewitchment.proxy.tab, ModEntities.juniper_broom);
+	public static final Item broom_yew = new ItemBroom(Bewitchment.MODID, "broom_yew", Bewitchment.proxy.tab, ModEntities.yew_broom);
 	// Material Items
 	public static final Item cold_iron_ingot = new ModItem("cold_iron_ingot", "ingotColdIron");
 	public static final Item silver_ingot = new ModItem("silver_ingot", "ingotSilver");

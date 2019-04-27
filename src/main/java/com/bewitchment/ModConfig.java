@@ -1,12 +1,14 @@
 package com.bewitchment;
 
-import com.bewitchment.registry.ModObjects;
-import net.minecraft.init.Blocks;
-import net.minecraftforge.common.config.Configuration;
-
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
+
+import com.bewitchment.registry.ModObjects;
+
+import net.minecraft.init.Blocks;
+import net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraftforge.common.config.Configuration;
 
 public class ModConfig extends Configuration {
 	public final List<String> broomSweepables;
@@ -16,6 +18,7 @@ public class ModConfig extends Configuration {
 			amethystSize, amethystChance, amethystMin, amethystMax,
 			garnetSize, garnetChance, garnetMin, garnetMax,
 			moonstoneSize, moonstoneChance, moonstoneMin, moonstoneMax;
+	public final List<String> blindwormBiomes, lizardBiomes, newtBiomes, owlBiomes, ravenBiomes, snakeBiomes, toadBiomes, blackDogBiomes, hellhoundBiomes, alphaHellhoundBiomes, serpentBiomes;
 
 	public ModConfig(File file) {
 		super(file);
@@ -46,6 +49,18 @@ public class ModConfig extends Configuration {
 		moonstoneChance = getInt("moonstoneChance", "ore", 6, 0, Byte.MAX_VALUE, "The chance for moonstone ore veins to spawn.");
 		moonstoneMin = getInt("moonstoneMin", "ore", 16, 0, 0, "The minimum height for moonstone ore veins to spawn.");
 		moonstoneMax = getInt("moonstoneMax", "ore", 120, 0, 255, "The maximum height for moonstone ore veins to spawn.");
+		
+		blindwormBiomes = Arrays.asList(getStringList("blindwormBiomes", "mobSpawns", new String[]{Type.FOREST.getName()}, "The list of BiomeDictionary types that the blindworm will spawn in."));
+		lizardBiomes = Arrays.asList(getStringList("lizardBiomes", "mobSpawns", new String[]{Type.FOREST.getName()}, "The list of BiomeDictionary types that the lizard will spawn in."));
+		newtBiomes = Arrays.asList(getStringList("newtBiomes", "mobSpawns", new String[]{Type.SWAMP.getName()}, "The list of BiomeDictionary types that the newt will spawn in."));
+		owlBiomes = Arrays.asList(getStringList("owlBiomes", "mobSpawns", new String[]{Type.FOREST.getName(), Type.DENSE.getName()}, "The list of BiomeDictionary types that the owl will spawn in."));
+		ravenBiomes = Arrays.asList(getStringList("ravenBiomes", "mobSpawns", new String[]{Type.PLAINS.getName(), Type.WASTELAND.getName()}, "The list of BiomeDictionary types that the raven will spawn in."));
+		snakeBiomes = Arrays.asList(getStringList("snakeBiomes", "mobSpawns", new String[]{Type.PLAINS.getName(), Type.HILLS.getName()}, "The list of BiomeDictionary types that the snake will spawn in."));
+		toadBiomes = Arrays.asList(getStringList("toadBiomes", "mobSpawns", new String[]{Type.SWAMP.getName()}, "The list of BiomeDictionary types that the toad will spawn in."));
+		blackDogBiomes = Arrays.asList(getStringList("blackDogBiomes", "mobSpawns", new String[]{Type.PLAINS.getName(), Type.WASTELAND.getName(), Type.FOREST.getName()}, "The list of BiomeDictionary types that the black dog will spawn in."));
+		hellhoundBiomes = Arrays.asList(getStringList("hellhoundBiomes", "mobSpawns", new String[]{Type.NETHER.getName()}, "The list of BiomeDictionary types that the hellhound will spawn in."));
+		alphaHellhoundBiomes = Arrays.asList(getStringList("alphaHellhoundBiomes", "mobSpawns", new String[]{Type.NETHER.getName()}, "The list of BiomeDictionary types that the alpha hellhound will spawn in."));
+		serpentBiomes = Arrays.asList(getStringList("serpentBiomes", "mobSpawns", new String[]{Type.NETHER.getName()}, "The list of BiomeDictionary types that the serpent will spawn in."));
 		save();
 	}
 }

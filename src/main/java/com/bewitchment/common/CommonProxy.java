@@ -13,6 +13,7 @@ import com.bewitchment.common.integration.patchouli.BewitchmentPatchouli;
 import com.bewitchment.common.integration.thaumcraft.ThaumcraftCompat;
 import com.bewitchment.common.world.gen.WorldGenCoquina;
 import com.bewitchment.common.world.gen.WorldGenOres;
+import com.bewitchment.registry.ModEntities;
 import com.bewitchment.registry.ModObjects;
 import com.bewitchment.registry.ModRecipes;
 import com.bewitchment.registry.util.IOreDictionaryContainer;
@@ -123,6 +124,7 @@ public class CommonProxy {
 	}
 
 	public void postInit(FMLPostInitializationEvent event) {
+		ModEntities.postInit();
 		ModRecipes.postInitOven();
 		ModRecipes.postInitAthame();
 		// Altar Values
