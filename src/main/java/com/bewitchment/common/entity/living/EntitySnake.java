@@ -1,6 +1,7 @@
 package com.bewitchment.common.entity.living;
 
 import com.bewitchment.Bewitchment;
+import com.bewitchment.Util;
 import com.bewitchment.common.entity.spirits.demons.EntitySerpent;
 import com.bewitchment.common.entity.util.ModEntityTameable;
 import com.bewitchment.registry.ModObjects;
@@ -82,10 +83,7 @@ public class EntitySnake extends ModEntityTameable {
 				if (milkTimer == 0 && getRNG().nextBoolean()) {
 					if (getGrowingAge() >= 0) {
 						world.playSound(null, getPosition(), SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.NEUTRAL, 1, 1);
-						stack.shrink(1);
-						if (stack.isEmpty()) player.setHeldItem(hand, new ItemStack(ModObjects.snake_venom));
-						else if (!player.inventory.addItemStackToInventory(new ItemStack(ModObjects.snake_venom)))
-							player.dropItem(new ItemStack(ModObjects.snake_venom), false);
+						Util.giveAndConsumeItem(player, hand, new ItemStack(ModObjects.snake_venom));
 						milkTimer = 3600;
 						return true;
 					}
