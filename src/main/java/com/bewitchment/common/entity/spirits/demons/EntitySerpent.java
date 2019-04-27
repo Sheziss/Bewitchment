@@ -11,6 +11,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -69,8 +70,9 @@ public class EntitySerpent extends ModEntityMob {
 	public boolean processInteract(EntityPlayer player, EnumHand hand) {
 		if (!world.isRemote && (getAttackTarget() == null || getAttackTarget().isDead || getRevengeTarget() == null || getRevengeTarget().isDead)) {
 			ItemStack stack = player.getHeldItem(hand);
-			if (stack.getItem() == ModObjects.glass_jar) {
+			if (stack.getItem() == Items.GLASS_BOTTLE) {
 				if (milkTimer == 0 && getRNG().nextBoolean()) {
+					world.playSound(null, getPosition(), SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.NEUTRAL, 1, 1);
 					stack.shrink(1);
 					if (stack.isEmpty()) player.setHeldItem(hand, new ItemStack(ModObjects.liquid_wroth));
 					else if (!player.inventory.addItemStackToInventory(new ItemStack(ModObjects.liquid_wroth)))

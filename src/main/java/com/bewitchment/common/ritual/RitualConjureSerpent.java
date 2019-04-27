@@ -27,7 +27,6 @@ public class RitualConjureSerpent extends Ritual {
 						Ingredient.fromStacks(new ItemStack(ModObjects.athame, 1, Short.MAX_VALUE)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.adders_fork)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.blindworms_sting)),
-						Ingredient.fromStacks(new ItemStack(ModObjects.fillet_of_fenny_snake)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.lizard_leg)),
 						Ingredient.fromStacks(new ItemStack(ModObjects.hellebore)),
 						Ingredient.fromStacks(new ItemStack(Items.BLAZE_POWDER))),

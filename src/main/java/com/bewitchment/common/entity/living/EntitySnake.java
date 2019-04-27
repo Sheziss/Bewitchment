@@ -15,12 +15,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
 public class EntitySnake extends ModEntityTameable {
@@ -76,9 +78,10 @@ public class EntitySnake extends ModEntityTameable {
 	public boolean processInteract(EntityPlayer player, EnumHand hand) {
 		if (!world.isRemote && (getAttackTarget() == null || getAttackTarget().isDead || getRevengeTarget() == null || getRevengeTarget().isDead)) {
 			ItemStack stack = player.getHeldItem(hand);
-			if (stack.getItem() == ModObjects.glass_jar) {
+			if (stack.getItem() == Items.GLASS_BOTTLE) {
 				if (milkTimer == 0 && getRNG().nextBoolean()) {
 					if (getGrowingAge() >= 0) {
+						world.playSound(null, getPosition(), SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.NEUTRAL, 1, 1);
 						stack.shrink(1);
 						if (stack.isEmpty()) player.setHeldItem(hand, new ItemStack(ModObjects.snake_venom));
 						else if (!player.inventory.addItemStackToInventory(new ItemStack(ModObjects.snake_venom)))
