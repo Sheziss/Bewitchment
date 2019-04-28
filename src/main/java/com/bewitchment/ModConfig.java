@@ -1,14 +1,13 @@
 package com.bewitchment;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.List;
-
 import com.bewitchment.registry.ModObjects;
-
 import net.minecraft.init.Blocks;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.config.Configuration;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 
 public class ModConfig extends Configuration {
 	public final List<String> broomSweepables;

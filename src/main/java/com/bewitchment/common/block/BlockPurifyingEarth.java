@@ -27,8 +27,6 @@ public class BlockPurifyingEarth extends ModBlock {
 			if (att == EnumCreatureAttribute.UNDEAD || att == BewitchmentAPI.DEMON || att == BewitchmentAPI.SPIRIT || (living instanceof EntityPlayer && !living.getCapability(ExtendedPlayer.CAPABILITY, null).getTransformation().canCrossSalt)) {
 				if (!living.isBurning()) {
 					living.setFire(1500);
-					living.addPotionEffect(new PotionEffect(ModPotions.demons_bane, 1000, 1, false, false));
-					living.addPotionEffect(new PotionEffect(ModPotions.holy_water, 1000, 1, false, false));
 				}
 			}
 		}
