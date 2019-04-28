@@ -83,7 +83,6 @@ public class ThaumcraftCompat {
 		event.register.registerObjectTag(new ItemStack(ModObjects.seed_wormwood), new AspectList().add(Aspect.PLANT, 1).add(Aspect.SOUL, 1));
 		event.register.registerObjectTag(new ItemStack(ModObjects.seed_chrysanthemum), new AspectList().add(Aspect.PLANT, 1).add(SUN, 1));
 		event.register.registerObjectTag(new ItemStack(ModObjects.seed_belladonna), new AspectList().add(Aspect.PLANT, 1).add(Aspect.DEATH, 1).add(Aspect.MAGIC, 1));
-		event.register.registerObjectTag(new ItemStack(ModObjects.seed_kelp), new AspectList().add(Aspect.PLANT, 1).add(Aspect.WATER, 1));
 //		evt.register.registerObjectTag(new ItemStack(ModObjects.spanish_moss), new AspectList().add(Aspect.PLANT, 2).add(Aspect.AIR, 2).add(Aspect.MAGIC, 2));
 		event.register.registerObjectTag(new ItemStack(ModObjects.owlets_wing), new AspectList().add(Aspect.BEAST, 3).add(Aspect.AIR, 2).add(MOON, 2));
 		event.register.registerObjectTag(new ItemStack(ModObjects.ravens_feather), new AspectList().add(Aspect.BEAST, 3).add(Aspect.AIR, 2).add(Aspect.DARKNESS, 2));
