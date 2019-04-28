@@ -1,6 +1,7 @@
 package com.bewitchment.common.block.util;
 
 import com.bewitchment.Util;
+
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

@@ -3,6 +3,7 @@ package com.bewitchment.common.item.food;
 import com.bewitchment.api.capability.extendedplayer.ExtendedPlayer;
 import com.bewitchment.api.capability.extendedplayer.ExtendedPlayer.TransformationType;
 import com.bewitchment.common.item.util.ModItemFood;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
