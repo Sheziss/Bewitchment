@@ -98,7 +98,7 @@ public class ExtendedPlayer implements ICapabilitySerializable<NBTTagCompound>, 
 
 		public final boolean canCrossSalt;
 
-		TransformationType(boolean canCrossSalt) {
+		private TransformationType(boolean canCrossSalt) {
 			this.canCrossSalt = canCrossSalt;
 		}
 	}

@@ -52,11 +52,11 @@ public class ModBlockSapling extends ModBlockBush implements IGrowable {
 			WorldGenModTree generator = null;
 			try {
 				generator = gen.getDeclaredConstructor(boolean.class).newInstance(false);
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			if (!world.isRemote && world.getBlockState(pos.up()).getBlock().canBeReplacedByLeaves(world.getBlockState(pos.up()), world, pos.up()) && generator.canSaplingGrow(world, pos)) generator.generate(world, rand, pos);
+			if (!world.isRemote && world.getBlockState(pos.up()).getBlock().canBeReplacedByLeaves(world.getBlockState(pos.up()), world, pos.up()) && generator.canSaplingGrow(world, pos))
+				generator.generate(world, rand, pos);
 		}
 	}
 
@@ -64,7 +64,8 @@ public class ModBlockSapling extends ModBlockBush implements IGrowable {
 	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
 		if (!world.isRemote) {
 			super.updateTick(world, pos, state, rand);
-			if (world.isAreaLoaded(pos, 1) && world.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0) this.grow(world, rand, pos, state);
+			if (world.isAreaLoaded(pos, 1) && world.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0)
+				this.grow(world, rand, pos, state);
 		}
 	}
 

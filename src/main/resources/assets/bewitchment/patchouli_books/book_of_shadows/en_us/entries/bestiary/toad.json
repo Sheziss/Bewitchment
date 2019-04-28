@@ -3,16 +3,16 @@
   "icon": "bewitchment:toe_of_frog",
   "category": "bestiary",
   "pages": [
-	{
-	  "type": "text",
-	  "text": "An amphibian found throughout swamps, it is said they make good familiars for those wishing to practice their skills in brewing..."
-	},
-	{
-	  "type": "entity",
-	  "name": "Toad",
-	  "entity": "bewitchment:toad",
-	  "scale": 1.0,
-	  "text": "it is wednesday my dudes"
-	}
+    {
+      "type": "text",
+      "text": "An amphibian found throughout swamps, it is said they make good familiars for those wishing to practice their skills in brewing..."
+    },
+    {
+      "type": "entity",
+      "name": "Toad",
+      "entity": "bewitchment:toad",
+      "scale": 1.0,
+      "text": "it is wednesday my dudes"
+    }
   ]
 }

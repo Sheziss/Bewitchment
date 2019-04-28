@@ -28,12 +28,12 @@ public class ModBlockStairs extends BlockStairs implements IOreDictionaryContain
 
 	@Override
 	public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face) {
-		return state.getMaterial() != Material.ICE && state.getMaterial() != Material.GLASS && super.doesSideBlockRendering(state, world, pos, face);
+		return state.getMaterial() == Material.ICE || state.getMaterial() == Material.GLASS ? false : super.doesSideBlockRendering(state, world, pos, face);
 	}
 
 	@SuppressWarnings("deprecation")
 	@Override
 	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face) {
-		return state.getMaterial() == Material.ICE || state.getMaterial() == Material.GLASS ? state != world.getBlockState(pos.offset(face)) || world.getBlockState(pos.offset(face)).getBlock() != this && super.shouldSideBeRendered(state, world, pos, face) : super.shouldSideBeRendered(state, world, pos, face);
+		return state.getMaterial() == Material.ICE || state.getMaterial() == Material.GLASS ? state != world.getBlockState(pos.offset(face)) ? true : world.getBlockState(pos.offset(face)).getBlock() != this && super.shouldSideBeRendered(state, world, pos, face) : super.shouldSideBeRendered(state, world, pos, face);
 	}
 }

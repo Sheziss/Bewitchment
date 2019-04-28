@@ -3,7 +3,7 @@ package com.bewitchment.common.block.tile.entity.util;
 import net.minecraft.util.math.BlockPos;
 
 public interface IAltarStorage {
-	BlockPos getAltarPosition();
+	public BlockPos getAltarPosition();
 
-	void setAltarPosition(BlockPos pos);
+	public void setAltarPosition(BlockPos pos);
 }

@@ -22,7 +22,17 @@ import java.util.Arrays;
 
 public class RitualConjureSerpent extends Ritual {
 	public RitualConjureSerpent() {
-		super(Bewitchment.MODID, "conjure_serpent", Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.athame, 1, Short.MAX_VALUE)), Ingredient.fromStacks(new ItemStack(ModObjects.adders_fork)), Ingredient.fromStacks(new ItemStack(ModObjects.blindworms_sting)), Ingredient.fromStacks(new ItemStack(ModObjects.lizard_leg)), Ingredient.fromStacks(new ItemStack(ModObjects.hellebore)), Ingredient.fromStacks(new ItemStack(Items.BLAZE_POWDER))), Arrays.asList(), Arrays.asList(), 600, 3750, 3, GlyphType.NETHER, GlyphType.NETHER, null);
+		super(Bewitchment.MODID, "conjure_serpent",
+				Arrays.asList(
+						Ingredient.fromStacks(new ItemStack(ModObjects.athame, 1, Short.MAX_VALUE)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.adders_fork)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.blindworms_sting)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.lizard_leg)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.hellebore)),
+						Ingredient.fromStacks(new ItemStack(Items.BLAZE_POWDER))),
+				Arrays.asList(),
+				Arrays.asList(),
+				600, 3750, 3, GlyphType.NETHER, GlyphType.NETHER, null);
 	}
 
 	@Override

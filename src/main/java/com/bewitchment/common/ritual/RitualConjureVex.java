@@ -22,7 +22,14 @@ import java.util.Arrays;
 
 public class RitualConjureVex extends Ritual {
 	public RitualConjureVex() {
-		super(Bewitchment.MODID, "conjure_vex", Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.athame, 1, Short.MAX_VALUE)), Ingredient.fromStacks(new ItemStack(Items.APPLE)), Ingredient.fromStacks(new ItemStack(ModObjects.wormwood))), Arrays.asList(), Arrays.asList(), 100, 1000, 2, GlyphType.NORMAL, GlyphType.ENDER, null);
+		super(Bewitchment.MODID, "conjure_vex",
+				Arrays.asList(
+						Ingredient.fromStacks(new ItemStack(ModObjects.athame, 1, Short.MAX_VALUE)),
+						Ingredient.fromStacks(new ItemStack(Items.APPLE)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.wormwood))),
+				Arrays.asList(),
+				Arrays.asList(),
+				100, 1000, 2, GlyphType.NORMAL, GlyphType.ENDER, null);
 	}
 
 	@Override

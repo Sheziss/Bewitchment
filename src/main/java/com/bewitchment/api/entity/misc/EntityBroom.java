@@ -44,7 +44,7 @@ public abstract class EntityBroom extends Entity {
 	@Override
 	public EnumActionResult applyPlayerInteraction(EntityPlayer player, Vec3d vec, EnumHand hand) {
 		if (!player.isRiding() && !player.isSneaking()) {
-			player.rotationYaw   = rotationYaw;
+			player.rotationYaw = rotationYaw;
 			player.rotationPitch = rotationPitch;
 			player.startRiding(this);
 			return EnumActionResult.SUCCESS;
@@ -97,8 +97,7 @@ public abstract class EntityBroom extends Entity {
 				float front = rider.moveForward, strafe = rider.moveStrafing, up = 0;
 				try {
 					up = getJump(rider) ? 1 : 0;
-				}
-				catch (IllegalArgumentException | IllegalAccessException e) {
+				} catch (IllegalArgumentException | IllegalAccessException e) {
 					e.printStackTrace();
 				}
 				handleMovement(rider.getLookVec(), front, strafe, up);

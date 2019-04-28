@@ -86,7 +86,8 @@ public class BlockGoblet extends ModBlock {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
-		if (stack.hasTagCompound() && stack.getTagCompound().getBoolean("full")) tooltip.add(new TextComponentTranslation("tooltip.goblet_full").getFormattedText());
+		if (stack.hasTagCompound() && stack.getTagCompound().getBoolean("full"))
+			tooltip.add(new TextComponentTranslation("tooltip.goblet_full").getFormattedText());
 	}
 
 	@Override
@@ -101,12 +102,12 @@ public class BlockGoblet extends ModBlock {
 
 	@Override
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase living, EnumHand hand) {
-		return getDefaultState().withProperty(FULL, living.getHeldItem(hand).hasTagCompound() && living.getHeldItem(hand).getTagCompound().getBoolean("full"));
+		return getDefaultState().withProperty(FULL, living.getHeldItem(hand).hasTagCompound() && living.getHeldItem(hand).getTagCompound().getBoolean("full") ? true : false);
 	}
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(FULL, meta == 1);
+		return getDefaultState().withProperty(FULL, meta == 1 ? true : false);
 	}
 
 	@Override

@@ -1,19 +1,19 @@
 {
   "type": "forge:ore_shaped",
   "pattern": [
-	"SPS",
-	"SPS"
+    "SPS",
+    "SPS"
   ],
   "key": {
-	"S": {
-	  "type": "forge:ore_dict",
-	  "ore": "stickWood"
-	},
-	"P": {
-	  "item": "bewitchment:planks_juniper"
-	}
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "stickWood"
+    },
+    "P": {
+      "item": "bewitchment:planks_juniper"
+    }
   },
   "result": {
-	"item": "bewitchment:fence_gate_juniper"
+    "item": "bewitchment:fence_gate_juniper"
   }
 }

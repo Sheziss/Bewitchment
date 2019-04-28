@@ -1,22 +1,22 @@
 {
   "forge_marker": 1,
   "defaults": {
-	"model": "cube_bottom_top",
-	"textures": {
-	  "top": "bewitchment:blocks/altar/altar_orange_top",
-	  "bottom": "bewitchment:blocks/altar/altar_bottom",
-	  "side": "bewitchment:blocks/altar/altar_orange_side"
-	}
+    "model": "cube_bottom_top",
+    "textures": {
+      "top": "bewitchment:blocks/altar/altar_orange_top",
+      "bottom": "bewitchment:blocks/altar/altar_bottom",
+      "side": "bewitchment:blocks/altar/altar_orange_side"
+    }
   },
   "variants": {
-	"normal": [
-	  {}
-	],
-	"type": {
-	  "unformed": {},
-	  "corner": {},
-	  "side": {},
-	  "tile": {}
-	}
+    "normal": [
+      {}
+    ],
+    "type": {
+      "unformed": {},
+      "corner": {},
+      "side": {},
+      "tile": {}
+    }
   }
 }

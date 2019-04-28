@@ -1,23 +1,23 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-	"DFD",
-	"FGF",
-	"DFD"
+    "DFD",
+    "FGF",
+    "DFD"
   ],
   "key": {
-	"D": {
-	  "item": "bewitchment:diabolical_vein"
-	},
-	"F": {
-	  "item": "bewitchment:demonic_elixir"
-	},
-	"G": {
-	  "type": "forge:ore_dict",
-	  "ore": "gemGarnet"
-	}
+    "D": {
+      "item": "bewitchment:diabolical_vein"
+    },
+    "F": {
+      "item": "bewitchment:demonic_elixir"
+    },
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "gemGarnet"
+    }
   },
   "result": {
-	"item": "bewitchment:wrathful_eye"
+    "item": "bewitchment:wrathful_eye"
   }
 }

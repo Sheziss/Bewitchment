@@ -23,7 +23,16 @@ import java.util.Arrays;
 
 public class RitualConjureBlaze extends Ritual {
 	public RitualConjureBlaze() {
-		super(Bewitchment.MODID, "conjure_blaze", Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.athame, 1, Short.MAX_VALUE)), Ingredient.fromStacks(Util.getOres("logWood")), Ingredient.fromStacks(new ItemStack(Items.NETHERBRICK)), Ingredient.fromStacks(new ItemStack(ModObjects.hellebore)), Ingredient.fromStacks(new ItemStack(ModObjects.wormwood))), Arrays.asList(), Arrays.asList(), 120, 1200, 2, GlyphType.NETHER, GlyphType.NETHER, null);
+		super(Bewitchment.MODID, "conjure_blaze",
+				Arrays.asList(
+						Ingredient.fromStacks(new ItemStack(ModObjects.athame, 1, Short.MAX_VALUE)),
+						Ingredient.fromStacks(Util.getOres("logWood")),
+						Ingredient.fromStacks(new ItemStack(Items.NETHERBRICK)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.hellebore)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.wormwood))),
+				Arrays.asList(),
+				Arrays.asList(),
+				120, 1200, 2, GlyphType.NETHER, GlyphType.NETHER, null);
 	}
 
 	@Override

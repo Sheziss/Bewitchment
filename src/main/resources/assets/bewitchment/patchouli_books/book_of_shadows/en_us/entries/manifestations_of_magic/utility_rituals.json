@@ -4,49 +4,49 @@
   "sortnum": "4",
   "category": "manifestations_of_magic",
   "pages": [
-	{
-	  "type": "text",
-	  "text": "Most of these rituals are able to aid you out in your day-to-day life, or act as utilities for bigger projects."
-	},
-	{
-	  "type": "ritual",
-	  "ritual": "bewitchment:shift_biome"
-	},
-	{
-	  "type": "ritual",
-	  "ritual": "bewitchment:nether_portal"
-	},
-	{
-	  "type": "ritual",
-	  "ritual": "bewitchment:flames"
-	},
-	{
-	  "type": "ritual",
-	  "ritual": "bewitchment:high_moon"
-	},
-	{
-	  "type": "ritual",
-	  "ritual": "bewitchment:sands_of_time"
-	},
-	{
-	  "type": "ritual",
-	  "ritual": "bewitchment:perception"
-	},
-	{
-	  "type": "ritual",
-	  "ritual": "bewitchment:solar_glory"
-	},
-	{
-	  "type": "ritual",
-	  "ritual": "bewitchment:gateway"
-	},
-	{
-	  "type": "ritual",
-	  "ritual": "bewitchment:frenzied_growth"
-	},
-	{
-	  "type": "ritual",
-	  "ritual": "bewitchment:call_of_the_wild"
-	}
+    {
+      "type": "text",
+      "text": "Most of these rituals are able to aid you out in your day-to-day life, or act as utilities for bigger projects."
+    },
+    {
+      "type": "ritual",
+      "ritual": "bewitchment:shift_biome"
+    },
+    {
+      "type": "ritual",
+      "ritual": "bewitchment:nether_portal"
+    },
+    {
+      "type": "ritual",
+      "ritual": "bewitchment:flames"
+    },
+    {
+      "type": "ritual",
+      "ritual": "bewitchment:high_moon"
+    },
+    {
+      "type": "ritual",
+      "ritual": "bewitchment:sands_of_time"
+    },
+    {
+      "type": "ritual",
+      "ritual": "bewitchment:perception"
+    },
+    {
+      "type": "ritual",
+      "ritual": "bewitchment:solar_glory"
+    },
+    {
+      "type": "ritual",
+      "ritual": "bewitchment:gateway"
+    },
+    {
+      "type": "ritual",
+      "ritual": "bewitchment:frenzied_growth"
+    },
+    {
+      "type": "ritual",
+      "ritual": "bewitchment:call_of_the_wild"
+    }
   ]
 }

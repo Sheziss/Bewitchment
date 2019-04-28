@@ -1,96 +1,96 @@
 [
   {
-	"name": "GENERIC_WAX",
-	"ingredient": [
-	  {
-		"type": "forge:ore_dict",
-		"ore": "materialWax"
-	  },
-	  {
-		"type": "forge:ore_dict",
-		"ore": "materialBeesax"
-	  },
-	  {
-		"type": "forge:ore_dict",
-		"ore": "materialPressedWax"
-	  },
-	  {
-		"type": "forge:ore_dict",
-		"ore": "itemBeeswax"
-	  },
-	  {
-		"type": "forge:ore_dict",
-		"ore": "wax"
-	  },
-	  {
-		"type": "forge:ore_dict",
-		"ore": "tallow"
-	  },
-	  {
-		"type": "forge:ore_dict",
-		"ore": "clumpWax"
-	  },
-	  {
-		"type": "forge:ore_dict",
-		"ore": "beeswax"
-	  },
-	  {
-		"type": "forge:ore_dict",
-		"ore": "itemWax"
-	  }
-	]
+    "name": "GENERIC_WAX",
+    "ingredient": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "materialWax"
+      },
+      {
+        "type": "forge:ore_dict",
+        "ore": "materialBeesax"
+      },
+      {
+        "type": "forge:ore_dict",
+        "ore": "materialPressedWax"
+      },
+      {
+        "type": "forge:ore_dict",
+        "ore": "itemBeeswax"
+      },
+      {
+        "type": "forge:ore_dict",
+        "ore": "wax"
+      },
+      {
+        "type": "forge:ore_dict",
+        "ore": "tallow"
+      },
+      {
+        "type": "forge:ore_dict",
+        "ore": "clumpWax"
+      },
+      {
+        "type": "forge:ore_dict",
+        "ore": "beeswax"
+      },
+      {
+        "type": "forge:ore_dict",
+        "ore": "itemWax"
+      }
+    ]
   },
   {
-	"name": "CANDLE_ANY",
-	"ingredient": [
-	  {
-		"item": "bewitchment:candle_white"
-	  },
-	  {
-		"item": "bewitchment:candle_orange"
-	  },
-	  {
-		"item": "bewitchment:candle_magenta"
-	  },
-	  {
-		"item": "bewitchment:candle_light_blue"
-	  },
-	  {
-		"item": "bewitchment:candle_yellow"
-	  },
-	  {
-		"item": "bewitchment:candle_lime"
-	  },
-	  {
-		"item": "bewitchment:candle_pink"
-	  },
-	  {
-		"item": "bewitchment:candle_gray"
-	  },
-	  {
-		"item": "bewitchment:candle_light_gray"
-	  },
-	  {
-		"item": "bewitchment:candle_cyan"
-	  },
-	  {
-		"item": "bewitchment:candle_purple"
-	  },
-	  {
-		"item": "bewitchment:candle_blue"
-	  },
-	  {
-		"item": "bewitchment:candle_brown"
-	  },
-	  {
-		"item": "bewitchment:candle_green"
-	  },
-	  {
-		"item": "bewitchment:candle_red"
-	  },
-	  {
-		"item": "bewitchment:candle_black"
-	  }
-	]
+    "name": "CANDLE_ANY",
+    "ingredient": [
+      {
+        "item": "bewitchment:candle_white"
+      },
+      {
+        "item": "bewitchment:candle_orange"
+      },
+      {
+        "item": "bewitchment:candle_magenta"
+      },
+      {
+        "item": "bewitchment:candle_light_blue"
+      },
+      {
+        "item": "bewitchment:candle_yellow"
+      },
+      {
+        "item": "bewitchment:candle_lime"
+      },
+      {
+        "item": "bewitchment:candle_pink"
+      },
+      {
+        "item": "bewitchment:candle_gray"
+      },
+      {
+        "item": "bewitchment:candle_light_gray"
+      },
+      {
+        "item": "bewitchment:candle_cyan"
+      },
+      {
+        "item": "bewitchment:candle_purple"
+      },
+      {
+        "item": "bewitchment:candle_blue"
+      },
+      {
+        "item": "bewitchment:candle_brown"
+      },
+      {
+        "item": "bewitchment:candle_green"
+      },
+      {
+        "item": "bewitchment:candle_red"
+      },
+      {
+        "item": "bewitchment:candle_black"
+      }
+    ]
   }
 ]

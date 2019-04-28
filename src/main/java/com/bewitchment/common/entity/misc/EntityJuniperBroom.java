@@ -22,8 +22,7 @@ public class EntityJuniperBroom extends EntityBroom {
 				motionY = limit.y;
 				motionZ = limit.z;
 			}
-		}
-		else {
+		} else {
 			motionX /= 1.1;
 			motionY /= 1.1;
 			motionZ /= 1.1;

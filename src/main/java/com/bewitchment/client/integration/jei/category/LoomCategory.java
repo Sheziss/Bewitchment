@@ -64,7 +64,7 @@ public class LoomCategory implements IRecipeCategory<LoomWrapper> {
 		private ItemStack output;
 
 		public LoomWrapper(LoomRecipe recipe) {
-			input  = recipe.getInput();
+			input = recipe.getInput();
 			output = recipe.getOutput();
 		}
 

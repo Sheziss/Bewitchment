@@ -14,9 +14,9 @@ public class OvenRecipe extends IForgeRegistryEntry.Impl<OvenRecipe> {
 
 	public OvenRecipe(String modid, String name, ItemStack input, ItemStack output, ItemStack byproduct, float byproductChance) {
 		this.setRegistryName(new ResourceLocation(modid, name));
-		this.input           = input;
-		this.output          = output;
-		this.byproduct       = byproduct;
+		this.input = input;
+		this.output = output;
+		this.byproduct = byproduct;
 		this.byproductChance = byproductChance;
 	}
 

@@ -1,66 +1,66 @@
 {
   "pools": [
-	{
-	  "rolls": 1,
-	  "name": "saplings",
-	  "entries": [
-		{
-		  "type": "item",
-		  "name": "bewitchment:sapling_cypress",
-		  "weight": 1,
-		  "functions": [
-			{
-			  "function": "set_count",
-			  "count": {
-				"min": 0,
-				"max": 2
-			  }
-			}
-		  ]
-		},
-		{
-		  "type": "item",
-		  "name": "bewitchment:sapling_elder",
-		  "weight": 1,
-		  "functions": [
-			{
-			  "function": "set_count",
-			  "count": {
-				"min": 0,
-				"max": 2
-			  }
-			}
-		  ]
-		},
-		{
-		  "type": "item",
-		  "name": "bewitchment:sapling_juniper",
-		  "weight": 1,
-		  "functions": [
-			{
-			  "function": "set_count",
-			  "count": {
-				"min": 0,
-				"max": 2
-			  }
-			}
-		  ]
-		},
-		{
-		  "type": "item",
-		  "name": "bewitchment:sapling_yew",
-		  "weight": 1,
-		  "functions": [
-			{
-			  "function": "set_count",
-			  "count": {
-				"min": 0,
-				"max": 2
-			  }
-			}
-		  ]
-		}
-	  ]
-	}
+    {
+      "rolls": 1,
+      "name": "saplings",
+      "entries": [
+        {
+          "type": "item",
+          "name": "bewitchment:sapling_cypress",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 0,
+                "max": 2
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "bewitchment:sapling_elder",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 0,
+                "max": 2
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "bewitchment:sapling_juniper",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 0,
+                "max": 2
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "bewitchment:sapling_yew",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 0,
+                "max": 2
+              }
+            }
+          ]
+        }
+      ]
+    }
   ]
 }

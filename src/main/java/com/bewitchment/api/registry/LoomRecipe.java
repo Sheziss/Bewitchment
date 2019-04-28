@@ -17,7 +17,7 @@ public class LoomRecipe extends IForgeRegistryEntry.Impl<LoomRecipe> {
 
 	public LoomRecipe(String modid, String name, List<Ingredient> input, ItemStack output) {
 		this.setRegistryName(new ResourceLocation(modid, name));
-		this.input  = input;
+		this.input = input;
 		this.output = output;
 	}
 

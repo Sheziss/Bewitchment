@@ -38,10 +38,14 @@ public class FortuneMeetDemon extends Fortune {
 				demon.setPosition(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
 				demon.onInitialSpawn(player.world.getDifficultyForLocation(pos), null);
 				player.world.spawnEntity(demon);
-				if (player.getRNG().nextInt(10) < player.world.getDifficulty().ordinal()) demon.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 900, 1));
-				if (player.getRNG().nextInt(10) < player.world.getDifficulty().ordinal()) demon.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 900, 1));
-				if (player.getRNG().nextInt(10) < player.world.getDifficulty().ordinal()) demon.addPotionEffect(new PotionEffect(MobEffects.SPEED, 900, 1));
-				if (player.getRNG().nextInt(10) < player.world.getDifficulty().ordinal()) demon.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 900, 1));
+				if (player.getRNG().nextInt(10) < player.world.getDifficulty().ordinal())
+					demon.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 900, 1));
+				if (player.getRNG().nextInt(10) < player.world.getDifficulty().ordinal())
+					demon.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 900, 1));
+				if (player.getRNG().nextInt(10) < player.world.getDifficulty().ordinal())
+					demon.addPotionEffect(new PotionEffect(MobEffects.SPEED, 900, 1));
+				if (player.getRNG().nextInt(10) < player.world.getDifficulty().ordinal())
+					demon.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 900, 1));
 				return true;
 			}
 		}

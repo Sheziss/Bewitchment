@@ -47,7 +47,8 @@ public class ItemBoline extends ItemShears {
 
 	@Override
 	public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot) {
-		@SuppressWarnings("deprecation") Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);
+		@SuppressWarnings("deprecation")
+		Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);
 		if (equipmentSlot == EntityEquipmentSlot.MAINHAND) {
 			multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", 3 + ModObjects.TOOL_SILVER.getAttackDamage(), 0));
 			multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -2.4, 0));
@@ -85,6 +86,7 @@ public class ItemBoline extends ItemShears {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
-		if (stack.hasTagCompound() && stack.getTagCompound().hasKey("biome_id")) tooltip.add(Biome.getBiome(stack.getTagCompound().getInteger("biome_id")).getBiomeName());
+		if (stack.hasTagCompound() && stack.getTagCompound().hasKey("biome_id"))
+			tooltip.add(Biome.getBiome(stack.getTagCompound().getInteger("biome_id")).getBiomeName());
 	}
 }

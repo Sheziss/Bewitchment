@@ -43,12 +43,10 @@ public class ItemBroom extends ModItem {
 				world.setBlockToAir(pos);
 				player.swingArm(hand);
 				world.playSound(null, pos, ModSounds.BROOM_SWEEP, SoundCategory.BLOCKS, 0.8f, world.rand.nextFloat() * 0.4f + 0.8f);
-			}
-			else for (int i = 0; i < 1; i++)
-			          world.spawnParticle(EnumParticleTypes.SWEEP_ATTACK, pos.getX() + world.rand.nextDouble(), pos.getY() + 0.1, pos.getZ() + world.rand.nextDouble(), 0, 0, 0);
+			} else for (int i = 0; i < 1; i++)
+				world.spawnParticle(EnumParticleTypes.SWEEP_ATTACK, pos.getX() + world.rand.nextDouble(), pos.getY() + 0.1, pos.getZ() + world.rand.nextDouble(), 0, 0, 0);
 			return EnumActionResult.SUCCESS;
-		}
-		else if (entry != null) {
+		} else if (entry != null) {
 			Entity entity = entry.newInstance(world);
 			entity.processInitialInteract(player, hand);
 			if (!world.isRemote) {
@@ -62,6 +60,7 @@ public class ItemBroom extends ModItem {
 
 	@SubscribeEvent
 	public void unmount(EntityMountEvent event) {
-		if (!event.getWorldObj().isRemote && event.getEntityBeingMounted() instanceof EntityBroom && event.isDismounting()) event.getEntityBeingMounted().setDead();
+		if (!event.getWorldObj().isRemote && event.getEntityBeingMounted() instanceof EntityBroom && event.isDismounting())
+			event.getEntityBeingMounted().setDead();
 	}
 }

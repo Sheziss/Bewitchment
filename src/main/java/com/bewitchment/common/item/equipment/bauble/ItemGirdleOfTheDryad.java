@@ -53,8 +53,10 @@ public class ItemGirdleOfTheDryad extends ModItemBauble implements IRenderBauble
 			GlStateManager.scale(0.12, 0.12, 0.12);
 			IRenderBauble.Helper.translateToChest();
 			IRenderBauble.Helper.defaultTransforms();
-			if (player.getItemStackFromSlot(EntityEquipmentSlot.CHEST).isEmpty()) model.render(player, player.limbSwing, player.limbSwingAmount, player.ticksExisted, player.prevRotationYaw, player.rotationPitch, 1);
-			else model_armor.render(player, player.limbSwing, player.limbSwingAmount, player.ticksExisted, player.prevRotationYaw, player.rotationPitch, 1);
+			if (player.getItemStackFromSlot(EntityEquipmentSlot.CHEST).isEmpty())
+				model.render(player, player.limbSwing, player.limbSwingAmount, player.ticksExisted, player.prevRotationYaw, player.rotationPitch, 1);
+			else
+				model_armor.render(player, player.limbSwing, player.limbSwingAmount, player.ticksExisted, player.prevRotationYaw, player.rotationPitch, 1);
 			GlStateManager.popMatrix();
 		}
 	}
@@ -106,7 +108,8 @@ public class ItemGirdleOfTheDryad extends ModItemBauble implements IRenderBauble
 
 	@SubscribeEvent
 	public void equipmentChange(LivingEquipmentChangeEvent event) {
-		if (!event.getEntityLiving().world.isRemote && event.getEntityLiving() instanceof EntityPlayer) growBark((EntityPlayer) event.getEntityLiving(), 0);
+		if (!event.getEntityLiving().world.isRemote && event.getEntityLiving() instanceof EntityPlayer)
+			growBark((EntityPlayer) event.getEntityLiving(), 0);
 	}
 
 	private boolean growBark(EntityPlayer player, int amount) {

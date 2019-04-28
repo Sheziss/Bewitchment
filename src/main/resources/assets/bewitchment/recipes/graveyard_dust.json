@@ -1,19 +1,19 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-	{
-	  "item": "bewitchment:ectoplasm"
-	},
-	{
-	  "item": "bewitchment:spectral_dust"
-	},
-	{
-	  "item": "minecraft:dye",
-	  "data": 15
-	}
+    {
+      "item": "bewitchment:ectoplasm"
+    },
+    {
+      "item": "bewitchment:spectral_dust"
+    },
+    {
+      "item": "minecraft:dye",
+      "data": 15
+    }
   ],
   "result": {
-	"item": "bewitchment:graveyard_dust",
-	"count": 3
+    "item": "bewitchment:graveyard_dust",
+    "count": 3
   }
 }

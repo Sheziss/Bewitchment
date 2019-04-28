@@ -22,7 +22,8 @@ public class WorldGenCoquina implements IWorldGenerator {
 					int y = rand.nextInt(2);
 					int z = rand.nextInt(2);
 					for (BlockPos blockpos : BlockPos.getAllInBox(position.add(-x, -y, -z), position.add(x, y, z)))
-						if (blockpos.distanceSq(position) <= Math.pow((x + y + z) * .333f + 0.5f, 2)) world.setBlockState(blockpos, ModObjects.coquina.getDefaultState(), 2);
+						if (blockpos.distanceSq(position) <= Math.pow((x + y + z) * .333f + 0.5f, 2))
+							world.setBlockState(blockpos, ModObjects.coquina.getDefaultState(), 2);
 					position = position.add(rand.nextInt(2) - 1, -rand.nextInt(2), rand.nextInt(2) - 1);
 				}
 				position = position.down();

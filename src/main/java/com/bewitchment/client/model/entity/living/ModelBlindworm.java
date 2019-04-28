@@ -26,9 +26,9 @@ public class ModelBlindworm extends ModelBase {
 	public ModelRenderer tail03;
 
 	public ModelBlindworm() {
-		this.textureWidth  = 64;
+		this.textureWidth = 64;
 		this.textureHeight = 65;
-		this.lowerJaw      = new ModelRenderer(this, 15, 8);
+		this.lowerJaw = new ModelRenderer(this, 15, 8);
 		this.lowerJaw.setRotationPoint(0, 0.9f, 1);
 		this.lowerJaw.addBox(-2, -0.5f, -4.8f, 4, 1, 5, 0);
 		this.setRotateAngle(lowerJaw, -0.09f, 0, 0);
@@ -71,7 +71,7 @@ public class ModelBlindworm extends ModelBase {
 		this.tail01 = new ModelRenderer(this, 23, 45);
 		this.tail01.setRotationPoint(0, 0, 5.9f);
 		this.tail01.addBox(-1.5f, -1.1f, -1, 3, 2, 7, 0);
-		this.rightEye        = new ModelRenderer(this, 32, 0);
+		this.rightEye = new ModelRenderer(this, 32, 0);
 		this.rightEye.mirror = true;
 		this.rightEye.setRotationPoint(-1.3f, -0.2f, 0);
 		this.rightEye.addBox(-1.5f, -2, -1, 2, 2, 2, 0);

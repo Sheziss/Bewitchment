@@ -45,9 +45,9 @@ public class ModelGirdleOfTheDryad extends ModelBase {
 	public ModelRenderer barkBack1c;
 
 	public ModelGirdleOfTheDryad() {
-		this.textureWidth  = 32;
+		this.textureWidth = 32;
 		this.textureHeight = 32;
-		this.barkfront2c   = new ModelRenderer(this, 25, 14);
+		this.barkfront2c = new ModelRenderer(this, 25, 14);
 		this.barkfront2c.setRotationPoint(-2.850585699081421f, 0.9393904209136963f, 0.8476096391677856f);
 		this.barkfront2c.addBox(-2, -3, 0, 2, 3, 1, 0);
 		this.setRotateAngle(barkfront2c, -0.026075345208696685f, 0.43477582849948554f, 0.037526528018900884f);

@@ -24,7 +24,21 @@ import java.util.Arrays;
 
 public class RitualConjureAlphaHellhound extends Ritual {
 	public RitualConjureAlphaHellhound() {
-		super(Bewitchment.MODID, "conjure_alpha_hellhound", Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.athame, 1, Short.MAX_VALUE)), Ingredient.fromStacks(Util.getOres("obsidian")), Ingredient.fromStacks(new ItemStack(Blocks.SOUL_SAND)), Ingredient.fromStacks(new ItemStack(Items.NETHERBRICK)), Ingredient.fromStacks(new ItemStack(ModObjects.tongue_of_dog)), Ingredient.fromStacks(new ItemStack(ModObjects.hellebore)), Ingredient.fromStacks(new ItemStack(ModObjects.wormwood)), Ingredient.fromStacks(new ItemStack(ModObjects.heart)), Ingredient.fromStacks(new ItemStack(ModObjects.snake_venom)), Ingredient.fromStacks(new ItemStack(Items.BLAZE_POWDER))), Arrays.asList(), Arrays.asList(), 800, 4150, 6, GlyphType.NETHER, GlyphType.NETHER, GlyphType.NETHER);
+		super(Bewitchment.MODID, "conjure_alpha_hellhound",
+				Arrays.asList(
+						Ingredient.fromStacks(new ItemStack(ModObjects.athame, 1, Short.MAX_VALUE)),
+						Ingredient.fromStacks(Util.getOres("obsidian")),
+						Ingredient.fromStacks(new ItemStack(Blocks.SOUL_SAND)),
+						Ingredient.fromStacks(new ItemStack(Items.NETHERBRICK)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.tongue_of_dog)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.hellebore)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.wormwood)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.heart)),
+						Ingredient.fromStacks(new ItemStack(ModObjects.snake_venom)),
+						Ingredient.fromStacks(new ItemStack(Items.BLAZE_POWDER))),
+				Arrays.asList(),
+				Arrays.asList(),
+				800, 4150, 6, GlyphType.NETHER, GlyphType.NETHER, GlyphType.NETHER);
 	}
 
 	@Override

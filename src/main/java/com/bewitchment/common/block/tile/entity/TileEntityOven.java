@@ -26,7 +26,7 @@ public class TileEntityOven extends ModTileEntity implements ITickable {
 	public final ItemStackHandler inventory_up = new ItemStackHandler(3) {
 		@Override
 		public boolean isItemValid(int index, ItemStack stack) {
-			return index == 0 ? TileEntityFurnace.isItemFuel(stack) : index != 1 || stack.getItem() == ModObjects.empty_jar;
+			return index == 0 ? TileEntityFurnace.isItemFuel(stack) : index == 1 ? stack.getItem() == ModObjects.empty_jar : true;
 		}
 
 		@Override
@@ -46,11 +46,10 @@ public class TileEntityOven extends ModTileEntity implements ITickable {
 			if (recipe == null || !recipe.isValid(inventory_up, inventory_down)) progress = 0;
 			else {
 				if (burnTime == -1 && !inventory_up.getStackInSlot(0).isEmpty() && !inventory_up.getStackInSlot(2).isEmpty()) {
-					burnTime     = TileEntityFurnace.getItemBurnTime(inventory_up.getStackInSlot(0));
+					burnTime = TileEntityFurnace.getItemBurnTime(inventory_up.getStackInSlot(0));
 					fuelBurnTime = burnTime;
 					inventory_up.extractItem(0, 1, false);
-				}
-				else if (burnTime >= 0) {
+				} else if (burnTime >= 0) {
 					progress++;
 					if (progress >= 200) {
 						progress = 0;
@@ -83,10 +82,10 @@ public class TileEntityOven extends ModTileEntity implements ITickable {
 	@Override
 	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
-		recipe       = tag.getString("recipe").isEmpty() ? null : BewitchmentAPI.REGISTRY_OVEN.getValue(new ResourceLocation(tag.getString("recipe")));
-		burnTime     = tag.getInteger("burnTime");
+		recipe = tag.getString("recipe").isEmpty() ? null : BewitchmentAPI.REGISTRY_OVEN.getValue(new ResourceLocation(tag.getString("recipe")));
+		burnTime = tag.getInteger("burnTime");
 		fuelBurnTime = tag.getInteger("fuelBurnTime");
-		progress     = tag.getInteger("progress");
+		progress = tag.getInteger("progress");
 	}
 
 	@Override

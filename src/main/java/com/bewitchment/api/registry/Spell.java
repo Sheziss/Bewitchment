@@ -14,10 +14,10 @@ public abstract class Spell extends IForgeRegistryEntry.Impl<Spell> {
 
 	public Spell(String modid, String name, int cost, int color, SpellType type) {
 		this.setRegistryName(new ResourceLocation(modid, name));
-		this.name  = getRegistryName().toString();
-		this.cost  = cost;
+		this.name = getRegistryName().toString();
+		this.cost = cost;
 		this.color = color;
-		this.type  = type;
+		this.type = type;
 	}
 
 	public abstract boolean canBeUsed(World world, BlockPos pos, EntityLivingBase caster);
@@ -53,6 +53,6 @@ public abstract class Spell extends IForgeRegistryEntry.Impl<Spell> {
 	public abstract void performEffect(World world, RayTraceResult result, EntityLivingBase caster);
 
 	public enum SpellType {
-		INSTANT, BLOCK, ENTITY, ALL
+		INSTANT, BLOCK, ENTITY, ALL;
 	}
 }

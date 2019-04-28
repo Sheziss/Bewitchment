@@ -29,8 +29,7 @@ public class ItemWaystone extends ModItem {
 		if (stack.hasTagCompound() && stack.getTagCompound().hasKey("location")) {
 			BlockPos pos = BlockPos.fromLong(stack.getTagCompound().getLong("location"));
 			tooltip.add(I18n.format("tooltip." + getTranslationKey().substring(5), pos.getX(), pos.getY(), pos.getZ(), stack.getTagCompound().getString("dimensionName")));
-		}
-		else tooltip.add(I18n.format("tooltip." + getTranslationKey().substring(5) + ".unbound"));
+		} else tooltip.add(I18n.format("tooltip." + getTranslationKey().substring(5) + ".unbound"));
 	}
 
 	@Override

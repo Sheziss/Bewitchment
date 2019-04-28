@@ -70,7 +70,8 @@ public class EntityRaven extends ModEntityTameable {
 
 	@Override
 	public boolean attackEntityFrom(DamageSource source, float amount) {
-		if (source.getTrueSource() != null && !(source.getTrueSource() instanceof EntityPlayer) && !(source.getTrueSource() instanceof EntityArrow)) amount = (amount + 1) / 2f;
+		if (source.getTrueSource() != null && !(source.getTrueSource() instanceof EntityPlayer) && !(source.getTrueSource() instanceof EntityArrow))
+			amount = (amount + 1) / 2f;
 		return super.attackEntityFrom(source, amount);
 	}
 

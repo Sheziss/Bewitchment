@@ -36,7 +36,8 @@ public class WorldGenCypressTree extends WorldGenModTree {
 			for (int x = -1; x <= 1; x++) {
 				for (int z = -1; z <= 1; z++) {
 					BlockPos current = pos.up(h).add(x, y, z);
-					if (world.getBlockState(current).getBlock().canBeReplacedByLeaves(world.getBlockState(current), world, current) && (core && z == 0 && x == 0 || full || cross && (z == 0 || x == 0))) world.setBlockState(current, ModObjects.leaves_cypress.getDefaultState());
+					if (world.getBlockState(current).getBlock().canBeReplacedByLeaves(world.getBlockState(current), world, current) && (core && z == 0 && x == 0 || full || cross && (z == 0 || x == 0)))
+						world.setBlockState(current, ModObjects.leaves_cypress.getDefaultState());
 				}
 			}
 		}
