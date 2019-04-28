@@ -1,15 +1,15 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "forge:fluid"
+	"model": "forge:fluid"
   },
   "variants": {
-    "magic_oil": [
-      {
-        "custom": {
-          "fluid": "magic_oil"
-        }
-      }
-    ]
+	"magic_oil": [
+	  {
+		"custom": {
+		  "fluid": "magic_oil"
+		}
+	  }
+	]
   }
 }

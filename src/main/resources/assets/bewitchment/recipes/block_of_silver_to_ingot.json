@@ -1,12 +1,12 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {
-      "item": "bewitchment:block_of_silver"
-    }
+	{
+	  "item": "bewitchment:block_of_silver"
+	}
   ],
   "result": {
-    "item": "bewitchment:silver_ingot",
-    "count": 9
+	"item": "bewitchment:silver_ingot",
+	"count": 9
   }
 }

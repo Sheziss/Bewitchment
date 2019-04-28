@@ -22,15 +22,7 @@ import java.util.Arrays;
 
 public class RitualConjureWitch extends Ritual {
 	public RitualConjureWitch() {
-		super(Bewitchment.MODID, "conjure_witch",
-				Arrays.asList(
-						Ingredient.fromStacks(new ItemStack(ModObjects.athame, 1, Short.MAX_VALUE)),
-						Ingredient.fromStacks(new ItemStack(Items.APPLE)),
-						Ingredient.fromStacks(new ItemStack(ModObjects.pentacle)),
-						Ingredient.fromStacks(new ItemStack(Items.POISONOUS_POTATO))),
-				Arrays.asList(),
-				Arrays.asList(),
-				200, 3000, 3, GlyphType.NETHER, GlyphType.ENDER, GlyphType.NETHER);
+		super(Bewitchment.MODID, "conjure_witch", Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.athame, 1, Short.MAX_VALUE)), Ingredient.fromStacks(new ItemStack(Items.APPLE)), Ingredient.fromStacks(new ItemStack(ModObjects.pentacle)), Ingredient.fromStacks(new ItemStack(Items.POISONOUS_POTATO))), Arrays.asList(), Arrays.asList(), 200, 3000, 3, GlyphType.NETHER, GlyphType.ENDER, GlyphType.NETHER);
 	}
 
 	@Override
@@ -40,8 +32,7 @@ public class RitualConjureWitch extends Ritual {
 			entity.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), world.rand.nextInt(360), 0);
 			entity.onInitialSpawn(world.getDifficultyForLocation(pos), null);
 			world.spawnEntity(entity);
-			if (world.rand.nextFloat() < 0.1f)
-				entity.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 6000, 2, false, false));
+			if (world.rand.nextFloat() < 0.1f) entity.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 6000, 2, false, false));
 		}
 	}
 

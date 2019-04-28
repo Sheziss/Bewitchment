@@ -17,14 +17,7 @@ import java.util.Arrays;
 
 public class RitualHighMoon extends Ritual {
 	public RitualHighMoon() {
-		super(Bewitchment.MODID, "high_moon",
-				Arrays.asList(
-						Ingredient.fromStacks(Util.getOres("ingotSilver")),
-						Ingredient.fromStacks(new ItemStack(Items.NETHERBRICK)),
-						Ingredient.fromStacks(new ItemStack(ModObjects.hellebore))),
-				Arrays.asList(),
-				Arrays.asList(),
-				100, 800, 0, GlyphType.NORMAL, null, null);
+		super(Bewitchment.MODID, "high_moon", Arrays.asList(Ingredient.fromStacks(Util.getOres("ingotSilver")), Ingredient.fromStacks(new ItemStack(Items.NETHERBRICK)), Ingredient.fromStacks(new ItemStack(ModObjects.hellebore))), Arrays.asList(), Arrays.asList(), 100, 800, 0, GlyphType.NORMAL, null, null);
 	}
 
 	@Override
@@ -34,7 +27,6 @@ public class RitualHighMoon extends Ritual {
 
 	@Override
 	public void onFinished(TileEntityGlyph tile, World world, EntityPlayer caster, BlockPos pos, int dimension, int time) {
-		if (!world.isRemote)
-			world.setWorldTime(world.getWorldTime() + (41600 - (world.getWorldTime() % 24000)) % 24000);
+		if (!world.isRemote) world.setWorldTime(world.getWorldTime() + (41600 - (world.getWorldTime() % 24000)) % 24000);
 	}
 }

@@ -4,9 +4,9 @@ import net.minecraft.client.model.ModelRenderer;
 
 public class ModelGirdleOfTheDryadArmor extends ModelGirdleOfTheDryad {
 	public ModelGirdleOfTheDryadArmor() {
-		this.textureWidth = 32;
+		this.textureWidth  = 32;
 		this.textureHeight = 32;
-		this.barkBack3c = new ModelRenderer(this, 1, 13);
+		this.barkBack3c    = new ModelRenderer(this, 1, 13);
 		this.barkBack3c.setRotationPoint(-0.3364242613315582f, -3.142953634262085f, 0.07752387970685959f);
 		this.barkBack3c.addBox(-3, -2, 0, 5, 3, 1, 0);
 		this.setRotateAngle(barkBack3c, -0.15854242384248612f, 0.33488954431075146f, 0.32152516945997495f);

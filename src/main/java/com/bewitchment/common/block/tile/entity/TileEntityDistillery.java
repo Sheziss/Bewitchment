@@ -47,14 +47,14 @@ public class TileEntityDistillery extends TileEntityAltarStorage implements ITic
 			if (recipe == null || !recipe.isValid(inventory_up, inventory_down)) progress = 0;
 			else {
 				if (burnTime == 0 && !inventory_side.getStackInSlot(0).isEmpty() && !isEmpty(inventory_up)) {
-					burnTime = 1200;
+					burnTime   = 1200;
 					recipeTime = recipe.getTime();
 					inventory_side.extractItem(0, 1, false);
-				} else if (burnTime > 0) {
-					if (MagicPower.attemptDrain(world, world.getClosestPlayer(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 5, false), getAltarPosition(), 2))
-						progress++;
+				}
+				else if (burnTime > 0) {
+					if (MagicPower.attemptDrain(world, world.getClosestPlayer(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 5, false), getAltarPosition(), 2)) progress++;
 					if (progress >= recipe.getTime()) {
-						progress = 0;
+						progress   = 0;
 						recipeTime = 0;
 						recipe.giveOutput(inventory_up, inventory_down);
 					}
@@ -84,7 +84,7 @@ public class TileEntityDistillery extends TileEntityAltarStorage implements ITic
 	@Override
 	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
-		recipe = tag.getString("recipe").isEmpty() ? null : BewitchmentAPI.REGISTRY_DISTILLERY.getValue(new ResourceLocation(tag.getString("recipe")));
+		recipe   = tag.getString("recipe").isEmpty() ? null : BewitchmentAPI.REGISTRY_DISTILLERY.getValue(new ResourceLocation(tag.getString("recipe")));
 		burnTime = tag.getInteger("burnTime");
 		progress = tag.getInteger("progress");
 	}

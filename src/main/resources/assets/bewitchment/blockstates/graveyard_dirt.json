@@ -1,14 +1,14 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "cube_all",
-    "textures": {
-      "all": "bewitchment:blocks/graveyard_dirt"
-    }
+	"model": "cube_all",
+	"textures": {
+	  "all": "bewitchment:blocks/graveyard_dirt"
+	}
   },
   "variants": {
-    "normal": [
-      {}
-    ]
+	"normal": [
+	  {}
+	]
   }
 }

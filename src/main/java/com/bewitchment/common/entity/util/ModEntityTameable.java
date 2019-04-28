@@ -32,7 +32,7 @@ public abstract class ModEntityTameable extends EntityTameable {
 
 	public ModEntityTameable(World world, ResourceLocation lootTableLocation, Item... tameItems) {
 		super(world);
-		this.tameItems = Sets.newHashSet(tameItems);
+		this.tameItems         = Sets.newHashSet(tameItems);
 		this.lootTableLocation = lootTableLocation;
 	}
 
@@ -62,20 +62,21 @@ public abstract class ModEntityTameable extends EntityTameable {
 		ItemStack stack = player.getHeldItem(hand);
 		if (!isTamed() && tameItems.contains(stack.getItem())) {
 			if (!player.isCreative()) stack.shrink(1);
-			if (!isSilent())
-				world.playSound(null, posX, posY, posZ, SoundEvents.ENTITY_PARROT_EAT, getSoundCategory(), 1, 1 + (rand.nextFloat() - rand.nextFloat()) * 0.2f);
+			if (!isSilent()) world.playSound(null, posX, posY, posZ, SoundEvents.ENTITY_PARROT_EAT, getSoundCategory(), 1, 1 + (rand.nextFloat() - rand.nextFloat()) * 0.2f);
 			if (!world.isRemote) {
 				if (rand.nextInt(5) == 0 && !ForgeEventFactory.onAnimalTame(this, player)) {
 					setTamedBy(player);
 					playTameEffect(true);
 					world.setEntityState(this, (byte) 7);
-				} else {
+				}
+				else {
 					playTameEffect(false);
 					world.setEntityState(this, (byte) 6);
 				}
 			}
 			return true;
-		} else if (!player.isSneaking() && isTamed()) setSitting(!isSitting());
+		}
+		else if (!player.isSneaking() && isTamed()) setSitting(!isSitting());
 		return super.processInteract(player, hand);
 	}
 

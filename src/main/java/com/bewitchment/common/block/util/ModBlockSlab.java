@@ -35,7 +35,7 @@ public class ModBlockSlab extends BlockSlab implements IOreDictionaryContainer {
 		this(name, base, false, oreDictionaryNames);
 		ModBlockSlab double_slab = new ModBlockSlab(getRegistryName().getPath() + "_double", base, true);
 		double_slab.setCreativeTab(null);
-		this.half = this;
+		this.half        = this;
 		double_slab.half = this;
 		Item item = new ItemSlab(this, this, double_slab).setRegistryName(getRegistryName()).setTranslationKey(getTranslationKey());
 		ModObjects.REGISTRY.add(item);
@@ -46,7 +46,7 @@ public class ModBlockSlab extends BlockSlab implements IOreDictionaryContainer {
 		super(base.getDefaultState().getMaterial());
 		Util.registerValues(this, name, base, oreDictionaryNames);
 		this.setDefaultState(isDouble ? blockState.getBaseState().withProperty(BlockPurpurSlab.VARIANT, BlockPurpurSlab.Variant.DEFAULT) : blockState.getBaseState().withProperty(BlockPurpurSlab.VARIANT, BlockPurpurSlab.Variant.DEFAULT).withProperty(HALF, EnumBlockHalf.BOTTOM));
-		this.isDouble = isDouble;
+		this.isDouble  = isDouble;
 		this.fullBlock = isDouble;
 	}
 
@@ -88,7 +88,7 @@ public class ModBlockSlab extends BlockSlab implements IOreDictionaryContainer {
 
 	@Override
 	public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face) {
-		return state.getMaterial() == Material.ICE || state.getMaterial() == Material.GLASS ? false : super.doesSideBlockRendering(state, world, pos, face);
+		return state.getMaterial() != Material.ICE && state.getMaterial() != Material.GLASS && super.doesSideBlockRendering(state, world, pos, face);
 	}
 
 	@Override
@@ -99,19 +99,19 @@ public class ModBlockSlab extends BlockSlab implements IOreDictionaryContainer {
 	@SuppressWarnings("deprecation")
 	@Override
 	public boolean isFullCube(IBlockState state) {
-		return state.getMaterial() == Material.ICE || state.getMaterial() == Material.GLASS ? false : super.isFullCube(state);
+		return state.getMaterial() != Material.ICE && state.getMaterial() != Material.GLASS && super.isFullCube(state);
 	}
 
 	@SuppressWarnings("deprecation")
 	@Override
 	public boolean isOpaqueCube(IBlockState state) {
-		return state.getMaterial() == Material.ICE || state.getMaterial() == Material.GLASS ? false : super.isOpaqueCube(state);
+		return state.getMaterial() != Material.ICE && state.getMaterial() != Material.GLASS && super.isOpaqueCube(state);
 	}
 
 	@SuppressWarnings("deprecation")
 	@Override
 	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face) {
-		return state.getMaterial() == Material.ICE || state.getMaterial() == Material.GLASS ? state != world.getBlockState(pos.offset(face)) ? true : world.getBlockState(pos.offset(face)).getBlock() != this || !isFullCube(world.getBlockState(pos.offset(face))) && super.shouldSideBeRendered(state, world, pos, face) : super.shouldSideBeRendered(state, world, pos, face);
+		return state.getMaterial() == Material.ICE || state.getMaterial() == Material.GLASS ? state != world.getBlockState(pos.offset(face)) || (world.getBlockState(pos.offset(face)).getBlock() != this || !isFullCube(world.getBlockState(pos.offset(face))) && super.shouldSideBeRendered(state, world, pos, face)) : super.shouldSideBeRendered(state, world, pos, face);
 	}
 
 	@Override

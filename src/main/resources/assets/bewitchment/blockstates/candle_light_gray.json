@@ -1,14 +1,14 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "bewitchment:candle",
-    "textures": {
-      "0": "bewitchment:blocks/candle/candle_light_gray"
-    }
+	"model": "bewitchment:candle",
+	"textures": {
+	  "0": "bewitchment:blocks/candle/candle_light_gray"
+	}
   },
   "variants": {
-    "normal": [
-      {}
-    ]
+	"normal": [
+	  {}
+	]
   }
 }

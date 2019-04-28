@@ -1,26 +1,26 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "cube_all",
-    "textures": {
-      "all": "bewitchment:blocks/leaves_yew"
-    }
+	"model": "cube_all",
+	"textures": {
+	  "all": "bewitchment:blocks/leaves_yew"
+	}
   },
   "variants": {
-    "normal": [
-      {}
-    ],
-    "check_decay=true,decayable=true": [
-      {}
-    ],
-    "check_decay=true,decayable=false": [
-      {}
-    ],
-    "check_decay=false,decayable=true": [
-      {}
-    ],
-    "check_decay=false,decayable=false": [
-      {}
-    ]
+	"normal": [
+	  {}
+	],
+	"check_decay=true,decayable=true": [
+	  {}
+	],
+	"check_decay=true,decayable=false": [
+	  {}
+	],
+	"check_decay=false,decayable=true": [
+	  {}
+	],
+	"check_decay=false,decayable=false": [
+	  {}
+	]
   }
 }

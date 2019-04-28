@@ -74,7 +74,8 @@ public class ModBlockLeaves extends BlockLeaves implements IOreDictionaryContain
 		if (!world.isRemote && stack.getItem() instanceof ItemShears) {
 			player.addStat(StatList.getBlockStats(this));
 			spawnAsEntity(world, pos, new ItemStack(Item.getItemFromBlock(this)));
-		} else super.harvestBlock(world, player, pos, state, tile, stack);
+		}
+		else super.harvestBlock(world, player, pos, state, tile, stack);
 	}
 
 	@Override

@@ -23,17 +23,7 @@ import java.util.Arrays;
 
 public class RitualCallOfTheWild extends Ritual {
 	public RitualCallOfTheWild() {
-		super(Bewitchment.MODID, "call_of_the_wild",
-				Arrays.asList(
-						Ingredient.fromStacks(new ItemStack(ModObjects.oak_spirit)),
-						Ingredient.fromStacks(new ItemStack(ModObjects.spruce_heart)),
-						Ingredient.fromStacks(new ItemStack(ModObjects.birch_soul)),
-						Ingredient.fromStacks(new ItemStack(ModObjects.chrysanthemum)),
-						Ingredient.fromStacks(new ItemStack(ModObjects.moonbell)),
-						Ingredient.fromStacks(Util.getOres("treeLeaves"))),
-				Arrays.asList(),
-				Arrays.asList(),
-				135, 1050, 3, GlyphType.ANY, GlyphType.ANY, GlyphType.ANY);
+		super(Bewitchment.MODID, "call_of_the_wild", Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.oak_spirit)), Ingredient.fromStacks(new ItemStack(ModObjects.spruce_heart)), Ingredient.fromStacks(new ItemStack(ModObjects.birch_soul)), Ingredient.fromStacks(new ItemStack(ModObjects.chrysanthemum)), Ingredient.fromStacks(new ItemStack(ModObjects.moonbell)), Ingredient.fromStacks(Util.getOres("treeLeaves"))), Arrays.asList(), Arrays.asList(), 135, 1050, 3, GlyphType.ANY, GlyphType.ANY, GlyphType.ANY);
 	}
 
 	@Override

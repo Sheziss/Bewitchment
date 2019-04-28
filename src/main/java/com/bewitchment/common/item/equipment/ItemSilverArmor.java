@@ -17,7 +17,6 @@ public class ItemSilverArmor extends ModItemArmor {
 
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
-		if (player.getCapability(ExtendedPlayer.CAPABILITY, null).getTransformation() == TransformationType.WEREWOLF)
-			player.attackEntityFrom(DamageSource.MAGIC, 1);
+		if (player.getCapability(ExtendedPlayer.CAPABILITY, null).getTransformation() == TransformationType.WEREWOLF) player.attackEntityFrom(DamageSource.MAGIC, 1);
 	}
 }

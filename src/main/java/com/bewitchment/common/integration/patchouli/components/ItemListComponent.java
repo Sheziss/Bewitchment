@@ -40,8 +40,8 @@ public class ItemListComponent implements ICustomComponent {
 	@Override
 	public void build(int x, int y, int page) {
 		ingredients = getInputsFromRegistry(registry, name, list_type);
-		this.x = x;
-		this.y = y;
+		this.x      = x;
+		this.y      = y;
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class ItemListComponent implements ICustomComponent {
 			GlStateManager.pushMatrix();
 			while (remaining > 0) {
 				for (int i = 0; i < Math.min(slots, remaining); i++)
-					context.renderIngredient(border + x + (17 * i), y + (17 * row), mouseX, mouseY, ingredients.get((row * slots) + i));
+				     context.renderIngredient(border + x + (17 * i), y + (17 * row), mouseX, mouseY, ingredients.get((row * slots) + i));
 				row++;
 				remaining -= slots;
 			}

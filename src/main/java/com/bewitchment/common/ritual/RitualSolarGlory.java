@@ -21,14 +21,7 @@ import java.util.Arrays;
 
 public class RitualSolarGlory extends Ritual {
 	public RitualSolarGlory() {
-		super(Bewitchment.MODID, "solar_glory",
-				Arrays.asList(
-						Ingredient.fromStacks(Util.getOres("ingotGold")),
-						Ingredient.fromStacks(new ItemStack(Items.NETHERBRICK)),
-						Ingredient.fromStacks(new ItemStack(ModObjects.chrysanthemum))),
-				Arrays.asList(),
-				Arrays.asList(),
-				100, 800, 0, GlyphType.NORMAL, null, null);
+		super(Bewitchment.MODID, "solar_glory", Arrays.asList(Ingredient.fromStacks(Util.getOres("ingotGold")), Ingredient.fromStacks(new ItemStack(Items.NETHERBRICK)), Ingredient.fromStacks(new ItemStack(ModObjects.chrysanthemum))), Arrays.asList(), Arrays.asList(), 100, 800, 0, GlyphType.NORMAL, null, null);
 	}
 
 	@Override
@@ -40,8 +33,7 @@ public class RitualSolarGlory extends Ritual {
 	public void onFinished(TileEntityGlyph tile, World world, EntityPlayer caster, BlockPos pos, int dimension, int time) {
 		if (!world.isRemote) {
 			for (EntityPlayer player : world.playerEntities) {
-				if (player.getCapability(ExtendedPlayer.CAPABILITY, null).getTransformation() == TransformationType.VAMPIRE)
-					player.addPotionEffect(new PotionEffect(ModPotions.sun_ward, 30 * 20));
+				if (player.getCapability(ExtendedPlayer.CAPABILITY, null).getTransformation() == TransformationType.VAMPIRE) player.addPotionEffect(new PotionEffect(ModPotions.sun_ward, 30 * 20));
 			}
 			world.setWorldTime(world.getWorldTime() + (30000 - (world.getWorldTime() % 24000)) % 24000);
 		}

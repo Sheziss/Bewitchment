@@ -29,14 +29,12 @@ public class ItemHellishBauble extends ModItemBauble {
 	@Override
 	public void onEquipped(ItemStack stack, EntityLivingBase living) {
 		living.world.playSound(null, living.getPosition(), SoundEvents.ENTITY_BLAZE_AMBIENT, SoundCategory.PLAYERS, 0.75f, 1.9f);
-		if (living instanceof EntityPlayer)
-			living.getCapability(MagicPower.CAPABILITY, null).addBonus(getTranslationKey(), 100);
+		if (living instanceof EntityPlayer) living.getCapability(MagicPower.CAPABILITY, null).addBonus(getTranslationKey(), 100);
 	}
 
 	@Override
 	public void onUnequipped(ItemStack stack, EntityLivingBase living) {
-		if (living instanceof EntityPlayer)
-			living.getCapability(MagicPower.CAPABILITY, null).removeBonus(getTranslationKey());
+		if (living instanceof EntityPlayer) living.getCapability(MagicPower.CAPABILITY, null).removeBonus(getTranslationKey());
 	}
 
 	@Override
@@ -46,8 +44,7 @@ public class ItemHellishBauble extends ModItemBauble {
 
 	@SubscribeEvent
 	public void onHurt(LivingHurtEvent event) {
-		if (((event.getSource().getTrueSource() instanceof EntityLivingBase && ((EntityLivingBase) event.getSource().getTrueSource()).getCreatureAttribute() == BewitchmentAPI.DEMON) || event.getSource().isExplosion() || event.getSource().isFireDamage()) && event.getEntityLiving() instanceof EntityPlayer && hasAmulet((EntityPlayer) event.getEntityLiving()) && event.getEntityLiving().getCapability(MagicPower.CAPABILITY, null).drain(50))
-			event.setAmount(event.getAmount() * 0.8f);
+		if (((event.getSource().getTrueSource() instanceof EntityLivingBase && ((EntityLivingBase) event.getSource().getTrueSource()).getCreatureAttribute() == BewitchmentAPI.DEMON) || event.getSource().isExplosion() || event.getSource().isFireDamage()) && event.getEntityLiving() instanceof EntityPlayer && hasAmulet((EntityPlayer) event.getEntityLiving()) && event.getEntityLiving().getCapability(MagicPower.CAPABILITY, null).drain(50)) event.setAmount(event.getAmount() * 0.8f);
 	}
 
 	private boolean hasAmulet(EntityPlayer player) {

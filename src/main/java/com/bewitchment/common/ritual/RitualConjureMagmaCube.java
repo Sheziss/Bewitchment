@@ -23,14 +23,7 @@ import java.util.Arrays;
 
 public class RitualConjureMagmaCube extends Ritual {
 	public RitualConjureMagmaCube() {
-		super(Bewitchment.MODID, "conjure_magma_cube",
-				Arrays.asList(
-						Ingredient.fromStacks(new ItemStack(ModObjects.athame, 1, Short.MAX_VALUE)),
-						Ingredient.fromStacks(new ItemStack(Items.BLAZE_POWDER)),
-						Ingredient.fromStacks(Util.getOres("slimeball"))),
-				Arrays.asList(),
-				Arrays.asList(),
-				120, 1200, 3, GlyphType.NETHER, GlyphType.NETHER, null);
+		super(Bewitchment.MODID, "conjure_magma_cube", Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.athame, 1, Short.MAX_VALUE)), Ingredient.fromStacks(new ItemStack(Items.BLAZE_POWDER)), Ingredient.fromStacks(Util.getOres("slimeball"))), Arrays.asList(), Arrays.asList(), 120, 1200, 3, GlyphType.NETHER, GlyphType.NETHER, null);
 	}
 
 	@Override

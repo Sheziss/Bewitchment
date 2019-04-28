@@ -18,10 +18,10 @@ public class DistilleryRecipe extends IForgeRegistryEntry.Impl<DistilleryRecipe>
 
 	public DistilleryRecipe(String modid, String name, List<Ingredient> input, List<ItemStack> output, int runningPower, int time) {
 		this.setRegistryName(new ResourceLocation(modid, name));
-		this.input = input;
-		this.output = output;
+		this.input        = input;
+		this.output       = output;
 		this.runningPower = runningPower;
-		this.time = time;
+		this.time         = time;
 	}
 
 	/**

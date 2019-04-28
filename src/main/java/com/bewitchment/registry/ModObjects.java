@@ -242,7 +242,7 @@ public class ModObjects {
 	public static final Item ring_of_the_adamantine_star = new ItemTalisman("ring_of_the_adamantine_star", BaubleType.RING);
 	public static final Item scarlet_orb = new ItemTalisman("scarlet_orb", BaubleType.BELT);
 	// Armor
-//	public static final Item witcharmor
+	//	public static final Item witcharmor
 	public static final Item cold_iron_helmet = new ModItemArmor("cold_iron_helmet", ARMOR_COLD_IRON, EntityEquipmentSlot.HEAD);
 	public static final Item cold_iron_chestplate = new ModItemArmor("cold_iron_chestplate", ARMOR_COLD_IRON, EntityEquipmentSlot.CHEST);
 	public static final Item cold_iron_leggings = new ModItemArmor("cold_iron_leggings", ARMOR_COLD_IRON, EntityEquipmentSlot.LEGS);
@@ -378,7 +378,7 @@ public class ModObjects {
 			if (obj instanceof Block) event.getRegistry().register((Block) obj);
 			if (obj instanceof BlockCandleBase) Bewitchment.proxy.ignoreProperty((Block) obj, BlockCandleBase.LIT);
 		}
-//		Bewitchment.proxy.ignoreProperty(crop_kelp, BlockLiquid.LEVEL);
+		//		Bewitchment.proxy.ignoreProperty(crop_kelp, BlockLiquid.LEVEL);
 		Bewitchment.proxy.ignoreProperty(door_cypress.door, BlockDoor.POWERED);
 		Bewitchment.proxy.ignoreProperty(door_elder.door, BlockDoor.POWERED);
 		Bewitchment.proxy.ignoreProperty(door_juniper.door, BlockDoor.POWERED);
@@ -408,12 +408,9 @@ public class ModObjects {
 			if (obj instanceof Item) {
 				Item item = (Item) obj;
 				event.getRegistry().register(item);
-				if (obj == ModObjects.eye_of_old)
-					Bewitchment.proxy.registerTextureWithVariant(item, Arrays.asList(s -> s.getDisplayName().equalsIgnoreCase("Haru") || s.getDisplayName().equalsIgnoreCase("Haruspex") || s.getDisplayName().equalsIgnoreCase("H4rv5p3x"), s -> s.getDisplayName().equalsIgnoreCase("Izuxe") || s.getDisplayName().equalsIgnoreCase("Izu") || s.getDisplayName().equalsIgnoreCase("Izuxe43ui520815")));
-				else if (obj == ModObjects.cold_iron_sword)
-					Bewitchment.proxy.registerTextureWithVariant(item, Arrays.asList(s -> s.getDisplayName().equalsIgnoreCase("Hudson Bat") || s.getDisplayName().equalsIgnoreCase("Masashi Bat") || s.getDisplayName().equalsIgnoreCase("Emmanuel Bat") || s.getDisplayName().equalsIgnoreCase("Michael Bat") || s.getDisplayName().equalsIgnoreCase("Yoshihiro Bat") || s.getDisplayName().equalsIgnoreCase("Lewis Bat") || s.getDisplayName().equalsIgnoreCase("Katushiro Bat") || s.getDisplayName().equalsIgnoreCase("Ashley Bat")));
-				else if (obj == ModObjects.waystone)
-					Bewitchment.proxy.registerTextureWithVariant(item, Arrays.asList(s -> s.hasTagCompound() && s.getTagCompound().hasKey("location")));
+				if (obj == ModObjects.eye_of_old) Bewitchment.proxy.registerTextureWithVariant(item, Arrays.asList(s -> s.getDisplayName().equalsIgnoreCase("Haru") || s.getDisplayName().equalsIgnoreCase("Haruspex") || s.getDisplayName().equalsIgnoreCase("H4rv5p3x"), s -> s.getDisplayName().equalsIgnoreCase("Izuxe") || s.getDisplayName().equalsIgnoreCase("Izu") || s.getDisplayName().equalsIgnoreCase("Izuxe43ui520815")));
+				else if (obj == ModObjects.cold_iron_sword) Bewitchment.proxy.registerTextureWithVariant(item, Arrays.asList(s -> s.getDisplayName().equalsIgnoreCase("Hudson Bat") || s.getDisplayName().equalsIgnoreCase("Masashi Bat") || s.getDisplayName().equalsIgnoreCase("Emmanuel Bat") || s.getDisplayName().equalsIgnoreCase("Michael Bat") || s.getDisplayName().equalsIgnoreCase("Yoshihiro Bat") || s.getDisplayName().equalsIgnoreCase("Lewis Bat") || s.getDisplayName().equalsIgnoreCase("Katushiro Bat") || s.getDisplayName().equalsIgnoreCase("Ashley Bat")));
+				else if (obj == ModObjects.waystone) Bewitchment.proxy.registerTextureWithVariant(item, Arrays.asList(s -> s.hasTagCompound() && s.getTagCompound().hasKey("location")));
 				else Bewitchment.proxy.registerTexture(item, "normal");
 			}
 		}
@@ -423,12 +420,10 @@ public class ModObjects {
 		List<Block> list = new ArrayList<>();
 		if (Loader.isModLoaded("chisel")) {
 			String groupName = base.getRegistryName().toString();
-			if (!groupName.contains("silver"))
-				CarvingUtils.getChiselRegistry().addVariation(groupName, CarvingUtils.variationFor(base.getDefaultState(), 0));
+			if (!groupName.contains("silver")) CarvingUtils.getChiselRegistry().addVariation(groupName, CarvingUtils.variationFor(base.getDefaultState(), 0));
 			for (String name : names) {
 				Block block = new ModBlockChisel(name, base);
-				if (!groupName.contains("silver"))
-					CarvingUtils.getChiselRegistry().addVariation(groupName, CarvingUtils.variationFor(block.getDefaultState(), list.size() + 1));
+				if (!groupName.contains("silver")) CarvingUtils.getChiselRegistry().addVariation(groupName, CarvingUtils.variationFor(block.getDefaultState(), list.size() + 1));
 				list.add(block);
 			}
 		}

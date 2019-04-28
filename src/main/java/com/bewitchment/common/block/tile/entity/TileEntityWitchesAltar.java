@@ -64,27 +64,27 @@ public class TileEntityWitchesAltar extends ModTileEntity implements ITickable {
 	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
 		magicPower.deserialize(tag);
-		gain = tag.getInteger("gain");
+		gain       = tag.getInteger("gain");
 		multiplier = tag.getDouble("multiplier");
 	}
 
 	public void refreshUpgrades(BlockPos pos) {
-		gain = 1;
+		gain       = 1;
 		multiplier = 1;
 		Block block = world.getBlockState(pos).getBlock();
 		Item item = Item.getItemFromBlock(block);
 		gain += BewitchmentAPI.ALTAR_GAIN_VALUES.getOrDefault(item, 0d);
 		multiplier += BewitchmentAPI.ALTAR_MULTIPLIER_VALUES.getOrDefault(item, 0);
-//		if (block == ModObjects.placed_item) {
-//			Item placedItem = ((TileEntityPlacedItem) world.getTileEntity(pos)).inventory.getStackInSlot(0).getItem();
-//			if (placedItem == ModObjects.athame) {
-//				for (EntityPlayer player : world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).grow(5))) {
-//					MagicPower cap = player.getCapability(MagicPower.CAPABILITY, null);
-//					int amount = Math.min(20, (cap.getMaxAmount() + cap.getBonusAmount()) - cap.getAmount());
-//					if (magicPower.drain(amount)) cap.fill(amount / 10);
-//				}
-//			}
-//		}
+		//		if (block == ModObjects.placed_item) {
+		//			Item placedItem = ((TileEntityPlacedItem) world.getTileEntity(pos)).inventory.getStackInSlot(0).getItem();
+		//			if (placedItem == ModObjects.athame) {
+		//				for (EntityPlayer player : world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).grow(5))) {
+		//					MagicPower cap = player.getCapability(MagicPower.CAPABILITY, null);
+		//					int amount = Math.min(20, (cap.getMaxAmount() + cap.getBonusAmount()) - cap.getAmount());
+		//					if (magicPower.drain(amount)) cap.fill(amount / 10);
+		//				}
+		//			}
+		//		}
 
 	}
 }

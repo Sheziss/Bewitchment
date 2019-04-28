@@ -12,11 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderOwl extends RenderLiving<EntityOwl> {
-	private static final ResourceLocation[] TEX = {
-			new ResourceLocation(Bewitchment.MODID, "textures/entity/owl_0.png"),
-			new ResourceLocation(Bewitchment.MODID, "textures/entity/owl_1.png"),
-			new ResourceLocation(Bewitchment.MODID, "textures/entity/owl_2.png"),
-			new ResourceLocation(Bewitchment.MODID, "textures/entity/owl_3.png")};
+	private static final ResourceLocation[] TEX = {new ResourceLocation(Bewitchment.MODID, "textures/entity/owl_0.png"), new ResourceLocation(Bewitchment.MODID, "textures/entity/owl_1.png"), new ResourceLocation(Bewitchment.MODID, "textures/entity/owl_2.png"), new ResourceLocation(Bewitchment.MODID, "textures/entity/owl_3.png")};
 
 	public RenderOwl(RenderManager manager) {
 		super(manager, new ModelOwl(), 0.3f);

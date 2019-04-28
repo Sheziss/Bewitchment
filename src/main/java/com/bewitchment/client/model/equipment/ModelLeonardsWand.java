@@ -25,9 +25,9 @@ public class ModelLeonardsWand extends ModelBase {
 	public ModelRenderer wand06Rb;
 
 	public ModelLeonardsWand() {
-		this.textureWidth = 32;
+		this.textureWidth  = 32;
 		this.textureHeight = 32;
-		this.wand06La = new ModelRenderer(this, 0, 11);
+		this.wand06La      = new ModelRenderer(this, 0, 11);
 		this.wand06La.setRotationPoint(0.5F, -4.4F, 0.0F);
 		this.wand06La.addBox(-0.5F, -0.7F, -0.5F, 2, 1, 1, 0.0F);
 		this.setRotateAngle(wand06La, 0.0F, 0.0F, 0.22689280275926282F);
@@ -37,7 +37,7 @@ public class ModelLeonardsWand extends ModelBase {
 		this.wand04 = new ModelRenderer(this, 0, 3);
 		this.wand04.setRotationPoint(0.0F, -4.4F, 0.0F);
 		this.wand04.addBox(-0.5F, -2.0F, -0.5F, 1, 2, 1, 0.0F);
-		this.wand06Ra = new ModelRenderer(this, 0, 11);
+		this.wand06Ra        = new ModelRenderer(this, 0, 11);
 		this.wand06Ra.mirror = true;
 		this.wand06Ra.setRotationPoint(-0.5F, -4.4F, 0.0F);
 		this.wand06Ra.addBox(-1.5F, -0.7F, -0.5F, 2, 1, 1, 0.0F);

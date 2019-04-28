@@ -38,8 +38,7 @@ public class EventHandler {
 			// Silver Tools
 			if (event.getSource().getTrueSource() instanceof EntityLivingBase) {
 				EntityLivingBase living = (EntityLivingBase) event.getSource().getTrueSource();
-				if (BewitchmentAPI.isWeakToSilver(event.getEntityLiving()) && Util.isRelated(living.getHeldItemMainhand(), "ingotSilver"))
-					event.setAmount(event.getAmount() * 4);
+				if (BewitchmentAPI.isWeakToSilver(event.getEntityLiving()) && Util.isRelated(living.getHeldItemMainhand(), "ingotSilver")) event.setAmount(event.getAmount() * 4);
 			}
 		}
 	}

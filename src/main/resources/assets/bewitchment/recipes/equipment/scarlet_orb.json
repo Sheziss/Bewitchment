@@ -1,25 +1,25 @@
 {
   "type": "forge:ore_shaped",
   "pattern": [
-    "SNS",
-    "NGN",
-    "SNS"
+	"SNS",
+	"NGN",
+	"SNS"
   ],
   "key": {
-    "S": {
-      "type": "forge:ore_dict",
-      "ore": "string"
-    },
-    "N": {
-      "type": "forge:ore_dict",
-      "ore": "nuggetGold"
-    },
-    "G": {
-      "type": "forge:ore_dict",
-      "ore": "gemAll"
-    }
+	"S": {
+	  "type": "forge:ore_dict",
+	  "ore": "string"
+	},
+	"N": {
+	  "type": "forge:ore_dict",
+	  "ore": "nuggetGold"
+	},
+	"G": {
+	  "type": "forge:ore_dict",
+	  "ore": "gemAll"
+	}
   },
   "result": {
-    "item": "bewitchment:scarlet_orb"
+	"item": "bewitchment:scarlet_orb"
   }
 }

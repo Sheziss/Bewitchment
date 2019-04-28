@@ -53,13 +53,11 @@ public class WorldGenJuniperTree extends WorldGenModTree {
 		for (BlockPos pos0 : logs) {
 			for (EnumFacing face : EnumFacing.VALUES) {
 				BlockPos pos1 = pos0.offset(face);
-				if (world.getBlockState(pos1).getBlock().canBeReplacedByLeaves(world.getBlockState(pos1), world, pos1))
-					world.setBlockState(pos1, ModObjects.leaves_juniper.getDefaultState());
+				if (world.getBlockState(pos1).getBlock().canBeReplacedByLeaves(world.getBlockState(pos1), world, pos1)) world.setBlockState(pos1, ModObjects.leaves_juniper.getDefaultState());
 				for (EnumFacing face0 : EnumFacing.VALUES) {
 					if (face0 != EnumFacing.DOWN) {
 						BlockPos pos2 = pos0.offset(face).offset(face0);
-						if (world.getBlockState(pos2).getBlock().canBeReplacedByLeaves(world.getBlockState(pos2), world, pos2) && rand.nextDouble() < 0.8)
-							world.setBlockState(pos2, ModObjects.leaves_juniper.getDefaultState());
+						if (world.getBlockState(pos2).getBlock().canBeReplacedByLeaves(world.getBlockState(pos2), world, pos2) && rand.nextDouble() < 0.8) world.setBlockState(pos2, ModObjects.leaves_juniper.getDefaultState());
 					}
 				}
 			}

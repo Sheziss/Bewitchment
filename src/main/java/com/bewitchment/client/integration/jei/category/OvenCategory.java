@@ -60,8 +60,8 @@ public class OvenCategory implements IRecipeCategory<OvenWrapper> {
 		private ItemStack input, output, byproduct;
 
 		public OvenWrapper(OvenRecipe recipe) {
-			input = recipe.getInput();
-			output = recipe.getOutput();
+			input     = recipe.getInput();
+			output    = recipe.getOutput();
 			byproduct = recipe.getByproduct();
 		}
 

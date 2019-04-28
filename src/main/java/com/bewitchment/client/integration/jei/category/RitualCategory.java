@@ -76,16 +76,16 @@ public class RitualCategory implements IRecipeCategory<RitualWrapper> {
 
 		public RitualWrapper(Ritual ritual, IGuiHelper helper) {
 			circles = ritual.getCircles();
-			input = new ArrayList<List<ItemStack>>();
+			input   = new ArrayList<List<ItemStack>>();
 			for (Ingredient ing : ritual.getInputItems()) input.add(Arrays.asList(ing.getMatchingStacks()));
-			output = ritual.getOutput(null);
-			name = I18n.format(ritual.getRegistryName().toString().replace(":", "."));
+			output        = ritual.getOutput(null);
+			name          = I18n.format(ritual.getRegistryName().toString().replace(":", "."));
 			startingPower = ritual.getStartingPower();
-			runningPower = ritual.getRunningPower();
-			center = helper.drawableBuilder(new ResourceLocation(Bewitchment.MODID, "textures/gui/jei_ritual_0.png"), 0, 0, 34, 34).setTextureSize(34, 34).build();
-			small = helper.drawableBuilder(new ResourceLocation(Bewitchment.MODID, "textures/gui/jei_ritual_1.png"), 0, 0, 34, 34).setTextureSize(34, 34).build();
-			medium = helper.drawableBuilder(new ResourceLocation(Bewitchment.MODID, "textures/gui/jei_ritual_2.png"), 0, 0, 34, 34).setTextureSize(34, 34).build();
-			large = helper.drawableBuilder(new ResourceLocation(Bewitchment.MODID, "textures/gui/jei_ritual_3.png"), 0, 0, 34, 34).setTextureSize(34, 34).build();
+			runningPower  = ritual.getRunningPower();
+			center        = helper.drawableBuilder(new ResourceLocation(Bewitchment.MODID, "textures/gui/jei_ritual_0.png"), 0, 0, 34, 34).setTextureSize(34, 34).build();
+			small         = helper.drawableBuilder(new ResourceLocation(Bewitchment.MODID, "textures/gui/jei_ritual_1.png"), 0, 0, 34, 34).setTextureSize(34, 34).build();
+			medium        = helper.drawableBuilder(new ResourceLocation(Bewitchment.MODID, "textures/gui/jei_ritual_2.png"), 0, 0, 34, 34).setTextureSize(34, 34).build();
+			large         = helper.drawableBuilder(new ResourceLocation(Bewitchment.MODID, "textures/gui/jei_ritual_3.png"), 0, 0, 34, 34).setTextureSize(34, 34).build();
 		}
 
 		@Override
@@ -99,10 +99,8 @@ public class RitualCategory implements IRecipeCategory<RitualWrapper> {
 			FontRenderer font = minecraft.fontRenderer;
 			font.drawString(name, (width - font.getStringWidth(name)) / 2, 0, 0);
 			String startingPower = I18n.format("jei.ritual.startingPower", this.startingPower), runningPower = I18n.format("jei.ritual.runningPower", this.runningPower);
-			if (this.startingPower > 0)
-				font.drawString(startingPower, (width - font.getStringWidth(startingPower)) / 2, height - (this.runningPower > 0 ? 3 : 2) * font.FONT_HEIGHT * 4 / 5, 0);
-			if (this.runningPower > 0)
-				font.drawString(runningPower, (width - font.getStringWidth(runningPower)) / 2, height - 2 * font.FONT_HEIGHT * 2 / 3, 0);
+			if (this.startingPower > 0) font.drawString(startingPower, (width - font.getStringWidth(startingPower)) / 2, height - (this.runningPower > 0 ? 3 : 2) * font.FONT_HEIGHT * 4 / 5, 0);
+			if (this.runningPower > 0) font.drawString(runningPower, (width - font.getStringWidth(runningPower)) / 2, height - 2 * font.FONT_HEIGHT * 2 / 3, 0);
 			int x = 73, y = 35;
 			color(minecraft, GlyphType.GOLDEN);
 			center.draw(minecraft, x, y * 5 / 4);

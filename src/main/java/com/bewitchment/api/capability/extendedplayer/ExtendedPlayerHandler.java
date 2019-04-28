@@ -29,8 +29,7 @@ public class ExtendedPlayerHandler {
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void breakBlock(BlockEvent.BreakEvent event) {
-		if (!event.getPlayer().getCapability(ExtendedPlayer.CAPABILITY, null).getTransformation().canCrossSalt && (event.getState().getBlock() == ModObjects.salt_barrier || event.getPlayer().world.getBlockState(event.getPos().up()).getBlock() == ModObjects.salt_barrier))
-			event.setCanceled(true);
+		if (!event.getPlayer().getCapability(ExtendedPlayer.CAPABILITY, null).getTransformation().canCrossSalt && (event.getState().getBlock() == ModObjects.salt_barrier || event.getPlayer().world.getBlockState(event.getPos().up()).getBlock() == ModObjects.salt_barrier)) event.setCanceled(true);
 	}
 
 	@SubscribeEvent

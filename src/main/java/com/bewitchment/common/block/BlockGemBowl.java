@@ -45,8 +45,7 @@ public class BlockGemBowl extends ModBlockContainer implements IInfusionStabilis
 		if (!world.isRemote && !player.isSneaking()) {
 			TileEntityGemBowl tile = ((TileEntityGemBowl) world.getTileEntity(pos));
 			ItemStack stack = player.getHeldItem(hand);
-			if (stack.isEmpty() && !tile.inventory.getStackInSlot(0).isEmpty())
-				player.setHeldItem(hand, tile.inventory.getStackInSlot(0).splitStack(1));
+			if (stack.isEmpty() && !tile.inventory.getStackInSlot(0).isEmpty()) player.setHeldItem(hand, tile.inventory.getStackInSlot(0).splitStack(1));
 			else if (!stack.isEmpty() && tile.inventory.getStackInSlot(0).isEmpty()) {
 				for (int id : OreDictionary.getOreIDs(stack)) {
 					if (TileEntityGemBowl.gainMap.keySet().contains(OreDictionary.getOreName(id))) {

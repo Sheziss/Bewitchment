@@ -4,33 +4,33 @@
   "sortnum": "4",
   "category": "manifestations_of_magic",
   "pages": [
-    {
-      "type": "text",
-      "text": "You have figured out how to conjure a myriad of basic spirits, or even call other witches."
-    },
-    {
-      "type": "ritual",
-      "ritual": "bewitchment:conjure_wither"
-    },
-    {
-      "type": "ritual",
-      "ritual": "bewitchment:conjure_ghast"
-    },
-    {
-      "type": "ritual",
-      "ritual": "bewitchment:conjure_vex"
-    },
-    {
-      "type": "ritual",
-      "ritual": "bewitchment:conjure_witch"
-    },
-    {
-      "type": "ritual",
-      "ritual": "bewitchment:conjure_blaze"
-    },
-    {
-      "type": "ritual",
-      "ritual": "bewitchment:conjure_magma_cube"
-    }
+	{
+	  "type": "text",
+	  "text": "You have figured out how to conjure a myriad of basic spirits, or even call other witches."
+	},
+	{
+	  "type": "ritual",
+	  "ritual": "bewitchment:conjure_wither"
+	},
+	{
+	  "type": "ritual",
+	  "ritual": "bewitchment:conjure_ghast"
+	},
+	{
+	  "type": "ritual",
+	  "ritual": "bewitchment:conjure_vex"
+	},
+	{
+	  "type": "ritual",
+	  "ritual": "bewitchment:conjure_witch"
+	},
+	{
+	  "type": "ritual",
+	  "ritual": "bewitchment:conjure_blaze"
+	},
+	{
+	  "type": "ritual",
+	  "ritual": "bewitchment:conjure_magma_cube"
+	}
   ]
 }

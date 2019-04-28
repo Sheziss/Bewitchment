@@ -20,7 +20,7 @@ public class ModBlockChisel extends ModBlock {
 
 	public ModBlockChisel(String name, Block base) {
 		super(base.getDefaultState().getMaterial());
-		Util.registerValues(this, base.getTranslationKey().substring(6 + Bewitchment.MODID.length(), base.getTranslationKey().length()) + "_" + name, base, Util.toArray(base instanceof IOreDictionaryContainer ? ((IOreDictionaryContainer) base).getOreDictionaryNames() : Arrays.asList("")));
+		Util.registerValues(this, base.getTranslationKey().substring(6 + Bewitchment.MODID.length()) + "_" + name, base, Util.toArray(base instanceof IOreDictionaryContainer ? ((IOreDictionaryContainer) base).getOreDictionaryNames() : Arrays.asList("")));
 		setTranslationKey(base.getTranslationKey().substring(5));
 		String finalName = "";
 		for (String s : name.split("_"))

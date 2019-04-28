@@ -39,7 +39,7 @@ public class BlockLantern extends BlockCandleBase {
 
 	@Override
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase living, EnumHand hand) {
-		return getDefaultState().withProperty(LIT, living.getHeldItem(hand).hasTagCompound() && living.getHeldItem(hand).getTagCompound().getBoolean("lit") ? true : false);
+		return getDefaultState().withProperty(LIT, living.getHeldItem(hand).hasTagCompound() && living.getHeldItem(hand).getTagCompound().getBoolean("lit"));
 	}
 
 	@Override
@@ -60,8 +60,7 @@ public class BlockLantern extends BlockCandleBase {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
-		if (stack.hasTagCompound() && stack.getTagCompound().getBoolean("lit"))
-			tooltip.add(new TextComponentTranslation("tooltip.lantern_lit").getFormattedText());
+		if (stack.hasTagCompound() && stack.getTagCompound().getBoolean("lit")) tooltip.add(new TextComponentTranslation("tooltip.lantern_lit").getFormattedText());
 	}
 
 	@Override
@@ -76,7 +75,6 @@ public class BlockLantern extends BlockCandleBase {
 
 	@Override
 	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
-		if (state.getValue(LIT))
-			world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5, pos.getY() + 0.6, pos.getZ() + 0.5, 0, 0, 0);
+		if (state.getValue(LIT)) world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5, pos.getY() + 0.6, pos.getZ() + 0.5, 0, 0, 0);
 	}
 }
