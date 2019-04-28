@@ -1,11 +1,10 @@
 package com.bewitchment.common.item.food;
 
-import com.bewitchment.api.capability.extendedplayer.ExtendedPlayer;
-import com.bewitchment.api.capability.extendedplayer.ExtendedPlayer.TransformationType;
 import com.bewitchment.common.item.util.ModItemFood;
-
+import com.bewitchment.registry.ModPotions;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
 public class ItemGarlic extends ModItemFood {
@@ -17,6 +16,6 @@ public class ItemGarlic extends ModItemFood {
 	@Override
 	protected void onFoodEaten(ItemStack stack, World world, EntityPlayer player) {
 		super.onFoodEaten(stack, world, player);
-		if (player.getCapability(ExtendedPlayer.CAPABILITY, null).getTransformation() == TransformationType.VAMPIRE) player.setFire(10);
+		player.addPotionEffect(new PotionEffect(ModPotions.garlicked, 20));
 	}
 }
