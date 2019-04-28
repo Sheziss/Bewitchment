@@ -1,20 +1,28 @@
 package com.bewitchment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.bewitchment.registry.ModObjects;
 import com.bewitchment.registry.util.IOreDictionaryContainer;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemHoe;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
+import net.minecraft.item.ItemTool;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.oredict.OreDictionary;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Util {
 	@SuppressWarnings("deprecation")
@@ -110,5 +118,12 @@ public class Util {
 			return removalList.isEmpty();
 		}
 		return false;
+	}
+	
+	public static void giveAndConsumeItem(EntityPlayer player, EnumHand hand, ItemStack stack)
+	{
+		if (!player.isCreative()) player.getHeldItem(hand).shrink(1);
+		if (player.getHeldItem(hand).isEmpty()) player.setHeldItem(hand, stack);
+		else if (!player.inventory.addItemStackToInventory(stack)) player.dropItem(stack, false);
 	}
 }
