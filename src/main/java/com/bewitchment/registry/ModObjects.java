@@ -324,7 +324,6 @@ public class ModObjects {
 	public static final Item chrysanthemum = new ModItem("chrysanthemum", "cropChrysanthemum");
 	public static final Item garlic = new ItemGarlic();
 	public static final Item hellebore = new ModItem("hellebore", "cropHellebore");
-	public static final Item kelp = new ModItem("kelp", "cropKelp");
 	public static final Item mandrake_root = new ModItem("mandrake_root", "cropMandrake");
 	public static final Item white_sage = new ModItem("white_sage", "cropWhiteSage");
 	public static final Item wormwood = new ModItem("wormwood", "cropWormwood");
@@ -379,7 +378,6 @@ public class ModObjects {
 			if (obj instanceof Block) event.getRegistry().register((Block) obj);
 			if (obj instanceof BlockCandleBase) Bewitchment.proxy.ignoreProperty((Block) obj, BlockCandleBase.LIT);
 		}
-		//		Bewitchment.proxy.ignoreProperty(crop_kelp, BlockLiquid.LEVEL);
 		Bewitchment.proxy.ignoreProperty(door_cypress.door, BlockDoor.POWERED);
 		Bewitchment.proxy.ignoreProperty(door_elder.door, BlockDoor.POWERED);
 		Bewitchment.proxy.ignoreProperty(door_juniper.door, BlockDoor.POWERED);
