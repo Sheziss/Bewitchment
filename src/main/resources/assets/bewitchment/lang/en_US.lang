@@ -70,6 +70,10 @@ tile.bewitchment.candle_green.name=Green Candle
 tile.bewitchment.candle_red.name=Red Candle
 tile.bewitchment.candle_black.name=Black Candle
 
+tile.bewitchment.sapling_cypress.name=Cypress Sapling
+tile.bewitchment.sapling_elder.name=Elder Sapling
+tile.bewitchment.sapling_juniper.name=Juniper Sapling
+tile.bewitchment.sapling_yew.name=Yew Sapling
 tile.bewitchment.log_cypress.name=Cypress Wood
 tile.bewitchment.log_elder.name=Elder Wood
 tile.bewitchment.log_juniper.name=Juniper Wood
@@ -82,10 +86,6 @@ tile.bewitchment.planks_cypress.name=Cypress Wood Planks
 tile.bewitchment.planks_elder.name=Elder Wood Planks
 tile.bewitchment.planks_juniper.name=Juniper Wood Planks
 tile.bewitchment.planks_yew.name=Yew Wood Planks
-tile.bewitchment.sapling_cypress.name=Cypress Sapling
-tile.bewitchment.sapling_elder.name=Elder Sapling
-tile.bewitchment.sapling_juniper.name=Juniper Sapling
-tile.bewitchment.sapling_yew.name=Yew Sapling
 
 tile.bewitchment.moonbell.name=Moonbell
 

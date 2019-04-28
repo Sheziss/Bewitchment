@@ -25,8 +25,6 @@ import com.bewitchment.common.block.BlockWitchFire;
 import com.bewitchment.common.block.BlockWitchesAltar;
 import com.bewitchment.common.block.BlockWitchesCauldron;
 import com.bewitchment.common.block.BlockWitchesLight;
-import com.bewitchment.common.block.crop.BlockCropBelladonna;
-import com.bewitchment.common.block.crop.BlockCropKelp;
 import com.bewitchment.common.block.tile.entity.TileEntityCrystalBall;
 import com.bewitchment.common.block.tile.entity.TileEntityDistillery;
 import com.bewitchment.common.block.tile.entity.TileEntityGemBowl;
@@ -90,7 +88,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.BlockFenceGate;
-import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -144,8 +141,14 @@ public class ModObjects {
 	public static final Block sightfire = new BlockWitchFire("sightfire");
 	public static final Block witches_light = new BlockWitchesLight();
 	public static final Block salt_barrier = new BlockSaltBarrier();
-	public static final Block crop_belladonna = new BlockCropBelladonna();
-	public static final Block crop_kelp = new BlockCropKelp();
+	public static final Block crop_aconitum = new ModBlockCrop("crop_aconitum", ModObjects.seed_aconitum, ModObjects.aconitum);
+	public static final Block crop_belladonna = new ModBlockCrop("crop_belladonna", ModObjects.seed_belladonna, ModObjects.belladonna);
+	public static final Block crop_chrysanthemum = new ModBlockCrop("crop_chrysanthemum", ModObjects.seed_chrysanthemum, ModObjects.chrysanthemum);
+	public static final Block crop_garlic = new ModBlockCrop("crop_garlic", ModObjects.seed_garlic, ModObjects.garlic);
+	public static final Block crop_hellebore = new ModBlockCrop("crop_hellebore", ModObjects.seed_hellebore, ModObjects.hellebore);
+	public static final Block crop_mandrake = new ModBlockCrop("crop_mandrake", ModObjects.seed_mandrake, ModObjects.mandrake_root);
+	public static final Block crop_white_sage = new ModBlockCrop("crop_white_sage", ModObjects.seed_white_sage, ModObjects.white_sage);
+	public static final Block crop_wormwood = new ModBlockCrop("crop_wormwood", ModObjects.seed_wormwood, ModObjects.wormwood);
 	// Devices
 	public static final Block witches_altar_unformed = createTileEntity(new BlockWitchesAltar(""), TileEntityWitchesAltar.class);
 	public static final Block witches_altar_white = new BlockWitchesAltar("white").setCreativeTab(null);
@@ -389,23 +392,16 @@ public class ModObjects {
 	public static final Item mandrake_root = new ModItem("mandrake_root", "cropMandrake");
 	public static final Item white_sage = new ModItem("white_sage", "cropWhiteSage");
 	public static final Item wormwood = new ModItem("wormwood", "cropWormwood");
-	public static final Block crop_aconitum = new ModBlockCrop("crop_aconitum", ModObjects.seed_aconitum, new ItemStack(ModObjects.aconitum), 3);
+
 	// Seeds
-	public static final ModItemSeed seed_aconitum = new ModItemSeed("seed_aconitum", ModObjects.crop_aconitum, Blocks.FARMLAND);
-	public static final ModItemSeed seed_belladonna = new ModItemSeed("seed_belladonna", ModObjects.crop_belladonna, Blocks.FARMLAND);
-	public static final Block crop_chrysanthemum = new ModBlockCrop("crop_chrysanthemum", ModObjects.seed_chrysanthemum, new ItemStack(ModObjects.chrysanthemum), 3);
-	public static final ModItemSeed seed_chrysanthemum = new ModItemSeed("seed_chrysanthemum", ModObjects.crop_chrysanthemum, Blocks.FARMLAND);
-	public static final Block crop_garlic = new ModBlockCrop("crop_garlic", ModObjects.seed_garlic, new ItemStack(ModObjects.garlic), 3);
-	public static final ModItemSeed seed_garlic = new ModItemSeed("seed_garlic", ModObjects.crop_garlic, Blocks.FARMLAND);
-	public static final Block crop_hellebore = new ModBlockCrop("crop_hellebore", ModObjects.seed_hellebore, new ItemStack(ModObjects.hellebore), 3);
-	public static final ModItemSeed seed_hellebore = new ModItemSeed("seed_hellebore", ModObjects.crop_hellebore, Blocks.FARMLAND);
-	public static final ModItemSeed seed_kelp = new ModItemSeed("seed_kelp", ModObjects.crop_kelp, Blocks.DIRT, Blocks.SAND, Blocks.GRAVEL);
-	public static final Block crop_mandrake = new ModBlockCrop("crop_mandrake", ModObjects.seed_mandrake, new ItemStack(ModObjects.mandrake_root), 3);
-	public static final ModItemSeed seed_mandrake = new ModItemSeed("seed_mandrake", ModObjects.crop_mandrake, Blocks.FARMLAND);
-	public static final Block crop_white_sage = new ModBlockCrop("crop_white_sage", ModObjects.seed_white_sage, new ItemStack(ModObjects.white_sage), 3);
-	public static final ModItemSeed seed_white_sage = new ModItemSeed("seed_white_sage", ModObjects.crop_white_sage, Blocks.FARMLAND);
-	public static final Block crop_wormwood = new ModBlockCrop("crop_wormwood", ModObjects.seed_wormwood, new ItemStack(ModObjects.wormwood), 6);
-	public static final ModItemSeed seed_wormwood = new ModItemSeed("seed_wormwood", ModObjects.crop_wormwood, Blocks.FARMLAND);
+	public static final Item seed_aconitum = new ModItemSeed("seed_aconitum", ModObjects.crop_aconitum, Blocks.FARMLAND);
+	public static final Item seed_belladonna = new ModItemSeed("seed_belladonna", ModObjects.crop_belladonna, Blocks.FARMLAND);
+	public static final Item seed_chrysanthemum = new ModItemSeed("seed_chrysanthemum", ModObjects.crop_chrysanthemum, Blocks.FARMLAND);
+	public static final Item seed_garlic = new ModItemSeed("seed_garlic", ModObjects.crop_garlic, Blocks.FARMLAND);
+	public static final Item seed_hellebore = new ModItemSeed("seed_hellebore", ModObjects.crop_hellebore, Blocks.FARMLAND);
+	public static final Item seed_mandrake = new ModItemSeed("seed_mandrake", ModObjects.crop_mandrake, Blocks.FARMLAND);
+	public static final Item seed_white_sage = new ModItemSeed("seed_white_sage", ModObjects.crop_white_sage, Blocks.FARMLAND);
+	public static final Item seed_wormwood = new ModItemSeed("seed_wormwood", ModObjects.crop_wormwood, Blocks.FARMLAND);
 	// Food
 	public static final Item juniper_berries = new ModItemFood("juniper_berries", 1, 0.5f, false).setPotionEffect(new PotionEffect(MobEffects.POISON, 100, 0), 0.1f);
 	public static final Item yew_aril = new ModItemFood("yew_aril", 1, 0.5f, false).setPotionEffect(new PotionEffect(MobEffects.POISON, 100, 0), 0.1f);
@@ -447,7 +443,7 @@ public class ModObjects {
 			if (obj instanceof Block) event.getRegistry().register((Block) obj);
 			if (obj instanceof BlockCandleBase) Bewitchment.proxy.ignoreProperty((Block) obj, BlockCandleBase.LIT);
 		}
-		Bewitchment.proxy.ignoreProperty(crop_kelp, BlockLiquid.LEVEL);
+//		Bewitchment.proxy.ignoreProperty(crop_kelp, BlockLiquid.LEVEL);
 		Bewitchment.proxy.ignoreProperty(door_cypress.door, BlockDoor.POWERED);
 		Bewitchment.proxy.ignoreProperty(door_elder.door, BlockDoor.POWERED);
 		Bewitchment.proxy.ignoreProperty(door_juniper.door, BlockDoor.POWERED);

@@ -52,21 +52,16 @@
     "age=6": [
       {
         "textures": {
-          "crop": "bewitchment:blocks/crop/crop_wormwood_6"
+          "crop": "bewitchment:blocks/crop/crop_wormwood_5"
         }
       }
     ],
-    "age=4": [
-      {}
-    ],
-    "age=5": [
-      {}
-    ],
-    "age=6": [
-      {}
-    ],
     "age=7": [
-      {}
+      {
+        "textures": {
+          "crop": "bewitchment:blocks/crop/crop_wormwood_6"
+        }
+      }
     ]
   }
 }

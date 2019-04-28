@@ -24,28 +24,44 @@
     "age=2": [
       {
         "textures": {
-          "crop": "bewitchment:blocks/crop/crop_chrysanthemum_2"
+          "crop": "bewitchment:blocks/crop/crop_chrysanthemum_1"
         }
       }
     ],
     "age=3": [
       {
         "textures": {
-          "crop": "bewitchment:blocks/crop/crop_chrysanthemum_3"
+          "crop": "bewitchment:blocks/crop/crop_chrysanthemum_1"
         }
       }
     ],
     "age=4": [
-      {}
+      {
+        "textures": {
+          "crop": "bewitchment:blocks/crop/crop_chrysanthemum_2"
+        }
+      }
     ],
     "age=5": [
-      {}
+      {
+        "textures": {
+          "crop": "bewitchment:blocks/crop/crop_chrysanthemum_2"
+        }
+      }
     ],
     "age=6": [
-      {}
+      {
+        "textures": {
+          "crop": "bewitchment:blocks/crop/crop_chrysanthemum_2"
+        }
+      }
     ],
     "age=7": [
-      {}
+      {
+        "textures": {
+          "crop": "bewitchment:blocks/crop/crop_chrysanthemum_3"
+        }
+      }
     ]
   }
 }
