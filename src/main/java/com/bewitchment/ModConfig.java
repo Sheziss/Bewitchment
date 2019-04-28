@@ -1,14 +1,13 @@
 package com.bewitchment;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.List;
-
 import com.bewitchment.registry.ModObjects;
-
 import net.minecraft.init.Blocks;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.config.Configuration;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 
 public class ModConfig extends Configuration {
 	public final List<String> broomSweepables;
@@ -49,7 +48,7 @@ public class ModConfig extends Configuration {
 		moonstoneChance = getInt("moonstoneChance", "ore", 6, 0, Byte.MAX_VALUE, "The chance for moonstone ore veins to spawn.");
 		moonstoneMin = getInt("moonstoneMin", "ore", 16, 0, 0, "The minimum height for moonstone ore veins to spawn.");
 		moonstoneMax = getInt("moonstoneMax", "ore", 120, 0, 255, "The maximum height for moonstone ore veins to spawn.");
-		
+
 		blindwormBiomes = Arrays.asList(getStringList("blindwormBiomes", "mobSpawns", new String[]{Type.FOREST.getName()}, "The list of BiomeDictionary types that the blindworm will spawn in."));
 		lizardBiomes = Arrays.asList(getStringList("lizardBiomes", "mobSpawns", new String[]{Type.FOREST.getName()}, "The list of BiomeDictionary types that the lizard will spawn in."));
 		newtBiomes = Arrays.asList(getStringList("newtBiomes", "mobSpawns", new String[]{Type.SWAMP.getName()}, "The list of BiomeDictionary types that the newt will spawn in."));
