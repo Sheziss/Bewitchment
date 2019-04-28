@@ -50,7 +50,7 @@ public abstract class ModTileEntity extends TileEntity {
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound tag) {
 		for (int i = 0; i < getInventories().length; i++)
-			tag.setTag("inventory_" + i, getInventories()[i].serializeNBT());
+		     tag.setTag("inventory_" + i, getInventories()[i].serializeNBT());
 		markDirty();
 		return super.writeToNBT(tag);
 	}
@@ -59,7 +59,7 @@ public abstract class ModTileEntity extends TileEntity {
 	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
 		for (int i = 0; i < getInventories().length; i++)
-			getInventories()[i].deserializeNBT(tag.getCompoundTag("inventory_" + i));
+		     getInventories()[i].deserializeNBT(tag.getCompoundTag("inventory_" + i));
 	}
 
 	public ItemStackHandler[] getInventories() {

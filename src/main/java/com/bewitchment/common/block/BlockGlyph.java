@@ -62,7 +62,8 @@ public class BlockGlyph extends ModBlockContainer {
 			if (!world.isRemote && stack.isEmpty()) {
 				if (tile.getRitual() != null) tile.stopRitual(player, false);
 				else tile.startRitual(player);
-			} else if (player.getHeldItem(hand).getItem() == ModObjects.waystone && stack.hasTagCompound() && stack.getTagCompound().hasKey("location")) {
+			}
+			else if (player.getHeldItem(hand).getItem() == ModObjects.waystone && stack.hasTagCompound() && stack.getTagCompound().hasKey("location")) {
 				if (tile.getRitual() != null && tile.getRitual().canBePerformedRemotely()) {
 					tile.setEffectivePos(BlockPos.fromLong(stack.getTagCompound().getLong("location")));
 					tile.setEffectiveDim(stack.getTagCompound().getInteger("dimension"));
@@ -115,8 +116,7 @@ public class BlockGlyph extends ModBlockContainer {
 	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
 		GlyphType type = state.getValue(TYPE);
 		double x = pos.getX() + 0.5, y = pos.getY() + 0.05, z = pos.getZ() + 0.5;
-		if (type == GlyphType.NETHER)
-			world.spawnParticle(EnumParticleTypes.FLAME, x + rand.nextGaussian() / 3, y, z + rand.nextGaussian() / 3, 0, 0, 0);
+		if (type == GlyphType.NETHER) world.spawnParticle(EnumParticleTypes.FLAME, x + rand.nextGaussian() / 3, y, z + rand.nextGaussian() / 3, 0, 0, 0);
 		if (type == GlyphType.ENDER) {
 			world.spawnParticle(EnumParticleTypes.PORTAL, x + rand.nextGaussian() / 3, y, z + rand.nextGaussian() / 3, 0, 0, 0);
 			world.spawnParticle(EnumParticleTypes.END_ROD, x + rand.nextGaussian() * 0.4, y, z + rand.nextGaussian() * 0.4, 0, 0.02 + 0.1 * rand.nextDouble(), 0);

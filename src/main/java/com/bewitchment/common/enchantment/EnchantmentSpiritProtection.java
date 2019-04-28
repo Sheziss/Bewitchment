@@ -16,12 +16,10 @@ public class EnchantmentSpiritProtection extends ModEnchantment {
 
 	@SubscribeEvent
 	public void livingHurt(LivingHurtEvent event) {
-		if (event.getEntityLiving() instanceof EntityPlayer)
-			applyEnchantment(event, getTotalLevelOnPlayer((EntityPlayer) event.getEntityLiving()));
+		if (event.getEntityLiving() instanceof EntityPlayer) applyEnchantment(event, getTotalLevelOnPlayer((EntityPlayer) event.getEntityLiving()));
 	}
 
 	public void applyEnchantment(LivingHurtEvent event, int level) {
-		if (level > 0 && event.getSource().getTrueSource() instanceof EntityLivingBase && BewitchmentAPI.isWeakToColdIron((EntityLivingBase) event.getSource().getTrueSource()))
-			event.setAmount(event.getAmount() * (1 - 0.05f * level));
+		if (level > 0 && event.getSource().getTrueSource() instanceof EntityLivingBase && BewitchmentAPI.isWeakToColdIron((EntityLivingBase) event.getSource().getTrueSource())) event.setAmount(event.getAmount() * (1 - 0.05f * level));
 	}
 }

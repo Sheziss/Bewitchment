@@ -42,8 +42,7 @@ public class BlockMoonbell extends ModBlockBush implements IInfusionStabiliserEx
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
-		if (rand.nextDouble() < 0.2)
-			world.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, pos.getX() + 0.5 + rand.nextGaussian() * 0.2, 0.1 + pos.getY() + rand.nextGaussian() * 0.2, pos.getZ() + 0.5 + rand.nextGaussian() * 0.2, 0, 0.1, 0);
+		if (rand.nextDouble() < 0.2) world.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, pos.getX() + 0.5 + rand.nextGaussian() * 0.2, 0.1 + pos.getY() + rand.nextGaussian() * 0.2, pos.getZ() + 0.5 + rand.nextGaussian() * 0.2, 0, 0.1, 0);
 	}
 
 	@Override
@@ -51,7 +50,7 @@ public class BlockMoonbell extends ModBlockBush implements IInfusionStabiliserEx
 		if (!world.isRemote && !state.getValue(PLACED) && world.isDaytime()) {
 			world.setBlockToAir(pos);
 			for (int i = 0; i < 7; i++)
-				world.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, pos.getX() + rand.nextDouble(), pos.getY() + rand.nextDouble(), pos.getZ() + rand.nextDouble(), rand.nextGaussian() * 0.1, rand.nextGaussian() * 0.1, rand.nextGaussian() * 0.1);
+			     world.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, pos.getX() + rand.nextDouble(), pos.getY() + rand.nextDouble(), pos.getZ() + rand.nextDouble(), rand.nextGaussian() * 0.1, rand.nextGaussian() * 0.1, rand.nextGaussian() * 0.1);
 		}
 	}
 

@@ -14,13 +14,7 @@ import java.util.Arrays;
 
 public class RitualSandsOfTime extends Ritual {
 	public RitualSandsOfTime() {
-		super(Bewitchment.MODID, "sands_of_time",
-				Arrays.asList(
-						Ingredient.fromStacks(Util.getOres("sand")),
-						Ingredient.fromStacks(Util.getOres("oreDiamond"))),
-				Arrays.asList(),
-				Arrays.asList(),
-				-1, 1000, 5, GlyphType.NORMAL, GlyphType.NORMAL, GlyphType.NORMAL);
+		super(Bewitchment.MODID, "sands_of_time", Arrays.asList(Ingredient.fromStacks(Util.getOres("sand")), Ingredient.fromStacks(Util.getOres("oreDiamond"))), Arrays.asList(), Arrays.asList(), -1, 1000, 5, GlyphType.NORMAL, GlyphType.NORMAL, GlyphType.NORMAL);
 	}
 
 	@Override

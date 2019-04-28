@@ -58,8 +58,7 @@ public class ModEnchantment extends Enchantment {
 	public int getMaxLevelOnPlayer(EntityPlayer player) {
 		int max = 0;
 		for (ItemStack stack : getEntityEquipment(player))
-			if (EnchantmentHelper.getEnchantmentLevel(this, stack) > max)
-				max = EnchantmentHelper.getEnchantmentLevel(this, stack);
+			if (EnchantmentHelper.getEnchantmentLevel(this, stack) > max) max = EnchantmentHelper.getEnchantmentLevel(this, stack);
 		return max;
 	}
 

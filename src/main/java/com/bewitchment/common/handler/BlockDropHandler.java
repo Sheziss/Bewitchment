@@ -21,7 +21,7 @@ public class BlockDropHandler {
 
 	private static void replaceDrop(HarvestDropsEvent event, Predicate<IBlockState> predicate, ItemStack out, int chance, boolean replaceAlways, boolean replaceIfTest, boolean ignoreSilkTouch) {
 		boolean test = predicate.test(event.getState());
-		if (test && (ignoreSilkTouch ? true : !event.isSilkTouching())) {
+		if (test && (ignoreSilkTouch || !event.isSilkTouching())) {
 			if (replaceAlways || (replaceIfTest && test)) event.getDrops().clear();
 			if (event.getWorld().rand.nextInt(100) <= chance) event.getDrops().add(out);
 		}

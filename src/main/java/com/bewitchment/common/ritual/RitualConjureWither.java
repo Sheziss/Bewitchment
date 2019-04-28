@@ -23,17 +23,7 @@ import java.util.Arrays;
 
 public class RitualConjureWither extends Ritual {
 	public RitualConjureWither() {
-		super(Bewitchment.MODID, "conjure_wither",
-				Arrays.asList(
-						Ingredient.fromStacks(new ItemStack(ModObjects.athame, 1, Short.MAX_VALUE)),
-						Ingredient.fromStacks(new ItemStack(Items.SKULL, 1, 1)),
-						Ingredient.fromStacks(new ItemStack(Blocks.SOUL_SAND)),
-						Ingredient.fromStacks(new ItemStack(ModObjects.hellebore)),
-						Ingredient.fromStacks(new ItemStack(ModObjects.wormwood)),
-						Ingredient.fromStacks(new ItemStack(ModObjects.ectoplasm))),
-				Arrays.asList(),
-				Arrays.asList(),
-				400, 5000, 4, GlyphType.NETHER, GlyphType.NETHER, GlyphType.NETHER);
+		super(Bewitchment.MODID, "conjure_wither", Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.athame, 1, Short.MAX_VALUE)), Ingredient.fromStacks(new ItemStack(Items.SKULL, 1, 1)), Ingredient.fromStacks(new ItemStack(Blocks.SOUL_SAND)), Ingredient.fromStacks(new ItemStack(ModObjects.hellebore)), Ingredient.fromStacks(new ItemStack(ModObjects.wormwood)), Ingredient.fromStacks(new ItemStack(ModObjects.ectoplasm))), Arrays.asList(), Arrays.asList(), 400, 5000, 4, GlyphType.NETHER, GlyphType.NETHER, GlyphType.NETHER);
 	}
 
 	@Override

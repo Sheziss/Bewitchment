@@ -23,18 +23,7 @@ import java.util.Arrays;
 
 public class RitualConjureGhast extends Ritual {
 	public RitualConjureGhast() {
-		super(Bewitchment.MODID, "conjure_ghast",
-				Arrays.asList(
-						Ingredient.fromStacks(new ItemStack(ModObjects.athame, 1, Short.MAX_VALUE)),
-						Ingredient.fromStacks(Util.getOres("dustGlowstone")),
-						Ingredient.fromStacks(new ItemStack(Blocks.SOUL_SAND)),
-						Ingredient.fromStacks(new ItemStack(ModObjects.ebb_of_death)),
-						Ingredient.fromStacks(new ItemStack(ModObjects.hellebore)),
-						Ingredient.fromStacks(new ItemStack(ModObjects.wormwood)),
-						Ingredient.fromStacks(new ItemStack(ModObjects.ectoplasm))),
-				Arrays.asList(),
-				Arrays.asList(),
-				250, 3400, 2, GlyphType.NETHER, GlyphType.NETHER, GlyphType.NETHER);
+		super(Bewitchment.MODID, "conjure_ghast", Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.athame, 1, Short.MAX_VALUE)), Ingredient.fromStacks(Util.getOres("dustGlowstone")), Ingredient.fromStacks(new ItemStack(Blocks.SOUL_SAND)), Ingredient.fromStacks(new ItemStack(ModObjects.ebb_of_death)), Ingredient.fromStacks(new ItemStack(ModObjects.hellebore)), Ingredient.fromStacks(new ItemStack(ModObjects.wormwood)), Ingredient.fromStacks(new ItemStack(ModObjects.ectoplasm))), Arrays.asList(), Arrays.asList(), 250, 3400, 2, GlyphType.NETHER, GlyphType.NETHER, GlyphType.NETHER);
 	}
 
 	@Override

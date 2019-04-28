@@ -51,16 +51,14 @@ public class EntitySnake extends ModEntityTameable {
 	public boolean attackEntityAsMob(Entity entity) {
 		if (entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue())) {
 			applyEnchantments(this, entity);
-			if (entity instanceof EntityLivingBase)
-				((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.POISON, 2000, 1, false, false));
+			if (entity instanceof EntityLivingBase) ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.POISON, 2000, 1, false, false));
 		}
 		return super.attackEntityAsMob(entity);
 	}
 
 	@Override
 	public boolean attackEntityFrom(DamageSource source, float amount) {
-		if (source.getTrueSource() != null && !(source.getTrueSource() instanceof EntityPlayer) && !(source.getTrueSource() instanceof EntityArrow))
-			amount = (amount + 1) / 2f;
+		if (source.getTrueSource() != null && !(source.getTrueSource() instanceof EntityPlayer) && !(source.getTrueSource() instanceof EntityArrow)) amount = (amount + 1) / 2f;
 		return super.attackEntityFrom(source, amount);
 	}
 
@@ -87,7 +85,8 @@ public class EntitySnake extends ModEntityTameable {
 						milkTimer = 3600;
 						return true;
 					}
-				} else {
+				}
+				else {
 					setAttackTarget(player);
 					setRevengeTarget(player);
 				}
@@ -138,7 +137,7 @@ public class EntitySnake extends ModEntityTameable {
 	public void readEntityFromNBT(NBTTagCompound tag) {
 		super.readEntityFromNBT(tag);
 		animationTimer = tag.getInteger("animationTimer");
-		milkTimer = tag.getInteger("milkTimer");
+		milkTimer      = tag.getInteger("milkTimer");
 	}
 
 	@Override

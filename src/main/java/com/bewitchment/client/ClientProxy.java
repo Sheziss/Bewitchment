@@ -94,19 +94,15 @@ public class ClientProxy extends CommonProxy {
 				return type == GlyphType.GOLDEN ? 0xe3dc3c : type == GlyphType.NETHER ? 0xbb0000 : type == GlyphType.ENDER ? 0x770077 : 0xffffff;
 			}
 		}, ModObjects.glyph);
-		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new IItemColor()
-		{
+		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new IItemColor() {
 			@Override
-			public int colorMultiplier(ItemStack stack, int tintIndex)
-			{
+			public int colorMultiplier(ItemStack stack, int tintIndex) {
 				return tintIndex == 0 ? 0xe6c44f : 0xffffff;
 			}
 		}, ModObjects.snake_venom);
-		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new IItemColor()
-		{
+		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new IItemColor() {
 			@Override
-			public int colorMultiplier(ItemStack stack, int tintIndex)
-			{
+			public int colorMultiplier(ItemStack stack, int tintIndex) {
 				return tintIndex == 0 ? 0x717d39 : 0xffffff;
 			}
 		}, ModObjects.liquid_wroth);
@@ -132,7 +128,7 @@ public class ClientProxy extends CommonProxy {
 	public void registerTextureWithVariant(Item item, List<Predicate<ItemStack>> predicates) {
 		ResourceLocation[] names = new ResourceLocation[predicates.size() + 1];
 		for (int i = 0; i <= predicates.size(); i++)
-			names[i] = new ResourceLocation(item.getRegistryName().toString() + (i == 0 ? "" : "_variant" + (predicates.size() == 1 ? "" : (i - 1))));
+		     names[i] = new ResourceLocation(item.getRegistryName().toString() + (i == 0 ? "" : "_variant" + (predicates.size() == 1 ? "" : (i - 1))));
 		ModelBakery.registerItemVariants(item, names);
 		ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition() {
 			@Override

@@ -1,19 +1,19 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "bewitchment:goblet"
+	"model": "bewitchment:goblet"
   },
   "variants": {
-    "normal": [
-      {}
-    ],
-    "full=true": [
-      {
-        "model": "bewitchment:goblet_filled"
-      }
-    ],
-    "full=false": [
-      {}
-    ]
+	"normal": [
+	  {}
+	],
+	"full=true": [
+	  {
+		"model": "bewitchment:goblet_filled"
+	  }
+	],
+	"full=false": [
+	  {}
+	]
   }
 }

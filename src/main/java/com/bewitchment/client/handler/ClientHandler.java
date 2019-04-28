@@ -13,7 +13,7 @@ public class ClientHandler {
 	public void renderPlayerPre(RenderPlayerEvent.Pre event) {
 		if (event.getEntityPlayer().getHeldItemMainhand().getItem() instanceof ItemLantern || event.getEntityPlayer().getHeldItemOffhand().getItem() instanceof ItemLantern) {
 			event.getEntityPlayer().swingProgress = 0.18f;
-			event.getEntityPlayer().swingingHand = event.getEntityPlayer().getHeldItemMainhand().getItem() instanceof ItemLantern ? EnumHand.MAIN_HAND : EnumHand.OFF_HAND;
+			event.getEntityPlayer().swingingHand  = event.getEntityPlayer().getHeldItemMainhand().getItem() instanceof ItemLantern ? EnumHand.MAIN_HAND : EnumHand.OFF_HAND;
 		}
 	}
 }

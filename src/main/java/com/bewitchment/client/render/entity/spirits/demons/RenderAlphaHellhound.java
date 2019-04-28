@@ -12,13 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderAlphaHellhound extends RenderLiving<EntityAlphaHellhound> {
-	private static final ResourceLocation[] TEX = {
-			new ResourceLocation(Bewitchment.MODID, "textures/entity/alpha_hellhound_0.png"),
-			new ResourceLocation(Bewitchment.MODID, "textures/entity/alpha_hellhound_1.png"),
-			new ResourceLocation(Bewitchment.MODID, "textures/entity/alpha_hellhound_2.png"),
-			new ResourceLocation(Bewitchment.MODID, "textures/entity/alpha_hellhound_3.png"),
-			new ResourceLocation(Bewitchment.MODID, "textures/entity/alpha_hellhound_4.png"),
-			new ResourceLocation(Bewitchment.MODID, "textures/entity/alpha_hellhound_5.png")};
+	private static final ResourceLocation[] TEX = {new ResourceLocation(Bewitchment.MODID, "textures/entity/alpha_hellhound_0.png"), new ResourceLocation(Bewitchment.MODID, "textures/entity/alpha_hellhound_1.png"), new ResourceLocation(Bewitchment.MODID, "textures/entity/alpha_hellhound_2.png"), new ResourceLocation(Bewitchment.MODID, "textures/entity/alpha_hellhound_3.png"), new ResourceLocation(Bewitchment.MODID, "textures/entity/alpha_hellhound_4.png"), new ResourceLocation(Bewitchment.MODID, "textures/entity/alpha_hellhound_5.png")};
 
 	public RenderAlphaHellhound(RenderManager manager) {
 		super(manager, new ModelAlphaHellhound(), 0.3f);

@@ -21,7 +21,7 @@ public class EntityYewBroom extends EntityBroom {
 	public boolean processInitialInteract(EntityPlayer player, EnumHand hand) {
 		boolean flag = super.processInitialInteract(player, hand);
 		if (flag) {
-			originalPos = getPosition();
+			originalPos       = getPosition();
 			originalDimension = player.dimension;
 		}
 		return flag;
@@ -63,7 +63,7 @@ public class EntityYewBroom extends EntityBroom {
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound tag) {
 		super.readEntityFromNBT(tag);
-		originalPos = BlockPos.fromLong(tag.getLong("originalPos"));
+		originalPos       = BlockPos.fromLong(tag.getLong("originalPos"));
 		originalDimension = tag.getInteger("originalDimension");
 	}
 }

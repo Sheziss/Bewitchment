@@ -10,7 +10,7 @@ import com.bewitchment.common.handler.BlockDropHandler;
 import com.bewitchment.common.handler.EventHandler;
 import com.bewitchment.common.handler.GuiHandler;
 import com.bewitchment.common.integration.patchouli.BewitchmentPatchouli;
-import com.bewitchment.common.integration.thaumcraft.ThaumcraftCompat;
+import com.bewitchment.common.integration.thaumcraft.BewitchmentThaumcraft;
 import com.bewitchment.common.world.gen.WorldGenCoquina;
 import com.bewitchment.common.world.gen.WorldGenOres;
 import com.bewitchment.registry.ModEntities;
@@ -73,7 +73,7 @@ public class CommonProxy {
 		NetworkRegistry.INSTANCE.registerGuiHandler(Bewitchment.instance, new GuiHandler());
 		MinecraftForge.EVENT_BUS.register(new BlockDropHandler());
 		MinecraftForge.EVENT_BUS.register(new EventHandler());
-		if (Loader.isModLoaded("thaumcraft")) MinecraftForge.EVENT_BUS.register(new ThaumcraftCompat());
+		if (Loader.isModLoaded("thaumcraft")) MinecraftForge.EVENT_BUS.register(new BewitchmentThaumcraft());
 
 		ModRecipes.initFurnace();
 		ModRecipes.initDistillery();
@@ -130,8 +130,7 @@ public class CommonProxy {
 		// Altar Values
 		for (final Block block : ForgeRegistries.BLOCKS) {
 			int amount = 0;
-			if (block instanceof IPlantable || block instanceof IGrowable || block instanceof BlockMelon || block instanceof BlockPumpkin)
-				amount = 30;
+			if (block instanceof IPlantable || block instanceof IGrowable || block instanceof BlockMelon || block instanceof BlockPumpkin) amount = 30;
 			if (block instanceof BlockLog) amount = 15;
 			if (block instanceof BlockLeaves) amount = 8;
 			BewitchmentAPI.ALTAR_NATURE_VALUES.put(block, amount);
@@ -161,6 +160,6 @@ public class CommonProxy {
 	}
 
 	public enum ModGui {
-		DISTILLERY, LOOM, OVEN, TAROT;
+		DISTILLERY, LOOM, OVEN, TAROT
 	}
 }

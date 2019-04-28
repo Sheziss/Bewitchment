@@ -52,7 +52,7 @@ public class MagicPower implements ICapabilitySerializable<NBTTagCompound>, ISto
 	}
 
 	public void removeBonus(String id) {
-		if (upgrades.containsKey(id)) upgrades.remove(id);
+		upgrades.remove(id);
 	}
 
 	public int getAmount() {

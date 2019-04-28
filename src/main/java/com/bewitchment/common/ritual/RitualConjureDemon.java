@@ -26,19 +26,7 @@ import java.util.Arrays;
 
 public class RitualConjureDemon extends Ritual {
 	public RitualConjureDemon() {
-		super(Bewitchment.MODID, "conjure_demon",
-				Arrays.asList(
-						Ingredient.fromStacks(new ItemStack(ModObjects.athame, 1, Short.MAX_VALUE)),
-						Ingredient.fromStacks(new ItemStack(ModObjects.heart)),
-						Ingredient.fromStacks(new ItemStack(ModObjects.hellebore)),
-						Ingredient.fromStacks(new ItemStack(ModObjects.hellhound_horn)),
-						Ingredient.fromStacks(new ItemStack(ModObjects.liquid_wroth)),
-						Ingredient.fromStacks(Util.getOres("ingotGold")),
-						Ingredient.fromStacks(new ItemStack(Items.ENDER_PEARL)),
-						Ingredient.fromStacks(new ItemStack(Items.GHAST_TEAR))),
-				Arrays.asList(EntityRegistry.getEntry(EntityVillager.class)),
-				Arrays.asList(),
-				616, 4750, 10, GlyphType.NETHER, GlyphType.NETHER, GlyphType.NETHER);
+		super(Bewitchment.MODID, "conjure_demon", Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.athame, 1, Short.MAX_VALUE)), Ingredient.fromStacks(new ItemStack(ModObjects.heart)), Ingredient.fromStacks(new ItemStack(ModObjects.hellebore)), Ingredient.fromStacks(new ItemStack(ModObjects.hellhound_horn)), Ingredient.fromStacks(new ItemStack(ModObjects.liquid_wroth)), Ingredient.fromStacks(Util.getOres("ingotGold")), Ingredient.fromStacks(new ItemStack(Items.ENDER_PEARL)), Ingredient.fromStacks(new ItemStack(Items.GHAST_TEAR))), Arrays.asList(EntityRegistry.getEntry(EntityVillager.class)), Arrays.asList(), 616, 4750, 10, GlyphType.NETHER, GlyphType.NETHER, GlyphType.NETHER);
 	}
 
 	@Override

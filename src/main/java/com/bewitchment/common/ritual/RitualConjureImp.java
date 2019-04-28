@@ -24,17 +24,7 @@ import java.util.Arrays;
 
 public class RitualConjureImp extends Ritual {
 	public RitualConjureImp() {
-		super(Bewitchment.MODID, "conjure_imp",
-				Arrays.asList(
-						Ingredient.fromStacks(new ItemStack(ModObjects.athame, 1, Short.MAX_VALUE)),
-						Ingredient.fromStacks(new ItemStack(ModObjects.heart)),
-						Ingredient.fromStacks(new ItemStack(ModObjects.hellebore)),
-						Ingredient.fromStacks(new ItemStack(ModObjects.hellhound_horn)),
-						Ingredient.fromStacks(new ItemStack(ModObjects.liquid_wroth)),
-						Ingredient.fromStacks(Util.getOres("ingotGold"))),
-				Arrays.asList(EntityRegistry.getEntry(EntityChicken.class)),
-				Arrays.asList(),
-				303, 3800, 6, GlyphType.NETHER, GlyphType.ANY, GlyphType.NETHER);
+		super(Bewitchment.MODID, "conjure_imp", Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.athame, 1, Short.MAX_VALUE)), Ingredient.fromStacks(new ItemStack(ModObjects.heart)), Ingredient.fromStacks(new ItemStack(ModObjects.hellebore)), Ingredient.fromStacks(new ItemStack(ModObjects.hellhound_horn)), Ingredient.fromStacks(new ItemStack(ModObjects.liquid_wroth)), Ingredient.fromStacks(Util.getOres("ingotGold"))), Arrays.asList(EntityRegistry.getEntry(EntityChicken.class)), Arrays.asList(), 303, 3800, 6, GlyphType.NETHER, GlyphType.ANY, GlyphType.NETHER);
 	}
 
 	@Override

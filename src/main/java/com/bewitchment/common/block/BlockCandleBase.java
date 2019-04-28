@@ -60,7 +60,7 @@ public abstract class BlockCandleBase extends ModBlock implements IInfusionStabi
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(LIT, meta == 1 ? true : false);
+		return getDefaultState().withProperty(LIT, meta == 1);
 	}
 
 	@Override

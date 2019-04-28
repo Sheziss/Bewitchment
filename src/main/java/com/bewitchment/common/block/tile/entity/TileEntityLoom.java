@@ -34,8 +34,7 @@ public class TileEntityLoom extends TileEntityAltarStorage implements ITickable 
 		if (!world.isRemote) {
 			if (recipe == null || !recipe.isValid(inventory_up, inventory_down)) progress = 0;
 			else {
-				if (MagicPower.attemptDrain(world, world.getClosestPlayer(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 5, false), getAltarPosition(), 6))
-					progress++;
+				if (MagicPower.attemptDrain(world, world.getClosestPlayer(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 5, false), getAltarPosition(), 6)) progress++;
 				if (progress >= 200) {
 					progress = 0;
 					recipe.giveOutput(inventory_up, inventory_down);
@@ -64,7 +63,7 @@ public class TileEntityLoom extends TileEntityAltarStorage implements ITickable 
 	@Override
 	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
-		recipe = tag.getString("recipe").isEmpty() ? null : BewitchmentAPI.REGISTRY_LOOM.getValue(new ResourceLocation(tag.getString("recipe")));
+		recipe   = tag.getString("recipe").isEmpty() ? null : BewitchmentAPI.REGISTRY_LOOM.getValue(new ResourceLocation(tag.getString("recipe")));
 		progress = tag.getInteger("progress");
 	}
 

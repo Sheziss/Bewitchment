@@ -34,7 +34,7 @@ public class ModItemDoor extends ItemDoor implements IOreDictionaryContainer {
 	private ModItemDoor(String name, Block base, ModBlockDoor door, String... oreDictionaryNames) {
 		super(door);
 		Util.registerValues(this, name, oreDictionaryNames);
-		this.door = door;
+		this.door      = door;
 		this.door.drop = new ItemStack(this);
 	}
 

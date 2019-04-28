@@ -37,14 +37,10 @@ public class FortuneMeetSerpent extends Fortune {
 				serpent.setPosition(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
 				serpent.onInitialSpawn(player.world.getDifficultyForLocation(pos), null);
 				player.world.spawnEntity(serpent);
-				if (player.getRNG().nextInt(10) < player.world.getDifficulty().ordinal())
-					serpent.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 900, 1));
-				if (player.getRNG().nextInt(10) < player.world.getDifficulty().ordinal())
-					serpent.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 900, 1));
-				if (player.getRNG().nextInt(10) < player.world.getDifficulty().ordinal())
-					serpent.addPotionEffect(new PotionEffect(MobEffects.SPEED, 900, 1));
-				if (player.getRNG().nextInt(10) < player.world.getDifficulty().ordinal())
-					serpent.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 900, 1));
+				if (player.getRNG().nextInt(10) < player.world.getDifficulty().ordinal()) serpent.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 900, 1));
+				if (player.getRNG().nextInt(10) < player.world.getDifficulty().ordinal()) serpent.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 900, 1));
+				if (player.getRNG().nextInt(10) < player.world.getDifficulty().ordinal()) serpent.addPotionEffect(new PotionEffect(MobEffects.SPEED, 900, 1));
+				if (player.getRNG().nextInt(10) < player.world.getDifficulty().ordinal()) serpent.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 900, 1));
 				return true;
 			}
 		}

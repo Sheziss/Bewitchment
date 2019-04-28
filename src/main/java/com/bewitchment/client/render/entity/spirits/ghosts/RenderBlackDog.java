@@ -14,12 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderBlackDog extends RenderLiving<EntityBlackDog> {
-	private static final ResourceLocation[] TEX = {
-			new ResourceLocation(Bewitchment.MODID, "textures/entity/black_dog_0.png"),
-			new ResourceLocation(Bewitchment.MODID, "textures/entity/black_dog_1.png"),
-			new ResourceLocation(Bewitchment.MODID, "textures/entity/black_dog_2.png"),
-			new ResourceLocation(Bewitchment.MODID, "textures/entity/black_dog_3.png"),
-			new ResourceLocation(Bewitchment.MODID, "textures/entity/black_dog_4.png")};
+	private static final ResourceLocation[] TEX = {new ResourceLocation(Bewitchment.MODID, "textures/entity/black_dog_0.png"), new ResourceLocation(Bewitchment.MODID, "textures/entity/black_dog_1.png"), new ResourceLocation(Bewitchment.MODID, "textures/entity/black_dog_2.png"), new ResourceLocation(Bewitchment.MODID, "textures/entity/black_dog_3.png"), new ResourceLocation(Bewitchment.MODID, "textures/entity/black_dog_4.png")};
 
 	public RenderBlackDog(RenderManager manager) {
 		super(manager, new ModelBlackDog(), 0.3f);
@@ -38,12 +33,7 @@ public class RenderBlackDog extends RenderLiving<EntityBlackDog> {
 	}
 
 	private static class LayerEyes implements LayerRenderer<EntityBlackDog> {
-		private static final ResourceLocation[] TEX = {
-				new ResourceLocation(Bewitchment.MODID, "textures/entity/black_dog_eyes_0.png"),
-				new ResourceLocation(Bewitchment.MODID, "textures/entity/black_dog_eyes_1.png"),
-				new ResourceLocation(Bewitchment.MODID, "textures/entity/black_dog_eyes_2.png"),
-				new ResourceLocation(Bewitchment.MODID, "textures/entity/black_dog_eyes_3.png"),
-				new ResourceLocation(Bewitchment.MODID, "textures/entity/black_dog_eyes_4.png")};
+		private static final ResourceLocation[] TEX = {new ResourceLocation(Bewitchment.MODID, "textures/entity/black_dog_eyes_0.png"), new ResourceLocation(Bewitchment.MODID, "textures/entity/black_dog_eyes_1.png"), new ResourceLocation(Bewitchment.MODID, "textures/entity/black_dog_eyes_2.png"), new ResourceLocation(Bewitchment.MODID, "textures/entity/black_dog_eyes_3.png"), new ResourceLocation(Bewitchment.MODID, "textures/entity/black_dog_eyes_4.png")};
 
 		private final RenderBlackDog renderer;
 
