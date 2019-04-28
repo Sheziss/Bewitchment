@@ -1,7 +1,6 @@
 package com.bewitchment.common.entity.spirits.demons;
 
 import com.bewitchment.Bewitchment;
-import com.bewitchment.Util;
 import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.common.entity.util.ModEntityMob;
 import com.bewitchment.registry.ModObjects;
@@ -74,7 +73,10 @@ public class EntitySerpent extends ModEntityMob {
 			if (stack.getItem() == Items.GLASS_BOTTLE) {
 				if (milkTimer == 0 && getRNG().nextBoolean()) {
 					world.playSound(null, getPosition(), SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.NEUTRAL, 1, 1);
-					Util.giveAndConsumeItem(player, hand, new ItemStack(ModObjects.liquid_wroth));
+					stack.shrink(1);
+					if (stack.isEmpty()) player.setHeldItem(hand, new ItemStack(ModObjects.liquid_wroth));
+					else if (!player.inventory.addItemStackToInventory(new ItemStack(ModObjects.liquid_wroth)))
+						player.dropItem(new ItemStack(ModObjects.liquid_wroth), false);
 					milkTimer = 6660;
 					return true;
 				} else {
