@@ -4,7 +4,7 @@ import baubles.api.BaubleType;
 import com.bewitchment.Bewitchment;
 import com.bewitchment.api.item.ItemBroom;
 import com.bewitchment.common.block.*;
-import com.bewitchment.common.block.crop.BlockCropBelladonna;
+import com.bewitchment.common.block.crop.BlockCropSpreading;
 import com.bewitchment.common.block.tile.entity.*;
 import com.bewitchment.common.block.tile.entity.util.TileEntityAltarStorage;
 import com.bewitchment.common.block.util.*;
@@ -78,7 +78,7 @@ public class ModObjects {
 	public static final Block witches_light = new BlockWitchesLight();
 	public static final Block salt_barrier = new BlockSaltBarrier();
 	public static final Block crop_aconitum = new ModBlockCrop("crop_aconitum", ModObjects.seed_aconitum, ModObjects.aconitum);
-	public static final Block crop_belladonna = new BlockCropBelladonna();
+	public static final Block crop_belladonna = new BlockCropSpreading("crop_belladonna", ModObjects.seed_belladonna, ModObjects.belladonna);
 	public static final Block crop_chrysanthemum = new ModBlockCrop("crop_chrysanthemum", ModObjects.seed_chrysanthemum, ModObjects.chrysanthemum);
 	public static final Block crop_garlic = new ModBlockCrop("crop_garlic", ModObjects.seed_garlic, ModObjects.garlic);
 	public static final Block crop_hellebore = new ModBlockCrop("crop_hellebore", ModObjects.seed_hellebore, ModObjects.hellebore);

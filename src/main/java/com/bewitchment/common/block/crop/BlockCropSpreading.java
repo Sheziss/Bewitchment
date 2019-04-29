@@ -4,15 +4,16 @@ import com.bewitchment.common.block.util.ModBlockCrop;
 import com.bewitchment.registry.ModObjects;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class BlockCropBelladonna extends ModBlockCrop {
-	public BlockCropBelladonna() {
-		super("crop_belladonna", ModObjects.seed_belladonna, ModObjects.belladonna);
+public class BlockCropSpreading extends ModBlockCrop {
+	public BlockCropSpreading(String name, Item seed, Item crop) {
+		super(name, seed, crop);
 	}
 
 	@Override
