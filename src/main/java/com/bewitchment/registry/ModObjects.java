@@ -36,14 +36,11 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import team.chisel.api.carving.CarvingUtils;
@@ -52,7 +49,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@EventBusSubscriber(modid = Bewitchment.MODID)
 public class ModObjects {
 	public static final List<Object> REGISTRY = new ArrayList<>();
 
@@ -372,10 +368,10 @@ public class ModObjects {
 	public static final Item spectral_dust = new ModItem("spectral_dust");
 	public static final Item wood_ash = new ModItem("wood_ash");
 
-	@SubscribeEvent
-	public static void registerBlocks(Register<Block> event) {
+	public static void preInit()
+	{
 		for (Object obj : REGISTRY) {
-			if (obj instanceof Block) event.getRegistry().register((Block) obj);
+			if (obj instanceof Block) ForgeRegistries.BLOCKS.register((Block) obj);
 			if (obj instanceof BlockCandleBase) Bewitchment.proxy.ignoreProperty((Block) obj, BlockCandleBase.LIT);
 		}
 		Bewitchment.proxy.ignoreProperty(door_cypress.door, BlockDoor.POWERED);
@@ -391,22 +387,19 @@ public class ModObjects {
 		Bewitchment.proxy.ignoreProperty(sapling_elder, ModBlockSapling.READY);
 		Bewitchment.proxy.ignoreProperty(sapling_juniper, ModBlockSapling.READY);
 		Bewitchment.proxy.ignoreProperty(sapling_yew, ModBlockSapling.READY);
-	}
 
-	@SubscribeEvent
-	public static void registerItems(Register<Item> event) {
 		for (Object obj : REGISTRY) {
 			if (obj instanceof Block) {
 				Block block = (Block) obj;
 				if (!(block instanceof BlockWitchFire) && !(block instanceof BlockWitchesLight) && !(block instanceof BlockGlyph) && !(block instanceof BlockSaltBarrier) && !(block instanceof BlockCrops) && !(block instanceof BlockDoor) && !(block instanceof BlockSlab) && !(block instanceof IFluidBlock)) {
 					Item itemBlock = block instanceof BlockLantern ? new ItemLantern(block).setRegistryName(block.getRegistryName()).setTranslationKey(block.getTranslationKey()) : new ItemBlock(block).setRegistryName(block.getRegistryName()).setTranslationKey(block.getTranslationKey());
-					event.getRegistry().register(itemBlock);
+					ForgeRegistries.ITEMS.register(itemBlock);
 					Bewitchment.proxy.registerTexture(itemBlock, block instanceof ModBlockBush ? "inventory" : "normal");
 				}
 			}
 			if (obj instanceof Item) {
 				Item item = (Item) obj;
-				event.getRegistry().register(item);
+				ForgeRegistries.ITEMS.register(item);
 				if (obj == ModObjects.eye_of_old) Bewitchment.proxy.registerTextureWithVariant(item, Arrays.asList(s -> s.getDisplayName().equalsIgnoreCase("Haru") || s.getDisplayName().equalsIgnoreCase("Haruspex") || s.getDisplayName().equalsIgnoreCase("H4rv5p3x"), s -> s.getDisplayName().equalsIgnoreCase("Izuxe") || s.getDisplayName().equalsIgnoreCase("Izu") || s.getDisplayName().equalsIgnoreCase("Izuxe43ui520815")));
 				else if (obj == ModObjects.cold_iron_sword) Bewitchment.proxy.registerTextureWithVariant(item, Arrays.asList(s -> s.getDisplayName().equalsIgnoreCase("Hudson Bat") || s.getDisplayName().equalsIgnoreCase("Masashi Bat") || s.getDisplayName().equalsIgnoreCase("Emmanuel Bat") || s.getDisplayName().equalsIgnoreCase("Michael Bat") || s.getDisplayName().equalsIgnoreCase("Yoshihiro Bat") || s.getDisplayName().equalsIgnoreCase("Lewis Bat") || s.getDisplayName().equalsIgnoreCase("Katushiro Bat") || s.getDisplayName().equalsIgnoreCase("Ashley Bat")));
 				else if (obj == ModObjects.waystone) Bewitchment.proxy.registerTextureWithVariant(item, Arrays.asList(s -> s.hasTagCompound() && s.getTagCompound().hasKey("location")));

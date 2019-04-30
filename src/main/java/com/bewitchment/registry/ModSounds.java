@@ -3,14 +3,11 @@ package com.bewitchment.registry;
 import com.bewitchment.Bewitchment;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
-import net.minecraftforge.event.RegistryEvent.Register;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@EventBusSubscriber(modid = Bewitchment.MODID)
 public class ModSounds {
 	public static final List<SoundEvent> REGISTRY = new ArrayList<>();
 
@@ -22,9 +19,8 @@ public class ModSounds {
 	public static final SoundEvent TOAD_HURT = createSoundEvent("toad_hurt");
 	public static final SoundEvent TOAD_IDLE = createSoundEvent("toad_idle");
 
-	@SubscribeEvent
-	public static void registerSounds(Register<SoundEvent> event) {
-		for (SoundEvent sound : REGISTRY) event.getRegistry().register(sound);
+	public static void preInit() {
+		for (SoundEvent sound : REGISTRY) ForgeRegistries.SOUND_EVENTS.register(sound);
 	}
 
 	private static final SoundEvent createSoundEvent(String name) {

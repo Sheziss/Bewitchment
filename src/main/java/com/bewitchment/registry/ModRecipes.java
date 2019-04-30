@@ -39,6 +39,7 @@ public class ModRecipes {
 		GameRegistry.addSmelting(ModObjects.garnet_ore, new ItemStack(ModObjects.garnet), 0.35f);
 		GameRegistry.addSmelting(ModObjects.moonstone_ore, new ItemStack(ModObjects.moonstone), 0.35f);
 		GameRegistry.addSmelting(ModObjects.golden_thread, new ItemStack(Items.GOLD_NUGGET), 1);
+		GameRegistry.addSmelting(ModObjects.silver_scales, new ItemStack(ModObjects.silver_nugget), 1);
 		GameRegistry.addSmelting(ModObjects.unfired_jar, new ItemStack(ModObjects.empty_jar), 0.45f);
 	}
 

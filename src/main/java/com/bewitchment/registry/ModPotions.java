@@ -1,23 +1,18 @@
 package com.bewitchment.registry;
 
-import com.bewitchment.Bewitchment;
 import com.bewitchment.common.potion.PotionSunWard;
 import net.minecraft.potion.Potion;
-import net.minecraftforge.event.RegistryEvent.Register;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@EventBusSubscriber(modid = Bewitchment.MODID)
 public class ModPotions {
 	public static final List<Potion> REGISTRY = new ArrayList<>();
 
 	public static final Potion sun_ward = new PotionSunWard();
 
-	@SubscribeEvent
-	public static void registerEntities(Register<Potion> event) {
-		for (Potion potion : REGISTRY) event.getRegistry().register(potion);
+	public static void preInit() {
+		for (Potion potion : REGISTRY) ForgeRegistries.POTIONS.register(potion);
 	}
 }

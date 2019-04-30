@@ -13,9 +13,7 @@ import com.bewitchment.common.integration.patchouli.BewitchmentPatchouli;
 import com.bewitchment.common.integration.thaumcraft.BewitchmentThaumcraft;
 import com.bewitchment.common.world.gen.WorldGenCoquina;
 import com.bewitchment.common.world.gen.WorldGenOres;
-import com.bewitchment.registry.ModEntities;
-import com.bewitchment.registry.ModObjects;
-import com.bewitchment.registry.ModRecipes;
+import com.bewitchment.registry.*;
 import com.bewitchment.registry.util.IOreDictionaryContainer;
 import net.minecraft.block.*;
 import net.minecraft.block.properties.IProperty;
@@ -54,6 +52,11 @@ public class CommonProxy {
 
 	public void preInit(FMLPreInitializationEvent event) {
 		config = new ModConfig(event.getSuggestedConfigurationFile());
+		ModEntities.preInit();
+		ModObjects.preInit();
+		ModEnchantments.preInit();
+		ModSounds.preInit();
+		ModPotions.preInit();
 		// Capability
 		CapabilityManager.INSTANCE.register(ExtendedPlayer.class, new ExtendedPlayer(), ExtendedPlayer::new);
 		MinecraftForge.EVENT_BUS.register(new ExtendedPlayerHandler());
@@ -81,6 +84,7 @@ public class CommonProxy {
 		ModRecipes.initOven();
 		ModRecipes.initRitual();
 		ModRecipes.initFortune();
+		BewitchmentPatchouli.init();
 
 		// Tool Repair
 		ModObjects.TOOL_COLD_IRON.setRepairItem(new ItemStack(ModObjects.cold_iron_ingot));
@@ -119,12 +123,9 @@ public class CommonProxy {
 		LootTableList.register(new ResourceLocation(Bewitchment.MODID, "entities/alpha_hellhound"));
 
 		LootTableList.register(new ResourceLocation(Bewitchment.MODID, "entities/demon"));
-
-		BewitchmentPatchouli.init();
 	}
 
 	public void postInit(FMLPostInitializationEvent event) {
-		ModEntities.postInit();
 		ModRecipes.postInitOven();
 		ModRecipes.postInitAthame();
 		// Altar Values

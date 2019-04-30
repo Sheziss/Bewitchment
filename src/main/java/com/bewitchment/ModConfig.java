@@ -1,6 +1,5 @@
 package com.bewitchment;
 
-import com.bewitchment.registry.ModObjects;
 import net.minecraft.init.Blocks;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.config.Configuration;
@@ -18,7 +17,7 @@ public class ModConfig extends Configuration {
 	public ModConfig(File file) {
 		super(file);
 		load();
-		broomSweepables = Arrays.asList(getStringList("broomSweepables", "misc", new String[]{Blocks.REDSTONE_WIRE.getTranslationKey(), ModObjects.glyph.getTranslationKey(), ModObjects.salt_barrier.getTranslationKey()}, "The list of blocks that the broom will sweep when right clicked on."));
+		broomSweepables = Arrays.asList(getStringList("broomSweepables", "misc", new String[]{Blocks.REDSTONE_WIRE.getTranslationKey()}, "The list of blocks that the broom will sweep when right clicked on. This includes salt and glyphs by default, so you don't need to add those."));
 
 		silverSize   = getInt("silverSize", "ore", 4, 0, Byte.MAX_VALUE, "The size of silver ore veins.");
 		silverChance = getInt("silverChance", "ore", 8, 0, Byte.MAX_VALUE, "The chance for silver ore veins to spawn.");

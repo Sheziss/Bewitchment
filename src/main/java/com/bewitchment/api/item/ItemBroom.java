@@ -18,7 +18,12 @@ import net.minecraftforge.event.entity.EntityMountEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class ItemBroom extends ModItem {
+	private static final List<String> defaultSweepables = Arrays.asList(ModObjects.glyph.getTranslationKey(), ModObjects.salt_barrier.getTranslationKey());
+
 	private final EntityEntry entry;
 
 	public ItemBroom(String modid, String name, CreativeTabs tab, EntityEntry entry) {
@@ -37,15 +42,14 @@ public class ItemBroom extends ModItem {
 	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing face, float hitX, float hitY, float hitZ) {
 		IBlockState state = world.getBlockState(pos);
 		Block block = state.getBlock();
-		if (Bewitchment.proxy.config.broomSweepables.contains(block.getTranslationKey())) {
+		if (defaultSweepables.contains(block.getTranslationKey()) || Bewitchment.proxy.config.broomSweepables.contains(block.getTranslationKey())) {
 			if (!world.isRemote) {
 				block.dropBlockAsItem(world, pos, state, 0);
 				world.setBlockToAir(pos);
 				player.swingArm(hand);
 				world.playSound(null, pos, ModSounds.BROOM_SWEEP, SoundCategory.BLOCKS, 0.8f, world.rand.nextFloat() * 0.4f + 0.8f);
 			}
-			else for (int i = 0; i < 1; i++)
-			          world.spawnParticle(EnumParticleTypes.SWEEP_ATTACK, pos.getX() + world.rand.nextDouble(), pos.getY() + 0.1, pos.getZ() + world.rand.nextDouble(), 0, 0, 0);
+			else world.spawnParticle(EnumParticleTypes.SWEEP_ATTACK, pos.getX() + world.rand.nextDouble(), pos.getY() + 0.1, pos.getZ() + world.rand.nextDouble(), 0, 0, 0);
 			return EnumActionResult.SUCCESS;
 		}
 		else if (entry != null) {
