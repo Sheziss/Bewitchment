@@ -16,24 +16,12 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
-import java.lang.reflect.Field;
-
 public abstract class EntityBroom extends Entity {
-	private static Field isJumping;
-
 	protected ItemStack item;
 
 	public EntityBroom(World world) {
 		super(world);
 		setSize(0.7f, 0.7f);
-	}
-
-	protected static boolean getJump(EntityLivingBase rider) throws IllegalArgumentException, IllegalAccessException {
-		if (isJumping == null) {
-			isJumping = ObfuscationReflectionHelper.getPrivateValue(EntityLivingBase.class, rider, "isJumping", "field_70703_bu");
-			isJumping.setAccessible(true);
-		}
-		return isJumping.getBoolean(rider);
 	}
 
 	@Override
@@ -136,6 +124,10 @@ public abstract class EntityBroom extends Entity {
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound tag) {
 		item = tag.hasKey("item") ? new ItemStack(tag.getCompoundTag("item")) : ItemStack.EMPTY;
+	}
+
+	protected static boolean getJump(EntityLivingBase rider) throws IllegalArgumentException, IllegalAccessException {
+		return ObfuscationReflectionHelper.getPrivateValue(EntityLivingBase.class, rider, "isJumping", "field_70703_bu");
 	}
 
 	protected abstract void handleMovement(Vec3d look, float front, float strafe, float up);
