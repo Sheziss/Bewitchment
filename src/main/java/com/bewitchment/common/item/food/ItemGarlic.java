@@ -16,6 +16,7 @@ public class ItemGarlic extends ModItemFood {
 	@Override
 	protected void onFoodEaten(ItemStack stack, World world, EntityPlayer player) {
 		super.onFoodEaten(stack, world, player);
-		if (player.getCapability(ExtendedPlayer.CAPABILITY, null).getTransformation() == TransformationType.VAMPIRE) player.setFire(10);
+		if (player.getCapability(ExtendedPlayer.CAPABILITY, null).getTransformation() == TransformationType.VAMPIRE)
+			player.setFire(10);
 	}
 }

@@ -1,18 +1,18 @@
 {
   "type": "forge:ore_shaped",
   "pattern": [
-	"CD"
+    "CD"
   ],
   "key": {
-	"C": {
-	  "item": "#CANDLE_ANY"
-	},
-	"D": {
-	  "type": "forge:ore_dict",
-	  "ore": "dyeLime"
-	}
+    "C": {
+      "item": "#CANDLE_ANY"
+    },
+    "D": {
+      "type": "forge:ore_dict",
+      "ore": "dyeLime"
+    }
   },
   "result": {
-	"item": "bewitchment:candle_lime"
+    "item": "bewitchment:candle_lime"
   }
 }

@@ -32,7 +32,8 @@ public class RitualConjureWitch extends Ritual {
 			entity.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), world.rand.nextInt(360), 0);
 			entity.onInitialSpawn(world.getDifficultyForLocation(pos), null);
 			world.spawnEntity(entity);
-			if (world.rand.nextFloat() < 0.1f) entity.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 6000, 2, false, false));
+			if (world.rand.nextFloat() < 0.1f)
+				entity.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 6000, 2, false, false));
 		}
 	}
 

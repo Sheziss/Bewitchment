@@ -17,7 +17,8 @@ public class WorldGenYewTree extends WorldGenModTree {
 		boolean flag = false;
 		for (int x = 0; x >= -1; x--) {
 			for (int z = 0; z >= -1; z--) {
-				if (world.getBlockState(pos.add(x, 0, z)).getBlock() == ModObjects.sapling_yew && world.getBlockState(pos.add(x + 1, 0, z)).getBlock() == ModObjects.sapling_yew && world.getBlockState(pos.add(x, 0, z + 1)).getBlock() == ModObjects.sapling_yew && world.getBlockState(pos.add(x + 1, 0, z + 1)).getBlock() == ModObjects.sapling_yew) flag = true;
+				if (world.getBlockState(pos.add(x, 0, z)).getBlock() == ModObjects.sapling_yew && world.getBlockState(pos.add(x + 1, 0, z)).getBlock() == ModObjects.sapling_yew && world.getBlockState(pos.add(x, 0, z + 1)).getBlock() == ModObjects.sapling_yew && world.getBlockState(pos.add(x + 1, 0, z + 1)).getBlock() == ModObjects.sapling_yew)
+					flag = true;
 			}
 		}
 		if (!flag) return false;
@@ -45,7 +46,8 @@ public class WorldGenYewTree extends WorldGenModTree {
 			for (int z = -3; z < 3; z++) {
 				for (int y = -2; y < hMax - hMin + 2; y++) {
 					BlockPos current = pos.up(hMin).add(x, y, z);
-					if (world.getBlockState(current).getBlock().canBeReplacedByLeaves(world.getBlockState(current), world, current) && !((x == -2 || x == 3 || z == -3 || z == 2) && (rand.nextDouble() < 0.1 || y >= hMax - hMin) && (x == -1 || x == 2 || z == -2 || z == 1) && y == hMax - hMin + 1 || x == -2 && z == -3 || x == -2 && z == 2 || x == 3 && z == -3 || x == 3 && z == 2)) world.setBlockState(current, ModObjects.leaves_yew.getDefaultState());
+					if (world.getBlockState(current).getBlock().canBeReplacedByLeaves(world.getBlockState(current), world, current) && !((x == -2 || x == 3 || z == -3 || z == 2) && (rand.nextDouble() < 0.1 || y >= hMax - hMin) && (x == -1 || x == 2 || z == -2 || z == 1) && y == hMax - hMin + 1 || x == -2 && z == -3 || x == -2 && z == 2 || x == 3 && z == -3 || x == 3 && z == 2))
+						world.setBlockState(current, ModObjects.leaves_yew.getDefaultState());
 				}
 			}
 		}

@@ -27,6 +27,7 @@ public class RitualHighMoon extends Ritual {
 
 	@Override
 	public void onFinished(TileEntityGlyph tile, World world, EntityPlayer caster, BlockPos pos, int dimension, int time) {
-		if (!world.isRemote) world.setWorldTime(world.getWorldTime() + (41600 - (world.getWorldTime() % 24000)) % 24000);
+		if (!world.isRemote)
+			world.setWorldTime(world.getWorldTime() + (41600 - (world.getWorldTime() % 24000)) % 24000);
 	}
 }

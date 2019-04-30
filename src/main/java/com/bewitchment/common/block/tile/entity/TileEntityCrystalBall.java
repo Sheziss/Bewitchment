@@ -16,7 +16,8 @@ public class TileEntityCrystalBall extends TileEntityAltarStorage {
 		if (!player.isSneaking()) {
 			if (!world.isRemote) {
 				Fortune fortune = player.getCapability(ExtendedPlayer.CAPABILITY, null).getFortune();
-				if (fortune != null) player.sendStatusMessage(new TextComponentTranslation("fortune.fortune_exists" + new TextComponentTranslation(fortune.getRegistryName().toString())), true);
+				if (fortune != null)
+					player.sendStatusMessage(new TextComponentTranslation("fortune.fortune_exists" + new TextComponentTranslation(fortune.getRegistryName().toString())), true);
 				else if (MagicPower.attemptDrain(world, player, getAltarPosition(), 3000)) {
 					List<Fortune> valid = BewitchmentAPI.REGISTRY_FORTUNE.getValuesCollection().stream().filter(f -> f.canBeUsed(player)).collect(Collectors.toList());
 					if (!valid.isEmpty()) {
@@ -31,10 +32,8 @@ public class TileEntityCrystalBall extends TileEntityAltarStorage {
 						}
 						player.sendStatusMessage(new TextComponentTranslation(set.getRegistryName().toString()), true);
 						player.getCapability(ExtendedPlayer.CAPABILITY, null).setFortune(set);
-					}
-					else player.sendStatusMessage(new TextComponentTranslation("fortune.no_fortune"), true);
-				}
-				else player.sendStatusMessage(new TextComponentTranslation("magic.no_power"), true);
+					} else player.sendStatusMessage(new TextComponentTranslation("fortune.no_fortune"), true);
+				} else player.sendStatusMessage(new TextComponentTranslation("magic.no_power"), true);
 			}
 			return true;
 		}

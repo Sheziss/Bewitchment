@@ -41,7 +41,8 @@ public class RitualDrawing extends Ritual {
 	public void onFinished(TileEntityGlyph tile, World world, EntityPlayer caster, BlockPos pos, int dimension, int time) {
 		for (int x = 0; x < circle.length; x++) {
 			for (int z = 0; z < circle.length; z++) {
-				if (circle[x][z] == 1) world.setBlockState(pos.add(x - circle.length / 2, 0, z - circle.length / 2), ModObjects.glyph.getDefaultState().withProperty(BlockGlyph.TYPE, type));
+				if (circle[x][z] == 1)
+					world.setBlockState(pos.add(x - circle.length / 2, 0, z - circle.length / 2), ModObjects.glyph.getDefaultState().withProperty(BlockGlyph.TYPE, type));
 			}
 		}
 	}

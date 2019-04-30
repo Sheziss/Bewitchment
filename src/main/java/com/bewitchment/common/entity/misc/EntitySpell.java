@@ -40,9 +40,12 @@ public class EntitySpell extends EntityThrowable {
 			Spell spell = BewitchmentAPI.REGISTRY_SPELL.getValue(new ResourceLocation(dataManager.get(SPELL)));
 			EntityLivingBase caster = getCaster();
 			if (spell != null) {
-				if (result.typeOfHit != Type.ENTITY || result.entityHit != caster) spell.performEffect(world, result, caster);
-				if (result.typeOfHit == Type.BLOCK && (spell.getType() == SpellType.BLOCK || spell.getType() == SpellType.ALL) && result.entityHit != caster) setDead();
-				if (result.typeOfHit == Type.ENTITY && (spell.getType() == SpellType.ENTITY || spell.getType() == SpellType.ALL) && result.entityHit != caster) setDead();
+				if (result.typeOfHit != Type.ENTITY || result.entityHit != caster)
+					spell.performEffect(world, result, caster);
+				if (result.typeOfHit == Type.BLOCK && (spell.getType() == SpellType.BLOCK || spell.getType() == SpellType.ALL) && result.entityHit != caster)
+					setDead();
+				if (result.typeOfHit == Type.ENTITY && (spell.getType() == SpellType.ENTITY || spell.getType() == SpellType.ALL) && result.entityHit != caster)
+					setDead();
 			}
 		}
 	}

@@ -8,7 +8,9 @@ import com.bewitchment.api.registry.LoomRecipe;
 import com.bewitchment.api.registry.OvenRecipe;
 import com.bewitchment.api.registry.Ritual;
 import com.bewitchment.common.block.BlockGlyph.GlyphType;
-import com.bewitchment.common.entity.living.*;
+import com.bewitchment.common.entity.living.EntityBlindworm;
+import com.bewitchment.common.entity.living.EntitySnake;
+import com.bewitchment.common.entity.living.EntityToad;
 import com.bewitchment.common.entity.spirits.demons.*;
 import com.bewitchment.common.entity.spirits.ghosts.EntityBlackDog;
 import com.bewitchment.common.fortune.*;
@@ -158,7 +160,8 @@ public class ModRecipes {
 				ResourceLocation loc = new ResourceLocation(Bewitchment.MODID, stack.getItem().getRegistryName().getPath() + stack.getMetadata());
 				int index = 0;
 				while (true) {
-					if (BewitchmentAPI.REGISTRY_OVEN.containsKey(loc)) loc = new ResourceLocation(loc.getNamespace(), loc.getPath() + index++);
+					if (BewitchmentAPI.REGISTRY_OVEN.containsKey(loc))
+						loc = new ResourceLocation(loc.getNamespace(), loc.getPath() + index++);
 					else break;
 				}
 				BewitchmentAPI.REGISTRY_OVEN.register(new OvenRecipe(loc.getNamespace(), loc.getPath(), stack, output, stack.getItem() instanceof ItemFood ? new ItemStack(ModObjects.cloudy_oil) : ItemStack.EMPTY, 0.85f));

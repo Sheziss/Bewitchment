@@ -35,7 +35,7 @@ public class ModBlockSlab extends BlockSlab implements IOreDictionaryContainer {
 		this(name, base, false, oreDictionaryNames);
 		ModBlockSlab double_slab = new ModBlockSlab(getRegistryName().getPath() + "_double", base, true);
 		double_slab.setCreativeTab(null);
-		this.half        = this;
+		this.half = this;
 		double_slab.half = this;
 		Item item = new ItemSlab(this, this, double_slab).setRegistryName(getRegistryName()).setTranslationKey(getTranslationKey());
 		ModObjects.REGISTRY.add(item);
@@ -46,7 +46,7 @@ public class ModBlockSlab extends BlockSlab implements IOreDictionaryContainer {
 		super(base.getDefaultState().getMaterial());
 		Util.registerValues(this, name, base, oreDictionaryNames);
 		this.setDefaultState(isDouble ? blockState.getBaseState().withProperty(BlockPurpurSlab.VARIANT, BlockPurpurSlab.Variant.DEFAULT) : blockState.getBaseState().withProperty(BlockPurpurSlab.VARIANT, BlockPurpurSlab.Variant.DEFAULT).withProperty(HALF, EnumBlockHalf.BOTTOM));
-		this.isDouble  = isDouble;
+		this.isDouble = isDouble;
 		this.fullBlock = isDouble;
 	}
 

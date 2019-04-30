@@ -39,6 +39,7 @@ public class BlockWitchesLight extends BlockAir {
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
 		ItemStack main = Minecraft.getMinecraft().player.getHeldItemMainhand(), off = Minecraft.getMinecraft().player.getHeldItemOffhand();
-		if ((main.getItem() instanceof ItemLantern && main.hasTagCompound() && main.getTagCompound().getBoolean("lit")) || (off.getItem() instanceof ItemLantern && off.hasTagCompound() && off.getTagCompound().getBoolean("lit"))) world.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, pos.getX() + 0.5 + rand.nextGaussian() * 0.2, pos.getY() + rand.nextDouble() * 0.6 + 0.2, pos.getZ() + 0.5 + rand.nextGaussian() * 0.2, 0, 0, 0);
+		if ((main.getItem() instanceof ItemLantern && main.hasTagCompound() && main.getTagCompound().getBoolean("lit")) || (off.getItem() instanceof ItemLantern && off.hasTagCompound() && off.getTagCompound().getBoolean("lit")))
+			world.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, pos.getX() + 0.5 + rand.nextGaussian() * 0.2, pos.getY() + rand.nextDouble() * 0.6 + 0.2, pos.getZ() + 0.5 + rand.nextGaussian() * 0.2, 0, 0, 0);
 	}
 }

@@ -131,7 +131,8 @@ public class CommonProxy {
 		// Altar Values
 		for (final Block block : ForgeRegistries.BLOCKS) {
 			int amount = 0;
-			if (block instanceof IPlantable || block instanceof IGrowable || block instanceof BlockMelon || block instanceof BlockPumpkin) amount = 30;
+			if (block instanceof IPlantable || block instanceof IGrowable || block instanceof BlockMelon || block instanceof BlockPumpkin)
+				amount = 30;
 			if (block instanceof BlockLog) amount = 15;
 			if (block instanceof BlockLeaves) amount = 8;
 			BewitchmentAPI.ALTAR_NATURE_VALUES.put(block, amount);

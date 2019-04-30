@@ -50,8 +50,7 @@ public class BlockCandle extends BlockCandleBase {
 			world.setBlockState(pos, getDefaultState().withProperty(LIT, false));
 			world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5f, 2.6f + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8f, false);
 			return true;
-		}
-		else {
+		} else {
 			ItemStack stack = player.getHeldItem(hand);
 			if (stack.getItem() == Items.FLINT_AND_STEEL) {
 				stack.damageItem(1, player);
@@ -75,6 +74,7 @@ public class BlockCandle extends BlockCandleBase {
 
 	@Override
 	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
-		if (state.getValue(LIT)) world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5, pos.getY() + 0.7, pos.getZ() + 0.5, 0, 0, 0);
+		if (state.getValue(LIT))
+			world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5, pos.getY() + 0.7, pos.getZ() + 0.5, 0, 0, 0);
 	}
 }

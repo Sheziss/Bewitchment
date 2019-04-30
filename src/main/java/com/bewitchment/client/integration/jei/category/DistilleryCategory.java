@@ -66,7 +66,7 @@ public class DistilleryCategory implements IRecipeCategory<DistilleryWrapper> {
 		private List<ItemStack> output;
 
 		public DistilleryWrapper(DistilleryRecipe recipe) {
-			input  = recipe.getInput();
+			input = recipe.getInput();
 			output = recipe.getOutput();
 		}
 

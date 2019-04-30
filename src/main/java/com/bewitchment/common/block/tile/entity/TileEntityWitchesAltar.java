@@ -64,12 +64,12 @@ public class TileEntityWitchesAltar extends ModTileEntity implements ITickable {
 	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
 		magicPower.deserialize(tag);
-		gain       = tag.getInteger("gain");
+		gain = tag.getInteger("gain");
 		multiplier = tag.getDouble("multiplier");
 	}
 
 	public void refreshUpgrades(BlockPos pos) {
-		gain       = 1;
+		gain = 1;
 		multiplier = 1;
 		Block block = world.getBlockState(pos).getBlock();
 		Item item = Item.getItemFromBlock(block);

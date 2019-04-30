@@ -37,10 +37,14 @@ public class FortuneMeetSilverfish extends Fortune {
 				silverfish.setPosition(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
 				silverfish.onInitialSpawn(player.world.getDifficultyForLocation(pos), null);
 				player.world.spawnEntity(silverfish);
-				if (player.getRNG().nextInt(10) < player.world.getDifficulty().ordinal()) silverfish.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 900, 1));
-				if (player.getRNG().nextInt(10) < player.world.getDifficulty().ordinal()) silverfish.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 900, 1));
-				if (player.getRNG().nextInt(10) < player.world.getDifficulty().ordinal()) silverfish.addPotionEffect(new PotionEffect(MobEffects.SPEED, 900, 1));
-				if (player.getRNG().nextInt(10) < player.world.getDifficulty().ordinal()) silverfish.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 900, 1));
+				if (player.getRNG().nextInt(10) < player.world.getDifficulty().ordinal())
+					silverfish.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 900, 1));
+				if (player.getRNG().nextInt(10) < player.world.getDifficulty().ordinal())
+					silverfish.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 900, 1));
+				if (player.getRNG().nextInt(10) < player.world.getDifficulty().ordinal())
+					silverfish.addPotionEffect(new PotionEffect(MobEffects.SPEED, 900, 1));
+				if (player.getRNG().nextInt(10) < player.world.getDifficulty().ordinal())
+					silverfish.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 900, 1));
 				return true;
 			}
 		}

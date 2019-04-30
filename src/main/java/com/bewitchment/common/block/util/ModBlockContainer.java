@@ -32,7 +32,7 @@ public abstract class ModBlockContainer extends BlockContainer {
 		super(mat);
 		Util.registerValues(this, name, mat, sound, hardness, resistance, tool, level);
 		this.modInstance = modInstance;
-		this.guiID       = guiID;
+		this.guiID = guiID;
 	}
 
 	@Override
@@ -97,7 +97,7 @@ public abstract class ModBlockContainer extends BlockContainer {
 			ModTileEntity tile = (ModTileEntity) world.getTileEntity(pos);
 			for (IItemHandler inventory : tile.getInventories())
 				for (int i = 0; i < inventory.getSlots(); i++)
-				     InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), inventory.getStackInSlot(i));
+					InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), inventory.getStackInSlot(i));
 		}
 		super.breakBlock(world, pos, state);
 	}
@@ -108,6 +108,7 @@ public abstract class ModBlockContainer extends BlockContainer {
 	}
 
 	public void refreshAltarPos(World world, BlockPos pos) {
-		if (world.getTileEntity(pos) instanceof IAltarStorage) ((IAltarStorage) world.getTileEntity(pos)).setAltarPosition(BlockWitchesAltar.getNearestAltar(world, pos));
+		if (world.getTileEntity(pos) instanceof IAltarStorage)
+			((IAltarStorage) world.getTileEntity(pos)).setAltarPosition(BlockWitchesAltar.getNearestAltar(world, pos));
 	}
 }

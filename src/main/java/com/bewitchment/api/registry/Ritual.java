@@ -37,12 +37,12 @@ public class Ritual extends IForgeRegistryEntry.Impl<Ritual> {
 
 	public Ritual(String modid, String name, List<Ingredient> inputItems, List<EntityEntry> inputEntities, List<ItemStack> output, int time, int startingPower, int runningPower, GlyphType small, GlyphType medium, GlyphType big) {
 		this.setRegistryName(new ResourceLocation(modid, name));
-		this.inputItems    = inputItems;
+		this.inputItems = inputItems;
 		this.inputEntities = inputEntities;
-		this.output        = output;
-		this.time          = time;
+		this.output = output;
+		this.time = time;
 		this.startingPower = startingPower;
-		this.runningPower  = runningPower;
+		this.runningPower = runningPower;
 		if (small == null) throw new IllegalArgumentException("Cannot have the smaller circle missing");
 		if (medium == null && big != null)
 			throw new IllegalArgumentException("Cannot have null middle circle when a big circle is present");
@@ -88,7 +88,8 @@ public class Ritual extends IForgeRegistryEntry.Impl<Ritual> {
 		if (tile != null) {
 			for (int i = 0; i < tile.inventory.getSlots(); i++) {
 				ItemStack stack = tile.inventory.extractItem(i, tile.inventory.getStackInSlot(i).getCount(), false);
-				if (stack.getItem() == ModObjects.athame) stack.damageItem(50, tile.getWorld().getPlayerEntityByUUID(tile.getCaster()));
+				if (stack.getItem() == ModObjects.athame)
+					stack.damageItem(50, tile.getWorld().getPlayerEntityByUUID(tile.getCaster()));
 				else {
 					for (Ingredient ing : getInputItems()) {
 						for (ItemStack stack0 : ing.getMatchingStacks()) {
@@ -190,7 +191,7 @@ public class Ritual extends IForgeRegistryEntry.Impl<Ritual> {
 	 */
 	public void onStopped(TileEntityGlyph tile, World world, EntityPlayer caster, BlockPos pos, int dimension, int time) {
 		for (int i = 0; i < tile.inventory.getSlots(); i++)
-		     InventoryHelper.spawnItemStack(world, tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ(), tile.inventory.extractItem(i, tile.inventory.getStackInSlot(i).getCount(), false));
+			InventoryHelper.spawnItemStack(world, tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ(), tile.inventory.extractItem(i, tile.inventory.getStackInSlot(i).getCount(), false));
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -227,7 +228,8 @@ public class Ritual extends IForgeRegistryEntry.Impl<Ritual> {
 			if (!getInputEntities().isEmpty()) {
 				boolean found = false;
 				for (EntityLivingBase entity : living)
-					if (getInputEntities().parallelStream().anyMatch(p -> p.getEntityClass().equals(entity.getClass()))) found = true;
+					if (getInputEntities().parallelStream().anyMatch(p -> p.getEntityClass().equals(entity.getClass())))
+						found = true;
 				return found;
 			}
 			return true;

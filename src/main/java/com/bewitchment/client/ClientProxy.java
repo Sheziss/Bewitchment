@@ -15,7 +15,9 @@ import com.bewitchment.common.block.BlockGlyph.GlyphType;
 import com.bewitchment.common.block.tile.entity.TileEntityGemBowl;
 import com.bewitchment.common.block.tile.entity.TileEntityPlacedItem;
 import com.bewitchment.common.block.tile.entity.TileEntityWitchesCauldron;
-import com.bewitchment.common.entity.living.*;
+import com.bewitchment.common.entity.living.EntityBlindworm;
+import com.bewitchment.common.entity.living.EntitySnake;
+import com.bewitchment.common.entity.living.EntityToad;
 import com.bewitchment.common.entity.misc.*;
 import com.bewitchment.common.entity.spirits.demons.*;
 import com.bewitchment.common.entity.spirits.ghosts.EntityBlackDog;
@@ -128,7 +130,7 @@ public class ClientProxy extends CommonProxy {
 	public void registerTextureWithVariant(Item item, List<Predicate<ItemStack>> predicates) {
 		ResourceLocation[] names = new ResourceLocation[predicates.size() + 1];
 		for (int i = 0; i <= predicates.size(); i++)
-		     names[i] = new ResourceLocation(item.getRegistryName().toString() + (i == 0 ? "" : "_variant" + (predicates.size() == 1 ? "" : (i - 1))));
+			names[i] = new ResourceLocation(item.getRegistryName().toString() + (i == 0 ? "" : "_variant" + (predicates.size() == 1 ? "" : (i - 1))));
 		ModelBakery.registerItemVariants(item, names);
 		ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition() {
 			@Override

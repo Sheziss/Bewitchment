@@ -73,14 +73,6 @@ public class ModObjects {
 	public static final Block sightfire = new BlockWitchFire("sightfire");
 	public static final Block witches_light = new BlockWitchesLight();
 	public static final Block salt_barrier = new BlockSaltBarrier();
-	public static final Block crop_aconitum = new ModBlockCrop("crop_aconitum", ModObjects.seed_aconitum, ModObjects.aconitum);
-	public static final Block crop_belladonna = new BlockCropSpreading("crop_belladonna", ModObjects.seed_belladonna, ModObjects.belladonna);
-	public static final Block crop_chrysanthemum = new ModBlockCrop("crop_chrysanthemum", ModObjects.seed_chrysanthemum, ModObjects.chrysanthemum);
-	public static final Block crop_garlic = new ModBlockCrop("crop_garlic", ModObjects.seed_garlic, ModObjects.garlic);
-	public static final Block crop_hellebore = new ModBlockCrop("crop_hellebore", ModObjects.seed_hellebore, ModObjects.hellebore);
-	public static final Block crop_mandrake = new ModBlockCrop("crop_mandrake", ModObjects.seed_mandrake, ModObjects.mandrake_root);
-	public static final Block crop_white_sage = new ModBlockCrop("crop_white_sage", ModObjects.seed_white_sage, ModObjects.white_sage);
-	public static final Block crop_wormwood = new ModBlockCrop("crop_wormwood", ModObjects.seed_wormwood, ModObjects.wormwood);
 	// Devices
 	public static final Block witches_altar_unformed = createTileEntity(new BlockWitchesAltar(""), TileEntityWitchesAltar.class);
 	public static final Block witches_altar_white = new BlockWitchesAltar("white").setCreativeTab(null);
@@ -323,16 +315,23 @@ public class ModObjects {
 	public static final Item mandrake_root = new ModItem("mandrake_root", "cropMandrake");
 	public static final Item white_sage = new ModItem("white_sage", "cropWhiteSage");
 	public static final Item wormwood = new ModItem("wormwood", "cropWormwood");
-
 	// Seeds
 	public static final Item seed_aconitum = new ModItemSeed("seed_aconitum", ModObjects.crop_aconitum, Blocks.FARMLAND);
+	public static final Block crop_aconitum = new ModBlockCrop("crop_aconitum", ModObjects.seed_aconitum, ModObjects.aconitum);
 	public static final Item seed_belladonna = new ModItemSeed("seed_belladonna", ModObjects.crop_belladonna, Blocks.FARMLAND);
+	public static final Block crop_belladonna = new BlockCropSpreading("crop_belladonna", ModObjects.seed_belladonna, ModObjects.belladonna);
 	public static final Item seed_chrysanthemum = new ModItemSeed("seed_chrysanthemum", ModObjects.crop_chrysanthemum, Blocks.FARMLAND);
+	public static final Block crop_chrysanthemum = new ModBlockCrop("crop_chrysanthemum", ModObjects.seed_chrysanthemum, ModObjects.chrysanthemum);
 	public static final Item seed_garlic = new ModItemSeed("seed_garlic", ModObjects.crop_garlic, Blocks.FARMLAND);
+	public static final Block crop_garlic = new ModBlockCrop("crop_garlic", ModObjects.seed_garlic, ModObjects.garlic);
 	public static final Item seed_hellebore = new ModItemSeed("seed_hellebore", ModObjects.crop_hellebore, Blocks.FARMLAND);
+	public static final Block crop_hellebore = new ModBlockCrop("crop_hellebore", ModObjects.seed_hellebore, ModObjects.hellebore);
 	public static final Item seed_mandrake = new ModItemSeed("seed_mandrake", ModObjects.crop_mandrake, Blocks.FARMLAND);
+	public static final Block crop_mandrake = new ModBlockCrop("crop_mandrake", ModObjects.seed_mandrake, ModObjects.mandrake_root);
 	public static final Item seed_white_sage = new ModItemSeed("seed_white_sage", ModObjects.crop_white_sage, Blocks.FARMLAND);
+	public static final Block crop_white_sage = new ModBlockCrop("crop_white_sage", ModObjects.seed_white_sage, ModObjects.white_sage);
 	public static final Item seed_wormwood = new ModItemSeed("seed_wormwood", ModObjects.crop_wormwood, Blocks.FARMLAND);
+	public static final Block crop_wormwood = new ModBlockCrop("crop_wormwood", ModObjects.seed_wormwood, ModObjects.wormwood);
 	// Food
 	public static final Item juniper_berries = new ModItemFood("juniper_berries", 1, 0.5f, false).setPotionEffect(new PotionEffect(MobEffects.POISON, 100, 0), 0.1f);
 	public static final Item yew_aril = new ModItemFood("yew_aril", 1, 0.5f, false).setPotionEffect(new PotionEffect(MobEffects.POISON, 100, 0), 0.1f);
@@ -368,8 +367,7 @@ public class ModObjects {
 	public static final Item spectral_dust = new ModItem("spectral_dust");
 	public static final Item wood_ash = new ModItem("wood_ash");
 
-	public static void preInit()
-	{
+	public static void preInit() {
 		for (Object obj : REGISTRY) {
 			if (obj instanceof Block) ForgeRegistries.BLOCKS.register((Block) obj);
 			if (obj instanceof BlockCandleBase) Bewitchment.proxy.ignoreProperty((Block) obj, BlockCandleBase.LIT);
@@ -400,9 +398,12 @@ public class ModObjects {
 			if (obj instanceof Item) {
 				Item item = (Item) obj;
 				ForgeRegistries.ITEMS.register(item);
-				if (obj == ModObjects.eye_of_old) Bewitchment.proxy.registerTextureWithVariant(item, Arrays.asList(s -> s.getDisplayName().equalsIgnoreCase("Haru") || s.getDisplayName().equalsIgnoreCase("Haruspex") || s.getDisplayName().equalsIgnoreCase("H4rv5p3x"), s -> s.getDisplayName().equalsIgnoreCase("Izuxe") || s.getDisplayName().equalsIgnoreCase("Izu") || s.getDisplayName().equalsIgnoreCase("Izuxe43ui520815")));
-				else if (obj == ModObjects.cold_iron_sword) Bewitchment.proxy.registerTextureWithVariant(item, Arrays.asList(s -> s.getDisplayName().equalsIgnoreCase("Hudson Bat") || s.getDisplayName().equalsIgnoreCase("Masashi Bat") || s.getDisplayName().equalsIgnoreCase("Emmanuel Bat") || s.getDisplayName().equalsIgnoreCase("Michael Bat") || s.getDisplayName().equalsIgnoreCase("Yoshihiro Bat") || s.getDisplayName().equalsIgnoreCase("Lewis Bat") || s.getDisplayName().equalsIgnoreCase("Katushiro Bat") || s.getDisplayName().equalsIgnoreCase("Ashley Bat")));
-				else if (obj == ModObjects.waystone) Bewitchment.proxy.registerTextureWithVariant(item, Arrays.asList(s -> s.hasTagCompound() && s.getTagCompound().hasKey("location")));
+				if (obj == ModObjects.eye_of_old)
+					Bewitchment.proxy.registerTextureWithVariant(item, Arrays.asList(s -> s.getDisplayName().equalsIgnoreCase("Haru") || s.getDisplayName().equalsIgnoreCase("Haruspex") || s.getDisplayName().equalsIgnoreCase("H4rv5p3x"), s -> s.getDisplayName().equalsIgnoreCase("Izuxe") || s.getDisplayName().equalsIgnoreCase("Izu") || s.getDisplayName().equalsIgnoreCase("Izuxe43ui520815")));
+				else if (obj == ModObjects.cold_iron_sword)
+					Bewitchment.proxy.registerTextureWithVariant(item, Arrays.asList(s -> s.getDisplayName().equalsIgnoreCase("Hudson Bat") || s.getDisplayName().equalsIgnoreCase("Masashi Bat") || s.getDisplayName().equalsIgnoreCase("Emmanuel Bat") || s.getDisplayName().equalsIgnoreCase("Michael Bat") || s.getDisplayName().equalsIgnoreCase("Yoshihiro Bat") || s.getDisplayName().equalsIgnoreCase("Lewis Bat") || s.getDisplayName().equalsIgnoreCase("Katushiro Bat") || s.getDisplayName().equalsIgnoreCase("Ashley Bat")));
+				else if (obj == ModObjects.waystone)
+					Bewitchment.proxy.registerTextureWithVariant(item, Arrays.asList(s -> s.hasTagCompound() && s.getTagCompound().hasKey("location")));
 				else Bewitchment.proxy.registerTexture(item, "normal");
 			}
 		}
@@ -412,10 +413,12 @@ public class ModObjects {
 		List<Block> list = new ArrayList<>();
 		if (Loader.isModLoaded("chisel")) {
 			String groupName = base.getRegistryName().toString();
-			if (!groupName.contains("silver")) CarvingUtils.getChiselRegistry().addVariation(groupName, CarvingUtils.variationFor(base.getDefaultState(), 0));
+			if (!groupName.contains("silver"))
+				CarvingUtils.getChiselRegistry().addVariation(groupName, CarvingUtils.variationFor(base.getDefaultState(), 0));
 			for (String name : names) {
 				Block block = new ModBlockChisel(name, base);
-				if (!groupName.contains("silver")) CarvingUtils.getChiselRegistry().addVariation(groupName, CarvingUtils.variationFor(block.getDefaultState(), list.size() + 1));
+				if (!groupName.contains("silver"))
+					CarvingUtils.getChiselRegistry().addVariation(groupName, CarvingUtils.variationFor(block.getDefaultState(), list.size() + 1));
 				list.add(block);
 			}
 		}

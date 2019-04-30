@@ -32,7 +32,8 @@ public class ItemNazar extends ModItemBauble {
 
 	@Override
 	public void onWornTick(ItemStack stack, EntityLivingBase living) {
-		if (living.ticksExisted % 40 == 0 && living.isPotionActive(MobEffects.UNLUCK)) living.removePotionEffect(MobEffects.UNLUCK);
+		if (living.ticksExisted % 40 == 0 && living.isPotionActive(MobEffects.UNLUCK))
+			living.removePotionEffect(MobEffects.UNLUCK);
 	}
 
 	@Override
@@ -42,7 +43,8 @@ public class ItemNazar extends ModItemBauble {
 
 	@SubscribeEvent
 	public void onHurt(LivingHurtEvent event) {
-		if (event.getSource().isMagicDamage() && event.getEntityLiving() instanceof EntityPlayer && hasAmulet((EntityPlayer) event.getEntityLiving())) event.setAmount(event.getAmount() * 0.9f);
+		if (event.getSource().isMagicDamage() && event.getEntityLiving() instanceof EntityPlayer && hasAmulet((EntityPlayer) event.getEntityLiving()))
+			event.setAmount(event.getAmount() * 0.9f);
 	}
 
 	private boolean hasAmulet(EntityPlayer player) {

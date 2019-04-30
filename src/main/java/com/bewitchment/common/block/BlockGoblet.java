@@ -86,7 +86,8 @@ public class BlockGoblet extends ModBlock {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
-		if (stack.hasTagCompound() && stack.getTagCompound().getBoolean("full")) tooltip.add(new TextComponentTranslation("tooltip.goblet_full").getFormattedText());
+		if (stack.hasTagCompound() && stack.getTagCompound().getBoolean("full"))
+			tooltip.add(new TextComponentTranslation("tooltip.goblet_full").getFormattedText());
 	}
 
 	@Override

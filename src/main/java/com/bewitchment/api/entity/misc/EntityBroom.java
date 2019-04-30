@@ -24,6 +24,10 @@ public abstract class EntityBroom extends Entity {
 		setSize(0.7f, 0.7f);
 	}
 
+	protected static boolean getJump(EntityLivingBase rider) throws IllegalArgumentException, IllegalAccessException {
+		return ObfuscationReflectionHelper.getPrivateValue(EntityLivingBase.class, rider, "isJumping", "field_70703_bu");
+	}
+
 	@Override
 	public Entity getControllingPassenger() {
 		return getPassengers().size() == 0 ? null : getPassengers().get(0);
@@ -32,7 +36,7 @@ public abstract class EntityBroom extends Entity {
 	@Override
 	public EnumActionResult applyPlayerInteraction(EntityPlayer player, Vec3d vec, EnumHand hand) {
 		if (!player.isRiding() && !player.isSneaking()) {
-			player.rotationYaw   = rotationYaw;
+			player.rotationYaw = rotationYaw;
 			player.rotationPitch = rotationPitch;
 			player.startRiding(this);
 			return EnumActionResult.SUCCESS;
@@ -85,8 +89,7 @@ public abstract class EntityBroom extends Entity {
 				float front = rider.moveForward, strafe = rider.moveStrafing, up = 0;
 				try {
 					up = getJump(rider) ? 1 : 0;
-				}
-				catch (IllegalArgumentException | IllegalAccessException e) {
+				} catch (IllegalArgumentException | IllegalAccessException e) {
 					e.printStackTrace();
 				}
 				handleMovement(rider.getLookVec(), front, strafe, up);
@@ -124,10 +127,6 @@ public abstract class EntityBroom extends Entity {
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound tag) {
 		item = tag.hasKey("item") ? new ItemStack(tag.getCompoundTag("item")) : ItemStack.EMPTY;
-	}
-
-	protected static boolean getJump(EntityLivingBase rider) throws IllegalArgumentException, IllegalAccessException {
-		return ObfuscationReflectionHelper.getPrivateValue(EntityLivingBase.class, rider, "isJumping", "field_70703_bu");
 	}
 
 	protected abstract void handleMovement(Vec3d look, float front, float strafe, float up);

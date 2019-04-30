@@ -85,6 +85,7 @@ public class ItemBoline extends ItemShears {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
-		if (stack.hasTagCompound() && stack.getTagCompound().hasKey("biome_id")) tooltip.add(Biome.getBiome(stack.getTagCompound().getInteger("biome_id")).getBiomeName());
+		if (stack.hasTagCompound() && stack.getTagCompound().hasKey("biome_id"))
+			tooltip.add(Biome.getBiome(stack.getTagCompound().getInteger("biome_id")).getBiomeName());
 	}
 }
