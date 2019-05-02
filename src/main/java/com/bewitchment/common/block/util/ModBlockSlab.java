@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+@SuppressWarnings({"NullableProblems", "deprecation"})
 public class ModBlockSlab extends BlockSlab implements IOreDictionaryContainer {
 	private final List<String> oreDictionaryNames = new ArrayList<String>();
 	private final boolean isDouble;
@@ -96,19 +97,16 @@ public class ModBlockSlab extends BlockSlab implements IOreDictionaryContainer {
 		return isDouble;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public boolean isFullCube(IBlockState state) {
 		return state.getMaterial() != Material.ICE && state.getMaterial() != Material.GLASS && super.isFullCube(state);
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public boolean isOpaqueCube(IBlockState state) {
 		return state.getMaterial() != Material.ICE && state.getMaterial() != Material.GLASS && super.isOpaqueCube(state);
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face) {
 		return state.getMaterial() == Material.ICE || state.getMaterial() == Material.GLASS ? state != world.getBlockState(pos.offset(face)) || (world.getBlockState(pos.offset(face)).getBlock() != this || !isFullCube(world.getBlockState(pos.offset(face))) && super.shouldSideBeRendered(state, world, pos, face)) : super.shouldSideBeRendered(state, world, pos, face);

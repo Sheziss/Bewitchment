@@ -63,7 +63,7 @@ public class FortuneTreasure extends Fortune {
 					LootContext lc = (new LootContext.Builder((WorldServer) evt.getWorld()).withLuck(evt.getPlayer().getLuck()).withPlayer(evt.getPlayer())).build();
 					List<ItemStack> spawn = lt.generateLootForPools(evt.getPlayer().getRNG(), lc);
 					spawn.forEach(s -> spawn(s, evt.getWorld(), evt.getPos()));
-					cap.setFortuneRemoveable(true);
+					cap.setFortuneRemovable(true);
 				}
 			}
 		}

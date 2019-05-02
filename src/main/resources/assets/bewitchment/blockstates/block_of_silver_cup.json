@@ -1,14 +1,14 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "cube_all",
-    "textures": {
-      "all": "bewitchment:blocks/chisel/block_of_silver_cup"
-    }
+	"model": "cube_all",
+	"textures": {
+	  "all": "bewitchment:blocks/chisel/block_of_silver_cup"
+	}
   },
   "variants": {
-    "normal": [
-      {}
-    ]
+	"normal": [
+	  {}
+	]
   }
 }

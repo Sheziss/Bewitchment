@@ -12,7 +12,6 @@ tile.bewitchment.loom.name=Loom
 tile.bewitchment.tarot_table.name=Tarot Table
 item.bewitchment.tarots_deck.name=Tarots Deck
 tile.bewitchment.crystal_ball.name=Crystal Ball
-tile.bewitchment.gem_bowl.name=Gem Bowl
 
 tile.bewitchment.block_of_cold_iron.name=Block of Cold Iron
 tile.bewitchment.block_of_silver.name=Block of Silver
@@ -35,6 +34,7 @@ tile.bewitchment.purifying_earth.name=Purifying Earth
 tile.bewitchment.graveyard_dirt.name=Graveyard Dirt
 
 tile.bewitchment.goblet.name=Goblet
+tile.bewitchment.filled_goblet.name=Filled Goblet
 
 tile.bewitchment.lantern_white.name=Lantern (White)
 tile.bewitchment.lantern_orange.name=Lantern (Orange)
@@ -136,6 +136,7 @@ tile.bewitchment.button_juniper.name=Juniper Button
 tile.bewitchment.button_yew.name=Yew Button
 
 #Items
+item.bewitchment.grimoire_magia.name=Grimoire Magia
 item.bewitchment.girdle_of_the_dryad.name=Girdle of the Dryad
 item.bewitchment.hellish_bauble.name=Hellish Bauble
 item.bewitchment.horseshoe.name=Horseshoe
@@ -143,11 +144,6 @@ item.bewitchment.nazar.name=Nazar
 item.bewitchment.token_of_remedies.name=Token of Remedies
 item.bewitchment.triskelion_amulet.name=Triskelion Amulet
 item.bewitchment.wrathful_eye.name=Wrathful Eye
-item.bewitchment.aquamarine_crown.name=Aquamarine Crown
-item.bewitchment.emerald_pendant.name=Emerald Pendant
-item.bewitchment.everwatching_eye.name=Everwatching Eye
-item.bewitchment.ring_of_the_adamantine_star.name=Ring of the Adamantine Star
-item.bewitchment.scarlet_orb.name=Scarlet Orb
 
 item.bewitchment.cold_iron_helmet.name=Cold Iron Helmet
 item.bewitchment.cold_iron_chestplate.name=Cold Iron Chestplate
@@ -249,6 +245,7 @@ item.bewitchment.seed_mandrake.name=Mandrake Seeds
 item.bewitchment.seed_white_sage.name=White Sage Seeds
 item.bewitchment.seed_wormwood.name=Wormwood Seeds
 
+item.bewitchment.bowl_of_stew.name=Bowl of Stew
 item.bewitchment.juniper_berries.name=Juniper Berries
 item.bewitchment.yew_aril.name=Yew Aril
 
@@ -376,9 +373,9 @@ ritual.precondition=Something's wrong
 fortune.fortune_exists=This one's future has already been revealed: %s
 fortune.no_fortune=This world has no secrets awaiting
 
-tooltip.goblet_full=Full
 tooltip.lantern_lit=Lit
 
+tooltip.bewitchment.grimoire_magia=Magic Stored: %d / %d
 tooltip.bewitchment.girdle_of_the_dryad=This belt protects the wearer from harm by growing pieces of bark as armor.
 tooltip.bewitchment.hellish_bauble=This oddly shaped trinket will allow you to tap into a small portion of demonic power.
 tooltip.bewitchment.horseshoe=Horseshoes seem to be rather lucky trinkets in general. Spirits seem averse to you.
@@ -388,7 +385,6 @@ tooltip.bewitchment.pouch=What secrets does it hold?
 tooltip.bewitchment.remedy_talisman=The gem in its core seems to absorb illnesses, but it depletes rather quickly.
 tooltip.bewitchment.triskelion_amulet=This amulet seems to provide some strength against foes, but drains you slightly.
 tooltip.bewitchment.wrathful_eye=This trinket commands respect from demons.
-tooltip.bewitchment.talisman=An enchantable trinket, its effects will mainfest once enchanted.
 
 tooltip.armor_description_cold_iron=Protects against demons and spirits
 tooltip.tool_description_cold_iron=Deals extra damage to demons and spirits
@@ -421,6 +417,9 @@ tooltip.bewitchment.seed_hellebore=Seed from a innocent-looking plant
 tooltip.bewitchment.seed_mandrake=Seed from a plant with a strange root
 tooltip.bewitchment.seed_white_sage=Seed from an evergreen perennial shrub
 tooltip.bewitchment.seed_wormwood=Seed from a weedy herb
+
+tooltip.bewitchment.filled_bowl=This is just hot water... Why did you make this?
+tooltip.bewitchment.filled_bowl_full=Restores %d hunger and %f saturation.
 
 #TC Aspects
 tc.aspect.diabolus=Demon, Unholy, Profane

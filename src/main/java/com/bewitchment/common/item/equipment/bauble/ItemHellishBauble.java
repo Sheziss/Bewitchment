@@ -29,14 +29,6 @@ public class ItemHellishBauble extends ModItemBauble {
 	@Override
 	public void onEquipped(ItemStack stack, EntityLivingBase living) {
 		living.world.playSound(null, living.getPosition(), SoundEvents.ENTITY_BLAZE_AMBIENT, SoundCategory.PLAYERS, 0.75f, 1.9f);
-		if (living instanceof EntityPlayer)
-			living.getCapability(MagicPower.CAPABILITY, null).addBonus(getTranslationKey(), 100);
-	}
-
-	@Override
-	public void onUnequipped(ItemStack stack, EntityLivingBase living) {
-		if (living instanceof EntityPlayer)
-			living.getCapability(MagicPower.CAPABILITY, null).removeBonus(getTranslationKey());
 	}
 
 	@Override

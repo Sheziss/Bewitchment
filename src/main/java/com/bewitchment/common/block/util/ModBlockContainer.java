@@ -2,6 +2,7 @@ package com.bewitchment.common.block.util;
 
 import com.bewitchment.Util;
 import com.bewitchment.common.block.BlockWitchesAltar;
+import com.bewitchment.common.block.tile.entity.TileEntityWitchesCauldron;
 import com.bewitchment.common.block.tile.entity.util.IAltarStorage;
 import com.bewitchment.common.block.tile.entity.util.ModTileEntity;
 import net.minecraft.block.BlockContainer;
@@ -24,6 +25,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandler;
 
+@SuppressWarnings("deprecation")
 public abstract class ModBlockContainer extends BlockContainer {
 	private final Object modInstance;
 	private final int guiID;
@@ -85,7 +87,6 @@ public abstract class ModBlockContainer extends BlockContainer {
 		return super.onBlockActivated(world, pos, state, player, hand, face, hitX, hitY, hitZ);
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face) {
 		return super.shouldSideBeRendered(state, world, pos, face) && (state.getMaterial() != Material.ICE && state.getMaterial() != Material.GLASS || world.getBlockState(pos.offset(face)).getBlock() != this);
@@ -93,7 +94,7 @@ public abstract class ModBlockContainer extends BlockContainer {
 
 	@Override
 	public void breakBlock(World world, BlockPos pos, IBlockState state) {
-		if (!world.isRemote && world.getGameRules().getBoolean("doTileDrops") && hasTileEntity(state) && world.getTileEntity(pos) instanceof ModTileEntity) {
+		if (!world.isRemote && world.getGameRules().getBoolean("doTileDrops") && hasTileEntity(state) && world.getTileEntity(pos) instanceof ModTileEntity && !(world.getTileEntity(pos) instanceof TileEntityWitchesCauldron)) {
 			ModTileEntity tile = (ModTileEntity) world.getTileEntity(pos);
 			for (IItemHandler inventory : tile.getInventories())
 				for (int i = 0; i < inventory.getSlots(); i++)

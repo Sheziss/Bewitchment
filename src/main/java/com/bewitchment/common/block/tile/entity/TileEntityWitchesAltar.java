@@ -1,14 +1,19 @@
 package com.bewitchment.common.block.tile.entity;
 
+import com.bewitchment.Util;
 import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.api.capability.magicpower.MagicPower;
 import com.bewitchment.common.block.BlockWitchesAltar;
 import com.bewitchment.common.block.tile.entity.util.ModTileEntity;
+import com.bewitchment.registry.ModObjects;
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 
@@ -54,7 +59,7 @@ public class TileEntityWitchesAltar extends ModTileEntity implements ITickable {
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound tag) {
-		magicPower.serialize(tag);
+		tag.setTag("magicPower", magicPower.serializeNBT());
 		tag.setInteger("gain", gain);
 		tag.setDouble("multiplier", multiplier);
 		return super.writeToNBT(tag);
@@ -63,7 +68,7 @@ public class TileEntityWitchesAltar extends ModTileEntity implements ITickable {
 	@Override
 	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
-		magicPower.deserialize(tag);
+		magicPower.deserializeNBT(tag.getCompoundTag("magicPower"));
 		gain = tag.getInteger("gain");
 		multiplier = tag.getDouble("multiplier");
 	}
@@ -75,16 +80,19 @@ public class TileEntityWitchesAltar extends ModTileEntity implements ITickable {
 		Item item = Item.getItemFromBlock(block);
 		gain += BewitchmentAPI.ALTAR_GAIN_VALUES.getOrDefault(item, 0d);
 		multiplier += BewitchmentAPI.ALTAR_MULTIPLIER_VALUES.getOrDefault(item, 0);
-		//		if (block == ModObjects.placed_item) {
-		//			Item placedItem = ((TileEntityPlacedItem) world.getTileEntity(pos)).inventory.getStackInSlot(0).getItem();
-		//			if (placedItem == ModObjects.athame) {
-		//				for (EntityPlayer player : world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).grow(5))) {
-		//					MagicPower cap = player.getCapability(MagicPower.CAPABILITY, null);
-		//					int amount = Math.min(20, (cap.getMaxAmount() + cap.getBonusAmount()) - cap.getAmount());
-		//					if (magicPower.drain(amount)) cap.fill(amount / 10);
-		//				}
-		//			}
-		//		}
-
+		if (block == ModObjects.placed_item) {
+			Item placedItem = ((TileEntityPlacedItem) world.getTileEntity(pos)).inventory.getStackInSlot(0).getItem();
+			if (placedItem == ModObjects.athame) {
+				for (EntityPlayer player : world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).grow(5))) {
+					for (ItemStack stack : Util.getEntireInventory(player)) {
+						if (stack.getItem() == ModObjects.grimoire_magia) {
+							MagicPower cap = stack.getCapability(MagicPower.CAPABILITY, null);
+							if (magicPower.drain(100)) cap.fill(10);
+							break;
+						}
+					}
+				}
+			}
+		}
 	}
 }

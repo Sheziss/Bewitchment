@@ -19,6 +19,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+@SuppressWarnings("deprecation")
 public class BlockDistillery extends ModBlockContainer {
 	private static final AxisAlignedBB BOX_X = new AxisAlignedBB(0.125, 0, 0, 0.875, 0.6875, 1), BOX_Z = new AxisAlignedBB(0, 0, 0.125, 1, 0.6875, 0.875);
 

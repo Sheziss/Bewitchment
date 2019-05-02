@@ -40,7 +40,7 @@ public class FortuneDropItem extends Fortune {
 		if (event.getEntityPlayer() != null) {
 			ExtendedPlayer cap = event.getEntityPlayer().getCapability(ExtendedPlayer.CAPABILITY, null);
 			if (cap.getFortune() == this && cap.isFortuneActive() && event.getEntityPlayer().dropItem(true) != null)
-				cap.setFortuneRemoveable(true);
+				cap.setFortuneRemovable(true);
 		}
 	}
 }

@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
 import thaumcraft.api.crafting.IInfusionStabiliserExt;
 
+@SuppressWarnings("deprecation")
 @Optional.Interface(iface = "thaumcraft.api.crafting.IInfusionStabiliserExt", modid = "thaumcraft")
 public abstract class BlockCandleBase extends ModBlock implements IInfusionStabiliserExt {
 	public static final PropertyBool LIT = PropertyBool.create("lit");

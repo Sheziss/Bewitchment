@@ -24,12 +24,15 @@ public class RenderTileEntityWitchesCauldron extends TileEntitySpecialRenderer<T
 		if (tank.getFluid() != null) {
 			FluidStack stack = tank.getFluid();
 			GlStateManager.pushMatrix();
-			GlStateManager.disableLighting();
 			GlStateManager.enableBlend();
-			GlStateManager.translate(x, y + 0.1 + (stack.amount / (Fluid.BUCKET_VOLUME * 2d)), z);
+			GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+			GlStateManager.disableAlpha();
+			//			System.out.println(tank.getFluidAmount());
+			GlStateManager.translate(x, (y + 3d / 5) - ((double) Fluid.BUCKET_VOLUME / tank.getFluidAmount()) + 1, z);
 			GlStateManager.translate(0.125, 0, 0.125);
 			GlStateManager.rotate(90, 1, 0, 0);
 			GlStateManager.scale(0.0460425, 0.0460425, 0.0460425);
+
 			Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 			TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(stack.getFluid().getStill().toString());
 			Tessellator tessellator = Tessellator.getInstance();
@@ -39,8 +42,9 @@ public class RenderTileEntityWitchesCauldron extends TileEntitySpecialRenderer<T
 			tessellator.getBuffer().pos(16, 0, 0).tex(sprite.getMaxU(), sprite.getMinV()).endVertex();
 			tessellator.getBuffer().pos(0, 0, 0).tex(sprite.getMinU(), sprite.getMinV()).endVertex();
 			tessellator.draw();
+
 			GlStateManager.disableBlend();
-			GlStateManager.enableLighting();
+			GlStateManager.enableAlpha();
 			GlStateManager.popMatrix();
 		}
 	}

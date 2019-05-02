@@ -3,7 +3,6 @@ package com.bewitchment.common.enchantment.util;
 import baubles.api.BaublesApi;
 import baubles.api.cap.IBaublesItemHandler;
 import com.bewitchment.Bewitchment;
-import com.bewitchment.common.item.equipment.bauble.ItemTalisman;
 import com.bewitchment.registry.ModEnchantments;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -20,8 +19,8 @@ import java.util.List;
 public class ModEnchantment extends Enchantment {
 	private final int maxLevel;
 
-	public ModEnchantment(String name, Rarity rarity, int maxLevel) {
-		super(rarity, EnumEnchantmentType.WEARABLE, new EntityEquipmentSlot[]{});
+	public ModEnchantment(String name, Rarity rarity, int maxLevel, EnumEnchantmentType type, EntityEquipmentSlot... slots) {
+		super(rarity, type, slots);
 		setRegistryName(new ResourceLocation(Bewitchment.MODID, name));
 		setName(getRegistryName().toString().replace(":", "."));
 		this.maxLevel = maxLevel;
@@ -41,16 +40,6 @@ public class ModEnchantment extends Enchantment {
 	}
 
 	@Override
-	public boolean canApply(ItemStack stack) {
-		return stack.getItem() instanceof ItemTalisman;
-	}
-
-	@Override
-	public boolean canApplyAtEnchantingTable(ItemStack stack) {
-		return canApply(stack);
-	}
-
-	@Override
 	public int getMaxLevel() {
 		return maxLevel;
 	}
@@ -67,14 +56,5 @@ public class ModEnchantment extends Enchantment {
 		int total = 0;
 		for (ItemStack stack : getEntityEquipment(player)) total += EnchantmentHelper.getEnchantmentLevel(this, stack);
 		return total;
-	}
-
-	public void onEquipped(EntityLivingBase living) {
-	}
-
-	public void onUnequipped(EntityLivingBase living) {
-	}
-
-	public void onWornTick(EntityLivingBase living) {
 	}
 }

@@ -25,6 +25,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 import java.util.Random;
 
+@SuppressWarnings("deprecation")
 public class BlockLantern extends BlockCandleBase {
 	private static final AxisAlignedBB BOX = new AxisAlignedBB(0.2, 0, 0.2, 0.8, 0.9375, 0.8);
 

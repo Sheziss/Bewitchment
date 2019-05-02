@@ -4,7 +4,6 @@ import com.bewitchment.Bewitchment;
 import com.bewitchment.api.capability.extendedplayer.ExtendedPlayer;
 import com.bewitchment.api.capability.extendedplayer.ExtendedPlayer.TransformationType;
 import com.bewitchment.api.registry.*;
-import com.bewitchment.registry.ModObjects;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -28,13 +27,14 @@ import java.util.Map;
  * The Bewitchment API, use this for creating addons.
  */
 public class BewitchmentAPI {
-	public static final IForgeRegistry<DistilleryRecipe> REGISTRY_DISTILLERY = new RegistryBuilder<DistilleryRecipe>().setName(ModObjects.distillery.getRegistryName()).setType(DistilleryRecipe.class).create();
-	public static final IForgeRegistry<LoomRecipe> REGISTRY_LOOM = new RegistryBuilder<LoomRecipe>().setName(ModObjects.loom.getRegistryName()).setType(LoomRecipe.class).create();
-	public static final IForgeRegistry<OvenRecipe> REGISTRY_OVEN = new RegistryBuilder<OvenRecipe>().setName(ModObjects.oven.getRegistryName()).setType(OvenRecipe.class).create();
-	public static final IForgeRegistry<Ritual> REGISTRY_RITUAL = new RegistryBuilder<Ritual>().setName(ModObjects.glyph.getRegistryName()).setType(Ritual.class).create();
+	//	public static final IForgeRegistry<CauldronRecipe> REGISTRY_CAULDRON = new RegistryBuilder<CauldronRecipe>().setName(new ResourceLocation(Bewitchment.MODID, "cauldron_recipe")).setType(CauldronRecipe.class).create();
+	public static final IForgeRegistry<DistilleryRecipe> REGISTRY_DISTILLERY = new RegistryBuilder<DistilleryRecipe>().setName(new ResourceLocation(Bewitchment.MODID, "distillery_recipe")).setType(DistilleryRecipe.class).create();
+	public static final IForgeRegistry<LoomRecipe> REGISTRY_LOOM = new RegistryBuilder<LoomRecipe>().setName(new ResourceLocation(Bewitchment.MODID, "loom_recipe")).setType(LoomRecipe.class).create();
+	public static final IForgeRegistry<OvenRecipe> REGISTRY_OVEN = new RegistryBuilder<OvenRecipe>().setName(new ResourceLocation(Bewitchment.MODID, "oven_recipe")).setType(OvenRecipe.class).create();
+	public static final IForgeRegistry<Ritual> REGISTRY_RITUAL = new RegistryBuilder<Ritual>().setName(new ResourceLocation(Bewitchment.MODID, "ritual")).setType(Ritual.class).create();
 	public static final IForgeRegistry<Spell> REGISTRY_SPELL = new RegistryBuilder<Spell>().setName(new ResourceLocation(Bewitchment.MODID, "spell")).setType(Spell.class).create();
 
-	public static final IForgeRegistry<Fortune> REGISTRY_FORTUNE = new RegistryBuilder<Fortune>().setName(ModObjects.crystal_ball.getRegistryName()).setType(Fortune.class).create();
+	public static final IForgeRegistry<Fortune> REGISTRY_FORTUNE = new RegistryBuilder<Fortune>().setName(new ResourceLocation(Bewitchment.MODID, "fortune")).setType(Fortune.class).create();
 
 	public static final Map<EntityEntry, Collection<ItemStack>> ATHAME_LOOT = new HashMap<>();
 	public static final Map<Block, Integer> ALTAR_NATURE_VALUES = new HashMap<>();

@@ -1,12 +1,12 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {
-      "item": "bewitchment:block_of_salt"
-    }
+	{
+	  "item": "bewitchment:block_of_salt"
+	}
   ],
   "result": {
-    "item": "bewitchment:salt",
-    "count": 9
+	"item": "bewitchment:salt",
+	"count": 9
   }
 }

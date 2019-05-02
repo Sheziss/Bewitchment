@@ -1,5 +1,6 @@
 package com.bewitchment;
 
+import baubles.api.BaublesApi;
 import com.bewitchment.registry.ModObjects;
 import com.bewitchment.registry.util.IOreDictionaryContainer;
 import net.minecraft.block.Block;
@@ -18,9 +19,9 @@ import net.minecraftforge.oredict.OreDictionary;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("deprecation")
 public class Util {
-	@SuppressWarnings("deprecation")
-	public static void registerValues(Block block, String name, Block base, String... oreDictionaryNames) {
+	public static final void registerValues(Block block, String name, Block base, String... oreDictionaryNames) {
 		registerValues(block, name, base.getDefaultState().getMaterial(), base.getSoundType(), base.getBlockHardness(null, null, null), base.getExplosionResistance(null) * 5, base.getHarvestTool(base.getDefaultState()), base.getHarvestLevel(base.getDefaultState()), oreDictionaryNames);
 	}
 
@@ -50,6 +51,16 @@ public class Util {
 		if (item instanceof IOreDictionaryContainer)
 			for (String ore : oreDictionaryNames) ((IOreDictionaryContainer) item).getOreDictionaryNames().add(ore);
 		ModObjects.REGISTRY.add(item);
+	}
+
+	public static final List<ItemStack> getEntireInventory(EntityPlayer player) {
+		List<ItemStack> fin = new ArrayList<>();
+		for (int i = 0; i < BaublesApi.getBaublesHandler(player).getSlots(); i++)
+			fin.add(BaublesApi.getBaublesHandler(player).getStackInSlot(i));
+		for (ItemStack stack : player.inventory.mainInventory) fin.add(stack);
+		for (ItemStack stack : player.inventory.armorInventory) fin.add(stack);
+		for (ItemStack stack : player.inventory.offHandInventory) fin.add(stack);
+		return fin;
 	}
 
 	public static final String[] toArray(List<String> list) {

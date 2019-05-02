@@ -16,6 +16,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+@SuppressWarnings("deprecation")
 public class BlockTarotTable extends ModBlockContainer {
 	public BlockTarotTable() {
 		super(Bewitchment.instance, "tarot_table", Material.ROCK, SoundType.STONE, 3, 3, "pickaxe", 0, ModGui.TAROT.ordinal());

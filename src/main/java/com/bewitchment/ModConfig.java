@@ -14,6 +14,8 @@ public class ModConfig extends Configuration {
 	public final int silverSize, silverChance, silverMin, silverMax, saltSize, saltChance, saltMin, saltMax, amethystSize, amethystChance, amethystMin, amethystMax, garnetSize, garnetChance, garnetMin, garnetMax, moonstoneSize, moonstoneChance, moonstoneMin, moonstoneMax;
 	public final List<String> blindwormBiomes, lizardBiomes, newtBiomes, owlBiomes, ravenBiomes, snakeBiomes, toadBiomes, blackDogBiomes, hellhoundBiomes, alphaHellhoundBiomes, serpentBiomes;
 
+	public final int maxGrimoirePower;
+
 	public ModConfig(File file) {
 		super(file);
 		load();
@@ -55,6 +57,8 @@ public class ModConfig extends Configuration {
 		hellhoundBiomes = Arrays.asList(getStringList("hellhoundBiomes", "mobSpawns", new String[]{Type.NETHER.getName()}, "The list of BiomeDictionary types that the hellhound will spawn in."));
 		alphaHellhoundBiomes = Arrays.asList(getStringList("alphaHellhoundBiomes", "mobSpawns", new String[]{Type.NETHER.getName()}, "The list of BiomeDictionary types that the alpha hellhound will spawn in."));
 		serpentBiomes = Arrays.asList(getStringList("serpentBiomes", "mobSpawns", new String[]{Type.NETHER.getName()}, "The list of BiomeDictionary types that the serpent will spawn in."));
+
+		maxGrimoirePower = getInt("maxGrimoirePower", "items", 5000, 1, Integer.MAX_VALUE, "The total amount of Magic Power the Grimoire Magia can hold.");
 		save();
 	}
 }

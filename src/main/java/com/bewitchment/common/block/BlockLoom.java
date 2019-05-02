@@ -16,6 +16,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+@SuppressWarnings("deprecation")
 public class BlockLoom extends ModBlockContainer {
 	public BlockLoom() {
 		super(Bewitchment.instance, "loom", Material.WOOD, SoundType.WOOD, 3, 3, "axe", 0, ModGui.LOOM.ordinal());

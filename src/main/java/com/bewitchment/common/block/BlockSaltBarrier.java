@@ -27,6 +27,7 @@ import net.minecraft.world.World;
 import java.util.List;
 import java.util.Random;
 
+@SuppressWarnings("deprecation")
 public class BlockSaltBarrier extends BlockRedstoneWire {
 	private static final AxisAlignedBB WALL = new AxisAlignedBB(0, -5, 0, 1, 5, 1);
 
@@ -59,7 +60,6 @@ public class BlockSaltBarrier extends BlockRedstoneWire {
 		return 0;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void addCollisionBoxToList(IBlockState state, World world, BlockPos pos, AxisAlignedBB box, List<AxisAlignedBB> boxes, Entity entity, boolean wut) {
 		if (entity instanceof EntityLivingBase) {

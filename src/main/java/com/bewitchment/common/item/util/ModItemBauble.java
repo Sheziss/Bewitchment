@@ -33,7 +33,7 @@ public abstract class ModItemBauble extends ModItem implements IBauble {
 				}
 			}
 		}
-		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
+		return new ActionResult<>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
 	}
 
 	@Override

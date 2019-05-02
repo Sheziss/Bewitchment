@@ -16,6 +16,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+@SuppressWarnings("deprecation")
 public class BlockOven extends ModBlockContainer {
 	public BlockOven() {
 		super(Bewitchment.instance, "oven", Material.IRON, SoundType.METAL, 5, 5, "pickaxe", 0, ModGui.OVEN.ordinal());

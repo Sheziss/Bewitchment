@@ -39,7 +39,7 @@ public class ExtendedPlayerHandler {
 			ExtendedPlayer cap = event.player.getCapability(ExtendedPlayer.CAPABILITY, null);
 			Fortune fortune = cap.getFortune();
 			if (fortune != null) {
-				if (cap.isFortuneRemoveable()) cap.setFortune(null);
+				if (cap.isFortuneRemovable()) cap.setFortune(null);
 				else {
 					if (fortune.isInstant(event.player)) cap.setFortuneActive(true);
 					if (cap.isFortuneActive() && fortune.apply(event.player)) cap.setFortune(null);

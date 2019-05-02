@@ -14,6 +14,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+@SuppressWarnings("deprecation")
 public class BlockCrystalBall extends ModBlockContainer {
 	private static final AxisAlignedBB BOX = new AxisAlignedBB(3d / 16, 0, 3d / 16, 13d / 16, 12d / 16, 13d / 16);
 

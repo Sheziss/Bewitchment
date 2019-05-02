@@ -13,6 +13,7 @@ import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.aspects.AspectRegistryEvent;
 
+@SuppressWarnings("deprecation")
 public class BewitchmentThaumcraft {
 	public static final Aspect SUN = getOrCreateAspect("sol", 0xffd300, new Aspect[]{Aspect.FIRE, Aspect.LIGHT}, new ResourceLocation(Bewitchment.MODID, "textures/thaumcraft/sol.png"));
 	public static final Aspect MOON = getOrCreateAspect("luna", 0x808080, new Aspect[]{Aspect.EARTH, Aspect.DARKNESS}, new ResourceLocation(Bewitchment.MODID, "textures/thaumcraft/luna.png"));
@@ -25,7 +26,6 @@ public class BewitchmentThaumcraft {
 		return new Aspect(tag, color, components, image, 1);
 	}
 
-	@SuppressWarnings("deprecation")
 	@SubscribeEvent
 	public void aspectRegistrationEvent(AspectRegistryEvent event) {
 		// Items
@@ -114,7 +114,6 @@ public class BewitchmentThaumcraft {
 		event.register.registerObjectTag(new ItemStack(ModObjects.perpetual_ice), new AspectList().add(Aspect.COLD, 10).add(Aspect.MAGIC, 10));
 		event.register.registerObjectTag(new ItemStack(ModObjects.goblet), new AspectList().add(Aspect.METAL, 15).add(Aspect.MAGIC, 15).add(Aspect.VOID, 15));
 		event.register.registerObjectTag(new ItemStack(ModObjects.loom), new AspectList().add(Aspect.PLANT, 30).add(Aspect.MAGIC, 15).add(Aspect.CRAFT, 25));
-		event.register.registerObjectTag(new ItemStack(ModObjects.witchfire), new AspectList().add(Aspect.FIRE, 5).add(Aspect.MAGIC, 5));
 		event.register.registerObjectTag(new ItemStack(ModObjects.oven), new AspectList().add(Aspect.FIRE, 25).add(Aspect.METAL, 30).add(Aspect.CRAFT, 30));
 		event.register.registerObjectTag(new ItemStack(ModObjects.nethersteel), new AspectList().add(Aspect.FIRE, 5).add(Aspect.MAGIC, 5).add(Aspect.METAL, 5).add(DEMON, 10));
 		event.register.registerObjectTag(new ItemStack(ModObjects.salt_ore), new AspectList().add(Aspect.EARTH, 4).add(Aspect.WATER, 4).add(Aspect.PROTECT, 4));
@@ -139,10 +138,6 @@ public class BewitchmentThaumcraft {
 		event.register.registerObjectTag(new ItemStack(ModObjects.moonstone_ore), new AspectList().add(Aspect.DESIRE, 4).add(Aspect.EARTH, 4).add(Aspect.MAGIC, 4).add(MOON, 4));
 
 		//Baubles
-		event.register.registerObjectTag(new ItemStack(ModObjects.scarlet_orb), new AspectList().add(Aspect.METAL, 25).add(Aspect.DESIRE, 25).add(Aspect.CRYSTAL, 25));
-		event.register.registerObjectTag(new ItemStack(ModObjects.aquamarine_crown), new AspectList().add(Aspect.METAL, 15).add(Aspect.WATER, 25).add(STAR, 15).add(Aspect.LIGHT, 10));
-		event.register.registerObjectTag(new ItemStack(ModObjects.ring_of_the_adamantine_star), new AspectList().add(Aspect.CRYSTAL, 25).add(Aspect.DESIRE, 15).add(STAR, 15));
-		event.register.registerObjectTag(new ItemStack(ModObjects.everwatching_eye), new AspectList().add(Aspect.METAL, 25).add(Aspect.ELDRITCH, 15).add(Aspect.SENSES, 15));
 
 		//Silver
 		event.register.registerObjectTag(new ItemStack(ModObjects.silver_ingot), new AspectList().add(Aspect.METAL, 10).add(Aspect.DESIRE, 5).add(MOON, 3));

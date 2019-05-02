@@ -8,9 +8,7 @@ import com.bewitchment.api.registry.LoomRecipe;
 import com.bewitchment.api.registry.OvenRecipe;
 import com.bewitchment.api.registry.Ritual;
 import com.bewitchment.common.block.BlockGlyph.GlyphType;
-import com.bewitchment.common.entity.living.EntityBlindworm;
-import com.bewitchment.common.entity.living.EntitySnake;
-import com.bewitchment.common.entity.living.EntityToad;
+import com.bewitchment.common.entity.living.*;
 import com.bewitchment.common.entity.spirits.demons.*;
 import com.bewitchment.common.entity.spirits.ghosts.EntityBlackDog;
 import com.bewitchment.common.fortune.*;
@@ -34,7 +32,10 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import java.util.Arrays;
 
 public class ModRecipes {
-	public static void initFurnace() {
+	public static void preInitCauldron() {
+	}
+
+	public static void preInitFurnace() {
 		GameRegistry.addSmelting(ModObjects.silver_ore, new ItemStack(ModObjects.silver_ingot), 0.35f);
 		GameRegistry.addSmelting(Blocks.SAPLING, new ItemStack(ModObjects.wood_ash, 4), 0.15f);
 		GameRegistry.addSmelting(ModObjects.amethyst_ore, new ItemStack(ModObjects.amethyst), 0.35f);
@@ -110,7 +111,7 @@ public class ModRecipes {
 		BewitchmentAPI.ATHAME_LOOT.put(EntityRegistry.getEntry(EntityDemoness.class), Sets.newHashSet(new ItemStack(ModObjects.demonic_heart)));
 	}
 
-	public static void initDistillery() {
+	public static void preInitDistillery() {
 		BewitchmentAPI.REGISTRY_DISTILLERY.register(new DistilleryRecipe(Bewitchment.MODID, "cleansing_balm", Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.acacia_resin)), Ingredient.fromStacks(new ItemStack(ModObjects.white_sage)), Ingredient.fromStacks(new ItemStack(ModObjects.salt))), Arrays.asList(new ItemStack(ModObjects.cleansing_balm), new ItemStack(ModObjects.wood_ash)), 0, 300));
 		BewitchmentAPI.REGISTRY_DISTILLERY.register(new DistilleryRecipe(Bewitchment.MODID, "demonic_elixir", Arrays.asList(Ingredient.fromStacks(new ItemStack(Items.BLAZE_POWDER)), Ingredient.fromStacks(new ItemStack(ModObjects.cloudy_oil, 2)), Ingredient.fromStacks(new ItemStack(ModObjects.demonic_heart)), Ingredient.fromStacks(new ItemStack(ModObjects.graveyard_dust))), Arrays.asList(new ItemStack(ModObjects.demonic_elixir, 2), new ItemStack(ModObjects.diabolical_vein, 1)), 0, 300));
 		BewitchmentAPI.REGISTRY_DISTILLERY.register(new DistilleryRecipe(Bewitchment.MODID, "everchanging_dew", Arrays.asList(Ingredient.fromStacks(new ItemStack(Items.DYE, 1, Short.MAX_VALUE)), Ingredient.fromStacks(new ItemStack(ModObjects.essence_of_vitality)), Ingredient.fromStacks(new ItemStack(Items.PAPER))), Arrays.asList(new ItemStack(ModObjects.everchanging_dew), new ItemStack(Items.SLIME_BALL, 3)), 0, 300));
@@ -123,7 +124,7 @@ public class ModRecipes {
 		BewitchmentAPI.REGISTRY_DISTILLERY.register(new DistilleryRecipe(Bewitchment.MODID, "undying_salve", Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.ectoplasm)), Ingredient.fromStacks(new ItemStack(ModObjects.ebb_of_death)), Ingredient.fromStacks(new ItemStack(ModObjects.essence_of_vitality))), Arrays.asList(new ItemStack(ModObjects.ectoplasm, 2), new ItemStack(ModObjects.undying_salve, 2)), 0, 300));
 	}
 
-	public static void initLoom() {
+	public static void preInitLoom() {
 		BewitchmentAPI.REGISTRY_LOOM.register(new LoomRecipe(Bewitchment.MODID, "spider_web", Arrays.asList(Ingredient.fromStacks(new ItemStack(Items.STRING)), Ingredient.fromStacks(new ItemStack(Items.STRING)), Ingredient.fromStacks(new ItemStack(Items.STRING))), new ItemStack(Blocks.WEB)));
 		BewitchmentAPI.REGISTRY_LOOM.register(new LoomRecipe(Bewitchment.MODID, "regal_silk", Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.chromatic_quill)), Ingredient.fromStacks(new ItemStack(Blocks.WEB)), Ingredient.fromStacks(new ItemStack(Blocks.WEB)), Ingredient.fromStacks(new ItemStack(ModObjects.everchanging_dew))), new ItemStack(ModObjects.regal_silk, 12)));
 		BewitchmentAPI.REGISTRY_LOOM.register(new LoomRecipe(Bewitchment.MODID, "golden_thread", Arrays.asList(Ingredient.fromStacks(new ItemStack(Items.WHEAT)), Ingredient.fromStacks(new ItemStack(Items.WHEAT)), Ingredient.fromStacks(new ItemStack(Blocks.HAY_BLOCK)), Ingredient.fromStacks(new ItemStack(ModObjects.everchanging_dew))), new ItemStack(ModObjects.golden_thread, 3)));
@@ -134,7 +135,7 @@ public class ModRecipes {
 		BewitchmentAPI.REGISTRY_LOOM.register(new LoomRecipe(Bewitchment.MODID, "sanguine_fabric", Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.diabolical_vein)), Ingredient.fromStacks(new ItemStack(ModObjects.diabolical_vein)), Ingredient.fromStacks(new ItemStack(ModObjects.diabolical_vein)), Ingredient.fromStacks(new ItemStack(ModObjects.diabolical_vein))), new ItemStack(ModObjects.sanguine_fabric, 4)));
 	}
 
-	public static void initOven() {
+	public static void preInitOven() {
 		BewitchmentAPI.REGISTRY_OVEN.register(new OvenRecipe(Bewitchment.MODID, "wheat", new ItemStack(Items.WHEAT), new ItemStack(Items.BREAD), new ItemStack(ModObjects.cloudy_oil), 0.85f));
 		BewitchmentAPI.REGISTRY_OVEN.register(new OvenRecipe(Bewitchment.MODID, "cactus", new ItemStack(Blocks.CACTUS), new ItemStack(Items.DYE, 1, 2), new ItemStack(ModObjects.cloudy_oil), 0.85f));
 		BewitchmentAPI.REGISTRY_OVEN.register(new OvenRecipe(Bewitchment.MODID, "chorus_fruit", new ItemStack(Items.CHORUS_FRUIT), new ItemStack(Items.CHORUS_FRUIT_POPPED), new ItemStack(ModObjects.dimensional_sand, 2), 0.85f));
@@ -169,7 +170,7 @@ public class ModRecipes {
 		}
 	}
 
-	public static void initRitual() {
+	public static void preInitRitual() {
 		BewitchmentAPI.REGISTRY_RITUAL.register(new RitualHighMoon());
 		BewitchmentAPI.REGISTRY_RITUAL.register(new RitualSolarGlory());
 		BewitchmentAPI.REGISTRY_RITUAL.register(new RitualSandsOfTime());
@@ -200,7 +201,7 @@ public class ModRecipes {
 		BewitchmentAPI.REGISTRY_RITUAL.register(new Ritual(Bewitchment.MODID, "sanctuary", Arrays.asList(Ingredient.fromStacks(new ItemStack(ModObjects.white_sage)), Ingredient.fromStacks(new ItemStack(ModObjects.salt)), Ingredient.fromStacks(Util.getOres("salt")), Ingredient.fromStacks(Util.getOres("dirt")), Ingredient.fromStacks(Util.getOres("dirt")), Ingredient.fromStacks(Util.getOres("dirt"))), Arrays.asList(), Arrays.asList(new ItemStack(ModObjects.purifying_earth, 16)), 250, 500, 4, GlyphType.NORMAL, GlyphType.NORMAL, null));
 	}
 
-	public static void initFortune() {
+	public static void preInitFortune() {
 		BewitchmentAPI.REGISTRY_FORTUNE.register(new FortuneBadLuck());
 		BewitchmentAPI.REGISTRY_FORTUNE.register(new FortuneDeath());
 		BewitchmentAPI.REGISTRY_FORTUNE.register(new FortuneDropItem());

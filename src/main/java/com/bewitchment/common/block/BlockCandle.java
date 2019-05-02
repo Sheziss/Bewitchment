@@ -21,6 +21,7 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
+@SuppressWarnings("deprecation")
 public class BlockCandle extends BlockCandleBase {
 	private static final AxisAlignedBB BOX = new AxisAlignedBB(0.38, 0, 0.38, 0.62, 0.5, 0.62);
 
@@ -50,7 +51,8 @@ public class BlockCandle extends BlockCandleBase {
 			world.setBlockState(pos, getDefaultState().withProperty(LIT, false));
 			world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5f, 2.6f + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8f, false);
 			return true;
-		} else {
+		}
+		else {
 			ItemStack stack = player.getHeldItem(hand);
 			if (stack.getItem() == Items.FLINT_AND_STEEL) {
 				stack.damageItem(1, player);

@@ -34,7 +34,7 @@ public class TileEntityLoom extends TileEntityAltarStorage implements ITickable 
 		if (!world.isRemote) {
 			if (recipe == null || !recipe.isValid(inventory_up, inventory_down)) progress = 0;
 			else {
-				if (MagicPower.attemptDrain(world, world.getClosestPlayer(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 5, false), getAltarPosition(), 6))
+				if (getAltarPosition() != null && MagicPower.attemptDrain(world.getTileEntity(getAltarPosition()), world.getClosestPlayer(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 5, false), 6))
 					progress++;
 				if (progress >= 200) {
 					progress = 0;

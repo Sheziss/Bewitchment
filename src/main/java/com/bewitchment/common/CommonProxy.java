@@ -57,6 +57,13 @@ public class CommonProxy {
 		ModEnchantments.preInit();
 		ModSounds.preInit();
 		ModPotions.preInit();
+		ModRecipes.preInitFurnace();
+		ModRecipes.preInitDistillery();
+		ModRecipes.preInitLoom();
+		ModRecipes.preInitOven();
+		ModRecipes.preInitRitual();
+		ModRecipes.preInitFortune();
+		ModRecipes.preInitCauldron();
 		// Capability
 		CapabilityManager.INSTANCE.register(ExtendedPlayer.class, new ExtendedPlayer(), ExtendedPlayer::new);
 		MinecraftForge.EVENT_BUS.register(new ExtendedPlayerHandler());
@@ -77,13 +84,6 @@ public class CommonProxy {
 		MinecraftForge.EVENT_BUS.register(new BlockDropHandler());
 		MinecraftForge.EVENT_BUS.register(new EventHandler());
 		if (Loader.isModLoaded("thaumcraft")) MinecraftForge.EVENT_BUS.register(new BewitchmentThaumcraft());
-
-		ModRecipes.initFurnace();
-		ModRecipes.initDistillery();
-		ModRecipes.initLoom();
-		ModRecipes.initOven();
-		ModRecipes.initRitual();
-		ModRecipes.initFortune();
 		BewitchmentPatchouli.init();
 
 		// Tool Repair

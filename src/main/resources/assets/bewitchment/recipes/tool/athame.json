@@ -1,25 +1,25 @@
 {
   "type": "forge:ore_shaped",
   "pattern": [
-    " S ",
-    "SGS",
-    " T "
+	" S ",
+	"SGS",
+	" T "
   ],
   "key": {
-    "S": {
-      "type": "forge:ore_dict",
-      "ore": "ingotSilver"
-    },
-    "G": {
-      "type": "forge:ore_dict",
-      "ore": "gemAll"
-    },
-    "T": {
-      "type": "forge:ore_dict",
-      "ore": "stickWood"
-    }
+	"S": {
+	  "type": "forge:ore_dict",
+	  "ore": "ingotSilver"
+	},
+	"G": {
+	  "type": "forge:ore_dict",
+	  "ore": "gemAll"
+	},
+	"T": {
+	  "type": "forge:ore_dict",
+	  "ore": "stickWood"
+	}
   },
   "result": {
-    "item": "bewitchment:athame"
+	"item": "bewitchment:athame"
   }
 }

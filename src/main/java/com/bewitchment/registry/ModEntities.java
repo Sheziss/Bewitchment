@@ -1,9 +1,7 @@
 package com.bewitchment.registry;
 
 import com.bewitchment.Bewitchment;
-import com.bewitchment.common.entity.living.EntityBlindworm;
-import com.bewitchment.common.entity.living.EntitySnake;
-import com.bewitchment.common.entity.living.EntityToad;
+import com.bewitchment.common.entity.living.*;
 import com.bewitchment.common.entity.misc.*;
 import com.bewitchment.common.entity.spirits.demons.*;
 import com.bewitchment.common.entity.spirits.ghosts.EntityBlackDog;

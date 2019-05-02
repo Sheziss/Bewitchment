@@ -18,7 +18,7 @@ public class ExtendedPlayer implements ICapabilitySerializable<NBTTagCompound>, 
 	private TransformationType transformation;
 	private Fortune fortune;
 
-	private boolean fortuneActive, fortuneRemoveable;
+	private boolean fortuneActive, fortuneRemovable;
 
 	public TransformationType getTransformation() {
 		return transformation == null ? TransformationType.NONE : transformation;
@@ -35,7 +35,7 @@ public class ExtendedPlayer implements ICapabilitySerializable<NBTTagCompound>, 
 	public void setFortune(Fortune fortune) {
 		this.fortune = fortune;
 		setFortuneActive(false);
-		setFortuneRemoveable(false);
+		setFortuneRemovable(false);
 	}
 
 	public boolean isFortuneActive() {
@@ -46,12 +46,12 @@ public class ExtendedPlayer implements ICapabilitySerializable<NBTTagCompound>, 
 		this.fortuneActive = active;
 	}
 
-	public boolean isFortuneRemoveable() {
-		return fortuneRemoveable;
+	public boolean isFortuneRemovable() {
+		return fortuneRemovable;
 	}
 
-	public void setFortuneRemoveable(boolean removeable) {
-		this.fortuneRemoveable = removeable;
+	public void setFortuneRemovable(boolean removable) {
+		this.fortuneRemovable = removable;
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class ExtendedPlayer implements ICapabilitySerializable<NBTTagCompound>, 
 		tag.setInteger("transformation", instance.getTransformation().ordinal());
 		tag.setString("fortune", fortune == null ? "" : instance.getFortune().getRegistryName().toString());
 		tag.setBoolean("fortuneActive", instance.isFortuneActive());
-		tag.setBoolean("fortuneRemoveable", instance.isFortuneRemoveable());
+		tag.setBoolean("fortuneRemovable", instance.isFortuneRemovable());
 		return tag;
 	}
 
@@ -70,7 +70,7 @@ public class ExtendedPlayer implements ICapabilitySerializable<NBTTagCompound>, 
 		instance.setTransformation(TransformationType.values()[tag.getInteger("transformation")]);
 		instance.setFortune(tag.getString("fortune").isEmpty() ? null : BewitchmentAPI.REGISTRY_FORTUNE.getValue(new ResourceLocation(tag.getString("fortune"))));
 		instance.setFortuneActive(tag.getBoolean("fortuneActive"));
-		instance.setFortuneRemoveable(tag.getBoolean("fortuneRemoveable"));
+		instance.setFortuneRemovable(tag.getBoolean("fortuneRemovable"));
 	}
 
 	@Override
