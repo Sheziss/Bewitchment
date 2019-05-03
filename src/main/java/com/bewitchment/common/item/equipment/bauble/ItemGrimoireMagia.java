@@ -67,9 +67,11 @@ public class ItemGrimoireMagia extends ModItemBauble {
 
 	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
-		super.getSubItems(tab, list);
-		ItemStack full = new ItemStack(this);
-		full.getCapability(MagicPower.CAPABILITY, null).setAmount(Bewitchment.proxy.config.maxGrimoirePower);
-		list.add(full);
+		if (isInCreativeTab(tab)) {
+			list.add(new ItemStack(this));
+			ItemStack full = new ItemStack(this);
+			full.getCapability(MagicPower.CAPABILITY, null).setAmount(Bewitchment.proxy.config.maxGrimoirePower);
+			list.add(full);
+		}
 	}
 }

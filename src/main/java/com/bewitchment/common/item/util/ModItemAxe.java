@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ModItemAxe extends ItemAxe {
 	public ModItemAxe(String name, ToolMaterial mat) {
-		super(mat, mat.getAttackDamage(), -3.1f);
+		super(mat, 5 + mat.getAttackDamage(), -3.1f);
 		Util.registerValues(this, name);
 	}
 
