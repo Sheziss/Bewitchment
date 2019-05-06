@@ -223,7 +223,6 @@ public class ModObjects {
 	public static final Item triskelion_amulet = new ItemTriskelionAmulet();
 	public static final Item wrathful_eye = new ItemWrathfulEye();
 	// Armor
-	//	public static final Item witcharmor
 	public static final Item cold_iron_helmet = new ModItemArmor("cold_iron_helmet", ARMOR_COLD_IRON, EntityEquipmentSlot.HEAD);
 	public static final Item cold_iron_chestplate = new ModItemArmor("cold_iron_chestplate", ARMOR_COLD_IRON, EntityEquipmentSlot.CHEST);
 	public static final Item cold_iron_leggings = new ModItemArmor("cold_iron_leggings", ARMOR_COLD_IRON, EntityEquipmentSlot.LEGS);
@@ -233,11 +232,9 @@ public class ModObjects {
 	public static final Item silver_leggings = new ItemSilverArmor("silver_leggings", EntityEquipmentSlot.LEGS);
 	public static final Item silver_boots = new ItemSilverArmor("silver_boots", EntityEquipmentSlot.FEET);
 	public static final Item witches_cowl = new ItemSilverArmor("witches_cowl", EntityEquipmentSlot.HEAD);
+	public static final Item witches_hat = new ItemSilverArmor("witches_hat", EntityEquipmentSlot.HEAD);
 	public static final Item witches_robe = new ItemSilverArmor("witches_robe", EntityEquipmentSlot.CHEST);
 	public static final Item witches_leggings = new ItemSilverArmor("witches_leggings", EntityEquipmentSlot.LEGS);
-	public static final Item witches_hat = new ItemSilverArmor("witches_hat", EntityEquipmentSlot.HEAD);
-
-
 	// Tools
 	public static final Item cold_iron_sword = new ModItemSword("cold_iron_sword", TOOL_COLD_IRON);
 	public static final Item cold_iron_pickaxe = new ModItemPickaxe("cold_iron_pickaxe", TOOL_COLD_IRON);
