@@ -83,7 +83,8 @@ public class ItemBowlOfStew extends ModItemFood {
 				if (stack0.getItem() instanceof ItemFood) {
 					try {
 						ReflectionHelper.findMethod(ItemFood.class, "onFoodEaten", "func_77849_c", ItemStack.class, World.class, EntityPlayer.class).invoke(stack0.getItem(), stack0, world, player);
-					} catch (Exception e) {
+					}
+					catch (Exception e) {
 					}
 				}
 			}

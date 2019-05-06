@@ -80,12 +80,14 @@ public class TileEntityWitchesCauldron extends TileEntityAltarStorage implements
 			if (isLava) {
 				world.playSound(null, getPos(), SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 1, (float) (0.2 * world.rand.nextDouble()) + 1);
 				stack.shrink(stack.getCount());
-			} else {
+			}
+			else {
 				world.playSound(null, getPos(), SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.BLOCKS, 1, (float) (0.2 * world.rand.nextDouble()) + 1);
 				if (stack.getItem() == ModObjects.wood_ash) {
 					tank.drain(Fluid.BUCKET_VOLUME, true);
 					clear(inventory);
-				} else inventory.insertItem(getFirstEmptySlot(inventory), stack, false);
+				}
+				else inventory.insertItem(getFirstEmptySlot(inventory), stack, false);
 			}
 			markDirty();
 		}

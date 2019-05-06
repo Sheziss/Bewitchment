@@ -32,8 +32,10 @@ public class TileEntityCrystalBall extends TileEntityAltarStorage {
 						}
 						player.sendStatusMessage(new TextComponentTranslation(set.getRegistryName().toString()), true);
 						player.getCapability(ExtendedPlayer.CAPABILITY, null).setFortune(set);
-					} else player.sendStatusMessage(new TextComponentTranslation("fortune.no_fortune"), true);
-				} else player.sendStatusMessage(new TextComponentTranslation("magic.no_power"), true);
+					}
+					else player.sendStatusMessage(new TextComponentTranslation("fortune.no_fortune"), true);
+				}
+				else player.sendStatusMessage(new TextComponentTranslation("magic.no_power"), true);
 			}
 			return true;
 		}

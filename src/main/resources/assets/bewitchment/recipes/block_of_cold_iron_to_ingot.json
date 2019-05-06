@@ -1,12 +1,12 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {
-      "item": "bewitchment:block_of_cold_iron"
-    }
+	{
+	  "item": "bewitchment:block_of_cold_iron"
+	}
   ],
   "result": {
-    "item": "bewitchment:cold_iron_ingot",
-    "count": 9
+	"item": "bewitchment:cold_iron_ingot",
+	"count": 9
   }
 }

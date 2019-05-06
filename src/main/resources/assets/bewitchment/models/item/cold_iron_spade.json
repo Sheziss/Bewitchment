@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "bewitchment:items/tool/cold_iron_spade"
+	"layer0": "bewitchment:items/tool/cold_iron_spade"
   }
 }

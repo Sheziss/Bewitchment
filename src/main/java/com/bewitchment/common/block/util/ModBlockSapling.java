@@ -53,7 +53,8 @@ public class ModBlockSapling extends ModBlockBush implements IGrowable {
 			WorldGenModTree generator = null;
 			try {
 				generator = gen.getDeclaredConstructor(boolean.class).newInstance(false);
-			} catch (Exception e) {
+			}
+			catch (Exception e) {
 				e.printStackTrace();
 			}
 			if (!world.isRemote && world.getBlockState(pos.up()).getBlock().canBeReplacedByLeaves(world.getBlockState(pos.up()), world, pos.up()) && generator.canSaplingGrow(world, pos))

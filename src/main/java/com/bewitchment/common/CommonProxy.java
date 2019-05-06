@@ -11,8 +11,7 @@ import com.bewitchment.common.handler.EventHandler;
 import com.bewitchment.common.handler.GuiHandler;
 import com.bewitchment.common.integration.patchouli.BewitchmentPatchouli;
 import com.bewitchment.common.integration.thaumcraft.BewitchmentThaumcraft;
-import com.bewitchment.common.world.gen.WorldGenCoquina;
-import com.bewitchment.common.world.gen.WorldGenOres;
+import com.bewitchment.common.world.gen.WorldGenerators;
 import com.bewitchment.registry.*;
 import com.bewitchment.registry.util.IOreDictionaryContainer;
 import net.minecraft.block.*;
@@ -95,8 +94,7 @@ public class CommonProxy {
 		ModObjects.ARMOR_VAMPIRE.setRepairItem(new ItemStack(ModObjects.sanguine_fabric));
 
 		// World
-		GameRegistry.registerWorldGenerator(new WorldGenOres(), 0);
-		GameRegistry.registerWorldGenerator(new WorldGenCoquina(), 0);
+		GameRegistry.registerWorldGenerator(new WorldGenerators(), 0);
 
 		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_aconitum), 3);
 		MinecraftForge.addGrassSeed(new ItemStack(ModObjects.seed_belladonna), 3);

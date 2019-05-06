@@ -49,7 +49,8 @@ public class TileEntityOven extends ModTileEntity implements ITickable {
 					burnTime = TileEntityFurnace.getItemBurnTime(inventory_up.getStackInSlot(0));
 					fuelBurnTime = burnTime;
 					inventory_up.extractItem(0, 1, false);
-				} else if (burnTime >= 0) {
+				}
+				else if (burnTime >= 0) {
 					progress++;
 					if (progress >= 200) {
 						progress = 0;

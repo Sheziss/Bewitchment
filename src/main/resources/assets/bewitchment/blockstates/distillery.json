@@ -1,30 +1,30 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "bewitchment:distillery",
-    "transform": "forge:default-block"
+	"model": "bewitchment:distillery",
+	"transform": "forge:default-block"
   },
   "variants": {
-    "normal": [
-      {}
-    ],
-    "facing=north": [
-      {}
-    ],
-    "facing=south": [
-      {
-        "y": 180
-      }
-    ],
-    "facing=east": [
-      {
-        "y": 90
-      }
-    ],
-    "facing=west": [
-      {
-        "y": 270
-      }
-    ]
+	"normal": [
+	  {}
+	],
+	"facing=north": [
+	  {}
+	],
+	"facing=south": [
+	  {
+		"y": 180
+	  }
+	],
+	"facing=east": [
+	  {
+		"y": 90
+	  }
+	],
+	"facing=west": [
+	  {
+		"y": 270
+	  }
+	]
   }
 }

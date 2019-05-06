@@ -3,10 +3,10 @@
   "icon": "bewitchment:kelp",
   "category": "herbology",
   "pages": [
-    {
-      "type": "spotlight",
-      "item": "bewitchment:kelp",
-      "text": "A large algae, it is often found at sea, in massive underwater forests, home to lots of sea life. When grown by you, it can grow just as tall."
-    }
+	{
+	  "type": "spotlight",
+	  "item": "bewitchment:kelp",
+	  "text": "A large algae, it is often found at sea, in massive underwater forests, home to lots of sea life. When grown by you, it can grow just as tall."
+	}
   ]
 }

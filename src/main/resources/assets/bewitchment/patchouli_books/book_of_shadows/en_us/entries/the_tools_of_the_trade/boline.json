@@ -3,15 +3,15 @@
   "icon": "bewitchment:boline",
   "category": "the_tools_of_the_trade",
   "pages": [
-    {
-      "type": "spotlight",
-      "item": "bewitchment:boline",
-      "text": "A small sickle, you have found it indispensible for harvesting plant-based ingredients. In addition, by using it to collect matter from a specific biome, you are able to use it for certain rituals..."
-    },
-    {
-      "type": "crafting",
-      "text": "Creating the Boline",
-      "recipe": "bewitchment:boline"
-    }
+	{
+	  "type": "spotlight",
+	  "item": "bewitchment:boline",
+	  "text": "A small sickle, you have found it indispensible for harvesting plant-based ingredients. In addition, by using it to collect matter from a specific biome, you are able to use it for certain rituals..."
+	},
+	{
+	  "type": "crafting",
+	  "text": "Creating the Boline",
+	  "recipe": "bewitchment:boline"
+	}
   ]
 }

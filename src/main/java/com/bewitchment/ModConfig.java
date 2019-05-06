@@ -11,6 +11,8 @@ import java.util.List;
 public class ModConfig extends Configuration {
 	public final List<String> broomSweepables;
 
+	public final int cypressChance, elderChance, juniperChance, yewChance;
+
 	public final int silverSize, silverChance, silverMin, silverMax, saltSize, saltChance, saltMin, saltMax, amethystSize, amethystChance, amethystMin, amethystMax, garnetSize, garnetChance, garnetMin, garnetMax, moonstoneSize, moonstoneChance, moonstoneMin, moonstoneMax;
 	public final List<String> blindwormBiomes, lizardBiomes, newtBiomes, owlBiomes, ravenBiomes, snakeBiomes, toadBiomes, blackDogBiomes, hellhoundBiomes, alphaHellhoundBiomes, serpentBiomes;
 
@@ -21,30 +23,35 @@ public class ModConfig extends Configuration {
 		load();
 		broomSweepables = Arrays.asList(getStringList("broomSweepables", "misc", new String[]{Blocks.REDSTONE_WIRE.getTranslationKey()}, "The list of blocks that the broom will sweep when right clicked on. This includes salt and glyphs by default, so you don't need to add those."));
 
-		silverSize = getInt("silverSize", "ore", 4, 0, Byte.MAX_VALUE, "The size of silver ore veins.");
-		silverChance = getInt("silverChance", "ore", 8, 0, Byte.MAX_VALUE, "The chance for silver ore veins to spawn.");
-		silverMin = getInt("silverMin", "ore", 10, 0, 0, "The minimum height for silver ore veins to spawn.");
-		silverMax = getInt("silverMax", "ore", 128, 0, 255, "The maximum height for silver ore veins to spawn.");
+		cypressChance = getInt("cypressChance", "treeGen", 20, 0, Byte.MAX_VALUE, "The chance for cypress trees to spawn. Set to 0 to disable.");
+		elderChance = getInt("elderChance", "treeGen", 20, 0, Byte.MAX_VALUE, "The chance for elder trees to spawn. Set to 0 to disable.");
+		juniperChance = getInt("juniperChance", "treeGen", 20, 0, Byte.MAX_VALUE, "The chance for juniper trees to spawn. Set to 0 to disable.");
+		yewChance = getInt("yewChance", "treeGen", 20, 0, Byte.MAX_VALUE, "The chance for elder trees to spawn. Set to 0 to disable.");
 
-		saltSize = getInt("saltSize", "ore", 2, 0, Byte.MAX_VALUE, "The size of salt ore veins.");
-		saltChance = getInt("saltChance", "ore", 6, 0, Byte.MAX_VALUE, "The chance for salt ore veins to spawn.");
-		saltMin = getInt("saltMin", "ore", 10, 0, 0, "The minimum height for salt ore veins to spawn.");
-		saltMax = getInt("saltMax", "ore", 120, 0, 255, "The maximum height for salt ore veins to spawn.");
+		silverSize = getInt("silverSize", "oreGen", 4, 0, Byte.MAX_VALUE, "The size of silver ore veins.");
+		silverChance = getInt("silverChance", "oreGen", 8, 0, Byte.MAX_VALUE, "The chance for silver ore veins to spawn.");
+		silverMin = getInt("silverMin", "oreGen", 10, 0, 0, "The minimum height for silver ore veins to spawn.");
+		silverMax = getInt("silverMax", "oreGen", 128, 0, 255, "The maximum height for silver ore veins to spawn.");
 
-		amethystSize = getInt("amethystSize", "ore", 2, 0, Byte.MAX_VALUE, "The size of amethyst ore veins.");
-		amethystChance = getInt("amethystChance", "ore", 6, 0, Byte.MAX_VALUE, "The chance for amethyst ore veins to spawn.");
-		amethystMin = getInt("amethystMin", "ore", 10, 0, 0, "The minimum height for amethyst ore veins to spawn.");
-		amethystMax = getInt("amethystMax", "ore", 64, 0, 255, "The maximum height for amethyst ore veins to spawn.");
+		saltSize = getInt("saltSize", "oreGen", 2, 0, Byte.MAX_VALUE, "The size of salt ore veins.");
+		saltChance = getInt("saltChance", "oreGen", 6, 0, Byte.MAX_VALUE, "The chance for salt ore veins to spawn.");
+		saltMin = getInt("saltMin", "oreGen", 10, 0, 0, "The minimum height for salt ore veins to spawn.");
+		saltMax = getInt("saltMax", "oreGen", 120, 0, 255, "The maximum height for salt ore veins to spawn.");
 
-		garnetSize = getInt("garnetSize", "ore", 2, 0, Byte.MAX_VALUE, "The size of garnet ore veins.");
-		garnetChance = getInt("garnetChance", "ore", 6, 0, Byte.MAX_VALUE, "The chance for garnet ore veins to spawn.");
-		garnetMin = getInt("garnetMin", "ore", 12, 0, 0, "The minimum height for garnet ore veins to spawn.");
-		garnetMax = getInt("garnetMax", "ore", 80, 0, 255, "The maximum height for garnet ore veins to spawn.");
+		amethystSize = getInt("amethystSize", "oreGen", 2, 0, Byte.MAX_VALUE, "The size of amethyst ore veins.");
+		amethystChance = getInt("amethystChance", "oreGen", 6, 0, Byte.MAX_VALUE, "The chance for amethyst ore veins to spawn.");
+		amethystMin = getInt("amethystMin", "oreGen", 10, 0, 0, "The minimum height for amethyst ore veins to spawn.");
+		amethystMax = getInt("amethystMax", "oreGen", 64, 0, 255, "The maximum height for amethyst ore veins to spawn.");
 
-		moonstoneSize = getInt("moonstoneSize", "ore", 2, 0, Byte.MAX_VALUE, "The size of moonstone ore veins.");
-		moonstoneChance = getInt("moonstoneChance", "ore", 6, 0, Byte.MAX_VALUE, "The chance for moonstone ore veins to spawn.");
-		moonstoneMin = getInt("moonstoneMin", "ore", 16, 0, 0, "The minimum height for moonstone ore veins to spawn.");
-		moonstoneMax = getInt("moonstoneMax", "ore", 120, 0, 255, "The maximum height for moonstone ore veins to spawn.");
+		garnetSize = getInt("garnetSize", "oreGen", 2, 0, Byte.MAX_VALUE, "The size of garnet ore veins.");
+		garnetChance = getInt("garnetChance", "oreGen", 6, 0, Byte.MAX_VALUE, "The chance for garnet ore veins to spawn.");
+		garnetMin = getInt("garnetMin", "oreGen", 12, 0, 0, "The minimum height for garnet ore veins to spawn.");
+		garnetMax = getInt("garnetMax", "oreGen", 80, 0, 255, "The maximum height for garnet ore veins to spawn.");
+
+		moonstoneSize = getInt("moonstoneSize", "oreGen", 2, 0, Byte.MAX_VALUE, "The size of moonstone ore veins.");
+		moonstoneChance = getInt("moonstoneChance", "oreGen", 6, 0, Byte.MAX_VALUE, "The chance for moonstone ore veins to spawn.");
+		moonstoneMin = getInt("moonstoneMin", "oreGen", 16, 0, 0, "The minimum height for moonstone ore veins to spawn.");
+		moonstoneMax = getInt("moonstoneMax", "oreGen", 120, 0, 255, "The maximum height for moonstone ore veins to spawn.");
 
 		blindwormBiomes = Arrays.asList(getStringList("blindwormBiomes", "mobSpawns", new String[]{Type.FOREST.getName()}, "The list of BiomeDictionary types that the blindworm will spawn in."));
 		lizardBiomes = Arrays.asList(getStringList("lizardBiomes", "mobSpawns", new String[]{Type.FOREST.getName()}, "The list of BiomeDictionary types that the lizard will spawn in."));

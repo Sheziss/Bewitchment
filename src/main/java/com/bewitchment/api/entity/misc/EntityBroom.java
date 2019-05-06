@@ -89,7 +89,8 @@ public abstract class EntityBroom extends Entity {
 				float front = rider.moveForward, strafe = rider.moveStrafing, up = 0;
 				try {
 					up = getJump(rider) ? 1 : 0;
-				} catch (IllegalArgumentException | IllegalAccessException e) {
+				}
+				catch (IllegalArgumentException | IllegalAccessException e) {
 					e.printStackTrace();
 				}
 				handleMovement(rider.getLookVec(), front, strafe, up);
