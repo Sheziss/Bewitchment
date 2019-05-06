@@ -1,24 +1,24 @@
 {
   "type": "forge:ore_shaped",
   "pattern": [
-	"GIG",
-	"IFI",
-	"GIG"
+    "GIG",
+    "IFI",
+    "GIG"
   ],
   "key": {
-	"G": {
-	  "type": "forge:ore_dict",
-	  "ore": "nuggetGold"
-	},
-	"I": {
-	  "type": "forge:ore_dict",
-	  "ore": "nuggetIron"
-	},
-	"F": {
-	  "item": "bewitchment:acacia_resin"
-	}
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "nuggetGold"
+    },
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "nuggetIron"
+    },
+    "F": {
+      "item": "bewitchment:acacia_resin"
+    }
   },
   "result": {
-	"item": "bewitchment:triskelion_amulet"
+    "item": "bewitchment:triskelion_amulet"
   }
 }

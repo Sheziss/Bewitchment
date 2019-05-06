@@ -26,6 +26,24 @@ public class ItemBowlOfStew extends ModItemFood {
 		super("bowl_of_stew", 0, 0, false);
 	}
 
+	public static ItemStack setFoodContents(List<ItemStack> items) {
+		ItemStack stack = new ItemStack(ModObjects.bowl_of_stew);
+		int healAmount = 0;
+		float saturationAmount = 0;
+		if (!items.isEmpty()) {
+			if (!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
+			stack.getTagCompound().setTag("items", new NBTTagList());
+			for (ItemStack stack0 : items) {
+				stack.getTagCompound().getTagList("items", Constants.NBT.TAG_COMPOUND).appendTag(stack0.serializeNBT());
+				healAmount += ((ItemFood) stack0.getItem()).getHealAmount(stack0);
+				saturationAmount += ((ItemFood) stack0.getItem()).getSaturationModifier(stack0);
+			}
+			stack.getTagCompound().setInteger("healAmount", healAmount);
+			stack.getTagCompound().setFloat("saturationAmount", saturationAmount);
+		}
+		return stack;
+	}
+
 	@Override
 	public EnumAction getItemUseAction(ItemStack stack) {
 		return EnumAction.DRINK;
@@ -65,28 +83,10 @@ public class ItemBowlOfStew extends ModItemFood {
 				if (stack0.getItem() instanceof ItemFood) {
 					try {
 						ReflectionHelper.findMethod(ItemFood.class, "onFoodEaten", "func_77849_c", ItemStack.class, World.class, EntityPlayer.class).invoke(stack0.getItem(), stack0, world, player);
+					} catch (Exception e) {
 					}
-					catch (Exception e) {}
 				}
 			}
 		}
-	}
-
-	public static ItemStack setFoodContents(List<ItemStack> items) {
-		ItemStack stack = new ItemStack(ModObjects.bowl_of_stew);
-		int healAmount = 0;
-		float saturationAmount = 0;
-		if (!items.isEmpty()) {
-			if (!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
-			stack.getTagCompound().setTag("items", new NBTTagList());
-			for (ItemStack stack0 : items) {
-				stack.getTagCompound().getTagList("items", Constants.NBT.TAG_COMPOUND).appendTag(stack0.serializeNBT());
-				healAmount += ((ItemFood) stack0.getItem()).getHealAmount(stack0);
-				saturationAmount += ((ItemFood) stack0.getItem()).getSaturationModifier(stack0);
-			}
-			stack.getTagCompound().setInteger("healAmount", healAmount);
-			stack.getTagCompound().setFloat("saturationAmount", saturationAmount);
-		}
-		return stack;
 	}
 }

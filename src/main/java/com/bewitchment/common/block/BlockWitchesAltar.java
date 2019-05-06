@@ -156,8 +156,7 @@ public class BlockWitchesAltar extends ModBlockContainer {
 						if (!player.isCreative()) stack.shrink(1);
 					}
 					return true;
-				}
-				else if (world.getBlockState(pos.up()).getBlock().isReplaceable(world, pos.up()) && (BewitchmentAPI.ALTAR_GAIN_VALUES.get(item) != null || BewitchmentAPI.ALTAR_MULTIPLIER_VALUES.get(item) != null)) {
+				} else if (world.getBlockState(pos.up()).getBlock().isReplaceable(world, pos.up()) && (BewitchmentAPI.ALTAR_GAIN_VALUES.get(item) != null || BewitchmentAPI.ALTAR_MULTIPLIER_VALUES.get(item) != null)) {
 					world.setBlockState(pos.up(), ModObjects.placed_item.getDefaultState().withProperty(BlockHorizontal.FACING, EnumFacing.fromAngle(player.rotationYaw)));
 					((TileEntityPlacedItem) world.getTileEntity(pos.up())).inventory.setStackInSlot(0, stack.splitStack(1));
 					((TileEntityWitchesAltar) world.getTileEntity(getAltarPosition(world, pos))).refreshUpgrades(pos.up());
@@ -241,8 +240,7 @@ public class BlockWitchesAltar extends ModBlockContainer {
 		if (ex - sx < ez - sz) {
 			world.setBlockState(new BlockPos(sx, y, sz + 1), getAltarWithColor(color).getDefaultState().withProperty(TYPE, AltarType.TILE));
 			world.setBlockState(new BlockPos(ex, y, sz + 1), getAltarWithColor(color).getDefaultState().withProperty(TYPE, AltarType.SIDE));
-		}
-		else {
+		} else {
 			world.setBlockState(new BlockPos(sx + 1, y, sz), getAltarWithColor(color).getDefaultState().withProperty(TYPE, AltarType.TILE));
 			world.setBlockState(new BlockPos(sx + 1, y, ez), getAltarWithColor(color).getDefaultState().withProperty(TYPE, AltarType.SIDE));
 		}

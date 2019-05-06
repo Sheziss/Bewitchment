@@ -1,20 +1,20 @@
 {
   "type": "forge:ore_shaped",
   "pattern": [
-	"PSP",
-	"PSP"
+    "PSP",
+    "PSP"
   ],
   "key": {
-	"S": {
-	  "type": "forge:ore_dict",
-	  "ore": "stickWood"
-	},
-	"P": {
-	  "item": "bewitchment:planks_yew"
-	}
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "stickWood"
+    },
+    "P": {
+      "item": "bewitchment:planks_yew"
+    }
   },
   "result": {
-	"item": "bewitchment:fence_yew",
-	"count": 3
+    "item": "bewitchment:fence_yew",
+    "count": 3
   }
 }

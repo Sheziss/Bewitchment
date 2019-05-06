@@ -1,17 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-	"I  ",
-	"II ",
-	"III"
+    "I  ",
+    "II ",
+    "III"
   ],
   "key": {
-	"I": {
-	  "item": "bewitchment:planks_yew"
-	}
+    "I": {
+      "item": "bewitchment:planks_yew"
+    }
   },
   "result": {
-	"item": "bewitchment:stairs_yew",
-	"count": 4
+    "item": "bewitchment:stairs_yew",
+    "count": 4
   }
 }
