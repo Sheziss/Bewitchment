@@ -32,9 +32,9 @@ public class WorldGenerators implements IWorldGenerator {
 	@Override
 	public void generate(Random rand, int chunkX, int chunkZ, World world, IChunkGenerator generator, IChunkProvider provider) {
 		if (world.provider instanceof WorldProviderSurface) {
-			generateTree(world, rand, new WorldGenCypressTree(true), ModObjects.sapling_cypress, chunkX, chunkZ, Bewitchment.proxy.config.cypressChance, b -> BiomeDictionary.hasType(b, BiomeDictionary.Type.FOREST) && BiomeDictionary.hasType(b, BiomeDictionary.Type.COLD) || BiomeDictionary.hasType(b, BiomeDictionary.Type.SPOOKY));
+			generateTree(world, rand, new WorldGenCypressTree(true), ModObjects.sapling_cypress, chunkX, chunkZ, Bewitchment.proxy.config.cypressChance, b -> BiomeDictionary.hasType(b, BiomeDictionary.Type.FOREST) && BiomeDictionary.hasType(b, BiomeDictionary.Type.COLD) && BiomeDictionary.hasType(b, BiomeDictionary.Type.SPOOKY));
 			generateTree(world, rand, new WorldGenElderTree(true), ModObjects.sapling_elder, chunkX, chunkZ, Bewitchment.proxy.config.elderChance, b -> BiomeDictionary.hasType(b, BiomeDictionary.Type.FOREST) && !BiomeDictionary.hasType(b, BiomeDictionary.Type.COLD));
-			generateTree(world, rand, new WorldGenJuniperTree(true), ModObjects.sapling_juniper, chunkX, chunkZ, Bewitchment.proxy.config.juniperChance, b -> BiomeDictionary.hasType(b, BiomeDictionary.Type.SAVANNA) || BiomeDictionary.hasType(b, BiomeDictionary.Type.MAGICAL));
+			generateTree(world, rand, new WorldGenJuniperTree(true), ModObjects.sapling_juniper, chunkX, chunkZ, Bewitchment.proxy.config.juniperChance, b -> BiomeDictionary.hasType(b, BiomeDictionary.Type.SAVANNA) && BiomeDictionary.hasType(b, BiomeDictionary.Type.MAGICAL));
 			generateTree(world, rand, new WorldGenYewTree(true), ModObjects.sapling_yew, chunkX, chunkZ, Bewitchment.proxy.config.yewChance, b -> BiomeDictionary.hasType(b, BiomeDictionary.Type.FOREST) && BiomeDictionary.hasType(b, BiomeDictionary.Type.DENSE));
 			generateCoquina(world, rand, chunkX, chunkZ);
 			generateOre(world, rand, silverOre, chunkX, chunkZ, Bewitchment.proxy.config.silverChance, Bewitchment.proxy.config.silverMin, Bewitchment.proxy.config.silverMax);
