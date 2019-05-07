@@ -10,6 +10,8 @@ import com.bewitchment.common.block.util.*;
 import com.bewitchment.common.integration.chisel.ModBlockChisel;
 import com.bewitchment.common.item.*;
 import com.bewitchment.common.item.equipment.ItemSilverArmor;
+import com.bewitchment.common.item.equipment.ItemWitchCowl;
+import com.bewitchment.common.item.equipment.ItemWitchRobes;
 import com.bewitchment.common.item.equipment.bauble.*;
 import com.bewitchment.common.item.food.ItemBowlOfStew;
 import com.bewitchment.common.item.food.ItemGarlic;
@@ -231,10 +233,10 @@ public class ModObjects {
 	public static final Item silver_chestplate = new ItemSilverArmor("silver_chestplate", EntityEquipmentSlot.CHEST);
 	public static final Item silver_leggings = new ItemSilverArmor("silver_leggings", EntityEquipmentSlot.LEGS);
 	public static final Item silver_boots = new ItemSilverArmor("silver_boots", EntityEquipmentSlot.FEET);
-	public static final Item witches_cowl = new ItemSilverArmor("witches_cowl", EntityEquipmentSlot.HEAD);
-	public static final Item witches_hat = new ItemSilverArmor("witches_hat", EntityEquipmentSlot.HEAD);
-	public static final Item witches_robe = new ItemSilverArmor("witches_robe", EntityEquipmentSlot.CHEST);
-	public static final Item witches_leggings = new ItemSilverArmor("witches_leggings", EntityEquipmentSlot.LEGS);
+	public static final Item witches_cowl = new ItemWitchCowl("witches_cowl", EntityEquipmentSlot.HEAD);
+	public static final Item witches_hat = new ItemWitchRobes("witches_hat", EntityEquipmentSlot.HEAD);
+	public static final Item witches_robe = new ItemWitchRobes("witches_robe", EntityEquipmentSlot.CHEST);
+	public static final Item witches_leggings = new ItemWitchRobes("witches_leggings", EntityEquipmentSlot.LEGS);
 	// Tools
 	public static final Item cold_iron_sword = new ModItemSword("cold_iron_sword", TOOL_COLD_IRON);
 	public static final Item cold_iron_pickaxe = new ModItemPickaxe("cold_iron_pickaxe", TOOL_COLD_IRON);
