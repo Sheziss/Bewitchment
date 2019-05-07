@@ -53,6 +53,7 @@ public class ModConfig extends Configuration {
 		moonstoneMin = getInt("moonstoneMin", "oreGen", 16, 0, 0, "The minimum height for moonstone ore veins to spawn.");
 		moonstoneMax = getInt("moonstoneMax", "oreGen", 120, 0, 255, "The maximum height for moonstone ore veins to spawn.");
 
+		//Todo: Switch to spawn system used in the master branch, it should probably go in the rewrite as well.
 		blindwormBiomes = Arrays.asList(getStringList("blindwormBiomes", "mobSpawns", new String[]{Type.FOREST.getName()}, "The list of BiomeDictionary types that the blindworm will spawn in."));
 		lizardBiomes = Arrays.asList(getStringList("lizardBiomes", "mobSpawns", new String[]{Type.FOREST.getName()}, "The list of BiomeDictionary types that the lizard will spawn in."));
 		newtBiomes = Arrays.asList(getStringList("newtBiomes", "mobSpawns", new String[]{Type.SWAMP.getName()}, "The list of BiomeDictionary types that the newt will spawn in."));
