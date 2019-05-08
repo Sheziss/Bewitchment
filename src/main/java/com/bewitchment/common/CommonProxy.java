@@ -137,8 +137,10 @@ public class CommonProxy {
 			if (block instanceof BlockLeaves) power = BewitchmentAPI.NaturePower.WEAK;
 			if (power != BewitchmentAPI.NaturePower.NONE) BewitchmentAPI.ALTAR_NATURE_VALUES.put(block, power);
 
-			if (block instanceof BlockTorch || block instanceof BlockCandle) BewitchmentAPI.registerAltarUpgradeGain(BewitchmentAPI.UpgradeType.WAND, block, 1);
-			if (block instanceof BlockLantern) BewitchmentAPI.registerAltarUpgradeGain(BewitchmentAPI.UpgradeType.WAND, block, 2);
+			if (block instanceof BlockTorch || block instanceof BlockCandle)
+				BewitchmentAPI.registerAltarUpgradeGain(BewitchmentAPI.UpgradeType.WAND, block, 1);
+			if (block instanceof BlockLantern)
+				BewitchmentAPI.registerAltarUpgradeGain(BewitchmentAPI.UpgradeType.WAND, block, 2);
 		}
 		BewitchmentAPI.registerAltarUpgradeMultiplier(BewitchmentAPI.UpgradeType.SWORD, ModObjects.athame, 0.8d);
 		BewitchmentAPI.registerAltarUpgradeGain(BewitchmentAPI.UpgradeType.CUP, ModObjects.goblet, 1);

@@ -63,8 +63,7 @@ public class BlockGlyph extends ModBlockContainer {
 			if (!world.isRemote && stack.isEmpty()) {
 				if (tile.getRitual() != null) tile.stopRitual(player, false);
 				else tile.startRitual(player);
-			}
-			else if (player.getHeldItem(hand).getItem() == ModObjects.waystone && stack.hasTagCompound() && stack.getTagCompound().hasKey("location")) {
+			} else if (player.getHeldItem(hand).getItem() == ModObjects.waystone && stack.hasTagCompound() && stack.getTagCompound().hasKey("location")) {
 				if (tile.getRitual() != null && tile.getRitual().canBePerformedRemotely()) {
 					tile.setEffectivePos(BlockPos.fromLong(stack.getTagCompound().getLong("location")));
 					tile.setEffectiveDim(stack.getTagCompound().getInteger("dimension"));

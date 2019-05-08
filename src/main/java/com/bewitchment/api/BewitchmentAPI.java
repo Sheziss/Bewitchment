@@ -58,76 +58,64 @@ public class BewitchmentAPI {
 	 */
 	public static EnumCreatureAttribute SPIRIT = EnumHelper.addCreatureAttribute("SPIRIT");
 
-	public static void registerAltarUpgradeGain(UpgradeType type, Item item, int amount)
-	{
+	public static void registerAltarUpgradeGain(UpgradeType type, Item item, int amount) {
 		if (type == UpgradeType.SWORD) SWORD_GAIN_VALUES.put(item, amount);
 		else if (type == UpgradeType.CUP) CUP_GAIN_VALUES.put(item, amount);
 		else if (type == UpgradeType.WAND) WAND_GAIN_VALUES.put(item, amount);
 		else PENTACLE_GAIN_VALUES.put(item, amount);
 	}
 
-	public static void registerAltarUpgradeGain(UpgradeType type, Block block, int amount)
-	{
+	public static void registerAltarUpgradeGain(UpgradeType type, Block block, int amount) {
 		registerAltarUpgradeGain(type, Item.getItemFromBlock(block), amount);
 	}
 
-	public static void registerAltarUpgradeMultiplier(UpgradeType type, Item item, double amount)
-	{
+	public static void registerAltarUpgradeMultiplier(UpgradeType type, Item item, double amount) {
 		if (type == UpgradeType.SWORD) SWORD_MULTIPLIER_VALUES.put(item, amount);
 		else if (type == UpgradeType.CUP) CUP_MULTIPLIER_VALUES.put(item, amount);
 		else if (type == UpgradeType.WAND) WAND_MULTIPLIER_VALUES.put(item, amount);
 		else PENTACLE_MULTIPLIER_VALUES.put(item, amount);
 	}
 
-	public static void registerAltarUpgradeMultiplier(UpgradeType type, Block block, double amount)
-	{
+	public static void registerAltarUpgradeMultiplier(UpgradeType type, Block block, double amount) {
 		registerAltarUpgradeMultiplier(type, Item.getItemFromBlock(block), amount);
 	}
 
-	public static int getAltarUpgradeGain(UpgradeType type, Item item)
-	{
+	public static int getAltarUpgradeGain(UpgradeType type, Item item) {
 		if (type == UpgradeType.SWORD) return SWORD_GAIN_VALUES.getOrDefault(item, 0);
 		else if (type == UpgradeType.CUP) return CUP_GAIN_VALUES.getOrDefault(item, 0);
 		else if (type == UpgradeType.WAND) return WAND_GAIN_VALUES.getOrDefault(item, 0);
 		else return PENTACLE_GAIN_VALUES.getOrDefault(item, 0);
 	}
 
-	public static int getAltarUpgradeGain(UpgradeType type, Block block)
-	{
+	public static int getAltarUpgradeGain(UpgradeType type, Block block) {
 		return getAltarUpgradeGain(type, Item.getItemFromBlock(block));
 	}
 
-	public static double getAltarUpgradeMultiplier(UpgradeType type, Item item)
-	{
+	public static double getAltarUpgradeMultiplier(UpgradeType type, Item item) {
 		if (type == UpgradeType.SWORD) return SWORD_MULTIPLIER_VALUES.getOrDefault(item, 0d);
 		else if (type == UpgradeType.CUP) return CUP_MULTIPLIER_VALUES.getOrDefault(item, 0d);
 		else if (type == UpgradeType.WAND) return WAND_MULTIPLIER_VALUES.getOrDefault(item, 0d);
 		else return PENTACLE_MULTIPLIER_VALUES.getOrDefault(item, 0d);
 	}
 
-	public static double getAltarUpgradeMultiplier(UpgradeType type, Block block)
-	{
+	public static double getAltarUpgradeMultiplier(UpgradeType type, Block block) {
 		return getAltarUpgradeMultiplier(type, Item.getItemFromBlock(block));
 	}
 
-	public static boolean isAltarUpgrade(UpgradeType type, Item item)
-	{
+	public static boolean isAltarUpgrade(UpgradeType type, Item item) {
 		return item != Items.AIR && (getAltarUpgradeGain(type, item) != 0 || getAltarUpgradeMultiplier(type, item) != 0);
 	}
 
-	public static boolean isAltarUpgrade(Item item)
-	{
+	public static boolean isAltarUpgrade(Item item) {
 		for (UpgradeType type : UpgradeType.values()) if (isAltarUpgrade(type, item)) return true;
 		return false;
 	}
 
-	public static boolean isAltarUpgrade(UpgradeType type, Block block)
-	{
+	public static boolean isAltarUpgrade(UpgradeType type, Block block) {
 		return isAltarUpgrade(type, Item.getItemFromBlock(block));
 	}
 
-	public static boolean isAltarUpgrade(Block block)
-	{
+	public static boolean isAltarUpgrade(Block block) {
 		return isAltarUpgrade(Item.getItemFromBlock(block));
 	}
 
@@ -163,13 +151,11 @@ public class BewitchmentAPI {
 		return isWerewolf(entity) || isVampire(entity) || entity.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD;
 	}
 
-	public enum UpgradeType
-	{
+	public enum UpgradeType {
 		SWORD, CUP, WAND, PENTACLE
 	}
 
-	public enum NaturePower
-	{
+	public enum NaturePower {
 		NONE, WEAK, NORMAL, STRONG
 	}
 }

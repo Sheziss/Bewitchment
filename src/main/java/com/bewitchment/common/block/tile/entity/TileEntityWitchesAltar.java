@@ -73,8 +73,7 @@ public class TileEntityWitchesAltar extends ModTileEntity implements ITickable {
 		gain = 1;
 		multiplier = 1;
 		boolean foundSword = false, foundCup = false, foundWand = false, foundPentacle = false;
-		for (BlockPos pos : BlockWitchesAltar.getAltarPositions(world, getPos()))
-		{
+		for (BlockPos pos : BlockWitchesAltar.getAltarPositions(world, getPos())) {
 			Block block = world.getBlockState(pos.up()).getBlock();
 			if (!foundSword && checkUpgrades(BewitchmentAPI.UpgradeType.SWORD, block)) foundSword = true;
 			if (!foundCup && checkUpgrades(BewitchmentAPI.UpgradeType.CUP, block)) foundCup = true;
@@ -85,7 +84,8 @@ public class TileEntityWitchesAltar extends ModTileEntity implements ITickable {
 				if (!foundSword && checkUpgrades(BewitchmentAPI.UpgradeType.SWORD, placedItem)) foundSword = true;
 				if (!foundCup && checkUpgrades(BewitchmentAPI.UpgradeType.CUP, placedItem)) foundCup = true;
 				if (!foundWand && checkUpgrades(BewitchmentAPI.UpgradeType.WAND, placedItem)) foundWand = true;
-				if (!foundPentacle && checkUpgrades(BewitchmentAPI.UpgradeType.PENTACLE, placedItem)) foundPentacle = true;
+				if (!foundPentacle && checkUpgrades(BewitchmentAPI.UpgradeType.PENTACLE, placedItem))
+					foundPentacle = true;
 				if (placedItem == ModObjects.athame) {
 					for (EntityPlayer player : world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(getPos()).grow(5))) {
 						for (ItemStack stack : Util.getEntireInventory(player)) {
@@ -103,10 +103,8 @@ public class TileEntityWitchesAltar extends ModTileEntity implements ITickable {
 		if (multiplier < 0) multiplier = 0;
 	}
 
-	private boolean checkUpgrades(BewitchmentAPI.UpgradeType type, Item item)
-	{
-		if (BewitchmentAPI.isAltarUpgrade(type, item))
-		{
+	private boolean checkUpgrades(BewitchmentAPI.UpgradeType type, Item item) {
+		if (BewitchmentAPI.isAltarUpgrade(type, item)) {
 			gain += BewitchmentAPI.getAltarUpgradeGain(type, item);
 			multiplier *= BewitchmentAPI.getAltarUpgradeMultiplier(type, item);
 			return true;
@@ -114,8 +112,7 @@ public class TileEntityWitchesAltar extends ModTileEntity implements ITickable {
 		return false;
 	}
 
-	private boolean checkUpgrades(BewitchmentAPI.UpgradeType type, Block block)
-	{
+	private boolean checkUpgrades(BewitchmentAPI.UpgradeType type, Block block) {
 		return checkUpgrades(type, Item.getItemFromBlock(block));
 	}
 }

@@ -1,12 +1,12 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-	{
-	  "item": "bewitchment:log_yew"
-	}
+    {
+      "item": "bewitchment:log_yew"
+    }
   ],
   "result": {
-	"item": "bewitchment:planks_yew",
-	"count": 4
+    "item": "bewitchment:planks_yew",
+    "count": 4
   }
 }

@@ -45,8 +45,7 @@ public class ModelBroom extends ModelBase {
 			handle.setRotationPoint(-13 + 0.2f * time1, 16f + 0.3f * time1, 0.2f * time2);
 			handle.rotateAngleX = time1 * 0.05235987755f - limbSwing * time1 * 0.17453292516f;
 			handle.rotateAngleY = time2 * 0.05235987755f - limbSwing * time1 * 0.17453292516f;
-		}
-		else {
+		} else {
 			handle.setRotationPoint(-13 + 0.02f * time1, 16f + 0.03f * time1, 0.02f * time2);
 			handle.rotateAngleX = time1 * 0.01745329251f;
 			handle.rotateAngleY = time2 * 0.01745329251f;

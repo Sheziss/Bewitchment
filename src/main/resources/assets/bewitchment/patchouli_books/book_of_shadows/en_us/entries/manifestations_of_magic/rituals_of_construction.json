@@ -4,41 +4,41 @@
   "sortnum": "4",
   "category": "manifestations_of_magic",
   "pages": [
-	{
-	  "type": "text",
-	  "text": "Many items exist in this world for you to craft, ranging from the standard broom, to crystal balls. However, all of these have one thing in common, they are crafted via ritual."
-	},
-	{
-	  "type": "ritual",
-	  "ritual": "bewitchment:deck"
-	},
-	{
-	  "type": "ritual",
-	  "ritual": "bewitchment:table"
-	},
-	{
-	  "type": "ritual",
-	  "ritual": "bewitchment:crystal_ball"
-	},
-	{
-	  "type": "ritual",
-	  "ritual": "bewitchment:broom_cypress"
-	},
-	{
-	  "type": "ritual",
-	  "ritual": "bewitchment:broom_elder"
-	},
-	{
-	  "type": "ritual",
-	  "ritual": "bewitchment:broom_juniper"
-	},
-	{
-	  "type": "ritual",
-	  "ritual": "bewitchment:broom_yew"
-	},
-	{
-	  "type": "ritual",
-	  "ritual": "bewitchment:sanctuary"
-	}
+    {
+      "type": "text",
+      "text": "Many items exist in this world for you to craft, ranging from the standard broom, to crystal balls. However, all of these have one thing in common, they are crafted via ritual."
+    },
+    {
+      "type": "ritual",
+      "ritual": "bewitchment:deck"
+    },
+    {
+      "type": "ritual",
+      "ritual": "bewitchment:table"
+    },
+    {
+      "type": "ritual",
+      "ritual": "bewitchment:crystal_ball"
+    },
+    {
+      "type": "ritual",
+      "ritual": "bewitchment:broom_cypress"
+    },
+    {
+      "type": "ritual",
+      "ritual": "bewitchment:broom_elder"
+    },
+    {
+      "type": "ritual",
+      "ritual": "bewitchment:broom_juniper"
+    },
+    {
+      "type": "ritual",
+      "ritual": "bewitchment:broom_yew"
+    },
+    {
+      "type": "ritual",
+      "ritual": "bewitchment:sanctuary"
+    }
   ]
 }
