@@ -11,6 +11,7 @@ import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntityVex;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -37,9 +38,15 @@ public class BewitchmentAPI {
 	public static final IForgeRegistry<Fortune> REGISTRY_FORTUNE = new RegistryBuilder<Fortune>().setName(new ResourceLocation(Bewitchment.MODID, "fortune")).setType(Fortune.class).create();
 
 	public static final Map<EntityEntry, Collection<ItemStack>> ATHAME_LOOT = new HashMap<>();
-	public static final Map<Block, Integer> ALTAR_NATURE_VALUES = new HashMap<>();
-	public static final Map<Item, Double> ALTAR_GAIN_VALUES = new HashMap<>();
-	public static final Map<Item, Integer> ALTAR_MULTIPLIER_VALUES = new HashMap<>();
+	public static final Map<Block, NaturePower> ALTAR_NATURE_VALUES = new HashMap<>();
+	private static final Map<Item, Integer> SWORD_GAIN_VALUES = new HashMap<>();
+	private static final Map<Item, Double> SWORD_MULTIPLIER_VALUES = new HashMap<>();
+	private static final Map<Item, Integer> CUP_GAIN_VALUES = new HashMap<>();
+	private static final Map<Item, Double> CUP_MULTIPLIER_VALUES = new HashMap<>();
+	private static final Map<Item, Integer> WAND_GAIN_VALUES = new HashMap<>();
+	private static final Map<Item, Double> WAND_MULTIPLIER_VALUES = new HashMap<>();
+	private static final Map<Item, Integer> PENTACLE_GAIN_VALUES = new HashMap<>();
+	private static final Map<Item, Double> PENTACLE_MULTIPLIER_VALUES = new HashMap<>();
 
 	/**
 	 * The Demon creature attribute.
@@ -51,6 +58,78 @@ public class BewitchmentAPI {
 	 */
 	public static EnumCreatureAttribute SPIRIT = EnumHelper.addCreatureAttribute("SPIRIT");
 
+	public static void registerAltarUpgradeGain(UpgradeType type, Item item, int amount)
+	{
+		if (type == UpgradeType.SWORD) SWORD_GAIN_VALUES.put(item, amount);
+		else if (type == UpgradeType.CUP) CUP_GAIN_VALUES.put(item, amount);
+		else if (type == UpgradeType.WAND) WAND_GAIN_VALUES.put(item, amount);
+		else PENTACLE_GAIN_VALUES.put(item, amount);
+	}
+
+	public static void registerAltarUpgradeGain(UpgradeType type, Block block, int amount)
+	{
+		registerAltarUpgradeGain(type, Item.getItemFromBlock(block), amount);
+	}
+
+	public static void registerAltarUpgradeMultiplier(UpgradeType type, Item item, double amount)
+	{
+		if (type == UpgradeType.SWORD) SWORD_MULTIPLIER_VALUES.put(item, amount);
+		else if (type == UpgradeType.CUP) CUP_MULTIPLIER_VALUES.put(item, amount);
+		else if (type == UpgradeType.WAND) WAND_MULTIPLIER_VALUES.put(item, amount);
+		else PENTACLE_MULTIPLIER_VALUES.put(item, amount);
+	}
+
+	public static void registerAltarUpgradeMultiplier(UpgradeType type, Block block, double amount)
+	{
+		registerAltarUpgradeMultiplier(type, Item.getItemFromBlock(block), amount);
+	}
+
+	public static int getAltarUpgradeGain(UpgradeType type, Item item)
+	{
+		if (type == UpgradeType.SWORD) return SWORD_GAIN_VALUES.getOrDefault(item, 0);
+		else if (type == UpgradeType.CUP) return CUP_GAIN_VALUES.getOrDefault(item, 0);
+		else if (type == UpgradeType.WAND) return WAND_GAIN_VALUES.getOrDefault(item, 0);
+		else return PENTACLE_GAIN_VALUES.getOrDefault(item, 0);
+	}
+
+	public static int getAltarUpgradeGain(UpgradeType type, Block block)
+	{
+		return getAltarUpgradeGain(type, Item.getItemFromBlock(block));
+	}
+
+	public static double getAltarUpgradeMultiplier(UpgradeType type, Item item)
+	{
+		if (type == UpgradeType.SWORD) return SWORD_MULTIPLIER_VALUES.getOrDefault(item, 0d);
+		else if (type == UpgradeType.CUP) return CUP_MULTIPLIER_VALUES.getOrDefault(item, 0d);
+		else if (type == UpgradeType.WAND) return WAND_MULTIPLIER_VALUES.getOrDefault(item, 0d);
+		else return PENTACLE_MULTIPLIER_VALUES.getOrDefault(item, 0d);
+	}
+
+	public static double getAltarUpgradeMultiplier(UpgradeType type, Block block)
+	{
+		return getAltarUpgradeMultiplier(type, Item.getItemFromBlock(block));
+	}
+
+	public static boolean isAltarUpgrade(UpgradeType type, Item item)
+	{
+		return item != Items.AIR && (getAltarUpgradeGain(type, item) != 0 || getAltarUpgradeMultiplier(type, item) != 0);
+	}
+
+	public static boolean isAltarUpgrade(Item item)
+	{
+		for (UpgradeType type : UpgradeType.values()) if (isAltarUpgrade(type, item)) return true;
+		return false;
+	}
+
+	public static boolean isAltarUpgrade(UpgradeType type, Block block)
+	{
+		return isAltarUpgrade(type, Item.getItemFromBlock(block));
+	}
+
+	public static boolean isAltarUpgrade(Block block)
+	{
+		return isAltarUpgrade(Item.getItemFromBlock(block));
+	}
 
 	/**
 	 * @param entity the entity to check
@@ -82,5 +161,15 @@ public class BewitchmentAPI {
 	 */
 	public static final boolean isWeakToSilver(EntityLivingBase entity) {
 		return isWerewolf(entity) || isVampire(entity) || entity.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD;
+	}
+
+	public enum UpgradeType
+	{
+		SWORD, CUP, WAND, PENTACLE
+	}
+
+	public enum NaturePower
+	{
+		NONE, WEAK, NORMAL, STRONG
 	}
 }

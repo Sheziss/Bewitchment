@@ -36,23 +36,19 @@ public class TileEntityWitchesAltar extends ModTileEntity implements ITickable {
 	@Override
 	public void update() {
 		if (!world.isRemote && world.getTotalWorldTime() % 20 == 0) {
-			if (world.getTotalWorldTime() % 200 == 0)
-				for (BlockPos pos : BlockWitchesAltar.getAltarPositions(world, getPos())) refreshUpgrades(pos.up());
-			int natureValue = 0, variety = 1;
+			refreshUpgrades();
+			double power = 0;
 			for (int x = -RADIUS; x < RADIUS; x++) {
 				for (int y = -RADIUS; y < RADIUS; y++) {
 					for (int z = -RADIUS; z < RADIUS; z++) {
 						Block block = world.getBlockState(pos.add(x, y, z)).getBlock();
-						int value = BewitchmentAPI.ALTAR_NATURE_VALUES.getOrDefault(block, 0);
-						if (value != 0) {
-							natureValue += value;
-							variety++;
-						}
+						double value = BewitchmentAPI.ALTAR_NATURE_VALUES.getOrDefault(block, BewitchmentAPI.NaturePower.NONE).ordinal() / 8d;
+						if (value != 0) power += value;
 					}
 				}
 			}
 			magicPower.setAmount(Math.min(magicPower.getAmount(), magicPower.getMaxAmount()));
-			magicPower.setMaxAmount((int) ((natureValue / variety) * multiplier));
+			magicPower.setMaxAmount((int) (power * multiplier));
 			magicPower.fill(gain);
 		}
 	}
@@ -73,26 +69,53 @@ public class TileEntityWitchesAltar extends ModTileEntity implements ITickable {
 		multiplier = tag.getDouble("multiplier");
 	}
 
-	public void refreshUpgrades(BlockPos pos) {
+	public void refreshUpgrades() {
 		gain = 1;
 		multiplier = 1;
-		Block block = world.getBlockState(pos).getBlock();
-		Item item = Item.getItemFromBlock(block);
-		gain += BewitchmentAPI.ALTAR_GAIN_VALUES.getOrDefault(item, 0d);
-		multiplier += BewitchmentAPI.ALTAR_MULTIPLIER_VALUES.getOrDefault(item, 0);
-		if (block == ModObjects.placed_item) {
-			Item placedItem = ((TileEntityPlacedItem) world.getTileEntity(pos)).inventory.getStackInSlot(0).getItem();
-			if (placedItem == ModObjects.athame) {
-				for (EntityPlayer player : world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).grow(5))) {
-					for (ItemStack stack : Util.getEntireInventory(player)) {
-						if (stack.getItem() == ModObjects.grimoire_magia) {
-							MagicPower cap = stack.getCapability(MagicPower.CAPABILITY, null);
-							if (magicPower.drain(100)) cap.fill(10);
-							break;
+		boolean foundSword = false, foundCup = false, foundWand = false, foundPentacle = false;
+		for (BlockPos pos : BlockWitchesAltar.getAltarPositions(world, getPos()))
+		{
+			Block block = world.getBlockState(pos.up()).getBlock();
+			if (!foundSword && checkUpgrades(BewitchmentAPI.UpgradeType.SWORD, block)) foundSword = true;
+			if (!foundCup && checkUpgrades(BewitchmentAPI.UpgradeType.CUP, block)) foundCup = true;
+			if (!foundWand && checkUpgrades(BewitchmentAPI.UpgradeType.WAND, block)) foundWand = true;
+			if (!foundPentacle && checkUpgrades(BewitchmentAPI.UpgradeType.PENTACLE, block)) foundPentacle = true;
+			if (block == ModObjects.placed_item) {
+				Item placedItem = ((TileEntityPlacedItem) world.getTileEntity(pos.up())).inventory.getStackInSlot(0).getItem();
+				if (!foundSword && checkUpgrades(BewitchmentAPI.UpgradeType.SWORD, placedItem)) foundSword = true;
+				if (!foundCup && checkUpgrades(BewitchmentAPI.UpgradeType.CUP, placedItem)) foundCup = true;
+				if (!foundWand && checkUpgrades(BewitchmentAPI.UpgradeType.WAND, placedItem)) foundWand = true;
+				if (!foundPentacle && checkUpgrades(BewitchmentAPI.UpgradeType.PENTACLE, placedItem)) foundPentacle = true;
+				if (placedItem == ModObjects.athame) {
+					for (EntityPlayer player : world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(getPos()).grow(5))) {
+						for (ItemStack stack : Util.getEntireInventory(player)) {
+							if (stack.getItem() == ModObjects.grimoire_magia) {
+								MagicPower cap = stack.getCapability(MagicPower.CAPABILITY, null);
+								if (magicPower.drain(100)) cap.fill(10);
+								break;
+							}
 						}
 					}
 				}
 			}
 		}
+		if (gain < 0) gain = 0;
+		if (multiplier < 0) multiplier = 0;
+	}
+
+	private boolean checkUpgrades(BewitchmentAPI.UpgradeType type, Item item)
+	{
+		if (BewitchmentAPI.isAltarUpgrade(type, item))
+		{
+			gain += BewitchmentAPI.getAltarUpgradeGain(type, item);
+			multiplier *= BewitchmentAPI.getAltarUpgradeMultiplier(type, item);
+			return true;
+		}
+		return false;
+	}
+
+	private boolean checkUpgrades(BewitchmentAPI.UpgradeType type, Block block)
+	{
+		return checkUpgrades(type, Item.getItemFromBlock(block));
 	}
 }

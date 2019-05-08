@@ -19,6 +19,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -157,16 +158,15 @@ public class BlockWitchesAltar extends ModBlockContainer {
 					}
 					return true;
 				}
-				else if (world.getBlockState(pos.up()).getBlock().isReplaceable(world, pos.up()) && (BewitchmentAPI.ALTAR_GAIN_VALUES.get(item) != null || BewitchmentAPI.ALTAR_MULTIPLIER_VALUES.get(item) != null)) {
+				else if (world.getBlockState(pos.up()).getBlock().isReplaceable(world, pos.up()) && !(item instanceof ItemBlock) && BewitchmentAPI.isAltarUpgrade(item)) {
 					world.setBlockState(pos.up(), ModObjects.placed_item.getDefaultState().withProperty(BlockHorizontal.FACING, EnumFacing.fromAngle(player.rotationYaw)));
 					((TileEntityPlacedItem) world.getTileEntity(pos.up())).inventory.setStackInSlot(0, stack.splitStack(1));
-					((TileEntityWitchesAltar) world.getTileEntity(getAltarPosition(world, pos))).refreshUpgrades(pos.up());
 				}
 			}
 			if (hand == EnumHand.MAIN_HAND && stack.isEmpty() && world.getBlockState(pos).getValue(TYPE) != AltarType.UNFORMED) {
 				TileEntityWitchesAltar tile = (TileEntityWitchesAltar) world.getTileEntity(getAltarPosition(world, pos));
 				MagicPower cap = tile.getCapability(MagicPower.CAPABILITY, null);
-				player.sendStatusMessage(new TextComponentString(cap.getAmount() + "/" + cap.getMaxAmount() + " (x" + tile.multiplier + ")"), true);
+				player.sendStatusMessage(new TextComponentString(cap.getAmount() + "/" + cap.getMaxAmount() + " (x" + tile.gain + ")"), true);
 			}
 		}
 		return super.onBlockActivated(world, pos, state, player, hand, face, hitX, hitY, hitZ);

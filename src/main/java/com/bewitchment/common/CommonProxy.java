@@ -6,6 +6,8 @@ import com.bewitchment.api.BewitchmentAPI;
 import com.bewitchment.api.capability.extendedplayer.ExtendedPlayer;
 import com.bewitchment.api.capability.extendedplayer.ExtendedPlayerHandler;
 import com.bewitchment.api.capability.magicpower.MagicPower;
+import com.bewitchment.common.block.BlockCandle;
+import com.bewitchment.common.block.BlockLantern;
 import com.bewitchment.common.handler.BlockDropHandler;
 import com.bewitchment.common.handler.EventHandler;
 import com.bewitchment.common.handler.GuiHandler;
@@ -17,7 +19,7 @@ import com.bewitchment.registry.util.IOreDictionaryContainer;
 import net.minecraft.block.*;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -127,20 +129,23 @@ public class CommonProxy {
 		ModRecipes.postInitOven();
 		ModRecipes.postInitAthame();
 		// Altar Values
-		for (final Block block : ForgeRegistries.BLOCKS) {
-			int amount = 0;
+		for (Block block : ForgeRegistries.BLOCKS) {
+			BewitchmentAPI.NaturePower power = BewitchmentAPI.NaturePower.NONE;
 			if (block instanceof IPlantable || block instanceof IGrowable || block instanceof BlockMelon || block instanceof BlockPumpkin)
-				amount = 30;
-			if (block instanceof BlockLog) amount = 15;
-			if (block instanceof BlockLeaves) amount = 8;
-			BewitchmentAPI.ALTAR_NATURE_VALUES.put(block, amount);
+				power = BewitchmentAPI.NaturePower.STRONG;
+			if (block instanceof BlockLog) power = BewitchmentAPI.NaturePower.NORMAL;
+			if (block instanceof BlockLeaves) power = BewitchmentAPI.NaturePower.WEAK;
+			if (power != BewitchmentAPI.NaturePower.NONE) BewitchmentAPI.ALTAR_NATURE_VALUES.put(block, power);
+
+			if (block instanceof BlockTorch || block instanceof BlockCandle) BewitchmentAPI.registerAltarUpgradeGain(BewitchmentAPI.UpgradeType.WAND, block, 1);
+			if (block instanceof BlockLantern) BewitchmentAPI.registerAltarUpgradeGain(BewitchmentAPI.UpgradeType.WAND, block, 2);
 		}
-		BewitchmentAPI.ALTAR_GAIN_VALUES.put(ModObjects.silver_sword, 1.275);
-		BewitchmentAPI.ALTAR_GAIN_VALUES.put(ModObjects.cold_iron_sword, 1.425);
-		BewitchmentAPI.ALTAR_GAIN_VALUES.put(ModObjects.athame, 1.625);
-		BewitchmentAPI.ALTAR_GAIN_VALUES.put(Items.IRON_SWORD, 1.275);
-		BewitchmentAPI.ALTAR_GAIN_VALUES.put(Items.GOLDEN_SWORD, 1.325);
-		BewitchmentAPI.ALTAR_GAIN_VALUES.put(Items.DIAMOND_SWORD, 1.575);
+		BewitchmentAPI.registerAltarUpgradeMultiplier(BewitchmentAPI.UpgradeType.SWORD, ModObjects.athame, 0.8d);
+		BewitchmentAPI.registerAltarUpgradeGain(BewitchmentAPI.UpgradeType.CUP, ModObjects.goblet, 1);
+		BewitchmentAPI.registerAltarUpgradeGain(BewitchmentAPI.UpgradeType.CUP, ModObjects.filled_goblet, 2);
+		BewitchmentAPI.registerAltarUpgradeGain(BewitchmentAPI.UpgradeType.PENTACLE, Blocks.SKULL, 2);
+		BewitchmentAPI.registerAltarUpgradeGain(BewitchmentAPI.UpgradeType.PENTACLE, ModObjects.pentacle, -1);
+		BewitchmentAPI.registerAltarUpgradeMultiplier(BewitchmentAPI.UpgradeType.PENTACLE, ModObjects.pentacle, 1.2d);
 	}
 
 	public boolean isFancyGraphicsEnabled() {
